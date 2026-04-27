@@ -1,4 +1,10 @@
-# 订阅崩溃事件（仓颉）
+# 订阅崩溃事件
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 ## 接口说明
 
@@ -10,8 +16,8 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
 
 **订阅接口功能介绍：**
 
-| 接口名                                              | 描述                                         |
-| --------------------------------------------------- | -------------------------------------------- |
+| 接口名 | 描述 |
+| -------------- | ---------------- |
 | addWatcher(watcher: Watcher): Option\<AppEventPackageHolder> | 添加应用事件观察者方法，可用于订阅应用事件。|
 | removeWatcher(watcher: Watcher): Unit               | 移除应用事件观察者方法，可用于取消订阅应用事件。|
 
@@ -24,9 +30,7 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
    <!-- compile -->
 
    ```cangjie
-   import kit.BasicServicesKit.*
-   import kit.PerformanceAnalysisKit.{HiAppEvent, Hilog}
-   import ohos.hiviewdfx.hi_app_event.*
+   import kit.PerformanceAnalysisKit.*
    ```
 
 2. 在“entry > src > main > cangjie > main_bility.cj”文件的onCreate函数中添加系统事件订阅，示例：
@@ -51,7 +55,6 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
                     // 开发者可以对事件集合中的事件数据进行自定义处理，此处是将事件数据打印在日志中
                     Hilog.info(0x0000, 'testTag', "HiAppEvent eventInfo.domain=${eventInfo.domain}")
                     Hilog.info(0x0000, 'testTag', "HiAppEvent eventInfo.name=${eventInfo.name}")
-                    Hilog.info(0x0000, 'testTag', "HiAppEvent eventInfo.eventType.value=${eventInfo.eventType.getValue()}")
                     for ((k, v) in eventInfo.params) {
                         // 开发者可以获取到崩溃事件发生的相关信息
                         if (k == "hilog") {
@@ -67,18 +70,12 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
     HiAppEvent.addWatcher(watcher)
    ```
 
-3. 编辑“entry > src > main > cangjie > Index.cj”，添加按钮并在onClick中构造崩溃场景以触发事件，示例代码如下：
+3. 编辑“entry > src > main > cangjie > index.cj”，在onClick中构造崩溃场景以触发事件，示例代码如下：
 
-   <!-- compile -->
-
-   ```cangjie
-    import stdx.encoding.json.*
-
-    // 在按钮点击函数中构造一个crash场景，触发应用崩溃事件
-    Button("appCrash").onClick ({ evt =>
-        let result = JsonObject.fromStr("")
-    })
-   ```
+    ```cangjie
+    // 在Text点击函数中构造一个crash场景，触发应用崩溃事件
+    unsafe { CPointer<UInt8>().read() }
+    ```
 
 4. 点击DevEco Studio界面中的运行按钮，运行应用工程，然后在应用界面中点击按钮“appCrash”，触发一次崩溃事件。崩溃事件发生后，系统会根据崩溃类型（CjError或NativeCrash）采用不同的栈回溯方式生成崩溃日志，然后再进行回调。其中NativeCrash栈回溯耗时约2秒，实际耗时与业务线程数量、进程间通信耗时有关。CjError触发进程内栈回溯，NativeCrash触发进程外栈回溯，因此NativeCrash栈回溯会比CjError栈回溯更耗时。用户可以订阅崩溃事件，栈回溯完成后会异步上报，不会阻塞当前业务。
 
@@ -86,7 +83,7 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
 
 若应用主动捕获崩溃异常，如下两种场景，HiAppEvent事件将会在应用退出前回调。
 
-场景1：异常处理中未主动退出，应用崩溃后不退出。例如采用[errorManger.on](../reference/AbilityKit/cj-apis-app-ability-error_manager.md#static-func-onErrorManagerEvent-errorobserver)捕获CjError，或主动注册NativeCrash信号处理函数但未退出。
+场景1：异常处理中未主动退出，应用崩溃后不退出。例如采用[errorManger.on](../reference/AbilityKit/cj-apis-app-ability-error_manager.md#static-func-onerrormanagerevent-errorobserver)捕获CjError，或主动注册NativeCrash信号处理函数但未退出。
 
 场景2：异常处理耗时过久，应用退出时机延后。
 

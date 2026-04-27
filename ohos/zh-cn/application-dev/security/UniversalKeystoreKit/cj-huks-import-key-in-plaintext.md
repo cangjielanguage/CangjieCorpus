@@ -1,4 +1,10 @@
-# 明文导入密钥（仓颉）
+# 明文导入密钥
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 分别以导入AES256与RSA2048密钥为例，具体的场景介绍及支持的算法规格，请参见[密钥导入的支持的算法](./cj-huks-key-import-overview.md#支持的算法)。
 
@@ -25,9 +31,6 @@
 /* 以下以导入AES256密钥的Callback操作使用为例 */
 /* 以下以生成DH密钥为例 */
 import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 func loggerInfo(str: String) {
@@ -78,6 +81,7 @@ func importKeyFunc(): Unit {
 
 ```cangjie
 /* 以下以生成DH密钥为例 */
+import kit.PerformanceAnalysisKit.Hilog
 import kit.UniversalKeystoreKit.*
 
 // X25519的公钥数据。X25519 密钥对中的私钥和公钥都是 32 字节（256 位），关于算法原理请自行参考相关密钥学资料。

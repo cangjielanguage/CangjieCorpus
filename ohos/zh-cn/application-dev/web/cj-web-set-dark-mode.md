@@ -1,5 +1,11 @@
 # 设置深色模式
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Web组件支持对前端页面进行深色模式配置。
 
 - 通过[darkMode()](../reference/arkui-cj/cj-web-web.md#func-darkmodewebdarkmode)接口可以配置不同的深色模式，默认关闭。当深色模式开启时，Web将启用媒体查询prefers-color-scheme中网页所定义的深色样式，若网页未定义深色样式，则保持原状。如需开启强制深色模式，建议配合[forceDarkAccess()](../reference/arkui-cj/cj-web-web.md#func-forcedarkaccessbool)使用。[WebDarkMode.Off](../reference/arkui-cj/cj-common-types.md#enum-webdarkmode)模式表示关闭深色模式。[WebDarkMode.On](../reference/arkui-cj/cj-common-types.md#enum-webdarkmode)表示开启深色模式，并且深色模式跟随前端页面。[WebDarkMode.Auto](../reference/arkui-cj/cj-common-types.md#enum-webdarkmode)表示开启深色模式，并跟随系统。

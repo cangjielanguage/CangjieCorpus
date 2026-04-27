@@ -1,4 +1,10 @@
-# ohos.security.skill
+# ohos.skill
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 skill模块介绍了skill标签对象。
 

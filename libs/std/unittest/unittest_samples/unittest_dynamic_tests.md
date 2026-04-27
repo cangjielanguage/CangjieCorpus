@@ -11,13 +11,16 @@
 
 如下是一个通过 `@Test/@TestCase` 构造的简单测试套：
 
+<!-- run -->
 ```cangjie
 @Test
 class A {
     @TestCase
-    func f() { @Assert(false) }
+    func f() {
+        @Assert(false)
+    }
 
-    @TestCase[x in [1, 2]]
+    @TestCase[x in [ 1, 2 ]]
     func g(x: Int) {
         @Assert( x >= 1 )
     }
@@ -26,16 +29,15 @@ class A {
 
 通过 `@TestBuilder` 可以创建跟上述测试套相同逻辑的动态测试套 ：
 
+<!-- run -->
 ```cangjie
 @TestBuilder
 public func buildCustomTestSuite(): TestSuite {
-   let suiteBuilder = TestSuite.builder("A")
-   let caseConfiguration = Configuration()
-   suiteBuilder.add(
-       UnitTestCase.create("f", configuration: caseConfiguration) { @Assert(false) })
-   suiteBuilder.add(
-       UnitTestCase.createParameterized("g", [1, 2]) { value => @Assert( value >= 1 ) })
-   suiteBuilder.build()
+    let suiteBuilder = TestSuite.builder("A")
+    let caseConfiguration = Configuration()
+    suiteBuilder.add(UnitTestCase.create("f", configuration: caseConfiguration) {@Assert(false)})
+    suiteBuilder.add(UnitTestCase.createParameterized("g", [1, 2]) {value => @Assert( value >= 1 )})
+    suiteBuilder.build()
 }
 ```
 
@@ -69,22 +71,23 @@ Summary: TOTAL: 2
 
 ## 运行动态测试并获取输出
 
-如果需要不从单元测试框架运行测试用例，而是从程序内部运行测试，则可以借助 `TestSuite` `runTests()` 函数来实现。
+如果需要不从单元测试框架运行测试用例，而是从程序内部运行测试，则可以借助 `TestSuite.runTests()` 函数来实现。
 
 例如：
 
+<!-- run -->
 ```cangjie
 import std.unittest.*
+import std.unittest.testmacro.*
 
 main() {
-   let suiteBuilder = TestSuite.builder("A")
-   let caseConfiguration = Configuration()
-   suiteBuilder.add(
-       UnitTestCase.create("f", configuration: caseConfiguration) { @Assert(false) })
-   suiteBuilder.add(
-       UnitTestCase.createParameterized("g", [1, 2]) { value => @Assert( value >= 1 ) })
-   let suite = suiteBuilder.build()
-   let report = suite.runTests()
+    let suiteBuilder = TestSuite.builder("A")
+    let caseConfiguration = Configuration()
+    suiteBuilder.add(UnitTestCase.create("f", configuration: caseConfiguration) {@Assert(false)})
+    suiteBuilder.add(UnitTestCase.createParameterized("g", [1, 2]) {value => @Assert( value >= 1 )})
+    let suite = suiteBuilder.build()
+    let report = suite.runTests()
+    report.reportTo(ConsoleReporter(colored: true))
 }
 ```
 
@@ -92,4 +95,4 @@ main() {
 
 - 使用 `ConsoleReporter` 类将其打印到控制台： `report.reportTo(ConsoleReporter(colored: true))` 。
 - 使用 `TextReporter` 类打印到任何 `PrettyPrinter` 实现： `report.reportTo(TextReporter(into: PrettyText()))` 。
-- 将结果输出为支持的格式之一，例如 XML（ `XmlReporter` ，仅用于单元测试，不用于性能测试）或 CSV（ `CsvReporter` 或 `CsvRawReporter` ，仅用于性能测试）。
+- 将结果输出为支持的格式之一，例如 XML（ `XmlReporter` 和 `XmlPerPackageReporter` ，仅用于单元测试，不用于性能测试）或 CSV（ `CsvReporter` 或 `CsvRawReporter` ，仅用于性能测试）。

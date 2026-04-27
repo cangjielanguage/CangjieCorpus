@@ -1,5 +1,11 @@
 # UIAbility组件生命周期
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 当用户打开、切换和返回到对应应用时，应用中的[UIAbility](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)实例会在其生命周期的不同状态之间转换。UIAbility类提供了一系列回调，通过这些回调可以知道当前UIAbility实例的某个状态发生改变，会经过UIAbility实例的创建和销毁，或者UIAbility实例发生了前后台的状态切换。
@@ -19,8 +25,8 @@ Create状态为在应用加载过程中，[UIAbility](../reference/AbilityKit/cj
 <!-- compile -->
 
 ```cangjie
-internal import kit.AbilityKit.UIAbility
-internal import kit.AbilityKit.Want
+import kit.AbilityKit.UIAbility
+import kit.AbilityKit.Want
 
 class MainAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
@@ -47,12 +53,8 @@ class MainAbility <: UIAbility {
 <!-- compile -->
 
 ```cangjie
-import kit.AbilityKit.UIAbilityContext
 import kit.AbilityKit.UIAbility
-import kit.ArkUI.{WindowStage, WindowCallbackType, WindowStageEventType}
-import ohos.callback_invoke.Callback1Argument
-import ohos.business_exception.BusinessException
-import kit.PerformanceAnalysisKit.Hilog
+import kit.ArkUI.WindowStage
 
 class MainAbility <: UIAbility {
     // ...
@@ -65,7 +67,7 @@ class MainAbility <: UIAbility {
 
 > **说明：**
 >
-> WindowStage的相关使用请参见[窗口开发指导](../windowmanager/application-window-stage.md#管理应用窗口)。
+> WindowStage的相关使用请参见[窗口开发指导](../windowmanager/cj-application-window-stage.md)。
 
 ### Foreground和Background状态
 

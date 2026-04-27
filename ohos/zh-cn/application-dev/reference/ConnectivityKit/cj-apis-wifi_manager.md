@@ -1,5 +1,11 @@
 # ohos.wifi_manager（WLAN）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 wifi_manager模块主要提供WLAN基础功能、P2P（peer-to-peer）功能和WLAN消息通知的相应服务，让应用可以通过WLAN和其他设备互联互通。
 
 ## 导入模块
@@ -19,7 +25,7 @@ ohos.permission.SET_WIFI_INFO
 API示例代码使用说明：
 
 - 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md)。
 
@@ -196,7 +202,7 @@ public func on(eventType: WifiCallbackType, callback: Callback1Argument<Int32>):
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[WifiCallbackType](#enum-wificallbacktype)|是|-|回调事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<Int32>|是|-|状态改变回调函数。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<Int32>|是|-|状态改变回调函数。|
 
 **异常：**
 
@@ -599,7 +605,7 @@ public init(
 |passphrase|String|是|-|群组密钥。|
 |groupName|String|是|-|群组名称。|
 |goBand|[GroupOwnerBand](#enum-groupownerband)|是|-|群组带宽。|
-|deviceAddressType|[DeviceAddressType](#enum-deviceaddresstype)|否|RandomDeviceAddress| **命名参数。** 设备地址类型。>|
+|deviceAddressType|[DeviceAddressType](#enum-deviceaddresstype)|否|RandomDeviceAddress| **命名参数。** 设备地址类型。|
 
 ## class WifiScanInfo
 

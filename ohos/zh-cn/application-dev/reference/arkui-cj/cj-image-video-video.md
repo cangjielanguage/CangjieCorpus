@@ -1,5 +1,11 @@
 # Video
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 用于播放视频文件并控制其播放状态的组件。
 
 > **说明：**
@@ -282,7 +288,7 @@ public func onStart(event: ?VoidCallback): This
 public func onUpdate(callback: ?Callback<PlaybackInfo, Unit>): This
 ```
 
-**功能：** 说明播放进度变化时触发该事件。
+**功能：** 播放进度变化时触发该事件。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -292,7 +298,7 @@ public func onUpdate(callback: ?Callback<PlaybackInfo, Unit>): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|callback|?[Callback](./cj-common-types.md#type-callbackt-v)\<[PlaybackInfo](#class-playbackinfo), Unit>|是|-|回调函数，说明播放进度变化时触发。<br>初始值：{ _ => }|
+|callback|?[Callback](./cj-common-types.md#type-callbackt-v)\<[PlaybackInfo](#class-playbackinfo), Unit>|是|-|回调函数，播放进度变化时触发。<br>初始值：{ _ => }|
 
 ### func onFullscreenChange(?Callback\<FullscreenInfo, Unit>)
 
@@ -409,12 +415,6 @@ public var duration: ?Int32
 ```cangjie
 public class VideoController {
     public init()
-    public func start(): Unit
-    public func pause(): Unit
-    public func stop(): Unit
-    public func setCurrentTime(value: Int32, seekMode: ?SeekMode): Unit
-    public func requestFullscreen(value: ?Bool): Unit
-    public func exitFullscreen(): Unit
 }
 ```
 

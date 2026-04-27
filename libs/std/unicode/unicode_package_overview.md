@@ -8,7 +8,7 @@ unicode 包提供了按 unicode 编码标准处理字符的能力。
 
 `Unicode` 编码标准将每个字符用唯一的码点表示，同时为每个字符定义了若干属性，如类别（字母、数字、标点等）、脚本（拉丁字母、希腊字母、汉字等）、大小写映射（大写或小写映射关系）、变音符号（是否带有变音符号，如重音符号）。
 
-本包提供了 `UnicodeRuneExtension` 和 `UnicodeStringExtension` 接口类型，用于为其他类型扩展 `Unicode` 相关的字符操作。并为 `Rune`、`String` 类型实现了若干扩展方法，包括字符类型判断、字符大小写转换等。
+本包提供了 `UnicodeRuneExtension` 和 `UnicodeStringExtension` 接口类型，为 `Rune`、`String` 类型实现了若干扩展方法，包括字符类型判断、字符大小写转换等。
 
 ## API 列表
 

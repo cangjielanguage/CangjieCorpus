@@ -2,15 +2,14 @@
 
 ### Visit characters in String as Rune values:
 
-Use the `for-in` pattern to iterate characters in the String as Rune values.
-For example, to determine wthther a string consists of entirely lower-case letters,
+Use the `runes()` method to iterate characters in the String as Rune values.
+For example, to determine whether a string consists entirely of lower-case letters,
 we can write:
 
 ```
-func isLowerWord(s: String) {
-    for (ch in s) {
-        let runeCh = Rune(ch)
-        if (runeCh < r'a' || runeCh > r'z') {
+func isLowerWord(s: String): Bool {
+    for (ch in s.runes()) {
+        if (ch < r'a' || ch > r'z') {
             return false
         }
     }
@@ -28,7 +27,7 @@ main() {
 Ways to initialize an `String` include:
 
 ```
-// Single and double quotes, use of escaoe characters
+// Single and double quotes, use of escape characters
 let s1: String = ""
 let s2 = 'Hello Cangjie Lang'
 let s3 = "\"Hello Cangjie Lang\""
@@ -47,7 +46,7 @@ let s7: String = #""#
 let s8 = ##'\n'##
 let s9 = ###"
     Hello,
-    Ccangjie
+    Cangjie
     Lang"###
 ```
 
@@ -174,7 +173,7 @@ To obtain the list of characters (of type Rune) from a string for further proces
 use either `runes` or `toRuneArray`.
 
 The function `toRuneArray` converts string to `Array<Rune>`, so it is possible to
-directly access the `Rune` value at particular index. For examepl:
+directly access the `Rune` value at particular index. For example:
 
 ```
 let s = "hello"

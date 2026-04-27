@@ -1,12 +1,18 @@
 # 焦点事件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 基础概念与规范
 
 ### 基础概念
 
 #### 焦点、焦点链和走焦
 
-- 焦点：指向当前应用界面上唯一的一个可交互元素，当用户使用键盘、电视遥控器、车机摇杆/旋钮等非指向性输入设备与应用程序进行间接交互时，基于焦点的导航和交互是重要的输入手段。
+- 焦点：指向当前应用界面上唯一的一个可交互元素，当用户使用键盘等非指向性输入设备与应用程序进行间接交互时，基于焦点的导航和交互是重要的输入手段。
 - 焦点链：在应用的组件树形结构中，当一个组件获得焦点时，从根节点到该组件节点的整条路径上的所有节点都会被视为处于焦点状态，形成一条连续的焦点链。
 - 走焦：指焦点在应用内的组件之间转移的行为。这一过程对用户是透明的，但开发者可以通过监听[onFocus](../reference/arkui-cj/cj-universal-event-focus.md#func-onfocus---unit)（焦点获取）和[onBlur](../reference/arkui-cj/cj-universal-event-focus.md#func-onblur---unit)（焦点失去）事件来捕捉这些变化。关于走焦的具体方式和规则，请参见[走焦规范](#走焦规范)。
 
@@ -31,13 +37,13 @@
 > **说明：**
 >
 > - [Popup](./cj-popup-and-menu-components-popup.md)组件在[focusable](../reference/arkui-cj/cj-universal-attribute-focus.md#func-focusablebool)属性（组件属性，非通用属性）为false的时候，不会有第2条特性。
-> - NavBar、[NavDestination](../reference/arkui-cj/cj-navigation-switching-navdestination.md#navdestination)没有第3条特性，对于它们的走焦范围，是与它们的首个父层级页面相同的。
+> - NavBar、[NavDestination](../reference/arkui-cj/cj-navigation-switching-navdestination.md)没有第3条特性，对于它们的走焦范围，是与它们的首个父层级页面相同的。
 
 #### 根容器
 
-根容器是[层级页面](#层级页面)内的概念，当某个[层级页面](#层级页面)首次创建并展示时，根据[层级页面](#层级页面)的特性，焦点会立即被该页面抢占。此时，该[层级页面](#层级页面)所在焦点链的末端节点将成为默认焦点，而这个默认焦点通常位于该[层级页面](#层级页面)的根容器上。
+根容器是层级页面内的概念，当某个层级页面首次创建并展示时，根据层级页面的特性，焦点会立即被该页面抢占。此时，该层级页面所在焦点链的末端节点将成为默认焦点，而这个默认焦点通常位于该层级页面的根容器上。
 
-在缺省状态下，[层级页面](#层级页面)的默认焦点位于其根容器上，但开发者可以通过defaultFocus属性来自定义这一行为。
+在缺省状态下，层级页面的默认焦点位于其根容器上，但开发者可以通过defaultFocus属性来自定义这一行为。
 
 当焦点位于根容器时，首次按下TAB键不仅会使焦点进入激活状态，还会触发焦点向子组件的传递。如果子组件本身也是一个容器，则焦点会继续向下传递，直至到达叶子节点。传递规则是：优先传递给上一次获得焦点的子节点，如果不存在这样的节点，则默认传递给第一个子节点。
 
@@ -52,7 +58,7 @@
 - 按键走焦
 
     - 前提：当前应用需处于焦点激活态。
-    - 范围限制：按键走焦仅在当前获得焦点的[层级页面](#层级页面)内进行，详情请参见[层级页面](#层级页面)中的“走焦范围限制”部分。
+    - 范围限制：按键走焦仅在当前获得焦点的层级页面内进行，详情请参见层级页面中的“走焦范围限制”部分。
     - 按键类型：
         - TAB键：遵循Z字型遍历逻辑，完成当前范围内所有叶子节点的遍历，到达当前范围内的最后一个组件后，继续按下TAB键，焦点将循环至范围内的第一个可获焦组件，实现循环走焦。
         - Shift+TAB键：与TAB键具有相反的焦点转移效果。方向键（上、下、左、右）：遵循十字型移动策略，在单层容器中，焦点的转移由该容器的特定走焦算法决定。若算法判定下一个焦点应落在某个容器组件上，系统将采用中心点距离优先的算法来进一步确定容器内的目标子节点。
@@ -63,7 +69,7 @@
 
     详情请参见[主动获焦失焦](#主动获焦失焦)，可以主动将焦点转移到指定组件上。
 
-    不可跨窗口，不可跨ArkUI实例申请焦点，可以跨[层级页面](#层级页面)申请焦点。
+    不可跨窗口，不可跨ArkUI实例申请焦点，可以跨层级页面申请焦点。
 
 - focusOnTouch
 
@@ -77,7 +83,7 @@
 
 - 组件删除：当处于焦点状态的组件被删除时，焦点框架首先尝试将焦点转移到相邻的兄弟组件上，遵循先向后再向前的顺序。若所有兄弟组件均不可获焦，则焦点将释放，并通知其父组件进行焦点处理。
 - 属性变更：若将处于焦点状态的组件的focusable或enabled属性设置为false，或者将visibility属性设置为不可见，焦点框架将自动转移焦点至其他可获焦组件。焦点框架首先尝试将焦点转移到相邻的兄弟组件上，遵循先向后再向前的顺序。若所有兄弟组件均不可获焦，则焦点将释放，并通知其父组件进行焦点处理。
-- [层级页面](#层级页面)切换：当发生[层级页面](#层级页面)切换时，如从一个页面跳转到另一个页面，当前页面的焦点将自动释放，新页面可能会根据预设逻辑自动获得焦点。
+- 层级页面切换：当发生层级页面切换时，如从一个页面跳转到另一个页面，当前页面的焦点将自动释放，新页面可能会根据预设逻辑自动获得焦点。
 - Web组件初始化：对于Web组件，当其被创建时，若其设计需要立即获得焦点（如某些弹出框或输入框），则可能触发焦点转移至该Web组件，其行为属于组件自身的行为逻辑，不属于焦点框架的规格范围。
 
 ### 走焦算法
@@ -116,7 +122,7 @@ public func onFocus(event: ?() -> Unit): T
 获焦事件回调，绑定该接口的组件获焦时，回调响应。
 
 ```cangjie
-public func onBlur(event: ?() -> Unit): T 
+public func onBlur(event: ?() -> Unit): T
 ```
 
 失焦事件回调，绑定该接口的组件失焦时，回调响应。
@@ -146,7 +152,7 @@ class EntryView {
             .fontColor(Color.Black)
             // 监听第一个组件的获焦事件，获焦后改变颜色
             .onFocus({ =>
-                oneButtonColor = Color.Green
+                oneButtonColor = Color(0x64BB5C)
             })
             // 监听第一个组件的失焦事件，失焦后改变颜色
             .onBlur({=>
@@ -159,7 +165,7 @@ class EntryView {
             .fontColor(Color.Black)
             // 监听第二个组件的获焦事件，获焦后改变颜色
             .onFocus({=>
-                twoButtonColor = Color.Green
+                twoButtonColor = Color(0x64BB5C)
             })
             // 监听第二个组件的失焦事件，失焦后改变颜色
             .onBlur({=>
@@ -172,7 +178,7 @@ class EntryView {
             .fontColor(Color.Black)
             // 监听第三个组件的获焦事件，获焦后改变颜色
             .onFocus({=>
-                threeButtonColor = Color.Green
+                threeButtonColor = Color(0x64BB5C)
             })
             // 监听第三个组件的失焦事件，失焦后改变颜色
             .onBlur({=>
@@ -297,9 +303,9 @@ class EntryView {
 
             Row() {
                 Button("Button1")
-                    .width(140).height(70)
+                    .width(140).height(70).margin(right: 20)
                 Button("Button2")
-                    .width(160).height(70)
+                    .width(140).height(70)
             }
 
             Divider()
@@ -368,7 +374,7 @@ class EntryView {
                 .fontColor(Color.Black)
                 // 监听第一个组件的获焦事件，获焦后改变颜色
                 .onFocus({ =>
-                    oneButtonColor = Color.Green
+                    oneButtonColor = Color(0x64BB5C)
                 })
                 // 监听第一个组件的失焦事件，失焦后改变颜色
                 .onBlur({ =>
@@ -382,7 +388,7 @@ class EntryView {
                 .fontColor(Color.Black)
                 // 监听第二个组件的获焦事件，获焦后改变颜色
                 .onFocus({ =>
-                    twoButtonColor = Color.Green
+                    twoButtonColor = Color(0x64BB5C)
                 })
                 // 监听第二个组件的失焦事件，失焦后改变颜色
                 .onBlur({ =>
@@ -398,7 +404,7 @@ class EntryView {
                 .defaultFocus(true)
                 // 监听第三个组件的获焦事件，获焦后改变颜色
                 .onFocus({ =>
-                    threeButtonColor = Color.Green
+                    threeButtonColor = Color(0x64BB5C)
                 })
                 // 监听第三个组件的失焦事件，失焦后改变颜色
                 .onBlur({ =>

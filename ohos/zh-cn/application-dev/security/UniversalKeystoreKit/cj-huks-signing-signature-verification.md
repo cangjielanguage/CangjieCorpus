@@ -1,14 +1,14 @@
-# 签名/验签（仓颉）
+# 签名/验签
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 当前指导共提供四种示例，供开发者参考完成签名、验签开发：
 
-- [签名/验签（仓颉）](#签名验签仓颉)
-- [开发步骤](#开发步骤)
-- [开发案例](#开发案例)
-- [ECC256/SHA256](#ecc256sha256)
-- [SM2/SM3](#sm2sm3)
-- [RSA/SHA256/PSS](#rsasha256pss)
-- [RSA/SHA256/PKCS1\_V1\_5](#rsasha256pkcs1_v1_5)
+- [SM2/SM3](#sm2sm3)、[RSA/SHA256/PSS](#rsasha256pss)、[RSA/SHA256/PKCS1\_V1\_5](#rsasha256pkcs1_v1_5)
 
 具体的场景介绍及支持的算法规格，请参见[签名/验签支持的算法](./cj-huks-signing-signature-verification-overview.md#支持的算法)。
 
@@ -64,10 +64,6 @@
 /*
  * 密钥算法为ECC256、摘要算法为SHA256
  */
-import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 let keyAlias = 'test_eccKeyAlias'
@@ -198,10 +194,6 @@ func testSignVerify() {
 /*
  * 密钥算法为SM2、摘要算法为SM3
  */
-import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 let keyAlias = 'test_sm2KeyAlias'
@@ -332,10 +324,6 @@ func testSignVerify() {
 /*
  * 密钥算法为RSA，摘要算法为SHA256，填充模式为PSS
  */
-import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 let keyAlias = 'test_rsaKeyAlias'
@@ -477,10 +465,6 @@ func testSignVerify() {
 /*
  * 密钥算法为RSA，摘要算法为SHA256，填充模式为PKCS1_V1_5
  */
-import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 let keyAlias = 'test_rsaKeyAlias'

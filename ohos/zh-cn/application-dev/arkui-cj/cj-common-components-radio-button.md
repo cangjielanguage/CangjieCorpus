@@ -1,5 +1,11 @@
 # 单选框（Radio）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Radio是单选框组件，通常用于提供相应的用户交互选择项，同一组的Radio中只有一个可以被选中。具体用法请参见[Radio](../reference/arkui-cj/cj-button-picker-radio.md)。
 
 ## 创建单选框

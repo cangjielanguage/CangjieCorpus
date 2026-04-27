@@ -1,5 +1,11 @@
 # @Prop宏：父子单向同步
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 \@Prop装饰的变量可以和父组件建立单向的同步关系。\@Prop装饰的变量是可变的，但是变化不会同步回其父组件。
 
 在阅读\@Prop文档前，建议开发者首先了解[\@State](./cj-macro-state.md)的基本用法。
@@ -24,7 +30,7 @@
 |:---|:---|
 |非属性宏|无。|
 |同步类型|单向同步：对父组件状态变量值的修改，将同步给子组件\@Prop装饰的变量，子组件\@Prop变量的修改不会同步到父组件的状态变量上。嵌套类型的场景请参见[观察变化](#观察变化)。|
-|允许装饰的变量类型|支持基础数据类型，对于String，Int64，Float64和Bool类型的变量，可以缺省类型。其他类型的变量不可缺省类型，必须被指定。<br/>支持enum、struct和Option类型，struct类型内部无法修改。<br/>支持class类型，如果要感知内部的变化，在定义的时候需要被[\@Observed](./cj-macro-observed-and-publish.md)修饰，对类内属性和嵌套属性使用[\@Publish](./cj-macro-observed-and-publish.md)装饰后，才能观察到其变化。嵌套类的情况同理。由于class是引用类型，使用\@Observed修饰时在子组件中对class内部变量的修改会影响父组件。<br/>支持数组类型，如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylist)。数组项为自定义类型时，使用[\@Observed](./cj-macro-observed-and-publish.md)和[\@Publish](./cj-macro-observed-and-publish.md)装饰时能观察到数组项中属性赋值。其他数组类型和Collection类型，如Array、Varray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。<br/>支持[Color](../../reference/arkui-cj/cj-common-types.md#class-color)类型。<br/>\@Prop和[数据源](./cj-state-management-overview.md#基本概念)类型需要相同，有以下三种情况：<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏同步时双方的类型必须相同，示例请参见[父组件@State到子组件@Prop简单数据类型同步](#父组件state到子组件prop简单数据类型同步)。<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏装饰的数组的项同步时 ，\@Prop的类型需要和\@State装饰的数组的数组项相同，比如\@Prop&nbsp;:&nbsp;T和\@State&nbsp;:&nbsp;Array&lt;T&gt;，示例请参见[父组件@State数组中的项到子组件@Prop简单数据类型同步](#父组件state数组项到子组件prop简单数据类型同步)。<br/>-&nbsp;当父组件状态变量为struct或者class时，\@Prop装饰的变量和父组件状态变量的属性类型相同，示例请参见[从父组件中的@State类对象属性到@Prop简单类型的同步](#从父组件中的state类对象属性到prop简单类型的同步)。<br/>支持类型的场景请参见[观察变化](#观察变化)。|
+|允许装饰的变量类型|支持基础数据类型，对于String，Int64，Float64和Bool类型的变量，可以缺省类型。其他类型的变量不可缺省类型，必须被指定。<br/>支持enum、struct和Option类型，struct类型内部无法修改。<br/>支持class类型，如果要感知内部的变化，在定义的时候需要被[\@Observed](./cj-macro-observed-and-publish.md)修饰，对类内属性和嵌套属性使用[\@Publish](./cj-macro-observed-and-publish.md)装饰后，才能观察到其变化。嵌套类的情况同理。由于class是引用类型，使用\@Observed修饰时在子组件中对class内部变量的修改会影响父组件。<br/>支持数组类型，如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylistt)。数组项为自定义类型时，使用[\@Observed](./cj-macro-observed-and-publish.md)和[\@Publish](./cj-macro-observed-and-publish.md)装饰时能观察到数组项中属性赋值。其他数组类型和Collection类型，如Array、Varray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。<br/>支持[Color](../../reference/arkui-cj/cj-common-types.md#class-color)类型。<br/>\@Prop和[数据源](./cj-state-management-overview.md#基本概念)类型需要相同，有以下三种情况：<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏同步时双方的类型必须相同，示例请参见[父组件@State到子组件@Prop简单数据类型同步](#父组件state到子组件prop简单数据类型同步)。<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏装饰的数组的项同步时 ，\@Prop的类型需要和\@State装饰的数组的数组项相同，比如\@Prop&nbsp;:&nbsp;T和\@State&nbsp;:&nbsp;Array&lt;T&gt;，示例请参见[父组件@State数组中的项到子组件@Prop简单数据类型同步](#父组件state数组项到子组件prop简单数据类型同步)。<br/>-&nbsp;当父组件状态变量为struct或者class时，\@Prop装饰的变量和父组件状态变量的属性类型相同，示例请参见[从父组件中的@State类对象属性到@Prop简单类型的同步](#从父组件中的state类对象属性到prop简单类型的同步)。<br/>支持类型的场景请参见[观察变化](#观察变化)。|
 |嵌套传递层数|在组件复用场景，建议\@Prop深度嵌套数据不要超过5层，嵌套太多会导致深拷贝占用的空间过大以及GarbageCollection(垃圾回收)，引起性能问题。|
 |被装饰变量的初始值|\@Prop装饰的变量必须使用其父组件提供的变量进行初始化，不允许在子组件中初始化。|
 
@@ -32,7 +38,7 @@
 
 |传递/访问|说明|
 |:---|:---|
-|从父组件初始化|在创建组件的新实例时，必须初始化所有\@Prop变量，不支持在组件内部进行初始化。支持父组件中的常规变量（常规变量对\@Prop赋值，只是数值的初始化，常规变量的变化不会触发UI刷新。只有状态变量才能触发UI刷新）、[\@State](./cj-macro-state.md)、[\@Link](./cj-macro-link.md)、\@Prop、[\@Provide](./cj-macro-provide-and-consume.md)、[\@Consume](./cj-macro-provide-and-consume.md)、[Publish](./cj-macro-observed-and-publish.md)、[\@StorageLink](./cj-appstorage.md#storagelink)、[\@StorageProp](./cj-appstorage.md#storrageprop)、[\@LocalStorageLink](./cj-localstorage.md#localstoragelink)和[\@LocalStorageProp](./cj-localstorage.md#localstorageprop)去初始化子组件中的\@Prop变量。|
+|从父组件初始化|在创建组件的新实例时，必须初始化所有\@Prop变量，不支持在组件内部进行初始化。支持父组件中的常规变量（常规变量对\@Prop赋值，只是数值的初始化，常规变量的变化不会触发UI刷新。只有状态变量才能触发UI刷新）、[\@State](./cj-macro-state.md)、[\@Link](./cj-macro-link.md)、\@Prop、[\@Provide](./cj-macro-provide-and-consume.md)、[\@Consume](./cj-macro-provide-and-consume.md)、[Publish](./cj-macro-observed-and-publish.md)、[\@StorageLink](./cj-appstorage.md#storagelink)、[\@StorageProp](./cj-appstorage.md#storageprop)、[\@LocalStorageLink](./cj-localstorage.md#localstoragelink)和[\@LocalStorageProp](./cj-localstorage.md#localstorageprop)去初始化子组件中的\@Prop变量。|
 |用于初始化子组件|\@Prop支持去初始化子组件中的常规变量、\@State、\@Link、\@Prop、\@Provide。|
 |是否支持组件外访问|\@Prop装饰的变量是私有的，只能在组件内访问。不可被访问修饰符修饰。|
 
@@ -126,7 +132,7 @@
     this.title.name.value = 'ArkUI'
     ```
 
-- 当装饰的对象是数组时，无法单独感知某个数组项的变化，但能感知整体的变化。如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylist)。
+- 当装饰的对象是数组时，无法单独感知某个数组项的变化，但能感知整体的变化。如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylistt)。
 
     \@Prop装饰的对象为ArrayList类型数组时。
 
@@ -377,7 +383,7 @@ class EntryView {
 
 初始渲染创建6个子组件实例，每个\@Prop装饰的变量初始化都在本地拷贝了一份数组项。子组件onclick事件处理程序会更改局部变量值。
 
-如果单击界面上的“1”六下，“2”五下、“3”四下，将所有变量的本地取值都变为“7”。
+如果连续单击界面上的“1”按钮六次、“2”按钮五次、“3”按钮四次，所有变量的本地取值将自动更新为“7”。
 
 ```text
 7

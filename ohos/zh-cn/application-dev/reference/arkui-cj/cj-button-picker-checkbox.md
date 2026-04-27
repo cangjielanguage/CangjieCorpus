@@ -1,5 +1,11 @@
 # Checkbox
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 多选框组件，通常用于某选项的打开或关闭。
 
 ## 导入模块
@@ -31,7 +37,7 @@ public init(name!: ?String = None, group!: ?String = None, indicatorBuilder!: ?C
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |name|?String|否|None|**命名参数。** 多选框名称。|
-|group|?String|否|None|**命名参数。** 用于指定多选框所属群组的名称（即所属[CheckboxGroup](./cj-button-picker-checkboxgroup.md#checkboxgroup)的名称）。<br/>**说明**：<br/>未配合使用[CheckboxGroup](./cj-button-picker-checkboxgroup.md#checkboxgroup)组件时，此值无用。|
+|group|?String|否|None|**命名参数。** 用于指定多选框所属群组的名称（即所属[CheckboxGroup](./cj-button-picker-checkboxgroup.md)的名称）。<br/>**说明**：<br/>未配合使用[CheckboxGroup](./cj-button-picker-checkboxgroup.md)组件时，此值无用。|
 |indicatorBuilder|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|否|None|**命名参数。** 配置多选框的选中样式为自定义UI描述。自定义UI描述与Checkbox组件为中心点对齐显示。indicatorBuilder设置为None时，默认为indicatorBuilder未设置状态。使用时结合[@Builder](../../arkui-cj/paradigm/cj-macro-builder.md)和bind方法使用。|
 
 ## 通用属性/通用事件
@@ -94,7 +100,7 @@ public func shape(value: ?CheckBoxShape): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[CheckBoxShape](./cj-common-types.md#enum-checkboxshape)|是|-|切换CheckBox组件形状，包括圆形和圆角方形。初始值:  CheckBoxShape.Circle|
+|value|?[CheckBoxShape](./cj-common-types.md#enum-checkboxshape)|是|-|切换CheckBox组件形状，包括圆形和圆角方形。初始值：CheckBoxShape.Circle|
 
 ## 组件事件
 
@@ -127,10 +133,6 @@ public type OnCheckboxChangeCallback = (Bool) -> Unit
 **功能：** (Bool) -> Unit 的类型别名。
 
 **类型：** (Bool) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 

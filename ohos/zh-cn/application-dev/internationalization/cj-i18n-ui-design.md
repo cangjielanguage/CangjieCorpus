@@ -1,5 +1,11 @@
 # 国际化界面设计
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 一套有效的国际化界面布局设计规则，既可以树立产品在国际化设计中产品调性，还可以保证操作的一致性，遵循以下设计规则可有效提升应用全球化质量。
 
 ## 界面空间预留与灵活布局
@@ -37,12 +43,12 @@
 
 **图3** 一般图标资源
 
-![zh-cn_image_0000001737423164](figures/zh-cn_image_0000001737423164.png)
+![zh-cn_image_0000001737423164](figures/right_speaker.png)
 
 **图4** RTL语言系统下提供的图标资源
 
-![zh-cn_image_0000001737264020](figures/zh-cn_image_0000001737264020.png)
+![zh-cn_image_0000001737264020](figures/left_speaker.png)
 
 **图5** RTL语言系统下提供的镜像控件
 
-![zh-cn_image_0000001784343305](figures/zh-cn_image_0000001784343305.png)
+![zh-cn_image_0000001784343305](figures/rtl_component.png)

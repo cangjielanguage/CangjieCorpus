@@ -1,10 +1,20 @@
 # 时间时区服务错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+> **说明：**
+>
+> 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
+
 ## -1 时间时区服务异常
 
 **错误信息**
 
-  The parameter check failed or permission denied or system error.
+The parameter check failed or permission denied or system error.
 
 **错误描述**
 

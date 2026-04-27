@@ -8,7 +8,7 @@ public class Configuration <: ToString {
 }
 ```
 
-功能：存储 `@Configure` 宏生成的 `unittest` 配置数据的对象。[Configuration](#class-configuration) 与 [HashMap](../../collection/collection_package_api/collection_package_class.md#class-hashmapk-v-where-k--hashable--equatablek) 类似，但它的键是 [KeyFor](./unittest_common_package_interfaces.md#interface-keyfor)  类型，值为任何给定类型。
+功能：存储 `@Configure` 宏生成的 `unittest` 配置数据的对象。[Configuration](#class-configuration) 与 [HashMap](../../collection/collection_package_api/collection_package_class.md#class-hashmapk-v-where-k--hashable--equatablek) 类似，但它的键是 [KeyFor](./unittest_common_package_interfaces.md#interface-keyfort) 类型，值为任何给定类型。
 
 父类型：
 
@@ -20,7 +20,7 @@ public class Configuration <: ToString {
 public init()
 ```
 
-功能：构造一个空的Configuration实例。
+功能：构造一个空的 Configuration 实例。
 
 ### func clone()
 
@@ -28,7 +28,7 @@ public init()
 public func clone(): Configuration
 ```
 
-功能：拷贝一份Configuration对象。
+功能：拷贝一份 Configuration 对象。
 
 返回值：
 
@@ -46,13 +46,13 @@ T 为 泛型参数，用于在对象中查找对应类型的值。
 
 参数：
 
-- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfor) - 配置项的键值。
+- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfort) - 配置项的键值。
 
 返回值：
 
 - ?T - 未找到时返回 None，找到对应类型及名称的值时返回 Some\<T>(v) 。
 
-### func getByName\<T>(name: String): ?T
+### func getByName\<T>(String)
 
 ```cangjie
 public func getByName<T>(name: String): ?T
@@ -66,6 +66,10 @@ T 为 泛型参数，用于在对象中查找对应类型的值。
 
 - name: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 键名称。
 
+返回值：
+
+- ?T - 未找到时返回 None，找到对应类型及名称的值时返回 Some\<T>(v)。
+
 ### func remove\<T>(KeyFor\<T>)
 
 ```cangjie
@@ -76,7 +80,7 @@ public func remove<T>(key: KeyFor<T>): ?T
 
 参数：
 
-- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfor) - 配置项的键值。
+- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfort) - 配置项的键值。
 
 返回值：
 
@@ -85,7 +89,7 @@ public func remove<T>(key: KeyFor<T>): ?T
 ### func removeByName\<T>(String)
 
 ```cangjie
-public func removeByName<T>(name: String): ?T
+public func removeByName<T>(key: String): ?T
 ```
 
 功能：删除对应键名称和类型的值。
@@ -101,17 +105,17 @@ public func removeByName<T>(name: String): ?T
 ### func set\<T>(KeyFor\<T>, T)
 
 ```cangjie
-public func set<T>(key: KeyFor<T>, value: T)
+public func set<T>(key: KeyFor<T>, value: T): Unit
 ```
 
 功能：给对应键名称和类型设置值。
 
 参数：
 
-- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfor) - 配置项的键值。
+- key: [KeyFor](./unittest_common_package_interfaces.md#interface-keyfort) - 配置项的键值。
 - value: T - 键值。
 
-### func setByName\<T>(name: String, value: T)
+### func setByName\<T>(String, T)
 
 ```cangjie
 public func setByName<T>(name: String, value: T): Unit
@@ -146,108 +150,21 @@ public static func merge(parent: Configuration, child: Configuration): Configura
 
 参数：
 
-- parent:[Configuration](#class-configuration) - 需要合并的配置
-- child:[Configuration](#class-configuration) - 需要合并的配置
+- parent: [Configuration](#class-configuration) - 需要合并的配置
+- child: [Configuration](#class-configuration) - 需要合并的配置
 
 返回值：
 
 - [Configuration](#class-configuration) - 合并完成的配置
 
-### extend Configuration <: BenchmarkConfig
+参考示例：
 
-```cangjie
-extend Configuration <: BenchmarkConfig {}
-```
+- [自定义性能基准测试配置](../../unittest/unittest_package_api/unittest_package_classes.md#class-benchmark)
+- [动态测试](../../unittest/unittest_samples/unittest_dynamic_tests.md#动态测试入门)
 
-功能：为 [Configuration](#class-configuration) 扩展 [BenchmarkConfig](../../unittest/unittest_package_api/unittest_package_interfaces.md#interface-benchmarkconfig) 接口。
+对于大多数情况，你无需编程式地更改配置。请改用以下方式：
 
-父类型：
-
-- [BenchmarkConfig](../../unittest/unittest_package_api/unittest_package_interfaces.md#interface-benchmarkconfig)
-
-#### func batchSize(Int64)
-
-```cangjie
-public func batchSize(b: Int64)
-```
-
-功能：配置性能测试时一个批次的执行次数。
-
-参数：
-
-- b: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 执行次数。
-
-#### func batchSize(Range\<Int64>)
-
-```cangjie
-public func batchSize(x: Range<Int64>)
-```
-
-功能：配置性能测试时一个批次的执行次数范围。
-
-参数：
-
-- b: [Range](../../core/core_package_api/core_package_structs.md#struct-ranget-where-t--countablet--comparablet--equatablet)\<Int64> - 执行次数范围。
-
-#### func explicitGC(ExplicitGcType)
-
-```cangjie
-public func explicitGC(x: ExplicitGcType)
-```
-
-功能：配置性能测试时执行 GC 的方式。
-
-参数：
-
-- x: [ExplicitGcType](../../unittest/unittest_package_api/unittest_package_enums.md#enum-explicitgctype) - GC 执行的方式。
-
-#### func minBatches(Int64)
-
-```cangjie
-public func minBatches(x: Int64)
-```
-
-功能：配置性能测试时最少的批次数。
-
-参数：
-
-- x: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 最少的批次数。
-
-#### func minDuration(Duration)
-
-```cangjie
-public func minDuration(x: Duration)
-```
-
-功能：配置性能测试时最短的执行时长。
-
-参数：
-
-- x: [Duration](../../core/core_package_api/core_package_structs.md#struct-duration) - 最短的执行时长。
-
-#### func warmup(Int64)
-
-```cangjie
-public func warmup(x: Int64)
-```
-
-功能：配置性能测试时预热的秒数。
-
-参数：
-
-- x: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 预热的秒数。
-
-#### func warmup(Duration)
-
-```cangjie
-public func warmup(x: Duration)
-```
-
-功能：配置性能测试时预热的时长。
-
-参数：
-
-- x: [Duration](../../core/core_package_api/core_package_structs.md#struct-duration) - 预热的时长。
+[@Configure 宏](../../unittest_testmacro/unittest_testmacro_package_api/unittest_testmacro_package_macros.md#configure-宏)
 
 ## class ConfigurationKey
 
@@ -262,23 +179,7 @@ abstract sealed class ConfigurationKey <: Equatable<ConfigurationKey> & Hashable
 - [Equatable](../../core/core_package_api/core_package_interfaces.md#interface-equatablet)\<[ConfigurationKey](#class-configurationkey)>
 - [Hashable](../../core/core_package_api/core_package_interfaces.md#interface-hashable)
 
-### func  equals(ConfigurationKey)
-
-```cangjie
-protected func equals(that: ConfigurationKey): Bool
-```
-
-功能：判断是否相等。
-
-参数：
-
-- that: [ConfigurationKey](#class-configurationkey) - 被对比的对象。
-
-返回值：
-
-- [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 是否相等。
-
-### func hashCode
+### func hashCode()
 
 ```cangjie
 public override func hashCode(): Int64
@@ -290,10 +191,20 @@ public override func hashCode(): Int64
 
 - [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - hashCode 值。
 
+### let name
+
+```cangjie
+public let name: String
+```
+
+功能：配置键值的名称。
+
+类型：[String](../../core/core_package_api/core_package_structs.md#struct-string)
+
 ### operator func ==(ConfigurationKey)
 
 ```cangjie
-public override operator func ==(that: ConfigurationKey)
+public override operator func ==(that: ConfigurationKey): Bool
 ```
 
 功能：判等。
@@ -306,10 +217,10 @@ public override operator func ==(that: ConfigurationKey)
 
 - [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 是否相等。
 
-### public override operator func !=(that: ConfigurationKey)
+### operator func !=(ConfigurationKey)
 
 ```cangjie
-public override operator func !=(that: ConfigurationKey)
+public override operator func !=(that: ConfigurationKey): Bool
 ```
 
 功能：判不等。
@@ -322,6 +233,30 @@ public override operator func !=(that: ConfigurationKey)
 
 - [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 是否不相等。
 
+### extend ConfigurationKey
+
+```cangjie
+extend ConfigurationKey {
+    static func create<T>(name: String): ConfigurationKey 
+}
+```
+
+#### static func create\<T>(String)
+
+```cangjie
+public static func create<T>(name: String): ConfigurationKey
+```
+
+功能：创建 [ConfigurationKey](#class-configurationkey)。
+
+参数：
+
+- name: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 配置键值的名称。
+
+返回值：
+
+- [ConfigurationKey](#class-configurationkey) - 创建的配置键值。
+
 ## class PrettyPrinter
 
 ```cangjie
@@ -332,18 +267,49 @@ public abstract class PrettyPrinter {
 
 功能：拥有颜色和对齐、缩进控制的打印器。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.common.*
+
+main() {
+    let pp = PrettyText()
+    pp.colored(Color.BLUE, "Start:").newLine()
+    pp.appendLine('-' * 40)
+    pp.appendLeftAligned("left", 40).newLine()
+    pp.appendCentered("centered", 40).newLine()
+    pp.appendRightAligned("right", 40).newLine()
+    pp.indent {
+        => pp.appendLine("isTopLevel: ${pp.isTopLevel}")
+    }
+    println(pp.toString())
+}
+```
+
+可能的运行结果：
+
+```text
+Start:
+----------------------------------------
+left                                    
+                centered                
+                                   right
+    isTopLevel: false
+```
+
 ### PrettyPrinter(UInt64,UInt64)
 
 ```cangjie
 public PrettyPrinter(let indentationSize!: UInt64 = 4, let startingIndent!: UInt64 = 0)
 ```
 
-功能：PrettyPrinter构造器。
+功能：PrettyPrinter 构造器。
 
 参数：
 
-- indentationSize!: [UInt64](../../core/core_package_api/core_package_intrinsics.md#uint64) - 一个缩进的空格数，默认4格。
-- startingIndent!: [UInt64](../../core/core_package_api/core_package_intrinsics.md#uint64) - 开头的缩进个数，默认0个缩进。
+- indentationSize!: [UInt64](../../core/core_package_api/core_package_intrinsics.md#uint64) - 一个缩进的空格数，默认 4 格。
+- startingIndent!: [UInt64](../../core/core_package_api/core_package_intrinsics.md#uint64) - 开头的缩进个数，默认 0 个缩进。
 
 ### prop isTopLevel
 
@@ -353,7 +319,7 @@ public prop isTopLevel: Bool
 
 功能：获取是否在打印的缩进顶层。
 
-类型：Bool 。
+类型：Bool
 
 ### func append(String)
 
@@ -470,7 +436,7 @@ public func appendRightAligned(text: String, space: UInt64): PrettyPrinter
 
 - [PrettyPrinter](#class-prettyprinter) - 打印器。
 
-### func colored(Color, body: () -> Unit)
+### func colored(Color, () -> Unit)
 
 ```cangjie
 public func colored(color: Color, body: () -> Unit): PrettyPrinter
@@ -478,6 +444,8 @@ public func colored(color: Color, body: () -> Unit): PrettyPrinter
 
 功能：对闭包中给打印器增加的字符串指定颜色。
 常见的用法如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 pp.colored(RED) {
@@ -493,6 +461,23 @@ pp.colored(RED) {
 
 - color: [Color](./unittest_common_package_enums.md#enum-color) - 指定打印的颜色。
 - body: () -> Unit - 添加字符串的闭包。
+
+返回值：
+
+- [PrettyPrinter](#class-prettyprinter) - 打印器。
+
+### func fillLimitedSpace(Int64, () -\> Unit)
+
+```cangjie
+public open func fillLimitedSpace(spaceSize: Int64, body: () -> Unit): PrettyPrinter
+```
+
+功能：指定大小填充代码块。
+
+参数：
+
+- spaceSize: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64)  - 所指定的大小。
+- body: () -\> Unit - 填充的方式。
 
 返回值：
 
@@ -515,7 +500,7 @@ public func colored(color: Color, text: String): PrettyPrinter
 
 - [PrettyPrinter](#class-prettyprinter) - 打印器。
 
-### func customOffset(UInt64, body: () -> Unit)
+### func customOffset(UInt64, () -> Unit)
 
 ```cangjie
 public func customOffset(symbols: UInt64, body: () -> Unit): PrettyPrinter
@@ -523,6 +508,8 @@ public func customOffset(symbols: UInt64, body: () -> Unit): PrettyPrinter
 
 功能：对闭包中给打印器增加的字符串指定额外缩进的个数。
 常见的用法如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 pp.customOffset(5) {
@@ -532,7 +519,7 @@ pp.customOffset(5) {
 }
 ```
 
-此时字符串 "1" "2" "3" 均额外缩进5个字符。
+此时字符串 "1" "2" "3" 均额外缩进 5 个字符。
 
 参数：
 
@@ -543,7 +530,7 @@ pp.customOffset(5) {
 
 - [PrettyPrinter](#class-prettyprinter) - 打印器。
 
-### func indent(body: () -> Unit)
+### func indent(() -> Unit)
 
 ```cangjie
 public func indent(body: () -> Unit): PrettyPrinter
@@ -551,6 +538,8 @@ public func indent(body: () -> Unit): PrettyPrinter
 
 功能：对闭包中给打印器增加的字符串指定额外缩进一次。
 常见的用法如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 pp.indent {
@@ -570,7 +559,7 @@ pp.indent {
 
 - [PrettyPrinter](#class-prettyprinter) - 打印器。
 
-### func indent(UInt64, body: () -> Unit)
+### func indent(UInt64, () -> Unit)
 
 ```cangjie
 public func indent(indents: UInt64, body: () -> Unit): PrettyPrinter
@@ -578,6 +567,8 @@ public func indent(indents: UInt64, body: () -> Unit): PrettyPrinter
 
 功能：对闭包中给打印器增加的字符串指定额外缩进指定次数。
 常见的用法如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 pp.indent(2) {
@@ -587,7 +578,7 @@ pp.indent(2) {
 }
 ```
 
-此时字符串 "1" "2" "3" 均额外缩进2次。
+此时字符串 "1" "2" "3" 均额外缩进 2 次。
 
 参数：
 
@@ -661,6 +652,29 @@ public class PrettyText <: PrettyPrinter & PrettyPrintable & ToString {
 - [PrettyPrintable](unittest_common_package_interfaces.md#interface-prettyprintable)
 - [ToString](../../core/core_package_api/core_package_interfaces.md#interface-tostring)
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.common.*
+import std.unittest.testmacro.*
+
+main() {
+    let pp = PrettyText()
+    println("isEmpty: ${pp.isEmpty()}")
+    pp.append("hello world")
+    println(pp.toString())
+}
+```
+
+可能的运行结果：
+
+```text
+isEmpty: true
+hello world
+```
+
 ### init()
 
 ```cangjie
@@ -679,7 +693,7 @@ public init(string: String)
 
 参数：
 
-- string : [String](../../core/core_package_api/core_package_structs.md#struct-string) - 希望放入打印文本开头的字符串。
+- string: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 希望放入打印文本开头的字符串。
 
 ### func isEmpty()
 
@@ -721,10 +735,10 @@ public func toString(): String
 
 - [String](../../core/core_package_api/core_package_structs.md#struct-string) - 打印文本的字符串。
 
-### static func of\<PP>(PP) where PP <: PrettyPrintable
+### static func of\<PP>(PP)
 
 ```cangjie
-public static func of<PP>(pp: PP) where PP <: PrettyPrintable
+public static func of<PP>(pp: PP): PrettyText where PP <: PrettyPrintable
 ```
 
 功能：通过打印从 [PrettyPrintable](./unittest_common_package_interfaces.md#interface-prettyprintable) 创建 [PrettyText](#class-prettytext)。

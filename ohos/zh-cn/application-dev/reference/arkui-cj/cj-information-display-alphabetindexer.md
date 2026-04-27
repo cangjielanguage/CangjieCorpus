@@ -1,5 +1,11 @@
 # AlphabetIndexer
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 可以与容器组件联动，用于按逻辑结构快速定位容器显示区域的组件。
 
 ## 导入模块
@@ -39,9 +45,8 @@ public init(arrayValue!: Array<String>, selected!: ?UInt32)
 
 > **说明：**
 >
-> - [width](cj-text-input-imagespan.md#var-width)属性设置"auto"时表示自适应宽度，宽度会随索引项最大宽度变化。
+> - [width](./cj-universal-attribute-size.md#func-widthoptionlength)属性设置"auto"时表示自适应宽度，宽度会随索引项最大宽度变化。
 > - [padding](./cj-universal-attribute-size.md#func-paddinglength)属性默认为4.vp。
-> - 文本最大的字体缩放倍数[maxFontScale](./cj-common-types.md#var-maxfontscale)和最小的字体缩放倍数[minFontScale](./cj-common-types.md#var-minfontscale)皆为1，不跟随系统字体大小调节变化。
 
 通用事件：全部支持。
 
@@ -112,7 +117,7 @@ public func font(
 ### func itemSize(?Length)
 
 ```cangjie
-public func itemSize(size: ?Length): This
+public func itemSize(value: ?Length): This
 ```
 
 **功能：** 设置索引项区域大小。
@@ -125,7 +130,7 @@ public func itemSize(size: ?Length): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|size|?[Length](./cj-common-types.md#interface-length)|是|-|索引项区域大小，索引项区域为正方形，即正方形边长。<br>不支持设置为百分比。初始值: 16.vp|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|索引项区域大小，索引项区域为正方形，即正方形边长。<br>不支持设置为百分比。初始值: 16.vp|
 
 ### func popupBackground(?ResourceColor)
 
@@ -195,7 +200,7 @@ public func popupFont(
 public func popupPosition(x!: ?Length = None, y!: ?Length = None): This
 ```
 
-**功能：** 设置弹出窗口相对于索引器条上边框中点的位置。
+**功能：** 设置弹出窗口相对于索引条上边框中点的位置。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -205,8 +210,8 @@ public func popupPosition(x!: ?Length = None, y!: ?Length = None): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 弹出窗口相对于索引器条上边框中点的x坐标。初始值: 60.vp|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 弹出窗口相对于索引器条上边框中点的y坐标。初始值: 48.vp|
+|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 弹出窗口相对于索引条上边框中点的x坐标。初始值: 60.vp|
+|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 弹出窗口相对于索引条上边框中点的y坐标。初始值: 48.vp|
 
 ### func selected(?Int32)
 
@@ -374,10 +379,6 @@ public type OnAlphabetIndexerSelectCallback = (Int64) -> Unit
 
 **类型：** (Int64) -> Unit
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ### type OnAlphabetIndexerRequestPopupDataCallback
 
 ```cangjie
@@ -388,10 +389,6 @@ public type OnAlphabetIndexerRequestPopupDataCallback = (Int64) -> Array<String>
 
 **类型：** (Int64) -> Array\<String>
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ### type OnAlphabetIndexerPopupSelectCallback
 
 ```cangjie
@@ -401,10 +398,6 @@ public type OnAlphabetIndexerPopupSelectCallback = (Int64) -> Unit
 **功能：** 提示弹窗二级索引项被选中时触发的事件。
 
 **类型：** (Int64) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 
@@ -434,7 +427,7 @@ class EntryView {
                 List(space: 20, initialIndex: 0) {
                     ForEach(
                         this.arrayA,
-                        {
+                        itemGeneratorFunc: {
                             item: String, idx: Int64 => ListItem() {
                                 Text(item)
                                     .width(80.percent)
@@ -446,7 +439,7 @@ class EntryView {
                     )
                     ForEach(
                         this.arrayB,
-                        {
+                        itemGeneratorFunc: {
                             item: String, idx: Int64 => ListItem() {
                                 Text(item)
                                     .width(80.percent)
@@ -458,7 +451,7 @@ class EntryView {
                     )
                     ForEach(
                         this.arrayC,
-                        {
+                        itemGeneratorFunc: {
                             item: String, idx: Int64 => ListItem() {
                                 Text(item)
                                     .width(80.percent)
@@ -470,7 +463,7 @@ class EntryView {
                     )
                     ForEach(
                         this.arrayJ,
-                        {
+                        itemGeneratorFunc: {
                             item: String, idx: Int64 => ListItem() {
                                 Text(item)
                                     .width(80.percent)

@@ -1,5 +1,11 @@
 # Web组件嵌套滚动
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Web组件嵌套滚动的典型应用场景为，在一个页面中，有多个独立的区域需要进行滚动，当用户滚动Web区域内容时，可带动其他滚动区域进行滚动，以达到上下滑动页面的用户体验。
 
 内嵌在可滚动容器（[Scroll](../reference/arkui-cj/cj-scroll-swipe-scroll.md)、[List](../reference/arkui-cj/cj-scroll-swipe-list.md)中的Web组件，接收到滑动手势事件，需要对接ArkUI框架的[NestedScrollMode](../reference/arkui-cj/cj-common-types.md#enum-nestedscrollmode)枚举类型，使得Web组件可以嵌套ArkUI可滚动容器，进行嵌套滚动。开发者可以在Web组件创建时，使用[nestedScroll](../reference/arkui-cj/cj-web-web.md#func-nestedscrollnestedscrollmode-nestedscrollmode)属性接口指定默认的嵌套滚动模式，也允许在过程中动态改变嵌套滚动的模式。

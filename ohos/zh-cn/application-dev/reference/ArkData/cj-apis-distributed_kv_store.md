@@ -1,5 +1,11 @@
 # ohos.data.distributed_kv_store（分布式键值数据库）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 分布式键值数据库为应用程序提供不同设备间数据库的分布式协同能力。通过调用分布式键值数据库各个接口，应用程序可将数据保存到分布式键值数据库中，并可对分布式键值数据库中的数据进行增加、删除、修改、查询、同步等操作。
 
 该模块提供以下分布式键值数据库相关的常用功能：
@@ -68,7 +74,7 @@ public static let MAX_BATCH_SIZE: Int32 = 128
 public static let MAX_KEY_LENGTH: Int32 = 1024
 ```
 
-**功能：** 值为1024，表示数据库中Key允许的最大长度，单位字节。如果存在重名符号，推荐使用别名：KV_MAX_KEY_LENGTH。
+**功能：** 值为1024，表示数据库中Key允许的最大长度，单位字节。
 
 **类型：** Int32
 
@@ -124,7 +130,7 @@ public static let MAX_STORE_ID_LENGTH: Int32 = 128
 public static let MAX_VALUE_LENGTH: Int32 = 4194303
 ```
 
-**功能：** 值为4194303，表示数据库中Value允许的最大长度，单位字节。推荐使用别名：KV_MAX_VALUE_LENGTH。
+**功能：** 值为4194303，表示数据库中Value允许的最大长度，单位字节。
 
 **类型：** Int32
 
@@ -279,7 +285,7 @@ public func getEntries(query: Query): Array<Entry>
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|query|[Query](#class-query)|是|-|表示要匹配的键前缀。|
+|query|[Query](#class-query)|是|-|表示查询对象。|
 
 **返回值：**
 
@@ -323,7 +329,7 @@ try {
 public func getResultSet(keyPrefix: String): KVStoreResultSet
 ```
 
-**功能：** 从DeviceKVStore数据库中获取本设备具有指定前缀的结果集。
+**功能：** 从DeviceKVStore数据库中获取本设备具有指定前缀的结果集。允许同时打开的结果集的最大数量为8个。
 
 **系统能力：** SystemCapability.DistributedDataManager.KVStore.Core
 
@@ -378,7 +384,7 @@ try {
 public func getResultSet(query: Query): KVStoreResultSet
 ```
 
-**功能：** 获取与指定设备ID和Query对象匹配的KVStoreResultSet对象。
+**功能：** 获取与指定设备ID和Query对象匹配的KVStoreResultSet对象。允许同时打开的结果集的最大数量为8个。
 
 **系统能力：** SystemCapability.DistributedDataManager.KVStore.Core
 
@@ -643,7 +649,11 @@ public var default: String
 public var nodeType: Int32
 ```
 
-**功能：** 表示指定节点对应的数据类型，取值为[KVValueType](#enum-kvvaluetype)对应的枚举值。暂不支持BYTE_ARRAY，使用此类型会导致[getKVStore](#func-getkvstoretstring-kvoptions-where-t--singlekvstore)失败。
+**功能：** 表示指定节点对应的数据类型，取值为[KVValueType](#enum-kvvaluetype)对应的枚举值。
+
+> **说明：**
+>
+> 当前版本不支持BYTE_ARRAY，使用此类型会导致[getKVStore](#func-getkvstoretstring-kvoptions-where-t--singlekvstore)失败。
 
 **类型：** Int32
 
@@ -849,7 +859,7 @@ public func getKVStore<T>(storeId: String, options: KVOptions): T where T <: Sin
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|storeId|String|是|-|数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH](#static-let-max_store_id_length)，且只能包含字母数字或下划线_|
+|storeId|String|是|-|数据库唯一标识符，长度不大于[MAX_STORE_ID_LENGTH](#static-let-max_store_id_length)，且只能包含字母数字或下划线_。|
 |options|[KVOptions](#class-kvoptions)|是|-|创建分布式键值实例的配置信息。|
 
 **返回值：**
@@ -975,7 +985,7 @@ KVStoreResultSet实例不会实时刷新。使用结果集后，如果数据库�
 
 > **说明：**
 >
-> - KVStoreResultSet的游标起始位置为-1。
+> KVStoreResultSet的游标起始位置为-1。
 
 **系统能力：** SystemCapability.DistributedDataManager.KVStore.Core
 
@@ -1157,11 +1167,11 @@ public init(securityLevel: KVSecurityLevel, createIfMissing!: Bool = true, encry
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |securityLevel|[KVSecurityLevel](#enum-kvsecuritylevel)|是|-|设置数据库安全级别。|
-|createIfMissing|Bool|否|true|当数据库文件不存在时是否创建数据库，true为创建，false为不创建，默认为true。|
-|encrypt|Bool|否|false|设置数据库文件是否加密，true为加密，false为不加密，默认为false。|
-|backup|Bool|否|true|设设置数据库文件是否备份，true为备份，false为不备份，默认为true。|
-|autoSync|Bool|否|false|设置数据库是否支持跨设备自动同步。默认为false，即只支持手动同步。|
-|schema|?[Schema](#class-schema)|否|None|设设置定义存储在数据库中的值，默认为undefined，即不使用Schema。|
+|createIfMissing|Bool|否|true|**命名参数。** 当数据库文件不存在时是否创建数据库，true为创建，false为不创建，默认为true。|
+|encrypt|Bool|否|false|**命名参数。** 设置数据库文件是否加密，true为加密，false为不加密，默认为false。|
+|backup|Bool|否|true|**命名参数。** 设置数据库文件是否备份，true为备份，false为不备份，默认为true。|
+|autoSync|Bool|否|false|**命名参数。** 设置数据库是否支持跨设备自动同步。默认为false，即只支持手动同步。|
+|schema|?[Schema](#class-schema)|否|None|**命名参数。** 设置定义存储在数据库中的值，默认为None，即不使用Schema。|
 
 ## class Query
 
@@ -1266,7 +1276,7 @@ public var root: FieldNode
 public var skip: Int32
 ```
 
-**功能：** 支持在检查Value时，跳过skip指定的字节数，且取值范围为[0, 4 * 1024 * 1024 - 2]字节。
+**功能：** 支持在检查Value时跳过skip指定的字节数，取值范围为[0, 4 * 1024 * 1024 - 2]字节。
 
 **类型：** Int32
 

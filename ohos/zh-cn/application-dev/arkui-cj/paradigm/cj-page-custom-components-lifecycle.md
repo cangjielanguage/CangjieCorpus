@@ -1,5 +1,11 @@
 # 页面和自定义组件生命周期
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在开始之前，需要先明确自定义组件和页面的关系：
 
 - 自定义组件：[@Component](./cj-create-custom-components.md#component)修饰的UI单元，可以组合多个系统组件实现UI的复用，可以调用组件的生命周期。
@@ -18,31 +24,31 @@
 
 ## 自定义组件的创建和渲染流程
 
-1.自定义组件的创建：自定义组件的实例由ArkUI框架创建。
+1. 自定义组件的创建：自定义组件的实例由ArkUI框架创建。
 
-2.初始化自定义组件的成员变量：通过本地默认值或者构造方法传递参数来初始化自定义组件的成员变量，初始化顺序为成员变量的定义顺序。
+2. 初始化自定义组件的成员变量：通过本地默认值或者构造方法传递参数来初始化自定义组件的成员变量，初始化顺序为成员变量的定义顺序。
 
-3.如果开发者定义了[aboutToAppear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttoappear)，则执行[aboutToAppear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttoappear)方法。
+3. 如果开发者定义了[aboutToAppear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttoappear)，则执行[aboutToAppear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttoappear)方法。
 
-4.在首次渲染的时候，执行build方法渲染系统组件，如果子组件为自定义组件，则创建自定义组件的实例。在首次渲染的过程中，框架会记录状态变量和组件的映射关系，当状态变量改变时，驱动其相关的组件刷新。
+4. 在首次渲染的时候，执行build方法渲染系统组件，如果子组件为自定义组件，则创建自定义组件的实例。在首次渲染的过程中，框架会记录状态变量和组件的映射关系，当状态变量改变时，驱动其相关的组件刷新。
 
-5.如果开发者定义了onDidBuild，则执行onDidBuild方法。
+5. 如果开发者定义了onDidBuild，则执行onDidBuild方法。
 
 ## 自定义组件重新渲染
 
 当事件句柄被触发（比如设置了点击事件，即触发点击事件）改变了状态变量时，或者LocalStorage / AppStorage中的属性更改，并导致绑定的状态变量更改其值时：
 
-1.框架观察到了变化，将启动重新渲染。
+1. 框架观察到了变化，将启动重新渲染。
 
-2.根据框架持有的两个map（[自定义组件的创建和渲染流程](#自定义组件的创建和渲染流程)中第4步），框架可以知道该状态变量管理了哪些UI组件，以及这些UI组件对应的更新函数。执行这些UI组件的更新函数，实现最小化更新。
+2. 根据框架持有的两个map（[自定义组件的创建和渲染流程](#自定义组件的创建和渲染流程)中第4步），框架可以知道该状态变量管理了哪些UI组件，以及这些UI组件对应的更新函数。执行这些UI组件的更新函数，实现最小化更新。
 
 ## 自定义组件的删除
 
 如果if组件的分支改变，或者ForEach循环渲染中数组的个数改变，组件将被删除：
 
-1.在删除组件之前，将调用其[aboutToDisappear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttodisappear)生命周期函数，标记着该节点将要被销毁。ArkUI的节点删除机制是：后端节点直接从组件树上摘下，后端节点被销毁，对前端节点解引用，前端节点已经没有引用时，将被回收。
+1. 在删除组件之前，将调用其[aboutToDisappear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttodisappear)生命周期函数，标记着该节点将要被销毁。ArkUI的节点删除机制是：后端节点直接从组件树上摘下，后端节点被销毁，对前端节点解引用，前端节点已经没有引用时，将被回收。
 
-2.自定义组件和它的变量将被删除，如果其有同步的变量，比如[@Link](../state_management/cj-macro-link.md)、[@Prop](../state_management/cj-macro-prop.md)、[@StorageLink](../state_management/cj-appstorage.md#storagelink)，将从[同步源](../state_management/cj-state-management-overview.md)上取消注册。
+2. 自定义组件和它的变量将被删除，如果其有同步的变量，比如[@Link](../state_management/cj-macro-link.md)、[@Prop](../state_management/cj-macro-prop.md)、[@StorageLink](../state_management/cj-appstorage.md#storagelink)，将从[同步源](../state_management/cj-state-management-overview.md)上取消注册。
 
 不建议在生命周期[aboutToDisappear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttodisappear)内使用异步操作，如果在生命周期的[aboutToDisappear](../../reference/arkui-cj/cj-custom-component-lifecycle.md#func-abouttodisappear)使用异步操作（spawn或者回调方法），自定义组件将被保留在spawn的闭包中，直到回调方法被执行完，这个行为阻止了自定义组件的垃圾回收。
 
@@ -211,7 +217,7 @@ class Page {
 
 以上示例中，Index页面包含两个自定义组件，一个是被@Entry修饰的EntryView，也是页面的入口组件，即页面的根节点；一个是Child，是EntryView的子组件。只有@Entry修饰的节点才可以使页面级别的生命周期方法生效，因此在EntryView中声明当前Index页面的页面生命周期函数（onPageShow / onPageHide / onBackPress）。EntryView和其子组件Child分别声明了各自的组件级别生命周期函数（aboutToAppear / onDidBuild/aboutToDisappear）。
 
-- 应用冷启动的初始化流程为：EntryView aboutToAppear --> EntryView build --> EntryView onDidBuild--> Child aboutToAppear --> Child build --> Child onDidBuild --> Index onPageShow。
+- 应用冷启动的初始化流程为：EntryView aboutToAppear --> EntryView build --> EntryView onDidBuild --> Child aboutToAppear --> Child build --> Child onDidBuild --> Index onPageShow。
 
 - 点击“delete Child”，if绑定的this.showChild变成false，删除Child组件，会执行Child aboutToDisappear方法。
 

@@ -1,6 +1,12 @@
 # 页面间转场（pageTransition）
 
-当路由进行切换时，可以通过自定义页面入场和页面退场的转场动效。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+当路由（[Router](./cj-apis-uicontext-router.md)）进行切换时，可以通过在[pageTransition](./cj-custom-component-lifecycle.md#func-pagetransition)函数中自定义页面入场和页面退场的转场动效。详细指导请参考[页面转场动画](../../arkui-cj/cj-page-transition-animation.md)。
 
 > **说明：**
 >
@@ -15,10 +21,10 @@ import kit.ArkUI.*
 ## class CommonTransition
 
 ```cangjie
-sealed abstract class CommonTransition {}
+abstract sealed class CommonTransition {}
 ```
 
-**功能：** 页面转场动画的通用基类，提供一系列可复用的动画效果方法。
+**功能：** 页面转场通用动效。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -30,7 +36,7 @@ sealed abstract class CommonTransition {}
 public func slide(value: SlideEffect): This
 ```
 
-**功能：** 设置页面转场时的滑动效果。
+**功能：** 设置页面转场时的滑入滑出效果。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -40,7 +46,7 @@ public func slide(value: SlideEffect): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|[SlideEffect](#enum-slideeffect)|是|-|滑动效果类型。|
+|value|[SlideEffect](#enum-slideeffect)|是|-|页面转场时的滑入滑出效果。|
 
 ### func translate(?Length, ?Length, ?Length)
 
@@ -58,9 +64,9 @@ public func translate(x!: ?Length = None, y!: ?Length = None, z!: ?Length = None
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** x轴上的平移距离。初始值：0.0vp|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** y轴上的平移距离。初始值：0.0vp|
-|z|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** z轴上的平移距离。初始值：0.0vp|
+|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** x轴的平移距离。<br>取值范围为(-∞, +∞)。<br>初始值：0.0.vp。|
+|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** y轴的平移距离。<br>取值范围为(-∞, +∞)。<br>初始值：0.0.vp。|
+|z|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** z轴的平移距离。<br>取值范围为(-∞, +∞)。<br>初始值：0.0.vp。|
 
 ### func scale(?Float32, ?Float32, ?Float32, ?Length, ?Length)
 
@@ -84,11 +90,11 @@ public func scale(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?Float32|否|None|**命名参数。** x轴上的缩放比例。初始值：1.0|
-|y|?Float32|否|None|**命名参数。** y轴上的缩放比例。初始值：1.0|
-|z|?Float32|否|None|**命名参数。** z轴上的缩放比例。初始值：1.0|
-|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点x轴坐标。初始值：50.percent|
-|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点y轴坐标。初始值：50.percent|
+|x|?Float32|否|None|**命名参数。** x轴的缩放倍数。x>1时以x轴方向放大，0<x<1时以x轴方向缩小，x<0时沿x轴反向并缩放。<br>初始值：1.0。|
+|y|?Float32|否|None|**命名参数。** y轴的缩放倍数。y>1时以y轴方向放大，0<y<1时以y轴方向缩小，y<0时沿y轴反向并缩放。<br>初始值：1.0。|
+|z|?Float32|否|None|**命名参数。** z轴的缩放倍数。z>1时以z轴方向放大，0<z<1时以z轴方向缩小，z<0时沿z轴反向并缩放。<br>初始值：1.0。|
+|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点x轴坐标。<br>初始值：50.percent。|
+|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点y轴坐标。<br>初始值：50.percent。|
 
 ### func opacity(Float64)
 
@@ -96,7 +102,7 @@ public func scale(
 public func opacity(value: Float64): This
 ```
 
-**功能：** 设置页面转场时的透明度效果。
+**功能：** 设置入场的起点透明度值或者退场的终点透明度值。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -106,7 +112,7 @@ public func opacity(value: Float64): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|Float64|是|-|透明度值，取值范围[0.0, 1.0]，0.0表示完全透明，1.0表示完全不透明。|
+|value|Float64|是|-|设置入场的起点透明度值或者退场的终点透明度值。取值范围[0.0, 1.0]，0.0表示完全透明，1.0表示完全不透明。|
 
 ## class PageTransitionEnter
 
@@ -152,10 +158,10 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|routeType|?[RouteType](#enum-routetype) |否|Option.None|**命名参数。** 页面转场效果生效的路由类型。|
-|duration|?Int32|否|None|**命名参数。** 动画的时长。单位：毫秒。取值范围：[0, +∞)。|
-|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。|
-|delay|?Int32|否|None|**命名参数。** 动画延迟时长。单位：毫秒。|
+|routeType|?[RouteType](#enum-routetype) |否|Option.None|**命名参数。** 页面转场效果生效的路由类型。<br>初始值：RouteType.None。|
+|duration|?Int32|否|None|**命名参数。** 动画的时长。<br>单位：毫秒。<br>取值范围：[0, +∞)。<br>初始值：1000。|
+|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。<br>Curve.Linear|
+|delay|?Int32|否|None|**命名参数。** 动画延迟时长。<br>单位：毫秒。<br>初始值：1000。|
 
 ### func onEnter(?PageTransitionCallback)
 
@@ -219,10 +225,10 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|routeType|?[RouteType](#enum-routetype)|否|Option.None|**命名参数。** 页面转场效果生效的路由类型。|
-|duration|?Int32|否|None|**命名参数。** 动画的时长。单位：毫秒。取值范围：[0, +∞)。|
-|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。|
-|delay|?Int32|否|None|**命名参数。** 动画延迟时长。单位：毫秒。|
+|routeType|?[RouteType](#enum-routetype) |否|Option.None|**命名参数。** 页面转场效果生效的路由类型。<br>初始值：RouteType.None。|
+|duration|?Int32|否|None|**命名参数。** 动画的时长。<br>单位：毫秒。<br>取值范围：[0, +∞)。<br>初始值：1000。|
+|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。<br>Curve.Linear|
+|delay|?Int32|否|None|**命名参数。** 动画延迟时长。<br>单位：毫秒。<br>初始值：1000。|
 
 ### func onExit(?PageTransitionCallback)
 
@@ -240,7 +246,7 @@ public func onExit(event: ?PageTransitionCallback)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|event|?[PageTransitionCallback](#type-pagetransitioncallback)|是|-|出场动画的逐帧回调直到入场动画结束，转场进度从0变化到1。|
+|event|?[PageTransitionCallback](#type-pagetransitioncallback)|是|-|出场动画的逐帧回调直到出场动画结束，转场进度从0变化到1。|
 
 ## enum RouteType
 
@@ -253,7 +259,7 @@ public enum RouteType <: Equatable<RouteType> {
 }
 ```
 
-**功能：** 页面路由类型。
+**功能：** 页面转场类型。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -269,7 +275,7 @@ public enum RouteType <: Equatable<RouteType> {
 None
 ```
 
-**功能：** 页面未重定向。
+**功能：** 页面未重定向。如Push和Pop描述中RouteType为None的情形，即页面进场时PageTransitionEnter的转场效果生效；退场时PageTransitionExit的转场效果生效。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -281,7 +287,7 @@ None
 Push
 ```
 
-**功能：** 跳转到下一页面。
+**功能：** 跳转到下一页面。PageA跳转到下一个新的界面PageB。对于PageA，指定RouteType为None或者Push的PageTransitionExit组件样式生效，对于PageB，指定RouteType为None或者Push的PageTransitionEnter组件样式生效。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -293,7 +299,7 @@ Push
 Pop
 ```
 
-**功能：** 重定向指定页面。
+**功能：** 重定向指定页面。从PageB回退到之前的页面PageA。对于PageB，指定RouteType为None或者Pop的PageTransitionExit组件样式生效，对于PageA，指定RouteType为None或者Pop的PageTransitionEnter组件样式生效。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -359,7 +365,7 @@ public enum SlideEffect <: Equatable<SlideEffect> {
 }
 ```
 
-**功能：** 页面滑动效果类型。
+**功能：** 页面转场时的滑入滑出效果。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -471,11 +477,7 @@ public operator func ==(other: SlideEffect): Bool
 public type PageTransitionCallback = (RouteType, Float64) -> Unit
 ```
 
-**功能：** 回调用于报告页面转换事件。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
+**功能：** 页面转场事件回调。
 
 **类型：** ([RouteType](#enum-routetype) , Float64) -> Unit
 

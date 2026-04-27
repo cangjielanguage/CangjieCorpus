@@ -116,31 +116,33 @@
     }
 
     func test1() {
-        let a = A() // Ok, A() is call the constructor of A
-        a() // Ok, a() is to call the operator () overloading function
+        let a = A() // OK, A() is call the constructor of A
+        a()         // OK, a() is to call the operator () overloading function
     }
     ```
 
    不能使用 `this` 或 `super` 调用 `()` 操作符重载函数。示例如下：
 
+    <!-- compile.error -->
+
     ```cangjie
     open class A {
         public init() {}
         public init(x: Int64) {
-            this() // Ok, this() calls the constructor of A
+            this() // OK, this() calls the constructor of A
         }
 
         public operator func ()(): Unit {}
 
         public func foo() {
-            this()  // Error, this() calls the constructor of A
+            this()  // Error, this() calls the constructor of A.
             super() // Error
         }
     }
 
     class B <: A {
         public init() {
-            super() // Ok, super()  calls the constuctor of the super class
+            super() // OK, super()  calls the constuctor of the super class
         }
 
         public func goo() {
@@ -162,11 +164,11 @@
     }
 
     main() {
-        let e = X(1) // Ok, X(1) is to call the constructor X(Int64)
-        X(1.0) // Ok, X(1.0) is to call the operator () overloading function
+        let e = X(1)    // OK, X(1) is to call the constructor X(Int64)
+        X(1.0)          // OK, X(1.0) is to call the operator () overloading function
         let e1 = X
-        e1(1) // Ok, e1(1) is to call the operator () overloading function
-        Y(1) // oK, Y(1) is to call the operator () overloading function
+        e1(1)           // OK, e1(1) is to call the operator () overloading function
+        Y(1)            // OK, Y(1) is to call the operator () overloading function
     }
     ```
 
@@ -198,10 +200,40 @@
 | `^`                 | Bitwise XOR           |
 | <code>&vert;</code> | Bitwise OR            |
 
-需要注意的是：
+**注意事项：**
 
-> **注意：**
->
-> - 一旦在某个类型上重载了除关系操作符（`<`、`<=`、`>`、`>=`、`==` 和 `!=`）之外的其他二元操作符，并且操作符函数的返回类型与左操作数的类型一致或是其子类型，那么此类型支持对应的复合赋值操作符。当操作符函数的返回类型与左操作数的类型不一致且不是其子类型时，在使用对应的复合赋值符号时将报类型不匹配错误。
-> - 仓颉编程语言不支持自定义操作符，即不允许定义除上表中所列 `operator` 之外的其他操作符函数。
-> - 对于类型 `T`, 如果 `T` 已经默认支持了上述若干可重载操作符，那么通过扩展的方式再次为其实现同签名的操作符函数时将报重定义错误。例如，为数值类型重载其已支持的同签名算术操作符、位操作符或关系操作符等操作符时，为 `Rune` 重载同签名的关系操作符时，为 `Bool` 类型重载同签名的逻辑操作符、判等或不等操作符时，等等这些情况，均会报重定义错误。
+- 一旦在某个类型上重载了除关系操作符（`<`、`<=`、`>`、`>=`、`==` 和 `!=`）之外的其他二元操作符，并且操作符函数的返回类型与左操作数的类型一致或是其子类型，那么此类型支持对应的复合赋值操作符。当操作符函数的返回类型与左操作数的类型不一致且不是其子类型时，在使用对应的复合赋值符号时将报类型不匹配错误。
+
+<!-- compile.error -->
+
+```cangjie
+open class MyClass {
+    var x: Int64 = 0
+    public init (a: Int64) {
+        x = a
+    }
+
+    public operator func +(right: MyClass): Int64 { // The above rules are not met
+        this.x + right.x
+    }
+}
+
+main() {
+    var a = MyClass(5)
+    var b = MyClass(3)
+    a += b; // Error, type incompatible in this compound assignment expression
+}
+```
+
+- 仓颉编程语言不支持自定义操作符，即不允许定义除上表中所列 `operator` 之外的其他操作符函数。
+- 对于类型 `T`，如果 `T` 已默认支持上述某些可重载操作符，那么通过扩展方式再次为其实现相同签名的操作符函数将报重定义错误。例如：为数值类型重载其已支持的同签名算术操作符、位操作符或关系操作符，为 `Rune` 重载同签名的关系操作符，或为 `Bool` 类型重载同签名的逻辑操作符、判等或不等操作符，均会报重定义错误。
+
+<!-- compile.error -->
+
+```cangjie
+extend Int64 {
+    public operator func +(x: Int64, y: Int64): Int64 { // Error, invalid number of parameters for operator '+'
+        x + y
+    }
+}
+```

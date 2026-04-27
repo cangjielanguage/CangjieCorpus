@@ -1,6 +1,12 @@
 # ohos.bundle.bundle_manager（bundleManager管理）
 
-bundle_manager模块提供应用信息的查询能力，支持应用包信息[BundleInfo](#class-bundleinfo)、应用程序信息[ApplicationInfo](#class-applicationinfo)、UIAbility组件信息[AbilityInfo](#class-abilityinfo)、ExtensionAbility组件信息[ExtensionAbilityInfo](#class-extensionabilityinfo)等信息的查询。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+bundle_manager模块提供应用信息的查询能力，支持查询应用包信息[BundleInfo](#class-bundleinfo)、应用程序信息[ApplicationInfo](#class-applicationinfo)、UIAbility组件信息[AbilityInfo](#class-abilityinfo)、ExtensionAbility组件信息[ExtensionAbilityInfo](#class-extensionabilityinfo)等。
 
 ## 导入模块
 
@@ -12,8 +18,8 @@ import kit.AbilityKit.*
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -139,7 +145,7 @@ public let descriptionId: Int32
 public let deviceTypes: Array<String>
 ```
 
-**功能：** Ability支持的设备类型，来源于modudle.json5配置的deviceTypes。
+**功能：** Ability支持的设备类型，来源于module.json5配置的deviceTypes。
 
 **类型：** Array\<String>
 
@@ -155,7 +161,7 @@ public let deviceTypes: Array<String>
 public let enabled: Bool
 ```
 
-**功能：** Ability是否可用，可用表示可以拉起或者查询，不可用时调用getAbilityInfo查询ability需要携带GET_ABILITY_INFO_WITH_DISABLE的AbilityFlag，取值为true表示Ability可用，取值为false表示Ability不可用。
+**功能：** Ability的可用性。可用表示可以拉起或查询，不可用时调用getAbilityInfo需携带GET_ABILITY_INFO_WITH_DISABLE的AbilityFlag。取值true表示可用，false表示不可用。
 
 **类型：** Bool
 
@@ -171,7 +177,7 @@ public let enabled: Bool
 public let excludeFromDock: Bool
 ```
 
-**功能：** 判断Ability是否可以在dock区域隐藏图标，取值为true表示可以隐藏，取值为false不可以隐藏。
+**功能：** 判断Ability是否可在dock区域隐藏图标，true表示可以，false表示不可以。
 
 **类型：** Bool
 
@@ -187,7 +193,7 @@ public let excludeFromDock: Bool
 public let exported: Bool
 ```
 
-**功能：** 判断Ability是否可以被其他应用拉起，取值为true表示Ability可以被其他应用拉起，取值为false表示Ability不可以被其他应用拉起。
+**功能：** 判断Ability是否可以被其他应用拉起，true表示可以，false表示不可以。
 
 **类型：** Bool
 
@@ -235,7 +241,7 @@ public let iconId: Int32
 public let label: String
 ```
 
-**功能：** Ability对用户显示的名称的资源描述符，对应module.json5]中abilities下配置的label字段。
+**功能：** Ability对用户显示的名称的资源描述符，对应module.json5中abilities下配置的label字段。
 
 **类型：** String
 
@@ -251,7 +257,7 @@ public let label: String
 public let labelId: Int32
 ```
 
-**功能：** Ability的标签资源id，是编译构建时根据应用配置abilities下的label自动生成的资源id。
+**功能：** Ability的标签资源id，编译构建时根据应用配置abilities下的label自动生成。
 
 **类型：** Int32
 
@@ -267,7 +273,7 @@ public let labelId: Int32
 public let launchType: LaunchType
 ```
 
-**功能：** Ability的启动模式，在启动的时候是否以多实例启动，详情参考[启动模式枚举](#enum-launchtype) 。
+**功能：** Ability的启动模式，决定该Ability在启动时是否以多实例启动，详情参考[启动模式枚举](#enum-launchtype) 。
 
 **类型：** [LaunchType](#enum-launchtype)
 
@@ -397,7 +403,7 @@ public let supportedWindowModes: Array<SupportedWindowMode>
 
 **功能：** Ability支持的窗口模式。
 
-**类型：** Array\<[SupportedWindowMode](#enum-SupportedWindowMode)>
+**类型：** Array\<[SupportedWindowMode](#enum-supportedwindowmode)>
 
 **读写能力：** 只读
 
@@ -630,7 +636,7 @@ public let description: String
 public let descriptionId: Int32
 ```
 
-**功能：** 标识应用的描述信息的资源id，是编译构建时根据应用配置的description自动生成的资源id。
+**功能：** 标识应用的描述信息的资源id，编译构建时根据应用配置的description自动生成。
 
 **类型：** Int32
 
@@ -646,7 +652,7 @@ public let descriptionId: Int32
 public let descriptionResource: AppResource
 ```
 
-**功能：** 应用程序的描述资源信息，包含了该资源信息的bundleName、moduleName 和 id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
+**功能：** 应用程序的描述资源信息，包含bundleName、moduleName和id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
 
 **类型：** [AppResource](../LocalizationKit/cj-apis-resource.md#class-appresource)
 
@@ -710,7 +716,7 @@ public let iconId: Int32
 public let iconResource: AppResource
 ```
 
-**功能：** 应用程序的图标资源信息，包含了该资源信息的bundleName、moduleName 和 id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
+**功能：** 应用程序的图标资源信息，包含bundleName、moduleName和id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
 
 **类型：** [AppResource](../LocalizationKit/cj-apis-resource.md#class-appresource)
 
@@ -784,7 +790,7 @@ public let labelId: Int32
 public let labelResource: AppResource
 ```
 
-**功能：** 应用程序的名称资源信息，包含了该资源信息的bundleName、moduleName 和 id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
+**功能：** 应用程序的名称资源信息，包含bundleName、moduleName和id，可以调用全球化的接口[getMediaContent](../LocalizationKit/cj-apis-resource_manager.md#func-getmediacontentuint32-screendensity)来获取详细的资源数据信息。
 
 **类型：** [AppResource](../LocalizationKit/cj-apis-resource.md#class-appresource)
 
@@ -1085,15 +1091,15 @@ public static const GET_BUNDLE_INFO_WITH_METADATA: Int32 = 0x00000020
 
 **功能：** 用于获取applicationInfo、moduleInfo、abilityInfo和extensionAbilityInfo中包含的metadata。
 
-单独使用不生效，它需要与GET_BUNDLE_INFO_WITH_APPLICATION、GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_ABILITY、GET_BUNDLE_INFO_WITH_EXTENSION_ABILITY配合使用，其中：
+单独使用时无效，必须与以下权限配合使用：GET_BUNDLE_INFO_WITH_APPLICATION、GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_ABILITY、GET_BUNDLE_INFO_WITH_EXTENSION_ABILITY。其中：
 
-获取applicationInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_APPLICATION一起使用。
+- 获取applicationInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_APPLICATION一起使用。
 
-获取moduleInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE一起使用。
+- 获取moduleInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE一起使用。
 
-获取abilityInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_ABILITY一起使用。
+- 获取abilityInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_ABILITY一起使用。
 
-获取extensionAbilityInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_EXTENSION_ABILITY一起使用。
+- 获取extensionAbilityInfo中包含的metadata，需要与GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_EXTENSION_ABILITY一起使用。
 
 **类型：** Int32
 
@@ -1243,7 +1249,7 @@ public let installTime: Int64
 
 > **说明：**
 >
-> - 设备出厂首次开机时，如果未获取到当前时间，会以Unix时间戳基准（1970-01-01 08:00:00 UTC+8）作为当前系统的起始时间。例如，开机后未获取到时间，等待32s之后安装成功，则应用包安装时间戳为32000。
+> 设备出厂首次开机时，如果未获取到当前时间，会以Unix时间戳基准（1970-01-01 08:00:00 UTC+8）作为当前系统的起始时间。例如，开机后未获取到时间，等待32s之后安装成功，则应用包安装时间戳为32000。
 
 **类型：** Int64
 
@@ -1660,7 +1666,7 @@ public class DefaultAppManager {}
 public static func isDefaultApplication(appType: ApplicationType): Bool
 ```
 
-**功能：** 根据系统已定义的应用类型或者UniformDataType类型判断当前应用是否是该类型的默认应用。
+**功能：** 根据系统已定义的应用类型判断当前应用是否是该类型的默认应用。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.DefaultApp
 
@@ -1670,7 +1676,7 @@ public static func isDefaultApplication(appType: ApplicationType): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|appType|ApplicationType|是|-|要查询的应用类型，取[ApplicationType](#enum-applicationtype)或者UniformDataType类型中的值。|
+|appType|ApplicationType|是|-|要查询的应用类型，取[ApplicationType](#enum-applicationtype)类型中的值。|
 
 **返回值：**
 
@@ -1726,7 +1732,7 @@ public class Dependency {
 public let bundleName: String
 ```
 
-**功能：** 标识当前模块依赖的共享包包名。
+**功能：** 标识当前模块依赖的共享包的包名。
 
 **类型：** String
 
@@ -2110,8 +2116,7 @@ public class HapModuleInfo {
 public let abilitiesInfo: Array<AbilityInfo>
 ```
 
-**功能：** 当前模块所有Ability的信息。通过调用[getBundleInfoForSelf](#static-func-getbundleinfoforselfint32
-)接口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE和GET_BUNDLE_INFO_WITH_ABILITY获取。
+**功能：** 当前模块所有Ability的信息。通过调用[getBundleInfoForSelf](#static-func-getbundleinfoforselfint32)接口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE和GET_BUNDLE_INFO_WITH_ABILITY获取。
 
 **类型：** Array\<[AbilityInfo](#class-abilityinfo)>
 
@@ -2581,7 +2586,7 @@ public class ReqPermissionDetail {
 
 > **说明：**
 >
-> - 如果应用内多包申请的权限名称一样，但是权限申请理由不一致，系统只会返回一个权限申请理由，优先级从高到低顺序为entry类型HAP、feature类型HAP、应用内HSP。
+> 如果应用内多包申请的权限名称一样，但是权限申请理由不一致，系统只会返回一个权限申请理由，优先级从高到低顺序为entry类型HAP、feature类型HAP、应用内HSP。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 
@@ -2901,7 +2906,7 @@ public class WindowSize {
 public let maxWindowHeight: UInt32
 ```
 
-**功能：** 表示自由窗口状态下窗口的最大高度，宽度单位为vp。
+**功能：** 表示自由窗口状态下窗口的最大高度，高度单位为vp。
 
 **类型：** UInt32
 
@@ -2949,7 +2954,7 @@ public let maxWindowWidth: UInt32
 public let minWindowHeight: UInt32
 ```
 
-**功能：** 表示自由窗口状态下窗口的最小高度，宽度单位为vp。
+**功能：** 表示自由窗口状态下窗口的最小高度，高度单位为vp。
 
 **类型：** UInt32
 
@@ -3044,7 +3049,7 @@ Browser
 Email
 ```
 
-**功能：** 默认邮件。
+**功能：** 邮件默认应用。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.DefaultApp
 
@@ -3460,7 +3465,7 @@ DataShare
 Driver
 ```
 
-**功能：** 驱驱动扩展能力，提供外设驱动扩展能力。应用配置了driver类型的ExtensionAbility后会被视为驱动应用，驱动应用在安装、卸载和恢复时不会区分用户，且创建新用户时也会安装设备上已有的驱动应用。例如，创建子用户时会默认安装主用户已有的驱动应用，在子用户上卸载驱动应用时，主用户上对应的驱动应用也会同时被卸载。
+**功能：** 提供外设驱动扩展能力。应用配置driver类型的ExtensionAbility后，被视为驱动应用，安装、卸载和恢复驱动应用时，不区分用户。创建新用户时，设备上已有的驱动应用也会安装。例如，创建子用户时，默认安装主用户已有的驱动应用。在子用户上卸载驱动应用时，主用户上对应的驱动应用也会被卸载。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 
@@ -3532,7 +3537,7 @@ InsightIntentUI
 Preview
 ```
 
-**功能：** 文件预览扩展能力，提供文件预览的能力，其他应用可以直接在应用中嵌入显示。预留能力，仅系统应用支持。
+**功能：** 文件预览扩展，支持系统应用直接嵌入显示。预留能力，仅系统应用支持。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 
@@ -3544,7 +3549,7 @@ Preview
 Print
 ```
 
-**功能：** 文件预览扩展能力，提供文件预览的能力，其他应用可以直接在应用中嵌入显示。预留能力，仅系统应用支持。
+**功能：** 文件打印扩展，提供应用打印照片、文档等办公场景能力。仅系统应用支持。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 

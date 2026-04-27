@@ -1,5 +1,11 @@
 # Web
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供具有网页显示能力的Web组件，[@ohos.web.webview](../ArkWeb/cj-apis-webview.md)提供web控制能力。
 
 ## 导入模块
@@ -43,9 +49,9 @@ public init(
 
 ## 通用属性/通用事件
 
-通用属性：仅支持[aspectRatio](./cj-universal-attribute-layoutconstraints.md#func-aspectratioint64)、[backdropBlur](./cj-universal-attribute-background.md#func-backdropblurfloat64)、[backgroundColor](./cj-universal-attribute-background.md#func-backgroundcolorresourcecolor)、[bindContentCover](./cj-universal-attribute-menu.md)、[bindContextMenu](./cj-universal-attribute-menu.md#func-bindcontextmenu---unit-responsetype)、[bindMenu](./cj-universal-attribute-menu.md#func-bindmenu---unit) 、[bindSheet](./cj-universal-attribute-sheettransition.md#func-bindsheetbool----unit-sheetoptions)、[borderColor](./cj-information-display-progress.md#var-bordercolor)、[borderStyle](./cj-common-types.md#enum-borderstyle)、[borderWidth](./cj-information-display-badge.md#var-borderwidth)、[clip](./cj-common-types.md#clip)、[constraintSize](./cj-universal-attribute-size.md#func-constraintsizelength-length-length-length)、[defaultFocus](./cj-universal-attribute-focus.md#func-defaultfocusbool)、[focusable](./cj-universal-attribute-popup.md#var-focusable)、[tabIndex](./cj-universal-attribute-focus.md#func-tabindexint32)、[groupDefaultFocus](./cj-universal-attribute-focus.md#func-groupdefaultfocusbool)、[displayPriority](./cj-universal-attribute-layoutconstraints.md#func-displaypriorityint32)、[draggable](./cj-image-video-image.md#func-draggablebool)、[enabled](./cj-universal-attribute-enable.md#func-enabledbool)、[flexBasis](./cj-universal-attribute-flexlayout.md#func-flexbasislength)、[flexShrink](./cj-universal-attribute-flexlayout.md#func-flexshrinkfloat64)、[layoutWeight](./cj-universal-attribute-size.md#func-layoutweightint32)、[id](./cj-universal-attribute-componentid.md)、[height](./cj-universal-attribute-size.md#func-heightlength)、[touchable](./cj-apis-window.md#let-touchable)、[margin](./cj-universal-attribute-size.md#func-marginlength)、[markAnchor](./cj-universal-attribute-location.md#func-markanchorlength-length)、[mask](./cj-scroll-swipe-swiper.md#func-maskbool)、[offset](./cj-apis-componentutils.md#class-offset)、[width](./cj-apis-display.md#var-width)、[zIndex](./cj-animation-sharedtransition.md#var-zindex)、[visibility](./cj-common-types.md#enum-visibility)、[scale](./cj-animation-pagetransition.md#func-scalefloat32-float32-float32-length-length)、[transform](./cj-apis-componentutils.md#let-transform)、[size](./cj-apis-componentutils.md#let-size)、[opacity](./cj-animation-pagetransition.md#func-opacityfloat64)、[sharedTransition](./cj-animation-sharedtransition.md#func-sharedtransitionstring-sharedtransitionoptions)、[transition](./cj-animation-transition.md#func-transition)。
+通用属性：仅支持[aspectRatio](./cj-universal-attribute-size.md#func-aspectratiofloat64)、[backdropBlur](./cj-universal-attribute-imageeffect.md#func-backdropblurfloat64)、[backgroundColor](./cj-universal-attribute-background.md#func-backgroundcolorresourcecolor)、[bindContentCover](./cj-universal-attribute-menu.md)、[bindContextMenu](./cj-universal-attribute-menu.md#func-bindcontextmenucustombuilder-responsetype-contextmenuoptions)、[bindMenu](./cj-universal-attribute-menu.md#func-bindmenuarraymenuelement) 、[bindSheet](./cj-universal-attribute-sheettransition.md#func-bindsheetbool-custombuilder-sheetoptions)、[borderColor](./cj-universal-attribute-border.md#func-bordercolorresourcecolor)、[borderStyle](./cj-common-types.md#enum-borderstyle)、[borderWidth](./cj-universal-attribute-border.md#func-borderwidthedgewidths)、[clip](./cj-common-types.md#clip)、[constraintSize](./cj-universal-attribute-layoutconstraints.md#func-constraintsizelength-length-length-length)、[defaultFocus](./cj-universal-attribute-focus.md#func-defaultfocusbool)、[focusable](./cj-universal-attribute-focus.md#func-focusablebool)、[tabIndex](./cj-universal-attribute-focus.md#func-tabindexint32)、[groupDefaultFocus](./cj-universal-attribute-focus.md#func-groupdefaultfocusbool)、[displayPriority](./cj-universal-attribute-size.md#func-displaypriorityint32)、[enabled](./cj-universal-attribute-enable.md#func-enabledbool)、[flexBasis](./cj-universal-attribute-flexlayout.md#func-flexbasislength)、[flexShrink](./cj-universal-attribute-flexlayout.md#func-flexshrinkfloat64)、[layoutWeight](./cj-universal-attribute-size.md#func-layoutweightint32)、[id](./cj-universal-attribute-componentid.md)、[height](./cj-universal-attribute-size.md#func-heightoptionlength)、[touchable](./cj-apis-window.md#var-touchable)、[margin](./cj-universal-attribute-size.md#func-marginlength)、[markAnchor](./cj-universal-attribute-location.md#func-markanchorlength-length)、[offset](./cj-apis-componentutils.md#class-offset)、[width](./cj-universal-attribute-size.md#func-widthoptionlength)、[zIndex](./cj-universal-attribute-zorder.md#func-zindexint32)、[visibility](./cj-common-types.md#enum-visibility)、[scale](./cj-animation-pagetransition.md#func-scalefloat32-float32-float32-length-length)、[translate](./cj-universal-attribute-transform.md#func-translatelength-length-length)、[responseRegion](./cj-universal-attribute-touchtarget.md#func-responseregionarrayrectangle)、[size](./cj-universal-attribute-size.md#func-sizelength-length)、[opacity](./cj-animation-pagetransition.md#func-opacityfloat64)、[sharedTransition](./cj-animation-sharedtransition.md#func-sharedtransitionstring-sharedtransitionoptions)、[transition](./cj-animation-transition.md#func-transitiontransitioneffect)、[position](./cj-universal-attribute-location.md#func-positionlength-length)、[direction](./cj-universal-attribute-layoutconstraints.md#func-directiondirection)。
 
-通用事件：仅支持[onAppear](./cj-universal-attribute-menu.md#var-onappear)、[onDisAppear](./cj-universal-attribute-menu.md#var-ondisappear)、[onBlur](./cj-universal-event-focus.md#func-onblur---unit)、[onFocus](./cj-universal-event-focus.md#func-onfocus---unit)、[onHover](./cj-universal-event-mouse.md)、[onMouse](./cj-universal-event-mouse.md#func-onmousemouseevent)、[onKeyEvent](./cj-universal-event-key.md#func-onkeyeventkeyevent-unit)、[onTouch](./cj-universal-event-touch.md#func-ontouchtouchevent-unit)、[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64-unit---unit)。
+通用事件：仅支持[onAppear](./cj-universal-event-appear.md#func-onappear---unit)、[onDisAppear](./cj-universal-event-appear.md#func-ondisappear---unit)、[onBlur](./cj-universal-event-focus.md#func-onblur---unit)、[onFocus](./cj-universal-event-focus.md#func-onfocus---unit)、[onHover](./cj-universal-event-mouse.md)、[onMouse](./cj-universal-event-mouse.md#func-onmousemouseevent---unit)、[onKeyEvent](./cj-universal-event-key.md#func-onkeyeventkeyevent---unit)、[onTouch](./cj-universal-event-touch.md#func-ontouchtouchevent---unit)、[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)。
 
 ## 组件属性
 
@@ -389,7 +395,7 @@ public class OnLoadInterceptEvent {
 
 **功能：** 当资源加载被拦截时，加载拦截事件。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -405,7 +411,7 @@ public var data: WebResourceRequest
 
 **读写能力：** 可读写
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -417,7 +423,7 @@ public init(data: WebResourceRequest)
 
 **功能：** 构造函数。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 

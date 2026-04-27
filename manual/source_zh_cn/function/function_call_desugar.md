@@ -48,7 +48,7 @@ func test() {
 
 ### Pipeline 表达式
 
-当需要对输入数据做一系列的处理时，可以使用 `pipeline` 表达式来简化描述。`pipeline` 表达式的语法形式如下：`e1 |> e2`。等价于如下形式的语法糖：`let v = e1; e2(v)` 。
+当需要对输入数据做一系列的处理时，可以使用 `pipeline` 表达式来简化描述。`pipeline` 表达式的语法形式如下：`e1 |> e2`。等价于如下形式的语法糖：`let v = e1; e2(v)`。
 
 其中 `e2` 是函数类型的表达式，`e1` 的类型是 `e2` 的参数类型的子类型。
 
@@ -83,7 +83,7 @@ let res = arr |> inc |> sum // res = 12
 
 `composition` 表达式表示两个单参函数的组合。`composition` 表达式语法为 `f ~> g`，等价于 `{ x => g(f(x)) }`。
 
-其中 `f`，`g` 均为只有一个参数的函数类型的表达式。
+其中 `f` 和 `g` 均为只有一个参数的函数类型的表达式。
 
 `f` 和 `g` 组合，则要求 `f(x)` 的返回类型是 `g(...)` 的参数类型的子类型。
 
@@ -111,7 +111,7 @@ func f(x: Int64): Float64 {
     Float64(x)
 }
 
-let lambdaComp = ({x: Int64 => x}) ~> f // The same as { x: Int64 => f({x: Int64 => x}(x)) }
+let lambdaComp = {x: Int64 => x} ~> f // The same as { x: Int64 => f({x: Int64 => x}(x)) }
 ```
 
 示例 3：
@@ -126,9 +126,11 @@ var hh = h1<Int64> ~> h2<Int64> // The same as { x: Int64 => h2<Int64>(h1<Int64>
 
 > **注意：**
 >
-> 表达式 f ~> g 中，会先对 f 求值，然后对 g 求值，最后才会进行函数的组合。
+> 表达式 `f ~> g` 中，会先对 `f` 求值，然后对 `g` 求值，最后才会进行函数的组合。
 
 另外，流操作符不能与无默认值的命名形参函数直接一同使用，这是因为无默认值的命名形参函数必须给出命名实参才可以调用。例如：
+
+<!-- compile.error -->
 
 ```cangjie
 func f(a!: Int64): Unit {}
@@ -136,17 +138,19 @@ func f(a!: Int64): Unit {}
 var a = 1 |> f  // Error
 ```
 
-如果需要使用，开发者可以通过 lambda 表达式传入 `f` 函数的命名实参：
+如需使用，开发者可以通过 lambda 表达式传入 `f` 函数的命名实参：
 
 <!-- compile -->
 
 ```cangjie
 func f(a!: Int64): Unit {}
 
-var x = 1 |>  { x: Int64 => f(a: x) } // Ok
+var x = 1 |>  { x: Int64 => f(a: x) } // OK
 ```
 
-由于相同的原因，当 `f` 的参数有默认值时，直接与流运算符一起使用也是错误的，例如：
+出于相同原因，当 `f` 的参数有默认值时，直接与流运算符一起使用也是错误的，例如：
+
+<!-- compile.error -->
 
 ```cangjie
 func f(a!: Int64 = 2): Unit {}
@@ -161,7 +165,7 @@ var a = 1 |> f // Error
 ```cangjie
 func f(a: Int64, b!: Int64 = 2): Unit {}
 
-var a = 1 |> f  // Ok
+var a = 1 |> f  // OK
 ```
 
 当然，如果想要在调用 `f` 时，为参数 `b` 传入其他参数，那么也需要借助 lambda 表达式：
@@ -171,7 +175,7 @@ var a = 1 |> f  // Ok
 ```cangjie
 func f(a: Int64, b!: Int64 = 2): Unit {}
 
-var a = 1 |> {x: Int64 => f(x,  b: 3)}  // Ok
+var a = 1 |> {x: Int64 => f(x, b: 3)}  // OK
 ```
 
 ## 变长参数
@@ -203,6 +207,8 @@ main() {
 ```
 
 需要注意，只有最后一个非命名参数可以作为变长参数，命名参数不能使用这个语法糖。
+
+<!-- compile.error -->
 
 ```cangjie
 func length(arr!: Array<Int64>) {
@@ -270,6 +276,8 @@ array: [1, 2]
 ```
 
 当编译器无法决议时会报错：
+
+<!-- compile.error -->
 
 ```cangjie
 func f(arr: Array<Int64>) { arr.size }

@@ -1,5 +1,11 @@
 # 弹性布局（Flex）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 弹性布局（[Flex](../reference/arkui-cj/cj-row-column-stack-flex.md)）提供更加有效的方式对容器中的子元素进行排列、对齐和分配剩余空间。常用于页面头部导航栏的均匀分布、页面框架的搭建、多行数据的排列等。
@@ -780,7 +786,7 @@ class EntryView {
 
 ### 内容对齐
 
-可以通过[alignContent](../reference/arkui-cj/cj-row-column-stack-flex.md#var-aligncontent)参数设置子元素各行在交叉轴剩余空间内的对齐方式，只在多行的Flex布局中生效，可选值有：
+可以通过[alignContent](../reference/arkui-cj/cj-row-column-stack-flex.md#initflexdirection-flexwrap-flexalign-itemalign-flexalign----unit)参数设置子元素各行在交叉轴剩余空间内的对齐方式，只在多行的Flex布局中生效，可选值有：
 
 - FlexAlign.Start：子元素各行与交叉轴起点对齐。
 
@@ -1137,7 +1143,7 @@ class EntryView {
 
     父容器宽度420.vp，三个子元素原始宽度为100.vp，左右padding为20.vp，总和320.vp，剩余空间100.vp根据flexGrow值的占比分配给子元素，未设置flexGrow的子元素不参与分配。
 
-    第一个元素以及第二个元素以2:3分配剩下的100.vp。第一个元素为100.vp+100.vp * 2/5=140.vp，第个元素为100.vp+100.vp* 3/5=160.vp。
+    第一个元素以及第二个元素以2:3分配剩下的100.vp。第一个元素为100.vp+100.vp * 2/5=140.vp，第二个元素为100.vp+100.vp* 3/5=160.vp。
 
 - [flexShrink](../reference/arkui-cj/cj-universal-attribute-flexlayout.md#func-flexshrinkfloat64): 当父容器空间不足时，子元素的压缩比例。
 

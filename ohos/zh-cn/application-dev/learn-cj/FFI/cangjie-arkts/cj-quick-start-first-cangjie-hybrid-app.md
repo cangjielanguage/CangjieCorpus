@@ -70,8 +70,7 @@ Project_name
 │    ├── oh-package.json5
 │    └── oh-package-lock.json5
 ├── hvigor
-│    ├── cangjie-build-support-x.y.z.tgz
-│    └── hvigor-config.json5
+│    ├── hvigor-config.json5
 ├── oh_modules
 ├── build-profile.json5
 ├── code-linter.json5
@@ -99,7 +98,6 @@ Project_name
     - **hvigorfile.ts**：模块级编译构建任务脚本。
     - **oh-package.json5**：用来描述包名、版本、入口文件（类型声明文件）和依赖项等信息。
 - **hvigor**：用于存放当前工程使用的 hvigor。
-    - **cangjie-build-support-x.y.z.tgz**：仓颉指定的 hvigor 任务包。
     - **hvigor-config.json5**：指定工程全局使用的 hvigor 以及 hvigor 参数配置。
 - **oh_modules**：用于存放三方库依赖信息，包含应用/服务所依赖的第三方库文件。
 - **build-profile.json5**：应用级配置信息，包括签名、产品配置等。

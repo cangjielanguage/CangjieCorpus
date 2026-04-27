@@ -1,4 +1,10 @@
-# 指定二进制数据转换对称密钥（仓颉）
+# 指定二进制数据转换对称密钥
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 以3DES和HMAC为例，根据指定的对称密钥二进制数据，生成密钥（SymKey），即将外部或存储的二进制数据生成密钥，该对象可用于后续的加解密等操作。
 
@@ -6,7 +12,7 @@
 
 对应的算法规格请参见[对称密钥生成规格：3DES](./cj-crypto-sym-key-generation-conversion-spec.md#3des)。
 
-1. 获取3DES二进制密钥数据，封装成[DataBlob](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#struct-datablob)对象。
+1. 获取3DES二进制密钥数据，封装成[DataBlob](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#class-datablob)对象。
 
 2. 调用[createSymKeyGenerator](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-createsymkeygeneratorstring)，指定字符串参数'3DES192'，创建密钥算法为3DES、密钥长度为192位的对称密钥生成器（SymKeyGenerator）。
 
@@ -20,7 +26,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func genKeyMaterialBlob(): DataBlob {
     let arr: Array<UInt8> = [0xba, 0x3d, 0xc2, 0x71, 0x21, 0x1e, 0x30, 0x56, 0xad, 0x47, 0xfc, 0x5a, 0x46, 0x39, 0xee,
@@ -57,7 +63,7 @@ func testConvertSymKey() {
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func testConvertKey() {
     // 对称密钥长度为64字节，512比特。

@@ -1,16 +1,14 @@
 # 启动应用内的UIAbility组件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 [UIAbility](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)是系统调度的最小单元。在设备内的功能模块之间跳转时，会涉及到启动特定的Ability，包括应用内的其他Ability，或其他应用的Ability（例如启动三方支付Ability）。
 
 本章主要介绍启动应用内的Ability组件的方式。
-
-- [启动应用内的UIAbility组件](#启动应用内的uiability组件)
-  - [启动应用内的UIAbility](#启动应用内的uiability)
-  - [启动UIAbility的指定页面](#启动uiability的指定页面)
-    - [概述](#概述)
-    - [调用方UIAbility指定启动页面](#调用方uiability指定启动页面)
-    - [目标UIAbility冷启动](#目标uiability冷启动)
-    - [目标UIAbility热启动](#目标uiability热启动)
 
 ## 启动应用内的UIAbility
 
@@ -28,8 +26,6 @@
     import kit.AbilityKit.{Want, UIAbilityContext, WantValueType}
     import std.collection.HashMap
     import kit.PerformanceAnalysisKit.Hilog
-
-    var globalContext:?UIAbilityContext = None
 
     // 见获取UIAbility的上下文信息章节
     func getContext(): UIAbilityContext {
@@ -130,7 +126,7 @@
 
     > **说明：**
     >
-    > 调用terminateSelf()方法停止当前Ability实例时，默认会保留该实例的快照（Snapshot），即在最近任务列表中仍然能查看到该实例对应的任务。如不需要保留该实例的快照，可以在其对应Ability的[module.json5配置文件](../cj-start/basic-knowledge/module-configuration-file.md)中，将[abilities标签](../cj-start/basic-knowledge/module-configuration-file.md#abilities标签)的removeMissionAfterTerminate字段配置为true。
+    > 调用terminateSelf()方法停止当前Ability实例时，默认会保留该实例的快照（Snapshot），即在最近任务列表中仍然能查看到该实例对应的任务。如不需要保留该实例的快照，可以在其对应Ability的[module.json5配置文件](../cj-start/basic-knowledge/cj-module-configuration-file.md)中，将[abilities标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#abilities标签)的removeMissionAfterTerminate字段配置为true。
 
 ## 启动UIAbility的指定页面
 
@@ -299,3 +295,8 @@ class FuncAbilityA <: UIAbility {
 > **说明：**
 >
 > 当被调用方[UIAbility组件启动模式](cj-uiability-launch-type.md)设置为multiton启动模式时，每次启动都会创建一个新的实例，那么onNewWant()回调就不会被用到。
+<!--Del-->
+## 示例代码
+
+[启动应用内的UIAbility组件](https://gitcode.com/openharmony/applications_app_samples_cangjie/tree/master/code/BasicFeature/Ability/LaunchUIAbilityComponentsApp)
+<!--DelEnd-->

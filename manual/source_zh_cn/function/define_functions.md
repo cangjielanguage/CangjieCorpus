@@ -48,6 +48,8 @@ func add(a!: Int64 = 1, b!: Int64 = 1): Int64 {
 
 参数列表中可以同时定义非命名参数和命名参数，但是需要注意的是，非命名参数只能定义在命名参数之前，也就意味着命名参数之后不能再出现非命名参数。例如，下例中 `add` 函数的参数列表定义是不合法的：
 
+<!-- compile.error -->
+
 ```cangjie
 func add(a!: Int64, b: Int64): Int64 { // Error, named parameter 'a' must be defined after non-named parameter 'b'
     return a + b
@@ -58,6 +60,8 @@ func add(a!: Int64, b: Int64): Int64 { // Error, named parameter 'a' must be def
 
 函数参数均为不可变变量，在函数定义内不能对其赋值。
 
+<!-- compile.error -->
+
 ```cangjie
 func add(a: Int64, b: Int64): Int64 {
     a = a + b // Error
@@ -66,6 +70,8 @@ func add(a: Int64, b: Int64): Int64 {
 ```
 
 函数参数作用域从定义处起至函数体结束：
+
+<!-- compile.error -->
 
 ```cangjie
 func add(a: Int64, b: Int64): Int64 {
@@ -80,6 +86,8 @@ func add(a: Int64, b: Int64): Int64 {
 函数返回值类型是函数被调用后得到的值的类型。函数定义时，返回值类型是可选的：可以显式地定义返回值类型（返回值类型定义在参数列表和函数体之间），也可以不定义返回值类型，交由编译器推导确定。
 
 当显式地定义了函数返回值类型时，就要求函数体的类型（关于如何确定函数体的类型可参见下节[函数体](./define_functions.md#函数体)）、函数体中所有 `return e` 表达式中 `e` 的类型是返回值类型的子类型。例如，对于上述 `add` 函数，显式地定义了它的返回值类型为 `Int64`；如果将函数体中的 `return a + b` 修改为 `return (a, b)`，则会因为类型不匹配而报错：
+
+<!-- compile.error -->
 
 ```cangjie
 // Error, the type of the expression after return does not match the return type of the function
@@ -121,6 +129,8 @@ func add(a: Int64, b: Int64) {
 在函数体的任意位置都可以使用 `return` 表达式来终止函数的执行并返回。`return` 表达式有两种形式：`return` 和 `return expr`（`expr` 是一个表达式）。
 
 对于 `return expr`，要求 `expr` 的类型与函数定义中的返回值类型保持一致。例如，下例中会因为 `return 100` 中 `100` 类型（`Int64`）和函数 `foo` 的返回值类型（`String`）不同而报错。
+
+<!-- compile.error -->
 
 ```cangjie
 // Error, cannot convert an integer literal to type 'Struct-String'

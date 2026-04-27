@@ -1,5 +1,11 @@
 # 切换按钮（Toggle）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Toggle组件提供状态按钮样式、勾选框样式和开关样式，一般用于两种状态之间的切换。具体用法请参见[Toggle](../reference/arkui-cj/cj-button-picker-toggle.md)。
 
 ## 创建切换按钮

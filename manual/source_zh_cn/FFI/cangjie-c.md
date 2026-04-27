@@ -13,10 +13,12 @@
 int rand();
 
 // stdio.h
-int printf (const char *fmt, ...);
+int printf(const char *fmt, ...);
 ```
 
 那么在仓颉中调用这两个函数的方式如下：
+
+<!-- run -->
 
 ```cangjie
 // declare the function by `foreign` keyword, and omit `@C`
@@ -38,14 +40,16 @@ main() {
 需要注意的是：
 
 1. `foreign` 修饰函数声明，代表该函数为外部函数。被 `foreign` 修饰的函数只能有函数声明，不能有函数实现。
-2. `foreign` 声明的函数，参数和返回类型必须符合 C 和仓颉数据类型之间的映射关系（详情请参见[类型映射](./cangjie-c.md#类型映射)）。
+2. `foreign` 声明的函数，参数和返回类型必须符合 C 和仓颉数据类型之间的映射关系，详情请参见[类型映射](./cangjie-c.md#类型映射)。
 3. 由于 C 侧函数很可能产生不安全操作，所以调用 `foreign` 修饰的函数需要被 `unsafe` 块包裹，否则会发生编译错误。
 4. `@C` 修饰的 `foreign` 关键字只能用来修饰函数声明，不可用来修饰其他声明，否则会发生编译错误。
 5. `@C` 只支持修饰 `foreign` 函数、顶层作用域中的非泛型函数和 `struct` 类型。
 6. `foreign` 函数不支持命名参数和参数默认值。`foreign` 函数允许变长参数，使用 `...` 表达，只能用于参数列表的最后。变长参数均需要满足 `CType` 约束，但不必是同一类型。
-7. 仓颉（CJNative 后端）虽然提供了栈扩容能力，但是由于 C 侧函数实际使用栈大小仓颉无法感知，所以 ffi 调用进入 C 函数后，仍然存在栈溢出的风险（可能导致程序运行时崩溃或者产生不可预期的行为），需要开发者根据实际情况，修改 `cjStackSize` 的配置。
+7. 仓颉（CJNative 后端）虽然提供了栈扩容能力，但是由于 C 侧函数实际使用栈大小其无法感知，所以 ffi 调用进入 C 函数后，仍然存在栈溢出的风险（可能导致程序运行时崩溃或者产生不可预期的行为），需要开发者根据实际情况，修改 `cjStackSize` 的配置。
 
 一些不合法的 `foreign` 声明的示例代码如下：
+
+<!-- compile.error -->
 
 ```cangjie
 foreign func rand(): Int32 { // compiler error
@@ -127,6 +131,8 @@ main() {
 `inout` 修饰的变量，可以是定义在顶层作用域中的变量、局部变量、`struct` 中的成员变量，但不能直接或间接来源于 `class` 的实例成员变量。
 
 下面是一个例子：
+
+<!-- compile.error -->
 
 ```cangjie
 foreign func foo1(ptr: CPointer<Int32>): Unit
@@ -248,6 +254,53 @@ main() {
 ```
 
 `@CallingConv` 只能用于修饰 `foreign` 块、单个 `foreign` 函数和顶层作用域中的 `CFunc` 函数。当 `@CallingConv` 修饰 `foreign` 块时，会为 `foreign` 块中的每个函数分别加上相同的 `@CallingConv` 修饰。
+
+## 使用说明
+
+- 操作系统线程局部变量使用约束
+
+  仓颉和 C 语言互操作时，使用操作系统线程的局部变量存在风险，说明如下：
+
+  1. 线程局部变量包括 C 语言提供的 `thread_local` 定义的变量和使用 `pthread_key_create` 创建的变量。
+  2. 仓颉具备仓颉线程调度能力，支持仓颉线程的切换和恢复，仓颉线程被调度到哪个操作系统线程是随机的，从而在仓颉线程上调用其他语言的线程局部变量是有风险的。
+
+  如下示例中，仓颉调用 C 语言的线程局部变量存在风险：
+
+  ```c
+  // C language logic using thread_local
+  static thread_local int64_t count = 0;
+  int64_t getCount() {
+      count++;
+      return count;
+  }
+  ```
+  <!-- code_check_manual -->
+
+  ```cangjie
+  foreign func getCount(): Int64
+  // Cangjie invokes the preceding C language logic
+  spawn {
+      let r1 = unsafe { getCount() }  // r1 equals 1
+      sleep(Duration.second * 10)
+      let r2 = unsafe { getCount() }  // r2 may not be equal to 2
+  }
+  ```
+
+- 线程绑定使用约束
+
+  仓颉调用 C 语言执行互操作逻辑时，仓颉线程调度到哪个操作系统线程是随机的，线程优先级和线程亲和性等与线程绑定的行为不建议使用。
+
+- 同步原语使用说明
+
+  仓颉调用 C 语言执行互操作逻辑时，当前这个仓颉线程会等待互操作逻辑执行结束，不建议在其他语言中出现可能导致长时间等待的阻塞性行为。
+
+- 对进程 fork 场景的支持说明
+
+  仓颉调用 C 语言执行互操作逻辑时，如果在 C 语言中以 `fork()` 方式创建子进程，子进程中不支持执行仓颉逻辑。同一进程中其他操作系统线程不受影响。
+
+- 进程退出时的说明
+
+  仓颉调用 C 语言执行互操作逻辑时，如果在 C 语言中退出进程，进程内共享的资源已经释放，可能导致非法访问等错误。
 
 ## 类型映射
 
@@ -400,7 +453,6 @@ main() {
 main() {
     var pInt8 = CPointer<Int8>()
     var pUInt8 = CPointer<UInt8>(pInt8) // CPointer<Int8> convert to CPointer<UInt8>
-    0
 }
 ```
 
@@ -412,7 +464,6 @@ main() {
 foreign func rand(): Int32
 main() {
     var ptr = CPointer<Int8>(rand)
-    0
 }
 ```
 
@@ -430,6 +481,8 @@ main() {
 
 `VArray` 作为参数的使用示例如下：
 
+<!-- code_check_manual -->
+
 ```cangjie
 foreign func cfoo1(a: CPointer<Int32>): Unit
 foreign func cfoo2(a: VArray<Int32, $3>): Unit
@@ -443,6 +496,8 @@ void cfoo2(int a[3]) { ... }
 ```
 
 调用 `CFunc` 时，需要通过 `inout` 修饰 `VArray` 类型变量：
+
+<!-- code_check_manual -->
 
 ```cangjie
 var a: VArray<Int32, $3> = [1, 2, 3]
@@ -533,6 +588,8 @@ main() {
 
 仓颉还提供了 `sizeOf` 和 `alignOf` 两个函数，用于获取上述 C 互操作类型的内存占用和内存对齐数值（单位：字节），函数声明如下：
 
+<!-- code_no_check -->
+
 ```cangjie
 public func sizeOf<T>(): UIntNative where T <: CType
 public func alignOf<T>(): UIntNative where T <: CType
@@ -540,7 +597,7 @@ public func alignOf<T>(): UIntNative where T <: CType
 
 使用示例：
 
-<!-- run -->
+<!-- verify -->
 
 ```cangjie
 @C
@@ -620,6 +677,8 @@ void set_callback(callback cb);
 
 对应的，在仓颉里面这个函数可以声明为：
 
+<!-- code_check_manual -->
+
 ```cangjie
 foreign func set_callback(cb: CFunc<(Int32) -> Unit>): Unit
 ```
@@ -633,6 +692,8 @@ CFunc 类型的变量可以从 C 侧传递过来，也可以在仓颉侧构造�
 > `foreign` 修饰的函数与 `@C` 修饰的函数，这两种 `CFunc` 的命名不建议使用 `CJ_`（不区分大小写）作为前缀，否则可能与标准库及运行时等编译器内部符号出现冲突，导致未定义行为。
 
 示例如下：
+
+<!-- code_check_manual -->
 
 ```cangjie
 @C
@@ -666,7 +727,7 @@ main() {
 
   给定的库文件会被直接传给链接器，库文件名的格式应为 `lib[arg].[extension]`。
 
-关于仓颉编译器支持的所有编译选项，详情请参见 "附录 > cjc 编译选项"。
+关于仓颉编译器支持的所有编译选项，详情请参见[cjc 编译选项](../Appendix/compile_options.md)。
 
 ## 示例
 
@@ -690,7 +751,7 @@ typedef struct {
     float z;
 } Cube;
 
-int32_t drawPicture(Point* point, Cube* cube) {
+void drawPicture(Point* point, Cube* cube) {
     point->x = 1;
     point->y = 2;
     printf("Draw Point finished.\n");
@@ -707,6 +768,8 @@ int32_t drawPicture(Point* point, Cube* cube) {
 ```
 
 仓颉代码如下：
+
+<!-- code_check_manual -->
 
 ```cangjie
 // main.cj

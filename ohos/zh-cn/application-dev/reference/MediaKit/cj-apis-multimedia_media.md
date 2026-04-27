@@ -1,10 +1,14 @@
 # ohos.multimedia.media（媒体服务）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 media模块为开发者提供一套简单且易于理解的接口，使得开发者能够方便接入系统并使用系统的媒体资源。
 
-媒体子系统包含了音视频相关媒体业务，提供以下常用功能：
-
-- 获取视频缩略图（[AVImageGenerator](#class-avimagegenerator)）
+媒体子系统包含了音视频相关媒体业务，目前主要提供获取视频缩略图（[AVImageGenerator](#class-avimagegenerator)）的功能。
 
 ## 导入模块
 
@@ -113,7 +117,7 @@ public var fd: Int32
 public var length: Int64
 ```
 
-**功能：** 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。
+**功能：** 资源长度，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。
 
 **类型：** Int64
 
@@ -129,7 +133,7 @@ public var length: Int64
 public var offset: Int64
 ```
 
-**功能：** 资源偏移量，默认值为0，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。
+**功能：** 资源偏移量，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。
 
 **类型：** Int64
 
@@ -160,8 +164,8 @@ public init(
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |fd|Int32|是|-|资源句柄，通过[getRawFd](../LocalizationKit/cj-apis-resource_manager.md#func-getrawfdstring)获取，也可以通过[open](../CoreFileKit/cj-apis-file_fs.md#static-func-openstring-int64)获取。|
-|offset|Int64|否|0| **命名参数。** 资源偏移量，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误。|
-|length|Int64|否|-1| **命名参数。** 资源长度，默认值为文件中从偏移量开始的剩余字节，需要基于预置资源的信息输入，非法值会造成字幕频资源解析错误。|
+|offset|Int64|否|0| **命名参数。** 资源偏移量，默认值为0，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。|
+|length|Int64|否|-1| **命名参数。** 资源长度，默认值为-1，需要基于预置资源的信息输入，非法值会造成音视频资源解析错误。|
 
 ## class AVImageGenerator
 
@@ -189,7 +193,7 @@ public mut prop fdSrc: AVFileDescriptor
 
 > **说明：**
 >
-> - 将资源句柄（fd）传递给AVImageGenerator实例之后，不允许通过该资源句柄做其他读写操作，包括但不限于将同一个资源句柄传递给多个AVPlayer/AVMetadataExtractor/AVImageGenerator/AVTranscoder。同一时间通过同一个资源句柄读写文件时存在竞争关系，将导致视频缩略图数据获取异常。
+> 将资源句柄（fd）传递给AVImageGenerator实例之后，不允许通过该资源句柄做其他读写操作，包括但不限于将同一个资源句柄传递给多个AVPlayer/AVImageGenerator/AVTranscoder。同一时间通过同一个资源句柄读写文件时存在竞争关系，将导致视频缩略图数据获取异常。
 
 **类型：** [AVFileDescriptor](#class-avfiledescriptor)
 
@@ -246,7 +250,6 @@ public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param:
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie

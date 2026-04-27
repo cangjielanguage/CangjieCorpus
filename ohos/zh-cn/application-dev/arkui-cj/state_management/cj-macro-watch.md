@@ -1,5 +1,11 @@
 # @Watch宏：状态变量更改通知
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 @Watch应用于对状态变量的监听。如果开发者需要关注某个状态变量的值是否改变，可以使用@Watch为状态变量设置回调函数。
 
 @Watch提供了状态变量的监听能力，@Watch仅能监听到可以观察到的变化。
@@ -80,7 +86,7 @@
 
 以下示例展示组件更新和@Watch的处理步骤。count在CountModifier中由@State装饰，在TotalView中由@Link装饰。
 
- <!-- run -->
+<!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
@@ -89,7 +95,7 @@ import ohos.arkui.state_macro_manage.*
 
 @Component
 class TotalView {
-  @Link @Watch[onCountUpdated] var count: Int64 = 0
+  @Link @Watch[onCountUpdated] var count: Int64
   @State var total: Int64 = 0
   // @Watch 回调
   func onCountUpdated(): Unit {
@@ -126,7 +132,7 @@ class EntryView {
 
 以下示例说明了如何在子组件中观察@Link变量。
 
- <!-- run -->
+<!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
@@ -224,12 +230,14 @@ class EntryView{
             Text("Total number of fruits: ${this.fruit.toString()}")
                 .fontSize(30)
             Button("Add apples")
-                .onClick({etv=> this.apple++
+                .onClick({etv=>
                     this.propName = "apple"
+                    this.apple++
                 })
             Button("Add cabbages")
-                .onClick({etv=> this.cabbage++
+                .onClick({etv=>
                     this.propName = "cabbages"
+                    this.cabbage++
                 })
 
         }

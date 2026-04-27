@@ -52,7 +52,7 @@ prop size: Int64
 func finish(): Array<Byte>
 ```
 
-功能：返回生成的 digest 值。
+功能：返回生成的摘要值。
 
 返回值：
 
@@ -64,7 +64,7 @@ func finish(): Array<Byte>
 func finish(to!: Array<Byte>): Unit
 ```
 
-功能：获取生成的信息摘要值，注意调用 finish 后不可以再进行摘要计算，如重新计算需要 reset 重置上下文。
+功能：获取生成的信息摘要值，注意调用 finish 后不可以再进行摘要计算，如重新计算需要执行 [reset](#func-reset) 函数重置上下文。
 
 参数：
 
@@ -85,3 +85,7 @@ func write(buffer: Array<Byte>): Unit
 ```
 
 功能：使用给定的 buffer 更新 digest 对象。
+
+参数：
+
+- buffer: [Array](../../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[Byte](../../../core/core_package_api/core_package_types.md#type-byte)> - 给定的数组。

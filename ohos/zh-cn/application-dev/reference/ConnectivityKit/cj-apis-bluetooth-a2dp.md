@@ -1,5 +1,11 @@
 # ohos.bluetooth.a2dp（蓝牙a2dp模块）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 a2dp模块提供了访问蓝牙音频接口的方法。
 
 ## 导入模块
@@ -27,7 +33,7 @@ API示例代码使用说明：
 public func createA2dpSrcProfile(): A2dpSourceProfile
 ```
 
-**功能：** 创建a2dp profile实例。
+**功能：** 创建蓝牙媒体[A2DP Source](#class-a2dpsourceprofile)实例。通过该实例可使用本端作为A2DP Source设备的方法，如：获取和其他设备间的蓝牙媒体音频播放状态。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -366,7 +372,7 @@ try {
 public func on(eventType: ProfileCallbackType, callback: Callback1Argument<StateChangeParam>): Unit
 ```
 
-**功能：** 订阅连接状态变化事件。使用Callback异步回调。
+**功能：** 订阅连接状态变化事件。
 
 **需要权限：** ohos.permission.ACCESS_BLUETOOTH
 
@@ -378,7 +384,7 @@ public func on(eventType: ProfileCallbackType, callback: Callback1Argument<State
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|eventType|[ProfileCallbackType](cj-apis-bluetooth-base_profile.md#enum-profilecallbacktype)|是|-|传入[CONNECTION_STATE_CHANGE](./cj-apis-bluetooth-base_profile.md#connectionstatechange)，表示连接状态变化事件类型。|
+|eventType|[ProfileCallbackType](cj-apis-bluetooth-base_profile.md#enum-profilecallbacktype)|是|-|传入[ConnectionStateChange](./cj-apis-bluetooth-base_profile.md#connectionstatechange)，表示连接状态变化事件类型。|
 |callback|Callback1Argument\<[StateChangeParam](cj-apis-bluetooth-base_profile.md#class-statechangeparam)>|是|-|表示回调函数的入参。|
 
 **异常：**
@@ -443,7 +449,7 @@ public class CodecInfo {
 public var codecBitsPerSample: CodecBitsPerSample
 ```
 
-**功能：** 表示每个采样点的位数，初始值为CODEC_BITS_PER_SAMPLE_NONE。
+**功能：** 表示每个采样点的位数，初始值为CodecBitsPerSampleNone。
 
 **类型：** [CodecBitsPerSample](#enum-codecbitspersample)
 
@@ -459,7 +465,7 @@ public var codecBitsPerSample: CodecBitsPerSample
 public var codecChannelMode: CodecChannelMode
 ```
 
-**功能：** 表示编码器的声道模式，初始值为CODEC_CHANNEL_MODE_NONE。
+**功能：** 表示编码器的声道模式，初始值为CodecChannelModeNone。
 
 **类型：** [CodecChannelMode](#enum-codecchannelmode)
 
@@ -475,7 +481,7 @@ public var codecChannelMode: CodecChannelMode
 public var codecSampleRate: CodecSampleRate
 ```
 
-**功能：** 表示编码器的采样率，初始值为CODEC_BITS_PER_SAMPLE_NONE。
+**功能：** 表示编码器的采样率，初始值为CodecSampleRateNone。
 
 **类型：** [CodecSampleRate](#enum-codecsamplerate)
 
@@ -491,7 +497,7 @@ public var codecSampleRate: CodecSampleRate
 public var codecType: CodecType
 ```
 
-**功能：** 表示编码器类型，初始值为CODEC_TYPE_SBC。
+**功能：** 表示编码器类型，初始值为CodecTypeSbc。
 
 **类型：** [CodecType](#enum-codectype)
 
@@ -588,7 +594,7 @@ public operator func !=(other: CodecBitsPerSample): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecBitsPerSample](#enum-codecbitspersample)|是|-|蓝牙编码器每个采样点的位数。|
+|other|[CodecBitsPerSample](#enum-codecbitspersample)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -612,7 +618,7 @@ public operator func ==(other: CodecBitsPerSample): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecBitsPerSample](#enum-codecbitspersample)|是|-|蓝牙编码器每个采样点的位数。|
+|other|[CodecBitsPerSample](#enum-codecbitspersample)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -626,7 +632,7 @@ public operator func ==(other: CodecBitsPerSample): Bool
 public func toString(): String
 ```
 
-**功能：** 返回蓝牙编码器每个采样点的位数的字符串表示。
+**功能：** 返回枚举值的字符串表示。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -636,7 +642,7 @@ public func toString(): String
 
 |类型|说明|
 |:----|:----|
-|String|蓝牙编码器每个采样点的位数的字符串表示。|
+|String|枚举值的字符串表示。|
 
 ## enum CodecChannelMode
 
@@ -712,7 +718,7 @@ public operator func !=(other: CodecChannelMode): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecChannelMode](#enum-codecchannelmode)|是|-|蓝牙编码器的声道模式。|
+|other|[CodecChannelMode](#enum-codecchannelmode)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -736,7 +742,7 @@ public operator func ==(other: CodecChannelMode): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecChannelMode](#enum-codecchannelmode)|是|-|蓝牙编码器的声道模式。|
+|other|[CodecChannelMode](#enum-codecchannelmode)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -750,7 +756,7 @@ public operator func ==(other: CodecChannelMode): Bool
 public func toString(): String
 ```
 
-**功能：** 返回蓝牙编码器的声道模式的字符串表示。
+**功能：** 返回枚举值的字符串表示。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -760,7 +766,7 @@ public func toString(): String
 
 |类型|说明|
 |:----|:----|
-|String|蓝牙编码器的声道模式的字符串表示。|
+|String|枚举值的字符串表示。|
 
 ## enum CodecSampleRate
 
@@ -888,7 +894,7 @@ public operator func !=(other: CodecSampleRate): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecSampleRate](#enum-codecsamplerate)|是|-|蓝牙编码器的采样率。|
+|other|[CodecSampleRate](#enum-codecsamplerate)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -912,7 +918,7 @@ public operator func ==(other: CodecSampleRate): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecSampleRate](#enum-codecsamplerate)|是|-|蓝牙编码器的采样率。|
+|other|[CodecSampleRate](#enum-codecsamplerate)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -926,7 +932,7 @@ public operator func ==(other: CodecSampleRate): Bool
 public func toString(): String
 ```
 
-**功能：** 返回蓝牙编码器的采样率的字符串表示。
+**功能：** 返回枚举值的字符串表示。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -936,7 +942,7 @@ public func toString(): String
 
 |类型|说明|
 |:----|:----|
-|String|蓝牙编码器的采样率的字符串表示。|
+|String|枚举值的字符串表示。|
 
 ## enum CodecType
 
@@ -1025,7 +1031,7 @@ public operator func !=(other: CodecType): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecType](#enum-codectype)|是|-|蓝牙编码器类型。|
+|other|[CodecType](#enum-codectype)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -1049,7 +1055,7 @@ public operator func ==(other: CodecType): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[CodecType](#enum-codectype)|是|-|蓝牙编码器类型。|
+|other|[CodecType](#enum-codectype)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -1063,7 +1069,7 @@ public operator func ==(other: CodecType): Bool
 public func toString(): String
 ```
 
-**功能：** 返回蓝牙编码器类型的字符串表示。
+**功能：** 返回枚举值的字符串表示。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -1073,7 +1079,7 @@ public func toString(): String
 
 |类型|说明|
 |:----|:----|
-|String|蓝牙编码器类型。|
+|String|枚举值的字符串表示。|
 
 ## enum PlayingState
 
@@ -1136,7 +1142,7 @@ public operator func !=(other: PlayingState): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[PlayingState](#enum-playingstate)|是|-|蓝牙A2DP 播放状态。|
+|other|[PlayingState](#enum-playingstate)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -1160,7 +1166,7 @@ public operator func ==(other: PlayingState): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[PlayingState](#enum-playingstate)|是|-|蓝牙A2DP 播放状态。|
+|other|[PlayingState](#enum-playingstate)|是|-|另一个枚举值。|
 
 **返回值：**
 
@@ -1174,7 +1180,7 @@ public operator func ==(other: PlayingState): Bool
 public func toString(): String
 ```
 
-**功能：** 返回蓝牙A2DP 播放状态的字符串表示。
+**功能：** 返回枚举值的字符串表示。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -1184,4 +1190,4 @@ public func toString(): String
 
 |类型|说明|
 |:----|:----|
-|String|蓝牙A2DP播放状态的字符串表示。|
+|String|枚举值的字符串表示。|

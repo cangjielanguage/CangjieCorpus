@@ -209,7 +209,6 @@ class A <: NamedType {}
 main() {
     println(NamedType.typename())
     println(A.typename())
-    0
 }
 ```
 
@@ -255,8 +254,8 @@ func printTypeName<T>() where T <: NamedType {
 }
 
 main() {
-    printTypeName<A>() // Ok
-    printTypeName<B>() // Ok
+    printTypeName<A>() // OK
+    printTypeName<B>() // OK
     printTypeName<I>() // Error, 'I' must implement all static function. Otherwise, an unimplemented 'f' is called, causing problems.
 }
 ```
@@ -266,7 +265,7 @@ main() {
 <!-- compile -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 interface M {
     func foo<T>(a: T): T
     static func toString<T>(b: ArrayList<T>): String where T <: ToString
@@ -383,7 +382,7 @@ main() {
 }
 ```
 
-对于 `interface` 的继承，子接口如果继承了父接口中有默认实现的函数或属性，则在子接口中不允许仅写此函数或属性的声明（即没有默认实现），而是必须要给出新的默认实现，并且函数定义前的 `override` 修饰符（或 `redef` 修饰符）是可选的；子接口如果继承了父接口中没有默认实现的函数或属性，则在子接口中允许仅写此函数或属性的声明（当然也允许定义默认实现），并且函数声明或定义前的 override 修饰符（或 `redef` 修饰符）是可选的。
+对于 `interface` 的继承，子接口如果继承了父接口中有默认实现的函数或属性，则在子接口中不允许仅写此函数或属性的声明（即没有默认实现），它必须要给出新的默认实现。函数定义前的 `override` 修饰符或 `redef` 修饰符是可选的。子接口如果继承了父接口中没有默认实现的函数或属性，则在子接口中允许仅写此函数或属性的声明，当然也允许定义默认实现，并且函数声明或定义前的 `override` 修饰符或 `redef` 修饰符同样是可选的。其中，`redef` 修饰符是针对子类中的同名静态函数的重定义。
 
 <!-- compile.error -->
 

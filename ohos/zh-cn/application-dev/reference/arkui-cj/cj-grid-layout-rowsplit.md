@@ -1,5 +1,11 @@
 # RowSplit
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 将子组件横向布局，并在每个子组件之间插入一根纵向的分割线。
 
 ## 导入模块
@@ -52,6 +58,11 @@ public func resizeable(value: ?Bool): This
 
 **功能：** 设置分割线是否可拖拽。
 
+> **说明：**
+>
+> - RowSplit的分割线可以改变左右两边子组件的宽度，子组件可改变宽度的范围取决于子组件的最大最小宽度。
+> - 支持[clip](../arkui-cj/cj-universal-attribute-shapclip.md#func-clipbool)、[margin](../arkui-cj/cj-universal-attribute-size.md#func-marginlength)等通用属性，clip不设置的时候默认值为true。
+
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
@@ -61,11 +72,6 @@ public func resizeable(value: ?Bool): This
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |value|?Bool|是|-|分割线是否可拖拽。<br>初始值：false。|
-
-> **说明：**
->
-> - RowSplit的分割线可以改变左右两边子组件的宽度，子组件可改变宽度的范围取决于子组件的最大最小宽度。
-> - 支持[clip](../arkui-cj/cj-universal-attribute-shapclip.md#func-clipbool)、[margin](../arkui-cj/cj-universal-attribute-size.md#func-marginlength)等通用属性，clip不设置的时候默认值为true。
 
 ## 示例代码
 
@@ -97,7 +103,6 @@ class EntryView {
                     .width(10.percent)
                     .height(100)
                     .backgroundColor(0xD2B48C)
-                    .textAlign(TextAlign.Center)
                     .textAlign(TextAlign.Center)
                 Text("3")
                     .width(10.percent)

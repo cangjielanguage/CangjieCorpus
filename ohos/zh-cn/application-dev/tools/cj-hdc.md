@@ -1,5 +1,11 @@
 # hdc
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 hdc（OpenHarmony Device Connector）是为开发人员提供的用于调试的命令行工具，通过该工具可以在Windows/Linux/macOS系统上与设备进行交互。
 
 hdc分为三部分：

@@ -1,5 +1,11 @@
 # @Provide宏和@Consume宏：与后代组件双向同步
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 `@Provide` 和 `@Consume`，应用于与后代组件的双向数据同步，应用于状态数据在多个层级之间传递的场景。不同于上文提到的父子组件之间通过命名参数机制传递，`@Provide` 和 `@Consume` 摆脱参数传递机制的束缚，实现跨层级传递。
 
 其中`@Provide`装饰的变量是在祖先组件中，可以理解为被“提供”给后代的状态变量。`@Consume`装饰的变量是在后代组件中，去“消费（绑定）”祖先组件提供的变量。
@@ -76,7 +82,7 @@ var age: Float64;
 
 - 当装饰的数据类型为整数类型、浮点类型、布尔类型、字符类型、字符串类型时，可以观察到数值的变化。
 
-- 当装饰的对象是元祖类型、数组类型、区间类型的时候，可以观察到数组的元素的更新。
+- 当装饰的对象是元组类型、数组类型、区间类型的时候，可以观察到数组的元素的更新。
 
 - 当装饰的对象是DateTime时，可以观察到DateTime整体的赋值，同时可通过调用DateTime的函数addDays(Int64), addHours(Int64), addMinutes(Int64), addMonths(Int64), addNanoseconds(Int64), addSeconds(Int64), addWeeks(Int64), addYears(Int64)更新DateTime的属性。
 
@@ -531,7 +537,7 @@ class Child {
     func build(){
         Column(){
             ForEach(arr,
-                { item: (Int64, String), idx: Int64 =>
+                itemGeneratorFunc: { item: (Int64, String), idx: Int64 =>
                     Text("key: ${item[0]} value: ${item[1]}").fontSize(30)
                     Divider()
                 },
@@ -620,7 +626,7 @@ class Child{
 
     func build(){
         Column{
-            ForEach(arr,{item: Int64, idx: Int64 =>
+            ForEach(arr,itemGeneratorFunc: {item: Int64, idx: Int64 =>
                 Text("${item}").fontSize(30)
                 Divider()
             })

@@ -1,5 +1,11 @@
 # Flex
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Flex是以弹性方式布局子组件的容器组件，提供更加有效的方式对容器内的子元素进行排列、对齐和分配剩余空间。
 
 具体指南请参考[弹性布局](../../arkui-cj/cj-layout-development-flex-layout.md)。
@@ -49,7 +55,7 @@ public init(direction!: ?FlexDirection = None, wrap!: ?FlexWrap = None,
 
 ## 通用属性/通用事件
 
-通用属性：除文本样式外，其余全部支持；对于自身独有 alignItems 属性的容器组件，通用属性 align 不生效。
+通用属性：全部支持。
 
 通用事件：全部支持。
 
@@ -429,7 +435,7 @@ import std.collection.*
 
 @Component
 class AlignContentFlex{
-    // 初始化对其方式：多行布局下子组件首部对齐
+    // 初始化对齐方式：多行布局下子组件首部对齐
     var alignContent :  FlexAlign  = FlexAlign.Start
 
     func build(){

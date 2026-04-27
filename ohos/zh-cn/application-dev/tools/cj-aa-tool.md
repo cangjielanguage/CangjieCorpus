@@ -1,5 +1,11 @@
 # aa工具
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Ability assistant（Ability助手，简称为aa），是用于启动应用和启动测试用例的工具，为开发者提供基本的应用调试和测试能力，例如启动应用组件、强制停止进程、打印应用组件相关信息等。
 
 ## 环境要求
@@ -65,10 +71,6 @@ aa start [-d <deviceId>] [-U <URI>] [-t <type>] [-A <action>] [-e <entity>] [-D]
 | --pb  | 可选参数，布尔类型键值对。     |
 | --ps  | 可选参数，字符串类型键值对。    |
 | --psn | 可选参数，空字符串关键字。     |
-| --wl | 可选参数，windowLeft，窗口左边距，单位px。<br>**约束：**<br>仅当2in1设备处于开发者模式下，且被启动应用采用调试签名时，该字段生效。|
-| --wt | 可选参数，windowTop，窗口上边距，单位px。<br>**约束：**<br>仅当2in1设备处于开发者模式下，且被启动应用采用调试签名时，该字段生效。|
-| --wh | 可选参数，windowHeight，窗口高度，单位px。<br>**约束：**<br>仅当2in1设备处于开发者模式下，且被启动应用采用调试签名时，该字段生效。|
-| --ww | 可选参数，windowWidth，窗口宽度，单位px。<br>**约束：**<br>仅当2in1设备处于开发者模式下，且被启动应用采用调试签名时，该字段生效。|
 | -R | 可选参数，调试时是否开启多线程错误检测。携带该参数代表开启，不携带代表关闭。|
 | -S | 可选参数，调试时是否进入应用沙箱。携带该参数代表进入，不携带代表不进入。 |
 | -D | 可选参数，调试模式。 |
@@ -433,7 +435,7 @@ Failed to verify the visibility of the target ability.
 
 **可能原因**
 
-当目标应用在module.json5配置文件中的[abilities标签](../cj-start/basic-knowledge/module-configuration-file.md#abilities标签)/[extensionAbilities标签](../cj-start/basic-knowledge/module-configuration-file.md#extensionabilities标签)中的exported字段配置为false时，表示对应UIAbility组件/ExtensionAbility组件不可以被其他应用调用，也无法被aa工具命令拉起。
+当目标应用在module.json5配置文件中的[abilities标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#abilities标签)/[extensionAbilities标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中的exported字段配置为false时，表示对应UIAbility组件/ExtensionAbility组件不可以被其他应用调用，也无法被aa工具命令拉起。
 
 **处理步骤**
 
@@ -560,7 +562,7 @@ The target application does not support debug mode.
 
 **处理步骤**
 
-使用Debug签名证书重新签名，安装新签名出的HAP后，再尝试执行该该命令。
+使用Debug签名证书重新签名，安装新签名出的HAP后，再尝试执行该命令。
 
 ### 10100101 获取应用信息失败
 
@@ -681,7 +683,7 @@ The device screen is locked during the application launch.
 
 **处理步骤**
 
-解释屏幕后重新尝试即可。
+解锁屏幕后重新尝试即可。
 
 ### 10106103 目标应用为到期众测应用
 
@@ -807,7 +809,7 @@ aa stop命令停止ServiceAbility时，-a的参数abilityName对应的Ability不
 
 **处理步骤**
 
-检查aa -a的参数abilityName对应的Abiility是否为ServiceAbility类型。
+检查aa -a的参数abilityName对应的Ability是否为ServiceAbility类型。
 
 ### 10104002 获取指定包信息失败
 
@@ -949,5 +951,5 @@ The target application is not a debug application.
 
 **处理步骤**
 
-使用Debug签名证书重新签名，安装新签名出的HAP后，再尝试执行该该命令。
+使用Debug签名证书重新签名，安装新签名出的HAP后，再尝试执行该命令。
 签名工具及签名证书的生成方式可以参考：[签名工具指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing)。

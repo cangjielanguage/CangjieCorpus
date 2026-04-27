@@ -1,5 +1,11 @@
 # 层叠布局（Stack）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 层叠布局（StackLayout）用于在屏幕上预留一块区域来显示组件中的元素，提供元素可以重叠的布局。层叠布局通过[Stack](../reference/arkui-cj/cj-row-column-stack-stack.md)容器组件实现位置的固定定位与层叠，容器中的子元素依次入栈，后一个子元素覆盖前一个子元素，子元素可以叠加，也可以设置位置。
@@ -32,15 +38,15 @@ class EntryView {
                 Column() {}
                     .width(90.percent)
                     .height(100.percent)
-                    .backgroundColor(0xff58b87c)
+                    .backgroundColor(0xC7C7CC)
                 Text('text')
                     .width(60.percent)
                     .height(60.percent)
-                    .backgroundColor(0xffc3f6aa)
+                    .backgroundColor(0xD1D1D6)
                 Button('button')
                     .width(30.percent)
                     .height(30.percent)
-                    .backgroundColor(0xff8ff3eb)
+                    .backgroundColor(0x0A9F7)
                     .fontColor(0x000)
             }
             .width(100.percent)

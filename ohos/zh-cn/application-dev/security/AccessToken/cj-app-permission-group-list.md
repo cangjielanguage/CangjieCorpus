@@ -1,5 +1,11 @@
 # 应用权限组列表
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 使用须知
 
 - 在申请目标权限前，建议开发者先阅读[应用权限管控概述-权限组和子权限](./cj-app-permission-mgmt-overview.md#权限组和子权限)，了解相关概念，再合理申请对应的权限组。
@@ -119,25 +125,6 @@
 ## 截屏
 
 - [ohos.permission.CUSTOM_SCREEN_CAPTURE](./cj-permissions-for-all-user.md#ohospermissioncustom_screen_capture)
-
-## 文件夹
-
-> **说明：**
->
-> 仅2in1设备可申请。
-
-- [ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY](./cj-permissions-for-all-user.md#ohospermissionread_write_download_directory)
-- [ohos.permission.READ_WRITE_DESKTOP_DIRECTORY](./cj-restricted-permissions.md#ohospermissionread_write_desktop_directory)
-- [ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY](./cj-permissions-for-all-user.md#ohospermissionread_write_documents_directory)
-
-## 文件夹
-
-> **说明：**
->
-> 仅2in1设备可申请。
-
-- [ohos.permission.READ_WRITE_DOWNLOAD_DIRECTORY](./cj-permissions-for-all-user.md#ohospermissionread_write_download_directory)
-- [ohos.permission.READ_WRITE_DOCUMENTS_DIRECTORY](./cj-permissions-for-all-user.md#ohospermissionread_write_documents_directory)
 
 ## 文件
 

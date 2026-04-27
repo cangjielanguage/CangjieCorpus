@@ -1,5 +1,11 @@
 # 组件内隐式共享元素转场（geometryTransition）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在视图切换过程中提供丝滑的上下文传承过渡。通用transition机制提供了[opacity](cj-animation-transition.md#static-func-opacityfloat64)、[scale](cj-animation-transition.md#static-func-scalescaleoptions)等转场效果，geometryTransition通过安排绑定的in/out组件(in指新视图、out指旧视图)的frame、position使得原本独立的transition动画在空间位置上发生联系，将视觉焦点由旧视图位置引导到新视图位置。
 
 ## 导入模块
@@ -11,10 +17,10 @@ import kit.ArkUI.*
 ## func geometryTransition(?String, ?Bool)
 
 ```cangjie
-func geometryTransition(id: ?String, followWithoutTransition!: ?Bool = None): T
+func geometryTransition(id: ?String, follow!: ?Bool): T
 ```
 
-**功能：** 组件内隐式共享元素转场
+**功能：** 组件内隐式共享元素转场。
 
 > **说明：**
 >
@@ -29,7 +35,7 @@ func geometryTransition(id: ?String, followWithoutTransition!: ?Bool = None): T
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |id|?String|是|-|用于设置绑定关系，id置空字符串清除绑定关系避免参与共享行为，id可更换重新建立绑定关系。同一个id只能有两个组件绑定且是in/out不同类型角色，不能多个组件绑定同一个id。<br>初始值：""。|
-|followWithoutTransition|?Bool|否|None| **命名参数。** 仅用于if范式下标记始终在组件树上的组件是否跟随做共享动画。初始值: false|
+|follow|?Bool|是|-| **命名参数。** 仅用于if范式下标记始终在组件树上的组件是否跟随做共享动画。<br>初始值：false。|
 
 **返回值：**
 
@@ -57,9 +63,9 @@ class EntryView {
                 Image(@r(app.media.startIcon))
                     .autoResize(false)
                     .clip(true)
-                    .width(300)
-                    .height(400)
-                    .offset(x: 0, y: 100)
+                    .width(350)
+                    .height(500)
+                    .offset(x: 20, y: 100)
                     .geometryTransition("picture")
                     .transition(TransitionEffect.OPACITY)
             } else {
@@ -74,6 +80,7 @@ class EntryView {
                 }
                     .width(80)
                     .height(80)
+                    .offset(x: 10, y: 10)
                     .borderRadius(20)
                     .clip(true)
                     .geometryTransition("picture")

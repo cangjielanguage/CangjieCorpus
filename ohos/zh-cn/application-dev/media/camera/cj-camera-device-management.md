@@ -1,4 +1,10 @@
-# 相机管理（仓颉）
+# 相机管理
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 在开发一个相机应用前，需要先通过调用相机接口来创建一个独立的相机设备。
 
@@ -13,12 +19,12 @@
     ```cangjie
     import kit.CameraKit.*
     import kit.AbilityKit.*
-    import ohos.hilog.Hilog
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.callback_invoke.Callback1Argument
     import ohos.business_exception.BusinessException
     ```
 
-2. 通过[getCameraManager](../../reference/CameraKit/cj-apis-multimedia-camera.md#func-getcameramanagerabilitycontext)方法，获取cameraManager对象。
+2. 通过[getCameraManager](../../reference/CameraKit/cj-apis-multimedia-camera.md#func-getcameramanageruiabilitycontext)方法，获取cameraManager对象。
 
     Context获取方式请参见：[获取UIAbility的上下文信息](../../application-models/cj-uiability-usage.md#获取uiability的上下文信息)。
 

@@ -1,10 +1,16 @@
 # ohos.settings（设置数据项名称）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 settings模块提供访问设置数据项的能力。
 
 > **说明：**
 >
-> - 如果访问的数据项没有获取到值，表示当前系统应用没有将该数据项的值添加到数据库。
+> 如果访问的数据项没有获取到值，表示当前系统应用没有将该数据项的值添加到数据库。
 
 ## 导入模块
 
@@ -79,7 +85,7 @@ try {
 public func getValue<T, P>(context: UIAbilityContext, name: T, defValue: String, domainName: P): String where T <: ToString
 ```
 
-**功能：** 获取数据库中指定数据项的值。
+**功能：** 获取数据项的值。
 
 **系统能力：** SystemCapability.Applications.Settings.Core
 

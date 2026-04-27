@@ -1,6 +1,12 @@
 # ohos.ability_access_ctrl（程序访问控制管理）
 
-程序访问控制提供程序的权限管理能力，包括鉴权、授权和取消授权等。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+程序访问控制管理模块提供程序的权限管理能力，包括鉴权、授权和取消授权等。
 
 ## 导入模块
 
@@ -23,7 +29,7 @@ API示例代码使用说明：
 public class AbilityAccessCtrl {}
 ```
 
-**功能：** 此类用于创建管理访问控制模块的实例。
+**功能：** 此类用于创建[AtManager](#class-atmanager)，AtManager为管理访问控制模块的实例。
 
 **系统能力：** SystemCapability.Security.AccessToken
 
@@ -35,7 +41,7 @@ public class AbilityAccessCtrl {}
 public static func createAtManager(): AtManager
 ```
 
-**功能：** 创建程序访问控制管理的实例对象。
+**功能：** 创建程序管理访问控制模块的实例对象。
 
 **系统能力：** SystemCapability.Security.AccessToken
 
@@ -45,7 +51,7 @@ public static func createAtManager(): AtManager
 
 |类型|说明|
 |:----|:----|
-|[AtManager](#class-atmanager)|获取访问控制模块的实例。|
+|[AtManager](#class-atmanager)|管理访问控制模块的实例。|
 
 **示例：**
 
@@ -94,7 +100,7 @@ public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): Gran
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |tokenID|UInt32|是|-|要校验的目标应用的身份标识。可通过应用的[ApplicationInfo](cj-apis-bundle_manager.md#class-applicationinfo)的accessTokenId字段获得。|
-|permissionName|[Permissions](#type-permissions)|是|-|需要校验的权限名称，合法的权限名取值可在[应用权限列表](../../security/AccessToken/cj-app-permissions.md#应用权限列表)中查询。|
+|permissionName|[Permissions](#type-permissions)|是|-|需要校验的权限名称，合法的权限名取值可在[应用权限列表](../../security/AccessToken/cj-app-permissions.md)中查询。|
 
 **返回值：**
 
@@ -149,9 +155,9 @@ public func requestPermissionsFromUser(context: UIAbilityContext, permissionList
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|context|[UIAbilityContext](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)|是|-|请求权限的UIAbility的Context。|
-|permissionList|Array\<[Permissions](#type-permissions)>|是|-|权限名列表，合法的权限名取值可在[应用权限列表](../../security/AccessToken/cj-app-permissions.md#应用权限列表)中查询。|
-|requestCallback|AsyncCallback\<[PermissionRequestResult](cj-apis-sercurity-permission_request_result.md#class-permissionrequestresultarraystring-arrayint32-arraybool)>|是|-|回调函数，返回接口调用是否成功的结果。|
+|context|[UIAbilityContext](cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)|是|-|请求权限的UIAbility的Context。|
+|permissionList|Array\<[Permissions](#type-permissions)>|是|-|权限名列表，合法的权限名取值可在[应用权限列表](../../security/AccessToken/cj-app-permissions.md)中查询。|
+|requestCallback|AsyncCallback\<[PermissionRequestResult](cj-apis-sercurity-permission_request_result.md#class-permissionrequestresult)>|是|-|回调函数，返回接口调用是否成功的结果。|
 
 **异常：**
 
@@ -315,4 +321,4 @@ public func toString(): String
 public type Permissions = String
 ```
 
-**功能：** [Permissions](#type-permissions)是String类型的别名。
+**功能：** 表示权限名称，是String类型的别名。

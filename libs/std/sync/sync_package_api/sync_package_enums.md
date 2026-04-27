@@ -22,19 +22,29 @@ public enum CatchupStyle {
 
 该示例创建了一个 `Timer`，该 `Timer` 会执行 3 次任务，从创建开始 1 秒后开始执行，每间隔 1 秒执行下一次任务，追平策略采用 `Delay`。
 
+<!-- run -->
+
 ```cangjie
 import std.sync.{Timer, CatchupStyle}
-import std.time.{MonoTime}
+import std.time.MonoTime
 
 main() {
     let start = MonoTime.now()
-    Timer.repeatTimes(3, Duration.second, Duration.second, {=>
-        println("Tick at: ${MonoTime.now() - start}")
+    Timer.repeatTimes(3, Duration.second, Duration.second, {
+        => println("Tick at: ${MonoTime.now() - start}")
     }, style: Delay)
 
     sleep(Duration.second * 4)
     0
 }
+```
+
+可能的运行结果：
+
+```text
+Tick at: 1s2ms855us251ns
+Tick at: 2s5ms390us18ns
+Tick at: 3s7ms935us552ns
 ```
 
 ### Burst
@@ -71,7 +81,7 @@ public enum MemoryOrder {
 
 功能：内存顺序类型枚举。
 
-内存顺序主要是指内存的读(load)写(store)操作的顺序，出于性能优化考虑编译器或CPU可能对指令进行重新排序，内存顺序枚举用来表示排序策略。
+内存顺序主要是指内存的读（load）写（store）操作的顺序，出于性能优化考虑编译器或 CPU 可能对指令进行重新排序，内存顺序枚举用来表示排序策略。
 
 > **注意：**
 >
@@ -85,7 +95,7 @@ SeqCst
 
 功能：用于表示顺序一致的顺序，即禁止了指令重排，确保该原子操作之前的所有原子操作都先于该操作之后的原子操作完成。
 
-## enum ReadWriteMutexMode <sup>(deprecated)<sup>
+## enum ReadWriteMutexMode <sup>(deprecated)</sup>
 
 ```cangjie
 public enum ReadWriteMutexMode {
@@ -96,7 +106,7 @@ public enum ReadWriteMutexMode {
 
 功能：读写锁公平模式枚举。
 
-锁的公平性是指，当同时有多个线程在等同一把锁时，是否按照等待顺序依次获得锁。
+锁的公平性是指，当同时有多个线程在等待同一把锁时，是否按照等待顺序依次获得锁。
 
 > **注意：**
 >

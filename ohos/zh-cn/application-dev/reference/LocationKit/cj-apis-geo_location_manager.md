@@ -1,5 +1,11 @@
 # ohos.geo_location_manager（位置服务）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 geo_location_manager模块提供GNSS定位、网络定位（蜂窝基站、WLAN、蓝牙定位技术）等基本功能。
 
 使用位置服务时请打开设备“位置”开关。如果“位置”开关关闭并且代码未设置捕获异常，可能导致应用异常。
@@ -57,8 +63,6 @@ public var maxAccuracy: Float32
 
 该参数生效的情况下，系统会对比GNSS或网络定位服务上报的位置信息与应用的位置信息申请。当位置信息[Location](#class-location)中的精度值（accuracy）小于等于应用要求的精度值（maxAccuracy）时，位置信息会返回给应用；否则系统将丢弃本次收到的位置信息。
 
-默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。
-
 当scenario为NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING或者priority为ACCURACY时建议设置maxAccuracy为大于10的值。
 
 当scenario为DAILY_LIFE_SERVICE/NO_POWER或者priority为LOW_POWER/FIRST_FIX时建议设置maxAccuracy为大于100的值。
@@ -77,7 +81,7 @@ public var maxAccuracy: Float32
 public var priority: LocationRequestPriority
 ```
 
-**功能：** 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#enum-locationrequestpriority)的定义。默认值为FIRST_FIX。
+**功能：** 表示优先级信息。当scenario取值为Unset时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为Unset时，无法发起定位请求。取值范围见[LocationRequestPriority](#enum-locationrequestpriority)的定义。
 
 **类型：** [LocationRequestPriority](#enum-locationrequestpriority)
 
@@ -93,7 +97,7 @@ public var priority: LocationRequestPriority
 public var scenario: LocationRequestScenario
 ```
 
-**功能：** 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#enum-locationrequestscenario)的定义。默认值为UNSET
+**功能：** 表示场景信息。当scenario取值为Unset时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为Unset时，无法发起定位请求。取值范围见[LocationRequestScenario](#enum-locationrequestscenario)的定义。
 
 **类型：** [LocationRequestScenario](#enum-locationrequestscenario)
 
@@ -137,10 +141,10 @@ public init(priority!: LocationRequestPriority = LocationRequestPriority.FirstFi
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|priority|[LocationRequestPriority](#enum-locationrequestpriority)|否|LocationRequestPriority.FirstFix|**命名参数。** 表示优先级信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestPriority](#enum-locationrequestpriority)的定义。默认值为FIRST_FIX。|
-|scenario|[LocationRequestScenario](#enum-locationrequestscenario)|否|LocationRequestScenario.Unset|**命名参数。** 表示场景信息。当scenario取值为UNSET时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为UNSET时，无法发起定位请求。取值范围见[LocationRequestScenario](#enum-locationrequestscenario)的定义。默认值为UNSET。|
-|maxAccuracy|Float32|否|0.0|**命名参数。** 应用向系统请求位置信息时要求的精度值，单位为米。|
-|timeoutMs|Int32|否|5000|**命名参数。** 应用向系统请求位置信息时要求的超时时间，单位为毫秒。|
+|priority|[LocationRequestPriority](#enum-locationrequestpriority)|否|LocationRequestPriority.FirstFix|**命名参数。** 表示优先级信息。当scenario取值为Unset时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为Unset时，无法发起定位请求。取值范围见[LocationRequestPriority](#enum-locationrequestpriority)的定义。默认值为LocationRequestPriority.FirstFix。|
+|scenario|[LocationRequestScenario](#enum-locationrequestscenario)|否|LocationRequestScenario.Unset|**命名参数。** 表示场景信息。当scenario取值为Unset时，priority参数生效，否则priority参数不生效；当scenario和priority均取值为Unset时，无法发起定位请求。取值范围见[LocationRequestScenario](#enum-locationrequestscenario)的定义。默认值为LocationRequestScenario.Unset。|
+|maxAccuracy|Float32|否|0.0|**命名参数。** 应用向系统请求位置信息时要求的精度值，单位为米。默认值为0，表示不限制位置信息的精度，取值范围为大于等于0。|
+|timeoutMs|Int32|否|5000|**命名参数。** 表示超时时间，单位是毫秒，最小为1000毫秒。取值范围为大于等于1000。|
 
 ## class GeoLocationManager
 
@@ -198,7 +202,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
-    let location = GeoLocationManager.getCurrentLocation(SingleLocationRequest(LocatingPriority.PriorityLocatingSpeed, 1000))
+    let location = GeoLocationManager.getCurrentLocation()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -254,7 +258,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
-    let location = GeoLocationManager.getCurrentLocation(SingleLocationRequest(LocatingPriority.PriorityLocatingSpeed, 1000))
+    let location = GeoLocationManager.getCurrentLocation(CurrentLocationRequest())
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -446,7 +450,7 @@ public var additionsMap: ?Map<String, String>
 
 **功能：** 附加信息。具体内容和顺序与additions一致。
 
-**类型：** Map
+**类型：** ?Map\<String, String>
 
 **读写能力：** 可读写
 
@@ -540,7 +544,7 @@ public var latitude: Float64
 public var longitude: Float64
 ```
 
-**功能：** 表示经度信息，正值表示东经，负值表是西经。取值范围为-180到180。仅支持WGS84坐标系。
+**功能：** 表示经度信息，正值表示东经，负值表示西经。取值范围为-180到180。仅支持WGS84坐标系。
 
 **类型：** Float64
 
@@ -849,7 +853,7 @@ public enum LocationRequestScenario {
 
 > **说明：**
 >
-> - 当使用NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING场景进行单次定位或持续定位时，会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。
+> 当使用NAVIGATION/TRAJECTORY_TRACKING/CAR_HAILING场景进行单次定位或持续定位时，会在GNSS提供稳定位置结果之前使用网络定位技术提供服务；在持续定位时，如果超过30秒无法获取GNSS定位结果则会使用网络定位技术获取位置。
 
 **系统能力：** SystemCapability.Location.Location.Core
 
@@ -909,7 +913,7 @@ Navigation
 NoPower
 ```
 
-**功能：** 表示无功耗功场景，这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。
+**功能：** 表示无功耗场景，这种场景下不会主动触发定位，会在其他应用定位时，才给当前应用返回位置。
 
 **系统能力：** SystemCapability.Location.Location.Core
 

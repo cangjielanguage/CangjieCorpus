@@ -1,5 +1,11 @@
 # 消息认证码计算
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 MAC（Message Authentication Code，消息认证码）可以对消息进行完整性校验，通过使用双方共享的密钥，识别出信息伪装篡改等行为。
 
 HMAC（Hash-based Message Authentication Code）是一种基于哈希的消息认证码算法。
@@ -33,7 +39,7 @@ HMAC通过指定摘要算法，以通信双方共享密钥与消息作为输入�
 2. 调用[createSymKeyGenerator](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-createsymkeygeneratorstring)、[convertKey](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-convertkeydatablob)，生成密钥算法为HMAC的对称密钥（SymKey）。
    生成对称密钥的详细开发指导，请参见[指定二进制数据生成对称密钥](./cj-crypto-convert-binary-data-to-sym-key.md)。
 
-3. 调用[init](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-initsymkey)，指定共享对称密钥（SymKey），初始化Mac对象。
+3. 调用[initialize](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-initializesymkey)，指定共享对称密钥（SymKey），初始化Mac对象。
 
 4. 调用[update](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-updatedatablob-1)，传入自定义消息，进行消息认证码计算。单次update长度没有限制。
 
@@ -47,7 +53,7 @@ HMAC通过指定摘要算法，以通信双方共享密钥与消息作为输入�
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func genSymKeyByData(symKeyData: Array<UInt8>) {
     let symKeyBlob: DataBlob = DataBlob(symKeyData)
@@ -81,7 +87,7 @@ func doHmacBySync() {
 2. 调用[createSymKeyGenerator](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-createsymkeygeneratorstring)，生成密钥算法为HMAC的对称密钥（SymKey）。
    生成对称密钥的详细开发指导，请参见[指定二进制数据生成对称密钥](./cj-crypto-convert-binary-data-to-sym-key.md)。
 
-3. 调用[init](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-initsymkey)，指定共享对称密钥（SymKey），初始化Mac对象。
+3. 调用[init](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-initializesymkey)，指定共享对称密钥（SymKey），初始化Mac对象。
 
 4. 传入自定义消息，将一次传入数据量设置为20字节，多次调用[update](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-updatedatablob-1)，进行消息认证码计算。
 
@@ -95,7 +101,7 @@ func doHmacBySync() {
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func genSymKeyByData(symKeyData: Array<UInt8>) {
     let symKeyBlob: DataBlob = DataBlob(symKeyData)

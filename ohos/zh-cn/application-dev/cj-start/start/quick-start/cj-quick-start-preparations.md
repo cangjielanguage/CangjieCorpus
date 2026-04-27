@@ -1,6 +1,12 @@
 # 开发准备
 
-本文档适用于OpenHarmony应用开发的初学者。通过使用仓颉语言构建一个简单的具有页面跳转/返回功能的应用（如下图所示），快速了解工程目录的主要文件，熟悉鸿蒙应用开发流程。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+本文档适用于OpenHarmony应用开发的初学者。通过使用仓颉语言构建一个简单的具有页面跳转/返回功能的应用（如下图所示），快速了解工程目录的主要文件，熟悉OpenHarmony应用开发流程。
 
 <!-- Cangjie diff -->
 
@@ -43,6 +49,6 @@ OpenHarmony提供了一套UI开发框架，即方舟开发框架（ArkUI框架�
 
 ## 环境准备
 
-下载最新版本的DevEco Studio、安装仓颉插件、仓颉SDK等步骤，详见：[配置开发环境](https://developer.huawei.com/consumer/cn/doc/cangjie-guides-V5/cj-ide-env-config-V5)。
+下载最新版本的DevEco Studio、安装仓颉插件、仓颉SDK等步骤，详见：[配置开发环境](https://developer.huawei.com/consumer/cn/doc/cangjie-guides/cj-start-install-software)。
 
 完成上述操作及基本概念的理解后，可进行下一步体验和学习。

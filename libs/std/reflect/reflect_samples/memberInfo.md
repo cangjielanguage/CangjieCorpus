@@ -25,8 +25,8 @@ main(): Unit {
     println((members[1].getValue(a) as Int64).getOrThrow())
     println(a.area())
     let funcs = ty.instanceFunctions.toArray()
-    if (funcs[0].returnType.name == "Int64"){
-        println("The area of the square is ${zl**2}")
+    if (funcs[0].returnType.name == "Int64") {
+        println("The area of the square is ${zl ** 2}")
     }
     return
 }

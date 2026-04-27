@@ -1,5 +1,11 @@
 # ohos.common_event_subscriber
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 common_event_subscriber模块表示公共事件的订阅者。
 
 ## 导入模块

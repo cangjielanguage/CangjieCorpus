@@ -1,5 +1,11 @@
 # 取消动态订阅公共事件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 动态订阅者完成业务需求后，应主动取消订阅。通过调用[unsubscribe()](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#static-func-unsubscribecommoneventsubscriber)方法，取消订阅事件。
@@ -8,7 +14,7 @@
 
 | 接口名 | 接口描述 |
 | -------- | -------- |
-| unsubscribe(subscriber:&nbsp;[CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscriber)): Unit | 取消订阅公共事件。 |
+| unsubscribe(subscriber:&nbsp;[CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_subscriber.md#class-commoneventsubscriber)): Unit | 取消订阅公共事件。 |
 
 ## 开发步骤
 
@@ -28,5 +34,5 @@
 
    ```cangjie
    // subscriber为订阅事件时创建的订阅者对象
-    CommonEventManager.unsubscribe(subscriber)
+   CommonEventManager.unsubscribe(subscriber)
    ```

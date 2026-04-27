@@ -1,10 +1,12 @@
-# 消息摘要计算SHA256（仓颉）
+# 消息摘要计算SHA256
 
-对应的算法规格请参见[消息摘要计算算法规格](./cj-crypto-generate-message-digest-overview.md#支持的算法与规格)。
-
+<!--Del-->
 > **说明：**
 >
-> 从API version 12开始，轻量级智能穿戴设备支持消息摘要的计算与操作。
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+对应的算法规格请参见[消息摘要计算算法规格](./cj-crypto-generate-message-digest-overview.md#支持的算法与规格)。
 
 ## 开发步骤
 
@@ -28,7 +30,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func doMd() {
     let mdAlgName = 'SHA256' // 摘要算法名。
@@ -59,7 +61,7 @@ func doMd() {
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func doLoopMd() {
     let mdAlgName = "SHA256" // 摘要算法名。

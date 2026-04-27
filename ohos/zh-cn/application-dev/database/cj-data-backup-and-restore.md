@@ -1,5 +1,11 @@
 # 数据库备份与恢复
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 当应用在处理一项重要的操作时不能被打断，例如：写入多个表关联的事务。此时，每个表的写入都是单独的，但是表与表之间的事务关联性不能被分割。
@@ -23,7 +29,7 @@
     ```cangjie
     // main_ability.cj
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
 
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -55,10 +61,8 @@
     ```cangjie
     // xxx.cj
     import kit.ArkData.*
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.business_exception.BusinessException
-    import ohos.data.distributed_kv_store.KVManager
-    import ohos.data.distributed_kv_store.SingleKVStore
-    import ohos.data.relational_store.*
     ```
 
     实现创建kvStore功能的核心代码是：
@@ -89,14 +93,6 @@
    ```
 
 2. 使用put()方法插入数据。
-
-    为实现插入数据功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    import ohos.data.distributed_kv_store.*
-    ```
 
     实现插入数据功能的核心代码是：
 
@@ -165,8 +161,8 @@
 
 ```cangjie
 import kit.ArkData.*
+import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.BusinessException
-import ohos.data.relational_store.*
 ```
 
 实现手动备份功能的核心代码是：
@@ -207,15 +203,6 @@ try {
 
 1. 抛出数据库异常错误码。
 
-    为实现抛出数据库异常错误码功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    import ohos.data.relational_store.RdbPredicates
-    import ohos.data.relational_store.RdbStore
-    ```
-
     实现抛出数据库异常错误码功能的核心代码是：
 
     <!-- compile -->
@@ -248,14 +235,6 @@ try {
 
 2. 关闭所有打开着的结果集。
 
-    为实现关闭结果集功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    import ohos.data.relational_store.ResultSet
-    ```
-
     实现关闭结果集功能的核心代码是：
 
     <!-- compile -->
@@ -275,7 +254,7 @@ try {
             Hilog.error(0, "ErrorCode: ${e.code}", e.message)
         }
     }
-   ```
+    ```
 
 3. 调用restore接口恢复数据。
 

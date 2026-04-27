@@ -1,5 +1,11 @@
 # ohos.bluetooth.hfp（蓝牙hfp模块）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 hfp模块提供了访问蓝牙呼叫接口的方法。
 
 ## 导入模块
@@ -166,7 +172,6 @@ public func getConnectionState(deviceId: String): ProfileConnectionState
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -309,7 +314,7 @@ try {
 public func on(eventType: ProfileCallbackType, callback: Callback1Argument<StateChangeParam>): Unit
 ```
 
-**功能：** 订阅连接状态变化事件。使用Callback异步回调。
+**功能：** 订阅连接状态变化事件。
 
 **需要权限：** ohos.permission.ACCESS_BLUETOOTH
 
@@ -321,8 +326,8 @@ public func on(eventType: ProfileCallbackType, callback: Callback1Argument<State
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|eventType|[ProfileCallbackType](./cj-apis-bluetooth-base_profile.md#enum-profilecallbacktype)|是|-|填写CONNECTIONSTATECHANGE，表示连接状态变化事件类型。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[StateChangeParam](cj-apis-bluetooth-base_profile.md#class-statechangeparam)>|是|-|表示回调函数的入参。|
+|eventType|[ProfileCallbackType](./cj-apis-bluetooth-base_profile.md#enum-profilecallbacktype)|是|-|填写ConnectionStateChange，表示连接状态变化事件类型。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[StateChangeParam](cj-apis-bluetooth-base_profile.md#class-statechangeparam)>|是|-|表示回调函数的入参。|
 
 **异常：**
 

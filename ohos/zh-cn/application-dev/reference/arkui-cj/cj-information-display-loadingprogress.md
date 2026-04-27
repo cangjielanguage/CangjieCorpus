@@ -1,8 +1,14 @@
 # LoadingProgress
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 用于显示加载动效的组件。
 
-加载动效在组件不可见时停止，组件的可见状态基于[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)处理，可见阈值raitos大于0即视为可见状态。
+加载动效在组件不可见时停止，组件的可见状态基于[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)处理，可见阈值ratios大于0即视为可见状态。
 
 ## 导入模块
 
@@ -30,7 +36,7 @@ public init()
 
 ## 通用属性/通用事件
 
-通用属性：除文本样式外，其余全部支持。
+通用属性：全部支持。
 
 > **说明：**
 >

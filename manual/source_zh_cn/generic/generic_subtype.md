@@ -10,7 +10,7 @@ interface I<X, Y> { }
 class C<Z> <: I<Z, Z> { }
 ```
 
-根据 `class C<Z> <: I<Z, Z> { }`，便知 `C<Bool> <: I<Bool, Bool>` 以及 `C<D> <: I<D, D>` 等。可以解读为“于所有的（不含类型变元的） `Z` 类型，都有 `C<Z> <: I<Z, Z>` 成立”。
+根据 `class C<Z> <: I<Z, Z> { }`，便知 `C<Bool> <: I<Bool, Bool>` 以及 `C<D> <: I<D, D>` 等。这可以解读为“对于所有的不含类型变元的 `Z` 类型，都有 `C<Z> <: I<Z, Z>` 成立”。
 
 但是对于下列代码：
 

@@ -4,7 +4,7 @@
 
 打印 Path 实例的目录部分、文件全名（有扩展名）、扩展名、文件名（无扩展名），并判断 Path 实例是绝对路径还是相对路径
 
-代码如下：
+示例：
 <!-- verify -->
 
 ```cangjie
@@ -30,7 +30,7 @@ main() {
     for (i in 0..pathStrArr.size) {
         let path: Path = Path(pathStrArr[i])
         // 打印 path 的整个路径字符串
-        println("Path${i}: ${path.toString()}")
+        println("Path${i}: ${path}")
         // 打印 path 的目录路径
         println("Path.parent: ${path.parent}")
         // 打印 path 的文件全名（有扩展名）
@@ -43,7 +43,6 @@ main() {
         println("Path.isAbsolute: ${path.isAbsolute()}; Path.isRelative: ${path.isRelative()}")
         println()
     }
-
     return 0
 }
 ```
@@ -54,14 +53,14 @@ main() {
 Path0: /a/b/c
 Path.parent: /a/b
 Path.fileName: c
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: c
 Path.isAbsolute: true; Path.isRelative: false
 
 Path1: /a/b/
 Path.parent: /a
 Path.fileName: b
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: b
 Path.isAbsolute: true; Path.isRelative: false
 
@@ -75,28 +74,28 @@ Path.isAbsolute: true; Path.isRelative: false
 Path3: /a
 Path.parent: /
 Path.fileName: a
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: a
 Path.isAbsolute: true; Path.isRelative: false
 
 Path4: /
 Path.parent: /
-Path.fileName:
-Path.extensionName:
-Path.fileNameWithoutExtension:
+Path.fileName: 
+Path.extensionName: 
+Path.fileNameWithoutExtension: 
 Path.isAbsolute: true; Path.isRelative: false
 
 Path5: ./a/b/c
 Path.parent: ./a/b
 Path.fileName: c
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: c
 Path.isAbsolute: false; Path.isRelative: true
 
 Path6: ./a/b/
 Path.parent: ./a
 Path.fileName: b
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: b
 Path.isAbsolute: false; Path.isRelative: true
 
@@ -108,30 +107,30 @@ Path.fileNameWithoutExtension: c
 Path.isAbsolute: false; Path.isRelative: true
 
 Path8: ./
-Path.parent:
+Path.parent: 
 Path.fileName: .
-Path.extensionName:
-Path.fileNameWithoutExtension:
+Path.extensionName: 
+Path.fileNameWithoutExtension: 
 Path.isAbsolute: false; Path.isRelative: true
 
 Path9: .
-Path.parent:
+Path.parent: 
 Path.fileName: .
-Path.extensionName:
-Path.fileNameWithoutExtension:
+Path.extensionName: 
+Path.fileNameWithoutExtension: 
 Path.isAbsolute: false; Path.isRelative: true
 
 Path10: 123.
-Path.parent:
+Path.parent: 
 Path.fileName: 123.
-Path.extensionName:
+Path.extensionName: 
 Path.fileNameWithoutExtension: 123
 Path.isAbsolute: false; Path.isRelative: true
 ```
 
-## Path 的拼接、判等、转规范化路径等操作
+## Path 的拼接、判等、规范化处理等操作
 
-代码如下：
+示例：
 <!-- verify -->
 
 ```cangjie
@@ -153,8 +152,8 @@ main() {
 
     let curCanonicalizedPath: Path = canonicalize(Path("."))
     let fileCanonicalizedPath: Path = canonicalize(Path("././././a/./../a/b/../../a/b/c/.././../../a/b/c/d.cj"))
-    if (fileCanonicalizedPath == canonicalize(filePath) &&
-        fileCanonicalizedPath.toString() == curCanonicalizedPath.toString() + "/a/b/c/d.cj") {
+    if (fileCanonicalizedPath == canonicalize(filePath) && fileCanonicalizedPath.toString() ==
+        curCanonicalizedPath.toString() + "/a/b/c/d.cj") {
         println("canonicalize filePath: success")
     }
 
@@ -170,9 +169,9 @@ filePath.join: success
 canonicalize filePath: success
 ```
 
-## 通过 Path 创建文件和目录
+## 通过 Path 创建文件与目录
 
-代码如下：
+示例：
 <!-- verify -->
 
 ```cangjie

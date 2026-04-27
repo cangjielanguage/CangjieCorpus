@@ -1,5 +1,11 @@
 # 基础类型定义
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 此页面记录UI框架使用的公共类型定义。
 
 ## 导入模块
@@ -59,7 +65,7 @@ prop size: Int64
 ### operator func [](Int64, T)
 
 ```cangjie
-public operator func [](idx: Int64, value!: T): Unit
+operator func [](idx: Int64, value!: T): Unit
 ```
 
 **功能：** 设置指定索引位置的元素值。
@@ -78,7 +84,7 @@ public operator func [](idx: Int64, value!: T): Unit
 ### operator func [](Int64)
 
 ```cangjie
-public operator func [](idx: Int64): T
+operator func [](idx: Int64): T
 ```
 
 **功能：** 获取指定索引位置的元素值。
@@ -245,10 +251,6 @@ prop lpx: Length
 
 **起始版本：** 22
 
-## Float64
-
-**功能：** Float64类型定义的描述。
-
 ### extend Float64 <: LengthProp & Length
 
 ```cangjie
@@ -368,10 +370,6 @@ public prop unitType: LengthUnit
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
-
-## Int64
-
-**功能：** Int64类型定义的描述。
 
 ### extend Int64 <: LengthProp & Length
 
@@ -520,7 +518,7 @@ extend Int64 <: ResourceColor {
 #### func toUInt32()
 
 ```cangjie
-func toUInt32(): UInt32
+public func toUInt32(): UInt32
 ```
 
 **功能：** 转为UInt32颜色取值。
@@ -548,7 +546,7 @@ extend UInt32 <: ResourceColor {
 #### func toUInt32()
 
 ```cangjie
-func toUInt32(): UInt32
+public func toUInt32(): UInt32
 ```
 
 **功能：** 转为UInt32颜色取值。
@@ -685,8 +683,6 @@ public let onChange: (T) -> Unit
 ```cangjie
 public class LengthMetrics <: Length {
     public init(value: Float64, unit!: LengthUnit = LengthUnit.Vp)
-    public prop value: Float64
-    public prop unitType: LengthUnit
 }
 ```
 
@@ -764,7 +760,6 @@ public class Color <: ResourceColor {
     public static let Transparent: Color = Color(0, 0, 0, alpha: 0.0)
     public init(red: UInt8, green: UInt8, blue: UInt8, alpha!: ?Float32 = None)
     public init(value: UInt32)
-    public func toUInt32(): UInt32
 }
 ```
 
@@ -781,7 +776,7 @@ public class Color <: ResourceColor {
 ### static let Black
 
 ```cangjie
-public static let Black: Color
+public static let Black: Color = Color(0xff000000)
 ```
 
 **功能：** 黑色。
@@ -797,7 +792,7 @@ public static let Black: Color
 ### static let Blue
 
 ```cangjie
-public static let Blue: Color
+public static let Blue: Color = Color(0xff0000ff)
 ```
 
 **功能：** 蓝色。
@@ -813,7 +808,7 @@ public static let Blue: Color
 ### static let Gray
 
 ```cangjie
-public static let Gray: Color
+public static let Gray: Color = Color(0xff808080)
 ```
 
 **功能：** 灰色。
@@ -829,7 +824,7 @@ public static let Gray: Color
 ### static let Green
 
 ```cangjie
-public static let Green: Color
+public static let Green: Color = Color(0xff008000)
 ```
 
 **功能：** 绿色。
@@ -845,7 +840,7 @@ public static let Green: Color
 ### static let Red
 
 ```cangjie
-public static let Red: Color
+public static let Red: Color = Color(0xffff0000)
 ```
 
 **功能：** 红色。
@@ -861,7 +856,7 @@ public static let Red: Color
 ### static let White
 
 ```cangjie
-public static let White: Color
+public static let White: Color = Color(0xffffffff)
 ```
 
 **功能：** 白色。
@@ -877,7 +872,7 @@ public static let White: Color
 ### static let Transparent
 
 ```cangjie
-public static let Transparent: Color
+public static let Transparent: Color = Color(0, 0, 0, alpha: 0.0)
 ```
 
 **功能：** 透明色。
@@ -1007,13 +1002,13 @@ public func get<T>(key: String): ?T
 
 ```cangjie
 public class KeyEvent {
-    public var keyText: String,
-    public var keyType: KeyType,
-    public var keyCode: Int32,
-    public var keySource: KeySource,
-    public var metaKey: Int32,
-    public var deviceId: Int64,
-    public var timestamp: Int64,
+    public var keyType: KeyType
+    public var keyCode: Int32
+    public var keyText: String
+    public var keySource: KeySource
+    public var deviceId: Int64
+    public var metaKey: Int32
+    public var timestamp: Int64
     public init(keyText: String, keyType: KeyType, keyCode: Int32, keySource: KeySource, metaKey: Int32,
         deviceId: Int64, timestamp: Int64)
 }
@@ -1316,7 +1311,7 @@ public init(touchType: TouchType, id: Int32, screenX: Float64, screenY: Float64,
 ## class BaseEvent
 
 ```cangjie
-sealed abstract class BaseEvent {
+abstract sealed class BaseEvent {
     public var target: ?EventTarget
     public var timestamp: Int64
     public var source: ?SourceType
@@ -1398,12 +1393,12 @@ public var deviceId: ?Int64
 
 ```cangjie
 public class ClickEvent <: BaseEvent {
-    public var x: Float64
-    public var y: Float64
-    public var windowX: Float64
-    public var windowY: Float64
     public var displayX: Float64
     public var displayY: Float64
+    public var windowX: Float64
+    public var windowY: Float64
+    public var x: Float64
+    public var y: Float64
 }
 ```
 
@@ -1602,11 +1597,11 @@ public init(pixelMap: ?PixelMap, builder: ?CustomBuilder, extraInfo: ?String)
 
 ```cangjie
 public class MouseEvent <: BaseEvent {
+    public var button: MouseButton
     public var screenX: Float64
     public var screenY: Float64
     public var x: Float64
     public var y: Float64
-    public var button: MouseButton
     public var action: MouseAction
     public init(timestamp: Int64, screenX: Float64, screenY: Float64, x: Float64, y: Float64, button: MouseButton, action: MouseAction)
 }
@@ -1621,22 +1616,6 @@ public class MouseEvent <: BaseEvent {
 **父类型：**
 
 - [BaseEvent](#class-baseevent)
-
-### var action
-
-```cangjie
-public var action: MouseAction
-```
-
-**功能：** 事件动作。
-
-**类型：** [MouseAction](./cj-common-types.md#enum-mouseaction)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ### var button
 
@@ -1718,6 +1697,22 @@ public var y: Float64
 
 **起始版本：** 22
 
+### var action
+
+```cangjie
+public var action: MouseAction
+```
+
+**功能：** 事件动作。
+
+**类型：** [MouseAction](./cj-common-types.md#enum-mouseaction)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
 ### init(Int64, Float64, Float64, Float64, Float64, MouseButton, MouseAction)
 
 ```cangjie
@@ -1746,10 +1741,9 @@ public init(timestamp: Int64, screenX: Float64, screenY: Float64, x: Float64, y:
 
 ```cangjie
 public class TouchEvent <: BaseEvent {
-    public var eventType: TouchType,
-    public var touches: ArrayList<TouchObject>,
-    public var changedTouches: ArrayList<TouchObject>
-    public func stopPropagation(): Unit
+    public var eventType: TouchType
+    public var touches: Array<TouchObject>
+    public var changedTouches: Array<TouchObject>
 }
 ```
 
@@ -1782,12 +1776,12 @@ public var eventType: TouchType
 ### var touches
 
 ```cangjie
-public var touches: ArrayList<TouchObject>
+public var touches: Array<TouchObject>
 ```
 
 **功能：** 全部手指信息。
 
-**类型：** ArrayList\<[TouchObject](#class-touchobject)>
+**类型：** Array\<[TouchObject](#class-touchobject)>
 
 **读写能力：** 可读写
 
@@ -1798,12 +1792,12 @@ public var touches: ArrayList<TouchObject>
 ### var changedTouches
 
 ```cangjie
-public var changedTouches: ArrayList<TouchObject>
+public var changedTouches: Array<TouchObject>
 ```
 
 **功能：** 当前发生变化的手指信息。
 
-**类型：** ArrayList\<[TouchObject](#class-touchobject)>
+**类型：** Array\<[TouchObject](#class-touchobject)>
 
 **读写能力：** 可读写
 
@@ -2171,7 +2165,7 @@ public class SharedTransitionOptions {
 public var duration: ?Int32
 ```
 
-**功能：** 设置共享转场的持续时间。
+**功能：** 描述共享元素转场动效播放时长。
 
 **类型：** ?Int32
 
@@ -2187,7 +2181,7 @@ public var duration: ?Int32
 public var curve: ?Curve
 ```
 
-**功能：** 设置共享转场的动画曲线。
+**功能：** 动画曲线。
 
 **类型：** ?[Curve](#enum-curve)
 
@@ -2203,7 +2197,7 @@ public var curve: ?Curve
 public var delay: ?Int32
 ```
 
-**功能：** 设置共享转场的延迟时间。
+**功能：** 延迟播放时间。
 
 **类型：** ?Int32
 
@@ -2235,7 +2229,7 @@ public var motionPath: ?MotionPathOptions
 public var zIndex: ?Int32
 ```
 
-**功能：** 设置共享转场的层级。
+**功能：** 设置Z轴。
 
 **类型：** ?Int32
 
@@ -2251,7 +2245,7 @@ public var zIndex: ?Int32
 public var effectType: ?SharedTransitionEffectType
 ```
 
-**功能：** 设置共享转场的效果类型。
+**功能：** 动画类型。
 
 **类型：** ?[SharedTransitionEffectType](#enum-sharedtransitioneffecttype)
 
@@ -2277,12 +2271,12 @@ public init(duration!: ?Int32 = None, curve!: ?Curve = None, delay!: ?Int32 = No
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|duration|?Int32|否|None|**命名参数。** 设置共享转场的动画曲线。初始值为1000。|
-|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 设置共享转场的动画曲线。初始值为Curve.Linear。|
-|delay|?Int32|否|None|**命名参数。** 设置共享转场的延迟时间。初始值为0。|
-|motionPath|?[MotionPathOptions](#class-motionpathoptions)|否|None|**命名参数。** 设置共享转场的运动路径。初始值为MotionPathOptions(path: "")。|
-|zIndex|?Int32|否|None|**命名参数。** 设置共享转场的层级。初始值为0。|
-|effectType|?[SharedTransitionEffectType](./cj-common-types.md#enum-sharedtransitioneffecttype)|否|None|**命名参数。** 设置共享转场的效果类型。初始值为SharedTransitionEffectType.Exchange。|
+|duration|?Int32|否|None|**命名参数。** 描述共享元素转场动效播放时长。<br>初始值：1000。<br>单位：毫秒。<br>取值范围：[0, +∞)。|
+|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。<br>初始值：Curve.Linear。|
+|delay|?Int32|否|None|**命名参数。** 延迟播放时间。<br>初始值：0。<br>单位：毫秒。|
+|motionPath|?[MotionPathOptions](#class-motionpathoptions)|否|None|**命名参数。** 设置共享转场的运动路径。<br>初始值：MotionPathOptions(path: "")。|
+|zIndex|?Int32|否|None|**命名参数。** 设置Z轴。<br>取值范围：(-∞, +∞)。<br>初始值：0。|
+|effectType|?[SharedTransitionEffectType](./cj-common-types.md#enum-sharedtransitioneffecttype)|否|None|**命名参数。** 动画类型。<br>初始值为SharedTransitionEffectType.Exchange。|
 
 ## class AnimateParam
 
@@ -2467,15 +2461,15 @@ public init(duration!: ?Int32 = None, tempo!: ?Float32 = None, curve!: ?Curve = 
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|duration|?Int32|否|None|**命名参数。** 动画持续时间，单位为毫秒。设置小于0的值时按0处理。初始值为1000。|
-|tempo|?Float32|否|None|**命名参数。** 动画播放速度，值越大动画播放越快，值越小播放越慢，为0时无动画效果。初始值为1.0。|
+|duration|?Int32|否|None|**命名参数。** 动画持续时间，单位为毫秒。设置小于0的值时按0处理。<br>初始值：1000。<br>**说明：**<br>1. 可以通过在持续时间为0的动画闭包函数中改变属性，以实现停止该属性动画的效果。<br>2. 设置小于0的值时按0处理。|
+|tempo|?Float32|否|None|**命名参数。** 动画播放速度，值越大动画播放越快，值越小播放越慢，为0时无动画效果。<br>初始值：1.0。<br>取值范围：[0, +∞)。|
 |curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。初始值为Curve.EaseInOut。|
-|delay|?Int32|否|None|**命名参数。** 动画延迟播放时间，单位为ms(毫秒)。初始值为0。|
-|iterations|?Int32|否|None|**命名参数。** 动画播放次数。设置为-1时表示无限次播放。设置为0时表示无动画效果。初始值为1。|
-|playMode|?[PlayMode](./cj-common-types.md#enum-playmode)|否|None|**命名参数。** 动画播放模式，默认播放完成后重头开始播放。初始值为PlayMode.Normal。|
+|delay|?Int32|否|None|**命名参数。** 动画延迟播放时间，单位为ms(毫秒)。<br>初始值：0。<br>取值范围：(-∞, +∞)。<br>**说明：**<br>delay>=0为延迟播放，delay<0表示提前播放。对于delay<0的情况：当delay的绝对值小于实际动画时长，动画将在开始后第一帧直接运动到delay绝对值的时刻的状态；当delay的绝对值大于等于实际动画时长，动画将在开始后第一帧直接运动到终点状态。其中实际动画时长等于单次动画时长乘以动画播放次数。|
+|iterations|?Int32|否|None|**命名参数。** 动画播放次数。设置为-1时表示无限次播放。设置为0时表示无动画效果。<br>初始值：1。<br>取值范围：[-1, +∞)。|
+|playMode|?[PlayMode](./cj-common-types.md#enum-playmode)|否|None|**命名参数。** 动画播放模式，默认播放完成后重头开始播放。<br>初始值：PlayMode.Normal。|
 |onFinish|Option\<() -> Unit>|否|Option.None|**命名参数。** 动画播放完成回调。|
-|finishCallbackType|?[FinishCallbackType](./cj-common-types.md#enum-finishcallbacktype)|否|None|**命名参数。** 在动画中定义onFinish回调的类型。初始值为FinishCallbackType.Removed。|
-|expectedFrameRateRange|Option<[ExpectedFrameRateRange](./cj-animation-animation.md#class-expectedframeraterange)>|否|Option.None|**命名参数。** 设置动画的期望帧率。|
+|finishCallbackType|?[FinishCallbackType](./cj-common-types.md#enum-finishcallbacktype)|否|None|**命名参数。** 在动画中定义onFinish回调的类型。<br>初始值：FinishCallbackType.Removed。|
+|expectedFrameRateRange|Option<[ExpectedFrameRateRange](#class-expectedframeraterange)>|否|Option.None|**命名参数。** 设置动画的期望帧率。|
 
 ## class HorizontalAlignParam
 
@@ -3477,6 +3471,7 @@ public open class MultiShadowOptions {
     public var radius: ?Length
     public var offsetX: ?Length
     public var offsetY: ?Length
+    protected init(radius: ?Length, offsetX: ?Length, offsetY: ?Length)
 }
 ```
 
@@ -3539,6 +3534,26 @@ public var offsetY: ?Length
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
+
+### init(?Length, ?Length, ?Length)
+
+```cangjie
+protected init(radius: ?Length, offsetX: ?Length, offsetY: ?Length)
+```
+
+**功能：** 构造一个MultiShadowOptions对象。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+| radius | ?[Length](./cj-common-types.md#interface-length) | 是 | - | 半径 |
+| offsetX | ?[Length](./cj-common-types.md#interface-length) | 是 | - | X轴偏移 |
+| offsetY | ?[Length](./cj-common-types.md#interface-length) | 是 | - | Y轴偏移 |
 
 ## class PickerTextStyle
 
@@ -3866,11 +3881,45 @@ public init(colorMode!: ?ThemeColorMode = None, adaptiveColor!: ?AdaptiveColor =
 
 ```cangjie
 public class PopupButton {
+    public var value: ?String
+    public var action: () -> Unit
     public init(value!: ?String, action!: () -> Unit)
 }
 ```
 
 **功能：** 构建弹窗按钮。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var value
+
+```cangjie
+public var value: ?String
+```
+
+**功能：** 按钮的文本内容。
+
+**类型：** Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var action
+
+```cangjie
+public var action: () -> Unit
+```
+
+**功能：** 按钮的点击事件。
+
+**类型：** Bool
+
+**读写能力：** 可读写
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -3949,17 +3998,17 @@ public init(value: Bool)
 ```cangjie
 public class PopupOptions {
     public var message: ?String
+    public var placement: ?Placement
     public var primaryButton: ?PopupButton
     public var secondaryButton: ?PopupButton
     public var onStateChange: ?(PopupStateChangeParam) -> Unit
-    public var messageOptions: ?PopupMessageOptions
     public var arrowOffset: ?Length
     public var showInSubWindow: ?Bool
     public var mask: ?ResourceColor
+    public var messageOptions: ?PopupMessageOptions
     public var targetSpace: ?Length
-    public var placement: ?Placement
-    public var offset: ?Position
     public var enableArrow: ?Bool
+    public var offset: ?Position
     public var popupColor: ?ResourceColor
     public var autoCancel: ?Bool
     public var width: ?Length
@@ -4023,6 +4072,22 @@ public var message: ?String
 
 **起始版本：** 22
 
+### var placement
+
+```cangjie
+public var placement: ?Placement
+```
+
+**功能：** 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom。如果同时设置了placementOnTop和placement，则以placement的设置生效。
+
+**类型：** ?[Placement](#enum-placement)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
 ### var primaryButton
 
 ```cangjie
@@ -4064,22 +4129,6 @@ public var onStateChange: ?(PopupStateChangeParam) -> Unit
 **功能：** 设置弹窗状态变化事件回调，参数为弹窗当前的显示状态。
 
 **类型：** ?([PopupStateChangeParam](#class-popupstatechangeparam)) -> Unit
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var messageOptions
-
-```cangjie
-public var messageOptions: ?PopupMessageOptions
-```
-
-**功能：** 设置弹窗信息文本参数。
-
-**类型：** ?[PopupMessageOptions](#class-popupmessageoptions)
 
 **读写能力：** 可读写
 
@@ -4135,6 +4184,22 @@ public var mask: ?ResourceColor
 
 **起始版本：** 22
 
+### var messageOptions
+
+```cangjie
+public var messageOptions: ?PopupMessageOptions
+```
+
+**功能：** 设置弹窗信息文本参数。
+
+**类型：** ?[PopupMessageOptions](#class-popupmessageoptions)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
 ### var targetSpace
 
 ```cangjie
@@ -4144,22 +4209,6 @@ public var targetSpace: ?Length
 **功能：** 设置popup与目标的间隙。
 
 **类型：** ?[Length](./cj-common-types.md#interface-length)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var placement
-
-```cangjie
-public var placement: ?Placement
-```
-
-**功能：** 设置popup组件相对于目标的显示位置，默认值为Placement.Bottom。如果同时设置了placementOnTop和placement，则以placement的设置生效。
-
-**类型：** ?[Placement](#enum-placement)
 
 **读写能力：** 可读写
 
@@ -5601,8 +5650,6 @@ public class ContextMenuOptions {
     public var backgroundColor: ?ResourceColor
     public var backgroundBlurStyle: ?BlurStyle
     public var transition: ?TransitionEffect
-    public var borderRadius: ?BorderRadiuses = None
-    public var layoutRegionMargin: ?Margin = None
     public init(
         offset!: ?Position = None,
         placement!: Option<Placement> = Option.None,
@@ -11535,7 +11582,6 @@ public enum Placement <: Equatable<Placement> {
     | LeftBottom
     | RightTop
     | RightBottom
-    | None
     | ...
 }
 ```
@@ -11689,18 +11735,6 @@ RightBottom
 ```
 
 **功能：** 气泡提示位于组件右侧，与组件下侧边缘对齐。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### None
-
-```cangjie
-None
-```
-
-**功能：** 气泡提示位置无变化。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -15982,7 +16016,7 @@ public enum MixedMode <: Equatable<MixedMode> {
 
 **功能：** 设置混合内容安全加载模式。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -15998,7 +16032,7 @@ All
 
 **功能：** 宽松模式：允许加载HTTP和HTTPS混合内容。所有不安全的内容都可以被加载。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -16010,7 +16044,7 @@ Compatible
 
 **功能：** 兼容模式：混合内容兼容性模式，部分不安全的内容可能被加载。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -16022,7 +16056,7 @@ None
 
 **功能：** 严格模式：不允许加载HTTP和HTTPS混合内容。不允许安全来源（secure origin）加载不安全来源（insecure origin）的内容。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -16034,7 +16068,7 @@ public operator func ==(other: MixedMode): Bool
 
 **功能：** 判断两个MixedMode枚举是否相等。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -16058,7 +16092,7 @@ public operator func !=(other: MixedMode): Bool
 
 **功能：** 判断两个MixedMode枚举是否不相等。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -17974,7 +18008,7 @@ public enum WebDarkMode <: Equatable<WebDarkMode> {
 
 **功能：** Web的深色模式，默认关闭。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -17990,7 +18024,7 @@ Off
 
 **功能：** Web的深色模式为关闭。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -18002,7 +18036,7 @@ On
 
 **功能：** Web的深色模式为开启。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -18014,7 +18048,7 @@ Auto
 
 **功能：** Web的深色模式为跟随系统。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -18026,7 +18060,7 @@ public operator func ==(other: WebDarkMode): Bool
 
 **功能：** 判断两个WebDarkMode枚举是否相等。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -18050,7 +18084,7 @@ public operator func !=(other: WebDarkMode): Bool
 
 **功能：** 判断两个WebDarkMode枚举是否不相等。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+**系统能力：** SystemCapability.Web.Webview.Core
 
 **起始版本：** 22
 
@@ -20763,10 +20797,6 @@ public type VoidCallback = () -> Unit
 
 **功能：** [VoidCallback](#type-voidcallback)是[() -> Unit](#type-voidcallback)类型的别名。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 **类型：** () -> Unit
 
 ## type Callback\<T, V>
@@ -20776,10 +20806,6 @@ public type Callback<T, V> = (T) -> V
 ```
 
 **功能：** Callback\<T, V>是(T) -> V类型的别名。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 **类型：** (T) -> V
 
@@ -20791,10 +20817,6 @@ public type CustomBuilder = () -> Unit
 
 **功能：** CustomBuilder是() -> Unit类型的别名。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 **类型：** () -> Unit
 
 ## type TransitionFinishCallback
@@ -20804,10 +20826,6 @@ public type TransitionFinishCallback = (Bool) -> Unit
 ```
 
 **功能：** [TransitionFinishCallback](#type-transitionfinishcallback)是(Bool) -> Unit类型的别名。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 **类型：** (Bool) -> Unit
 
@@ -20819,10 +20837,6 @@ public type ItemGeneratorFunc<T> = (T, Int64) -> Unit
 
 **功能：** 定义Item生成器函数。
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 **类型：** (T, Int64) -> Unit
 
 ## type KeyGeneratorFunc\<T>
@@ -20832,9 +20846,5 @@ public type KeyGeneratorFunc<T> = (T, Int64) -> String
 ```
 
 **功能：** 定义键生成器函数。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 **类型：** (T, Int64) -> String

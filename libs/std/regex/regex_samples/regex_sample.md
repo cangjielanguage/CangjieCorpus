@@ -1,4 +1,4 @@
-# regex 示例
+# Regex 示例
 
 ## Regex 匹配大小写
 
@@ -74,9 +74,9 @@ import std.regex.*
 main(): Unit {
     let printMatchData: (MatchData) -> Unit = {
         md =>
-        println("found: `${md.matchString()}`")
-        let pos = md.matchPosition()
-        println("[${pos.start}, ${pos.end})")
+            println("found: `${md.matchString()}`")
+            let pos = md.matchPosition()
+            println("[${pos.start}, ${pos.end})")
     }
 
     let unicodePattern = "(?:[\u{2460}\u{2461}\u{2462}\u{2463}\u{2464}\u{2465}\u{2466}\u{2467}\u{2468}]{2,4})"
@@ -107,16 +107,16 @@ main(): Unit {
 运行结果：
 
 ```text
-#Unicode disabled:
+#Unicode disabled: 
 IllegalArgumentException: Invalid utf8 byte sequence.
 
-#Unicode enabled:
+#Unicode enabled: 
 found: `①②`
 [0, 6)
 found: `⑤⑥`
 [8, 14)
 
-#Unicode enabled with literals:
+#Unicode enabled with literals: 
 found: `①②`
 [0, 6)
 found: `⑤⑥`

@@ -1,5 +1,11 @@
 # CheckboxGroup
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 多选框群组，用于控制多选框全选或者不全选状态。
 
 ## 导入模块
@@ -48,7 +54,7 @@ public init(group!: ?String = None)
 public func selectAll(value: ?Bool): This
 ```
 
-**功能：** 设置是否全选。若同组的[Checkbox](./cj-button-picker-checkbox.md#checkbox)显式设置了select属性，则Checkbox的优先级高。
+**功能：** 设置是否全选。若同组的[Checkbox](./cj-button-picker-checkbox.md)显式设置了select属性，则Checkbox的优先级高。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -96,7 +102,7 @@ public func onChange(callback: ?OnCheckboxGroupChangeCallback): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|callback|?[OnCheckboxGroupChangeCallback](#type-oncheckboxgroupchangecallback)|是|-|多选框群组的信息。初始值:  { _ => }|
+|callback|?[OnCheckboxGroupChangeCallback](#type-oncheckboxgroupchangecallback)|是|-|多选框群组的信息。初始值：{ _ => }|
 
 ## 基础类型定义
 
@@ -104,8 +110,8 @@ public func onChange(callback: ?OnCheckboxGroupChangeCallback): This
 
 ```cangjie
 public class CheckboxGroupResult {
-    public var status: SelectStatus
     public var name: Array<String>
+    public var status: SelectStatus
     public init(
         status: SelectStatus,
         name: Array<String>
@@ -183,10 +189,6 @@ public type OnCheckboxGroupChangeCallback = (CheckboxGroupResult) -> Unit
 
 **类型：** ([CheckboxGroupResult](#class-checkboxgroupresult)) -> Unit
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ## 示例代码
 
 ### 示例1（设置多选框群组）
@@ -251,9 +253,7 @@ class EntryView {
 
 ![checkbox_group](figures/checkbox_group.gif)
 
-### 示例2（自定义勾选样式）
-
-该示例通过配置mark实现自定义多选框群组的勾选样式。
+### 示例2
 
 <!-- run -->
 

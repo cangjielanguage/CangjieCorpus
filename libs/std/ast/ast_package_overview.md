@@ -4,6 +4,8 @@
 
 ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，提供语法解析函数。可将仓颉源码的词法单元（[Tokens](./ast_package_api/ast_package_classes.md#class-tokens)）解析为抽象语法树（Abstract Syntax Tree）节点对象。
 
+对于 ios 平台运行的场景，本包仅支持在 ios 12 及以上系统运行。
+
 仓颉 ast 包提供了 `Macro With Context` 的相关函数，用于在宏展开时获取展开过程中的上下文相关信息。在嵌套宏场景下，内层宏可以调用库函数 [assertParentContext(String)](./ast_package_api/ast_package_funcs.md#func-assertparentcontextstring) 来保证内层宏调用一定嵌套在特定的外层宏调用中。如果内层宏调用这个函数时没有嵌套在给定的外层宏调用中，该函数将抛出一个错误。同时，函数 [insideParentContext(String)](./ast_package_api/ast_package_funcs.md#func-insideparentcontextstring) 也用于检查内层宏调用是否嵌套在特定的外层宏调用中，但是返回一个布尔值。`Macro With Context` 的相关函数只能作为函数被直接调用，不能赋值给变量，不能作为实参或返回值使用。
 
 `Macro With Context` 相关函数如下：
@@ -65,6 +67,7 @@ ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，�
 | [Body](./ast_package_api/ast_package_classes.md#class-body) | 表示 Class 类型、 Struct 类型、 Interface 类型以及扩展中由 `{}` 和内部的一组声明节点组成的结构。 |
 | [CallExpr](./ast_package_api/ast_package_classes.md#class-callexpr) | 表示函数调用节点节点。 |
 | [ClassDecl](./ast_package_api/ast_package_classes.md#class-classdecl) | 类定义节点。 |
+| [CommandTypePattern](./ast_package_api/ast_package_classes.md#class-commandtypepattern) | 表示一个带有类型注解的命令模式。 |
 | [ConstPattern](./ast_package_api/ast_package_classes.md#class-constpattern) | 表示常量模式节点。 |
 | [Constructor](./ast_package_api/ast_package_classes.md#class-constructor) | 表示 `enum` 类型中的 `Constructor` 节点。 |
 | [Decl](./ast_package_api/ast_package_classes.md#class-decl) | 所有声明节点的父类，继承自 `Node` 节点，提供了所有声明节点的通用接口。 |
@@ -74,12 +77,16 @@ ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，�
 | [ExceptTypePattern](./ast_package_api/ast_package_classes.md#class-excepttypepattern) | 表示一个用于异常模式状态下的节点。 |
 | [Expr](./ast_package_api/ast_package_classes.md#class-expr) | 所有表达式节点的父类，继承自 `Node` 节点。 |
 | [ExtendDecl](./ast_package_api/ast_package_classes.md#class-extenddecl) | 表示一个扩展定义节点。 |
+| [FeatureId](./ast_package_api/ast_package_classes.md#class-featureid) | 表示一个 feature id。 |
+| [FeaturesDirective](./ast_package_api/ast_package_classes.md#class-featuresdirective) | feature directive 节点对象。 |
+| [FeaturesSet](./ast_package_api/ast_package_classes.md#class-featuresset) | 一组 features 名称。 |
 | [ForInExpr](./ast_package_api/ast_package_classes.md#class-forinexpr) | 表示 `for-in` 表达式。 |
 | [FuncDecl](./ast_package_api/ast_package_classes.md#class-funcdecl) | 表示一个函数定义节点。 |
 | [FuncParam](./ast_package_api/ast_package_classes.md#class-funcparam) | 表示函数参数节点，包括非命名参数和命名参数。 |
 | [FuncType](./ast_package_api/ast_package_classes.md#class-functype) | 表示函数类型节点。 |
 | [GenericConstraint](./ast_package_api/ast_package_classes.md#class-genericconstraint) | 表示一个泛型约束节点。 |
 | [GenericParam](./ast_package_api/ast_package_classes.md#class-genericparam) | 表示一个类型形参节点。 |
+| [Handler](./ast_package_api/ast_package_classes.md#class-handler) | 表示一个 `handle` 子句。 |
 | [IfExpr](./ast_package_api/ast_package_classes.md#class-ifexpr) | 表示条件表达式。 |
 | [ImportContent](./ast_package_api/ast_package_classes.md#class-importcontent) | 表示包导入节点中的导入项。 |
 | [ImportList](./ast_package_api/ast_package_classes.md#class-importlist) | 表示包导入节点。 |
@@ -106,6 +113,7 @@ ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，�
 | [ParenExpr](./ast_package_api/ast_package_classes.md#class-parenexpr) | 表示一个括号表达式节点，是指使用圆括号括起来的表达式。 |
 | [ParenType](./ast_package_api/ast_package_classes.md#class-parentype) | 表示括号类型节点。 |
 | [Pattern](./ast_package_api/ast_package_classes.md#class-pattern) | 所有模式匹配节点的父类，继承自 `Node` 节点。 |
+| [PerformExpr](./ast_package_api/ast_package_classes.md#class-performexpr) | 表示一个 `perform` 表达式节点。 |
 | [PrefixType](./ast_package_api/ast_package_classes.md#class-prefixtype) | 表示带问号的前缀类型节点。 |
 | [PrimaryCtorDecl](./ast_package_api/ast_package_classes.md#class-primaryctordecl) | 表示一个主构造函数节点。 |
 | [PrimitiveType](./ast_package_api/ast_package_classes.md#class-primitivetype) | 表示一个基本类型节点。 |
@@ -118,6 +126,7 @@ ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，�
 | [RangeExpr](./ast_package_api/ast_package_classes.md#class-rangeexpr) | 表示包含区间操作符的表达式。 |
 | [RefExpr](./ast_package_api/ast_package_classes.md#class-refexpr) | 表示一个使用自定义类型节点相关的表达式节点。 |
 | [RefType](./ast_package_api/ast_package_classes.md#class-reftype) | 表示一个用户自定义类型节点。 |
+| [ResumeExpr](./ast_package_api/ast_package_classes.md#class-resumeexpr) | 表示一个 `resume` 表达式节点。 |
 | [ReturnExpr](./ast_package_api/ast_package_classes.md#class-returnexpr) | 表示 `return` 表达式节点。 |
 | [SpawnExpr](./ast_package_api/ast_package_classes.md#class-spawnexpr) | 表示 `Spawn` 表达式。 |
 | [StructDecl](./ast_package_api/ast_package_classes.md#class-structdecl) | 表示一个 `Struct` 节点。 |
@@ -159,7 +168,7 @@ ast 包主要包含了仓颉源码的语法解析器和仓颉语法树节点，�
 
 |                 结构体名           |                功能                |
 | --------------------------------- | ---------------------------------- |
-| [Position](./ast_package_api/ast_package_structs.md#struct-position) | 表示位置信息的数据结构，包含文件ID，行号和列号。|
+| [Position](./ast_package_api/ast_package_structs.md#struct-position) | 表示位置信息的数据结构，包含文件 ID、行号和列号。|
 | [Token](./ast_package_api/ast_package_structs.md#struct-token) | 词法单元类型。|
 
 ### 异常类

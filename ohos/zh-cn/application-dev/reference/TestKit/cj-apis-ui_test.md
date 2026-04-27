@@ -1,5 +1,11 @@
 # ohos.ui_test（UI测试）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ui_test模块提供模拟UI操作的能力，供开发者在测试场景使用，主要支持如点击、双击、长按、滑动等UI操作能力。
 
 该模块提供以下功能：
@@ -19,8 +25,8 @@ import kit.TestKit.*
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -35,7 +41,7 @@ API示例代码使用说明：
 ### 测试命令
 
 ```text
-hdc shell aa test -b com.example.myapplication -m entry -s unittest CJTestRunner
+hdc shell aa test -b com.example.myapplication -m entry -s unittest OpenHarmonyTestRunner -s class TestExample
 ```
 
 - 这里的`-b com.example.myapplication -m entry`按照app里实际的bundle name和module name填。
@@ -139,7 +145,7 @@ try {
 public func doubleClick(): Unit
 ```
 
-**功能：** 控件对象进行双击操作。
+**功能：** 对控件对象进行双击操作。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -1306,14 +1312,6 @@ public func click(x: Int32, y: Int32): Unit
 |x|Int32|是|-|以Int32的形式传入目标点的横坐标信息，取值范围：大于等于0的整数。|
 |y|Int32|是|-|以Int32的形式传入目标点的纵坐标信息，取值范围：大于等于0的整数。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1388,14 +1386,6 @@ public func delayMs(duration: Int32): Unit
 |:---|:---|:---|:---|:---|
 |duration|Int32|是|-|给定的时间，单位：ms，取值范围：大于等于0的整数。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1433,14 +1423,6 @@ public func doubleClick(x: Int32, y: Int32): Unit
 |:---|:---|:---|:---|:---|
 |x|Int32|是|-|以Int32的形式传入目标点的横坐标信息，取值范围：大于等于0的整数。|
 |y|Int32|是|-|以Int32的形式传入目标点的纵坐标信息，取值范围：大于等于0的整数。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -1485,17 +1467,9 @@ public func drag(
 |:---|:---|:---|:---|:---|
 |startx|Int32|是|-|以Int32的形式传入起始点的横坐标信息，取值范围：大于等于0的整数。|
 |starty|Int32|是|-|以Int32的形式传入起始点的纵坐标信息，取值范围：大于等于0的整数。|
-|endx|Int32|是|-|以Int32的形式传入目的点的横坐标信息，取值范围：大于等于0的整数。
+|endx|Int32|是|-|以Int32的形式传入目的点的横坐标信息，取值范围：大于等于0的整数。|
 |endy|Int32|是|-|以Int32的形式传入目的点的纵坐标信息，取值范围：大于等于0的整数。|
 |speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -1583,14 +1557,6 @@ public func findComponents(on: On): ?Array<Component>
 |:----|:----|
 |?Array\<[Component](#class-component)>|返回控件对象的列表。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1634,14 +1600,6 @@ public func findWindow(filter: WindowFilter): ?UiWindow
 |:----|:----|
 |?[UiWindow](#class-uiwindow)|返回目标窗口对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1680,15 +1638,7 @@ public func fling(from: Point, to: Point, stepLen: Int32, speed: Int32): Unit
 |from|[Point](#class-point)|是|-|手指接触屏幕的起始点坐标。|
 |to|[Point](#class-point)|是|-|手指离开屏幕时的坐标点。|
 |stepLen|Int32|是|-|间隔距离，取值大于等于0的整数，单位：px。|
-|speed|Int32|是|-|滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+|speed|Int32|是|-|滑动速率，取值范围为200-40000的整数，不在范围内设为600，单位：px/s。|
 
 **示例：**
 
@@ -1726,15 +1676,7 @@ public func fling(direction: UiDirection, speed: Int32): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |direction|[UiDirection](#enum-uidirection)|是|-|进行抛滑的方向。|
-|speed|Int32|是|-|滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+|speed|Int32|是|-|滑动速率，取值范围为200-40000的整数，不在范围内设为600，单位：px/s。|
 
 **示例：**
 
@@ -1891,14 +1833,6 @@ public func injectMultiPointerAction(pointers: PointerMatrix, speed!: Int32 = 60
 |:----|:----|
 |Bool|返回操作是否成功完成。true：完成，false：未完成。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1946,14 +1880,6 @@ public func inputText(p: Point, text: String): Unit
 |p|[Point](#class-point)|是|-|输入文本的坐标点。|
 |text|String|是|-|输入的文本信息，当前支持英文、中文和特殊字符。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -1994,14 +1920,6 @@ public func longClick(x: Int32, y: Int32): Unit
 |x|Int32|是|-|以Int32的形式传入目标点的横坐标信息，取值范围：大于等于0的整数。|
 |y|Int32|是|-|以Int32的形式传入目标点的纵坐标信息，取值范围：大于等于0的整数。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2038,17 +1956,9 @@ public func mouseClick(p: Point, btnId: MouseButton, key1!: Int32 = 0, key2!: In
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |p|[Point](#class-point)|是|-|鼠标点击的坐标。|
-|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按钮。|
+|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按键。|
 |key1|Int32|否|0|**命名参数。** 指定的第一个key值，取值大于等于0的整数，默认值为0。|
 |key2|Int32|否|0|**命名参数。** 指定的第二个key值，取值大于等于0的整数，默认值为0。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2087,17 +1997,9 @@ public func mouseDoubleClick(p: Point, btnId: MouseButton, key1!: Int32 = 0, key
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |p|[Point](#class-point)|是|-|鼠标双击的坐标。|
-|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按钮。|
+|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按键。|
 |key1|Int32|否|0|**命名参数。** 指定的第一个key值，取值大于等于0的整数，默认值0。|
 |key2|Int32|否|0|**命名参数。** 指定的第二个key值，取值大于等于0的整数，默认值0。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2125,7 +2027,7 @@ try {
 public func mouseDrag(from: Point, to: Point, speed!: Int32 = 600): Unit
 ```
 
-**功能：** 鼠标按住鼠标左键从起始坐标点拖拽至终点坐标点。
+**功能：** 按住鼠标左键从起始坐标点拖拽至终点坐标点。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -2137,15 +2039,7 @@ public func mouseDrag(from: Point, to: Point, speed!: Int32 = 600): Unit
 |:---|:---|:---|:---|:---|
 |from|[Point](#class-point)|是|-|起始点坐标。|
 |to|[Point](#class-point)|是|-|终点坐标。|
-|speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+|speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值，单位：px/s。|
 
 **示例：**
 
@@ -2184,17 +2078,9 @@ public func mouseLongClick(p: Point, btnId: MouseButton, key1!: Int32 = 0, key2!
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |p|[Point](#class-point)|是|-|鼠标长按的坐标。|
-|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按钮。|
+|btnId|[MouseButton](#enum-mousebutton)|是|-|按下的鼠标按键。|
 |key1|Int32|否|0|**命名参数。** 指定的第一个key值，取值大于等于0的整数，默认值为0。|
 |key2|Int32|否|0|**命名参数。** 指定的第二个key值，取值大于等于0的整数，默认值为0。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2234,14 +2120,6 @@ public func mouseMoveTo(p: Point): Unit
 |:---|:---|:---|:---|:---|
 |p|[Point](#class-point)|是|-|目标点的坐标。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2280,15 +2158,7 @@ public func mouseMoveWithTrack(from: Point, to: Point, speed!: Int32 = 600): Uni
 |:---|:---|:---|:---|:---|
 |from|[Point](#class-point)|是|-|起始点坐标。|
 |to|[Point](#class-point)|是|-|终点坐标。|
-|speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+|speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值，单位：px/s。|
 
 **示例：**
 
@@ -2332,14 +2202,6 @@ public func mouseScroll(p: Point, down: Bool, d: Int32, key1!: Int32 = 0, key2!:
 |key1|Int32|否|0|**命名参数。** 指定的第一个key值，取值大于等于0的整数，默认值为0。|
 |key2|Int32|否|0|**命名参数。** 指定的第二个key值，取值大于等于0的整数，默认值为0。|
 |speed|Int32|否|20|**命名参数。** 鼠标滚轮滚动的速度，范围：1-500的整数，不在范围内设为默认值为20，单位：格/秒。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2447,14 +2309,6 @@ public func screenCap(savePath: String): Bool
 |:----|:----|
 |Bool|返回截图操作是否成功完成。true：完成，false：未完成。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2499,14 +2353,6 @@ public func screenCapture(savePath: String, rect!: Rect = Rect(0,0,0,0)): Bool
 |:----|:----|
 |Bool|返回截图操作是否成功完成。true：成功完成，false：未成功完成。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2544,14 +2390,6 @@ public func setDisplayRotation(rotation: DisplayRotation): Unit
 |:---|:---|:---|:---|:---|
 |rotation|[DisplayRotation](#enum-displayrotation)|是|-|设备的显示方向。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2588,14 +2426,6 @@ public func setDisplayRotationEnabled(enabled: Bool): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |enabled|Bool|是|-|能否旋转屏幕的标识，true：可以旋转，false：不可以旋转。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2644,14 +2474,6 @@ public func swipe(
 |endy|Int32|是|-|以Int32的形式传入目的点的纵坐标信息，取值范围：大于等于0的整数。|
 |speed|Int32|否|600|**命名参数。** 滑动速率，取值范围为200-40000的整数，默认值为600，不在范围内设为默认值为600，单位：px/s。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2691,14 +2513,6 @@ public func triggerCombineKeys(key0: Int32, key1: Int32, key2!: Int32 = 0): Unit
 |key1|Int32|是|-|指定的第二个key值，取值大于等于0的整数。|
 |key2|Int32|否|0|**命名参数。** 指定的第三个key值，取值范围：大于等于0的整数。默认值为0。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2735,14 +2549,6 @@ public func triggerKey(keyCode: Int32): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |keyCode|Int32|是|-|指定的key值，取值范围：大于等于0的整数。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2788,14 +2594,6 @@ public func waitForComponent(on: On, time: Int32): ?Component
 |:----|:----|
 |?[Component](#class-component)|返回控件对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -2839,14 +2637,6 @@ public func waitForIdle(idleTime: Int32, timeout: Int32): Bool
 |类型|说明|
 |:----|:----|
 |Bool|返回当前界面的所有控件是否已经空闲。true：已经空闲，false：不空闲。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -2956,14 +2746,6 @@ public func checkable(b!: Bool = true): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件能否被勾选状态属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. 1. Incorrect parameter types; 2. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3005,14 +2787,6 @@ public func checked(b!: Bool = true): On
 |类型|说明|
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的被勾选状态属性的[On](#class-on)对象。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
 
 **示例：**
 
@@ -3091,21 +2865,13 @@ public func description(val: String, pattern!: MatchPattern = MatchPattern.Equal
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |val|String|是|-|控件的描述属性。<!--RP2--><!--RP2End-->|
-|pattern|[MatchPattern](#enum-matchpattern)|否|MatchPattern.Equals|**命名参数。** 指定的文本匹配模式，默认为EQUALS。|
+|pattern|[MatchPattern](#enum-matchpattern)|否|MatchPattern.Equals|**命名参数。** 指定的文本匹配模式，默认为Equals。|
 
 **返回值：**
 
 |类型|说明|
 |:----|:----|
 |[On](#class-on)|返回指定目标控件description属性的[On](#class-on)对象。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | if the input parameters are invalid. |
 
 **示例：**
 
@@ -3149,14 +2915,6 @@ public func enabled(b!: Bool = true): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的使能状态属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3198,14 +2956,6 @@ public func focused(b!: Bool = true): On
 |类型|说明|
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的获焦状态属性的[On](#class-on)对象。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
 
 **示例：**
 
@@ -3249,14 +2999,6 @@ public func id(id: String): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件id属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3299,14 +3041,6 @@ public func inWindow(bundleName: String): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件位于给出的应用窗口内的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3348,14 +3082,6 @@ public func isAfter(on: On): On
 |类型|说明|
 |:----|:----|
 |[On](#class-on)|返回指定目标控件位于给出的特征属性控件之后的[On](#class-on)对象。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -3400,14 +3126,6 @@ public func isBefore(on: On): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件位于给出的特征属性控件之前的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3451,14 +3169,6 @@ public func longClickable(b!: Bool = true): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的可长按点击状态属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3500,14 +3210,6 @@ public func onType(tp: String): On
 |类型|说明|
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的控件类型属性的[On](#class-on)对象。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -3551,14 +3253,6 @@ public func scrollable(b!: Bool = true): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的可滑动状态属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3601,14 +3295,6 @@ public func selected(b!: Bool = true): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件的被选中状态属性的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1. Incorrect parameter types; 2. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3644,7 +3330,7 @@ public func text(txt: String, pattern!: MatchPattern = MatchPattern.Equals): On
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |txt|String|是|-|指定控件文本，用于匹配目标控件文本。<!--RP2--><!--RP2End-->|
-|pattern|[MatchPattern](#enum-matchpattern)|否|MatchPattern.Equals|**命名参数。** 指定的文本匹配模式，默认为EQUALS。|
+|pattern|[MatchPattern](#enum-matchpattern)|否|MatchPattern.Equals|**命名参数。** 指定的文本匹配模式，默认为Equals。|
 
 **返回值：**
 
@@ -3694,14 +3380,6 @@ public func within(on: On): On
 |:----|:----|
 |[On](#class-on)|返回指定目标控件位于给出的特征属性控件内的[On](#class-on)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)和[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3744,7 +3422,7 @@ public class Point {
 public var displayId:?Int32
 ```
 
-**功能：** 坐标点所属的屏幕ID，取值范围：大于等于0的整数。默认值为设备默认屏幕ID。
+**功能：** 坐标点所属的屏幕ID，取值范围：大于等于0的整数。
 
 **类型：** ?Int32
 
@@ -3843,14 +3521,6 @@ public static func create(fingers: Int32, steps: Int32): PointerMatrix
 |:----|:----|
 |[PointerMatrix](#class-pointermatrix)|返回构造的[PointerMatrix](#class-pointermatrix)对象。|
 
-**异常：**
-
-- BusinessException：对应错误码如下表，[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
-
 **示例：**
 
 <!-- compile -->
@@ -3888,14 +3558,6 @@ public func setPoint(finger: Int32, step: Int32, point: Point): Unit
 |finger|Int32|是|-|手指的序号，取值大于等于0的整数，且不超过构造PointerMatrix对象时设置的手指数。|
 |step|Int32|是|-|步骤的序号，取值大于等于0的整数，且不超过构造PointerMatrix对象时设置的操作的步骤数。|
 |point|[Point](#class-point)|是|-|该行为的坐标点。建议相邻的坐标点距离在10px至80px范围内。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
 
 **示例：**
 
@@ -3963,7 +3625,7 @@ public var bottom: Int32
 public var displayId:?Int32
 ```
 
-**功能：** 控件边框所属的屏幕ID，取值大于或等于0的整数。默认值为设备默认屏幕ID。
+**功能：** 控件边框所属的屏幕ID，取值大于或等于0的整数。
 
 **类型：** ?Int32
 
@@ -4136,15 +3798,7 @@ public func once(onceType: OnceType, callback: Callback<UiElementInfo>): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |onceType|[OnceType](#enum-oncetype)|是|-|订阅的事件类型。|
-|callback|[Callback](./../arkui-cj/cj-common-types.md#type-callback)\<[UiElementInfo](#class-uielementinfo)>|是|-|事件发生时执行的回调函数。|
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
-
-  | 错误码ID | 错误信息 |
-  | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
+|callback|[Callback](../../reference/arkui-cj/cj-common-types.md#type-callbackt-v)\<[UiElementInfo](#class-uielementinfo)>|是|-|事件发生时执行的回调函数。|
 
 **示例：**
 
@@ -4237,7 +3891,9 @@ public func focus(): Unit
 
 **功能：** 让窗口获焦。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4555,7 +4211,9 @@ public func maximize(): Unit
 
 **功能：** 将窗口最大化。适用于支持窗口最大化操作的窗口。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4599,7 +4257,9 @@ public func minimize(): Unit
 
 **功能：** 将窗口最小化。适用于支持窗口最小化操作的窗口。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4643,7 +4303,9 @@ public func moveTo(x: Int32, y: Int32): Unit
 
 **功能：** 将窗口移动到目标点。适用于支持移动的窗口。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4653,8 +4315,8 @@ public func moveTo(x: Int32, y: Int32): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|Int32|是|-|以Int32的形式传入目标点的横坐标信息，取值范围：大于等于0的整数|
-|y|Int32|是|-|Int32的形式传入目标点的纵坐标信息，取值范围：大于等于0的整数|
+|x|Int32|是|-|以Int32的形式传入目标点的横坐标信息，取值范围：大于等于0的整数。|
+|y|Int32|是|-|以Int32的形式传入目标点的纵坐标信息，取值范围：大于等于0的整数。|
 
 **异常：**
 
@@ -4662,7 +4324,6 @@ public func moveTo(x: Int32, y: Int32): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 401 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified; 2. Incorrect parameter types; 3. Parameter verification failed. |
   | 17000004 | The window or component is invisible or destroyed. |
   | 17000005 | This operation is not supported. |
 
@@ -4744,7 +4405,9 @@ public func resume(): Unit
 
 **功能：** 将窗口恢复到之前的窗口模式。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4788,7 +4451,9 @@ public func split(): Unit
 
 **功能：** 将窗口模式切换成分屏模式。适用于支持切换分屏模式的窗口。
 
-**说明** 该接口在PC/2in1、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+> **说明：**
+>
+> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
 
 **系统能力：** SystemCapability.Test.UiTest
 
@@ -4849,7 +4514,7 @@ public class WindowFilter {
 public var active:?Bool
 ```
 
-**功能：** 窗口是否正与用户进行交互，true：交互状态，false：未交互状态，默认值为false。
+**功能：** 窗口是否正与用户进行交互，true：交互状态，false：未交互状态。
 
 **类型：** ?Bool
 
@@ -4865,7 +4530,7 @@ public var active:?Bool
 public var bundleName:?String
 ```
 
-**功能：** 窗口归属应用的包名，默认值为空。
+**功能：** 窗口归属应用的包名。
 
 **类型：** ?String
 
@@ -4881,7 +4546,7 @@ public var bundleName:?String
 public var displayId:?Int32
 ```
 
-**功能：** 窗口所属的屏幕ID。取值大于或等于0的整数。默认值为设备默认屏ID。
+**功能：** 窗口所属的屏幕ID。取值大于或等于0的整数。
 
 **类型：** ?Int32
 
@@ -4897,7 +4562,7 @@ public var displayId:?Int32
 public var focused:?Bool
 ```
 
-**功能：** 窗口是否处于获焦状态，true：获焦状态，false：未获焦状态，默认值为false。
+**功能：** 窗口是否处于获焦状态，true：获焦状态，false：未获焦状态。
 
 **类型：** ?Bool
 
@@ -4913,7 +4578,7 @@ public var focused:?Bool
 public var title:?String
 ```
 
-**功能：** 窗口的标题信息，默认值为空。
+**功能：** 窗口的标题信息。
 
 **类型：** ?String
 

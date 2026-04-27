@@ -1,5 +1,11 @@
 # 不依赖UI组件的全局自定义弹出框（openCustomDialog）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 由于[CustomDialogController](../reference/arkui-cj/cj-dialog-customdialog.md#class-customdialogcontroller)在使用上存在诸多限制，不支持动态创建也不支持动态刷新。
 
 > **说明：**
@@ -27,9 +33,9 @@
 >
 > 详细变量定义请参考[完整示例](#完整示例)。
 
-- 创建customdialog。
+- 创建CustomDialog。
 
-   Customdialog用于定义自定义弹出框的内容。
+   CustomDialog用于定义自定义弹出框的内容。
 
     ```cangjie
     @Builder
@@ -45,7 +51,7 @@
 
 - 打开自定义弹出框。
 
-   通过调用openCustomDialog接口打开的弹出框,弹出框内容为CustomDialogOptions类型，其中this.CustomDialog为自定义弹出框的内容。
+   通过调用openCustomDialog接口打开的弹出框，弹出框内容为CustomDialogOptions类型，其中this.CustomDialog为自定义弹出框的内容。
 
     <!-- run -->
 
@@ -91,7 +97,7 @@
 
 - 关闭自定义弹出框。
 
-   closeCustomDialog接口需要传入待关闭弹出框对应的CustomDialogId。
+    closeCustomDialog接口需要传入待关闭弹出框对应的CustomDialogId。
 
     <!-- run -->
 

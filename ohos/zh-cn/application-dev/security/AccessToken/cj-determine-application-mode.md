@@ -1,5 +1,11 @@
 # 选择申请权限的方式
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 应用在访问数据或者执行操作时，需要评估该行为是否需要应用具备相关的权限。如果确认需要目标权限，则需要在应用安装包中申请目标权限。
 
 每一个权限的权限等级、授权方式不同，申请权限的方式也不同，开发者在申请权限前，需要进行如下操作：
@@ -33,7 +39,7 @@
 | system_core | system_grant | true | [申请使用受限权限](./cj-declare-permissions-in-acl.md) &gt; [声明权限](./cj-declare-permissions.md) &gt; 访问接口 |
 | system_core | user_grant | true | [申请使用受限权限](./cj-declare-permissions-in-acl.md) &gt; [声明权限](./cj-declare-permissions.md) &gt; [向用户申请授权](./cj-request-user-authorization.md) &gt; 访问接口 |
 
-如果应用需要将自身的APL等级声明为system_basic及以上，在开发应用安装包时，需要修改应用的HarmonyAppProvision配置文件即SDK目录下的“`Toolchains / _{Version} _/ lib / UnsgnedReleasedProfileTemplate.json`”文件，并重新进行应用签名。
+如果应用需要将自身的APL等级声明为system_basic及以上，在开发应用安装包时，需要修改应用的HarmonyAppProvision配置文件即SDK目录下的“`Toolchains/_{Version}_/lib/UnsignedReleasedProfileTemplate.json`”文件，并重新进行应用签名。
 
 **修改方式：**
 

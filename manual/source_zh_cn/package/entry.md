@@ -12,7 +12,7 @@
 
 ```cangjie
 // main.cj
-main(): Int64 { // Ok.
+main(): Int64 { // OK.
     return 0
 }
 ```
@@ -23,7 +23,7 @@ main(): Int64 { // Ok.
 
 ```cangjie
 // main.cj
-main(args: Array<String>): Unit { // Ok.
+main(args: Array<String>): Unit { // OK.
     for (arg in args) {
         println(arg)
     }

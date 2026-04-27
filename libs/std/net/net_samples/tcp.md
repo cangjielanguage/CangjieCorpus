@@ -7,7 +7,6 @@ import std.net.*
 import std.sync.*
 
 let SERVER_PORT: UInt16 = 33333
-
 let syncCounter = SyncCounter(1)
 
 func runTcpServer() {

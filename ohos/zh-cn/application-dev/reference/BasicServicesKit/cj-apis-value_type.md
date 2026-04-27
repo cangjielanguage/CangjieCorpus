@@ -1,5 +1,11 @@
 # ohos.value_type
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 value_type模块含公共事件附加信息。
 
 ## 导入模块

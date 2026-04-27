@@ -1,5 +1,11 @@
 # RelativeContainer
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 相对布局组件，用于复杂场景中元素对齐的布局。
 
 > **说明：**
@@ -291,7 +297,7 @@ public var position: ?GuideLinePosition
 
 **功能：** 指定guideline的位置。当未声明或声明异常值（如undefined）时，guideline的位置默认为start: 0。start和 end两种声明方式选择一种即可。若同时声明，仅start生效。若容器在某个方向的size被声明为"auto"，则该方向上guideline的位置只能使用start方式声明（不允许使用百分比）。
 
-**类型：** ?[GuideLinePosition](./cj-common-types.md#enum-guidelineposition)
+**类型：** ?[GuideLinePosition](./cj-row-column-stack-relativecontainer.md#class-guidelineposition)
 
 **读写能力：** 可读写
 
@@ -393,7 +399,7 @@ class EntryView {
 }
 ```
 
-![relativecontainer1](figures/relativecontainer1.png)
+![relativecontainer1](figures/relative_container1.png)
 
 ### 示例2（子组件设置外边距）
 
@@ -456,11 +462,11 @@ class EntryView {
 }
 ```
 
-![relativecontainer2](figures/relativecontainer2.png)
+![relativecontainer2](figures/relative_container2.png)
 
 ### 示例3（设置偏移）
 
-本示例通过[bias](cj-universal-attribute-location.md#class-bias)实现了子组件的位置在竖直方向的两个锚点间偏移的效果。
+本示例通过[Bias](./cj-common-types.md#class-bias)实现子组件的位置在竖直方向的两个锚点间偏移的效果。
 
 <!-- run -->
 

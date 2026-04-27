@@ -102,7 +102,7 @@ public func eprint(str: String, flush!: Bool = true): Unit
 参数：
 
 - str: [String](core_package_structs.md#struct-string) - 待输出的字符串。
-- flush!: [Bool](core_package_intrinsics.md#bool) - 是否将缓存数据区的内容立即刷新写入与标准错误流相关的文件和设备中，true表示立即刷新，false表示暂不刷新 ，默认 false。
+- flush!: [Bool](core_package_intrinsics.md#bool) - 是否将缓存数据区的内容立即刷新写入与标准错误流相关的文件和设备中，true 表示立即刷新，false 表示暂不刷新 ，默认 false。
 
 示例：
 
@@ -121,6 +121,57 @@ main() {
 
 ```text
 NegativeArraySizeException is caught!
+```
+
+## func eprint\<T>(T, Bool) where T <: ToString
+
+```cangjie
+public func eprint<T>(arg: T, flush!: Bool = false): Unit where T <: ToString
+```
+
+功能：将指定 T 类型实例的字符串表示打印到标准错误文本流。
+
+如抛出异常时，消息将打印到标准错误文本流（stderr），而不是标准输出（stdout）。
+
+参数：
+
+- arg: T - 待打印的 T 类型实例，该函数将打印其 toString 的返回值。
+- flush!: [Bool](core_package_intrinsics.md#bool) - 是否清空缓存，true 清空，false 不清空，默认 false。
+
+示例：
+
+<!-- verify -->
+```cangjie
+class Rectangle <: ToString {
+    var width: Int64
+    var height: Int64
+
+    public init(width: Int64, height: Int64) {
+        this.width = width
+        this.height = height
+    }
+
+    public func area() {
+        width * height
+    }
+    public func toString(): String {
+        return "width: ${this.width}, height: ${this.height}"
+    }
+}
+
+main() {
+    try {
+        throw NegativeArraySizeException("I am an Exception!")
+    } catch (e: NegativeArraySizeException) {
+        eprint<Rectangle>(Rectangle(10, 20), flush: true)
+    }
+}
+```
+
+运行结果：
+
+```text
+width: 10, height: 20
 ```
 
 ## func eprintln(String)
@@ -156,57 +207,6 @@ main() {
 NegativeArraySizeException is caught!
 ```
 
-## func eprint\<T>(T, Bool) where T <: ToString
-
-```cangjie
-public func eprint<T>(arg: T, flush!: Bool = false): Unit where T <: ToString
-```
-
-功能：将指定 T 类型实例的字符串表示打印到标准错误文本流。
-
-如抛出异常时，消息将打印到标准错误文本流（stderr），而不是标准输出（stdout）。
-
-参数：
-
-- arg: T - 待打印的 T 类型实例，该函数将打印其 toString 的返回值。
-- flush!: [Bool](core_package_intrinsics.md#bool) - 是否清空缓存，true 清空，false 不清空，默认 false。
-
-示例：
-
-<!-- verify -->
-```cangjie
-class Rectangle <: ToString{
-    var width: Int64
-    var height: Int64
-
-    public init(width: Int64, height: Int64) {
-        this.width = width
-        this.height = height
-    }
-
-    public func area() {
-        width * height
-    }
-    public func toString(): String{
-        return "width: ${this.width}, height: ${this.height}"
-    }
-}
-
-main() {
-    try {
-        throw NegativeArraySizeException("I am an Exception!")
-    } catch (e: NegativeArraySizeException) {
-        eprint<Rectangle>(Rectangle(10,20), flush: true)
-    }
-}
-```
-
-运行结果：
-
-```text
-width: 10, height: 20
-```
-
 ## func eprintln\<T>(T) where T <: ToString
 
 ```cangjie
@@ -225,7 +225,7 @@ public func eprintln<T>(arg: T): Unit where T <: ToString
 
 <!-- verify -->
 ```cangjie
-class Rectangle <: ToString{
+class Rectangle <: ToString {
     var width: Int64
     var height: Int64
 
@@ -237,7 +237,7 @@ class Rectangle <: ToString{
     public func area() {
         width * height
     }
-    public func toString(): String{
+    public func toString(): String {
         return "width: ${this.width}, height: ${this.height}"
     }
 }
@@ -246,7 +246,7 @@ main() {
     try {
         throw NegativeArraySizeException("I am an Exception!")
     } catch (e: NegativeArraySizeException) {
-        eprintln<Rectangle>(Rectangle(10,20))
+        eprintln<Rectangle>(Rectangle(10, 20))
     }
 }
 ```
@@ -256,6 +256,58 @@ main() {
 ```text
 width: 10, height: 20
 ```
+
+<!--Del-->
+## func exclusiveScope\<T>(( ) -> T)
+
+```cangjie
+public func exclusiveScope<T>(fn: () -> T): T
+```
+
+功能：在独占作用域中执行一个闭包，确保闭包在隔离的上下文中运行，并适当地处理任何结果或异常。当执行 fn 时，会发生从仓颉线程栈到操作系统线程栈的切换，并且底层操作系统线程不能被其他仓颉线程抢占。在 fn 返回后，它将切换回仓颉线程栈，并允许进行抢占。
+
+> **注意：**
+>
+> 不支持平台：Windows、macOS、OpenHarmony、HarmonyOS、iOS。
+
+参数：
+
+- fn: () -> T - 在独占作用域中执行的函数/闭包。
+
+返回值：
+
+- T - 函数执行的结果。
+
+异常：
+
+- [ExclusiveScopeException](core_package_exceptions.md#class-exclusivescopeexception) - 如果在执行过程中发生异常。
+
+示例：
+
+<!-- verify -->
+
+```cangjie
+main() {
+    let result = exclusiveScope<Int64> {
+        // 在独占作用域中执行的代码
+        return 42
+    }
+    println("结果: ${result}")
+    
+    // 也可以执行无返回值的操作
+    exclusiveScope<Unit> {
+        println("在独占作用域中执行")
+    }
+}
+```
+
+运行结果：
+
+```text
+结果: 42
+在独占作用域中执行
+```
+<!--DelEnd-->
 
 ## func ifNone\<T>(Option\<T>, () -> Unit)
 
@@ -276,7 +328,7 @@ public func ifNone<T>(o: Option<T>, action: () -> Unit): Unit
 ```cangjie
 main() {
     let num: Option<Int64> = None
-    ifNone<Int64>(num,{=> println("num is None")})
+    ifNone<Int64>(num, {=> println("num is None")})
 }
 ```
 
@@ -305,7 +357,7 @@ public func ifSome<T>(o: Option<T>, action: (T) -> Unit): Unit
 ```cangjie
 main() {
     let num: Option<Int64> = Some(200)
-    ifSome<Int64>(num,{numValue: Int64 => println("num is ${numValue}")})
+    ifSome<Int64>(num, {numValue: Int64 => println("num is ${numValue}")})
 }
 ```
 
@@ -325,7 +377,7 @@ public func max<T>(a: T, b: T, others: Array<T>): T where T <: Comparable<T>
 
 > **注意：**
 >
-> 浮点数类型的比较也将按照 [Comparable](./core_package_interfaces.md#interface-comparablet) 的结果进行比较，如果浮点书中有非数 `NaN`，结果将不正确，此时建议使用 [Float16](./core_package_intrinsics.md#float16)、[Float32](./core_package_intrinsics.md#float32)、[Float64](./core_package_intrinsics.md#float64) 的 `static func max`方法。
+> 浮点数类型的比较也将按照 [Comparable](./core_package_interfaces.md#interface-comparablet) 的结果进行比较，如果浮点数中有非数 `NaN`，结果将不正确，此时建议使用 [Float16](./core_package_intrinsics.md#float16)、[Float32](./core_package_intrinsics.md#float32)、[Float64](./core_package_intrinsics.md#float64) 的 `static func max`方法。
 
 参数：
 
@@ -341,7 +393,7 @@ public func max<T>(a: T, b: T, others: Array<T>): T where T <: Comparable<T>
 
 <!-- verify -->
 ```cangjie
-class Rectangle <: Comparable<Rectangle> & ToString{
+class Rectangle <: Comparable<Rectangle> & ToString {
     var width: Int64
     var height: Int64
 
@@ -364,10 +416,11 @@ class Rectangle <: Comparable<Rectangle> & ToString{
             Ordering.GT
         }
     }
-    public func toString(): String{
+    public func toString(): String {
         return "width: ${this.width}, height: ${this.height}, area: ${this.area}"
     }
 }
+
 main() {
     var r1: Rectangle = Rectangle(10, 20)
     var r2: Rectangle = Rectangle(20, 30)
@@ -391,7 +444,7 @@ public func min<T>(a: T, b: T, others: Array<T>): T where T <: Comparable<T>
 
 > **注意：**
 >
-> 浮点数类型的比较也将按照[Comparable](./core_package_interfaces.md#interface-comparablet)的结果进行比较，如果浮点书中有非数`NaN`，结果将不正确，此时建议使用 [Float16](./core_package_intrinsics.md#float16)、[Float32](./core_package_intrinsics.md#float32)、[Float64](./core_package_intrinsics.md#float64) 的 `static func min`方法。
+> 浮点数类型的比较也将按照 [Comparable](./core_package_interfaces.md#interface-comparablet) 的结果进行比较，如果浮点数中有非数`NaN`，结果将不正确，此时建议使用 [Float16](./core_package_intrinsics.md#float16)、[Float32](./core_package_intrinsics.md#float32)、[Float64](./core_package_intrinsics.md#float64) 的 `static func min`方法。
 
 参数：
 
@@ -492,6 +545,10 @@ public func print(f: Float16, flush!: Bool = false): Unit
 
 功能：向控制台输出 [Float16](core_package_intrinsics.md#float16) 类型数据的小数点后六位的字符串表达，即超出六位的小数位不会输出，不足六位的小数位会补零。
 
+> **注意：**
+>
+> 仓颉采用 IEEE 754 格式表示浮点数，保存数值可能会有误差。
+
 参数：
 
 - f: [Float16](core_package_intrinsics.md#float16) - 待输出的 [Float16](core_package_intrinsics.md#float16) 类型数据。
@@ -517,10 +574,6 @@ main() {
 0.680176
 ```
 
-> **注意：**
->
-> 仓颉采用IEEE 754格式表示浮点数，保存数值可能会有误差。
->
 ## func print(Float32, Bool)
 
 ```cangjie
@@ -1469,7 +1522,7 @@ width: 5, height: 10
 public func readln(): String
 ```
 
-功能：接受控制台输入，直到遇到换行或EOF结束。
+功能：接受控制台输入，直到遇到换行或 EOF 结束。
 
 返回值：
 
@@ -1642,8 +1695,8 @@ import std.time.*
 main(): Int64 {
     spawn {
         =>
-        println("New thread starts")
-        println("New thread ends")
+            println("New thread starts")
+            println("New thread ends")
     }
 
     println("Main thread")
@@ -1657,7 +1710,7 @@ main(): Int64 {
 }
 ```
 
-在启动主线程后，执行到sleep函数的时候，主线程会让出系统执行权，并睡眠 1 秒后重新唤醒竞争系统执行权，继续执行剩余逻辑。在主线程睡眠期间，自定义线程拿到执行权，开始执行。运行结果：
+在启动主线程后，执行到 sleep 函数的时候，主线程会让出系统执行权，并睡眠 1 秒后重新唤醒竞争系统执行权，继续执行剩余逻辑。在主线程睡眠期间，自定义线程拿到执行权，开始执行。运行结果：
 
 ```text
 Main thread
@@ -1712,12 +1765,15 @@ class MyClass<T> {
         myData[index] = element
     }
 }
+
 class Student <: ToString {
-    public func toString() { "student" }
+    public func toString() {
+        "student"
+    }
 }
 ```
 
-示例结果：
+运行结果：
 
 ```text
 student

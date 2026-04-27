@@ -1,10 +1,12 @@
-# 密钥导出（仓颉）
+# 密钥导出
 
-当业务需要获取持久化存储的非对称密钥的公钥时使用，当前支持ECC/RSA/ED25519/X25519/SM2的公钥导出。
-
+<!--Del-->
 > **说明：**
 >
-> 轻量级设备仅支持RSA公钥导出。
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+当业务需要获取持久化存储的非对称密钥的公钥时使用，当前支持ECC/RSA/ED25519/X25519/SM2的公钥导出。
 
 ## 开发步骤
 
@@ -16,15 +18,18 @@
 
 ## 示例
 
+为实现密钥导出功能，需要导入如下包：
+
 <!-- compile -->
 
 ```cangjie
 import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
+```
 
+实现密钥导出功能的核心代码是：
+
+```cangjie
 func loggerInfo(str: String) {
     Hilog.info(0, "CangjieTest", str)
 }
@@ -42,5 +47,4 @@ try {
 } catch (e: Exception) {
     loggerInfo("exportKeyItem input arg invalid")
 }
-
 ```

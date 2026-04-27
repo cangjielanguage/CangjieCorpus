@@ -1,6 +1,6 @@
 # 元组类型
 
-元组（Tuple）可以将多个不同的类型组合在一起，成为一个新的类型。元组类型使用 `(T1, T2, ..., TN)` 表示，其中 `T1` 到 `TN` 可以是任意类型，不同类型间使用逗号（`,`）连接。元组至少是二元，例如，`(Int64, Float64)` 表示一个二元组类型，`(Int64, Float64, String)` 表示一个三元组类型。
+元组（Tuple）可以将多个不同的类型组合在一起，成为一个新的类型。元组类型使用 `(T1, T2, ..., TN)` 表示，其中 `T1` 到 `TN` 可以是任意类型，不同类型间使用逗号（ `,` ）连接。元组至少是二元，例如，`(Int64, Float64)` 表示一个二元组类型，`(Int64, Float64, String)` 表示一个三元组类型。
 
 元组的长度是固定的，即一旦定义了一个元组类型的实例，它的长度不能再被更改。
 
@@ -53,14 +53,28 @@ PI
 
 ## 元组类型的类型参数
 
-可以为元组类型标记显式的类型参数名，下面例子中的 `name` 和 `price` 就是 `类型参数名`。
+可以为元组类型标记显式的类型参数名，下面例子中的 `name` 和 `price` 就是类型参数名。
 
-<!-- compile -->
+<!-- verify -->
 
 ```cangjie
-func getFruitPrice (): (name: String, price: Int64) {
+func getFruitPrice(): (name: String, price: Int64) {
     return ("banana", 10)
 }
+
+main() {
+    let tmp = getFruitPrice()
+    var a = tmp[0]
+    var b = tmp[1]
+    b++
+    println("b = ${b}, tmp[1] = ${tmp[1]}")
+}
+```
+
+编译并执行上面的代码，会输出：
+
+```text
+b = 11, tmp[1] = 10
 ```
 
 对于一个元组类型，只允许统一写类型参数名，或者统一不写类型参数名，不允许交替存在，并且参数名本身不能作为变量使用或用于访问元组中元素。
@@ -68,7 +82,7 @@ func getFruitPrice (): (name: String, price: Int64) {
 <!-- compile.error -->
 
 ```cangjie
-let a: (name: String, Int64) = ("banana", 5)   // Error
+let a: (name: String, Int64) = ("banana", 5) // Error, in a parameter type list, either all parameters must be named, or none of them
 let b: (name: String, price: Int64) = ("banana", 5) // OK
-b.name // Error
+b.name // Error, undeclared identifier 'name'
 ```

@@ -1,5 +1,11 @@
 # ohos.multimedia.image（图片处理）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 image模块提供图片处理效果，包括通过属性创建PixelMap、读取图像像素数据、读取区域内的图片数据等。
 
 ## 导入模块
@@ -25,6 +31,10 @@ public func createImagePacker(): ImagePacker
 ```
 
 **功能：** 创建ImagePacker实例。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImagePacker实例使用完成后，应主动调用[release](#func-release-1)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImagePacker
 
@@ -60,7 +70,13 @@ try {
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver
 ```
 
-**功能：** 通过图片大小、图片格式、容量创建ImageReceiver实例。ImageReceiver做为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
+**功能：** 通过图片大小、图片格式、容量创建ImageReceiver实例。
+
+> **说明：**
+>
+> - ImageReceiver做为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
+>
+> - 由于图片占用内存较大，所以当ImageReceiver实例使用完成后，应主动调用[release](#func-release-2)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 
@@ -71,7 +87,7 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |size|[Size](#class-size)|是|-|图像的默认大小。该参数不会影响接收到的图片大小，实际返回大小由生产者决定，如相机。|
-|format|[ImageFormat](#enum-imageformat)|是|-|图像格式，取值为[ImageFormat](#enum-imageformat)常量（目前仅支持 ImageFormat:JPEG，实际返回格式由生产者决定，如相机）。|
+|format|[ImageFormat](#enum-imageformat)|是|-|图像格式，取值为[ImageFormat](#enum-imageformat)常量（目前仅支持 ImageFormat:Jpeg，实际返回格式由生产者决定，如相机）。|
 |capacity|Int32|是|-|同时访问的最大图像数。该参数仅作为期望值，实际capacity由设备硬件决定。|
 
 **返回值：**
@@ -115,6 +131,10 @@ public func createImageSource(uri: String): ImageSource
 ```
 
 **功能：** 通过传入的uri创建ImageSource实例。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -166,6 +186,10 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource
 ```
 
 **功能：** 通过传入的uri创建ImageSource实例。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -219,6 +243,10 @@ public func createImageSource(fd: Int32): ImageSource
 
 **功能：** 通过传入文件描述符来创建ImageSource实例。
 
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
+
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
 **起始版本：** 22
@@ -268,6 +296,10 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource
 ```
 
 **功能：** 通过传入文件描述符来创建ImageSource实例。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -321,6 +353,10 @@ public func createImageSource(buf: Array<UInt8>): ImageSource
 
 **功能：** 通过缓冲区创建ImageSource实例。buf数据应该是未解码的数据，不要传入类似于RBGA，YUV的像素buffer数据，如果想通过像素buffer数据创建pixelMap，可以调用[createPixelMap](#func-createpixelmaparrayuint8-initializationoptions)这一类接口。
 
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
+
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
 **起始版本：** 22
@@ -371,6 +407,10 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
 ```
 
 **功能：** 通过缓冲区创建ImageSource实例。buf数据应该是未解码的数据，不要传入类似于RBGA，YUV的像素buffer数据，如果想通过像素buffer数据创建pixelMap，可以调用[createPixelMap](#func-createpixelmaparrayuint8-initializationoptions)这一类接口。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -425,6 +465,10 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
 
 **功能：** 通过图像资源文件的RawFileDescriptor创建ImageSource实例。
 
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
+
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
 **起始版本：** 22
@@ -477,7 +521,11 @@ try {
 public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions): PixelMap
 ```
 
-**功能：** 通过属性创建PixelMap，默认采用BGRA_8888格式处理数据。
+**功能：** 通过属性创建PixelMap，默认采用Bgra8888格式处理数据。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release](#func-release-4)方法及时释放内存。释放时应确保后续不再使用该对象。
 
 **系统能力：** SystemCapability.Multimedia.Image.Core
 
@@ -512,16 +560,45 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
 ```cangjie
 // index.cj
 
-import kit.ImageKit.*
+import kit.ArkUI.Row
+import kit.ArkUI.Column
+import kit.ArkUI.loadNativeView
+import kit.ArkUI.CustomView
+import kit.ArkUI.CJEntry
+import kit.ArkUI.Image
+import kit.ArkUI.LengthProp
+import kit.ArkUI.SubscriberManager
+import kit.ArkUI.LocalStorage
+import ohos.arkui.state_macro_manage.*
+import kit.ImageKit.{InitializationOptions, createPixelMap, Size, PixelMap}
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
-try {
-    let color: Array<UInt8> = Array<UInt8>(96, repeat: 0) //96为需要创建的像素buffer大小，取值为：height * width *4
-    let opts: InitializationOptions = InitializationOptions(Size(4, 6))
-    let pixelMap = createPixelMap(color, opts)
-} catch (e: BusinessException) {
-    Hilog.info(0, "test", "${e.message}")
+func getPixelMap(): PixelMap {
+    try {
+        // 96 为需要创建的像素 buffer 大小，取值为：height * width * 4
+        let color: Array<UInt8> = Array<UInt8>(96, repeat: 0)
+        let opts: InitializationOptions = InitializationOptions(Size(4, 6))
+        // 通过属性创建的PixelMap实例，后续可以调用该实例的方法读取或写入图像数据
+        let pixelMap = createPixelMap(color, opts)
+        return pixelMap
+    } catch (e: BusinessException) {
+        Hilog.info(0, "test", "${e.message}")
+        throw e
+    }
+}
+
+@Entry
+@Component
+class EntryView {
+
+    func build() {
+        Row {
+            Column {
+                Image(getPixelMap())
+            }.width(100.percent)
+        }.height(100.percent)
+    }
 }
 ```
 
@@ -639,7 +716,7 @@ public class DecodingOptions {
 public var desiredColorSpace:?ColorSpaceManager
 ```
 
-**功能：** 目标色彩空间。默认值为UNKNOWN。
+**功能：** 目标色彩空间。
 
 **类型：** ?[ColorSpaceManager](../ArkGraphics2D/cj-apis-color_manager.md#class-colorspacemanager)
 
@@ -655,9 +732,9 @@ public var desiredColorSpace:?ColorSpaceManager
 public var desiredDynamicRange: DecodingDynamicRange
 ```
 
-**功能：** 目标动态范围，默认值为SDR。
+**功能：** 目标动态范围。
 
-如果平台不支持HDR，设置无效，默认解码为SDR内容。
+如果平台不支持Hdr，设置无效，默认解码为Sdr内容。
 
 **类型：** [DecodingDynamicRange](#enum-decodingdynamicrange)
 
@@ -673,7 +750,7 @@ public var desiredDynamicRange: DecodingDynamicRange
 public var desiredPixelFormat: PixelMapFormat
 ```
 
-**功能：** 解码的像素格式。默认值为RGBA_8888。仅支持设置：RGBA_8888、BGRA_8888和RGB_565。有透明通道图片格式不支持设置RGB_565，如PNG、GIF、ICO和WEBP。
+**功能：** 解码的像素格式。仅支持设置：Rgba8888、Bgra8888和Rgb565。有透明通道图片格式不支持设置Rgb565，如PNG、GIF、ICO和WEBP。
 
 **类型：** [PixelMapFormat](#enum-pixelmapformat)
 
@@ -689,9 +766,7 @@ public var desiredPixelFormat: PixelMapFormat
 public var desiredRegion: Region
 ```
 
-**功能：** 解码图像中由Region指定的矩形区域，当原始图像很大而只需要解码图像的一部分时，可以设置该参数，有助于提升性能，默认为原始大小。
-
-注意：若解码接口同时传入了desiredSize参数与desiredRegion参数，需进一步传入cropAndScaleStrategy参数指定缩放与裁剪的先后顺序，推荐设置CROP_FIRST。
+**功能：** 解码图像中由Region指定的矩形区域，当原始图像很大而只需要解码图像的一部分时，可以设置该参数，有助于提升性能。
 
 **类型：** [Region](#class-region)
 
@@ -707,9 +782,7 @@ public var desiredRegion: Region
 public var desiredSize: Size
 ```
 
-**功能：** 期望输出大小，必须为正整数，若与原尺寸比例不一致，则会进行拉伸/缩放到指定尺寸，默认为原始尺寸。
-
-注意：若解码接口同时传入了desiredSize参数与desiredRegion参数，需进一步传入cropAndScaleStrategy参数指定缩放与裁剪的先后顺序，推荐设置CROP_FIRST。
+**功能：** 期望输出大小，必须为正整数，若与原尺寸比例不一致，则会进行拉伸/缩放到指定尺寸。
 
 **类型：** [Size](#class-size)
 
@@ -725,7 +798,7 @@ public var desiredSize: Size
 public var editable: Bool
 ```
 
-**功能：** true表示可编辑，false表示不可编辑。默认值为false。当取值为false时，图片不可二次编辑，如writePixels操作将失败。
+**功能：** true表示可编辑，false表示不可编辑。当取值为false时，图片不可二次编辑，如writePixels操作将失败。
 
 **类型：** Bool
 
@@ -741,7 +814,7 @@ public var editable: Bool
 public var fitDensity: Int32
 ```
 
-**功能：** 图像像素密度，单位为ppi。默认值为0。
+**功能：** 图像像素密度，单位为ppi。
 
 **类型：** Int32
 
@@ -757,7 +830,7 @@ public var fitDensity: Int32
 public var index: UInt32
 ```
 
-**功能：** 解码图片序号。默认值为0，表示第一张图片。当取值为N时，表示第N+1张图片。单帧图片场景中index取值只能为0，动图等多帧图片场景中index的取值范围为：0~（帧数-1）。
+**功能：** 解码图片序号。设置值为0，表示第一张图片。当取值为N时，表示第N+1张图片。单帧图片场景中index取值只能为0，动图等多帧图片场景中index的取值范围为：0~（帧数-1）。
 
 **类型：** UInt32
 
@@ -773,7 +846,7 @@ public var index: UInt32
 public var rotate: UInt32
 ```
 
-**功能：** 旋转角度。默认值为0。
+**功能：** 旋转角度。
 
 **类型：** UInt32
 
@@ -789,7 +862,7 @@ public var rotate: UInt32
 public var sampleSize: UInt32
 ```
 
-**功能：** 缩略图采样大小，默认值为1。当前只能取1。
+**功能：** 缩略图采样大小。当前只能取1。
 
 **类型：** UInt32
 
@@ -821,13 +894,13 @@ public init(sampleSize!: UInt32 = 1, rotate!: UInt32 = 0, editable!: Bool = fals
 |sampleSize|UInt32|否|1|**命名参数。** 缩略图采样大小，默认值为1。当前只能取1。|
 |rotate|UInt32|否|0|**命名参数。** 旋转角度。默认值为0。|
 |editable|Bool|否|false|**命名参数。** true表示可编辑，false表示不可编辑。默认值为false。当取值为false时，图片不可二次编辑，如writePixels操作将失败。|
-|desiredSize|[Size](#class-size)|否|Size(0, 0)|**命名参数。** 期望输出大小，必须为正整数，若与原尺寸比例不一致，则会进行拉伸/缩放到指定尺寸，默认为原始尺寸。<br>注意：若解码接口同时传入了desiredSize参数与desiredRegion参数，需进一步传入cropAndScaleStrategy参数指定缩放与裁剪的先后顺序，推荐设置CROP_FIRST。|
-|desiredRegion|[Region](#class-region)|否|Region(Size(0, 0), 0, 0)|**命名参数。** 解码图像中由Region指定的矩形区域，当原始图像很大而只需要解码图像的一部分时，可以设置该参数，有助于提升性能，默认为原始大小。<br>注意：若解码接口同时传入了desiredSize参数与desiredRegion参数，需进一步传入cropAndScaleStrategy参数指定缩放与裁剪的先后顺序，推荐设置CROP_FIRST。|
-|desiredPixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|Unknown|**命名参数。** 解码的像素格式。默认值为RGBA_8888。仅支持设置：RGBA_8888、BGRA_8888和RGB_565。有透明通道图片格式不支持设置RGB_565，如PNG、GIF、ICO和WEBP。|
+|desiredSize|[Size](#class-size)|否|Size(0, 0)|**命名参数。** 期望输出大小，必须为正整数，若与原尺寸比例不一致，则会进行拉伸/缩放到指定尺寸，默认为原始尺寸。|
+|desiredRegion|[Region](#class-region)|否|Region(Size(0, 0), 0, 0)|**命名参数。** 解码图像中由Region指定的矩形区域，当原始图像很大而只需要解码图像的一部分时，可以设置该参数，有助于提升性能，默认为原始大小。|
+|desiredPixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|Unknown|**命名参数。** 解码的像素格式。默认值为Unknown。仅支持设置：Rgba8888、Bgra8888和Rgb565。有透明通道图片格式不支持设置Rgb565，如PNG、GIF、ICO和WEBP。|
 |index|UInt32|否|0|**命名参数。** 解码图片序号。默认值为0，表示第一张图片。当取值为N时，表示第N+1张图片。单帧图片场景中index取值只能为0，动图等多帧图片场景中index的取值范围为：0~（帧数-1）。|
 |fitDensity|Int32|否|0|**命名参数。** 图像像素密度，单位为ppi。默认值为0。|
-|desiredColorSpace|?[ColorSpaceManager](../ArkGraphics2D/cj-apis-color_manager.md#class-colorspacemanager)|否|None|**命名参数。** 目标色彩空间。默认值为UNKNOWN。|
-|desiredDynamicRange|[DecodingDynamicRange](#enum-decodingdynamicrange)|否|Sdr|**命名参数。** 目标动态范围，默认值为SDR。<br>如果平台不支持HDR，设置无效，默认解码为SDR内容。 |
+|desiredColorSpace|?[ColorSpaceManager](../ArkGraphics2D/cj-apis-color_manager.md#class-colorspacemanager)|否|None|**命名参数。** 目标色彩空间。色域默认值为Unknown。|
+|desiredDynamicRange|[DecodingDynamicRange](#enum-decodingdynamicrange)|否|Sdr|**命名参数。** 目标动态范围，默认值为Sdr。<br>如果平台不支持Hdr，设置无效，默认解码为Sdr内容。 |
 
 ## class Image
 
@@ -835,7 +908,15 @@ public init(sampleSize!: UInt32 = 1, rotate!: UInt32 = 0, editable!: Bool = fals
 public class Image {}
 ```
 
-**功能：** 提供基本的图像操作，包括获取图像信息、读写图像数据。调用[readNextImage](#func-readnextimage)和[readLatestImage](#func-readlatestimage)接口时会返回image。
+**功能：** Image类，用于获取图像内容。
+
+> **说明：**
+>
+> - 调用[readNextImage](#func-readnextimage)和[readLatestImage](#func-readlatestimage)接口时会返回Image实例。
+>
+> - Image的属性仅支持在创建时初始化，后续无法再修改，且它的属性不对图像内容产生实际影响，请以图片生产者写入的属性为准，即以向[ImageReceiver](#class-imagereceiver)发送图片数据的发送方实际写入的内容为准。
+>
+> - 由于图片占用内存较大，所以当Image实例使用完成后，应主动调用[release](#func-release)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.Core
 
@@ -929,7 +1010,7 @@ public func getComponent(componentType: ComponentType): Component
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|componentType|[ComponentType](#enum-componenttype)|是|-|图像的组件类型。（目前仅支持 ComponentType:JPEG，实际返回格式由生产者决定，如相机）。|
+|componentType|[ComponentType](#enum-componenttype)|是|-|图像的组件类型。（目前仅支持 ComponentType:Jpeg，实际返回格式由生产者决定，如相机）。|
 
 **返回值：**
 
@@ -974,9 +1055,11 @@ public func release(): Unit
 
 **功能：** 释放当前图像。
 
-在接收另一个图像前必须先释放对应资源。
-
-Cangjie有内存回收机制，Image对象不调用release方法，内存最终也会由系统统一释放。但图片使用的内存往往较大，为尽快释放内存，建议应用在使用完成后主动调用release方法提前释放内存。
+> **说明：**
+>
+> - 在接收另一个图像前必须先释放对应资源。
+>
+> - 由于图片占用内存较大，所以当Image实例使用完成后，应主动调用该方法，及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.Core
 
@@ -1079,6 +1162,10 @@ public var mimeType: String
 
 **功能：** 图片真实格式（MIME type）。
 
+图片解码和图片编码支持格式的范围不同，请避免直接将解码得到的图片真实格式作为图片编码时[PackingOption](#class-packingoption)的format。
+
+可以使用[ImageSource](#class-imagesource)的supportedFormats属性和[ImagePacker](#class-imagepacker)的supportedFormats属性查看解码和编码支持的格式范围。
+
 **类型：** String
 
 **读写能力：** 可读写
@@ -1141,9 +1228,17 @@ public var stride: Int32
 public class ImagePacker {}
 ```
 
-**功能：** 图片编码器类，用于图片压缩和编码。在调用ImagePacker的方法前，需要先通过[createImagePacker](#func-createimagepacker)构建一个ImagePacker实例。
+**功能：** ImagePacker类，用于图片压缩和编码。
 
-当前支持的格式有：jpeg、webp、png、heif、gif（不同硬件设备支持情况不同，可通过ImagePacker的supportedFormats属性查看）。
+> **说明：**
+>
+> - 在调用ImagePacker的方法前，需要先通过[createImagePacker](#func-createimagepacker)构建一个ImagePacker实例。
+>
+> - 编码期间，请避免修改或释放作为输入的ImageSource/PixelMap对象，以免出现crash或其他未定义行为。
+>
+> - 由于图片占用内存较大，所以当ImagePacker实例使用完成后，应主动调用[release](#func-release-1)方法及时释放内存。释放时应确保后续不再使用该实例。
+>
+> - 当前支持的格式有：jpeg、webp、png、heif、gif（不同硬件设备支持情况不同，可通过ImagePacker的supportedFormats属性查看）。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImagePacker
 
@@ -1155,7 +1250,7 @@ public class ImagePacker {}
 public prop supportedFormats: Array<String>
 ```
 
-**功能：** 图片编码支持的格式。
+**功能：** 图片编码支持的格式，包括：jpeg、webp、png、heic、gif（不同硬件设备支持情况不同）。
 
 **类型：** Array\<String>
 
@@ -1218,7 +1313,6 @@ public func packToData(source: ImageSource, options: PackingOption): Array<UInt8
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -1250,7 +1344,7 @@ public func packToData(source: PixelMap, options: PackingOption): Array<UInt8>
 **功能：** 图片压缩或重新编码。
 
 > **注意：**
-> 接口如果返回401错误码，表明参数异常，可能是PixelMap对象被提前释放了。需要调用方排查，在该方法调用结束后再释放PixelMap对象。
+> 接口如果返回62980115错误码，表明参数异常，可能是PixelMap对象被提前释放了。需要调用方排查，在该方法调用结束后再释放PixelMap对象。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImagePacker
 
@@ -1349,7 +1443,6 @@ public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): 
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -1391,7 +1484,7 @@ public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Uni
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|source|[PixelMap](#class-pixelmap)|是|-|码的PixelMap资源。|
+|source|[PixelMap](#class-pixelmap)|是|-|编码的PixelMap资源。|
 |fd|Int32|是|-|文件描述符。|
 |options|[PackingOption](#class-packingoption)|是|-|设置编码参数。|
 
@@ -1450,7 +1543,9 @@ public func release(): Unit
 
 **功能：** 释放图片打包实例。
 
-Cangjie有内存回收机制，ImagePacker对象不调用release方法，内存最终也会由系统统一释放。但图片使用的内存往往较大，为尽快释放内存，建议应用在使用完成后主动调用release方法提前释放内存。
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImagePacker实例使用完成后，应主动调用该方法，及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImagePacker
 
@@ -1497,7 +1592,7 @@ public class ImagePropertyOptions {
 public var defaultValue: String
 ```
 
-**功能：** 默认属性值。默认值为空。
+**功能：** 默认属性值。
 
 **类型：** String
 
@@ -1513,7 +1608,7 @@ public var defaultValue: String
 public var index: UInt32
 ```
 
-**功能：** 图片序号。默认值为0。
+**功能：** 图片序号。
 
 **类型：** UInt32
 
@@ -1548,9 +1643,15 @@ public init(index!: UInt32 = 0, defaultValue!: String = "")
 public class ImageReceiver {}
 ```
 
-**功能：** 图像接收类，用于获取组件surface id，接收最新的图片和读取下一张图片，以及释放ImageReceiver实例。ImageReceiver作为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
+**功能：** 图像接收类，用于获取组件surface id，接收最新的图片和读取下一张图片，以及释放ImageReceiver实例。
 
-在调用以下方法前需要先通过[createImageReceiver](#func-createimagereceiversize-imageformat-int32)创建ImageReceiver实例。
+> **说明：**
+>
+> - ImageReceiver作为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
+>
+> - 在调用以下方法前需要先通过[createImageReceiver](#func-createimagereceiversize-imageformat-int32)创建ImageReceiver实例。
+>
+> - 由于图片占用内存较大，所以当ImageReceiver实例使用完成后，应主动调用[release](#func-release-2)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 
@@ -1586,7 +1687,7 @@ public prop capacity: Int32
 public prop format: ImageFormat
 ```
 
-**功能：** 图像格式，取值为[ImageFormat](#enum-imageformat)常量（目前仅支持 ImageFormat:JPEG，实际返回格式由生产者决定，如相机）。
+**功能：** 图像格式，取值为[ImageFormat](#enum-imageformat)常量（目前仅支持 ImageFormat:Jpeg，实际返回格式由生产者决定，如相机）。
 
 **类型：** [ImageFormat](#enum-imageformat)
 
@@ -1682,7 +1783,9 @@ public func release(): Unit
 
 **功能：** 释放ImageReceiver实例。
 
-Cangjie有内存回收机制，ImageReceiver对象不调用release方法，内存最终也会由系统统一释放。但图片使用的内存往往较大，为尽快释放内存，建议应用在使用完成后主动调用release方法提前释放内存。
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageReceiver实例使用完成后，应主动调用该方法，及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 
@@ -1716,7 +1819,9 @@ public func readLatestImage(): Image
 
 **功能：** 从ImageReceiver读取最新的图片。
 
-**注意**：此接口需要在[on](#func-onreceivetype-callback0argument)回调触发后调用，才能正常的接收到数据。且此接口返回的[Image](#class-image)对象使用完毕后需要调用[release](#func-release-1)方法释放，释放后才可以继续接收新的数据。
+> **注意：** 
+> 
+> - 此接口需要在[on](#func-onreceivetype-callback0argument)回调触发后调用，才能正常的接收到数据。且此接口返回的[Image](#class-image)对象使用完毕后需要调用[release](#func-release-1)方法释放，释放后才可以继续接收新的数据。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 
@@ -1764,7 +1869,9 @@ public func readNextImage(): Image
 
 **功能：** 从ImageReceiver读取下一张图片。
 
-**注意**：此接口需要在[on](#func-onreceivetype-callback0argument)回调触发后调用，才能正常的接收到数据。且此接口返回的[Image](#class-image)对象使用完毕后需要调用[release](#func-release-1)方法释放，释放后才可以继续接收新的数据。
+> **注意：** 
+> 
+> - 此接口需要在[on](#func-onreceivetype-callback0argument)回调触发后调用，才能正常的接收到数据。且此接口返回的[Image](#class-image)对象使用完毕后需要调用[release](#func-release-1)方法释放，释放后才可以继续接收新的数据。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 
@@ -1904,7 +2011,15 @@ try {
 public class ImageSource {}
 ```
 
-**功能：** ImageSource类，用于获取图片相关信息。在调用ImageSource的方法前，需要先通过[createImageSource](#func-createimagesourcearrayuint8)构建一个ImageSource实例。
+**功能：** ImageSource类，用于获取图片相关信息。
+
+> **说明：**
+>
+> - 在调用ImageSource的方法前，需要先通过[createImageSource](#func-createimagesourcearrayuint8)构建一个ImageSource实例。
+>
+> - ImageSource的所有方法均不支持并发调用。
+>
+> - 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用[release](#func-release-3)方法及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -1916,8 +2031,7 @@ public class ImageSource {}
 public prop supportedFormats: Array<String>
 ```
 
-**功能：** 支持的图片格式，包括：png，jpeg，bmp，gif，webp，dng，heic+
-（不同硬件设备支持情况不同）。
+**功能：** 支持的图片格式，包括：png，jpeg，bmp，gif，webp，dng，heic（不同硬件设备支持情况不同）。
 
 **类型：** Array\<String>
 
@@ -1943,6 +2057,10 @@ public func createPixelMap(options!: DecodingOptions = DecodingOptions()): Pixel
 ```
 
 **功能：** 通过图片解码参数创建PixelMap对象。
+
+> **说明：**
+>
+> 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release](#func-release-4)方法，及时释放内存。释放时应确保后续不再使用该对象。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -1970,7 +2088,6 @@ public func createPixelMap(options!: DecodingOptions = DecodingOptions()): Pixel
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2006,10 +2123,17 @@ try {
 public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): Array<PixelMap>
 ```
 
-**功能：** 通过图片解码参数创建PixelMap数组。针对动图如Gif、Webp，此接口返回每帧图片数据；针对静态图，此接口返回唯一的一帧图片数据。
+**功能：** 通过图片解码参数创建PixelMap数组。
+
+> **说明：**
+>
+> - 针对动图如Gif、Webp，此接口返回每帧图片数据；针对静态图，此接口返回唯一的一帧图片数据。
+>
+> - 由于图片占用内存较大，所以当PixelMap对象使用完成后，应主动调用[release](#func-release-4)方法，及时释放内存。释放时应确保后续不再使用该对象。
 
 > **注意：**
-> 此接口会一次性解码全部帧，当帧数过多或单帧图像过大时，会占用较大内存，造成系统内存紧张，此种情况推荐使用Image组件显示动图，Image组件采用逐帧解码，占用内存比此接口少。
+>
+> - 此接口会一次性解码全部帧，当帧数过多或单帧图像过大时，会占用较大内存，造成系统内存紧张，此种情况推荐使用Image组件显示动图，Image组件采用逐帧解码，占用内存比此接口少。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -2051,7 +2175,6 @@ public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): A
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2118,7 +2241,6 @@ public func getDelayTimeList(): Array<Int32>
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2175,7 +2297,6 @@ public func getFrameCount(): UInt32
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2229,7 +2350,6 @@ public func getImageInfo(index!: UInt32 = 0): ImageInfo
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2257,7 +2377,7 @@ public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = 
 
 **功能：** 获取图片中给定索引处图像的指定属性键的值。
 
-该接口仅支持JPEG、PNG和HEIF（不同硬件设备支持情况不同）文件，且需要包含exif信息。其中可以通过supportedFormats属性查询是否支持HEIF格式的exif读写。
+该接口仅支持JPEG、PNG、HEIF和WEBP（不同硬件设备支持情况不同）文件，且需要包含Exif信息。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -2297,7 +2417,6 @@ public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = 
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2325,11 +2444,11 @@ public func modifyImageProperty(key: PropertyKey, value: String): Unit
 
 **功能：** 通过指定的键修改图片属性的值。
 
-该接口仅支持JPEG、PNG和HEIF（不同硬件设备支持情况不同）文件，且需要包含exif信息。其中可以通过supportedFormats属性查询是否支持HEIF格式的exif读写。
+该接口仅支持JPEG、PNG、HEIF和WEBP（不同硬件设备支持情况不同）文件，且需要包含Exif信息。
 
 > **说明：**
 >
-> - 调用modifyImageProperty修改属性会改变属性字节长度，使用buffer创建的ImageSource调用modifyImageProperty会导致buffer内容覆盖，目前buffer创建的ImageSource不支持调用此接口，请改用fd或path创建的ImageSource。
+> 调用modifyImageProperty修改属性会改变属性字节长度，使用buffer创建的ImageSource调用modifyImageProperty会导致buffer内容覆盖，目前buffer创建的ImageSource不支持调用此接口，请改用fd或path创建的ImageSource。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -2349,6 +2468,7 @@ public func modifyImageProperty(key: PropertyKey, value: String): Unit
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980104 | Failed to initialize the internal object. |
+  | 62980110 | The image source data is incorrect. |
   | 62980115 | Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
   | 62980123 | The image does not support EXIF decoding. |
   | 62980133 | The EXIF data is out of range. |
@@ -2357,7 +2477,6 @@ public func modifyImageProperty(key: PropertyKey, value: String): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2385,7 +2504,9 @@ public func release(): Unit
 
 **功能：** 释放ImageSource实例。
 
-Cangjie有内存回收机制，ImageSource对象不调用release方法，内存最终也会由系统统一释放。但图片使用的内存往往较大，为尽快释放内存，建议应用在使用完成后主动调用release方法提前释放内存。
+> **说明：**
+>
+> 由于图片占用内存较大，所以当ImageSource实例使用完成后，应主动调用该方法，及时释放内存。释放时应确保后续不再使用该实例。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -2451,7 +2572,6 @@ public func updateData(buf: Array<UInt8>, isFinished: Bool, offset: UInt32, leng
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2509,7 +2629,7 @@ public class InitializationOptions {
 public var alphaType: AlphaType
 ```
 
-**功能：** 透明度。默认值为AlphaType.Premul。
+**功能：** 透明度。
 
 **类型：** [AlphaType](#enum-alphatype)
 
@@ -2525,7 +2645,7 @@ public var alphaType: AlphaType
 public var editable: Bool
 ```
 
-**功能：** true表示可编辑，false表示不可编辑。默认值为false。
+**功能：** true表示可编辑，false表示不可编辑。
 
 **类型：** Bool
 
@@ -2557,7 +2677,7 @@ public var pixelFormat: PixelMapFormat
 public var scaleMode: ScaleMode
 ```
 
-**功能：** 缩略值。默认值为0
+**功能：** 缩略值。
 
 **类型：** [ScaleMode](#enum-scalemode)
 
@@ -2589,7 +2709,7 @@ public var size: Size
 public var srcPixelFormat: PixelMapFormat
 ```
 
-**功能：** 传入的buffer数据的像素格式。默认值为Bgra8888。
+**功能：** 传入的buffer数据的像素格式。
 
 **类型：** [PixelMapFormat](#enum-pixelmapformat)
 
@@ -2619,9 +2739,9 @@ public init(size: Size, alphaType!: AlphaType = AlphaType.Premul, editable!: Boo
 |size|[Size](#class-size)|是|-|**命名参数。** 创建图片大小。|
 |alphaType|[AlphaType](#enum-alphatype)|否|AlphaType.Premul|**命名参数。** 透明度。默认值为AlphaType.Premul。|
 |editable|Bool|否|false|**命名参数。** true表示可编辑，false表示不可编辑。默认值为false。|
-|srcPixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Bgra8888|**命名参数。** 传入的buffer数据的像素格式。默认值为Bgra8888。|
-|pixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Rgba8888|**命名参数。**  生成的pixelMap的像素格式。默认值为Rgba8888。|
-|scaleMode|[ScaleMode](#enum-scalemode)|否|ScaleMode.FitTargetSize|**命名参数。** 缩略值。默认值为0|
+|srcPixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Bgra8888|**命名参数。** 传入的buffer数据的像素格式。默认值为PixelMapFormat.Bgra8888。|
+|pixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Rgba8888|**命名参数。**  生成的pixelMap的像素格式。默认值为PixelMapFormat.Rgba8888。|
+|scaleMode|[ScaleMode](#enum-scalemode)|否|ScaleMode.FitTargetSize|**命名参数。** 缩略值。默认值为ScaleMode.FitTargetSize。|
 
 ## class PackingOption
 
@@ -2665,7 +2785,7 @@ public var bufferSize: UInt64
 public var desiredDynamicRange: PackingDynamicRange
 ```
 
-**功能：** 目标动态范围。默认值为Sdr。
+**功能：** 目标动态范围。
 
 **类型：** [PackingDynamicRange](#enum-packingdynamicrange)
 
@@ -2681,11 +2801,13 @@ public var desiredDynamicRange: PackingDynamicRange
 public var format: String
 ```
 
-**功能：** 目标格式。</br>当前只支持"image/jpeg"、"image/webp"、"image/png"和"image/heic(或者image/heif)"、"image/sdr_astc_4x4"、"image/sdr_sut_superfast_4x4"（不同硬件设备支持情况不同）、"image/hdr_astc_4x4"。
+**功能：** 目标格式。
+
+当前只支持"image/jpeg"、"image/webp"、"image/png"和"image/heic(或者image/heif)"、"image/sdr_astc_4x4"、"image/sdr_sut_superfast_4x4"（不同硬件设备支持情况不同）、"image/hdr_astc_4x4"。
 
 > **说明：**
 >
-> - 因为jpeg不支持透明通道，若使用带透明通道的数据编码jpeg格式，透明色将变为黑色。
+> 因为jpeg不支持透明通道，若使用带透明通道的数据编码jpeg格式，透明色将变为黑色。
 
 **类型：** String
 
@@ -2701,7 +2823,7 @@ public var format: String
 public var needsPackProperties: Bool
 ```
 
-**功能：** 是否需要编码图片属性信息，例如EXIF。true表示需要，false表示不需要。默认值为false。
+**功能：** 是否需要编码图片属性信息，例如EXIF。true表示需要，false表示不需要。
 
 **类型：** Bool
 
@@ -2754,7 +2876,7 @@ public init(format: String, quality: UInt8, bufferSize!: UInt64 = 0,
 |quality|UInt8|是|-|1. 编码中设定输出图片质量的参数，该参数仅对JPEG图片和HEIF图片生效。取值范围：[0, 100]。0质量最低，100质量最高，质量越高生成图片所占空间越大。WebP、PNG等图片均为无损编码。<br> 2.sdr_astc_4x4编码中，可以设定输出图片质量的参数，可选参数：92、85。<br>3. sut编码中，设定输出图片质量可选参数：92。<br>4. hdr_astc_4x4编码中，可以设定输出图片质量的参数，可选参数：85。|
 |bufferSize|UInt64|否|0|**命名参数。** 接收编码数据的缓冲区大小，单位为Byte。如果不设置大小，默认为25M。如果编码图片超过25M，需要指定大小。bufferSize需大于编码后图片大小。使用[packToFile](#func-packtofileimagesource-int32-packingoption)不受此参数限制。|
 |desiredDynamicRange|[PackingDynamicRange](#enum-packingdynamicrange)|否|Sdr|**命名参数。** 目标动态范围。默认值为Sdr。|
-|needsPackProperties|Bool|否|false|**命名参数。** 是否需要编码图片属性信息，例如EXIF。true表示需要，false表示不需要。默认值为false。。|
+|needsPackProperties|Bool|否|false|**命名参数。** 是否需要编码图片属性信息，例如EXIF。true表示需要，false表示不需要。默认值为false。|
 
 ## class PixelMap
 
@@ -2766,6 +2888,8 @@ public class PixelMap {}
 
 在调用PixelMap的方法前，需要先通过[createPixelMap](#func-createpixelmaparrayuint8-initializationoptions)构建一个PixelMap对象。
 
+图片使用的内存往往较大，在PixelMap对象使用完成后，应主动调用[release](#func-release-4)方法及时释放内存。释放时应确保后续不再使用该对象。
+
 **系统能力：** SystemCapability.Multimedia.Image.Core
 
 **起始版本：** 22
@@ -2776,7 +2900,7 @@ public class PixelMap {}
 public prop isEditable: Bool
 ```
 
-**功能：** true表示图像像素可被编辑，false表示不可被编辑。
+**功能：**  图像像素是否可被编辑。true表示可被编辑，false表示不可被编辑。为false时，图像的渲染和传输性能更好。
 
 **类型：** Bool
 
@@ -2800,7 +2924,7 @@ public prop isEditable: Bool
 public prop isStrideAlignment: Bool
 ```
 
-**功能：** true表示图像内存为DMA内存，false表示非DMA内存。
+**功能：** 图像的行数据是否已进行内存对齐。true表示已进行内存对齐，每行数据的末尾可能有空白字节填充以满足对齐要求；false表示未进行内存对齐，每行数据紧密排列，末尾无空白字节填充。
 
 **类型：** Bool
 
@@ -2834,7 +2958,7 @@ public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|targetColorSpace|[ColorSpaceManager](../ArkGraphics2D/cj-apis-color_manager.md#class-colorspacemanager)|是|-|目标色彩空间，支持SRGB、DCI_P3、DISPLAY_P3、ADOBE_RGB_1998。|
+|targetColorSpace|[ColorSpaceManager](../ArkGraphics2D/cj-apis-color_manager.md#class-colorspacemanager)|是|-|目标色彩空间，支持Srgb、DciP3、DisplayP3、AdobeRgb1998。|
 
 **异常：**
 
@@ -2848,7 +2972,6 @@ public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2899,7 +3022,6 @@ public func createAlphaPixelMap(): PixelMap
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2948,7 +3070,6 @@ public func crop(region: Region): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -2999,7 +3120,6 @@ public func flip(horizontal: Bool, vertical: Bool): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3050,7 +3170,6 @@ public func getBytesNumberPerRow(): UInt32
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3102,7 +3221,6 @@ public func getColorSpace(): ColorSpaceManager
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3152,7 +3270,6 @@ public func getDensity(): Int32
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3201,7 +3318,6 @@ public func getImageInfo(): ImageInfo
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3250,7 +3366,6 @@ public func getPixelBytesNumber(): UInt32
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3299,7 +3414,6 @@ public func opacity(rate: Float32): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3349,7 +3463,6 @@ public func readPixels(area: PositionArea): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3404,7 +3517,6 @@ public func readPixelsToBuffer(dst: Array<UInt8>): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3432,9 +3544,11 @@ try {
 public func release(): Unit
 ```
 
-**功能：** 释放PixelMap对象。释放后，任何访问该对象内部数据的方法调用将会失败。
+**功能：** 释放PixelMap对象（释放后，任何访问该对象内部数据的方法调用都会失败）。
 
-Cangjie有内存回收机制，PixelMap对象不调用release方法，内存最终也会由系统统一释放。但图片使用的内存往往较大，为尽快释放内存，建议应用在使用完成后主动调用release方法提前释放内存。
+图片使用的内存往往较大，在PixelMap对象使用完成后，应主动调用该方法及时释放内存。
+
+释放时应确保后续不再使用该对象。
 
 > **注意：**
 >
@@ -3454,7 +3568,6 @@ Cangjie有内存回收机制，PixelMap对象不调用release方法，内存最�
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3508,7 +3621,6 @@ public func rotate(angle: Float32): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3564,7 +3676,6 @@ public func scale(x: Float32, y: Float32): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3615,7 +3726,6 @@ public func setColorSpace(colorSpace: ColorSpaceManager): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3656,8 +3766,8 @@ translate后的图片尺寸改变为：width+X ，height+Y，建议translate后�
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|Float32|是|-|区域横坐标。|
-|y|Float32|是|-|区域纵坐标。|
+|x|Float32|是|-|区域横坐标。单位：像素。|
+|y|Float32|是|-|区域纵坐标。单位：像素。|
 
 **异常：**
 
@@ -3669,7 +3779,6 @@ translate后的图片尺寸改变为：width+X ，height+Y，建议translate后�
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3720,7 +3829,6 @@ public func writeBufferToPixels(src: Array<UInt8>): Unit
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -3748,7 +3856,7 @@ try {
 public func writePixels(area: PositionArea): Unit
 ```
 
-**功能：** 固定按照BGRA_8888格式，读取[PositionArea](#class-positionarea).pixels缓冲区中的图像像素数据，并写入PixelMap指定区域内，该区域由[PositionArea](#class-positionarea).region指定。使用Promise异步回调。
+**功能：** 固定按照BGRA_8888格式，读取[PositionArea](#class-positionarea).pixels缓冲区中的图像像素数据，并写入PixelMap指定区域内，该区域由[PositionArea](#class-positionarea).region指定。
 
 可用公式计算PositionArea需要申请的内存大小。
 
@@ -3776,7 +3884,6 @@ RGBA的区域计算公式：读取区域（region.size{width * height}）* 4 （
 
 **示例：**
 
-<!-- compile only -->
 <!-- compile -->
 
 ```cangjie
@@ -4101,7 +4208,7 @@ public var sourceDensity: Int32
 public var sourcePixelFormat: PixelMapFormat
 ```
 
-**功能：** 图片像素格式，默认值为UNKNOWN。
+**功能：** 图片像素格式。
 
 **类型：** [PixelMapFormat](#enum-pixelmapformat)
 
@@ -4117,7 +4224,7 @@ public var sourcePixelFormat: PixelMapFormat
 public var sourceSize: Size
 ```
 
-**功能：** 图像像素大小，默认值为空。
+**功能：** 图像像素大小。
 
 **类型：** [Size](#class-size)
 
@@ -4144,7 +4251,7 @@ public init(sourceDensity: Int32, sourcePixelFormat!: PixelMapFormat = PixelMapF
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |sourceDensity|Int32|是|-|图片资源像素密度，单位为ppi。|
-|sourcePixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Unknown|**命名参数。** 图片像素格式，默认值为UNKNOWN。|
+|sourcePixelFormat|[PixelMapFormat](#enum-pixelmapformat)|否|PixelMapFormat.Unknown|**命名参数。** 图片像素格式，默认值为PixelMapFormat.Unknown。|
 |sourceSize|[Size](#class-size)|否|Size(0, 0)|**命名参数。** 图像像素大小，默认值为空。|
 
 ## enum AlphaType
@@ -5111,7 +5218,7 @@ BitsPerSample
 
 修改示例：`imageSource.modifyImageProperty(key,'8 8 8');`或`imageSource.modifyImageProperty(key,'8,8,8');`
 
-读取结果示例："8,8,8
+读取结果示例："8,8,8"
 
 **系统能力：** SystemCapability.Multimedia.Image.Core
 
@@ -5315,7 +5422,7 @@ GpsDateStamp
 GpsLatitude
 ```
 
-**功能：** 图片纬度。修改时应按"度，分，秒"格式传入，如"39，54，7.542"
+**功能：** 图片纬度。修改时应按"度，分，秒"格式传入，如"39, 54, 7.542"
 
 修改传参格式说明：三个非负有理数字符串，逗号隔开。
 
@@ -6140,7 +6247,7 @@ public func toString(): String
 支持SVG标签，使用版本为(SVG) 1.1，当前支持的标签列表有：
 
 - a
-- circla
+- circle
 - clipPath
 - defs
 - ellipse

@@ -1,5 +1,11 @@
 # 滚动组件通用API
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 滚动组件通用属性和事件目前只支持[List](./cj-scroll-swipe-list.md)、[Grid](./cj-scroll-swipe-grid.md)、[Scroll](./cj-scroll-swipe-scroll.md)。
 
 ## 组件属性
@@ -463,6 +469,10 @@ public func onWillScroll(handler: Option<(Float64, ScrollState, ScrollSource) ->
 
 **功能：** 滚动事件回调，滚动组件滚动前触发。回调当前帧将要滚动的偏移量和当前滚动状态和滚动操作来源，其中回调的偏移量为计算得到的将要滚动的偏移量值，并非最终实际滚动偏移。
 
+> **说明：**
+>
+> 调用scrollEdge和不带动画的scrollToIndex时，不触发onWillScroll。
+
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
@@ -472,10 +482,6 @@ public func onWillScroll(handler: Option<(Float64, ScrollState, ScrollSource) ->
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |handler|Option<(Float64, [ScrollState](./cj-common-types.md#enum-scrollstate), [ScrollSource](./cj-common-types.md#enum-scrollsource)) -> Unit>|是|-|滚动组件滑动前触发的回调。|
-
-> **说明：**
->
-> 调用scrollEdge和不带动画的scrollToIndex时，不触发onWillScroll。
 
 **返回值：**
 

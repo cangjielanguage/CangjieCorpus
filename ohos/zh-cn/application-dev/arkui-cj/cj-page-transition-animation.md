@@ -1,5 +1,11 @@
 # 页面转场动画（不推荐）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 为了实现更好的转场效果，推荐使用[模态转场](./cj-modal-transition.md)。
 
 两个页面间发生跳转，一个页面消失，另一个页面出现，这时可以配置各自页面的页面转场参数实现自定义的页面转场效果。[页面转场](../reference/arkui-cj/cj-animation-pagetransition.md)效果写在pageTransition函数中，通过[PageTransitionEnter](../reference/arkui-cj/cj-animation-pagetransition.md#class-pagetransitionenter)和[PageTransitionExit](../reference/arkui-cj/cj-animation-pagetransition.md#class-pagetransitionexit)指定页面进入和退出的动画效果。

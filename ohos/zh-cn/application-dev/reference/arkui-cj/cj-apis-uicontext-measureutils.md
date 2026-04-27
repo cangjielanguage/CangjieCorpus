@@ -1,5 +1,11 @@
 # MeasureUtils
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供文本宽度、高度等相关计算。
 
 > **说明：**
@@ -154,9 +160,9 @@ public init(
 
 ```cangjie
 public class SizeOptions {
-    public var height: Length
-    public var width: Length
-    public init(Length, Length)
+    public var width: Length = 0
+    public var height: Length = 0
+    public init(width!: Length = 0, height!: Length = 0)
 }
 ```
 
@@ -169,7 +175,7 @@ public class SizeOptions {
 ### var height
 
 ```cangjie
-public var height: Length
+public var height: Length = 0
 ```
 
 **功能：** 高度。
@@ -185,7 +191,7 @@ public var height: Length
 ### var width
 
 ```cangjie
-public var width: Length
+public var width: Length = 0
 ```
 
 **功能：** 宽度。

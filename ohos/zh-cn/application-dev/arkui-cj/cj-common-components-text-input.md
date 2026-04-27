@@ -1,5 +1,11 @@
 # 文本输入（TextInput/TextArea）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 TextInput、TextArea是输入框组件，通常用于响应用户的输入操作，比如评论区的输入、聊天框的输入、表格的输入等，也可以结合其它组件构建功能页面，例如登录注册页面。具体用法请参见[TextInput](../reference/arkui-cj/cj-text-input-textinput.md)、[TextArea](../reference/arkui-cj/cj-text-input-textarea.md)。
 
 ## 创建输入框
@@ -60,12 +66,12 @@ init(placeholder!: ?ResourceStr = None, text!: ?ResourceStr = None,controller!: 
 
     ```cangjie
     TextInput( placeholder: '我是提示文本', text: '我是当前文本内容' )
-    .backgroundColor(0xFEC0CD)
+    .backgroundColor(0x4D0A59F7)
     ```
 
     ![Text12](figures/Text12.png)
 
-    更丰富的样式可以结合[通用属性](../reference/arkui-cj/cj-universal-attributes.md#通用属性)实现。
+    更丰富的样式可以结合[通用属性](../reference/arkui-cj/cj-universal-attributes.md)实现。
 
 ## 选中菜单
 

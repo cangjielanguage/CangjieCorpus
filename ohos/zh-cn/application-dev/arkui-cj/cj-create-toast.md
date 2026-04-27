@@ -1,5 +1,11 @@
 # 即时反馈（Toast）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 即时反馈（Toast）是一种临时性的消息提示框，用于向用户显示简短的操作反馈或状态信息。​它通常在屏幕的底部或顶部短暂弹出，随后在一段时间后自动消失。即时反馈的主要目的是提供简洁、不打扰的信息反馈，避免干扰用户当前的操作流程。
 
 可以通过使用[UIContext](../reference/arkui-cj/cj-apis-uicontext-uicontext.md)中的[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getpromptaction)方法获取当前UI上下文关联的[PromptAction](../reference/arkui-cj/cj-apis-uicontext-promptaction.md)对象，再通过该对象调用[showToast](../reference/arkui-cj/cj-apis-uicontext-promptaction.md#func-showtoastshowtoastoptions)创建并显示文本提示框。

@@ -1,5 +1,11 @@
 # Tabs
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 通过页签进行内容视图切换的容器组件，每个页签对应一个内容视图。
 
 ## 导入模块
@@ -14,7 +20,7 @@ import kit.ArkUI.*
 
 > **说明：**
 >
-> - Tabs子组件的visibility属性设置为None，或者visibility属性设置为Hidden时，对应子组件不显示，但依然会在视窗内占位。
+> Tabs子组件的visibility属性设置为None，或者visibility属性设置为Hidden时，对应子组件不显示，但依然会在视窗内占位。
 
 ## 创建组件
 
@@ -264,11 +270,11 @@ class EntryView {
         return FontWeight.W500
     }
 
-    func getOpacity(index: Int32): Int64 {
+    func getOpacity(index: Int32): Float64 {
         if (this.selectedIndex == index) {
-            return 1
+            return Float64(1)
         }
-        return 0
+        return Float64(0)
     }
 
     @Builder
@@ -283,6 +289,7 @@ class EntryView {
             Divider()
             .strokeWidth(2)
             .color(0x007DFF)
+            .opacity(this.getOpacity(index))
         }.width(100.percent)
     }
 
@@ -313,6 +320,8 @@ class EntryView {
             .onChange({index: Int32 =>
                 // currentIndex控制TabContent显示页签
                 this.currentIndex = index
+                // selectedIndex控制自定义TabBar内Image和Text颜色切换
+                this.selectedIndex = index
             })
             .width(360)
             .height(296)
@@ -400,7 +409,6 @@ class EntryView {
                     TabContent(){}.tabBar({=>bind(this.tabBuilder, this)(Int32(index), '页签 ${this.list[index]}')})
                 })
             }
-            .id("TabsExample12")
             .barMode(BarMode.Scrollable)
             .backgroundColor(0xF1F3F5)
             .height(56)

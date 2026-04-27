@@ -1,6 +1,12 @@
 # ohos.security.permission_request_result（PermissionRequestResult）
 
-权限请求结果对象，在调用[requestPermissionsFromUser](cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)申请权限时返回此对象表明此次权限申请的结果
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+权限请求结果对象。在调用[requestPermissionsFromUser](cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)申请权限时返回此对象，表明此次权限申请的结果。
 
 ## 导入模块
 
@@ -39,9 +45,9 @@ public class PermissionRequestResult {
 public var authResults: Array<Int32>
 ```
 
-**功能：** 相应请求权限的结果：
+**功能：** 响应请求权限的结果：
 
-- -1：未授权。①dialogShownResults返回为true，表示用户首次申请；②dialogShownResults返回为false，表示权限已设置，无需弹窗，需要用户在"设置"中修改。
+- -1：未授权。如果dialogShownResults返回为true，表示用户首次申请；如果dialogShownResults返回为false，表示权限已设置，无需弹窗，需要用户在"设置"中修改。
 
 - 0：已授权。
 

@@ -1,6 +1,12 @@
 # ohos.file.fs（文件管理）
 
-fs模块为基础文件操作API，提供基础文件操作能力，包括文件基本管理、文件目录管理、文件信息统计、文件流式读写等常用功能。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+fs模块提供基础文件操作能力，包括文件基本管理、文件目录管理、文件信息统计、文件流式读写等常用功能。
 
 ## 导入模块
 
@@ -149,9 +155,9 @@ public func getParent(): String
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900042 | Unknown error |
-  | 14300002 | Invalid URI |
+  | 13900005 | I/O error. |
+  | 13900042 | Unknown error. |
+  | 14300002 | Invalid URI. |
 
 **示例：**
 
@@ -200,12 +206,12 @@ public func tryLock(exclusive!: Bool = false): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900008 | Bad file descriptor |
-  | 13900020 | Invalid argument |
-  | 13900034 | Operation would block |
-  | 13900042 | Unknown error |
-  | 13900043 | No record locks available |
+  | 13900004 | Interrupted system call. |
+  | 13900008 | Bad file descriptor. |
+  | 13900020 | Invalid argument. |
+  | 13900034 | Operation would block. |
+  | 13900042 | Unknown error. |
+  | 13900043 | No record locks available. |
 
 **示例：**
 
@@ -236,7 +242,7 @@ try {
 public func unlock(): Unit
 ```
 
-**功能：** 以同步方式解锁文件。
+**功能：** 解锁文件。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -248,12 +254,12 @@ public func unlock(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900008 | Bad file descriptor |
-  | 13900020 | Invalid argument |
-  | 13900034 | Operation would block |
-  | 13900042 | Unknown error |
-  | 13900043 | No record locks available |
+  | 13900004 | Interrupted system call. |
+  | 13900008 | Bad file descriptor. |
+  | 13900020 | Invalid argument. |
+  | 13900034 | Operation would block. |
+  | 13900042 | Unknown error. |
+  | 13900043 | No record locks available. |
 
 **示例：**
 
@@ -310,8 +316,8 @@ public static func access(path: String, mode!: AccessModeType = AccessModeType.E
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |path|String|是|-|文件或目录应用沙箱路径。|
-|mode|[AccessModeType](#enum-accessmodetype)|否|AccessModeType.Exist|文件或目录校验的权限。|
-|flag|[AccessFlagType](#enum-accessflagtype)|否|AccessFlagType.Local|文件或目录校验的位置。|
+|mode|[AccessModeType](#enum-accessmodetype)|否|AccessModeType.Exist|**命名参数。** 文件或目录校验的权限。|
+|flag|[AccessFlagType](#enum-accessflagtype)|否|AccessFlagType.Local|**命名参数。** 文件或目录校验的位置。|
 
 **返回值：**
 
@@ -325,18 +331,18 @@ public static func access(path: String, mode!: AccessModeType = AccessModeType.E
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900020 | Invalid argument |
-  | 13900023 | Text file busy |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900042 | Unknown error |
+  | 13900002 | No such file or directory. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900023 | Text file busy. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -369,7 +375,7 @@ try {
 public static func close(file: Int32): Unit
 ```
 
-**功能：** 以同步方法关闭文件。
+**功能：** 关闭文件。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -387,12 +393,12 @@ public static func close(file: Int32): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900025 | No space left on device |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900025 | No space left on device. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -421,7 +427,7 @@ try {
 public static func close(file: File): Unit
 ```
 
-**功能：** 以同步方法关闭文件。
+**功能：** 关闭文件。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -439,12 +445,12 @@ public static func close(file: File): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900025 | No space left on device |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900025 | No space left on device. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -493,25 +499,25 @@ public static func copyDir(src: String, dest: String, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900015 | File exists |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900015 | File exists. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -560,24 +566,24 @@ public static func copyFile(src: String, dest: String, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -626,24 +632,24 @@ public static func copyFile(src: String, dest: Int32, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -693,24 +699,24 @@ public static func copyFile(src: Int32, dest: String, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -760,24 +766,24 @@ public static func copyFile(src: Int32, dest: Int32, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -821,7 +827,7 @@ public static func createRandomAccessFile(file: String, mode!: Int64 = OpenMode.
 |:---|:---|:---|:---|:---|
 |file|String|是|-|文件的应用沙箱路径。|
 |mode|Int64|否|OpenMode.READ_ONLY|**命名参数。** 创建文件RandomAccessFile对象的[选项](#class-openmode)，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。|
-|options|[RandomAccessFileOptions](#class-randomaccessfileoptions)|否|RandomAccessFileOptions()|支持如下选项：<br/>- start，Option\<Int64>类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，Option\<Int64>类型，表示期望读取结束的位置。可选，默认文件末尾。|
+|options|[RandomAccessFileOptions](#class-randomaccessfileoptions)|否|RandomAccessFileOptions()|**命名参数。** 支持如下选项：<br/>- start，Option\<Int64>类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，Option\<Int64>类型，表示期望读取结束的位置。可选，默认文件末尾。|
 
 **返回值：**
 
@@ -835,33 +841,33 @@ public static func createRandomAccessFile(file: String, mode!: Int64 = OpenMode.
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900006 | No such device or address |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900017 | No such device |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900029 | Resource deadlock would occur |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900006 | No such device or address. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900017 | No such device. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900029 | Resource deadlock would occur. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -905,8 +911,8 @@ public static func createRandomAccessFile(file: File, mode!: Int64 = OpenMode.RE
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |file|[File](#class-file)|是|-|已打开的File对象。|
-|mode|Int64|否|OpenMode.READ_ONLY|创建文件RandomAccessFile对象的选项，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。|
-|options|[RandomAccessFileOptions](#class-randomaccessfileoptions)|否|RandomAccessFileOptions()|支持如下选项：<br/>- start，Option\<Int64>类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，Option\<Int64>类型，表示期望读取结束的位置。可选，默认文件末尾。|
+|mode|Int64|否|OpenMode.READ_ONLY|**命名参数。** 创建文件RandomAccessFile对象的选项，仅当传入文件沙箱路径时生效，必须指定如下选项中的一个，默认以只读方式创建：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读创建。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写创建。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写创建。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果RandomAccessFile对象存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到RandomAccessFile对象末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式创建RandomAccessFile对象。|
+|options|[RandomAccessFileOptions](#class-randomaccessfileoptions)|否|RandomAccessFileOptions()|**命名参数。** 支持如下选项：<br/>- start，Option\<Int64>类型，表示期望读取文件的位置。可选，默认从当前位置开始读。<br/>- end，Option\<Int64>类型，表示期望读取结束的位置。可选，默认文件末尾。|
 
 **返回值：**
 
@@ -920,33 +926,33 @@ public static func createRandomAccessFile(file: File, mode!: Int64 = OpenMode.RE
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900006 | No such device or address |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900017 | No such device |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900029 | Resource deadlock would occur |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900006 | No such device or address. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900017 | No such device. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900029 | Resource deadlock would occur. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -1003,33 +1009,33 @@ public static func createStream(path: String, mode: String): Stream
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900006 | No such device or address |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900017 | No such device |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900029 | Resource deadlock would occur |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900006 | No such device or address. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900017 | No such device. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900029 | Resource deadlock would occur. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -1083,13 +1089,13 @@ public static func dup(fd: Int32): File
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900014 | Device or resource busy |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900042 | Unknown error |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900014 | Device or resource busy. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1140,13 +1146,13 @@ public static func fdatasync(fd: Int32): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1201,33 +1207,33 @@ public static func fdopenStream(fd: Int32, mode: String): Stream
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900006 | No such device or address |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900017 | No such device |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900029 | Resource deadlock would occur |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900006 | No such device or address. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900017 | No such device. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900029 | Resource deadlock would occur. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1276,13 +1282,13 @@ public static func fsync(fd: Int32): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1325,7 +1331,7 @@ public static func listFile(path: String, options!: ListFileOptions = ListFileOp
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |path|String|是|-|目录的应用沙箱路径。|
-|options|[ListFileOptions](#class-listfileoptions)|否|ListFileOptions()|文件过滤选项。默认不进行过滤。|
+|options|[ListFileOptions](#class-listfileoptions)|否|ListFileOptions()|**命名参数。** 文件过滤选项。默认不进行过滤。|
 
 **返回值：**
 
@@ -1339,11 +1345,11 @@ public static func listFile(path: String, options!: ListFileOptions = ListFileOp
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900018 | Not a directory |
-  | 13900042 | Unknown error |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900018 | Not a directory. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1387,7 +1393,7 @@ public static func lseek(fd: Int32, offset: Int64, whence!: WhenceType = SeekSet
 |:---|:---|:---|:---|:---|
 |fd|Int32|是|-|文件描述符。|
 |offset|Int64|是|-|相对偏移位置，单位为字节。|
-|whence|[WhenceType](#enum-whencetype)|否|SeekSet|偏**命名参数。** 移指针相对位置类型。不指定则默认为文件起始位置处。|
+|whence|[WhenceType](#enum-whencetype)|否|SeekSet|**命名参数。** 偏移指针相对位置类型。不指定则默认为文件起始位置处。|
 
 **返回值：**
 
@@ -1401,11 +1407,11 @@ public static func lseek(fd: Int32, offset: Int64, whence!: WhenceType = SeekSet
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900008 | Bad file descriptor |
-  | 13900020 | Invalid argument |
-  | 13900026 | Illegal seek |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
+  | 13900008 | Bad file descriptor. |
+  | 13900020 | Invalid argument. |
+  | 13900026 | Illegal seek. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1436,7 +1442,7 @@ try {
 public static func lstat(path: String): Stat
 ```
 
-**功能：** 获取链接文件信息
+**功能：** 获取链接文件信息。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -1460,16 +1466,16 @@ public static func lstat(path: String): Stat
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1515,21 +1521,21 @@ public static func mkdir(path: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900015 | File exists |
-  | 13900018 | Not a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900028 | Too many links |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900015 | File exists. |
+  | 13900018 | Not a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900028 | Too many links. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1576,21 +1582,21 @@ public static func mkdir(path: String, recursion: Bool): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900015 | File exists |
-  | 13900018 | Not a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900028 | Too many links |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900015 | File exists. |
+  | 13900018 | Not a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900028 | Too many links. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1642,21 +1648,21 @@ public static func mkdtemp(prefix: String): String
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900015 | File exists |
-  | 13900018 | Not a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900028 | Too many links |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900015 | File exists. |
+  | 13900018 | Not a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900028 | Too many links. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1687,7 +1693,7 @@ public static func moveDir(src: String, dest: String, mode!: Int32 = 0): Unit
 
 > **说明：**
 >
-> - 该接口不支持在分布式文件路径下操作。
+> 该接口不支持在分布式文件路径下操作。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -1699,7 +1705,7 @@ public static func moveDir(src: String, dest: String, mode!: Int32 = 0): Unit
 |:---|:---|:---|:---|:---|
 |src|String|是|-|源文件夹的应用沙箱路径。|
 |dest|String|是|-|目标文件夹的应用沙箱路径。|
-|mode|Int32|否|0|移动模式，默认值为0。<br/>-&nbsp;mode为0，目录级别抛异常。若目标目录下存在与源目录名冲突的非空目录，则抛出异常。<br/>-&nbsp;mode为1，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#class-conflictfiles)>形式提供。<br/>-&nbsp; mode为2，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。<br/>-&nbsp; mode为3，目录级别强制覆盖。移动源目录至目标目录下，目标目录下移动的目录内容与源目录完全一致。若目标目录下存在与源目录名冲突的目录，该目录下的所有原始文件将被删除。|
+|mode|Int32|否|0|**命名参数。** 移动模式，默认值为0。<br/>-&nbsp;mode为0，目录级别抛异常。若目标目录下存在与源目录名冲突的非空目录，则抛出异常。<br/>-&nbsp;mode为1，文件级别抛异常。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则抛出异常。源目录下未冲突的文件全部移动至目标目录下，目标目录下未冲突文件将继续保留，且冲突文件信息将在抛出异常的data属性中以Array\<[ConflictFiles](#class-conflictfiles)>形式提供。<br/>-&nbsp; mode为2，文件级别强制覆盖。目标目录下存在与源目录名冲突的目录，若冲突目录下存在同名文件，则强制覆盖冲突目录下所有同名文件，未冲突文件将继续保留。<br/>-&nbsp; mode为3，目录级别强制覆盖。移动源目录至目标目录下，目标目录下移动的目录内容与源目录完全一致。若目标目录下存在与源目录名冲突的目录，该目录下的所有原始文件将被删除。|
 
 **异常：**
 
@@ -1707,25 +1713,25 @@ public static func moveDir(src: String, dest: String, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900016 | Cross-device link |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900028 | Too many links |
-  | 13900032 | Directory not empty |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900016 | Cross-device link. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900028 | Too many links. |
+  | 13900032 | Directory not empty. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1759,7 +1765,7 @@ public static func moveFile(src: String, dest: String, mode!: Int32 = 0): Unit
 
 > **说明：**
 >
-> - 该接口不支持在分布式文件路径下操作。
+> 该接口不支持在分布式文件路径下操作。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -1771,7 +1777,7 @@ public static func moveFile(src: String, dest: String, mode!: Int32 = 0): Unit
 |:---|:---|:---|:---|:---|
 |src|String|是|-|源文件夹的应用沙箱路径。|
 |dest|String|是|-|目标文件夹的应用沙箱路径。|
-|mode|Int32|否|0|移动模式。若mode为0，移动位置存在同名文件时，强制移动覆盖。若mode为1，移动位置存在同名文件时，抛出异常。默认为0。|
+|mode|Int32|否|0|**命名参数。** 移动模式。若mode为0，移动位置存在同名文件时，强制移动覆盖。若mode为1，移动位置存在同名文件时，抛出异常。默认为0。|
 
 **异常：**
 
@@ -1779,25 +1785,25 @@ public static func moveFile(src: String, dest: String, mode!: Int32 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900016 | Cross-device link |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900028 | Too many links |
-  | 13900032 | Directory not empty |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900016 | Cross-device link. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900028 | Too many links. |
+  | 13900032 | Directory not empty. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -1838,7 +1844,7 @@ public static func open(path: String, mode!: Int64 = OpenMode.READ_ONLY): File
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |path|String|是|-|打开文件或目录的应用沙箱路径或URI。|
-|mode|Int64|否|OpenMode.READ_ONLY|打开文件或目录的[选项](#class-openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。|
+|mode|Int64|否|OpenMode.READ_ONLY|**命名参数。** 打开文件或目录的[选项](#class-openmode)，必须指定如下选项中的一个，默认以只读方式打开：<br/>-&nbsp;OpenMode.READ_ONLY(0o0)：只读打开。<br/>-&nbsp;OpenMode.WRITE_ONLY(0o1)：只写打开。<br/>-&nbsp;OpenMode.READ_WRITE(0o2)：读写打开。<br/>给定如下功能选项，以按位或的方式追加，默认不给定任何额外选项：<br/>-&nbsp;OpenMode.CREATE(0o100)：若文件不存在，则创建文件。<br/>-&nbsp;OpenMode.TRUNC(0o1000)：如果文件存在且文件具有写权限，则将其长度裁剪为零。<br/>-&nbsp;OpenMode.APPEND(0o2000)：以追加方式打开，后续写将追加到文件末尾。<br/>-&nbsp;OpenMode.NONBLOCK(0o4000)：如果path指向FIFO、块特殊文件或字符特殊文件，则本次打开及后续&nbsp;IO&nbsp;进行非阻塞操作。<br/>-&nbsp;OpenMode.DIR(0o200000)：如果path不指向目录，则出错。不允许附加写权限。<br/>-&nbsp;OpenMode.NOFOLLOW(0o400000)：如果path指向符号链接，则出错。<br/>-&nbsp;OpenMode.SYNC(0o4010000)：以同步IO的方式打开文件。|
 
 **返回值：**
 
@@ -1852,33 +1858,33 @@ public static func open(path: String, mode!: Int64 = OpenMode.READ_ONLY): File
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900006 | No such device or address |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900017 | No such device |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900029 | Resource deadlock would occur |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900034 | Operation would block |
-  | 13900038 | Value too large for defined data type |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900006 | No such device or address. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900017 | No such device. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900029 | Resource deadlock would occur. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900034 | Operation would block. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -1920,7 +1926,7 @@ public static func read(fd: Int32, buffer: Array<Byte>, options!: ReadOptions = 
 |:---|:---|:---|:---|:---|
 |fd|Int32|是|-|已打开的文件描述符。|
 |buffer|Array\<Byte>|是|-|用于保存读取到的文件数据的缓冲区。|
-|options|[ReadOptions](#class-readoptions)|否|ReadOptions()|支持如下选项：<br/>-&nbsp;offset，Int64类型，表示期望读取文件的位置。默认从当前位置开始读。<br/>-&nbsp;length，UIntNative类型，表示期望读取数据的长度。默认缓冲区长度。|
+|options|[ReadOptions](#class-readoptions)|否|ReadOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;offset，?Int64类型，表示期望读取文件的位置。默认从当前位置开始读。<br/>-&nbsp;length，?UIntNative类型，表示期望读取数据的长度。默认缓冲区长度。|
 
 **返回值：**
 
@@ -1934,16 +1940,16 @@ public static func read(fd: Int32, buffer: Array<Byte>, options!: ReadOptions = 
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900034 | Operation would block |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900034 | Operation would block. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -1985,7 +1991,7 @@ public static func readLines(filePath: String, options!: Options = Options()): R
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |filePath|String|是|-|文件的应用沙箱路径。|
-|options|[Options](#class-options)|否|Options()|可选项。支持以下选项：<br/>-&nbsp;encoding，String类型，当数据是&nbsp;String&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"，仅支持&nbsp;"utf-8"。|
+|options|[Options](#class-options)|否|Options()|**命名参数。** 可选项。支持以下选项：<br/>-&nbsp;encoding，String类型，当数据是&nbsp;String&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"，仅支持&nbsp;"utf-8"。|
 
 **返回值：**
 
@@ -1999,19 +2005,19 @@ public static func readLines(filePath: String, options!: Options = Options()): R
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900012 | Permission denied |
-  | 13900015 | File exists |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900022 | Too many open files |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900002 | No such file or directory. |
+  | 13900012 | Permission denied. |
+  | 13900015 | File exists. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900022 | Too many open files. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -2056,7 +2062,7 @@ public static func readText(filePath: String, options!: ReadTextOptions = ReadTe
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |filePath|String|是|-|文件的应用沙箱路径。|
-|options|[ReadTextOptions](#class-readtextoptions)|否|ReadTextOptions()|支持如下选项：<br/>-&nbsp;offset，Int64类型，表示期望读取文件的位置。可选，默认从初始位置开始读取。<br/>-&nbsp;length，Int64类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，String类型，当数据是&nbsp;String&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"，仅支持&nbsp;"utf-8"。|
+|options|[ReadTextOptions](#class-readtextoptions)|否|ReadTextOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;offset，Int64类型，表示期望读取文件的位置。可选，默认从初始位置开始读取。<br/>-&nbsp;length，Int64类型，表示期望读取数据的长度。可选，默认文件长度。<br/>-&nbsp;encoding，String类型，当数据是&nbsp;String&nbsp;类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"，仅支持&nbsp;"utf-8"。|
 
 **返回值：**
 
@@ -2070,20 +2076,20 @@ public static func readText(filePath: String, options!: ReadTextOptions = ReadTe
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -2115,7 +2121,7 @@ public static func rename(oldPath: String, newPath: String): Unit
 
 > **说明：**
 >
-> - 该接口不支持在分布式文件路径下操作。
+> 该接口不支持在分布式文件路径下操作。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -2134,25 +2140,25 @@ public static func rename(oldPath: String, newPath: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900015 | File exists |
-  | 13900016 | Cross-device link |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900025 | No space left on device |
-  | 13900027 | Read-only file system |
-  | 13900028 | Too many links |
-  | 13900032 | Directory not empty |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900015 | File exists. |
+  | 13900016 | Cross-device link. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900025 | No space left on device. |
+  | 13900027 | Read-only file system. |
+  | 13900028 | Too many links. |
+  | 13900032 | Directory not empty. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2199,18 +2205,18 @@ public static func rmdir(path: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900018 | Not a directory |
-  | 13900020 | Invalid argument |
-  | 13900027 | Read-only file system1 |
-  | 13900030 | File name too long |
-  | 13900032 | Directory not empty |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900018 | Not a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900027 | Read-only file system. |
+  | 13900030 | File name too long. |
+  | 13900032 | Directory not empty. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2262,19 +2268,19 @@ public static func stat(file: Int32): Stat
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2319,7 +2325,7 @@ public static func stat(file: String): Stat
 
 |类型|说明|
 |:----|:----|
-|[Stat](#class-stat)|表示文件或目录的具体信息。。|
+|[Stat](#class-stat)|表示文件或目录的具体信息。|
 
 **异常：**
 
@@ -2327,19 +2333,19 @@ public static func stat(file: String): Stat
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900030 | File name too long |
-  | 13900031 | Function not implemented |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900038 | Value too large for defined data type |
-  | 13900042 | Unknown error |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900030 | File name too long. |
+  | 13900031 | Function not implemented. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900038 | Value too large for defined data type. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2378,7 +2384,7 @@ public static func truncate(file: String, len!: Int64 = 0): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |file|String|是|-|文件的应用沙箱路径。|
-|len|Int64|否|0|文件截断后的长度（单位：字节）。默认为0。|
+|len|Int64|否|0|**命名参数。** 文件截断后的长度（单位：字节）。默认为0。|
 
 **异常：**
 
@@ -2386,22 +2392,22 @@ public static func truncate(file: String, len!: Int64 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900027 | Read-only file system |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900027 | Read-only file system. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2430,7 +2436,7 @@ try {
 public static func truncate(file: Int32, len!: Int64 = 0): Unit
 ```
 
-**功能：** 以同步方法截断文件。
+**功能：** 截断文件内容。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -2441,7 +2447,7 @@ public static func truncate(file: Int32, len!: Int64 = 0): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |file|Int32|是|-|已打开的文件描述符fd。|
-|len|Int64|否|0|文件截断后的长度（单位：字节）。默认为0。|
+|len|Int64|否|0|**命名参数。** 文件截断后的长度（单位：字节）。默认为0。|
 
 **异常：**
 
@@ -2449,22 +2455,22 @@ public static func truncate(file: Int32, len!: Int64 = 0): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900023 | Text file busy |
-  | 13900024 | File too large |
-  | 13900027 | Read-only file system |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900023 | Text file busy. |
+  | 13900024 | File too large. |
+  | 13900027 | Read-only file system. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2512,21 +2518,21 @@ public static func unlink(path: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900011 | Out of memory |
-  | 13900012 | Permission denied |
-  | 13900013 | Bad address |
-  | 13900014 | Device or resource busy |
-  | 13900018 | Not a directory |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900027 | Read-only file system |
-  | 13900030 | File name too long |
-  | 13900033 | Too many symbolic links encountered |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900011 | Out of memory. |
+  | 13900012 | Permission denied. |
+  | 13900013 | Bad address. |
+  | 13900014 | Device or resource busy. |
+  | 13900018 | Not a directory. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900027 | Read-only file system. |
+  | 13900030 | File name too long. |
+  | 13900033 | Too many symbolic links encountered. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2573,12 +2579,12 @@ public static func utimes(path: String, mtime: Float64): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900002 | No such file or directory |
-  | 13900012 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 13900027 | Read-only file system |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900002 | No such file or directory. |
+  | 13900012 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 13900027 | Read-only file system. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2622,7 +2628,7 @@ public static func write(fd: Int32, buffer: Array<Byte>, options!: WriteOptions 
 |:---|:---|:---|:---|:---|
 |fd|Int32|是|-|已打开的文件描述符。|
 |buffer|Array\<Byte>|是|-|待写入文件的数据，来自缓冲区。|
-|options|[WriteOptions](#class-writeoptions)|否|WriteOptions()|支持如下选项：<br/>-&nbsp;offset，?Int64类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，?UIntNative类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，String类型，当数据是String类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"。当前仅支持&nbsp;"utf-8"。|
+|options|[WriteOptions](#class-writeoptions)|否|WriteOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;offset，?Int64类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，?UIntNative类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，String类型，当数据是String类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"。当前仅支持&nbsp;"utf-8"。|
 
 **返回值：**
 
@@ -2636,18 +2642,18 @@ public static func write(fd: Int32, buffer: Array<Byte>, options!: WriteOptions 
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2678,7 +2684,7 @@ try {
 public static func write(fd: Int32, buffer: String, options!: WriteOptions = WriteOptions()): Int64
 ```
 
-**功能：** 以同步方法将数据写入文件。
+**功能：** 将数据写入文件。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -2690,13 +2696,13 @@ public static func write(fd: Int32, buffer: String, options!: WriteOptions = Wri
 |:---|:---|:---|:---|:---|
 |fd|Int32|是|-|已打开的文件描述符。|
 |buffer|String|是|-|待写入文件的数据，来自字符串。|
-|options|[WriteOptions](#class-writeoptions)|否|WriteOptions()|支持如下选项：<br/>-&nbsp;offset，?Int64类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，?UIntNative类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，String类型，当数据是String类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"。当前仅支持&nbsp;"utf-8"。|
+|options|[WriteOptions](#class-writeoptions)|否|WriteOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;offset，?Int64类型，表示期望写入文件的位置。可选，默认从当前位置开始写。<br/>-&nbsp;length，?UIntNative类型，表示期望写入数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;encoding，String类型，当数据是String类型时有效，表示数据的编码方式，默认&nbsp;"utf-8"。当前仅支持&nbsp;"utf-8"。|
 
 **返回值：**
 
 |类型|说明|
 |:----|:----|
-|Int64|实返回实际写入的数据长度（单位：字节）。|
+|Int64|返回实际写入的数据长度（单位：字节）。|
 
 **异常：**
 
@@ -2704,18 +2710,18 @@ public static func write(fd: Int32, buffer: String, options!: WriteOptions = Wri
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -2789,7 +2795,7 @@ public var displayName: Array<String>
 public var excludeMedia: Bool
 ```
 
-**功能：** 是是否排除Media中已有的文件。true：排除Media中已有的文件；false：不排除Media中已有的文件。
+**功能：** 是否排除Media中已有的文件。true：排除Media中已有的文件；false：不排除Media中已有的文件。预留字段，暂不支持使用。
 
 **类型：** Bool
 
@@ -2886,12 +2892,12 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|suffix|Array\<String>|否|Array\<String>()|文件后缀名完全匹配，各个关键词OR关系。|
-|displayName|Array\<String>|否|Array\<String>()|文件名模糊匹配，各个关键词OR关系。当前仅支持通配符*。|
-|mimeType|Array\<String>|否|Array\<String>()|mime类型完全匹配，各个关键词OR关系。预留字段，暂不支持使用。|
-|fileSizeOver|?Int64|否|None|文件大小匹配，大于指定大小的文件。|
-|lastModifiedAfter|?Float64|否|None|文件最近修改时间匹配，在指定时间点及之后的文件。|
-|excludeMedia|Bool|否|false|是否排除Media中已有的文件。true：排除Media中已有的文件；false：不排除Media中已有的文件。|
+|suffix|Array\<String>|否|Array\<String>()|**命名参数。** 文件后缀名完全匹配，各个关键词OR关系。|
+|displayName|Array\<String>|否|Array\<String>()|**命名参数。** 文件名模糊匹配，各个关键词OR关系。当前仅支持通配符*。|
+|mimeType|Array\<String>|否|Array\<String>()|**命名参数。** mime类型完全匹配，各个关键词OR关系。预留字段，暂不支持使用。|
+|fileSizeOver|?Int64|否|None|**命名参数。** 文件大小匹配，大于指定大小的文件。|
+|lastModifiedAfter|?Float64|否|None|**命名参数。** 文件最近修改时间匹配，在指定时间点及之后的文件。|
+|excludeMedia|Bool|否|false|**命名参数。** 是否排除Media中已有的文件。true：排除Media中已有的文件；false：不排除Media中已有的文件。预留字段，暂不支持使用。|
 
 **异常：**
 
@@ -2899,7 +2905,7 @@ public init(
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
+  | 13900020 | Invalid argument. |
 
 ## class ListFileOptions
 
@@ -2928,7 +2934,7 @@ public class ListFileOptions {
 public var filter: Filter
 ```
 
-**功能：** 文件过滤配置项。 可选，设置过滤条件。
+**功能：** 文件过滤配置项。
 
 **类型：** [Filter](#class-filter)
 
@@ -2944,7 +2950,7 @@ public var filter: Filter
 public var listNum: Int32
 ```
 
-**功能：** 列出文件名数量。可选，当设置0时，列出所有文件，默认为0。
+**功能：** 列出文件名数量。当设置0时，列出所有文件。
 
 **类型：** Int32
 
@@ -2960,7 +2966,7 @@ public var listNum: Int32
 public var recursion: Bool
 ```
 
-**功能：** 是否递归子目录下文件名。可选，默认为false。当recursion为false时，返回当前目录下满足过滤要求的文件名及目录名。当recursion为true时，返回此目录下所有满足过滤要求的文件的相对路径（以/开头）。
+**功能：** 是否递归子目录下文件名。当recursion为false时，返回当前目录下满足过滤要求的文件名及目录名。当recursion为true时，返回此目录下所有满足过滤要求的文件的相对路径（以/开头）。
 
 **类型：** Bool
 
@@ -2990,9 +2996,9 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|recursion|Bool|否|false|是否递归子目录下文件名。可选，默认为false。当recursion为false时，返回当前目录下满足过滤要求的文件名及目录名。当recursion为true时，返回此目录下所有满足过滤要求的文件的相对路径（以/开头）。|
-|listNum|Int32|否|0|列出文件名数量。可选，当设置0时，列出所有文件，默认为0。|
-|filter|[Filter](#class-filter)|否|Filter()|文件过滤配置项。 可选，设置过滤条件。|
+|recursion|Bool|否|false|**命名参数。** 是否递归子目录下文件名。可选，默认为false。当recursion为false时，返回当前目录下满足过滤要求的文件名及目录名。当recursion为true时，返回此目录下所有满足过滤要求的文件的相对路径（以/开头）。|
+|listNum|Int32|否|0|**命名参数。** 列出文件名数量。可选，当设置0时，列出所有文件，默认为0。|
+|filter|[Filter](#class-filter)|否|Filter()|**命名参数。** 文件过滤配置项。 可选，设置过滤条件。|
 
 ## class OpenMode
 
@@ -3208,7 +3214,7 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|encoding|String|否|"utf-8"|**命名参数。** 文件编码方式。可选项。。|
+|encoding|String|否|"utf-8"|**命名参数。** 文件编码方式。可选项。|
 
 ## class RandomAccessFile
 
@@ -3319,16 +3325,16 @@ public func read(buffer: Array<Byte>, options!: ReadOptions = ReadOptions()): In
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900034 | Operation would block |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900034 | Operation would block. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -3429,18 +3435,18 @@ public func write(buffer: String, options!: WriteOptions = WriteOptions()): Int6
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -3472,7 +3478,7 @@ try {
 public func write(buffer: Array<Byte>, options!: WriteOptions = WriteOptions()): Int64
 ```
 
-**功能：** 以同步方法将数据写入文件。
+**功能：** 将数据写入文件。
 
 **系统能力：** SystemCapability.FileManagement.File.FileIO
 
@@ -3497,18 +3503,18 @@ public func write(buffer: Array<Byte>, options!: WriteOptions = WriteOptions()):
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -3644,9 +3650,9 @@ public func next(): ReaderIteratorResult
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900037 | No data available |
-  | 13900042 | Unknown error |
+  | 13900005 | I/O error. |
+  | 13900037 | No data available. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -3746,7 +3752,7 @@ public open class ReadOptions {
 public var length: Option<UIntNative>
 ```
 
-**功能：** 期望读取数据的长度，单位为字节。可选，默认缓冲区长度。
+**功能：** 期望读取数据的长度，单位为字节。
 
 **类型：** Option\<UIntNative>
 
@@ -3762,7 +3768,7 @@ public var length: Option<UIntNative>
 public var offset: Option<Int64>
 ```
 
-**功能：** 期望读取文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读
+**功能：** 期望读取文件位置，单位为字节（基于当前filePointer加上offset的位置）。
 
 **类型：** Option\<Int64>
 
@@ -3791,8 +3797,8 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|offset|Option\<Int64>|否|None|期望读取文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读|
-|length|Option\<UIntNative>|否|None|期望读取数据的长度，单位为字节。可选，默认缓冲区长度。|
+|offset|Option\<Int64>|否|None|**命名参数。** 期望读取文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始读。|
+|length|Option\<UIntNative>|否|None|**命名参数。** 期望读取数据的长度，单位为字节。可选，默认缓冲区长度。|
 
 ## class ReadTextOptions
 
@@ -3823,7 +3829,7 @@ public class ReadTextOptions <: ReadOptions {
 public var encoding: String
 ```
 
-**功能：** 当数据是 String 类型时有效，表示数据的编码方式，默认 'utf-8'，仅支持 'utf-8'。
+**功能：** 当数据是 String 类型时有效，表示数据的编码方式，仅支持 'utf-8'。
 
 **类型：** String
 
@@ -3853,9 +3859,9 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|offset|Option\<Int64>|否|None| 期望读取文件的位置，单位为字节。可选，默认从当前位置开始读取。|
-|length|Option\<UIntNative>|否|None| 期望读取数据的长度，单位为字节。可选，默认文件长度。|
-|encoding|String|否|"utf-8"|当数据是 String 类型时有效，表示数据的编码方式，默认 'utf-8'，仅支持 'utf-8'。|
+|offset|Option\<Int64>|否|None|**命名参数。** 期望读取文件的位置，单位为字节。可选，默认从当前位置开始读取。|
+|length|Option\<UIntNative>|否|None|**命名参数。** 期望读取数据的长度，单位为字节。可选，默认文件长度。|
+|encoding|String|否|"utf-8"|**命名参数。** 当数据是 String 类型时有效，表示数据的编码方式，默认 'utf-8'，仅支持 'utf-8'。|
 
 ## class Stat
 
@@ -4324,12 +4330,12 @@ public func close(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900025 | No space left on device |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900025 | No space left on device. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -4371,18 +4377,18 @@ public func flush(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -4424,7 +4430,7 @@ public func read(buffer: Array<Byte>, options!: ReadOptions = ReadOptions()): In
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |buffer|Array\<Byte>|是|-| 用于读取文件的缓冲区。|
-|options|[ReadOptions](#class-readoptions)|否|ReadOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;length，UIntNative类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，Int64类型，表示期望读取文件的位置。可选，默认从当前位置开始读。|
+|options|[ReadOptions](#class-readoptions)|否|ReadOptions()|**命名参数。** 支持如下选项：<br/>-&nbsp;length，?UIntNative类型，表示期望读取数据的长度。可选，默认缓冲区长度。<br/>-&nbsp;offset，?Int64类型，表示期望读取文件的位置。可选，默认从当前位置开始读。|
 
 **返回值：**
 
@@ -4438,16 +4444,16 @@ public func read(buffer: Array<Byte>, options!: ReadOptions = ReadOptions()): In
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900019 | Is a directory |
-  | 13900020 | Invalid argument |
-  | 13900034 | Operation would block |
-  | 13900042 | Unknown error |
-  | 13900044 | Network is unreachable |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900019 | Is a directory. |
+  | 13900020 | Invalid argument. |
+  | 13900034 | Operation would block. |
+  | 13900042 | Unknown error. |
+  | 13900044 | Network is unreachable. |
 
 **示例：**
 
@@ -4504,18 +4510,18 @@ public func write(buffer: String, options!: WriteOptions = WriteOptions()): Int6
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -4572,18 +4578,18 @@ public func write(buffer: Array<Byte>, options!: WriteOptions = WriteOptions()):
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900001 | Operation not permitted |
-  | 13900004 | Interrupted system call |
-  | 13900005 | I/O error |
-  | 13900008 | Bad file descriptor |
-  | 13900010 | Try again |
-  | 13900013 | Bad address |
-  | 13900020 | Invalid argument |
-  | 13900024 | File too large |
-  | 13900025 | No space left on device |
-  | 13900034 | Operation would block |
-  | 13900041 | Quota exceeded |
-  | 13900042 | Unknown error |
+  | 13900001 | Operation not permitted. |
+  | 13900004 | Interrupted system call. |
+  | 13900005 | I/O error. |
+  | 13900008 | Bad file descriptor. |
+  | 13900010 | Try again. |
+  | 13900013 | Bad address. |
+  | 13900020 | Invalid argument. |
+  | 13900024 | File too large. |
+  | 13900025 | No space left on device. |
+  | 13900034 | Operation would block. |
+  | 13900041 | Quota exceeded. |
+  | 13900042 | Unknown error. |
 
 **示例：**
 
@@ -4639,7 +4645,7 @@ public class WriteOptions <: Options {
 public var length: Option<UIntNative>
 ```
 
-**功能：** 期望写入数据的长度，单位为字节。可选，默认缓冲区长度。
+**功能：** 期望写入数据的长度，单位为字节。
 
 **类型：** Option\<UIntNative>
 
@@ -4655,7 +4661,7 @@ public var length: Option<UIntNative>
 public var offset: Option<Int64>
 ```
 
-**功能：** 期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写
+**功能：** 期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。
 
 **类型：** Option\<Int64>
 
@@ -4685,9 +4691,9 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|length|Option\<UIntNative>|否|None|期望写入数据的长度，单位为字节。可选，默认缓冲区长度。|
-|offset|Option\<Int64>|否|None|期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写|
-|encoding|String|否|"utf-8"|当数据是String类型时有效，表示数据的编码方式，默认"utf-8"，仅支持"utf-8"。|
+|length|Option\<UIntNative>|否|None|**命名参数。** 期望写入数据的长度，单位为字节。可选，默认缓冲区长度。|
+|offset|Option\<Int64>|否|None|**命名参数。** 期望写入文件位置，单位为字节（基于当前filePointer加上offset的位置）。可选，默认从偏移指针（filePointer）开始写。|
+|encoding|String|否|"utf-8"|**命名参数。** 当数据是String类型时有效，表示数据的编码方式，默认"utf-8"，仅支持"utf-8"。|
 
 ## enum AccessFlagType
 

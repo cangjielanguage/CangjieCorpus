@@ -4,6 +4,8 @@
 
 在仓颉编程语言中，可以通过 `import fullPackageName.itemName` 的语法导入其他包中的一个顶层声明或定义，`fullPackageName` 为完整路径包名，`itemName` 为声明的名字。导入语句在源文件中的位置必须在包声明之后，其他声明或定义之前。例如：
 
+<!-- code_check_manual -->
+
 ```cangjie
 package a
 import std.math.*
@@ -13,11 +15,15 @@ import {package1.foo, package2.bar}
 
 如果要导入的多个 `itemName` 同属于一个 `fullPackageName`，可以使用 `import fullPackageName.{itemName[, itemName]*}` 语法，例如：
 
+<!-- code_check_manual -->
+
 ```cangjie
 import package1.{foo, bar, fuzz}
 ```
 
 这等价于：
+
+<!-- code_check_manual -->
 
 ```cangjie
 import package1.foo
@@ -26,6 +32,8 @@ import package1.fuzz
 ```
 
 除了通过 `import fullPackagename.itemName` 语法导入一个特定的顶层声明或定义外，还可以使用 `import packageName.*` 语法将 `packageName` 包中所有可见的顶层声明或定义全部导入。例如：
+
+<!-- code_check_manual -->
 
 ```cangjie
 import package1.*
@@ -41,6 +49,8 @@ import {package1.*, package2.*}
 - 禁止包间的循环依赖导入，如果包之间存在循环依赖，编译器会报错。
 
 示例如下：
+
+<!-- code_check_manual -->
 
 ```cangjie
 // pkga/a.cj
@@ -59,13 +69,15 @@ import pkga.*
 package pkgc
 
 import pkga.C // Error, 'C' is not accessible in package 'pkga'.
-import pkga.R // OK, R is an external top-level declaration of package pkga.
 import pkgc.f1 // Error, package 'pkgc' should not import itself.
 
 public func f1() {}
 
 // pkgc/c2.cj
 package pkgc
+
+import pkga.R // OK, R is an external top-level declaration of package pkga.
+import pkga
 
 func f2() {
     /* OK, the imported declaration is visible to all source files of the same package
@@ -78,13 +90,13 @@ func f2() {
 
     // OK, the declaration of current package can be accessed directly.
     f1()
-
-    // OK, accessing declaration of current package by fully qualified name is supported.
-    pkgc.f1()
 }
 ```
 
 在仓颉编程语言中，导入的声明或定义如果和当前包中的顶层声明或定义重名且不构成函数重载，则导入的声明和定义会被遮盖；导入的声明或定义如果和当前包中的顶层声明或定义重名且构成函数重载，函数调用时将会根据函数重载的规则进行函数决议。
+
+<!-- compile -over_res -->
+<!-- cfg="-p pkga --output-type=staticlib"-->
 
 ```cangjie
 // pkga/a.cj
@@ -93,9 +105,15 @@ package pkga
 public struct R {}            // R1
 public func f(a: Int32) {}    // f1
 public func f(a: Bool) {} // f2
+```
 
+<!-- compile -over_res -->
+<!-- cfg="-p pkgb libpkga.a --output-type=staticlib"-->
+
+```cangjie
 // pkgb/b.cj
 package pkgb
+
 import pkga.*
 
 func f(a: Int32) {}         // f3
@@ -104,7 +122,7 @@ struct R {}                 // R2
 func bar() {
     R()     // OK, R2 shadows R1.
     f(1)    // OK, invoke f3 in current package.
-    f(true) // OK, invoke f2 in the imported package
+    f(true) // OK, invoke f2 in the pkga
 }
 ```
 
@@ -172,23 +190,35 @@ func bar() {
         A.f1()  // OK, package name conflict is resolved by renaming package name.
         B.f2()  // OK, package name conflict is resolved by renaming package name.
         p1.f1() // Error, the original package name cannot be used.
-        a()     // Ok.
-        b()     // Ok.
+        a()     // OK.
+        b()     // OK.
         pkgc.f1()    // Error, the original name cannot be used.
     }
     ```
 
 - 如果没有对导入的存在冲突的名字进行重命名，在 `import` 语句处不报错；在使用处，会因为无法导入唯一的名字而报错。这种情况可以通过 `import as` 定义别名或者 `import fullPackageName` 导入包作为命名空间。
 
+    <!-- compile -import1 -->
+    <!-- cfg="-p p1 --output-type=staticlib" -->
+
     ```cangjie
     // a.cj
     package p1
     public class C {}
+    ```
 
+    <!-- compile -import1 -->
+    <!-- cfg="-p p2 --output-type=staticlib" -->
+
+    ```cangjie
     // b.cj
     package p2
     public class C {}
+    ```
 
+    <!-- code_check_manual -->
+
+    ```cangjie
     // main1.cj
     package pkga
     import p1.C
@@ -197,25 +227,35 @@ func bar() {
     main() {
         let _ = C() // Error
     }
+    ```
 
+    <!-- compile -import1 -->
+    <!-- cfg="-p pkgb libp1.a libp2.a" -->
+
+    ```cangjie
     // main2.cj
     package pkgb
     import p1.C as C1
     import p2.C as C2
 
     main() {
-        let _ = C1() // Ok
-        let _ = C2() // Ok
+        let _ = C1() // OK
+        let _ = C2() // OK
     }
+    ```
 
+    <!-- compile -import1 -->
+    <!-- cfg="-p pkgc libp1.a libp2.a" -->
+
+    ```cangjie
     // main3.cj
     package pkgc
     import p1
     import p2
 
     main() {
-        let _ = p1.C() // Ok
-        let _ = p2.C() // Ok
+        let _ = p1.C() // OK
+        let _ = p2.C() // OK
     }
     ```
 
@@ -232,12 +272,8 @@ func bar() {
 
 在下面的例子中，`b` 是 `a` 的子包，在 `a` 中通过 `public import` 重导出了 `b` 中定义的函数 `f`。
 
-```cangjie
-package a
-public import a.b.f
-
-public let x = 0
-```
+<!-- compile -reimport1 -->
+<!-- cfg="-p a/b --output-type=staticlib" -->
 
 ```cangjie
 internal package a.b
@@ -245,9 +281,22 @@ internal package a.b
 public func f() { 0 }
 ```
 
+<!-- compile -reimport1 -->
+<!-- cfg="-p a --output-type=staticlib" -->
+
 ```cangjie
-import a.f  // Ok
-let _ = f() // Ok
+package a
+public import a.b.f
+
+public let x = 0
+```
+
+<!-- compile -reimport1 -->
+<!-- cfg="liba.a liba.b.a" -->
+
+```cangjie
+import a.f  // OK
+let _ = f() // OK
 ```
 
 需要注意的是，包不可以被重导出：如果被 `import` 导入的是包，那么该 `import` 不允许被 `public`、`protected` 或者 `internal` 修饰。

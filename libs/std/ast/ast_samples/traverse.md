@@ -9,7 +9,7 @@ import std.ast.*
 
 class MyVisitor <: Visitor {
     public var uninitializedVars = Tokens() // 存储变量词法单元
-    override public func visit(varDecl: VarDecl) {
+    public override func visit(varDecl: VarDecl) {
         try {
             varDecl.expr
         } catch (e: ASTException) {

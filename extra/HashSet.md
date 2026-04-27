@@ -95,7 +95,7 @@ For example:
 ```
 let a = HashSet<Int64>([1, 2, 3, 3])
 let b = HashSet<Int64>([2, 3, 4, 4])
-a.add(all: b)     // add all em=lements of b to a, so a is now union of a and b
+a.add(all: b)     // add all elements of b to a, so a is now union of a and b
 println(a)      // prints [1, 2, 3, 4]
 ```
 

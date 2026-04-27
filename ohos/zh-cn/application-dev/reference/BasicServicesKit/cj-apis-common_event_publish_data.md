@@ -1,5 +1,11 @@
 # ohos.common_event_publish_data
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 common_event_publish_data模块描述公共事件内容和属性。
 
 ## 导入模块
@@ -68,7 +74,7 @@ public var bundleName: String
 public var code: Int32
 ```
 
-**功能：** 表示发布方传递的公共事件数据（Int32类型）。默认值为0。
+**功能：** 表示发布方传递的公共事件数据（Int32类型）。
 
 **类型：** Int32
 
@@ -100,7 +106,7 @@ public var data: String
 public var isOrdered: Bool
 ```
 
-**功能：** 表示是否是有序事件。默认为false。
+**功能：** 表示是否是有序事件。
 
 - true：有序公共事件，根据订阅者设置的优先级等级，优先将公共事件发送给优先级较高的订阅者，等待其成功接收该公共事件之后再将事件发送给优先级较低的订阅者。如果有多个订阅者具有相同的优先级，则他们将随机接收到公共事件。
 
@@ -120,7 +126,7 @@ public var isOrdered: Bool
 public var isSticky: Bool
 ```
 
-**功能：** 表示是否是粘性事件。默认为false。
+**功能：** 表示是否是粘性事件。
 
 - true：粘性公共事件，能够让订阅者收到在订阅前已经发送的公共事件。
 
@@ -192,9 +198,9 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|bundleName|String|否|""|表示订阅者包名称，只有包名为bundleName的订阅者才能收到该公共事件。|
-|data|String|否|""|表示发布方传递的公共事件数据（string类型）。数据大小不超过64KB。|
-|code|Int32|否|0|表示发布方传递的公共事件数据（Int32类型）。默认值为0。|
+|bundleName|String|否|""| **命名参数。** 表示订阅者包名称，只有包名为bundleName的订阅者才能收到该公共事件。|
+|data|String|否|""| **命名参数。** 表示发布方传递的公共事件数据（String类型）。数据大小不超过64KB。|
+|code|Int32|否|0| **命名参数。** 表示发布方传递的公共事件数据（Int32类型）。默认值为0。|
 |subscriberPermissions|Array\<String>|否|Array\<String>()| **命名参数。** 表示订阅者的权限。|
 |isOrdered|Bool|否|false| **命名参数。** 表示是否是有序事件。默认为false。|
 |isSticky|Bool|否|false| **命名参数。** 表示是否是粘性事件。默认为false。|

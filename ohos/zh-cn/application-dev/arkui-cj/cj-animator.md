@@ -1,5 +1,11 @@
 # 帧动画（ohos.animator）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 帧动画具备逐帧回调的特性，便于开发者在每一帧中处理需调整的属性。通过向应用提供onFrame逐帧回调，帧动画使开发者能够在应用的每一帧设置属性值，从而实现组件属性值变化的自然过渡，营造出动画效果。
 
 与属性动画相比，帧动画能让开发者实时感知动画进程，即时调整UI值，具备事件即时响应和可暂停的优势，但在性能上略逊于属性动画。当属性动画能满足需求时，建议优先采用属性动画接口实现。属性动画接口请参见[实现属性动画](cj-attribute-animation-apis.md)。
@@ -211,7 +217,7 @@ class EntryView {
             Button('播放').onClick({ evt=>
               this.backAnimator?.play()
               this.animatorStatus = '播放中'
-            }).width(80).height(35)
+            }).width(80).height(35).margin(top: 20)
             Button("重置").onClick({ evt=>
               this.translateX = 0
               this.translateY = 0
@@ -227,7 +233,7 @@ class EntryView {
               .borderRadius(45.vp)
               .width(60)
               .height(60)
-              .translate( x: this.translateX, y: this.translateY )
+              .translate( x: this.translateX, y: this.translateY ).margin(left: 20)
           }
           .width(100.percent)
           .height(45.percent)

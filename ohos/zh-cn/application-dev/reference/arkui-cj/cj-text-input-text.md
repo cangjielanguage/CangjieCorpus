@@ -1,5 +1,11 @@
 # Text
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 显示一段文本的组件。
 
 <!--RP3--><!--RP3End-->
@@ -12,7 +18,7 @@ import kit.ArkUI.*
 
 ## 子组件
 
-可以包含[Span](./cj-text-input-span.md#span)、[ImageSpan](./cj-text-input-imagespan.md#imagespan)子组件。
+可以包含[Span](./cj-text-input-span.md)、[ImageSpan](./cj-text-input-imagespan.md)子组件。
 
 ## 创建组件
 
@@ -586,4 +592,4 @@ class EntryView {
 }
 ```
 
-![text](figures/text1.png)
+![text](figures/text_component.png)

@@ -1,5 +1,11 @@
 # LazyForEach：数据懒加载
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 API参数说明见：[LazyForEach API参数说明](../../reference/arkui-cj/cj-state-rendering-lazyforeach.md)。
 
 LazyForEach从提供的数据源中按需迭代数据，并在每次迭代过程中创建相应的组件。当在滚动容器中使用了LazyForEach，框架会根据滚动容器可视区域按需创建组件，当组件滑出可视区域外时，框架会进行组件销毁回收以降低内存占用
@@ -660,7 +666,7 @@ public class EntryView {
 1. onDatasetChange与其它操作数据的接口不能混用。
 2. 传入onDatasetChange的operations，其中每一项operation的index均从修改前的原数组内寻找。因此，operations中的index跟操作Datasource中的index不总是一一对应的，而且不能是负数。
 
-第一个例子清楚地显示了这一点:
+第一个例子清楚地显示了这一点：
 
 ```cangjie
 // 修改之前的数组

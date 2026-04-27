@@ -5,21 +5,21 @@
 ```cangjie
 public interface UnicodeRuneExtension {
     func isLetter(): Bool
-    func isLowerCase(): Bool
     func isNumber(): Bool
-    func isTitleCase(): Bool
+    func isLowerCase(): Bool
     func isUpperCase(): Bool
+    func isTitleCase(): Bool
     func isWhiteSpace(): Bool
-    func toLowerCase(): Rune
-    func toLowerCase(opt: CasingOption): Rune
-    func toTitleCase(): Rune
-    func toTitleCase(opt: CasingOption): Rune
     func toUpperCase(): Rune
+    func toLowerCase(): Rune
+    func toTitleCase(): Rune
     func toUpperCase(opt: CasingOption): Rune
+    func toLowerCase(opt: CasingOption): Rune
+    func toTitleCase(opt: CasingOption): Rune
 }
 ```
 
-功能：`Unicode` 字符集相关扩展的接口，用于为其他类型扩展 `Unicode` 字符集相关的操作。
+功能：`Unicode` 字符集相关扩展的接口。
 
 可用于为 [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) 类型增加一系列与 `Unicode` 字符集相关的扩展函数，包括字符类型判断，字符大小写转换，删除空白字符等。
 
@@ -67,7 +67,7 @@ func isTitleCase(): Bool
 
 功能：判断该类型是否是 `Unicode` 标题化字符。
 
-`Unicode` 中的标题化字符指的是一种特殊的字母形式，它们在某些语言中用于表示标题中每个单词的首字母大写的形式。这些字母由特殊的字符表示，例如U+01C5（ǅ）和U+01F1（Ǳ）。这些字符通常用于一些东欧语言，如克罗地亚语和塞尔维亚语。
+`Unicode` 中的标题化字符指的是一种特殊的字母形式，它们在某些语言中用于表示标题中每个单词的首字母大写的形式。这些字母由特殊的字符表示，例如 U+01C5（ǅ）和 U+01F1（Ǳ）。这些字符通常用于一些东欧语言，如克罗地亚语和塞尔维亚语。
 
 标题化字符包括：`0x01C5`、`0x01C8`、`0x01CB`、`0x01F2`、`0x1F88 - 0x1F8F`、`0x1F98 - 0x1F9F`、`0x1F98 - 0x1F9F`、`0x1FA8 - 0x1FAF`、`0x1FBC`、`0x1FCC`、`0x1FFC`
 
@@ -81,7 +81,7 @@ func isTitleCase(): Bool
 func isUpperCase(): Bool
 ```
 
-功能：：判断该类型是否是 `Unicode` 大写字符。
+功能：判断该类型是否是 `Unicode` 大写字符。
 
 返回值：
 
@@ -113,30 +113,6 @@ func toLowerCase(): Rune
 
 - [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的小写字符。
 
-### func toTitleCase()
-
-```cangjie
-func toTitleCase(): Rune
-```
-
-功能：获取该类型对应的 `Unicode` 标题大写字符。
-
-返回值：
-
-- [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的标题大写字符。
-
-### func toUpperCase()
-
-```cangjie
-func toUpperCase(): Rune
-```
-
-功能：获取该类型对应的 `Unicode` 大写字符。
-
-返回值：
-
-- [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的小写字符。
-
 ### func toLowerCase(CasingOption)
 
 ```cangjie
@@ -153,6 +129,18 @@ func toLowerCase(opt: CasingOption): Rune
 
 - [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的小写字符。
 
+### func toTitleCase()
+
+```cangjie
+func toTitleCase(): Rune
+```
+
+功能：获取该类型对应的 `Unicode` 标题大写字符。
+
+返回值：
+
+- [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的标题大写字符。
+
 ### func toTitleCase(CasingOption)
 
 ```cangjie
@@ -168,6 +156,18 @@ func toTitleCase(opt: CasingOption): Rune
 返回值：
 
 - [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的标题大写字符。
+
+### func toUpperCase()
+
+```cangjie
+func toUpperCase(): Rune
+```
+
+功能：获取该类型对应的 `Unicode` 大写字符。
+
+返回值：
+
+- [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 当前类型对应的小写字符。
 
 ### func toUpperCase(CasingOption)
 
@@ -191,7 +191,7 @@ func toUpperCase(opt: CasingOption): Rune
 extend Rune <: UnicodeRuneExtension
 ```
 
-功能：为 [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) 类型扩展 [UnicodeRuneExtension](unicode_package_interfaces.md#interface-UnicodeRuneExtension) 接口，支持字符集相关的操作。
+功能：为 [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) 类型扩展 [UnicodeRuneExtension](unicode_package_interfaces.md#interface-unicoderuneextension) 接口，支持字符集相关的操作。
 
 父类型：
 
@@ -295,7 +295,7 @@ public func isTitleCase(): Bool
 
 功能：判断字符是否是 `Unicode` 标题化字符。
 
-`Unicode` 中的标题化字符指的是一种特殊的字母形式，它们在某些语言中用于表示标题中每个单词的首字母大写的形式。这些字母由特殊的字符表示，例如U+01C5（ǅ）和U+01F1（Ǳ）。这些字符通常用于一些东欧语言，如克罗地亚语和塞尔维亚语。
+`Unicode` 中的标题化字符指的是一种特殊的字母形式，它们在某些语言中用于表示标题中每个单词的首字母大写的形式。这些字母由特殊的字符表示，例如 U+01C5（ǅ）和 U+01F1（Ǳ）。这些字符通常用于一些东欧语言，如克罗地亚语和塞尔维亚语。
 
 标题化字符包括：`0x01C5`、`0x01C8`、`0x01CB`、`0x01F2`、`0x1F88 - 0x1F8F`、`0x1F98 - 0x1F9F`、`0x1F98 - 0x1F9F`、`0x1FA8 - 0x1FAF`、`0x1FBC`、`0x1FCC`、`0x1FFC`
 
@@ -325,7 +325,7 @@ true
 public func isUpperCase(): Bool
 ```
 
-功能：：判断字符是否是 `Unicode` 大写字符。
+功能：判断字符是否是 `Unicode` 大写字符。
 
 返回值：
 
@@ -571,14 +571,14 @@ public interface UnicodeStringExtension {
     func toUpper(): String
     func toUpper(opt: CasingOption): String
     func trim(): String
-    func trimEnd(): String
-    func trimLeft(): String
     func trimRight(): String
+    func trimLeft(): String
     func trimStart(): String
+    func trimEnd(): String
 }
 ```
 
-功能：`Unicode` 字符集相关扩展的接口，用于为其他类型扩展 `Unicode` 字符集相关的操作。
+功能：`Unicode` 字符集相关扩展的接口。
 
 可用于为 [String](../../core/core_package_api/core_package_structs.md#struct-string) 类型增加一系列与 `Unicode` 字符集相关的扩展函数，包括字符类型判断，字符大小写转换，删除空白字符等。
 
@@ -798,7 +798,7 @@ func trimStart(): String
 extend String <: UnicodeStringExtension
 ```
 
-功能：为 [String](../../../std/core/core_package_api/core_package_structs.md#struct-string) 类型扩展 [UnicodeRuneExtension](unicode_package_interfaces.md#interface-UnicodeStringExtension) 接口，支持字符集相关的操作。
+功能：为 [String](../../../std/core/core_package_api/core_package_structs.md#struct-string) 类型扩展 [UnicodeRuneExtension](unicode_package_interfaces.md#interface-unicoderuneextension) 接口，支持字符集相关的操作。
 
 父类型：
 
@@ -1060,14 +1060,15 @@ public func trim(): String
 import std.unicode.*
 
 main(): Unit {
-    println("\nx \t ".trim())
+    let str = "  x  "
+    println("\"${str.trim()}\"")
 }
 ```
 
 运行结果：
 
 ```text
-x
+"x"
 ```
 
 #### func trimEnd()
@@ -1092,14 +1093,15 @@ public func trimEnd(): String
 import std.unicode.*
 
 main(): Unit {
-    println("  x  ".trimEnd())
+    let str = "  x  "
+    println("\"${str.trimEnd()}\"")
 }
 ```
 
 运行结果：
 
 ```text
-  x
+"  x"
 ```
 
 #### func trimLeft() <sup>(deprecated)</sup>
@@ -1123,19 +1125,20 @@ public func trimLeft(): String
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 如果字符串中不存在有效的 UTF-8 编码，抛出异常。
 
 示例：
-
+<!-- verify -->
 ```cangjie
 import std.unicode.*
 
 main(): Unit {
-    println("  x  ".trimLeft())
+    let str = "  x  "
+    println("\"${str.trimLeft()}\"")
 }
 ```
 
 运行结果：
 
 ```text
-x
+"x  "
 ```
 
 #### func trimRight() <sup>(deprecated)</sup>
@@ -1159,19 +1162,20 @@ public func trimRight(): String
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 如果字符串中不存在有效的 UTF-8 编码，抛出异常。
 
 示例：
-
+<!-- verify -->
 ```cangjie
 import std.unicode.*
 
 main(): Unit {
-    println("  x  ".trimRight())
+    let str = "  x  "
+    println("\"${str.trimRight()}\"")
 }
 ```
 
 运行结果：
 
 ```text
-  x
+"  x"
 ```
 
 #### func trimStart()
@@ -1196,12 +1200,13 @@ public func trimStart(): String
 import std.unicode.*
 
 main(): Unit {
-    println("  x  ".trimStart())
+    let str = "  x  "
+    println("\"${str.trimStart()}\"")
 }
 ```
 
 运行结果：
 
 ```text
-x
+"x  "
 ```

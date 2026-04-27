@@ -1,5 +1,11 @@
 # 通过关系型数据库实现数据持久化
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 关系型数据库基于SQLite组件，适用于存储包含复杂关系数据的场景，比如一个班级的学生信息，需要包括姓名、学号、各科成绩等，又或者公司的雇员信息，需要包括姓名、工号、职位等。由于数据之间有较强的对应关系，复杂程度比键值型数据更高，此时需要使用关系型数据库来持久化保存数据。
@@ -38,13 +44,13 @@
 
 | 接口名称 | 描述 |
 | -------- | -------- |
-| getRdbStore(context: StageContext, config: StoreConfig): RdbStore | 获取一个RdbStore用于操作关系型数据库。开发者可按需配置RdbStore的参数，并通过RdbStore调用相关接口执行数据操作。 |
-| executeSql(sql: String, bindArgs: Array\<RelationalStoreValueType>): Unit | 执行包含指定参数但不返回值的SQL语句。 |
-| insert(table: String, values: Map\<String, RelationalStoreValueType>): Int64 | 向目标表中插入一行数据。 |
-| update(values: Map\<String, RelationalStoreValueType>, predicates: RdbPredicates): Int64 | 根据predicates的指定实例对象更新数据库中的数据。 |
+| getRdbStore(context: UIAbilityContext, config: StoreConfig): RdbStore | 获取一个RdbStore用于操作关系型数据库。开发者可按需配置RdbStore的参数，并通过RdbStore调用相关接口执行数据操作。 |
+| executeSql(sql: String, bindArgs!: Array\<RelationalStoreValueType> = []): Unit | 执行包含指定参数但不返回值的SQL语句。 |
+| insert(table: String, values: ValuesBucket, conflict!: ConflictResolution = ConflictResolution.OnConflictNone): Int64 | 向目标表中插入一行数据。 |
+| update(values: ValuesBucket, predicates: RdbPredicates, conflict!: ConflictResolution = ConflictResolution.OnConflictNone): Int64 | 根据predicates的指定实例对象更新数据库中的数据。 |
 | delete(predicates: RdbPredicates): Int64 | 根据predicates的指定实例对象从数据库中删除数据。 |
-| query(predicates: RdbPredicates, columns: Array\<String>): ResultSet| 根据指定条件查询数据库中的数据。 |
-| deleteRdbStore(context: StageContext, name: String): Unit | 删除数据库。 |
+| query(predicates: RdbPredicates, columns!: Array\<String> = []): ResultSet| 根据指定条件查询数据库中的数据。 |
+| deleteRdbStore(context: UIAbilityContext, name: String): Unit | 删除数据库。 |
 
 ## 开发步骤
 
@@ -52,19 +58,22 @@
 
 1. 使用关系型数据库实现数据持久化，需要获取一个RdbStore，其中包括建库、建表、升降级等操作。示例代码如下所示：
 
+    为实现相关功能，需要导入如下包：
+
     <!-- compile -->
 
     ```cangjie
-    import ohos.business_exception.BusinessException
     import kit.ArkData.*
-    import kit.AbilityKit.getStageContext
-    import std.collection.HashMap
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
-    import ohos.data.relational_store.RdbStore
-    import kit.ArkData.{StoreConfig, getRdbStore, RdbPredicates, deleteRdbStore}
-    import ohos.data.relational_store.RelationalStoreSecurityLevel
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason}
     import kit.ArkUI.{WindowStage}
+    import kit.PerformanceAnalysisKit.Hilog
+    import ohos.business_exception.BusinessException
+    import std.collection.HashMap
+    ```
 
+    <!-- compile -->
+
+    ```cangjie
     let storeConfig = StoreConfig(
     RelationalStoreSecurityLevel.S3,// 数据库安全级别
     name: "RdbTest.db", // 数据库文件名
@@ -113,14 +122,6 @@
     > - 错误码的详细介绍请参见[通用错误码](../reference/cj-errorcode-universal.md)和[关系型数据库错误码](../reference/ArkData/cj-errorcode-data-rdb.md)。
 
 2. 获取到RdbStore后，调用insert()接口插入数据。示例代码如下所示：
-
-    为实现插入数据功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    import ohos.data.relational_store.RelationalStoreValueType 
-    ```
 
     实现插入数据功能的核心代码是：
 

@@ -1,5 +1,11 @@
 # 打包工具
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 打包工具用于在程序编译完成后，对编译出的文件等进行打包，以供安装发布。开发者可以使用DevEco Studio进行打包，也可使用打包工具的JAR包进行打包，JAR包通常存放在SDK路径下的toolchains目录中。
 
 打包工具支持生成：Ability类型的模块包（HAP）、动态共享包（HSP）、应用程序包（App）、快速修复模块包（HQF）、快速修复包（APPQF）。
@@ -48,8 +54,8 @@
 | --ets-path | 否 | NA  | 存放ets文件目录路径。| 仅stage模型生效。 |
 | --out-path  | 是| NA  | 目标文件路径，文件名必须以.hap为后缀。 | NA |
 | --force  | 否 | true或者false | 默认值为false。如果为true，表示当目标文件存在时，强制删除。| NA  |
-| --an-path | 否  | NA | 存放[an文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs-V5/faqs-arkts-52-V5)的路径。| 仅stage模型生效。 |
-| --ap-path | 否| NA | 存放[ap文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs-V5/faqs-arkts-52-V5)的路径。| 仅stage模型生效。 |
+| --an-path | 否  | NA | 存放[an文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-arkts-52)的路径。| 仅stage模型生效。 |
+| --ap-path | 否| NA | 存放[ap文件](https://developer.huawei.com/consumer/cn/doc/harmonyos-faqs/faqs-arkts-52)的路径。| 仅stage模型生效。 |
 | --dir-list | 否 | NA | 可指定目标文件夹列表，将其打入HAP包内。 | NA  |
 | --compress-level | 否| number| 压缩等级，默认值1。可选等级1-9。在应用配置compressNativeLibs参数为true的情况下生效，数值越大压缩率越高、压缩速度越慢。 | NA  |
 | --pkg-context-path   | 否 | NA  | 可指定语境信息表文件路径，文件名必须为pkgContextInfo.json。 | 仅stage模型生效。|
@@ -216,7 +222,7 @@ java -jar path\app_packing_tool.jar --mode versionNormalize --input-list 1.hap,2
 java -jar path\app_packing_tool.jar --mode packageNormalize --hsp-list path\1.hsp,path\2.hsp --bundle-name com.example.myapplication --version-code 1000001 --out-path path\out\
 ```
 
-**表8**  参数含义及规范
+**表8** 参数含义及规范
 
 | 指令 | 是否必选项 | 选项   | 描述  |
 |------|-------|------|---|

@@ -1,5 +1,11 @@
 # ohos.app.ability.ability_delegator_registry（AbilityDelegatorRegistry）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ability_delegator_registry模块提供用于存储已注册的[AbilityDelegator](#class-abilitydelegator)和[AbilityDelegatorArgs](#class-abilitydelegatorargs)对象的全局寄存器的能力，包括获取应用程序的[AbilityDelegator](#class-abilitydelegator)对象、获取单元测试参数对象。该模块中的接口只能用于测试框架中。
 
 ## 导入模块
@@ -23,7 +29,7 @@ API示例代码使用说明：
 public class AbilityDelegator {}
 ```
 
-**功能：** AbilityDelegator用于创建并管理一个[AbilityMonitor](#class-abilitymonitor)对象（该对象用于监视指定[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)生命周期状态的更改），包括对[AbilityMonitor](#class-abilitymonitor)实例的添加、删除，等待[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)到达OnCreate生命周期、设置等待时间、获取指定Ability的生命周期状态、获取当前应用顶部[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)、启动指定[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)等。
+**功能：** AbilityDelegator用于创建并管理一个[AbilityMonitor](#class-abilitymonitor)对象（该对象用于监视指定[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)生命周期状态的变更），包括对[AbilityMonitor](#class-abilitymonitor)实例的添加、删除，等待[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)到达OnCreate生命周期、设置等待时间、获取指定Ability的生命周期状态、获取当前应用顶部[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)、启动指定[UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)等。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -237,7 +243,7 @@ public func executeShellCommand(cmd: String, timeoutSecs!: Int64 = 0): ShellCmdR
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |cmd|String|是|-|Shell命令字符串。|
-|timeoutSecs|Int64|否|0|设定命令超时时间，单位秒（s）。|
+|timeoutSecs|Int64|否|0|**命名参数。** 设定命令超时时间，单位秒（s）。|
 
 **返回值：**
 
@@ -651,7 +657,7 @@ public func waitAbilityMonitor(monitor: AbilityMonitor, timeout!: Int64 = 5000):
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |monitor|[AbilityMonitor](#class-abilitymonitor)|是|-|[AbilityMonitor](#class-abilitymonitor)实例。|
-|timeout|Int64|否|5000|最大等待时间，单位毫秒（ms），默认值为5000毫秒。   |
+|timeout|Int64|否|5000|**命名参数。** 最大等待时间，单位毫秒（ms），默认值为5000毫秒。   |
 
 **返回值：**
 
@@ -710,7 +716,7 @@ public func waitAbilityStageMonitor(monitor: AbilityStageMonitor, timeout!: Int6
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |monitor|[AbilityStageMonitor](#class-abilitystagemonitor)|是|-|[AbilityStageMonitor](#class-abilitystagemonitor)实例。|
-|timeout|Int64|否|5000|超时最大等待时间，单位毫秒（ms），默认值为5000毫秒。|
+|timeout|Int64|否|5000|**命名参数。** 超时最大等待时间，单位毫秒（ms），默认值为5000毫秒。|
 
 **返回值：**
 
@@ -1126,7 +1132,7 @@ public init(
 |onAbilityDestroy|?([UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)) -> Unit|否|None| **命名参数。** UIAbility对象被销毁前，触发该回调函数。|
 |onWindowStageCreate|?([UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)) -> Unit|否|None| **命名参数。** 当WindowStage实例被创建时，触发该回调函数。|
 |onWindowStageRestore|?([UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)) -> Unit|否|None| **命名参数。** 当UIAbility跨端迁移时，目标端UIAbility恢复页面栈时，触发该回调函数。|
-|onWindowStageDestroy|?([UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)) -> Unit|否|None| **命名参数。**当WindowStage被销毁前，触发该回调函数。|
+|onWindowStageDestroy|?([UIAbility](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)) -> Unit|否|None| **命名参数。** 当WindowStage被销毁前，触发该回调函数。|
 
 **示例：**
 

@@ -43,13 +43,13 @@ main(): Int64 {
 count = 1000
 ```
 
-## Monitor <sup>(deprecated)<sup> 的使用
+## Monitor <sup>(deprecated)</sup> 的使用
 
 > **注意：**
 >
 > 未来版本即将废弃，使用 [Condition](../sync_package_api/sync_package_interfaces.md#interface-condition) 替代。
 
-示例:
+示例：
 
 在不同线程中，使用 `Monitor` 实现挂起和唤醒线程：
 
@@ -101,16 +101,18 @@ New thread: after wait
 
 ## Mutex 的使用
 
-示例:
+示例：
 
-在不同线程中，使用 `Mutex` 锁和解锁：
+在不同线程中，使用 `Mutex` 加锁和解锁：
 
 <!-- verify -->
 ```cangjie
 import std.sync.*
 
 var mt = Mutex()
-var con = synchronized(mt) { mt.condition() }
+var con = synchronized(mt) {
+    mt.condition()
+}
 var flag: Bool = true
 
 main(): Int64 {
@@ -172,7 +174,7 @@ main(): Int64 {
     let fut = spawn {
         synchronized(mutex) {
             println("New thread: before wait")
-            condition.waitUntil {=> !flag.load() } // 挂起当前线程，等待直到 flag 值为 true
+            condition.waitUntil {=> !flag.load()} // 挂起当前线程，等待直到 flag 值为 true
             println("New thread: after wait")
         }
     }
@@ -204,7 +206,7 @@ New thread: after wait
 
 ## Timer 的使用
 
-示例:
+示例：
 
 使用 `Timer` 创建一次性和重复性任务：
 
@@ -215,15 +217,21 @@ import std.sync.*
 main(): Int64 {
     let count = AtomicInt8(0)
 
-    Timer.once(50 * Duration.millisecond) { =>
-        println("run only once")
-        count.fetchAdd(1)
+    Timer.once(50 * Duration.millisecond) {
+        =>
+            println("run only once")
+            count.fetchAdd(1)
     }
 
-    let timer = Timer.repeat(100 * Duration.millisecond, 200 * Duration.millisecond, { =>
-        println("run repetitively")
-        count.fetchAdd(10)
-    })
+    let timer = Timer.repeat(
+        100 * Duration.millisecond,
+        200 * Duration.millisecond,
+        {
+            =>
+                println("run repetitively")
+                count.fetchAdd(10)
+        }
+    )
 
     sleep(Duration.second)
     timer.cancel()

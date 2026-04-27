@@ -47,13 +47,13 @@ for (element in arr) {
 }
 ```
 
-Note there is no pattern matching before `in`. If the elements of an array are tuples,
-access entries of the tuple individually, e.g.:
+If the elements of an array are tuples, the loop variable can be written as a tuple
+pattern to destructure each element, e.g.:
 
 ```
 var a = [(2, 3), (3, 4)]
-for (pair in a) {
-    println("(${pair[0]}, ${pair[1]})")
+for ((x, y) in a) {
+    println("(${x}, ${y})")
 }
 ```
 

@@ -1,5 +1,11 @@
 # ohos.common_event_data
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 common_event_data模块描述公共事件的数据。
 
 ## 导入模块
@@ -41,7 +47,7 @@ public class CommonEventData {
 public var bundleName: String
 ```
 
-**功能：** 表示包名称，当前默认为空。
+**功能：** 表示包名称。
 
 **类型：** String
 
@@ -57,7 +63,7 @@ public var bundleName: String
 public var code: Int32
 ```
 
-**功能：** 表示订阅者接收到的公共事件数据（Int32类型）。该字段取值与发布者使用[commonEventManager.publish](./cj-apis-common_event_manager.md#static-func-publishstring-commoneventpublishdata)发布公共事件时，通过[CommonEventPublishData](./cj-apis-common_event_publish_data.md#class-commoneventpublishdata)中的`code`字段传递的数据一致。默认值为0。
+**功能：** 表示订阅者接收到的公共事件数据（Int32类型）。该字段取值与发布者使用[commonEventManager.publish](./cj-apis-common_event_manager.md#static-func-publishstring-commoneventpublishdata)发布公共事件时，通过[CommonEventPublishData](./cj-apis-common_event_publish_data.md#class-commoneventpublishdata)中的`code`字段传递的数据一致。
 
 **类型：** Int32
 

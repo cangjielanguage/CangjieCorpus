@@ -18,7 +18,7 @@ public class AssertException <: Exception {
 ### init()
 
 ```cangjie
-public init(message: String)
+public init()
 ```
 
 功能：构造函数。
@@ -58,7 +58,7 @@ public let expression: String
 
 功能：检查的表达式。
 
-类型：[String](../../core/core_package_api/core_package_structs.md#struct-string)。
+类型：[String](../../core/core_package_api/core_package_structs.md#struct-string)
 
 ### let originalException
 
@@ -68,9 +68,9 @@ public let originalException: Exception
 
 功能：原始的类型信息。
 
-类型：[Exception](../../core/core_package_api/core_package_exceptions.md#class-exception)。
+类型：[Exception](../../core/core_package_api/core_package_exceptions.md#class-exception)
 
-### func getOriginalStackTrace
+### func getOriginalStackTrace()
 
 ```cangjie
 public func getOriginalStackTrace(): String
@@ -85,7 +85,7 @@ public func getOriginalStackTrace(): String
 ## class UnittestCliOptionsFormatException
 
 ```cangjie
-public class UnittestCliOptionsFormatException <: UnittestException
+public class UnittestCliOptionsFormatException <: UnittestException {}
 ```
 
 功能：控制台选项格式错误抛出的异常。
@@ -97,10 +97,35 @@ public class UnittestCliOptionsFormatException <: UnittestException
 ## class UnittestException
 
 ```cangjie
-public open class UnittestException <: Exception
+public open class UnittestException <: Exception {}
 ```
 
 功能：框架通用异常。
+
+父类型：
+
+- [Exception](../../core/core_package_api/core_package_exceptions.md#class-exception)
+
+### func getClassName()
+
+```cangjie
+protected open override func getClassName(): String
+```
+
+功能：获得类名。
+
+返回值：
+
+- [String](../../core/core_package_api/core_package_structs.md#struct-string) - 类名字符串。
+
+## class UnittestTimeoutException
+
+```cangjie
+public class UnittestTimeoutException <: Exception {
+}
+```
+
+功能：运行超时时抛出的异常。仅可被框架使用。
 
 父类型：
 

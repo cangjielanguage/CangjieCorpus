@@ -1,5 +1,11 @@
 # Webview错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 > **说明：**
 >
 > 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
@@ -8,7 +14,7 @@
 
 **错误信息**
 
-Init error. The WebviewController must be associated with a Web compoent.
+Init error. The WebviewController must be associated with a Web component.
 
 **错误描述**
 

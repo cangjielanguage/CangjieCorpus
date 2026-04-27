@@ -1,5 +1,11 @@
 # 使用DevTools工具调试前端页面
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Web组件支持使用DevTools工具调试前端页面。DevTools是一个Web前端开发调试工具，提供了电脑上调试移动设备前端页面的能力。开发者利用DevTools工具可以在电脑上调试移动设备上的前端网页，设备需为4.1.0及以上版本。
 
 ## 调试步骤
@@ -145,7 +151,7 @@ Web组件支持使用DevTools工具调试前端页面。DevTools是一个Web前�
 
         ![hdc_fport_ls_38532](figures/devtools_resources_hdc_fport_ls_38532.png)
 
-    - 如果返回 `[Empty]`， 则说明端口转发失败。
+    - 如果返回 `[Empty]`，则说明端口转发失败。
 
         ![hdc_fport_ls_empty](figures/devtools_resources_hdc_fport_ls_empty.jpg)
 
@@ -411,11 +417,11 @@ hdc fport ls
 - 请删除hdc里其他不必要的转发任务。
 - 转发成功后，请用电脑端的Chrome浏览器打开网址 <http://localhost:9222/json> ，URL里的9222需要改为自己实际配置的TCP端口。
 
-    - 如果网页有内容， 说明端口转发成功，请在Chrome的调试页面[等待被调试页面的出现](#等待发现被调试页面)。
+    - 如果网页有内容，说明端口转发成功，请在Chrome的调试页面[等待被调试页面的出现](#等待发现被调试页面)。
 
       ![chrome_localhost](figures/devtools_resources_chrome_localhost.jpg)
 
-    - 如果展示的是错误网页， 说明端口转发失败， 解决方法见上面的[端口转发不成功](#端口转发不成功)。
+    - 如果展示的是错误网页，说明端口转发失败，解决方法见上面的[端口转发不成功](#端口转发不成功)。
 
       ![chrome_localhost_refused](figures/devtools_resources_chrome_localhost_refused.jpg)
 

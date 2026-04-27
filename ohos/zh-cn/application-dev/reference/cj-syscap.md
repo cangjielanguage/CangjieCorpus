@@ -1,5 +1,11 @@
 # 系统能力SystemCapability使用指南
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 ### 系统能力与 API
@@ -36,19 +42,11 @@ SDK向DevEco Studio提供全量API，DevEco Studio识别开发者项目中选择
 
 ## SysCap开发指导
 
-<!--RP1--><!--RP1End-->
+<!--RP1-->
 
 ### PCID获取
 
 PCID，全称Product Compatibility ID，包含当前设备支持的SysCap信息。获取所有设备PCID的认证中心正在建设中，目前需要找对应设备的厂商获取该设备的PCID。
-
-### PCID导入
-
-DevEco Studio工程支持PCID的导入。导入的PCID文件解码后输出的SysCap会被写入syscap.json文件中。
-
-在工程目录右键后选择Import Product Compatibility ID，即可上传PCID文件并导入至syscap.json中。
-
-![20220329-103626](figures/20220329-103626.gif)
 
 ### 配置联想能力集和要求能力集
 
@@ -83,6 +81,7 @@ DevEco Studio会根据创建的工程所支持的设置自动配置联想能力�
  }
 }
 ```
+<!--RP1End-->
 
 ### 单设备应用开发
 
@@ -98,7 +97,7 @@ DevEco Studio会根据创建的工程所支持的设置自动配置联想能力�
 
 ### 判断API是否可以使用
 
-当前提供了Cangjie API用于帮助判断某个API是否可以使用。
+当前提供了仓颉 API用于帮助判断某个API是否可以使用。
 
 <!-- compile -->
 
@@ -114,7 +113,7 @@ if(canIUse("SystemCapability.ArkUI.ArkUI.Full")){
 
 ### 不同设备相同能力的差异检查
 
-即使是相同的系统能力，在不同的设备下，也会有能力的差异。比如同是摄像头的能力，平板设备优于智能穿戴设备。
+即使是相同的系统能力，在不同的设备下，也会有能力的差异。
 
 以下示例通过获取蓝牙已连接设备进行举例：
 
@@ -146,7 +145,7 @@ try {
 
 3. 产品解决方案厂商按硬件能力和产品诉求，可按需拼装部件。
 
-4. 产品配置的部件可以是系统部件，也可以是三方开发的私有部件，由于部件与SysCap间存在映射，所有拼装后即可得到该产品的SysCap集合。
+4. 产品配置的部件可以是系统部件，也可以是三方开发的私有部件，由于部件与SysCap间存在映射，所以拼装后即可得到该产品的SysCap集合。
 
 5. SysCap集编码生成 PCID (Product Compatibility ID， 产品兼容性标识)，应用开发者可将PCID导入DevEco Studio，解码成SysCap，开发时对设备的SysCap差异做兼容性处理。
 

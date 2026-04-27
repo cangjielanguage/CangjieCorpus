@@ -1,5 +1,11 @@
 # 可ACL申请的系统应用可用权限（系统授权）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在申请目标权限前，建议开发者先了解[不同权限的申请路径](./cj-determine-application-mode.md)，对权限的工作流程有基本了解后，再结合以下权限字段的具体说明，判断应用能否申请目标权限，提高开发效率。
 
 > **说明：**
@@ -1796,7 +1802,7 @@
 
 **起始版本：** 12
 
-## ohos.permission.START_ABILIIES_FROM_BACKGROUND
+## ohos.permission.START_ABILITIES_FROM_BACKGROUND
 
 允许应用在后台启动FA。
 
@@ -3650,18 +3656,6 @@
 
 **起始版本：** 12
 
-## ohos.permission.ACCESS_MULTICORE_HYBRID_ABILITY
-
-允许应用访问智能手表系统服务。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**ACL使能：** true
-
-**起始版本：** 12
-
 ## ohos.permission.ACCESS_DEVICE_COLLABORATION_SERVICE
 
 允许应用使用多屏服务的能力。
@@ -4072,20 +4066,6 @@
 
 **起始版本：** 14
 
-## ohos.permission.ACCESS_VIRTUAL_KEYBOARD
-
-允许应用/服务更新/查询虚拟键盘状态。
-
-通过该权限，应用可以更新虚拟键盘状态，服务可以查询虚拟键盘状态。当前仅2in1设备场景下可申请此权限。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**ACL使能：** true
-
-**起始版本：** 14
-
 ## ohos.permission.READ_APP_LOCK
 
 允许系统应用读取应用锁状态。
@@ -4268,20 +4248,6 @@
 
 **起始版本：** 18
 
-## ohos.permission.VIRTUAL_KEYBOARD_WINDOW
-
-允许系统应用创建虚拟键盘窗口。
-
-系统应用获取此权限后，才可以成功创建虚拟键盘窗口。当前仅2in1设备系统应用可申请此权限。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**ACL使能：** true
-
-**起始版本：** 15
-
 ## ohos.permission.GET_FAMILY_INFO
 
 允许系统应用获取“家人共享”中的群组信息。
@@ -4401,7 +4367,7 @@
 
 允许系统应用访问开机向导应用的普通数据、普通公共事件。
 
-仅手机、平板、2in1设备应用可申请此权限。
+仅手机、平板设备应用可申请此权限。
 
 **权限级别：** system_basic
 
@@ -4569,20 +4535,6 @@
 
 **起始版本：** 19
 
-## ohos.permission.ENTERPRISE_ACCESS_DLP_FILE
-
-允许应用调用企业空间访问DLP文件的接口。
-
-**权限级别：** system_core
-
-**授权方式：** 系统授权（system_grant）
-
-**ACL使能：** true
-
-**支持设备：** PC/2in1
-
-**起始版本：** 20
-
 ## ohos.permission.UNINSTALL_PLUGIN_BUNDLE
 
 允许应用调用卸载插件的接口。
@@ -4719,7 +4671,7 @@
 
 **ACL使能：** true
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -4733,7 +4685,7 @@
 
 **ACL使能：** true
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -4773,7 +4725,7 @@
 
 **ACL使能：** true
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 

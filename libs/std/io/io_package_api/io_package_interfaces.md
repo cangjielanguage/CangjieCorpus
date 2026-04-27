@@ -1,18 +1,5 @@
 # 接口
 
-## interface IOStream
-
-```cangjie
-public interface IOStream <: InputStream & OutputStream {}
-```
-
-功能：输入输出流接口。
-
-父类型：
-
-- [InputStream](#interface-inputstream)
-- [OutputStream](#interface-outputstream)
-
 ## interface InputStream
 
 ```cangjie
@@ -39,6 +26,19 @@ func read(buffer: Array<Byte>): Int64
 
 - [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 读取的数据的字节数。
 
+## interface IOStream
+
+```cangjie
+public interface IOStream <: InputStream & OutputStream {}
+```
+
+功能：输入输出流接口。
+
+父类型：
+
+- [InputStream](#interface-inputstream)
+- [OutputStream](#interface-outputstream)
+
 ## interface OutputStream
 
 ```cangjie
@@ -56,7 +56,7 @@ public interface OutputStream {
 func flush(): Unit
 ```
 
-功能：清空缓存区。该函数提供默认实现，默认实现为空。
+功能：清空缓存区。该函数的默认实现为空。
 
 ### func write(Array\<Byte>)
 
@@ -74,10 +74,10 @@ func write(buffer: Array<Byte>): Unit
 
 ```cangjie
 public interface Seekable {
-    prop length: Int64
+    func seek(sp: SeekPosition): Int64
     prop position: Int64
     prop remainLength: Int64
-    func seek(sp: SeekPosition): Int64
+    prop length: Int64
 }
 ```
 
@@ -89,7 +89,7 @@ public interface Seekable {
 prop length: Int64
 ```
 
-功能：返回当前流中的总数据量。
+功能：返回当前流中的总数据量（以字节为单位）。
 
 类型：[Int64](../../core/core_package_api/core_package_intrinsics.md#int64)
 
@@ -109,7 +109,7 @@ prop position: Int64
 prop remainLength: Int64
 ```
 
-功能：返回当前流中未读的数据量。
+功能：返回当前流中未读的数据量（以字节为单位）。
 
 类型：[Int64](../../core/core_package_api/core_package_intrinsics.md#int64)
 

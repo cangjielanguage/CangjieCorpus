@@ -1,10 +1,16 @@
-# 通用属性协议开发指导
+# 连接和传输数据
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 ## 简介
 
 本指南主要提供了基于通用属性协议（Generic Attribute Profile，GATT）实现BLE设备间连接和传输数据的开发指导。当两个设备间进行GATT通信交互时，依据设备功能的不同，可区分为GATT客户端和GATT服务端，本指南将分别介绍客户端与服务端的实现方法。
 
-GATT是低功耗蓝牙（BLE）的核心协议，定义了基于服务（Service）、特征值（Characteristic）和描述符（Descriptor）进行蓝牙通信和传输数据的机制。相关术语介绍请参考[Connectivity Kit术语](../terminology.md)。
+GATT是低功耗蓝牙（BLE）的核心协议，定义了基于服务（Service）、特征值（Characteristic）和描述符（Descriptor）进行蓝牙通信和传输数据的机制。相关术语介绍请参考[Connectivity Kit术语](../cj-terminology.md)。
 
 ## 实现原理
 
@@ -26,11 +32,19 @@ GATT是低功耗蓝牙（BLE）的核心协议，定义了基于服务（Service
 
 客户端通过查找设备流程搜索到目标设备后，即可构造客户端实例，后续所有操作都基于该客户端实例。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 构造客户端实例。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 
@@ -45,12 +59,20 @@ try {
 
 通过订阅连接状态变化事件，可以获取实时的GATT连接状态。整个连接过程会涉及多种状态的跃迁，其中[StateConnected](../../reference/ConnectivityKit/cj-apis-bluetooth-constant.md#stateconnected)表示已连接，[StateDisconnected](../../reference/ConnectivityKit/cj-apis-bluetooth-constant.md#statedisconnected)表示已断连。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 订阅连接状态变化事件。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 
@@ -73,11 +95,19 @@ try {
 
 通过创建的客户端实例，直接发起连接即可。通过连接状态变化事件判断是否已连接成功。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 发起连接。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 
@@ -96,11 +126,19 @@ try {
 - 后续的读写特征值、读写描述符等操作都需要在服务发现操作完成后进行，否则会失败。
 - 后续的读写等操作中指定的特征值或描述符必须包含在服务能力集合中，否则会失败。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 服务发现。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 
@@ -127,11 +165,19 @@ try {
 
 相关API请参考[readCharacteristicValue](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-readcharacteristicvalueblecharacteristic-asynccallbackblecharacteristic)和[writeCharacteristicValue](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-writecharacteristicvalueblecharacteristic-gattwritetype-asynccallbackunit)。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.*
+```
 
+- 读取或写入特征值。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 let bufferDesc: Array<Byte> = [11, 0]
@@ -187,11 +233,19 @@ try {
 
 相关API请参考[readDescriptorValue](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-readdescriptorvaluebledescriptor-asynccallbackbledescriptor)和[writeDescriptorValue](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-writedescriptorvaluebledescriptor-asynccallbackunit)。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.*
+```
 
+- 读取或写入描述符。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 let bufferDesc: Array<Byte> = [11, 0]
@@ -239,12 +293,20 @@ try {
 - 先订阅服务端特征值变化事件，详情请见[on(BleCharacteristicChange)](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-onbluetoothblegattclientdevicecallbacktype-callback1argumentblecharacteristic)。
 - 再使能服务端特征值变化通知或者指示能力，应用根据实际场景选择一种方式即可。相关API请参考[setCharacteristicChangeNotification](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-setcharacteristicchangenotificationblecharacteristic-bool-asynccallbackunit)和[setCharacteristicChangeIndication](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-setcharacteristicchangeindicationblecharacteristic-bool-asynccallbackunit)。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 接收服务端特征值变化通知或指示。
+
+```cangjie
 // 此处是伪代码
 let device = 'XX:XX:XX:XX:XX:XX'
 
@@ -322,11 +384,19 @@ try {
 
 构造服务端实例，后续所有操作都基于该服务端实例。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.BusinessException
+```
 
+- 创建服务端实例。
+
+```cangjie
 try {
     let gattServer: GattServer = createGattServer()
 } catch (e: BusinessException) {
@@ -337,6 +407,18 @@ try {
 **2. 添加服务**
 
 添加应用需要的服务，将在蓝牙子系统中注册指定的UUID服务。客户端会发起服务查询，判断服务端是否支持特定的服务。
+
+- 导入模块。
+
+<!-- compile -->
+
+```cangjie
+import kit.ConnectivityKit.*
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.business_exception.BusinessException
+```
+
+- 添加服务。
 
 ```cangjie
 // 创建descriptors
@@ -379,12 +461,20 @@ try {
 
 通过订阅连接状态变化事件，可以获取实时的GATT连接状态以及客户端的设备地址。整个连接过程涉及多种状态的跃迁，其中[StateConnected](../../reference/ConnectivityKit/cj-apis-bluetooth-constant.md#stateconnected)表示已连接，[StateDisconnected](../../reference/ConnectivityKit/cj-apis-bluetooth-constant.md#statedisconnected)表示已断连。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 订阅连接状态变化事件。
+
+```cangjie
 class StateChangeCallback <: Callback1Argument<BleConnectionChangeState> {
     public func invoke(err: ?BusinessException, state: BleConnectionChangeState): Unit {
         Hilog.info(0, "Bluetooth", "bluetooth connect state changed")
@@ -411,12 +501,20 @@ try {
 - 收到读取特征值请求时，需要调用[sendResponse](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-sendresponseserverresponse)进行回复对应特征值的数据内容。
 - 收到写入特征值请求时，可保存客户端写入的特征值数据内容。根据写入请求[CharacteristicWriteRequest](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#class-characteristicwriterequest)的needRsp判断是否需要调用[sendResponse](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-sendresponseserverresponse)进行回复。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 订阅特征值读取或写入事件。
+
+```cangjie
 let gattServer = createGattServer()
 let arrayBufferCCC: Array<Byte> = [1, 0]
 
@@ -493,12 +591,20 @@ try {
 - 收到读取描述符请求时，需要调用[sendResponse](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-sendresponseserverresponse)进行回复对应描述符的数据内容。
 - 收到写入描述符请求时，可保存客户端写入的描述符数据内容。根据写入请求[DescriptorWriteRequest](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#class-descriptorwriterequest)的needRsp判断是否需要调用[sendResponse](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-sendresponseserverresponse)进行回复。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.callback_invoke.*
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 订阅描述符读取或写入事件。
+
+```cangjie
 let gattServer = createGattServer()
 let arrayBufferCCC: Array<Byte> = [1, 0]
 
@@ -575,11 +681,19 @@ try {
 - 该特征值需包含蓝牙标准协议定义的Client Characteristic Configuration描述符UUID（00002902-0000-1000-8000-00805f9b34fb），才支持通知或者指示能力。
 - 使用通知或者指示能力需要使能。客户端可以通过[setCharacteristicChangeNotification](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-setcharacteristicchangenotificationblecharacteristic-bool-asynccallbackunit)或[setCharacteristicChangeIndication](../../reference/ConnectivityKit/cj-apis-bluetooth-ble.md#func-setcharacteristicchangeindicationblecharacteristic-bool-asynccallbackunit)。使能该能力，应用根据实际场景选择一种方式即可。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 发送特征值变化通知或指示。
+
+```cangjie
 let device = 'XX:XX:XX:XX:XX:XX'; // 该设备地址表示客户端地址，可以通过连接状态变化事件中获取
 let arrayBufferC: Array<Byte> = [0, 0]
 let notifyCharacteristic = NotifyCharacteristic(
@@ -601,11 +715,19 @@ try {
 
 当应用不再需要创建的服务端实例时，需要主动关闭，并释放相关资源。例如：删除已添加的服务，取消已订阅事件。
 
+- 导入模块。
+
+<!-- compile -->
+
 ```cangjie
 import ohos.business_exception.*
 import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
+```
 
+- 关闭服务端实例。
+
+```cangjie
 try {
     let gattServer = createGattServer()
     gattServer.removeService("00001810-0000-1000-8000-00805F9B34FB") // 删除此前注册的服务

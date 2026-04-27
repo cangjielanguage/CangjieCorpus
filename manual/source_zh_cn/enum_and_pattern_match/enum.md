@@ -109,12 +109,12 @@ enum RGBColor {
 }
 
 let r1 = Red                 // Will choose 'let Red'
-let r2 = RGBColor.Red        // Ok: constructed by enum type name
+let r2 = RGBColor.Red        // OK: constructed by enum type name
 
 let g1 = Green(100)          // Will choose 'func Green'
-let g2 = RGBColor.Green(100) // Ok: constructed by enum type name
+let g2 = RGBColor.Green(100) // OK: constructed by enum type name
 
-let b = Blue(100)            // Ok: can be uniquely identified as an enum constructor
+let b = Blue(100)            // OK: can be uniquely identified as an enum constructor
 ```
 
 如下的例子中，只有构造器 `Blue` 会因为名称冲突而不能直接使用，必须加上类型名 `RGBColor`。
@@ -128,9 +128,9 @@ enum RGBColor {
     | Red | Green(UInt8) | Blue(UInt8)
 }
 
-let r = Red                 // Ok: constructed by enum type name
+let r = Red                 // OK: constructed by enum type name
 
-let g = Green(100)          // Ok: constructed by enum type name
+let g = Green(100)          // OK: constructed by enum type name
 
 let b = Blue(100)           // Will choose constructor of 'class Blue' and report an error
 ```

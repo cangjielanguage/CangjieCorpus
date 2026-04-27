@@ -1,5 +1,11 @@
 # 加密/解密介绍及算法规格
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在HUKS中已经有密钥，需要对一段数据加密或是解密，均可以使用HUKS完成加密/解密操作。
 
 ## 支持的算法
@@ -26,8 +32,6 @@
 | SM2/-/NoPadding | 摘要算法SM3。 | 11+ | 是 |
 | DES/CBC/NoPadding<br/>DES/ECB/NoPadding | CBC模式下 IV 参数必选。 | 15+ | 是 |
 | 3DES/CBC/NoPadding<br/>3DES/ECB/NoPadding | CBC模式下 IV 参数必选。 | 15+ | 是 |
-
-### <!--RP2-->轻量级设备<!--RP2End-->规格
 
 <!--Del-->
 轻量级设备所列规格，OEM厂商将基于实际情况决定是否实现，如需使用，请查阅具体厂商提供的说明，确保规格支持再使用。

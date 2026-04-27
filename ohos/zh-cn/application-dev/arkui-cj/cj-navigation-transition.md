@@ -1,5 +1,11 @@
 # 导航转场
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 导航转场是页面的路由转场方式，也就是一个界面消失，另外一个界面出现的动画效果。
 
 导航转场推荐使用[Navigation](../reference/arkui-cj/cj-navigation-switching-navigation.md)组件实现，可搭配[NavDestination](../reference/arkui-cj/cj-navigation-switching-navdestination.md)组件实现导航功能。
@@ -36,7 +42,7 @@ func pageMap(name: String, param: Any) {
 class EntryView {
      @Provide var pathInfos: NavPathStack = NavPathStack()
      @State var listArray1: Array<String> = ['WLAN', 'Bluetooth']
-     @State var listArray2: Array<String> = ['Personal Hotpot', 'Connect & Share']
+     @State var listArray2: Array<String> = ['Personal Hotspot', 'Connect & Share']
      func build() {
         Column() {
             Navigation(this.pathInfos) {
@@ -77,7 +83,6 @@ class EntryView {
                                 .height(12)
                                 .margin(15)
                                 .border(width: 2.px, color: 0xCCCCCC)
-                                .rotate( angle: 45.0 )
                             }
                             .borderRadius(15)
                             .shadow(radius: 100.0, color: 0xededed)
@@ -120,7 +125,6 @@ class EntryView {
                                 .height(12)
                                 .margin(15)
                                 .border(width: 2.px,color: 0xCCCCCC)
-                                .rotate( angle: 45.0 )
                             }
                             .borderRadius(15)
                             .shadow(radius: 100.0, color: 0xededed)
@@ -259,7 +263,6 @@ class PageTwo {
                                 .height(12)
                                 .margin( right: 15 )
                                 .border(width: 2.px, color: 0xcccccc )
-                                .rotate(angle: 45.0)
                             }
                             .borderRadius(15)
                             .shadow(radius: 100.0, color: 0xededed)

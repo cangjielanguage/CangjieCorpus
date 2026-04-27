@@ -1,5 +1,11 @@
 # 应用级变量的状态管理
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 状态管理模块提供了应用程序的数据存储能力、持久化数据管理能力、UIAbility数据存储能力和应用程序需要的环境状态。
 
 ## 导入模块
@@ -156,7 +162,7 @@ public static func link<T>(propName: String): ?ObservedProperty<T>
 
 |类型|说明|
 |:----|:----|
-|?[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回双向绑定的数据，如果AppStorage中不存在对应的属性值，则返回None。|
+|?ObservedProperty\<T>|返回双向绑定的数据，如果AppStorage中不存在对应的属性值，则返回None。|
 
 ### static func property\<T>(String)
 
@@ -180,7 +186,7 @@ public static func property<T>(propName: String): ?ObservedProperty<T>
 
 |类型|说明|
 |:----|:----|
-|?[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回单向绑定的数据，如果AppStorage中不存在对应的属性值，则返回None。|
+|?ObservedProperty\<T>|返回单向绑定的数据，如果AppStorage中不存在对应的属性值，则返回None。|
 
 ### static func set\<T>(String, T)
 
@@ -230,7 +236,7 @@ public static func setAndLink<T>(propName: String, defaultValue: T): ObservedPro
 
 |类型|说明|
 |:----|:----|
-|[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回双向绑定的数据。|
+|ObservedProperty\<T>|返回双向绑定的数据。|
 
 ### static func setAndProp\<T>(String, T)
 
@@ -255,7 +261,7 @@ public static func setAndProp<T>(propName: String, defaultValue: T): ObservedPro
 
 |类型|说明|
 |:----|:----|
-|[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回单向绑定的数据。|
+|ObservedProperty\<T>|返回单向绑定的数据。|
 
 ### static func setOrCreate\<T>(String, T)
 
@@ -505,7 +511,7 @@ public func link<T>(propName: String): ?ObservedProperty<T>
 
 |类型|说明|
 |:----|:----|
-|?[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回双向绑定的数据，如果LocalStorage中不存在对应的属性值，则返回None。|
+|?ObservedProperty\<T>|返回双向绑定的数据，如果LocalStorage中不存在对应的属性值，则返回None。|
 
 ### func property\<T>(String)
 
@@ -529,7 +535,7 @@ public func property<T>(propName: String): ?ObservedProperty<T>
 
 |类型|说明|
 |:----|:----|
-|?[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回单向绑定的数据，如果LocalStorage中不存在对应的属性值，则返回None。|
+|?ObservedProperty\<T>|返回单向绑定的数据，如果LocalStorage中不存在对应的属性值，则返回None。|
 
 ### func set\<T>(String, T)
 
@@ -579,7 +585,7 @@ public func setAndLink<T>(propName: String, defaultValue: T): ObservedProperty<T
 
 |类型|说明|
 |:----|:----|
-|[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回双向绑定的数据。|
+|ObservedProperty\<T>|返回双向绑定的数据。|
 
 ### func setAndProp\<T>(String, T)
 
@@ -604,7 +610,7 @@ public func setAndProp<T>(propName: String, defaultValue: T): ObservedProperty<T
 
 |类型|说明|
 |:----|:----|
-|[ObservedProperty](./cj-state-rendering-componentstatemanagement.md#class-observedproperty)\<T>|返回单向绑定的数据。|
+|ObservedProperty\<T>|返回单向绑定的数据。|
 
 ### func setOrCreate\<T>(String, T)
 

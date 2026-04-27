@@ -1,5 +1,11 @@
 # 位置设置
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 设置组件的位置、锚点和偏移量。
 
 ## 导入模块
@@ -31,7 +37,7 @@ func position(x!: ?Length, y!: ?Length): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func markAnchor(?Length, ?Length)
 
@@ -56,7 +62,7 @@ func markAnchor(x!: ?Length, y!: ?Length): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func offset(?Length, ?Length)
 
@@ -81,7 +87,7 @@ func offset(x!: ?Length, y!: ?Length): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func alignRules(?AlignRuleOption)
 
@@ -109,7 +115,7 @@ func alignRules(value: ?AlignRuleOption): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## 示例代码
 
@@ -131,7 +137,7 @@ class EntryView {
         Column {
             Column(space: 10) {
                 // 设置子组件左上角相对于父组件左上角的偏移位置
-                // 元素内容<元素宽高，设置内容在与元素内的对齐方式
+                // 元素内容<元素宽高，设置内容在元素内的对齐方式
                 Text("align")
                     .fontSize(9)
                     .fontColor(0xCCCCCC)

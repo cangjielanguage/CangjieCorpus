@@ -1,4 +1,10 @@
-# HMAC（仓颉）
+# HMAC
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 HMAC是密钥相关的哈希运算消息认证码（Hash-based Message Authentication Code）。具体的场景介绍及支持的算法规格，请参见[HMAC介绍与算法规格](./cj-huks-hmac-overview.md)。
 
@@ -32,10 +38,6 @@ HMAC是密钥相关的哈希运算消息认证码（Hash-based Message Authentic
 /*
  * 以下以HMAC密钥的操作使用为例
  */
-import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 let HmacKeyAlias = 'test_HMAC' // 密钥别名，用户自行指定，用于生成密钥
@@ -95,7 +97,7 @@ func HMACData() {
         inData: StringToUint8Array(plainText)
     )
     // 调用initSession获取handle，HmacKeyAlias是密钥别名，在生成密钥时进行指定的
-    handle = initSession(HmacKeyAlias, options)
+    handle = initSession(HmacKeyAlias, options).handle
     // 调用finishSession获取HMAC的结果
     hashData = finishSession(handle.getOrThrow(), options)
 }

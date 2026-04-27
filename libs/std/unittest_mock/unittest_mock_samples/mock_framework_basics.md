@@ -2,7 +2,9 @@
 
 ## 创建 mock 对象
 
-**mock 构造函数**可以通过调用 `mock<T>` 和 `spy<T>` 函数来创建两种对象：**mock**和**spy**，其中 `T` 表示被 mock 的类或接口。
+**mock 构造函数**可以通过调用 `mock<T>` 和 `spy<T>` 函数来创建两种对象：**mock** 和 **spy**，其中 `T` 表示被 mock 的类或接口。
+
+<!-- code_no_check -->
 
 ```cangjie
 public func mock<T>(): T
@@ -28,11 +30,12 @@ public func spy<T>(objectToSpyOn: T): T
 
 **配置 API** 的入口是 `@On` 宏调用。
 
+<!--compile.onlyformat-->
 ```cangjie
 @On(storage.getComments(testId)).returns(testComments)
 ```
 
-示例中，如果 mock 对象 `storage` *接收*到 `getComments` 方法的调用，并且指定了参数 `testId` ，则返回 `testComment` 。
+示例中，如果 mock 对象 `storage` *接收*到 `getComments` 方法的调用，并且指定了参数 `testId` ，则返回 `testComments` 。
 
 如上行为即为**打桩**，桩（Stub， 模拟还未实现或无法在测试环境中执行的组件）需在测试用例主体内部先定义。
 
@@ -56,7 +59,7 @@ public func spy<T>(objectToSpyOn: T): T
 1. `@On` 宏调用中描述的**桩签名**。
 2. 用于描述桩行为的[操作](#操作-api)。
 3. （可选）用于设置[预期](#预期)的基数说明符（ cardinality specifier， 指定预期执行次数的表达式）。
-4. （可选）[续体](#桩链)（ continuation， 支持链式调用的表达式）。
+4. （可选）[续体](#桩链)（continuation， 支持链式调用的表达式）。
 
 mock 框架拦截匹配桩签名的调用，并执行桩声明中指定的操作。
 
@@ -66,29 +69,26 @@ mock 框架拦截匹配桩签名的调用，并执行桩声明中指定的操作
 
 如下是一个为顶层函数打桩的示例：
 
+<!--run -->
 ```cangjie
-package catalog
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
 
 public class Entry {
-    init(let id: Int64, let title: String, let description: String) {}
-    statuc func parse() { ... }
+    Entry(let id: Int64, let title: String, let description: String) {}
+    static func parse(): Entry {
+        Entry(1, "1", "1")
+    }
 }
 
 public func loadLastEntryInCatalog(): Entry {
-    let resp = client.get("http://mycatalog.com/api/entries/last")
-    let buf = Array<UInt8>(50, repeat: 0)
-    let len = resp.body.read(buf)
-    return Entry.parse(String.fromUtf8(buf[..len]))
+    return Entry.parse()
 }
 
 public func drawLastEntryWidget() {
     let lastEntry = loadLastEntryInCatalog()
     // drawing...
 }
-```
-
-```cangjie
-package test
 
 @Test
 class RightsTest {
@@ -128,16 +128,18 @@ class RightsTest {
 
 方法的桩的签名结构：`<mock object name>.<method name>(<argument matcher>*)`。
 
+<!--compile.onlyformat-->
 ```cangjie
-@On(foo.method(0, 1))                 // 带参数 0 和 1 的方法调用
+@On(foo.method(0, 1)) // 带参数 0 和 1 的方法调用
 @On(foo.method(param1: 0, param2: 1)) // 带命名参数的方法调用
 ```
 
 当桩属性 getter/setter 或字段读/写操作时，使用 `<mock object name>.<property or field name>` 或 `<mock object name>.<property or field name> = <argument matcher>` 。
 
+<!--compile.onlyformat-->
 ```cangjie
-@On(foo.prop)      // 属性 getter
-@On(foo.prop = 3)  // 参数为 3 的属性 setter
+@On(foo.prop) // 属性 getter
+@On(foo.prop = 3) // 参数为 3 的属性 setter
 ```
 
 对于顶层函数和静态函数，签名是类似的：
@@ -152,9 +154,10 @@ class RightsTest {
 
 对运算符函数打桩时，运算符的接收者必须是对 mock/spy 对象的单个引用，而运算符的参数必须是参数匹配器。
 
+<!--compile.onlyformat-->
 ```cangjie
-@On(foo + 3)  // 'operator func +'，参数为 3
-@On(foo[0])   // 'operator func []'，参数为 0
+@On(foo + 3) // 'operator func +'，参数为 3
+@On(foo[0]) // 'operator func []'，参数为 0
 ```
 
 ### 参数匹配器
@@ -180,22 +183,23 @@ class RightsTest {
 
 示例：
 
+<!--compile.onlyformat-->
 ```cangjie
-let p = mock<Printer>()         // 假设print采用ToString类型的单个参数。
+let p = mock<Printer>() // 假设 print 采用 ToString 类型的单个参数。
 
-@On(p.print(_))                 // 可以使用“_”特殊字符代替 any() 。
+@On(p.print(_)) // 可以使用“_”特殊字符代替 any() 。
 
-@On(p.print(eq("foo")))         // 只匹配“foo”参数。
-@On(p.print("foo"))             // 常量字符串可以省略显式匹配器。
+@On(p.print(eq("foo"))) // 只匹配“foo”参数。
+@On(p.print("foo")) // 常量字符串可以省略显式匹配器。
 
-let predefined = "foo"          // 可以传递单个标识符，而不是参数匹配器。
-@On(p.print(predefined))        // 如果类型相等，则使用结构相等来匹配。
+let predefined = "foo" // 可以传递单个标识符，而不是参数匹配器。
+@On(p.print(predefined)) // 如果类型相等，则使用结构相等来匹配。
 
-@On(p.print(ofType<Bar>()))     // 仅匹配Bar类型的参数。
+@On(p.print(ofType<Bar>())) // 仅匹配 Bar 类型的参数。
 
 // 对于更复杂的匹配器，鼓励使用以下模式。
 let hasQuestionMark = { arg: String => arg.contains("?") }
-@On(p.print(argThat(hasQuestionMark)))  // 只匹配包含问号的字符串。
+@On(p.print(argThat(hasQuestionMark))) // 只匹配包含问号的字符串。
 ```
 
 正确选择函数重载依赖仓颉类型推断机制。可以使用 `ofType` 来解决与类型推断有关的编译时问题。
@@ -203,11 +207,13 @@ let hasQuestionMark = { arg: String => arg.contains("?") }
 
 重要规则：函数调用作为**参数匹配器**时，会视为对匹配器的调用。
 
+<!-- code_no_check -->
+
 ```cangjie
-@On(foo.bar(calculateArgument())) // 不正确，calculateArgument()不是匹配器。
+@On(foo.bar(calculateArgument())) // 不正确，calculateArgument() 不是匹配器。
 
 let expectedArgument = calculateArgument()
-@On(foo.bar(expectedArgument))    // 正确，只要 'expectedArgument' 是可等价的和/或引用类型。
+@On(foo.bar(expectedArgument)) // 正确，只要 'expectedArgument' 是可等价的和/或引用类型。
 ```
 
 ### 操作 API
@@ -231,6 +237,7 @@ mock 框架提供 API 来指定桩操作。触发桩后，打桩声明会执行�
 >
 > `throws` 用于测试桩声明抛出异常时的系统行为。`fails` 用于测试桩声明是否未被调用。
 
+<!--compile.onlyformat-->
 ```cangjie
 @On(service.request()).throws(TimeoutException())
 ```
@@ -244,8 +251,10 @@ mock 框架提供 API 来指定桩操作。触发桩后，打桩声明会执行�
 * `returns(valueFactory: () -> R)`：调用 `valueFactory` 去构造桩触发时抛出的异常。
 * `returnsConsecutively(values: Array<R>)`, `returnsConsecutively(values: ArrayList<R>)`：触发桩时，返回 `values` 中的下一个元素。
 
+<!-- code_no_check -->
+
 ```cangjie
-@On(foo.bar()).returns(2) // 返回 0
+@On(foo.bar()).returns(2) // 返回 2
 @On(foo.bar()).returnsConsecutively(1, 2, 3) // 依次返回 1，2，3
 ```
 
@@ -279,8 +288,15 @@ mock 框架提供 API 来指定桩操作。触发桩后，打桩声明会执行�
 
 示例：
 
+<!--run -->
 ```cangjie
-// example_test.cj
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Foo {
+    func bar() { }
+}
+
 @Test
 func tooFewInvocations() {
     let foo = mock<Foo>()
@@ -300,7 +316,7 @@ Expectation failed
             example_test.cj:6
 ```
 
-如果没有自定义预期，mock框架使用默认预期：
+如果没有自定义预期，mock 框架使用默认预期：
 
 | 操作| 默认期望基数| 允许自定义基数|
 | ----   |  ---                |  ---                      |
@@ -321,9 +337,12 @@ Expectation failed
 
 总预期为各个链预期之和。如果在测试中指定了一个复杂的链，那么链的所有部分都会被触发。
 
+<!-- code_no_check -->
+
+<!--compile.onlyformat-->
 ```cangjie
 @On(foo.bar()).returnsConsecutively(1, 2, 3, 4)
-//同下
+// 同下
 @On(foo.bar()).returnsConsecutively(1, 2).then().returnsConsecutively(3, 4)
 ```
 
@@ -343,6 +362,7 @@ mock 对象无需创建真正的依赖来测试 API ，只需配置特定测试�
 
 spy 对象支持重写真实实例的可观察行为。只有通过 spy 对象引用的调用才会被拦截。创建 spy 对象对原始 spy 实例的引用无影响。spy 调用自己的方法不会被拦截。
 
+<!--compile.onlyformat-->
 ```cangjie
 let serviceSpy = spy(service)
 // 模拟超时，继续使用真正的实现
@@ -368,7 +388,7 @@ let serviceSpy = spy(service)
 >
 > 在编译依赖 `p` 的包时，也必须添加此标志。
 
-在测试中使用mock对象（ `cjc--test` ）不需要额外的标志。
+在测试中使用 mock 对象（ `cjc --test` ）不需要额外的标志。
 
 ### 使用 cjpm 编译
 
@@ -376,6 +396,6 @@ let serviceSpy = spy(service)
 
 还可以使用 cjpm 配置文件控制哪些包支持 mock 。
 
-<!-- 待办：添加关于默认mock行为的章节。-->
+<!-- 待办：添加关于默认 mock 行为的章节。-->
 
 <!-- 待办：添加对其他文档的引用。-->

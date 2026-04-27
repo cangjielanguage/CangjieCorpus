@@ -1,5 +1,11 @@
 # 图像效果
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 设置组件的模糊、阴影、球面效果以及设置图片的图像效果。
 
 ## 导入模块
@@ -24,7 +30,7 @@ func blur(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|模糊半径。初始值:  0.0|
+|value|?Float64|是|-|模糊半径。初始值：0.0|
 
 **返回值：**
 
@@ -48,7 +54,7 @@ func colorBlend(value: ?ResourceColor): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|是|-|颜色混合值。初始值:  Color.Transparent|
+|value|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|是|-|颜色混合值。初始值：Color.Transparent|
 
 **返回值：**
 
@@ -59,7 +65,7 @@ func colorBlend(value: ?ResourceColor): T
 ## func backdropBlur(?Float64)
 
 ```cangjie
-public func backdropBlur(value: ?Float64): T
+func backdropBlur(value: ?Float64): T
 ```
 
 **功能：** 为组件添加背景模糊效果，可以自定义模糊半径。
@@ -72,7 +78,7 @@ public func backdropBlur(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|模糊半径。初始值:  0.0|
+|value|?Float64|是|-|模糊半径。初始值：0.0|
 
 **返回值：**
 
@@ -83,7 +89,7 @@ public func backdropBlur(value: ?Float64): T
 ## func shadow(?Float64, ?ResourceColor, ?Float64, ?Float64)
 
 ```cangjie
-func shadow(radius!: ?Float64, color!: ?ResourceColor = None, offsetX!: ?Float64 = None, offsetY!: ?Float64 = None): T
+func shadow(radius!: ?Float64, color!: ?ResourceColor, offsetX!: ?Float64, offsetY!: ?Float64): T
 ```
 
 **功能：** 为组件添加阴影效果。
@@ -96,10 +102,10 @@ func shadow(radius!: ?Float64, color!: ?ResourceColor = None, offsetX!: ?Float64
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|radius|?Float64|是|-|**命名参数。** 阴影模糊半径。初始值:  0.0|
-|color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 阴影颜色。初始值:  Color(0x666666)|
-|offsetX|?Float64|否|None|**命名参数。** 阴影X轴偏移量。初始值:  0.0|
-|offsetY|?Float64|否|None|**命名参数。** 阴影Y轴偏移量。初始值:  0.0|
+|radius|?Float64|是|-|**命名参数。** 阴影模糊半径。初始值：0.0|
+|color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|是|-|**命名参数。** 阴影颜色。初始值：Color(0x666666)|
+|offsetX|?Float64|是|-|**命名参数。** 阴影X轴偏移量。初始值：0.0|
+|offsetY|?Float64|是|-|**命名参数。** 阴影Y轴偏移量。初始值：0.0|
 
 **返回值：**
 
@@ -123,7 +129,7 @@ func grayscale(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|灰度值。值定义为灰度转换的比例，入参1.0则完全转为灰度图像，入参0.0则图像无变化，入参在0.0和1.0之间时，效果呈线性变化。取值范围：[0.0, 1.0]。初始值:  0.0|
+|value|?Float64|是|-|灰度值。值定义为灰度转换的比例，入参1.0则完全转为灰度图像，入参0.0则图像无变化，入参在0.0和1.0之间时，效果呈线性变化。取值范围：[0.0, 1.0]。初始值：0.0|
 
 **返回值：**
 
@@ -147,7 +153,7 @@ func brightness(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|亮度值。初始值:  1.0|
+|value|?Float64|是|-|亮度值。初始值：1.0|
 
 **返回值：**
 
@@ -171,7 +177,7 @@ func saturate(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|饱和度值。初始值:  1.0|
+|value|?Float64|是|-|饱和度值。初始值：1.0|
 
 **返回值：**
 
@@ -195,7 +201,7 @@ func contrast(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|对比度值。值为1.0时，显示原图，大于1.0时，值越大对比度越高，图像越清晰醒目，小于1.0时，值越小对比度越低。推荐取值范围：[0.0, 10.0)。初始值:  1.0|
+|value|?Float64|是|-|对比度值。值为1.0时，显示原图，大于1.0时，值越大对比度越高，图像越清晰醒目，小于1.0时，值越小对比度越低。推荐取值范围：[0.0, 10.0)。初始值：1.0|
 
 **返回值：**
 
@@ -219,7 +225,7 @@ func invert(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|反色值，取值范围[0.0, 1.0]。值为1时表示完全反色，值小于等于0时图像无变化。初始值:  0.0|
+|value|?Float64|是|-|反色值，取值范围[0.0, 1.0]。值为1时表示完全反色，值小于等于0时图像无变化。初始值：0.0|
 
 **返回值：**
 
@@ -243,10 +249,10 @@ func invert(low!: ?Float64, high!: ?Float64, threshold!: ?Float64, thresholdRang
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|low|?Float64|是|-|**命名参数。** 低阈值。初始值:  0.0|
-|high|?Float64|是|-|**命名参数。** 高阈值。初始值:  0.0|
-|threshold|?Float64|是|-|**命名参数。** 阈值。初始值:  0.0|
-|thresholdRange|?Float64|是|-|**命名参数。** 阈值范围。初始值:  0.0|
+|low|?Float64|是|-|**命名参数。** 低阈值。初始值：0.0|
+|high|?Float64|是|-|**命名参数。** 高阈值。初始值：0.0|
+|threshold|?Float64|是|-|**命名参数。** 阈值。初始值：0.0|
+|thresholdRange|?Float64|是|-|**命名参数。** 阈值范围。初始值：0.0|
 
 **返回值：**
 
@@ -270,7 +276,7 @@ func sepia(value: ?Float64): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Float64|是|-|深褐色值。将图像转换为深褐色，降低色彩度，产生温暖复古的图像风格。入参为褐色滤镜强度，值为1则完全是深褐色的，值小于等于0则图像无变化，值大于1会进一步放大色彩偏移比例，图像整体会变得更亮且色彩更加偏黄/偏红，但不属于标准sepia效果。<br> 取值范围：[0.0, +∞)，推荐取值范围：(0.0, 1.0]。初始值:  0.0|
+|value|?Float64|是|-|深褐色值。将图像转换为深褐色，降低色彩度，产生温暖复古的图像风格。入参为褐色滤镜强度，值为1则完全是深褐色的，值小于等于0则图像无变化，值大于1会进一步放大色彩偏移比例，图像整体会变得更亮且色彩更加偏黄/偏红，但不属于标准sepia效果。<br> 取值范围：[0.0, +∞)，推荐取值范围：(0.0, 1.0]。初始值：0.0|
 
 **返回值：**
 

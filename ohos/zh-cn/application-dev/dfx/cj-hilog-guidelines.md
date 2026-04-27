@@ -1,10 +1,16 @@
-# 使用HiLog打印日志（仓颉）
+# 使用HiLog打印日志
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 在应用开发过程中，可在关键代码处输出日志信息。在运行应用后，通过查看日志信息来分析应用执行情况（如应用是否正常运行、代码运行时序、运行逻辑分支是否正常等）。
 
 ## 接口说明
 
-HiLog中定义了DEBUG、INFO、Warn、ERROR、FATAL五种日志级别，并提供了对应的方法输出不同级别的日志，接口如下表所示，具体说明可查阅[API参考文档](../reference/PerformanceAnalysisKit/cj-apis-hilog.md)。
+HiLog中定义了DEBUG、INFO、WARN、ERROR、FATAL五种日志级别，并提供了对应的方法输出不同级别的日志，接口如下表所示，具体说明可查阅[API参考文档](../reference/PerformanceAnalysisKit/cj-apis-hilog.md)。
 
 | 接口名 | 功能描述 |
 | -------- | -------- |
@@ -53,6 +59,7 @@ HiLog中定义了DEBUG、INFO、Warn、ERROR、FATAL五种日志级别，并提�
     // index.cj
 
     import kit.PerformanceAnalysisKit.*
+    import kit.ArkUI.Button
 
     @Entry
     @Component
@@ -95,6 +102,6 @@ HiLog中定义了DEBUG、INFO、Warn、ERROR、FATAL五种日志级别，并提�
    打印日志结果为:
 
    ```txt
-   01-02 08:18:24.947   30988-30988   A0ff00/testTag                  com.example.hilogemo  I     hello World
-   01-02 08:18:24.947   30988-30988   A00000/testTag                  com.example.hilogemo  E     this is an error level log
+   01-02 08:18:24.947   30988-30988   A0ff00/testTag                  com.example.hilogdemo  I     hello World
+   01-02 08:18:24.947   30988-30988   A00000/testTag                  com.example.hilogdemo  E     this is an error level log
    ```

@@ -1,5 +1,11 @@
 # ForEach：循环渲染
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ForEach接口基于数组类型数据来进行循环渲染，需要与容器组件配合使用，且接口返回的组件应当是允许包含在ForEach父容器组件中的子组件。例如，ListItem组件要求ForEach的父容器组件必须为[List组件](../../reference/arkui-cj/cj-scroll-swipe-list.md)。
 
 ## 键值生成规则
@@ -398,8 +404,8 @@ class EntryView {
     func build() {
         Column() {
             Button() {
-                Text('在第1项后插入新项').fontSize(30)
-            }
+                Text('在第1项后插入新项').fontSize(20)
+            }.width(240).height(45).backgroundColor(0x0A59F7)
             .onClick({ evt =>
                 this.simpleList.insert(1,'new item')
             })
@@ -463,7 +469,7 @@ class EntryView {
         Column() {
             Button() {
             Text('在第1项后插入新项').fontSize(30)
-            }
+            }.width(240).height(45).backgroundColor(0x0A59F7)
             .onClick({
                 evt =>this.simpleList.insert(1,'new item')
             })

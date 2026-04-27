@@ -19,8 +19,8 @@ public class MyPublicType {
         println(message)
     }
 
-    public static func myPublicStaticMemeberFunction() {
-        println("myPackage.MyPublicType.myPublicStaticMemeberFunction is called.")
+    public static func myPublicStaticMemberFunction() {
+        println("myPackage.MyPublicType.myPublicStaticMemberFunction is called.")
     }
 
     static let myStaticVariable = MyPublicType("Initializing myStaticVariable in myPackage.MyPublicType")
@@ -69,7 +69,7 @@ $ tree ..
 │       └── release
 │           ├── bin
 │           │   ├── main
-│           │   ├── myExecutableDirectory.bchir2
+│           │   ├── myExecutableDirectory.bchir
 │           │   └── myExecutableDirectory.cjo
 │           ├── myExecutableDirectory
 │           │   └── incremental-cache.json
@@ -85,7 +85,7 @@ $ tree ..
             ├── myPackage
             │   ├── incremental-cache.json
             │   ├── libmyPackage.so
-            │   ├── myPackage.bchir2
+            │   ├── myPackage.bchir
             │   └── myPackage.cjo
             └── myPackage-cache.json
 

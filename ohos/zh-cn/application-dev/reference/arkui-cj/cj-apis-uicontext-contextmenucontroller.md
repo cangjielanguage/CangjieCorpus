@@ -1,5 +1,11 @@
 # ContextMenuController
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供控制菜单关闭的能力。
 
 > **说明：**

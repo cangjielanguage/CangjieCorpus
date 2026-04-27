@@ -1,5 +1,11 @@
 # 图形变换
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 用于对组件进行旋转、平移、缩放、矩阵变换等操作。
 
 ## 导入模块
@@ -11,8 +17,8 @@ import kit.ArkUI.*
 ## func rotate(?Float32, ?Float32, ?Float32, ?Float32, ?Length, ?Length)
 
 ```cangjie
-public func rotate(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None, angle!: ?Float32 = None,
-    centerX!: ?Length = None, centerY!: ?Length = None): T
+func rotate(x!: ?Float32, y!: ?Float32, z!: ?Float32, angle!: ?Float32,
+    centerX!: ?Length, centerY!: ?Length): T
 ```
 
 **功能：** 设置组件旋转。
@@ -32,12 +38,12 @@ public func rotate(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?Float32|否|None|**命名参数。** 旋转轴向量x坐标。初始值: 0.0|
-|y|?Float32|否|None|**命名参数。** 旋转轴向量y坐标。初始值: 0.0|
-|z|?Float32|否|None|**命名参数。** 旋转轴向量z坐标。初始值: 1.0|
-|angle|?Float32|否|None|**命名参数。** 旋转角度。取值为正时相对于旋转轴方向顺时针转动，取值为负时相对于旋转轴方向逆时针转动。初始值: 0.0|
-|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点x轴坐标。表示组件变换中心点（即锚点）的x方向坐标。初始值:  50.percent|
-|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点y轴坐标。表示组件变换中心点（即锚点）的y方向坐标。初始值:  50.percent|
+|x|?Float32|是|-|**命名参数。** 旋转轴向量x坐标。初始值: 0.0|
+|y|?Float32|是|-|**命名参数。** 旋转轴向量y坐标。初始值: 0.0|
+|z|?Float32|是|-|**命名参数。** 旋转轴向量z坐标。初始值: 1.0|
+|angle|?Float32|是|-|**命名参数。** 旋转角度。取值为正时相对于旋转轴方向顺时针转动，取值为负时相对于旋转轴方向逆时针转动。初始值: 0.0|
+|centerX|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 变换中心点x轴坐标。表示组件变换中心点（即锚点）的x方向坐标。初始值：50.percent|
+|centerY|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 变换中心点y轴坐标。表示组件变换中心点（即锚点）的y方向坐标。初始值：50.percent|
 
 **返回值：**
 
@@ -48,8 +54,8 @@ public func rotate(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None
 ## func scale(?Float32, ?Float32, ?Float32, ?Length, ?Length)
 
 ```cangjie
-public func scale(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None, centerX!: ?Length = None,
-    centerY!: ?Length = None): T
+func scale(x!: ?Float32, y!: ?Float32, z!: ?Float32, centerX!: ?Length,
+    centerY!: ?Length): T
 ```
 
 **功能：** 设置组件的缩放。
@@ -62,11 +68,11 @@ public func scale(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None,
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?Float32|否|None|**命名参数。** X轴缩放分量。初始值:  1.0|
-|y|?Float32|否|None|**命名参数。** Y轴缩放分量。初始值:  1.0|
-|z|?Float32|否|None|**命名参数。** Z轴缩放分量。初始值:  1.0|
-|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点x轴坐标。表示组件变换中心点（即锚点）的x方向坐标。初始值:  50.percent|
-|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点y轴坐标。表示组件变换中心点（即锚点）的y方向坐标。初始值:  50.percent|
+|x|?Float32|是|-|**命名参数。** X轴缩放分量。初始值：1.0|
+|y|?Float32|是|-|**命名参数。** Y轴缩放分量。初始值：1.0|
+|z|?Float32|是|-|**命名参数。** Z轴缩放分量。初始值：1.0|
+|centerX|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 变换中心点x轴坐标。表示组件变换中心点（即锚点）的x方向坐标。初始值：50.percent|
+|centerY|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 变换中心点y轴坐标。表示组件变换中心点（即锚点）的y方向坐标。初始值：50.percent|
 
 **返回值：**
 
@@ -77,7 +83,7 @@ public func scale(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None,
 ## func translate(?Length, ?Length, ?Length)
 
 ```cangjie
-public func translate(x!: ?Length = None, y!: ?Length = None, z!: ?Length = None): T
+func translate(x!: ?Length, y!: ?Length, z!: ?Length): T
 ```
 
 **功能：** 设置组件的平移。
@@ -90,9 +96,9 @@ public func translate(x!: ?Length = None, y!: ?Length = None, z!: ?Length = None
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** X轴平移距离。初始值:  0.px|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** Y轴平移距离。初始值:  0.px|
-|z|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** Z轴平移距离。初始值:  0.px|
+|x|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** X轴平移距离。初始值：0.px|
+|y|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** Y轴平移距离。初始值：0.px|
+|z|?[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** Z轴平移距离。初始值：0.px|
 
 **返回值：**
 

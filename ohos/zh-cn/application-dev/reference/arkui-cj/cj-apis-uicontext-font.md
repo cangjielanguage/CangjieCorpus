@@ -1,5 +1,11 @@
 # Font
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 注册自定义字体的信息。
 
 > **说明：**
@@ -54,7 +60,7 @@ public func getFontByName(fontName: String): ?FontInfo
 public func getSystemFontList(): Array<String>
 ```
 
-**功能：** 获取系统支持的字体列表。该接口仅在PC/2in1设备上生效，在其他设备上返回空数组。
+**功能：** 获取系统支持的字体列表。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -98,16 +104,16 @@ public func registerFont(familyName!: ResourceStr, familySrc!: ResourceStr): Uni
 
 ```cangjie
 public class FontInfo {
-    public var family: String
-    public var fullName: String
-    public var italic: Bool
-    public var monoSpace: Bool
     public var path: String
     public var postScriptName: String
+    public var fullName: String
+    public var family: String
     public var subfamily: String
-    public var symbolic: Bool
     public var weight: UInt32
     public var width: UInt32
+    public var italic: Bool
+    public var monoSpace: Bool
+    public var symbolic: Bool
 }
 ```
 

@@ -1,5 +1,11 @@
 # 基于设备分类和数据分级的访问控制
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 基本概念
 
 分布式数据管理对数据实施分类分级保护，提供基于数据安全标签以及设备安全等级的访问控制机制。
@@ -12,7 +18,7 @@
 
 | 风险等级 | 风险标准 | 定义 | 样例 |
 | -------- | -------- | -------- | -------- |
-| 严重 | S4 | 业界法律法规定义的特殊数据类型，涉及个人最私密领域的信息。一旦泄露、篡改、破坏或销毁，可能会给个人或组织造成重大的不利影响。 | 政治观点、宗教和哲学信仰、工会成员资格、基因数据、生物信息、健康和性生活状况、性取向，或设备认证鉴权、个人信用卡等财物信息。 |
+| 严重 | S4 | 业界法律法规定义的特殊数据类型，涉及个人最私密领域的信息。一旦泄露、篡改、破坏或销毁，可能会给个人或组织造成重大的不利影响。 | 政治观点、宗教和哲学信仰、工会成员资格、基因数据、生物信息、健康和性生活状况、性取向，或设备认证鉴权、个人信用卡等财务信息。 |
 | 高 | S3 | 数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严峻的不利影响。 | 个人实时精确定位信息、运动轨迹等。 |
 | 中 | S2 | 数据的泄露、篡改、破坏、销毁可能会给个人或组织导致严重的不利影响。 | 个人的详细通信地址、姓名昵称等。 |
 | 低 | S1 | 数据的泄露、篡改、破坏、销毁可能会给个人或组织导致有限的不利影响。 | 性别、国籍、用户申请记录等。 |
@@ -69,7 +75,7 @@
     ```cangjie
     // main_ability.cj
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
 
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -100,9 +106,9 @@
 
     ```cangjie
     // xxx.cj
-    import kit.ArkData.{DistributedKVStore, KVManagerConfig}
+    import kit.ArkData.*
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.business_exception.BusinessException
-    import ohos.data.distributed_kv_store.*
     ```
 
     实现创建数据库功能的核心代码是：
@@ -146,7 +152,7 @@
     ```cangjie
     // main_ability.cj
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
 
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -177,9 +183,9 @@
 
     ```cangjie
     // xxx.cj
-    import kit.ArkData.{StoreConfig, getRdbStore}
+    import kit.ArkData.*
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.business_exception.BusinessException
-    import ohos.data.relational_store.*
     ```
 
     实现创建数据库功能的核心代码是：

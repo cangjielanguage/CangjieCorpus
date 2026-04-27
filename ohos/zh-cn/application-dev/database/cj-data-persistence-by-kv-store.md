@@ -1,5 +1,11 @@
 # 通过键值型数据库实现数据持久化
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 键值型数据库存储键值对形式的数据，当需要存储的数据没有复杂的关系模型，比如存储商品名称及对应价格、员工工号及今日是否已出勤等，由于数据复杂度低，更容易兼容不同数据库版本和设备类型，因此推荐使用键值型数据库持久化此类数据。
@@ -13,13 +19,12 @@
 
 ## 接口说明
 
-以下是键值型数据库持久化功能的相关接口，大部分为异步接口。异步接口均有callback和Promise两种返回形式，下表均以callback形式为例，更多接口及使用方式请参见[分布式键值数据库](../reference/ArkData/cj-apis-distributed_kv_store.md)。
+以下是键值型数据库持久化功能的相关接口，更多接口及使用方式请参见[分布式键值数据库](../reference/ArkData/cj-apis-distributed_kv_store.md)。
 
 | 接口名称 | 描述 |
 | -------- | -------- |
 | createKVManager(config: KVManagerConfig): KVManager | 创建一个KVManager对象实例，用于管理数据库对象。 |
-| getSingleKVStore(storeId: String, options: KVOptions): SingleKVStore | 指定options和storeId，创建并获取单版本分布式键值数据库。 |
-| getDeviceKVStore(storeId: String, options: KVOptions): DeviceKVStore | 指定Options和storeId，创建并获取多设备协同数据库。|
+| getKVStore\<T>(storeId: String, options: KVOptions): T where T <: SingleKVStore | 指定options和storeId，创建并获取分布式键值数据库。 |
 | put(key: String, value: KVValueType): Unit | 添加指定类型的键值对到数据库。 |
 | get(key: String): KVValueType | 获取指定键的值。 |
 | delete(key: String): Unit | 从数据库中删除指定键值的数据。 |
@@ -34,11 +39,10 @@
 
     ```cangjie
     // main_ability.cj
-    import kit.ArkData.{ DistributedKVStore, KVManagerConfig }
+    import kit.ArkData.{ DistributedKVStore, KVManagerConfig, KVManager }
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
     import ohos.business_exception.BusinessException
-    import ohos.data.distributed_kv_store.KVManager
 
     var kvManager: Option<KVManager> = Option<KVManager>.None
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
@@ -81,7 +85,7 @@
     // xxx.cj
     import kit.ArkData.*
     import ohos.business_exception.BusinessException
-    import ohos.data.distributed_kv_store.SingleKVStore
+    import kit.PerformanceAnalysisKit.Hilog
     ```
 
     实现创建并获取键值数据库功能的核心代码是：
@@ -106,15 +110,6 @@
     ```
 
 3. 调用put()方法向键值数据库中插入数据。示例代码如下所示：
-
-    为实现插入数据功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    // xxx.cj
-    import ohos.data.distributed_kv_store.KVValueType
-    ```
 
     实现插入数据功能的核心代码是：
 

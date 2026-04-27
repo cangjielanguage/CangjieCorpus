@@ -1,5 +1,11 @@
 # ohos.data.preferences（用户首选项）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 用户首选项为应用提供Key-Value键值型的数据处理能力，支持应用持久化轻量级数据，并对其修改和查询。
 
 数据存储形式为键值对，键的类型为字符串型，值的存储数据类型包括数字型、字符型、布尔型以及这3种类型的数组类型。
@@ -26,7 +32,7 @@ API示例代码使用说明：
 public const MAX_KEY_LENGTH: UInt32 = 1024
 ```
 
-**功能：** Key的最大长度限制为1024个字节。
+**功能：** Key的最大长度，限制为1024个字节。
 
 **类型：** UInt32
 
@@ -40,7 +46,7 @@ public const MAX_KEY_LENGTH: UInt32 = 1024
 public const MAX_VALUE_LENGTH: UInt32 = 16 * 1024 * 1024
 ```
 
-**功能：** Value的最大长度限制为16MB。
+**功能：** Value的最大长度，限制为16MB。
 
 **类型：** UInt32
 
@@ -74,8 +80,6 @@ public var dataGroupId: String
 
 **功能：** 应用组ID，<!--RP1-->暂不支持指定dataGroupId在对应共享沙箱路径下创建Preferences实例。<!--RP1End-->
 
-为可选参数。指定在此dataGroupId对应的沙箱路径下创建Preferences实例。当此参数不填时，默认在本应用沙箱目录下创建Preferences实例。
-
 **类型：** String
 
 **读写能力：** 可读写
@@ -106,7 +110,7 @@ public var name: String
 public var storageType: StorageType
 ```
 
-**功能：** 存储模式，为可选参数。表示当前Preferences实例需要使用的存储模式。当此参数不填时，默认使用XML存储模式。当选择某种存储模式创建Preferences后，不支持中途切换存储模式。
+**功能：** 存储模式。表示当前Preferences实例需要使用的存储模式。当选择某种存储模式创建Preferences后，不支持中途切换存储模式。
 
 **类型：** [StorageType](#enum-storagetype)
 
@@ -134,8 +138,8 @@ public init(name: String, dataGroupId!: String = String.empty,
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |name|String|是|-|Preferences实例的名称。名称长度需大于零且小于等于255字节，名称中不能包含'/'且不能以'/'结尾。|
-|dataGroupId|String|否|String.empty|应用组ID，为可选参数。|
-|storageType|[StorageType](#enum-storagetype)|否|StorageType.Xml|存储模式，为可选参数。表示当前Preferences实例需要使用的存储模式。当此参数不填时，默认使用XML存储模式。当选择某种存储模式创建Preferences后，不支持中途切换存储模式。|
+|dataGroupId|String|否|String.empty|**命名参数。** 应用组ID，为可选参数。|
+|storageType|[StorageType](#enum-storagetype)|否|StorageType.Xml|**命名参数。** 存储模式。表示当前Preferences实例需要使用的存储模式。当选择某种存储模式创建Preferences后，不支持中途切换存储模式。|
 
 ## class Preferences
 
@@ -306,7 +310,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
-    let preferences = Preferences.getPreferences(Global.abilityContext, PreferencesOptions("mystore", dataGroupId:"myGroupID")) // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
+    let preferences = Preferences.getPreferences(Global.abilityContext, "mystore") // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     // 删除 Preferences 实例的缓存
     Preferences.removePreferencesFromCache(Global.abilityContext, PreferencesOptions("mystore", dataGroupId:"myGroupID"))
 } catch (e: BusinessException) {
@@ -341,7 +345,7 @@ public static func getPreferences(context: UIAbilityContext, options: Preference
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[事件错误码](./cj-errorcode-preferences.md)。
+- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -377,9 +381,11 @@ try {
 public static func removePreferencesFromCache(context: UIAbilityContext, name: String): Unit
 ```
 
-**功能：** 从缓存中移出指定的Preferences实例。
+**功能：** 从缓存中移除指定的Preferences实例。
 
-应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-string)接口获取某个Preferences实例后，该实例会被会被缓存起来，后续再次[getPreferences](#static-func-getpreferencesuiabilitycontext-string)时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。调用此接口移出缓存中的实例之后，再次getPreferences将会重新读取持久化文件，生成新的Preferences实例。
+应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-string)接口获取某个Preferences实例后，该实例会被缓存起来。后续再次调用getPreferences时，不会再从持久化文件中读取，而是直接从缓存中获取Preferences实例。
+
+调用此接口移除缓存中的实例之后，再次调用getPreferences将会重新读取持久化文件，生成新的Preferences实例。
 
 调用该接口后，不建议再使用旧的Preferences实例进行数据操作，否则会出现数据一致性问题。
 
@@ -429,9 +435,9 @@ try {
 public static func removePreferencesFromCache(context: UIAbilityContext, options: PreferencesOptions): Unit
 ```
 
-**功能：** 从缓存中移出指定的Preferences实例。
+**功能：** 从缓存中移除指定的Preferences实例。
 
-应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)接口获取某个Preferences实例后，该实例会被会被缓存起来，后续再次[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。调用此接口移出缓存中的实例之后，再次getPreferences将会重新读取持久化文件，生成新的Preferences实例。
+应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)接口获取某个Preferences实例后，该实例会被缓存起来，后续再次[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。调用此接口移出缓存中的实例之后，再次getPreferences将会重新读取持久化文件，生成新的Preferences实例。
 
 调用该接口后，不建议再使用旧的Preferences实例进行数据操作，否则会出现数据一致性问题。
 
@@ -628,7 +634,7 @@ public func get(key: String, defValue: PreferencesValueType): PreferencesValueTy
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|key|String|是|-|要获取的存储Key名称，不能为空，最大长度限制为[MAX_KEY_LENGTH](#const-max_key_length)|
+|key|String|是|-|要获取的存储Key名称，不能为空，最大长度限制为[MAX_KEY_LENGTH](#const-max_key_length)。|
 |defValue|[PreferencesValueType](#enum-preferencesvaluetype)|是|-|默认返回值。支持Int64、Float64、String、Bool、 Array\<Bool>、Array\<Float64>、Array\<String>。|
 
 **返回值：**
@@ -797,7 +803,7 @@ public func off(event: PreferencesEvent, callback!: ?Callback1Argument<String> =
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[PreferencesEvent](#enum-preferencesevent)|是|-|事件类型，表示取消订阅数据变更，或表示取消订阅进程间数据变更。|
-|callback|?[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<String>|否|None|需要取消的回调函数，不填写则全部取消。<br> String: 发生变化的Key的类型。|
+|callback|?[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<String>|否|None|**命名参数。** 需要取消的回调函数，不填写则全部取消。<br> String: 发生变化的Key的类型。|
 
 **异常：**
 
@@ -858,7 +864,7 @@ public func on(event: PreferencesEvent, callback: Callback1Argument<String>): Un
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[PreferencesEvent](#enum-preferencesevent)|是|-|事件类型。<br> PreferencesChange 时，表示订阅数据变更，订阅的Key的值发生变更后，在执行flush方法后，触发callback回调。<br> PreferencesMultiProcessChange 时，表示订阅进程间数据变更，多个进程持有同一个首选项文件时，订阅的Key的值在任意一个进程发生变更后，执行flush方法后，触发callback回调。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<String>|是|-|回调函数。<br>String: 发生变化的Key的类型。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<String>|是|-|回调函数。<br>String: 发生变化的Key的类型。|
 
 **异常：**
 

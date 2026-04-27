@@ -1,5 +1,11 @@
 # 模态转场
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 模态转场是新的界面覆盖在旧的界面上，旧的界面不消失的一种转场方式。
 
 **表1** 模态转场接口
@@ -7,9 +13,9 @@
 | 接口                                       | 说明                | 使用场景                                     |
 |:---------------------------------------- |:----------------- |:---------------------------------------- |
 | [bindContentCover](../reference/arkui-cj/cj-universal-attribute-bindcontentcover.md#func-bindcontentcoverbool-custombuilder-contentcoveroptions) | 弹出全屏的模态组件。        | 用于自定义全屏的模态展示界面，结合转场动画和共享元素动画可实现复杂转场动画效果，如缩略图片点击后查看大图。 |
-| [bindSheet](../reference/arkui-cj/cj-universal-attribute-sheettransition.md#func-bindsheetbool----unit-sheetoptions) | 弹出半模态组件。          | 用于半模态展示界面，如分享框。                          |
-| [bindMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindmenu---unit) | 弹出菜单，点击组件后弹出。     | 需要Menu菜单的场景，如一般应用的“+”号键。                 |
-| [bindContextMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindcontextmenu---unit-responsetype) | 弹出菜单，长按或者右键点击后弹出。 | 长按浮起效果，一般结合拖拽框架使用，如桌面图标长按浮起。             |
+| [bindSheet](../reference/arkui-cj/cj-universal-attribute-sheettransition.md#func-bindsheetbool-custombuilder-sheetoptions) | 弹出半模态组件。          | 用于半模态展示界面，如分享框。                          |
+| [bindMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindmenuarraymenuelement) | 弹出菜单，点击组件后弹出。     | 需要Menu菜单的场景，如一般应用的“+”号键。                 |
+| [bindContextMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindcontextmenucustombuilder-responsetype-contextmenuoptions) | 弹出菜单，长按或者右键点击后弹出。 | 长按浮起效果，一般结合拖拽框架使用，如桌面图标长按浮起。             |
 | [bindPopup](../reference/arkui-cj/cj-universal-attribute-popup.md#func-bindpopupbool-custompopupoptions) | 弹出Popup弹框。        | Popup弹框场景，如点击后对某个组件进行临时说明。               |
 | [if](./rendering_control/cj-rendering-control-ifelse.md)                                       | 通过if新增或删除组件。      | 用来在某个状态下临时显示一个界面，这种方式的返回导航需要由开发者监听接口实现。  |
 
@@ -100,7 +106,7 @@ class EntryView {
                     .fontColor(Color.White)
                     .width(100.percent)
                     .textAlign(TextAlign.Center)
-                    .padding(top: 30.vp, bottom: 15.vp)
+                    .padding(top: 60.vp, bottom: 15.vp)
             }.backgroundColor(0x007dfe)
 
             Row {
@@ -355,7 +361,7 @@ class EntryView {
 
 ## 使用bindMenu实现菜单弹出效果
 
-[bindMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindmenuarraymenuelement-menuoptions)为组件绑定弹出式菜单，通过点击触发。完整示例和效果如下。
+[bindMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindmenuarraymenuelement)为组件绑定弹出式菜单，通过点击触发。完整示例和效果如下。
 
  <!-- run -->
 
@@ -393,7 +399,7 @@ class EntryView {
 
 ## 使用bindContextMenu实现菜单弹出效果
 
-[bindContextMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindcontextmenu---unit-responsetype-contextmenuoptions)为组件绑定弹出式菜单，通过长按或右键点击触发。完整示例和效果如下。
+[bindContextMenu](../reference/arkui-cj/cj-universal-attribute-menu.md#func-bindcontextmenucustombuilder-responsetype-contextmenuoptions)为组件绑定弹出式菜单，通过长按或右键点击触发。完整示例和效果如下。
 
 完整示例和效果如下。
 

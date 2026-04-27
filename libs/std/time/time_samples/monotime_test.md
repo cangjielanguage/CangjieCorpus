@@ -8,6 +8,7 @@
 import std.time.*
 
 const count = 10000
+
 main() {
     let start = MonoTime.now()
     for (_ in 0..count) {

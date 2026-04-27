@@ -2,7 +2,7 @@
 
 下面是文件内容相关操作示例。
 
-代码如下:
+示例：
 
 <!-- run -->
 
@@ -17,22 +17,23 @@ main(): Int64 {
     var len = lseek(fd2, 0, SEEK_END)
     println("len ==> ${len}")
     close(fd2)
-    var str1 = unsafe{LibC.mallocCString(" ")}
+    var str1 = unsafe { LibC.mallocCString(" ") }
     var buf = str1.getChars()
     var fd3 = `open`("textcase.txt", O_RDWR)
     var readNum = unsafe { read(fd3, buf, 2) }
-    unsafe{ LibC.free(str1)}
+    unsafe { LibC.free(str1) }
     println("readNum ==> ${readNum}")
     close(fd3)
-    var str2 = unsafe{LibC.mallocCString("123456")}
+    var str2 = unsafe { LibC.mallocCString("123456") }
     var buf2 = str2.getChars()
 
     var fd4 = `open`("textcase.txt", O_RDWR)
     var fd5 = dup(fd4)
     var writeNum = unsafe { write(fd5, buf2, UIntNative(str2.size())) }
-    unsafe { LibC.free(str2)}
+    unsafe { LibC.free(str2) }
     println("writeNum ==> ${writeNum}")
     close(fd4)
+    unlink("textcase.txt")
     return 0
 }
 ```

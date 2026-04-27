@@ -1,5 +1,11 @@
 # RichEditor
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 支持图文混排和文本交互式编辑的组件。
 
 ## 导入模块
@@ -1648,7 +1654,6 @@ public class RichEditorImageSpanStyle {
     public var size: Option<(Length, Length)>
     public var verticalAlign: ?ImageSpanAlignment
     public var objectFit: ?ImageFit
-    public var layoutStyle: ?RichEditorLayoutStyle
     public init(
         size!: Option<(Length, Length)> = Option.None,
         verticalAlign!: ?ImageSpanAlignment = Option.None,
@@ -1704,22 +1709,6 @@ public var objectFit: ?ImageFit
 **功能：** 图像适应方式。
 
 **类型：** ?[ImageFit](./cj-common-types.md#enum-imagefit)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-#### var layoutStyle
-
-```cangjie
-public var layoutStyle: RichEditorLayoutStyle
-```
-
-**功能：** 图像布局样式。
-
-**类型：** [RichEditorLayoutStyle](#class-richeditorlayoutstyle)
 
 **读写能力：** 可读写
 
@@ -2067,7 +2056,9 @@ public init(pixelMap!: PixelMap, size!: ?(Length, Length))
 ### class RichEditorBaseController
 
 ```cangjie
-public open class RichEditorBaseController {}
+public open class RichEditorBaseController {
+    protected init(id: Int64)
+}
 ```
 
 **功能：** 提供RichEditor的基础控制器。
@@ -2075,6 +2066,24 @@ public open class RichEditorBaseController {}
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
+
+#### init(Int64)
+
+```cangjie
+protected init(id: Int64)
+```
+
+**功能：** 创建实例。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|id|Int64|是|-|标识号|
 
 #### func getCaretOffset()
 
@@ -2381,10 +2390,6 @@ public type PasteEventCallback = (PasteEvent) -> Unit
 
 **类型：** ([PasteEvent](#class-pasteevent)) -> Unit
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ### type OnDidChangeCallback
 
 ```cangjie
@@ -2394,10 +2399,6 @@ public type OnDidChangeCallback = (rangeBefore: TextRange, rangeAfter: TextRange
 **功能：** 内容更改后的回调函数。
 
 **类型：** ([TextRange](#class-textrange), [TextRange](#class-textrange)) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 

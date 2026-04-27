@@ -4,12 +4,12 @@
 
 ```cangjie
 public interface ColumnInfo {
-    prop displaySize: Int64
-    prop length: Int64
     prop name: String
-    prop nullable: Bool
-    prop scale: Int64
     prop typeName: String
+    prop length: Int64
+    prop scale: Int64
+    prop nullable: Bool
+    prop displaySize: Int64
 }
 ```
 
@@ -89,9 +89,9 @@ prop typeName: String
 ```cangjie
 public interface Connection <: Resource {
     prop state: ConnectionState
-    func createTransaction(): Transaction
     func getMetaData(): Map<String, String>
     func prepareStatement(sql: String): Statement
+    func createTransaction(): Transaction
 }
 ```
 
@@ -165,8 +165,8 @@ func prepareStatement(sql: String): Statement
 
 ```cangjie
 public interface Datasource <: Resource {
-    func connect(): Connection
     func setOption(key: String, value: String): Unit
+    func connect(): Connection
 }
 ```
 
@@ -208,8 +208,8 @@ func setOption(key: String, value: String): Unit
 ```cangjie
 public interface Driver {
     prop name: String
-    prop preferredPooling: Bool
     prop version: String
+    prop preferredPooling: Bool
     func open(connectionString: String, opts: Array<(String, String)>): Datasource
 }
 ```
@@ -274,8 +274,8 @@ public interface QueryResult <: Resource {
     prop columnInfos: Array<ColumnInfo>
     func next(values: Array<SqlDbType>): Bool
     func next(): Bool
-    func get<T>(index: Int): T
-    func getOrNull<T>(index: Int): ?T
+    func get<T>(index: Int64): T
+    func getOrNull<T>(index: Int64): ?T
 }
 ```
 
@@ -297,25 +297,33 @@ prop columnInfos: Array<ColumnInfo>
 
 类型：[Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[ColumnInfo](database_sql_package_interfaces.md#interface-columninfo)>
 
-### func get\<T>(Int)
+### func get\<T>(Int64)
 
 ```cangjie
-func get<T>(index: Int): T
+func get<T>(index: Int64): T
 ```
 
 功能：从结果集的当前行检索指定列的值。
+
+参数：
+
+- index: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 指定列。
 
 返回值：
 
 - T - `T` 类型的实例。
 
-### func getOrNull\<T>(Int)
+### func getOrNull\<T>(Int64)
 
 ```cangjie
-func getOrNull<T>(index: Int): ?T
+func getOrNull<T>(index: Int64): ?T
 ```
 
 功能：从结果集的当前行检索指定列的值，数据库列允许 SQL NULL。
+
+参数：
+
+- index: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 指定列。
 
 返回值：
 
@@ -347,7 +355,7 @@ func next(values: Array<SqlDbType>): Bool
 
 > **注意：**
 >
-> 未来版本即将废弃不再使用，可使用 [next()](database_sql_package_interfaces.md#func-next) 替代。
+> 未来版本即将废弃，可使用 [next()](database_sql_package_interfaces.md#func-next) 替代。
 
 参数：
 
@@ -369,7 +377,7 @@ public interface SqlDbType {
 
 > **注意：**
 >
-> 未来版本即将废弃不再使用。
+> 未来版本即将废弃。
 
 要扩展用户定义的类型，请继承 [SqlDbType <sup>(deprecated)</sup>](database_sql_package_interfaces.md#interface-sqldbtype-deprecated) 或 [SqlNullableDbType <sup>(deprecated)</sup>](database_sql_package_interfaces.md#interface-sqlnullabledbtype-deprecated)。
 
@@ -394,14 +402,14 @@ prop name: String
 ## interface SqlNullableDbType <sup>(deprecated)</sup>
 
 ```cangjie
-public interface SqlNullableDbType <: SqlDbType
+public interface SqlNullableDbType <: SqlDbType {}
 ```
 
 功能：允许 `null` 值的 sql 数据类型父类。
 
 > **注意：**
 >
-> 未来版本即将废弃不再使用。
+> 未来版本即将废弃。
 
 如果为 `null` 值，`value` 属性值为 [Option](../../core/core_package_api/core_package_enums.md#enum-optiont).None。
 
@@ -414,11 +422,11 @@ public interface SqlNullableDbType <: SqlDbType
 ```cangjie
 public interface Statement <: Resource {
     prop parameterColumnInfos: Array<ColumnInfo>
-    func query(params: Array<SqlDbType>): QueryResult
     func setOption(key: String, value: String): Unit
     func update(params: Array<SqlDbType>): UpdateResult
-    func set<T>(index: Int, value: T): Unit
-    func setNull(index: Int): Unit
+    func query(params: Array<SqlDbType>): QueryResult
+    func set<T>(index: Int64, value: T): Unit
+    func setNull(index: Int64): Unit
     func update(): UpdateResult
     func query(): QueryResult
 }
@@ -468,7 +476,7 @@ func query(params: Array<SqlDbType>): QueryResult
 
 > **注意：**
 >
-> 未来版本即将废弃不再使用，可使用 query() 替代。
+> 未来版本即将废弃，可使用 query() 替代。
 
 参数：
 
@@ -482,30 +490,30 @@ func query(params: Array<SqlDbType>): QueryResult
 
 - [SqlException](database_sql_package_exceptions.md#class-sqlexception) - 当执行过程中发生了异常情况，比如网络中断，服务器超时，参数个数不正确时，抛出异常。
 
-### func set\<T>(Int, T)
+### func set\<T>(Int64, T)
 
 ```cangjie
-func set<T>(index: Int, value: T): Unit
+func set<T>(index: Int64, value: T): Unit
 ```
 
 功能：设置 sql 参数，将仓颉的数据类型转成数据库的数据类型。
 
 参数：
 
-- index: [Int](../../core/core_package_api/core_package_types.md#type-int) - 参数所在序列。
+- index: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 参数所在序列。
 - value: T - 参数值。
 
-### func setNull(Int)
+### func setNull(Int64)
 
 ```cangjie
-func setNull(index: Int): Unit
+func setNull(index: Int64): Unit
 ```
 
 功能：将指定位置处的语句参数设置为 SQL NULL。
 
 参数：
 
-- index: [Int](../../core/core_package_api/core_package_types.md#type-int) - 参数所在序列。
+- index: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 参数所在序列。
 
 ### func setOption(String, String)
 
@@ -519,30 +527,6 @@ func setOption(key: String, value: String): Unit
 
 - key: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 连接选项名称。
 - value: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 连接选项的值。
-
-### func update(Array\<SqlDbType>) <sup>(deprecated)</sup>
-
-```cangjie
-func update(params: Array<SqlDbType>): UpdateResult
-```
-
-功能：执行 sql 语句，得到更新结果。
-
-> **注意：**
->
-> 未来版本即将废弃不再使用，可使用 update() 替代。
-
-参数：
-
-- params: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[SqlDbType <sup>(deprecated)</sup>](database_sql_package_interfaces.md#interface-sqldbtype-deprecated)> - sql 数据类型的数据列表，用于替换 sql 语句中的 `?` 占位符。
-
-返回值：
-
-- [UpdateResult](database_sql_package_interfaces.md#interface-updateresult) - 更新结果。
-
-异常：
-
-- [SqlException](database_sql_package_exceptions.md#class-sqlexception) - 当执行过程中发生了异常情况，比如网络中断、服务器超时，参数个数不正确时，抛出异常。
 
 ### func update()
 
@@ -560,19 +544,43 @@ func update(): UpdateResult
 
 - [SqlException](database_sql_package_exceptions.md#class-sqlexception) - 当执行过程中发生了异常情况，比如网络中断，服务器超时，参数个数不正确时，抛出异常。
 
+### func update(Array\<SqlDbType>) <sup>(deprecated)</sup>
+
+```cangjie
+func update(params: Array<SqlDbType>): UpdateResult
+```
+
+功能：执行 sql 语句，得到更新结果。
+
+> **注意：**
+>
+> 未来版本即将废弃，可使用 update() 替代。
+
+参数：
+
+- params: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[SqlDbType <sup>(deprecated)</sup>](database_sql_package_interfaces.md#interface-sqldbtype-deprecated)> - sql 数据类型的数据列表，用于替换 sql 语句中的 `?` 占位符。
+
+返回值：
+
+- [UpdateResult](database_sql_package_interfaces.md#interface-updateresult) - 更新结果。
+
+异常：
+
+- [SqlException](database_sql_package_exceptions.md#class-sqlexception) - 当执行过程中发生了异常情况，比如网络中断、服务器超时，参数个数不正确时，抛出异常。
+
 ## interface Transaction
 
 ```cangjie
 public interface Transaction {
+    mut prop isoLevel: TransactionIsoLevel
     mut prop accessMode: TransactionAccessMode
     mut prop deferrableMode: TransactionDeferrableMode
-    mut prop isoLevel: TransactionIsoLevel
     func begin(): Unit
     func commit(): Unit
-    func release(savePointName: String): Unit
     func rollback(): Unit
     func rollback(savePointName: String): Unit
     func save(savePointName: String): Unit
+    func release(savePointName: String): Unit
 }
 ```
 
@@ -698,8 +706,8 @@ func save(savePointName: String): Unit
 
 ```cangjie
 public interface UpdateResult {
-    prop lastInsertId: Int64
     prop rowCount: Int64
+    prop lastInsertId: Int64
 }
 ```
 

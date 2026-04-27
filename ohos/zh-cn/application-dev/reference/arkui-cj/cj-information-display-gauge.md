@@ -1,5 +1,11 @@
 # Gauge
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 数据量规图表组件，用于将数据展示为环形图表。
 
 ## 导入模块
@@ -151,7 +157,7 @@ public func endAngle(angle: ?Float32): This
 
 > **说明：**
 >
-> 当起始角度位置和终止角度位置差过小时，会绘制出异常图像，请取合理的起始角度位置和终止角度位置。
+> 当起始角度位置和终止角度位置差过小时，会绘制出异常图像，请选取合理的起始角度位置和终止角度位置。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -179,8 +185,8 @@ public func indicator(icon!: ?ResourceStr = None, space!: ?Length = None): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|icon|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None| **命名参数。** 初始值: "default" 指针样式："default"为三角箭头，"null"为无指针。|
-|space|?[Length](./cj-common-types.md#interface-length)|否|None| **命名参数。** 初始值: 8.0.vp 指针距离圆环外边的间距(不支持百分比)。<br>单位：vp。|
+|icon|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None| **命名参数。** 初始值: "SystemStyle"。 指针样式："SystemStyle"为三角箭头，"null"为无指针。|
+|space|?[Length](./cj-common-types.md#interface-length)|否|None| **命名参数。** 初始值: 8.0.vp。 指针距离圆环外边的间距(不支持百分比)。<br>单位：vp。|
 
 ### func startAngle(?Float32)
 

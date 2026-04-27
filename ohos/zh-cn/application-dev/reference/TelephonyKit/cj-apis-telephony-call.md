@@ -1,5 +1,11 @@
 # ohos.telephony.call（拨打电话）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 call模块提供呼叫管理功能，包括拨打电话、跳转到拨号界面、获取通话状态、格式化电话号码等。
 
 ## 导入模块
@@ -13,7 +19,7 @@ import kit.TelephonyKit.*
 API示例代码使用说明：
 
 - 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -40,7 +46,7 @@ public static func formatPhoneNumber(
 
 **功能：** 格式化电话号码，可设置格式化参数。
 
-电话号码格式化后为标准数字字串，例如：“138 xxxx xxxx”、“0755 xxxx xxxx”。
+电话号码格式化后为标准数字字符串，例如：“138 xxxx xxxx”、“0755 xxxx xxxx”。
 
 **系统能力：** SystemCapability.Telephony.CallManager
 
@@ -96,7 +102,7 @@ public static func formatPhoneNumberToE164(phoneNumber: String, countryCode: Str
 
 **功能：** 将电话号码格式化为E.164表示形式。
 
-待格式化的电话号码需要与传入的国家码相匹配，如中国电话号码需要传入国家码CN，否则格式化后的电话号码为null。
+待格式化的电话号码需要与传入的国家码相匹配，如中国电话号码需要传入国家码CN，否则格式化后的电话号码为""。
 
 **系统能力：** SystemCapability.Telephony.CallManager
 
@@ -277,7 +283,7 @@ public static func isEmergencyPhoneNumber(phoneNumber: String, options!: Emergen
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |phoneNumber|String|是|-|电话号码。|
-|options|[EmergencyNumberOptions](#class-emergencynumberoptions)|否|EmergencyNumberOptions(slotId: 0)|电话号码参数。|
+|options|[EmergencyNumberOptions](#class-emergencynumberoptions)|否|EmergencyNumberOptions(slotId: 0)|**命名参数。** 电话号码参数。|
 
 **返回值：**
 
@@ -321,6 +327,10 @@ public static func makeCall(phoneNumber: String): Unit
 ```
 
 **功能：** 跳转到拨号界面，并显示待拨出的号码。后台调用需要申请ohos.permission.START_ABILITIES_FROM_BACKGROUND权限。
+
+> **说明：**
+>
+> 该接口为预埋接口，当前功能受限，推荐使用双参接口[makeCall](#static-func-makecalluiabilitycontext-string)。
 
 **系统能力：** SystemCapability.Applications.Contacts
 
@@ -461,7 +471,7 @@ public init(slotId!: Int32 = 0)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|slotId|Int32|否|0|卡槽ID。|
+|slotId|Int32|否|0|**命名参数。** 卡槽ID。|
 
 ## class NumberFormatOptions
 
@@ -484,7 +494,7 @@ public class NumberFormatOptions {
 public var countryCode: String
 ```
 
-**功能：** 国家码，支持所有国家的国家码，如：CN（中国）。默认为：CN。
+**功能：** 国家码，支持所有国家的国家码，如：CN（中国）。
 
 **类型：** String
 
@@ -510,7 +520,7 @@ public init(countryCode!: String = "CN")
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|countryCode|String|否|"CN"|国家码，支持所有国家的国家码，如：CN（中国）。默认为：CN。|
+|countryCode|String|否|"CN"|**命名参数。** 国家码，支持所有国家的国家码，如：CN（中国）。默认为："CN"。|
 
 **示例：**
 
@@ -644,7 +654,7 @@ public operator func !=(other: CallState): Bool
 public operator func ==(other: CallState): Bool
 ```
 
-**功能：**  判断两个枚举值是否不相等。
+**功能：** 判断两个枚举值是否相等。
 
 **系统能力：** SystemCapability.Telephony.CallManager
 

@@ -1,10 +1,16 @@
 # ScrollBar
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 滚动条组件ScrollBar，用于配合可滚动组件使用。如[List](./cj-scroll-swipe-list.md)、[Grid](./cj-scroll-swipe-grid.md)、[Scroll](./cj-scroll-swipe-scroll.md)。
 
 > **说明：**
 >
-> ScrollBar主轴方向不设置大小时，采用父组件[布局约束](./cj-universal-attribute-layoutconstraints.md#布局约束)中的maxSize作为主轴方向大小。如果ScrollBar的父组件存在可滚动组件，如[List](./cj-scroll-swipe-list.md)、[Grid](./cj-scroll-swipe-grid.md)、[Scroll](./cj-scroll-swipe-scroll.md)，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
+> ScrollBar主轴方向不设置大小时，采用父组件[布局约束](./cj-universal-attribute-layoutconstraints.md)中的maxSize作为主轴方向大小。如果ScrollBar的父组件存在可滚动组件，如[List](./cj-scroll-swipe-list.md)、[Grid](./cj-scroll-swipe-grid.md)、[Scroll](./cj-scroll-swipe-scroll.md)，建议设置ScrollBar主轴方向大小，否则ScrollBar主轴方向大小可能为无穷大。
 
 ## 导入模块
 
@@ -30,6 +36,13 @@ public init(
 ```
 
 **功能：** 创建滚动条组件。
+
+> **说明：**
+>
+>  - ScrollBar组件负责定义可滚动区域的行为样式，ScrollBar的子节点负责定义滚动条的行为样式。
+>  - 滚动条组件与可滚动组件通过Scroller进行绑定，且只有当两者方向相同时，才能联动，ScrollBar与可滚动组件仅支持一对一绑定。
+>  - ScrollBar组件没有子节点时，支持显示默认样式的滚动条。
+>  - ScrollBar组件的显隐通过BarState设置，组件内部会自动根据BarState设置调整opacity控制显隐，因此ScrollBar组件设置[opacity](./cj-universal-attribute-opacity.md#func-opacityfloat64)属性不生效。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 

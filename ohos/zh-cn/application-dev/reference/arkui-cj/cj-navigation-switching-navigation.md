@@ -1,5 +1,11 @@
 # Navigation
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Navigation组件是路由导航的根视图容器，一般作为Page页面的根容器使用，其内部默认包含了标题栏、内容区和工具栏，其中内容区默认首页显示导航内容（Navigation的子组件）或非首页显示（[NavDestination](./cj-navigation-switching-navdestination.md)的子组件），首页和非首页通过路由进行切换。
 
 > **说明：**
@@ -147,7 +153,7 @@ public func title(value: ?ResourceStr, options!: ?NavigationTitleOptions = None)
 public class NavigationOptions {
     public var launchMode: ?LaunchMode
     public var animated: ?Bool
-    public init(launchMode: ?LaunchMode = None, animated: ?Bool = None)
+    public init(launchMode!: ?LaunchMode = None, animated!: ?Bool = None)
 }
 ```
 
@@ -192,7 +198,7 @@ public var launchMode: ?LaunchMode
 #### init(?LaunchMode, ?Bool)
 
 ```cangjie
-public init(launchMode: ?LaunchMode = None, animated: ?Bool = None)
+public init(launchMode!: ?LaunchMode = None, animated!: ?Bool = None)
 ```
 
 **功能：** NavigationOptions的构造函数。
@@ -217,8 +223,9 @@ public class NavigationTitleOptions {
     public var barStyle: ?BarStyle
     public var paddingStart: ?Length
     public var paddingEnd: ?Length
-    public init(backgroundColor: ?ResourceColor = None, backgroundBlurStyle: ?BlurStyle = None, 
-        barStyle: ?BarStyle = None, paddingStart: ?Length = None, paddingEnd: ?Length = None)
+    public init(backgroundColor!: ?ResourceColor = None, backgroundBlurStyle!: ?BlurStyle = None,
+        barStyle!: ?BarStyle = None, paddingStart!: ?Length = None, paddingEnd!: ?Length = None
+    )
 }
 ```
 
@@ -311,8 +318,8 @@ public var paddingStart: ?Length
 #### init(?ResourceColor, ?BlurStyle, ?BarStyle, ?Length, ?Length)
 
 ```cangjie
-public init(backgroundColor: ?ResourceColor = None, backgroundBlurStyle: ?BlurStyle = Option.None, 
-    barStyle: ?BarStyle = None, paddingStart: ?Length = None, paddingEnd: ?Length = None)
+public init(backgroundColor!: ?ResourceColor = None, backgroundBlurStyle!: ?BlurStyle = None,
+    barStyle!: ?BarStyle = None, paddingStart!: ?Length = None, paddingEnd!: ?Length = None)
 ```
 
 **功能：** NavigationTitleOptions的构造函数。
@@ -326,8 +333,8 @@ public init(backgroundColor: ?ResourceColor = None, backgroundBlurStyle: ?BlurSt
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|标题栏背景颜色。|
-|backgroundBlurStyle|?[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|Option.None|标题栏背景模糊样式。|
-|barStyle|?[BarStyle](#enum-barstyle)|否|None|标题栏布局样式。初始值：BarStyle.STANDARD。|
+|backgroundBlurStyle|?[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|None|标题栏背景模糊样式。|
+|barStyle|?[BarStyle](#enum-barstyle)|否|None|标题栏布局样式。初始值：BarStyle.Standard。|
 |paddingStart|?[Length](./cj-common-types.md#interface-length)|否|None|标题栏起始边距。|
 |paddingEnd|?[Length](./cj-common-types.md#interface-length)|否|None|标题栏结束边距。|
 
@@ -399,7 +406,7 @@ public var param: ?String
 #### init(?String, ?String, ?Callback\<PopInfo, Unit>)
 
 ```cangjie
-public init(name！: ?String, param！: ?String, onPop！: ?Callback<PopInfo, Unit> = None)
+public init(name!: ?String, param!: ?String, onPop!: ?Callback<PopInfo, Unit> = None)
 ```
 
 **功能：** NavPathInfo的构造函数。
@@ -483,7 +490,7 @@ public func pushPath(info: ?NavPathInfo, options!: ?NavigationOptions = None): U
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |info|?[NavPathInfo](#class-navpathinfo)|是|-|要推入的NavDestination。|
-|options|?[NavigationOptions](#class-navigationoptions)|否|None|**命名参数。**  导航选项。|
+|options|?[NavigationOptions](#class-navigationoptions)|否|None|**命名参数。** 导航选项。|
 
 #### func pushPathByName(?String, ?String, ?Bool)
 
@@ -672,7 +679,7 @@ public enum LaunchMode <: Equatable<LaunchMode> {
 MoveToTopSingleTon
 ```
 
-**功能：** 当具有指定名称的NavDestination存在时，将其移到栈顶，否则行为与STANDARD模式一致。
+**功能：** 当具有指定名称的NavDestination存在时，将其移到栈顶，否则行为与Standard模式一致。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -684,7 +691,7 @@ MoveToTopSingleTon
 NewInstance
 ```
 
-**功能：** 此模式创建NavDestination实例。与STANDARD相比，此模式不会重用栈中同名实例。
+**功能：** 此模式创建NavDestination实例。与Standard相比，此模式不会重用栈中同名实例。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -696,7 +703,7 @@ NewInstance
 PopToSingleTon
 ```
 
-**功能：** 当具有指定名称的NavDestination存在时，栈将弹出直到该NavDestination，否则行为与STANDARD模式一致。
+**功能：** 当具有指定名称的NavDestination存在时，栈将弹出直到该NavDestination，否则行为与Standard模式一致。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 

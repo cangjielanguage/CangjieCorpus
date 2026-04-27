@@ -1,5 +1,15 @@
 # 包管理子系统通用错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+> **说明：**
+>
+> 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
+
 ## 17700001 指定的bundleName不存在
 
 **错误信息**
@@ -182,7 +192,7 @@ Failed to install the HAP because the HAP signature fails to be verified.
 1. 确认hap包是否签名成功。
 2. 确认hap包的签名证书是从应用市场申请。
 3. 确认多个hap包签名时使用的证书相同。
-4. 确认升级的ha包p签名证书与已安装的hap包相同。
+4. 确认升级的hap包签名证书与已安装的hap包相同。
 
 ## 17700012 安装包路径无效或者文件过大导致应用安装失败
 
@@ -503,14 +513,14 @@ Failed to install the HAP because the overlay check of the HAP is failed.
 
 1. 使用应用间的overlay特性时，overlay特征应用必须为预置应用。
 2. 使用应用间的overlay特性时，目标应用必须为预置应用。
-3. 使用应用间的overlay特性时，目标应用不能是具有overlay特征的应用
-4. 目标module不能是具有overlay特征的module。
+3. 使用应用间的overlay特性时，目标应用不能具有overlay特征。
+4. 目标module不能具有overlay特征。
 
 **处理步骤**
 
 1. 检查overlay特征应用是否为预置应用。
 2. 检查目标应用是否为预置应用。
-3. 检查目标应用是否不为overlay特征的应用
+3. 检查目标应用是否不具备overlay特征。
 4. 检查目标module是否不为overlay特征的module。
 
 ## 17700032 指定的应用不包含overlay特征的module
@@ -547,7 +557,7 @@ The specified module is not an overlay module.
 
 **处理步骤**
 
-检查指定的module是否不为overlay特征的module。
+检查指定的module是否不具备overlay特征。
 
 ## 17700034 指定的module是overlay特征的module
 
@@ -635,8 +645,8 @@ The specified shared bundle does not exist.
 
 **可能原因**
 
-1. 当前指定卸载的版本不存在与被卸载的shared library中。
-2. 当前指定卸载的shared library不存在与设备中。
+1. 当前指定卸载的版本不存在于被卸载的shared library中。
+2. 当前指定卸载的shared library不存在于设备中。
 
 **处理步骤**
 
@@ -655,8 +665,8 @@ Failed to install because disallow install a shared bundle by hapFilePaths.
 
 **可能原因**
 
-1. 通过bm工具安装应用时，-p参数传入了应用间共享库的安装包路径。
-2. 通过install接口安装应用时，hapFilePaths参数传入了应用间共享库的安装包路径。
+1. 通过bm工具安装应用时，使用-p参数指定应用间共享库的安装包路径。
+2. 通过install接口安装应用时，使用hapFilePaths参数指定应用间共享库的安装包路径。
 
 **处理步骤**
 
@@ -753,8 +763,8 @@ Failed to install the HAP because the isolationMode configured is not supported.
 
 **可能原因**
 
-1. 设备支持隔离模式，即persist.bms.supportIsolationMode为true时，HAP配置的isolationMode为nonisolationOnly。
-2. 设备不支持隔离模式，即persist.bms.supportIsolationMode为false时，HAP配置的isolationMode为isolationOnly。
+1. 设备支持隔离模式，当persist.bms.supportIsolationMode为true时，HAP配置的isolationMode为nonisolationOnly。
+2. 设备不支持隔离模式，当persist.bms.supportIsolationMode为false时，HAP配置的isolationMode为isolationOnly。
 
 **处理步骤**
 

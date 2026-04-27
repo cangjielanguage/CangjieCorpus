@@ -1,6 +1,12 @@
 # TextInput
 
-单行文本输入框组件。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+单行文本输入框组件。当前仅支持基本输入模式，无特殊限制。
 
 ## 导入模块
 
@@ -597,20 +603,10 @@ class EntryView {
         Text(this.text)
         Button('Set caretPosition 1')
             .margin(15)
-        Button('Get CaretOffset')
-            .margin(15)
-        // 密码输入框
-        TextInput(placeholder: 'input your password...')
-            .width(95.percent)
-            .height(40)
-            .margin(20)
-            .maxLength(9)
-        // 邮箱地址自动填充类型
-        TextInput(placeholder: 'input your email...' )
-            .width(95.percent)
-            .height(40)
-            .margin(20)
-            .maxLength(9)
+            .onClick({ evt => 
+                // 将光标移动至第一个字符后
+                this.controller.caretPosition(1)
+            })
         // 内联风格输入框
         TextInput( text: 'inline style' )
             .width(95.percent)

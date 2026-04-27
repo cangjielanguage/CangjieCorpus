@@ -1,5 +1,11 @@
 # bm工具
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Bundle Manager（包管理工具，简称bm）是实现应用安装、卸载、更新、查询等功能的工具，bm为开发者提供基本的应用安装包的调试能力。
 
 > **说明：**
@@ -699,9 +705,9 @@ error: install parse profile prop check error.
 
 **可能原因：**
 
-1. [app.json5配置文件](../cj-start/basic-knowledge/app-configuration-file.md)中的bundleName、[module.json5配置文件](../cj-start/basic-knowledge/module-configuration-file.md)中name不符合命名规则。<!--Del-->
+1. [app.json5配置文件](../cj-start/basic-knowledge/cj-app-configuration-file.md)中的bundleName、[module.json5配置文件](../cj-start/basic-knowledge/cj-module-configuration-file.md)中name不符合命名规则。<!--Del-->
 
-2. [extensionAbilities](../cj-start/basic-knowledge/module-configuration-file.md#extensionabilities标签)中type字段配置为service或dataShare。
+2. [extensionAbilities](../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中type字段配置为service或dataShare。
 
 <!--DelEnd-->
 
@@ -820,7 +826,7 @@ error: install parse profile missing prop.
 
 **处理步骤：**
 
-- 方法1：请参考[app.json5配置文件](../cj-start/basic-knowledge/app-configuration-file.md)和[module.json5配置文件](../cj-start/basic-knowledge/module-configuration-file.md)查看并补充必填字段。
+- 方法1：请参考[app.json5配置文件](../cj-start/basic-knowledge/cj-app-configuration-file.md)和[module.json5配置文件](../cj-start/basic-knowledge/cj-module-configuration-file.md)查看并补充必填字段。
 - 方法2：通过hilog日志判断缺失字段。
 
     开启落盘命令：
@@ -1035,7 +1041,7 @@ error: install failed due to grant request permissions failed.
 
 **处理步骤：**
 
-根据[ACL签名指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section157591551175916)为应用申请受限ACL权限。
+根据[ACL签名指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section5301916183411)为应用申请受限ACL权限。
 
 ### 9568290 更新HAP token失败导致安装失败
 
@@ -1253,7 +1259,7 @@ proxyData标签requiredReadPermission和requiredWritePermission属性验证失�
 
 **处理步骤：**
 
-检查应用定义的proxyData内容是否符合要求，参考[proxyData标签](../cj-start/basic-knowledge/module-configuration-file.md#proxydata标签)。
+检查应用定义的proxyData内容是否符合要求，参考[proxyData标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#proxydata标签)。
 
 ### 9568315 数据代理URI错误
 
@@ -1271,7 +1277,7 @@ proxyData标签uri属性验证失败。
 
 **处理步骤：**
 
-检查应用定义的proxyData内容是否符合要求，参考[proxyData标签](../cj-start/basic-knowledge/module-configuration-file.md#proxydata标签)。
+检查应用定义的proxyData内容是否符合要求，参考[proxyData标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#proxydata标签)。
 
 ### 9568336 应用调试类型与已安装应用不一致
 
@@ -1421,7 +1427,7 @@ error: device type is not supported.
 
 **处理步骤：**
 
-如需要适配当前设备，请在应用设备类型配置中增加当前设备类型。应用deviceTypes配置包含phone（手机）、tablet（平板）、2in1（2合1设备）、tv（智慧屏）、wearable（智能手表）和car（车机）。
+如需要适配当前设备，请在应用设备类型配置中增加当前设备类型。应用deviceTypes配置包含phone（手机）、tablet（平板）。
 
 ### 9568308 应用包类型不一致
 
@@ -2312,7 +2318,7 @@ error: Install failed due to hap moduleName is empty.
 
 **处理步骤：**
 
-检查[module.json5](../cj-start/basic-knowledge/module-configuration-file.md)的name字段是否为空。
+检查[module.json5](../cj-start/basic-knowledge/cj-module-configuration-file.md)的name字段是否为空。
 
 ### 9568331 签名信息不一致
 
@@ -2362,7 +2368,7 @@ HAP包没有配置文件，导致安装失败。
 
 **可能原因：**
 
-[module.json、pack.info](../cj-start/basic-knowledge/application-package-structure-stage.md)等配置文件缺失。
+[module.json、pack.info](../cj-start/basic-knowledge/cj-application-package-structure-stage.md)等配置文件缺失。
 
 **处理步骤：**
 
@@ -2380,7 +2386,7 @@ error: Install parse bad profile.
 
 **可能原因：**
 
-[module.json、pack.info](../cj-start/basic-knowledge/application-package-structure-stage.md)等配置文件格式异常。
+[module.json、pack.info](../cj-start/basic-knowledge/cj-application-package-structure-stage.md)等配置文件格式异常。
 
 **处理步骤：**
 
@@ -2398,7 +2404,7 @@ error: Install parse profile prop type error.
 
 **可能原因：**
 
-[module.json、pack.info](../cj-start/basic-knowledge/application-package-structure-stage.md)等配置文件存在数据类型错误的字段。
+[module.json、pack.info](../cj-start/basic-knowledge/cj-application-package-structure-stage.md)等配置文件存在数据类型错误的字段。
 
 **处理步骤：**
 
@@ -2416,7 +2422,7 @@ error: Too large size of string or array type element in the profile.
 
 **可能原因：**
 
-[module.json、pack.info](../cj-start/basic-knowledge/application-package-structure-stage.md)等配置文件存在字符串长度或者数组大小过大的字段。
+[module.json、pack.info](../cj-start/basic-knowledge/cj-application-package-structure-stage.md)等配置文件存在字符串长度或者数组大小过大的字段。
 
 **处理步骤：**
 
@@ -2561,7 +2567,7 @@ error: Failed to install the plugin because they have different configuration in
 
 **处理步骤**
 
-检查多HSP之间的包信息是否一致，包括[app.json5配置文件](../cj-start/basic-knowledge/app-configuration-file.md)中bundleName、bundleType、versionCode、apiReleaseType字段。
+检查多HSP之间的包信息是否一致，包括[app.json5配置文件](../cj-start/basic-knowledge/cj-app-configuration-file.md)中bundleName、bundleType、versionCode、apiReleaseType字段。
 
 ### 9568437 插件的 pluginDistributionIDs 解析失败
 
@@ -2644,7 +2650,7 @@ error: install failed due to U1Enabled can not change.
 
 **处理步骤**
 
-方案一：重新签名，签名过程中，请参考[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section9786111152213)的支持ACL权限、或者[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section157591551175916)的使用ACL的签名配置指导进行配置，确保待安装应用与已安装应用配置一致。
+方案一：重新签名，签名过程中，请参考[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section18815157237)的支持ACL权限、或者[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)的使用ACL的签名配置指导进行配置，确保待安装应用与已安装应用配置一致。
 
 方案二：先卸载设备上已安装的应用，再尝试安装待安装应用。
 
@@ -2664,7 +2670,7 @@ error: Install failed due to the U1Enabled is not same in all haps.
 
 **处理步骤**
 
-重新签名，签名过程中，请参考[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section9786111152213)的支持ACL权限、或者[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section157591551175916)的使用ACL的签名配置指导进行配置，使多个HAP包签名信息中allowed-acls的U1Enabled信息一致。
+重新签名，签名过程中，请参考[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section18815157237)的支持ACL权限、或者[手动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)的使用ACL的签名配置指导进行配置，使多个HAP包签名信息中allowed-acls的U1Enabled信息一致。
 
 <!--Del-->
 ## 常见问题

@@ -1,5 +1,11 @@
 # 仅MDM应用可用权限
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 以下权限仅对MDM（Mobile Device Management）设备管理应用开放。
 
 > **注意：**
@@ -472,7 +478,7 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -487,7 +493,7 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -502,7 +508,7 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -517,7 +523,7 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -532,7 +538,7 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
@@ -547,6 +553,6 @@
 <!--Del-->
 **ACL使能：** true<!--DelEnd-->
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20

@@ -1,5 +1,11 @@
 # 共享元素转场（一镜到底）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 共享元素转场是一种界面切换时对相同或者相似的两个元素做的一种位置和大小匹配的过渡动画效果，也称一镜到底动效。
 
 如下例所示，在点击图片后，该图片消失，同时在另一个位置出现新的图片，二者之间内容相同，可以对它们添加一镜到底动效。左图为不添加一镜到底动效的效果，右图为添加一镜到底动效的效果，一镜到底的效果能够让二者的出现消失产生联动，使得内容切换过程显得灵动自然而不生硬。
@@ -18,7 +24,7 @@
 
 ## 不新建组件并直接变化原组件
 
-该方法不新建容器，通过在已有容器上增删组件触发[transition](../reference/arkui-cj/cj-animation-transition.md#func-transition)，搭配组件[属性动画](./cj-attribute-animation-apis.md)实现一镜到底效果。
+该方法不新建容器，通过在已有容器上增删组件触发[transition](../reference/arkui-cj/cj-animation-transition.md#func-transitiontransitioneffect)，搭配组件[属性动画](./cj-attribute-animation-apis.md)实现一镜到底效果。
 
 对于同一个容器展开，容器内兄弟组件消失或者出现的场景，可通过对同一个容器展开前后进行宽高位置变化并配置属性动画，对兄弟组件配置出现消失转场动画实现一镜到底效果。基本步骤为：
 
@@ -407,7 +413,7 @@ class Post{
             Text(this.data.message)
 
             Row(){
-                ForEach(this.data.images,{imageResource: AppResource,index: Int
+                ForEach(this.data.images, itemGeneratorFunc: {imageResource: AppResource,index: Int
                     =>
                     Image(imageResource)
                     .size(width:100,height:100)

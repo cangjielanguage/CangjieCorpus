@@ -1,4 +1,11 @@
 # 通用属性
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 <!--Del-->
 - [尺寸设置](cj-universal-attribute-size.md)
 - [位置设置](cj-universal-attribute-location.md)
@@ -18,6 +25,7 @@
 - [Popup控制](cj-universal-attribute-popup.md)
 - [菜单控制](cj-universal-attribute-menu.md)
 - [焦点控制](cj-universal-attribute-focus.md)
+- [拖拽控制](cj-universal-attribute-dragcontrol.md)
 - [组件标识](cj-universal-attribute-componentid.md)
 - [前景色设置](cj-universal-attribute-foregroundcolor.md)
 - [组件内容模糊](cj-universal-attribute-foregroundblurstyle.md)

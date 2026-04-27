@@ -1,5 +1,11 @@
 # Web页面显示内容滚动
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ArkWeb中的Webview.WebviewController提供scrollTo和scrollBy接口。
 
 当Web显示的内容大小远远大于组件大小时，用户可以通过scrollTo和scrollBy对Web页面中显示的内容进行滚动来显示没有显示的部分，且可以生成动画滚动效果。目前动画效果不支持手势打断，可以通过再次执行一个时间约为0的动画进行强制打断。
@@ -82,3 +88,8 @@ class EntryView {
 ```
 
 ![web-content-scrolling](figures/web-content-scrolling.gif)
+<!--Del-->
+## 示例代码
+
+[Web页面显示内容滚动](https://gitcode.com/openharmony/applications_app_samples_cangjie/tree/master/code/BasicFeature/Web/PageScroll)
+<!--DelEnd-->

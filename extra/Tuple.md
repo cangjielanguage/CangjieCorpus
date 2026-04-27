@@ -62,7 +62,7 @@ var tuple = (true, false)
 var tuple2 = (false, tuple[1])
 ```
 
-### Type parameter of the typle type:
+### Type parameter of the tuple type:
 
 ```
 func getFruitPrice(): (name: String, price: Int64) {
@@ -73,7 +73,7 @@ func getFruitPrice(): (name: String, price: Int64) {
 ### Printing tuples and arrays of tuples
 
 Unfortunately, the tuple type does not implement `ToString`, so it does not have `toString`
-functions, not can it be used in `println` and string interpolation. To print a tuple
+functions, nor can it be used in `println` and string interpolation. To print a tuple
 or array of tuples, iterate over the elements explicitly. For example:
 
 ```

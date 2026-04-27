@@ -10,26 +10,26 @@
 
   ```cangjie
   // Scenario 1
-  func f(a: Int64): Unit {
-  }
 
-  func f(a: Float64): Unit {
-  }
-
-  func f(a: Int64, b: Float64): Unit {
-  }
+  func f(a: Int64): Unit {}
+  func f(a: Float64): Unit {}
+  func f(a: Int64, b: Float64): Unit {}
   ```
 
-- 对于两个同名泛型函数 (详见[泛型函数](../generic/generic_function.md#泛型函数)章节），如果重命名一个函数的泛型形参后（使泛型参数顺序相同），其非泛型部分与另一个函数的非泛型部分函数参数不同，则两个函数构成重载，否则这两个泛型函数构成重复定义错误（类型变元的约束不参与判断）。示例如下：
+- 对于两个同名[泛型函数](../generic/generic_function.md)，如果重命名一个函数的泛型形参后（使泛型参数顺序相同），其非泛型部分与另一个函数的非泛型部分函数参数不同，则两个函数构成重载，否则这两个泛型函数构成重复定义错误（类型变元的约束不参与判断）。示例如下：
+
+  <!-- compile.error -->
 
   ```cangjie
+  // Scenario 2
+
   interface I1{}
   interface I2{}
 
   func f1<X, Y>(a: X, b: Y) {}
-  func f1<Y, X>(a: X, b: Y) {} // Ok: after rename generic type parameter, it will be 'func f1<X, Y>(a: Y, b: X)'
+  func f1<Y, X>(a: X, b: Y) {} // OK: after rename generic type parameter, it will be 'func f1<X, Y>(a: Y, b: X)'
 
-  func f2<T>(a: T) where T <: I1 {}
+  func f2<T>(a: T) where T <: I1 {} // Error, not overloading
   func f2<T>(a: T) where T <: I2 {} // Error, not overloading
   ```
 
@@ -38,7 +38,8 @@
   <!-- compile -->
 
   ```cangjie
-  // Scenario 2
+  // Scenario 3
+
   class C {
       var a: Int64
       var b: Float64
@@ -60,7 +61,8 @@
   <!-- compile -->
 
   ```cangjie
-  // Scenario 3
+  // Scenario 4
+
   class C {
       C(var a!: Int64, var b!: Float64) {
           this.a = a
@@ -79,13 +81,12 @@
   <!-- compile -->
 
   ```cangjie
-  // Scenario 4
-  func f(a: Int64): Unit {
-  }
+  // Scenario 5
+
+  func f(a: Int64): Unit {}
 
   func g() {
-      func f(a: Float64): Unit {
-      }
+      func f(a: Float64): Unit {}
   }
   ```
 
@@ -94,15 +95,13 @@
   <!-- compile -->
 
   ```cangjie
-  // Scenario 5
+  // Scenario 6
   open class Base {
-      public func f(a: Int64): Unit {
-      }
+      public func f(a: Int64): Unit {}
   }
 
   class Sub <: Base {
-      public func f(a: Float64): Unit {
-      }
+      public func f(a: Float64): Unit {}
   }
   ```
 
@@ -113,6 +112,8 @@
 
 如下示例，两个变量均为函数类型且函数参数类型不同，但由于它们不是函数声明所以不能重载，如下示例将编译报错（重定义错）：
 
+<!-- compile.error -->
+
 ```cangjie
 main() {
     var f: (Int64) -> Unit
@@ -122,23 +123,23 @@ main() {
 
 如下示例，虽然变量 `f` 为函数类型，但由于变量和函数之间不能同名，如下示例将编译报错（重定义错）：
 
+<!-- compile.error -->
+
 ```cangjie
 main() {
     var f: (Int64) -> Unit
-
-    func f(a: Float64): Unit {   // Error, functions and variables cannot have the same name
-    }
+    func f(a: Float64): Unit {} // Error, functions and variables cannot have the same name
 }
 ```
 
 如下示例，静态成员函数 `f` 与实例成员函数 `f` 的参数类型不同，但由于类内静态成员函数和实例成员函数之间不能重载，如下示例将编译报错：
 
+<!-- compile.error -->
+
 ```cangjie
 class C {
-    public static func f(a: Int64): Unit {
-    }
-    public func f(a: Float64): Unit {
-    }
+    public static func f(a: Int64): Unit {}
+    public func f(a: Float64): Unit {}
 }
 ```
 
@@ -200,7 +201,9 @@ class C {
 
     ```cangjie
     open class Base {
-        public func g(a: Sub) { print("1") }
+        public func g(a: Sub) {
+            print("1")
+        }
     }
 
     class Sub <: Base {
@@ -211,6 +214,6 @@ class C {
 
     func outer() {
         let s: Sub = Sub()
-        s.g(Sub())   // Output: 1
+        s.g(Sub()) // Output: 1
     }
     ```

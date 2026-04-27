@@ -1,5 +1,11 @@
 # ohos.resource
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 resource模块描述资源类型。
 
 ## 导入模块

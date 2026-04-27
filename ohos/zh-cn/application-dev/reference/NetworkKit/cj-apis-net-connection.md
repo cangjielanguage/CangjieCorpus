@@ -1,5 +1,11 @@
 # ohos.net.connection（网络连接管理）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 connection模块提供管理网络一些基础能力，包括获取默认激活的数据网络、获取所有激活数据网络列表、开启关闭飞行模式、获取网络能力信息等功能。
 
 本节错误码的详细介绍请参见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
@@ -492,7 +498,7 @@ try {
 public func isDefaultNetMetered(): Bool
 ```
 
-**功能：** 检查默认数据网络是否被激活。如果有默认数据网络，可以使用[getDefaultNet](#func-getdefaultnet)去获取。
+**功能：** 检查当前网络上的数据流量使用是否被计费（例如：WiFi网络不会被计费，蜂窝网络会被计费）
 
 **需要权限：** ohos.permission.GET_NETWORK_INFO
 
@@ -504,7 +510,7 @@ public func isDefaultNetMetered(): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|返回true表示默认数据网络被激活，返回false表示没有被激活。|
+|Bool|表示当前网络上的数据流量是否被计费。true表示会被计费，false表示不会被计费。|
 
 **异常：**
 
@@ -941,8 +947,8 @@ public init(host: String,  port: UInt32, exclusionList: Array<String>,
 |host|String|是|-|代理服务器主机名。|
 |port|UInt32|是|-|主机端口。取值范围[0,65535]。|
 |exclusionList|Array\<String>|是|-|不使用代理的主机名列表。|
-|username|String|否|""|使用代理的用户名。|
-|password|String|否|""|使用代理的用户密码。|
+|username|String|否|""|**命名参数。** 使用代理的用户名。|
+|password|String|否|""|**命名参数。** 使用代理的用户密码。|
 
 ## class LinkAddress
 
@@ -1030,7 +1036,7 @@ public var address: String
 public var family: UInt32
 ```
 
-**功能：** IPv4 = 1，IPv6 = 2，默认IPv4。
+**功能：** IPv4 = 1，IPv6 = 2。
 
 **类型：** UInt32
 
@@ -1046,7 +1052,7 @@ public var family: UInt32
 public var port: UInt32
 ```
 
-**功能：** 端口，取值范围\[0, 65535]，默认值为0。
+**功能：** 端口，取值范围\[0, 65535]。
 
 **类型：** UInt32
 
@@ -1073,8 +1079,8 @@ public init(address: String, family!: UInt32 = 1, port!: UInt32 = 0)
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |address|String|是|-|地址。|
-|family|UInt32|否|1|IPv4 = 1，IPv6 = 2，默认IPv4。|
-|port|UInt32|否|0|端口，取值范围\[0, 65535]，默认值为0。|
+|family|UInt32|否|1|**命名参数。** IPv4 = 1，IPv6 = 2，默认IPv4。|
+|port|UInt32|否|0|**命名参数。** 端口，取值范围\[0, 65535]，默认值为0。|
 
 ## class NetBlockStatusInfo
 
@@ -1225,8 +1231,8 @@ public init(bearerTypes: Array<NetBearType>, linkUpBandwidthKbps!: UInt32 = 0, l
 |:---|:---|:---|:---|:---|
 |bearerTypes|Array\<[NetBearType](#enum-netbeartype)>|是|-|网络类型。数组里面只包含了一种网络类型。|
 |linkUpBandwidthKbps|UInt32|否|0|**命名参数。** 上行（设备到网络）带宽，单位(kb/s)。0表示无法评估当前网络带宽。|
-|linkDownBandwidthKbps|UInt32|否|0|**命名参数。** **功能：** 下行（网络到设备）带宽，单位(kb/s)。0表示无法评估当前网络带宽。|
-|networkCap|Array\<[NetCap](#enum-netcap)>|否|Array\<NetCap>()|网络具体能力。|
+|linkDownBandwidthKbps|UInt32|否|0|**命名参数。** 下行（网络到设备）带宽，单位(kb/s)。0表示无法评估当前网络带宽。|
+|networkCap|Array\<[NetCap](#enum-netcap)>|否|Array\<NetCap>()|**命名参数。** 网络具体能力。|
 
 ## class NetCapabilityInfo
 
@@ -1314,7 +1320,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[NetConnectionEvent](#enum-netconnectionevent)|是|-|网络连接事件类型，仅支持NetAvailable和NetLost事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[NetHandle](#class-nethandle)>|是|-|回调函数，返回数据网络句柄。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[NetHandle](#class-nethandle)>|是|-|回调函数，返回数据网络句柄。|
 
 **异常：**
 
@@ -1373,7 +1379,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockSt
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[NetConnectionEvent](#enum-netconnectionevent)|是|-|网络连接事件类型，仅支持NetBlockStatusChange事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[NetBlockStatusInfo](#class-netblockstatusinfo)>|是|-|回调函数，获取网络阻塞状态信息。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[NetBlockStatusInfo](#class-netblockstatusinfo)>|是|-|回调函数，获取网络阻塞状态信息。|
 
 **异常：**
 
@@ -1436,7 +1442,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabil
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[NetConnectionEvent](#enum-netconnectionevent)|是|-|网络连接事件类型，仅支持NetCapabilitiesChange事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[NetCapabilityInfo](#class-netcapabilityinfo)>|是|-|回调函数，返回数据网络句柄（netHandle）和网络的能力信息（netCap）。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[NetCapabilityInfo](#class-netcapabilityinfo)>|是|-|回调函数，返回数据网络句柄（netHandle）和网络的能力信息（netCap）。|
 
 **异常：**
 
@@ -1499,7 +1505,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnect
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[NetConnectionEvent](#enum-netconnectionevent)|是|-|网络连接事件类型，仅支持NetConnectionPropertiesChange事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[NetConnectionPropertyInfo](#class-netconnectionpropertyinfo)>|是|-|回调函数，获取网络连接属性信息。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[NetConnectionPropertyInfo](#class-netconnectionpropertyinfo)>|是|-|回调函数，获取网络连接属性信息。|
 
 **异常：**
 
@@ -2131,7 +2137,7 @@ public enum NetCap {
 NetCapabilityInternet
 ```
 
-**功能：** 表示该网络应具有访问Internet的能力，此能力由网络提供者设置，但该网络访问Internet的连通性并未被网络管理成功验证。网络连通性可以通过NET_CAPABILITY_VALIDATED和NET_CAPABILITY_CHECKING_CONNECTIVITY判断。
+**功能：** 表示该网络应具有访问Internet的能力，此能力由网络提供者设置，但该网络访问Internet的连通性并未被网络管理成功验证。网络连通性可以通过NetCapabilityValidated判断。
 
 **系统能力：** SystemCapability.Communication.NetManager.Core
 
@@ -2181,7 +2187,7 @@ NetCapabilityValidated
 
 **功能：** 表示网络管理通过该网络与华为云地址成功建立连接，此能力由网络管理模块设置。
 
-注意： 网络管理可能会与华为云地址建立连接失败，导致网络能力不具备此标记位，但不完全代表该网络无法访问互联网。另外，对于新完成连接的网络，由于网络正在进行连通性验证，此值可能无法反映真实的验证结果。对此，应用可以通过NET_CAPABILITY_CHECKING_CONNECTIVITY检查网络是否正在检测连通性。
+注意： 网络管理可能会与华为云地址建立连接失败，导致网络能力不具备此标记位，但不完全代表该网络无法访问互联网。另外，对于新完成连接的网络，由于网络正在进行连通性验证，此值可能无法反映真实的验证结果。
 
 **系统能力：** SystemCapability.Communication.NetManager.Core
 

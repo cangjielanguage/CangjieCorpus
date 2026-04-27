@@ -8,6 +8,9 @@
 
 宏定义如下：
 
+<!-- compile.error -macro1 -->
+<!-- cfg="--compile-macro" -->
+
 ```cangjie
 // macro_definition.cj
 macro package macro_definition
@@ -17,7 +20,8 @@ import std.ast.*
 public macro testDef(input: Tokens): Tokens {
     for (i in 0..input.size) {
         if (input[i].kind == IDENTIFIER) {
-            diagReport(DiagReportLevel.ERROR, input[i..(i + 1)], "This expression is not allowed to contain identifier",   "Here is the illegal identifier")
+            diagReport(DiagReportLevel.ERROR, input[i..(i + 1)], "This expression is not allowed to contain identifier",
+                "Here is the illegal identifier")
         }
     }
     return input
@@ -25,6 +29,9 @@ public macro testDef(input: Tokens): Tokens {
 ```
 
 宏调用如下：
+
+<!-- compile.error -macro1 -->
+<!-- cfg="--debug-macro" -->
 
 ```cangjie
 // macro_call.cj
@@ -55,14 +62,14 @@ cjc macro_call.cj -o demo
 
 ```text
 error: This expression is not allowed to contain identifier
- ==> call.cj:9:22:
+ ==> macro_call.cj:9:22:
   |
 9 |     let b = @testDef(a)
   |                      ^ Here is the illegal identifier
   |
 
 error: This expression is not allowed to contain identifier
-  ==> call.cj:10:26:
+  ==> macro_call.cj:10:26:
    |
 10 |     let c = @testDef(1 + a)
    |                          ^ Here is the illegal identifier
@@ -73,11 +80,13 @@ error: This expression is not allowed to contain identifier
 
 ## 非宏展开过程中调用示例
 
+<!-- compile -->
+
 ```cangjie
 import std.ast.*
 
 func A(input: Tokens) {
-    diagReport(DiagReportLevel.ERROR, input, "Message", "Hint")  // 该调用处在普通函数 A 中，diagReport 实际不会执行任何操作
+    diagReport(DiagReportLevel.ERROR, input, "Message", "Hint") // 该调用处在普通函数 A 中，diagReport 实际不会执行任何操作
 }
 
 main() {

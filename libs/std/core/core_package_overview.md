@@ -22,6 +22,7 @@ core 包是标准库的核心包，提供了适用仓颉语言编程最基本的
 | [eprintln(String)](./core_package_api/core_package_funcs.md#func-eprintlnstring) | 将指定字符串打印到标准错误文本流，末尾添加换行。 |
 | [eprint\<T>(T, Bool) where T <: ToString](./core_package_api/core_package_funcs.md#func-eprinttt-bool-where-t--tostring) | 将指定 T 类型实例的字符串表示打印到标准错误文本流。 |
 | [eprintln\<T>(T) where T <: ToString](./core_package_api/core_package_funcs.md#func-eprintlntt-where-t--tostring) | 将指定 T 类型实例的字符串表示打印到标准错误文本流，末尾添加换行。 |
+| <!--DelRow--> [exclusiveScope\<T>(( ) -> T)](./core_package_api/core_package_funcs.md#func-exclusivescopet----t) | 在独占作用域中执行一个闭包，确保闭包在隔离的上下文中运行，并适当地处理结果或异常。 |
 | [ifNone(Option\<T>, () -> Unit)](./core_package_api/core_package_funcs.md#func-ifnonetoptiont----unit) | 如果输入是 Option.None 类型数据，则执行 action 函数。 |
 | [ifSome(Option\<T>, (T) -> Unit)](./core_package_api/core_package_funcs.md#func-ifsometoptiont-t---unit) | 如果输入是 Option.Some 类型数据，则执行 action 函数。 |
 | [max\<T>(T, T, Array\<T>) where T <: Comparable\<T>](./core_package_api/core_package_funcs.md#func-maxtt-t-arrayt-where-t--comparablet) | 获取一组数据中的最大值 |
@@ -57,7 +58,7 @@ core 包是标准库的核心包，提供了适用仓颉语言编程最基本的
 | [println(UInt64)](./core_package_api/core_package_funcs.md#func-printlnuint64) | 向控制台输出 UInt64 类型数据的字符串表达，末尾添加换行。 |
 | [println(UInt8)](./core_package_api/core_package_funcs.md#func-printlnuint8) | 向控制台输出 UInt8 类型数据的字符串表达，末尾添加换行。 |
 | [println\<T>(T) where T <: ToString](./core_package_api/core_package_funcs.md#func-printlntt-where-t--tostring) | 向控制台输出 `T` 类型实例的字符串表示，末尾添加换行。 |
-| [readln()](./core_package_api/core_package_funcs.md#func-readln) | 接受控制台输入，直到遇到换行或EOF结束。 |
+| [readln()](./core_package_api/core_package_funcs.md#func-readln) | 接受控制台输入，直到遇到换行或 EOF 结束。 |
 | [refEq(Object, Object)](./core_package_api/core_package_funcs.md#func-refeqobject-object) | 判断两个 Object 实例的内存地址是否相同。 |
 | [releaseArrayRawData(CPointerHandle\<T>) where T <: CType](./core_package_api/core_package_funcs.md#func-releasearrayrawdatatcpointerhandlet-where-t--ctype) | 释放原始指针实例，该实例通过 acquireArrayRawData 获取。 |
 | [sizeOf\<T>() where T <: CType](./core_package_api/core_package_funcs.md#func-sizeoft-where-t--ctype) | 获取类型 T 所占用的内存空间大小。 |
@@ -132,6 +133,7 @@ core 包是标准库的核心包，提供了适用仓颉语言编程最基本的
 | [StringBuilder](./core_package_api/core_package_classes.md#class-stringbuilder) | 该类主要用于字符串的构建。 |
 | [Thread](./core_package_api/core_package_classes.md#class-thread) | `Thread` 类代表一个仓颉类，可用于获取线程 ID 及名字、查询线程是否存在取消请求、注册线程未处理异常的处理函数等。 |
 | [ThreadLocal\<T>](./core_package_api/core_package_classes.md#class-threadlocalt) | 该类表示仓颉线程局部变量。 |
+| [ThreadSnapshot](./core_package_api/core_package_classes.md#class-threadsnapshot) | 该类用于获取当前线程或者所有线程的信息，包含名称、id、状态、调用栈。 |
 
 ### 枚举
 
@@ -141,6 +143,7 @@ core 包是标准库的核心包，提供了适用仓颉语言编程最基本的
 | [Endian](./core_package_api/core_package_enums.md#enum-endian) | 枚举类型 Endian 表示运行平台的端序，分为大端序和小端序。 |
 | [Ordering](./core_package_api/core_package_enums.md#enum-ordering) | Ordering 表示比较大小的结果，它包含三种情况：小于，大于和等于。 |
 | [Option\<T>](./core_package_api/core_package_enums.md#enum-optiont) | Option\<T> 是对 `T` 类型的封装，表示可能有值也可能无值。 |
+| [ThreadState](./core_package_api/core_package_enums.md#enum-threadstate) | ThreadState 表示线程的状态，它包含四种状态：等待执行，正在执行，挂起和结束执行。|
 
 ### 结构体
 
@@ -163,13 +166,13 @@ core 包是标准库的核心包，提供了适用仓颉语言编程最基本的
 | [ArithmeticException](./core_package_api/core_package_exceptions.md#class-arithmeticexception) | 算术异常类，发生算术异常时使用。 |
 | [Error](./core_package_api/core_package_exceptions.md#class-error) | `Error` 是所有错误类的父类。该类不可被继承，不可初始化，但是可以被捕获到。 |
 | [Exception](./core_package_api/core_package_exceptions.md#class-exception) | `Exception` 是所有异常类的父类。 |
+| <!--DelRow--> [ExclusiveScopeException](./core_package_api/core_package_exceptions.md#class-exclusivescopeexception) | 自定义异常类，用于包装在独占作用域中抛出的异常。它保留了原始异常的堆栈信息，不支持主动构造该异常，但是可以被捕获到。 |
 | [IllegalArgumentException](./core_package_api/core_package_exceptions.md#class-illegalargumentexception) | 表示参数非法的异常类。 |
 | [IllegalFormatException](./core_package_api/core_package_exceptions.md#class-illegalformatexception) | 表示变量的格式无效或不标准时的异常类。 |
 | [IllegalMemoryException](./core_package_api/core_package_exceptions.md#class-illegalmemoryexception) | 表示内存操作错误的异常类。 |
 | [IllegalStateException](./core_package_api/core_package_exceptions.md#class-illegalstateexception) | 表示状态非法的异常类。 |
 | [IncompatiblePackageException](./core_package_api/core_package_exceptions.md#class-incompatiblepackageexception) | 表示包不兼容的异常类。 |
 | [IndexOutOfBoundsException](./core_package_api/core_package_exceptions.md#class-indexoutofboundsexception) | 表示索引越界的异常类。 |
-| [InternalError](./core_package_api/core_package_exceptions.md#class-internalerror) | 表示内部错误的错误类，该类不可初始化，但是可以被捕获到。 |
 | [NegativeArraySizeException](./core_package_api/core_package_exceptions.md#class-negativearraysizeexception) | 表示数组大小为负数的异常类。 |
 | [NoneValueException](./core_package_api/core_package_exceptions.md#class-nonevalueexception) | 表示 Option\<T> 实例的值为 `None` 的异常类，通常在 `getOrThrow` 函数中被抛出。 |
 | [OutOfMemoryError](./core_package_api/core_package_exceptions.md#class-outofmemoryerror) | 表示内存不足错误的错误类，该类不可被继承，不可初始化，但是可以被捕获到。 |

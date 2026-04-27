@@ -121,7 +121,7 @@ The result of 'abc' == 'ABC' is: false
 The result of 'abc' + 'ABC' is: abcABC
 ```
 
-字符串还支持其他常见操作，例如拆分、替换等。具体操作可以参考《仓颉编程语言标准库 API 》的 String 介绍，下面给出部分常见操作：
+字符串还支持其他常见操作，例如拆分、替换等。下面给出部分常见操作：
 
 <!-- run -->
 
@@ -132,7 +132,7 @@ main() {
     var s3 = "abcyyabcqqabcbc"
     let r1 = s2.contains(s1)    // 判断s2中是否包含字符串s1
     println(r1)                 // true
-    let r2 = s3.split(s1)       //对原字符串 s2 按照字符串 s1 分隔符分割，指定是否删除空串
+    let r2 = s3.split(s1)       //对原字符串 s3 按照字符串 s1 分隔符分割，指定是否删除空串
     println(r2[1])              // yy
     s1 = s2
     println(s1)                 // ABCabc

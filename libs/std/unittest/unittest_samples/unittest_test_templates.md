@@ -1,4 +1,4 @@
-# 测试模版
+# 测试模板
 
 ## 入门
 
@@ -6,27 +6,32 @@
 
 要创建测试模板，请将 `@TestTemplate` 宏放在抽象类上：
 
+<!-- compile-test1 -->
 ```cangjie
+public class DbConnection {
+    func close() {}
+}
 @TestTemplate
 abstract class DbTest {
     public prop dbConnection: DbConnection
 
     @TestCase
-    func testCommonDbApi1() { /* ... */}
+    func testCommonDbApi1() { /* ... */ }
 
     @TestCase
-    func testCommonDbApi2() { /* ... */}
+    func testCommonDbApi2() { /* ... */ }
 }
 ```
 
 可用这个模板创建多个实际的测试套件，例如测试与不同特定数据库的连接。要使用测试模板，只需继承相应的类：
 
+<!-- compile-test1 -->
 ```cangjie
 @Test
 class MySqlTest <: DbTest {
     var dbConnection_: ?DbConnection = None
 
-    override prop dbConnection: DbConnection {
+    public override prop dbConnection: DbConnection {
         get() {
             dbConnection_.getOrThrow()
         }
@@ -34,12 +39,12 @@ class MySqlTest <: DbTest {
 
     @BeforeAll
     func initializeConnection() {
-        dbConnection_ = Some(...)
+        dbConnection_ = Some(DbConnection())
     }
 
     @AfterAll
     func closeConnection() {
-        dbConnection_.close()
+        dbConnection_?.close()
     }
 
     @TestCase
@@ -75,32 +80,45 @@ Summary: TOTAL: 3
 
 `@_Each` 派生类的方法也适用于基类的测试用例。
 
+<!-- run -->
 ```cangjie
 @TestTemplate
 abstract class BaseTemplate {
     @BeforeEach
-    func baseBeforeEach() { println("base before each") }
+    func baseBeforeEach() {
+        println("base before each")
+    }
 
     @AfterEach
-    func baseAfterEach() { println("base after each") }
+    func baseAfterEach() {
+        println("base after each")
+    }
 }
 
 @TestTemplate
 abstract class Template <: BaseTemplate {
     @TestCase
-    func templateCase() { println("template case") }
+    func templateCase() {
+        println("template case")
+    }
 }
 
 @Test
 class Test <: Template {
     @BeforeEach
-    func beforeEach() { println("before each") }
+    func beforeEach() {
+        println("before each")
+    }
 
     @AfterEach
-    func afterEach() { println("after each") }
+    func afterEach() {
+        println("after each")
+    }
 
     @TestCase
-    func testCase() { println("case") }
+    func testCase() {
+        println("case")
+    }
 }
 ```
 

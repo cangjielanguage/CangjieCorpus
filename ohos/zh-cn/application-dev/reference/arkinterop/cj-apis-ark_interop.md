@@ -1,12 +1,22 @@
 # ohos.ark_interop（ArkTS互操作库）
 
-ArkTS 应用的开发语言包括 ArkTS、typescript、javascript，ArkTS 互操作库是为仓颉语言提供与 ArkTS 语言互操作能力。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+ArkTS 应用的开发语言包括 ArkTS、typescript、javascript，ArkTS 互操作库为仓颉语言提供与 ArkTS 语言进行互操作的能力。
 
 ## 导入模块
 
 ```cangjie
 import ohos.ark_interop.*
 ```
+
+> **说明：**
+>
+> 当前暂不支持Kit化的导入方式，预计在下个版本支持。
 
 ## interface JSInteropByte
 
@@ -32,7 +42,7 @@ public interface JSInteropType<T> {
 }
 ```
 
-**功能：** 该接口用于为可用于声明式互操作宏的类型实现扩展方法。声明式互操作宏框架场景使用，开发者不需要使用此API。
+**功能：** 该接口为支持声明式互操作宏的类型提供扩展方法。此接口仅供声明式互操作宏框架内部使用，开发者无需直接调用。
 
 如下类型扩展了此接口：
 
@@ -47,7 +57,7 @@ public interface JSInteropType<T> {
 <!--compile-->
 ```cangjie
 @Interop[ArkTS]
-class MyCustomClass {
+public class MyCustomClass {
     public let name: String   // String实现了JSInteropType<String>，所以可以在这里使用。
     public let age: Int64     // Int64实现了JSInteropType<Int64>，所以可以在这里使用。
 
@@ -229,7 +239,7 @@ public static func fromJSValue(_: JSContext, input: JSValue): Int8
 |_|[JSContext](#class-jscontext)|是|-|ArkTS 互操作上下文。|
 |input|[JSValue](#class-jsvalue)|是|-|ArkTS 统一类型。|
 
-**返回值：** Int8
+**返回值：**
 
 |类型|说明|
 |:----|:----|
@@ -282,7 +292,7 @@ public func toJSValue(context: JSContext): JSValue
 
 |类型|说明|
 |:----|:----|
-|[JSValue](#class-jsvalue)|ArkTS 统一类型。|
+|[JSValue](#class-jsvalue)|ArkTS统一类型。|
 
 **异常：**
 
@@ -1096,7 +1106,7 @@ public func toJSValue(context: JSContext): JSValue
 
 ## extend Float32 <: JSInteropType\<Float32>
 
-**功能：** 该接口可用为内置类型 Float32 实现扩展方法。
+**功能：** 该接口可为内置类型 Float32 实现扩展方法。
 
 **起始版本：** 22
 
@@ -1197,7 +1207,7 @@ public func toJSValue(context: JSContext): JSValue
 
 ## extend Float64 <: JSInteropType\<Float64>
 
-**功能：** 该接口可用为内置类型 Float64 实现扩展方法。
+**功能：** 该接口可为内置类型 Float64 实现扩展方法。
 
 **起始版本：** 22
 
@@ -1550,12 +1560,6 @@ public static func fromJSValue(_: JSContext, _: JSValue): Unit
 |_|[JSContext](#class-jscontext)|是|-|ArkTS 互操作上下文。|
 |_|[JSValue](#class-jsvalue)|是|-|ArkTS 统一类型。|
 
-**返回值：**
-
-|类型|说明|
-|:----|:----|
-|Unit|仓颉类型。|
-
 ### static func toArktsType()
 
 ```cangjie
@@ -1841,10 +1845,10 @@ public prop size: Int64
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch. |
 
-### func \[](Int64)
+### operator func \[](Int64)
 
 ```cangjie
-public operator func[](index: Int64): JSValue
+public operator func [](index: Int64): JSValue
 ```
 
 **功能：** 往 ArkTS 数组写入一个元素。
@@ -1878,16 +1882,16 @@ public operator func[](index: Int64): JSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let jsArr = callInfo[0].asArray(context)
+    let jsArr = callInfo[0].asArray()
     let firstElement = jsArr[0]
     return firstElement
 }
 ```
 
-### func \[](Int64, JSValue)
+### operator func \[](Int64, JSValue)
 
 ```cangjie
-public operator func[](index: Int64, value!: JSValue): Unit
+public operator func [](index: Int64, value!: JSValue): Unit
 ```
 
 **功能：** 往 ArkTS 数组写入一个元素。
@@ -1916,17 +1920,17 @@ public operator func[](index: Int64, value!: JSValue): Unit
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let jsArr = callInfo[0].asArray(context)
+    let jsArr = callInfo[0].asArray()
     let setValue = context.number(1.0).toJSValue()
     jsArr[0] = setValue
     return setValue
 }
 ```
 
-### func \[](Int64, JSHeapObject)
+### operator func \[](Int64, JSHeapObject)
 
 ```cangjie
-public operator func[](index: Int64, value!: JSHeapObject): Unit
+public operator func [](index: Int64, value!: JSHeapObject): Unit
 ```
 
 **功能：** 往 ArkTS 数组写入一个元素。
@@ -1955,7 +1959,7 @@ public operator func[](index: Int64, value!: JSHeapObject): Unit
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let jsArr = callInfo[0].asArray(context)
+    let jsArr = callInfo[0].asArray()
     let setValue = context.string("abc")
     jsArr[0] = setValue
     return setValue.toJSValue()
@@ -2912,7 +2916,7 @@ public class JSArrayEx<T> <: JSInteropType<JSArrayEx<T>> where T <: JSInteropTyp
 
 **父类型：**
 
-- [JSInteropType\<JSArrayEx\<T>>](#interface-jsinteroptype)
+- [JSInteropType\<JSArrayEx\<T>>](#interface-jsinteroptypet)
 
 ### prop size
 
@@ -2974,7 +2978,7 @@ public static func fromJSValue(context: JSContext, input: JSValue): JSArrayEx<T>
 
 |类型|说明|
 |:----|:----|
-|[JSArrayEx](#class-jsarrayex)\<T>|声明式互操作宏类型 JSArrayEx。|
+|[JSArrayEx](#class-jsarrayext-where-t--jsinteroptypet)\<T>|声明式互操作宏类型 JSArrayEx。|
 
 **异常：**
 
@@ -3016,7 +3020,7 @@ public func clone(): JSArrayEx<T>
 
 |类型|说明|
 |:----|:----|
-|[JSArrayEx](#class-jsarrayex)\<T>|克隆得到的新 JSArrayEx。|
+|[JSArrayEx](#class-jsarrayext-where-t--jsinteroptypet)\<T>|克隆得到的新 JSArrayEx。|
 
 **异常：**
 
@@ -3059,13 +3063,13 @@ public func concat(other: JSArrayEx<T>): JSArrayEx<T>
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[JSArrayEx](#class-jsarrayex)\<T>|是|-|串联到末尾的 JSArrayEx。|
+|other|[JSArrayEx](#class-jsarrayext-where-t--jsinteroptypet)\<T>|是|-|串联到末尾的 JSArrayEx。|
 
 **返回值：**
 
 |类型|说明|
 |:----|:----|
-|[JSArrayEx](#class-jsarrayex)\<T>|串联得到的新 JSArrayEx。|
+|[JSArrayEx](#class-jsarrayext-where-t--jsinteroptypet)\<T>|串联得到的新 JSArrayEx。|
 
 **异常：**
 
@@ -3310,10 +3314,10 @@ public func toJSValue(context: JSContext): JSValue
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch.                     |
 
-### func \[](Int64)
+### operator func \[](Int64)
 
 ```cangjie
-public operator func[](index: Int64): T
+public operator func [](index: Int64): T
 ```
 
 **功能：** 获取数组下标 index 对应的值。
@@ -3359,10 +3363,10 @@ func getIndexOperator(context: JSContext): JSValue {
 }
 ```
 
-### func \[](Int64, T)
+### operator func \[](Int64, T)
 
 ```cangjie
-public operator func[](index: Int64, value!: T)
+public operator func [](index: Int64, value!: T): Unit
 ```
 
 **功能：** 修改数组中下标 index 对应的值。
@@ -3593,10 +3597,10 @@ public prop thisArg: JSValue
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch.                     |
 
-### func \[](Int64)
+### operator func \[](Int64)
 
 ```cangjie
-public operator func[](index: Int64): JSValue
+public operator func [](index: Int64): JSValue
 ```
 
 **功能：** 通过索引获取对应的参数。
@@ -3737,7 +3741,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     }
     clazz.addAccessor("classKind", getter: context.function(getClassKind))
     let obj = clazz.new()
-    let classKind = obj.getProperty(context, "classKind").toString(context)
+    let classKind = obj.getProperty("classKind").toString()
     Hilog.info(0, "test", "class kind is ${classKind}")
     return obj
 }
@@ -3787,7 +3791,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     }
     clazz.addAccessor("classKind", getter: getClassKind)
     let obj = clazz.new()
-    let classKind = obj.getProperty(context, "classKind").toString(context)
+    let classKind = obj.getProperty("classKind").toString()
     Hilog.info(0, "test", "class kind is ${classKind}")
     return obj
 }
@@ -3836,7 +3840,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     }
     clazz.addMethod("getClassKind", context.function(getClassKind))
     let obj = clazz.new()
-    let classKind = obj.getProperty(context, "classKind").toString(context)
+    let classKind = obj.getProperty("classKind").toString()
     Hilog.info(0, "test", "class kind is ${classKind}")
     return obj
 }
@@ -3885,7 +3889,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     }
     clazz.addMethod("getClassKind", getClassKind)
     let obj = clazz.new()
-    let classKind = obj.getProperty(context, "classKind").toString(context)
+    let classKind = obj.getProperty("classKind").toString()
     Hilog.info(0, "test", "class kind is ${classKind}")
     return obj
 }
@@ -3931,7 +3935,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     let clazz = context.clazz(ctor)
     clazz.addProperty("classKind", context.string("CustomClass").toJSValue())
     let obj = clazz.new()
-    let classKind = obj.getProperty(context, "classKind").toString(context)
+    let classKind = obj.getProperty("classKind").toString()
     Hilog.info(0, "test", "class kind is ${classKind}")
     return obj
 }
@@ -5331,6 +5335,62 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
 }
 ```
 
+### func requireArkModule(String)
+
+```cangjie
+public func requireArkModule(src: String): JSValue
+```
+
+**功能：** 导入一个ArkTS模块，包括系统模块、HAP模块里的文件、HAR模块里的文件、HSP模块里的文件和Native模块，详见[在仓颉代码里导入ArkTS模块](../../learn-cj/FFI/cangjie-arkts/cangjie-load-arkts.md)。
+
+**起始版本：** 23
+
+**参数：**
+
+| 参数名 | 类型   | 必填 | 默认值 | 说明         |
+| :----- | :----- | :--- | :----- | :----------- |
+| src    | String | 是   | -      | 模块标识符。 |
+
+**返回值：**
+
+| 类型                      | 说明                     |
+| :------------------------ | :----------------------- |
+| [JSValue](#class-jsvalue) | 返回ArkTS模块的JSValue。 |
+
+**异常：**
+
+- BusinessException：对应错误码如下表，详见[互操作错误码](./cj-errorcode-ark_interop.md)
+
+| 错误码ID | 错误信息                                                          |
+| :------- | :---------------------------------------------------------------- |
+| 34300002 | Module initialize fail.                                           |
+| 34300004 | Thread mismatch.                                                  |
+| 34300006 | Target module not exist.                                          |
+| 34300007 | Can not requireArkModule during initializing cangjie module.      |
+| 34300008 | Current application have not support requireArkModule of the url. |
+
+**示例：**
+
+<!--compile-->
+```cangjie
+import ohos.hilog.Hilog
+import ohos.business_exception.BusinessException
+
+func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
+    try {
+        let hilog = context.requireArkModule("@ohos.hilog").asObject()
+        hilog.callMethod("info", [
+            context.number(0).toJSValue(),
+            context.string("test").toJSValue(),
+            context.string("call hilog success").toJSValue()
+        ])
+    } catch (e: BusinessException) {
+        Hilog.info(0, "test", e.message)
+    }
+    return context.undefined().toJSValue()
+}
+```
+
 ### func requireSystemNativeModule(String, ?String)
 
 ```cangjie
@@ -5537,55 +5597,6 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
 }
 ```
 
-### func requireArkModule(String)
-
-```cangjie
-public func requireArkModule(src: String): JSValue
-```
-
-**功能：** 导入一个ArkTS模块。
-
-**起始版本：** 23
-
-**参数：**
-
-| 参数名 | 类型     | 必填 | 默认值 | 说明     |
-|:----|:-------|:---|:----|:-------|
-| src | String | 是  | -   | 模块标识符。 |
-
-**返回值：**
-
-| 类型                         | 说明                     |
-|:---------------------------|:-----------------------|
-| [JSValue](#class-jsvalue) | 返回 ArkTS 模块的JSValue。 |
-
-**异常：**
-
-- BusinessException：对应错误码如下表，详见[互操作错误码](./cj-errorcode-ark_interop.md)
-
-| 错误码ID | 错误信息                                                              |
-|:------|:------------------------------------------------------------------|
-| 34300002   | Module initialize fail.                                           |
-| 34300004   | Thread mismatch.                                                  |
-| 34300006   | Target module not exist.                                          |
-| 34300007   | Can not requireArkModule during initializing cangjie module.      |
-| 34300008   | Current application have not support requireArkModule of the url. |
-
-**示例：**
-
-<!--compile-->
-```cangjie
-func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let hilog = context.requireArkModule("@ohos.hilog").asObject()
-    hilog.callMethod("info", [
-        context.number(0).toJSValue(),
-        context.string("test").toJSValue(),
-        context.string("call hilog success").toJSValue()
-    ])
-    return context.undefined().toJSValue()
-}
-```
-
 ## class JSExternal
 
 ```cangjie
@@ -5637,7 +5648,7 @@ class Data <: SharedObject {
 }
 
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let external = callInfo[0].asExternal(context)
+    let external = callInfo[0].asExternal()
 
     if (let Some(data) <- external.cast<Data>()) {
          data.doSth()
@@ -5682,7 +5693,7 @@ class Data <: SharedObject {
 }
 
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let external = callInfo[0].asExternal(context)
+    let external = callInfo[0].asExternal()
 
     let sharedObject = external.getData()
     if (let Some(data) <- (sharedObject as Data)) {
@@ -5744,7 +5755,7 @@ public func call(thisArg!: JSValue = context.undefined().toJSValue()): JSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let callback = callInfo[0].asFunction(context)
+    let callback = callInfo[0].asFunction()
     return callback.call()
 }
 ```
@@ -5787,7 +5798,7 @@ public func call(arg: JSValue, thisArg!: JSValue = context.undefined().toJSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let callback = callInfo[0].asFunction(context)
+    let callback = callInfo[0].asFunction()
     let arg0 = context.number(1.0).toJSValue()
     return callback.call(arg0)
 }
@@ -5831,7 +5842,7 @@ public func call(args: Array<JSValue>, thisArg!: JSValue = context.undefined().t
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let callback = callInfo[0].asFunction(context)
+    let callback = callInfo[0].asFunction()
     let arg0 = context.number(1.0).toJSValue()
     let arg1 = context.boolean(false).toJSValue()
     return callback.call([arg0, arg1])
@@ -5853,7 +5864,7 @@ public class JSHashMapEx<K, V> <: JSInteropType<JSHashMapEx<K, V>> where K <: JS
 
 **父类型：**
 
-- [JSInteropType\<JSHashMapEx\<K,V>>](#interface-jsinteroptype)
+- [JSInteropType\<JSHashMapEx\<K,V>>](#interface-jsinteroptypet)
 
 ### prop size
 
@@ -5899,7 +5910,6 @@ public init(map: HashMap<K, V>)
 <!--compile-->
 ```cangjie
 import ohos.hilog.Hilog
-
 import std.collection.HashMap
 
 func createHashMapExFromHashMap(context: JSContext): JSValue {
@@ -5959,7 +5969,7 @@ public static func fromJSValue(context: JSContext, input: JSValue): JSHashMapEx<
 
 |类型|说明|
 |:----|:----|
-|[JSHashMapEx](#class-jshashmapex)\<K, V>|声明式互操作宏类型 JSHashMapEx。|
+|[JSHashMapEx](#class-jshashmapexk-v-where-k--jskeyable--hashable--equatablek--jsinteroptypek-v--jsinteroptypev)\<K, V>|声明式互操作宏类型 JSHashMapEx。|
 
 **异常：**
 
@@ -5993,7 +6003,7 @@ func convertJSValueToStringHashMapEx(context: JSContext, callInfo: JSCallInfo): 
 
     // 遍历所有键值对
     for (key in keys) {
-        let value = jsHashMapEx[key]
+        let value = source[key]
         Hilog.info(0, "test", "Key: ${key}, Value: ${value}")
     }
 
@@ -6050,7 +6060,7 @@ public func clone(): JSHashMapEx<K, V>
 
 |类型|说明|
 |:----|:----|
-|[JSHashMapEx](#class-jshashmapex)\<K, V>|克隆得到的新 JSHashMapEx。|
+|[JSHashMapEx](#class-jshashmapexk-v-where-k--jskeyable--hashable--equatablek--jsinteroptypek-v--jsinteroptypev)\<K, V>|克隆得到的新 JSHashMapEx。|
 
 **异常：**
 
@@ -6523,7 +6533,7 @@ public func values(): Collection<V>
 | 34300003   | Accessing reference is beyond reach.  |
 | 34300004   | Thread mismatch.                      |
 
-### func \[](K)
+### operator func \[](K)
 
 ```cangjie
 public operator func [](key: K): V
@@ -6572,7 +6582,7 @@ func getIndexOperatorHashMapEx(context: JSContext): JSValue {
 }
 ```
 
-### func \[](K, V)
+### operator func \[](K, V)
 
 ```cangjie
 public operator func [](key: K, value!: V): Unit
@@ -6950,7 +6960,7 @@ func setObjectProperties(context: JSContext): JSValue {
 ## class JSObjectBase
 
 ```cangjie
-sealed abstract class JSObjectBase <: JSHeapObject {}
+abstract sealed class JSObjectBase <: JSHeapObject {}
 ```
 
 **功能：** 一个 ArkTS 对象的安全引用的基类。可以操作 ArkTS 对象。
@@ -7030,7 +7040,7 @@ public func callMethod(key: JSKeyable, args: Array<JSValue>): JSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let json = context.global["JSON"].asObject(context)
+    let json = context.global["JSON"].asObject()
     json.callMethod("parse", [context.string("{a: 1, b: 2}").toJSValue()])
 }
 ```
@@ -7226,7 +7236,7 @@ class Data <: SharedObject {
 }
 
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let obj = callInfo[0].asObject(context)
+    let obj = callInfo[0].asObject()
     let sharedObJ = obj.getAttachInfo().getOrThrow()
     let data = (sharedObJ as Data).getOrThrow()
     data.doSth()
@@ -7271,7 +7281,7 @@ public func getProperty(key: JSKeyable): JSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let obj = callInfo[0].asObject(context)
+    let obj = callInfo[0].asObject()
     let result = obj.getProperty("a")
     return result
 }
@@ -7315,7 +7325,7 @@ public func hasProperty(key: JSKeyable): Bool
 import ohos.hilog.Hilog
 
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let obj = callInfo[0].asObject(context)
+    let obj = callInfo[0].asObject()
     let hasA = obj.hasProperty("a")
     Hilog.info(0, "test", "obj has property of a: ${hasA}")
     obj.toJSValue()
@@ -7364,7 +7374,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
         callInfo.thisArg
     }
     let classA = context.clazz(ctor)
-    let obj = classA.new().asObject(context)
+    let obj = classA.new().asObject()
     let isClassA = obj.instanceOf(classA)
     Hilog.info(0, "test", "obj is classA: ${isClassA}")
     return obj.toJSValue()
@@ -7447,7 +7457,7 @@ func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
 }
 ```
 
-### func \[](JSKeyable)
+### operator func \[](JSKeyable)
 
 ```cangjie
 public operator func [](key: JSKeyable): JSValue
@@ -7484,13 +7494,13 @@ public operator func [](key: JSKeyable): JSValue
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let obj = callInfo[0].asObject(context)
+    let obj = callInfo[0].asObject()
     let result = obj["a"]
     return result
 }
 ```
 
-### func \[](JSKeyable, JSValue)
+### operator func \[](JSKeyable, JSValue)
 
 ```cangjie
 public operator func [](key: JSKeyable, value!: JSValue): Unit
@@ -7576,7 +7586,7 @@ public func catchError(callback: JSFunction): Unit
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let promise = callInfo[0].asPromise(context)
+    let promise = callInfo[0].asPromise()
     let onError: JSLambda = {context, callInfo =>
         context.undefined().toJSValue()
     }
@@ -7616,7 +7626,7 @@ public func then(onFulfilled: JSFunction, onRejected!: ?JSFunction = None): Unit
 <!--compile-->
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
-    let promise = callInfo[0].asPromise(context)
+    let promise = callInfo[0].asPromise()
     let onFulfilled: JSLambda = {context, callInfo =>
         context.undefined().toJSValue()
     }
@@ -7958,6 +7968,66 @@ public func toUtf16String(): Utf16String
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch.                     |
 
+### extend JSString <: JSInteropType\<JSString>
+
+**功能：** 为类型JSString实现扩展方法。
+
+**起始版本：** 22
+
+**父类型：**
+
+- [JSInteropType\<JSString>](#interface-jsinteroptypet)
+
+#### static func fromJSValue(JSContext, JSValue)
+
+```cangjie
+public static func fromJSValue(_: JSContext, input: JSValue): JSString
+```
+
+**功能：** 将JSValue类型转换为相应的JSString类型。
+
+**起始版本：** 22
+
+**参数：**
+
+| 参数名 | 类型                          | 必填 | 默认值 | 说明                |
+| :----- | :---------------------------- | :--- | :----- | :------------------ |
+| _      | [JSContext](#class-jscontext) | 是   | -      | ArkTS互操作上下文。 |
+| input  | [JSValue](#class-jsvalue)     | 是   | -      | ArkTS统一类型。     |
+
+**返回值：**
+
+| 类型                        | 说明                              |
+| :-------------------------- | :-------------------------------- |
+| [JSString](#class-jsstring) | JSValue类型转换后的JSString类型。 |
+
+**异常：**
+
+- BusinessException：对应错误码如下表，详见[互操作错误码](./cj-errorcode-ark_interop.md)
+
+| 错误码ID | 错误信息                             |
+| :------- | :----------------------------------- |
+| 34300002 | Outside error occurred.              |
+| 34300003 | Accessing reference is beyond reach. |
+| 34300004 | Thread mismatch.                     |
+| 34300005 | The ArkTS data types do not match.   |
+
+#### static func toArktsType()
+
+```cangjie
+public static func toArktsType(): String
+```
+
+**功能：** 获取JSString类型对应的ArkTS类型的名称。
+
+**起始版本：** 22
+
+**返回值：**
+
+| 类型   | 说明                |
+| :----- | :------------------ |
+| String | 对应的ArkTS类型的名称，即"string"。 |
+
 ## class JSStringEx
 
 ```cangjie
@@ -7972,7 +8042,7 @@ public class JSStringEx <: JSInteropType<JSStringEx> & Equatable<JSStringEx> & T
 
 **父类型：**
 
-- [JSInteropType\<JSStringEx>](#interface-jsinteroptype)
+- [JSInteropType\<JSStringEx>](#interface-jsinteroptypet)
 - Equatable\<JSStringEx>
 - ToString
 
@@ -8114,7 +8184,7 @@ public func toString(): String
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch.                     |
 
-### func !=(JSStringEx)
+### operator func !=(JSStringEx)
 
 ```cangjie
 public operator func !=(str: JSStringEx): Bool
@@ -8145,7 +8215,7 @@ public operator func !=(str: JSStringEx): Bool
 | 34300003   | Accessing reference is beyond reach. |
 | 34300004   | Thread mismatch.                     |
 
-### func ==(JSStringEx)
+### operator func ==(JSStringEx)
 
 ```cangjie
 public operator func ==(str: JSStringEx): Bool
@@ -8206,7 +8276,7 @@ func createSymbol(context: JSContext): JSValue {
     object["name"] = context.function { context, callInfo =>
         return object[symbol]
     }.toJSValue()
-    return object.toJSValue(context)
+    return object.toJSValue()
 }
 ```
 
@@ -8928,9 +8998,9 @@ public func getProperty(key: JSKeyable): JSValue
 ```cangjie
 func doSth(context: JSContext, callInfo: JSCallInfo): JSValue {
     let jsObJ = callInfo[0]
-    let element = jsObJ.getProperty(context, "a")
-    let element1 = jsObJ.getProperty(context, context.string("a"))
-    let element2 = jsObJ.getProperty(context, context.symbol())
+    let element = jsObJ.getProperty("a")
+    let element1 = jsObJ.getProperty(context.string("a"))
+    let element2 = jsObJ.getProperty(context.symbol())
     return element
 }
 ```
@@ -9929,7 +9999,7 @@ public class Utf16String <: ToString & Equatable<Utf16String> & Hashable & JSKey
 - Equatable\<Utf16String>
 - Hashable
 - [JSKeyable](#interface-jskeyable)
-- [JSInteropType\<Utf16String>](#interface-jsinteroptype)
+- [JSInteropType\<Utf16String>](#interface-jsinteroptypet)
 
 ### prop accessible
 
@@ -10211,9 +10281,9 @@ public func contains(target: Utf16String): Bool
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|target|[Utf16String](#class-utf16string)|是|-|目标字符串。|
+|参数名|类型|必填|默认值| 说明                      |
+|:---|:---|:---|:---|:------------------------|
+|target|[Utf16String](#class-utf16string)|是|-| 目标字符串。当目标字符串为空时返回false。 |
 
 **返回值：**
 
@@ -10322,9 +10392,9 @@ public func endsWith(target: Utf16String): Bool
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|target|[Utf16String](#class-utf16string)|是|-|目标字符串。|
+|参数名|类型|必填|默认值| 说明                     |
+|:---|:---|:---|:---|:-----------------------|
+|target|[Utf16String](#class-utf16string)|是|-| 目标字符串。目标字符串为空时返回false。 |
 
 **返回值：**
 
@@ -10465,7 +10535,7 @@ public func indexOf(target: Utf16String, fromIndex: Int64): ?Int64
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |target|[Utf16String](#class-utf16string)|是|-|目标字符串。|
-|fromIndex|Int64|是|-|当前字符串的查找起始位置，不填是 0。|
+|fromIndex|Int64|是|-|当前字符串的查找起始位置。|
 
 **返回值：**
 
@@ -10630,10 +10700,10 @@ public func lastIndexOf(target: Utf16String, fromIndex: Int64): ?Int64
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|target|[Utf16String](#class-utf16string)|是|-|目标字符串。|
-|fromIndex|Int64|是|-|当前字符串的查找起始位置，不填是 size。|
+|参数名|类型|必填|默认值| 说明                                                                 |
+|:---|:---|:---|:---|:-------------------------------------------------------------------|
+|target|[Utf16String](#class-utf16string)|是|-| 目标字符串。                                                             |
+|fromIndex|Int64|是|-| 当前字符串的查找起始位置（从目标字符串末尾往前匹配）。fromIndex小于0或大于等于size时视为size-1，字符串末尾位置。 |
 
 **返回值：**
 
@@ -10687,7 +10757,7 @@ public func lazySplit(separator: Utf16String, removeEmpty!: Bool = false): Itera
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |separator|[Utf16String](#class-utf16string)|是|-|分隔符。当分隔符为空字符串时，每个字符都是单独的元素。|
-|removeEmpty|Bool|否|false|是否删除空白元素。|
+|removeEmpty|Bool|否|false|是否删除空白元素，为true时删除空白元素。|
 
 **返回值：**
 
@@ -10738,11 +10808,11 @@ public func lazySplit(separator: Utf16String, maxSplit: Int64, removeEmpty!: Boo
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|separator|[Utf16String](#class-utf16string)|是|-|分隔符。当分隔符为空字符串时，每个字符都是单独的元素。|
-|maxSplit|Int64|是|-|分割最大数量。为 0 时无上限。|
-|removeEmpty|Bool|否|false|是否删除空白元素。|
+|参数名|类型|必填|默认值| 说明                          |
+|:---|:---|:---|:---|:----------------------------|
+|separator|[Utf16String](#class-utf16string)|是|-| 分隔符。当分隔符为空字符串时，每个字符都是单独的元素。 |
+|maxSplit|Int64|是|-| 分割最大数量。为0时最大分割数量无限制。        |
+|removeEmpty|Bool|否|false| 是否删除空白元素，为true时删除空白元素。                   |
 
 **返回值：**
 
@@ -10893,10 +10963,10 @@ public func split(separator: Utf16String, removeEmpty!: Bool = false): Array<Utf
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|separator|[Utf16String](#class-utf16string)|是|-|分隔符。当分隔符为空字符串时，每个字符都是单独的元素。|
-|removeEmpty|Bool|否|false|是否删除空白元素。|
+|参数名|类型|必填|默认值| 说明                        |
+|:---|:---|:---|:---|:--------------------------|
+|separator|[Utf16String](#class-utf16string)|是|-| 分隔符。当分隔符为空字符串时，每个字符都是单独的元素。|
+|removeEmpty|Bool|否|false| 是否删除空白元素，为true时删除空白元素。    |
 
 **返回值：**
 
@@ -10947,11 +11017,11 @@ public func split(separator: Utf16String, maxSplit: Int64, removeEmpty!: Bool = 
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|separator|[Utf16String](#class-utf16string)|是|-|分隔符。当分隔符为空字符串时，每个字符都是单独的元素。|
-|maxSplit|Int64|是|-|分割最大数量。为 0 时无上限。|
-|removeEmpty|Bool|否|false|是否删除空白元素。|
+|参数名|类型|必填|默认值| 说明                          |
+|:---|:---|:---|:---|:----------------------------|
+|separator|[Utf16String](#class-utf16string)|是|-| 分隔符。当分隔符为空字符串时，每个字符都是单独的元素。 |
+|maxSplit|Int64|是|-| 分割最大数量。为0时最大分割数量无限制。            |
+|removeEmpty|Bool|否|false| 是否删除空白元素，为true时删除空白元素。      |
 
 **返回值：**
 
@@ -10980,9 +11050,9 @@ public func startsWith(target: Utf16String): Bool
 
 **参数：**
 
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|target|[Utf16String](#class-utf16string)|是|-|目标字符串。|
+|参数名|类型|必填|默认值| 说明                     |
+|:---|:---|:---|:---|:-----------------------|
+|target|[Utf16String](#class-utf16string)|是|-| 目标字符串。目标字符串为空时返回false。 |
 
 **返回值：**
 
@@ -11105,10 +11175,10 @@ func convertToString(context: JSContext): JSValue {
 }
 ```
 
-### func !=(Utf16String)
+### operator func !=(Utf16String)
 
 ```cangjie
-public operator func != (target: Utf16String): Bool
+public operator func !=(target: Utf16String): Bool
 ```
 
 **功能：** 判断与目标字符串是否不相等。
@@ -11135,10 +11205,10 @@ public operator func != (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func +(Utf16String)
+### operator func +(Utf16String)
 
 ```cangjie
-public operator func + (right: Utf16String): Utf16String
+public operator func +(right: Utf16String): Utf16String
 ```
 
 **功能：** 往后拼接一个字符串。
@@ -11165,10 +11235,10 @@ public operator func + (right: Utf16String): Utf16String
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func \<(Utf16String)
+### operator func \<(Utf16String)
 
 ```cangjie
-public operator func < (target: Utf16String): Bool
+public operator func <(target: Utf16String): Bool
 ```
 
 **功能：** 判断是否小于目标字符串（按字符 Unicode 的字典序）。
@@ -11195,10 +11265,10 @@ public operator func < (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func \<=(Utf16String)
+### operator func \<=(Utf16String)
 
 ```cangjie
-public operator func <= (target: Utf16String): Bool
+public operator func <=(target: Utf16String): Bool
 ```
 
 **功能：** 判断是否小于或等于目标字符串（按字符 Unicode 的字典序）。
@@ -11225,10 +11295,10 @@ public operator func <= (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func ==(Utf16String)
+### operator func ==(Utf16String)
 
 ```cangjie
-public operator func == (target: Utf16String): Bool
+public operator func ==(target: Utf16String): Bool
 ```
 
 **功能：** 判断与目标字符串是否相等。
@@ -11255,10 +11325,10 @@ public operator func == (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func >(Utf16String)
+### operator func >(Utf16String)
 
 ```cangjie
-public operator func > (target: Utf16String): Bool
+public operator func >(target: Utf16String): Bool
 ```
 
 **功能：** 判断是否大于目标字符串（按字符 Unicode 的字典序）。
@@ -11285,10 +11355,10 @@ public operator func > (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func >=(Utf16String)
+### operator func >=(Utf16String)
 
 ```cangjie
-public operator func >= (target: Utf16String): Bool
+public operator func >=(target: Utf16String): Bool
 ```
 
 **功能：** 判断是否大于或等于目标字符串（按字符 Unicode 的字典序）。
@@ -11315,7 +11385,7 @@ public operator func >= (target: Utf16String): Bool
 |:------|:-------------------------------------|
 | 34300003   | Accessing reference is beyond reach. |
 
-### func \[](Int64)
+### operator func \[](Int64)
 
 ```cangjie
 public operator func [](index: Int64): UInt16
@@ -11346,7 +11416,7 @@ public operator func [](index: Int64): UInt16
 | 1     | The accessing index is out of range. |
 | 34300003   | Accessing reference is beyond reach. |
 
-### func \[](Range\<Int64>)
+### operator func \[](Range\<Int64>)
 
 ```cangjie
 public operator func [](range: Range<Int64>): Utf16String
@@ -11559,7 +11629,7 @@ public func toString(): String
 |:----|:----|
 |String|字符串描述。|
 
-### func !=(JSType)
+### operator func !=(JSType)
 
 ```cangjie
 public operator func !=(target: JSType): Bool
@@ -11581,7 +11651,7 @@ public operator func !=(target: JSType): Bool
 |:----|:----|
 |Bool|为 true 时代表两个类型不等。|
 
-### func ==(JSType)
+### operator func ==(JSType)
 
 ```cangjie
 public operator func ==(target: JSType): Bool
@@ -11611,8 +11681,6 @@ public type ClassRegister =(JSContext) -> JSClass
 
 **功能：** ClassRegister 是 ([JSContext](#class-jscontext)) -> [JSClass](#class-jsclass) 类型的别名。
 
-**起始版本：** 22
-
 ## type FuncRegister
 
 ```cangjie
@@ -11620,8 +11688,6 @@ public type FuncRegister =(JSContext) -> JSFunction
 ```
 
 **功能：** FuncRegister 是 ([JSContext](#class-jscontext)) -> [JSFunction](#class-jsfunction) 类型的别名。
-
-**起始版本：** 22
 
 ## type JSBufferFinalizer
 
@@ -11631,8 +11697,6 @@ public type JSBufferFinalizer =(CPointer<Byte>) -> Unit
 
 **功能：** JSBufferFinalizer 是 (CPointer\<Byte>) -> Unit 类型的别名。
 
-**起始版本：** 22
-
 ## type JSLambda
 
 ```cangjie
@@ -11640,8 +11704,6 @@ public type JSLambda =(JSContext, JSCallInfo) -> JSValue
 ```
 
 **功能：** JSLambda 是 ([JSContext](#class-jscontext), [JSCallInfo](#class-jscallinfo)) -> [JSValue](#class-jsvalue) 类型的别名。
-
-**起始版本：** 22
 
 ## type ModuleRegister
 
@@ -11651,8 +11713,6 @@ public type ModuleRegister =(JSContext, JSObject) -> Unit
 
 **功能：** ModuleRegister 是 ([JSContext](#class-jscontext), [JSObject](#class-jsobject)) -> Unit 类型的别名。
 
-**起始版本：** 22
-
 ## type napi_env
 
 ```cangjie
@@ -11661,8 +11721,6 @@ public type napi_env = CPointer<Unit>
 
 **功能：** napi_env 是 CPointer\<Unit> 类型的别名。
 
-**起始版本：** 22
-
 ## type napi_value
 
 ```cangjie
@@ -11670,5 +11728,3 @@ public type napi_value = CPointer<Unit>
 ```
 
 **功能：** napi_value 是 CPointer\<Unit> 类型的别名。
-
-**起始版本：** 22

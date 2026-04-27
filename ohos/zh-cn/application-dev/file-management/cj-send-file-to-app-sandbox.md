@@ -1,8 +1,14 @@
 # 向应用沙箱推送文件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 开发者在应用开发调试时，可能需要向应用沙箱下推送一些文件以期望在应用内访问或测试，此时有两种方式：
 
-1. 可以通过DevEco Studio向应用安装路径中放入目标文件，详见[应用安装资源访问](..//cj-start/start/ide-resource-categories-and-access.md#资源访问)。
+1. 可以通过DevEco Studio向应用安装路径中放入目标文件，详见[应用安装资源访问](..//cj-start/start/cj-ide-resource-categories-and-access.md#资源访问)。
 
 2. 在具备设备环境时，可以使用另一种更为灵活的方式，通过hdc工具来向设备中应用沙箱路径推送文件。即本文介绍的内容。
 

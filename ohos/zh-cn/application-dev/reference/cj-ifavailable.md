@@ -1,8 +1,14 @@
 # API标签化管控
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
-通常，开发者需要对一些 API 进行标签化，使得这些 API 能够根据标签被限定在源码的不同位置使用。全局标签会从 Deveco Studio 创建的仓颉工程中获取，例如：创建的工程为 5.1.0，那么它的全局 API level 为 18。 标签化的 API 需要满足全局的标签配置才能够被合法使用。
+通常，开发者需要对一些 API 进行标签化，使得这些 API 能够根据标签被限定在源码的不同位置使用。全局标签会从 Deveco Studio 创建的仓颉工程中获取，例如：创建的工程为 6.0.2，那么它的全局 API level 为 22。 标签化的 API 需要满足全局的标签配置才能够被合法使用。
 
 为了做到 API 标签化管控，仓颉语言引入了 `@IfAvailable` 宏表达式。它可以基于全局的标签设置，提供更精细的标签化 API 的使用管控。`@IfAvailable` 需要与自定义注解 `APILevel` 配合使用，本章将介绍 `@IfAvailable` 的功能及使用方法。
 
@@ -29,13 +35,13 @@
 
 ### `level` 检查
 
-`@IfAvailable` 宏表达式中，指定 `<label>` 为 `level` 时，该检查生效。
+`@IfAvailable` 宏表达式中，指定 `<label>` 为 `level` 时，该项检查生效。
 
 在任何作用域中，不允许调用比当前作用域更高 Level 的 API。即 `<lambda1>` 中不得调用高于 `level: <value>` 中 `<value>` 指定的值，在 `<lambda2>` 中不得调用高于当前工程的 Level 等级。
 
 ### `syscap` 检查
 
-`@IfAvailable` 宏表达式中，指定 `<label>` 为 `syscap` 时，该检查生效。
+`@IfAvailable` 宏表达式中，指定 `<label>` 为 `syscap` 时，该项检查生效。
 
 > **说明：**
 >
@@ -46,9 +52,9 @@
 
 - 当调用的 API 满足**交集**时，不报错；
 - 当调用 API 不满足**交集**，但满足**并集**时，编译告警；
-- 当调用 API 既不满足**交集**，也不满足时**并集**，编译报错。
+- 当调用 API 既不满足**交集**，也不满足**并集**时，编译报错。
 
-在任何作用域中，不允许调用任何设备中都不支持的 API，允许调用 syscap 在**交集**与**并集**中的 API。`@IfAvailable` 可以为**交集**与**并集**增加能力，即 `<lambda1>` 中可以调用 `syscap: <value>` 中 `<value>` 指定的 syscap API，在 `<lambda2>` 中则不允许。
+在任何作用域中，不允许调用任何设备中都不支持的 API，允许调用 SysCap 在**交集**与**并集**中的 API。`@IfAvailable` 可以为**交集**与**并集**增加能力，即 `<lambda1>` 中可以调用 `syscap: <value>` 中 `<value>` 指定的 SysCap API，在 `<lambda2>` 中则不允许。
 
 ## `@IfAvailable` 使用示例
 
@@ -61,23 +67,26 @@
 ```cangjie
 package ohos.sample
 
-@!APILevel[17]
-public func f17() {
-    println("level-17")
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.labels.APILevel
+
+@!APILevel[since: "22"]
+public func f22() {
+    Hilog.info(0, "", "level-22")
 }
 
-@!APILevel[18]
-public func f18() {
-    println("level-18")
+@!APILevel[since: "23"]
+public func f23() {
+    Hilog.info(0, "", "level-23")
 }
 
-@!APILevel[19]
-public func f19() {
-    println("level-19")
+@!APILevel[since: "24"]
+public func f24() {
+    Hilog.info(0, "", "level-24")
 }
 ```
 
-假设 `ohos.sample` 为 sdk 提供的包，用户使用 Deveco Studio 仓颉项目工程时可以选择所需的 level 等级：
+假设 `ohos.sample` 为 sdk 提供的包，用户使用 Deveco Studio 仓颉项目工程时可以选择所需的 APILevel 等级：
 
 ![image-Create-Project-With-Level](./figures/image-Create-Project-With-Level.png)
 
@@ -89,18 +98,18 @@ public func f19() {
 import ohos.sample.*
 
 func demo() {
-    @IfAvaliable(level: 19, { =>
-        // 编译期：此作用域允许调用 level 为 19 或 19 以下的 API。即该分支能够使用 f17, f18, f19，调用更高等级接口会编译报错。
-        // 运行期：当执行设备支持 level 19，那么执行该分支。
-        f17();
-        f18();
-        f19();
+    @IfAvailable(level: 24, { =>
+        // 编译期：此作用域允许调用 level 为 24 或 24 以下的 API。即该分支能够使用 f22, f23, f24，调用更高等级接口会编译报错。
+        // 运行期：当执行设备支持 level 24，那么执行该分支。
+        f22()
+        f23()
+        f24()
     }, { =>
-        // 编译期：此作用域使用工程提供的能力，允许调用 level 为 18 或 18 以下的 API。即该分支能够使用 f17, f18，调用更高等级接口会编译报错（如 f19）。
-        // 运行期：当执行设备支持 level 18，那么执行该分支。
-        f17();
-        f18();
-        f19(); // compile error
+        // 编译期：此作用域使用工程提供的能力，允许调用 level 为 23 或 23 以下的 API。即该分支能够使用 f22, f23，调用更高等级接口会编译报错（如 f24）。
+        // 运行期：当执行设备支持 level 23，那么执行该分支。
+        f22()
+        f23()
+        f24() // compile error
     })
 }
 ```
@@ -114,24 +123,27 @@ func demo() {
 ```cangjie
 package ohos.sample
 
-@!APILevel[18, syscap: "SystemCapability.A"]
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.labels.APILevel
+
+@!APILevel[since: "22", syscap: "SystemCapability.A"]
 public func f1() {
-    println("SystemCapability.A")
+    Hilog.info(0, "", "SystemCapability.A")
 }
 
-@!APILevel[18, syscap: "SystemCapability.B"]
+@!APILevel[since: "22", syscap: "SystemCapability.B"]
 public func f2() {
-    println("SystemCapability.B")
+    Hilog.info(0, "", "SystemCapability.B")
 }
 
-@!APILevel[18, syscap: "SystemCapability.C"]
+@!APILevel[since: "22", syscap: "SystemCapability.C"]
 public func f3() {
-    println("SystemCapability.C")
+    Hilog.info(0, "", "SystemCapability.C")
 }
 
-@!APILevel[18, syscap: "SystemCapability.D"]
+@!APILevel[since: "22", syscap: "SystemCapability.D"]
 public func f4() {
-    println("SystemCapability.D")
+    Hilog.info(0, "", "SystemCapability.D")
 }
 ```
 
@@ -147,24 +159,24 @@ Deveco Studio 默认读取所有设备支持的 SystemCapability，用于检查�
 import ohos.sample.*
 
 func demo() {
-    @IfAvaliable(syscap: "SystemCapability.D", { =>
+    @IfAvailable(syscap: "SystemCapability.D", { =>
         // 此作用域最高允许使用 ["SystemCapability.A", "SystemCapability.B", "SystemCapability.C", "SystemCapability.D"]，其中：
         // ["SystemCapability.B", "SystemCapability.D"] 不告警；
         // ["SystemCapability.A", "SystemCapability.C"] 告警；
         // 非 ["SystemCapability.A", "SystemCapability.B", "SystemCapability.C", "SystemCapability.D"] 报错
-        f1();  // warning
-        f2();  // ok
-        f3();  // warning
-        f4();  // ok
+        f1()  // warning
+        f2()  // ok
+        f3()  // warning
+        f4()  // ok
     }, { =>
         // 此作用域最高允许使用 ["A", "B", "C"]，其中：
         // ["B"] 不告警；
         // ["A", "C"] 告警；
         // 非 ["A", "B", "C"] 报错
-        f1();  // warning
-        f2();  // ok
-        f3();  // warning
-        f4();  // error
+        f1()  // warning
+        f2()  // ok
+        f3()  // warning
+        f4()  // error
     })
 }
 ```

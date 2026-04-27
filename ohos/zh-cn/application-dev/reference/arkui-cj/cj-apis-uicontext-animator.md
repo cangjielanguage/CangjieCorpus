@@ -1,5 +1,11 @@
 # AnimatorResult
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供组件动画Animator的结果，包括启动动画、重置动画参数和以相反的顺序播放动画等。
 
 > **说明：**
@@ -225,7 +231,7 @@ public func cancel(): Unit
 
   |错误码ID|错误信息|
   |:----|:---|
-  |100001|AInternal error. Possible causes: The specified page is not found or the object property list is not obtained.|
+  |100001|Internal error. Possible causes: The specified page is not found or the object property list is not obtained.|
 
 ### func reverse()
 

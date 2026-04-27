@@ -1,6 +1,12 @@
 # ohos.app.ability.want_constant（Want常量）
 
-want_constant模块提供Ability相关的枚举，包括应用启动原因LaunchReason、上次退出原因LastExitReason、迁移结果OnContinueResult等。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+want_constant模块提供了Want操作相关的系统预设枚举和常量，例如在启动Ability时常用的Flag、Param参数等。
 
 ## 导入模块
 
@@ -20,8 +26,8 @@ ohos.permission.PRIVACY_WINDOW
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -49,7 +55,7 @@ public class Flags {
 public static const FLAG_AUTH_PERSISTABLE_URI_PERMISSION: UInt32 = 0x00000040
 ```
 
-**功能：** 表示该URI可被接收方持久化。该字段仅在2in1和Tablet设备上生效。
+**功能：** 表示该URI可被接收方持久化。该字段仅在Tablet设备上生效。
 
 **类型：** UInt32
 
@@ -147,7 +153,9 @@ public static const ABILITY_BACK_TO_OTHER_MISSION_STACK: String = "ability.param
 
 **功能：** 表示是否支持跨任务链返回。
 
-该参数用于控制跨应用的UIAbility返回逻辑，其核心作用是改变用户执行返回键时的应用跳转行为。例如现有UIAbility A和UIAbility B，当前前台显示的是UIAbility A，随后系统服务又拉起UIAbility B（同时在Want的Params字段配置该参数为true），那么，当UIAbility B退出时，会返回到UIAbility A（即返回到最近一次的访问任务）。如果未配置该参数，则默认直接返回桌面。需要注意的是，该字段仅支持系统设置，三方应用传入该字段不生效。
+该参数用于控制跨任务链返回逻辑，其核心作用是改变用户执行返回键时的应用跳转行为。例如，现有UIAbility A和UIAbility B，前台显示的是UIAbility A，随后系统服务拉起UIAbility B（同时在Want的Params字段配置该参数为true）。如果配置了该参数，当UIAbility B退出时，会返回到UIAbility A（即返回到最近一次的访问任务）；如果未配置该参数，则默认直接返回桌面。
+
+需要注意的是，该字段仅支持系统设置，三方应用传入该字段不生效。
 
 **类型：** String
 

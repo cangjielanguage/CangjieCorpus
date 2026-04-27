@@ -42,20 +42,20 @@ public class MockFrameworkInternalError <: PrettyException {}
 public abstract class PrettyException <: Exception & PrettyPrintable {}
 ```
 
-功能：支持 [PrettyPrintable](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-prettyprintable) 的异常类型，可以较好得打印异常信息。
+功能：支持 [PrettyPrintable](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-prettyprintable) 的异常类型，可以较好地打印异常信息。
 
 父类型：
 
 - [Exception](../../core/core_package_api/core_package_exceptions.md#class-exception)
 - [PrettyPrintable](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-prettyprintable)
 
-### func pprint
+### func pprint(PrettyPrinter)
 
 ```cangjie
 public func pprint(to: PrettyPrinter): PrettyPrinter
 ```
 
-功能：支持较好得颜色打印、缩进格式打印异常信息。
+功能：支持较好地颜色打印、缩进格式打印异常信息。
 
 参数：
 

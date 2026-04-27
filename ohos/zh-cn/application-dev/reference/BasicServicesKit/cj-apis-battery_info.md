@@ -1,5 +1,11 @@
 # ohos.battery_info（电量信息）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 battery_info模块主要提供电池状态和充放电状态的查询接口。
 
 ## 导入模块
@@ -24,22 +30,6 @@ public class BatteryInfo {}
 ```
 
 **功能：** 描述电池信息的类。
-
-**系统能力：** SystemCapability.PowerManager.BatteryManager.Core
-
-**起始版本：** 22
-
-### static prop batteryCapacityLevel
-
-```cangjie
-public static prop batterySoc: Int32
-```
-
-**功能：** 当前设备的电池充电状态 (SoC)，单位为百分比。
-
-**类型：** Int32
-
-**读写能力：** 只读
 
 **系统能力：** SystemCapability.PowerManager.BatteryManager.Core
 
@@ -147,7 +137,7 @@ public static prop isBatteryPresent: Bool
 public static prop nowCurrent: Int32
 ```
 
-**功能：** 表示当前设备电池的电流。
+**功能：** 表示当前设备电池的电流，单位毫安。
 
 **类型：** Int32
 

@@ -4,7 +4,7 @@
 
 > **说明：**
 >
-> 示例中使用 [TimeZone.load](../time_package_api/time_package_classes.md#static-func-loadstring) 函数加载时区信息，在不同平台上加载时区信息有不同的依赖，用户需按其要求进行设置。
+> 示例中使用 [TimeZone.load](../time_package_api/time_package_classes.md#static-func-loadstring) 函数加载时区信息，在不同平台上加载时区信息有不同的依赖，用户需按要求进行设置。
 
 <!-- verify -->
 
@@ -12,7 +12,8 @@
 import std.time.*
 
 main() {
-    let datetime = DateTime.of(year: 2024, month: May, dayOfMonth: 22, hour: 12, timeZone: TimeZone.load("Asia/Shanghai"))
+    let datetime = DateTime.of(year: 2024, month: May, dayOfMonth: 22, hour: 12,
+        timeZone: TimeZone.load("Asia/Shanghai"))
 
     println("CST: ${datetime}")
     println("UTC: ${datetime.inUTC()}")

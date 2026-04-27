@@ -1,5 +1,11 @@
 # LazyForEach
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在大量子组件的场景下，LazyForEach与缓存列表项、动态预加载、组件复用等方法配合使用，可以进一步提升滑动帧率并降低应用内存占用。
 
 ## 导入模块
@@ -13,9 +19,9 @@ import kit.ArkUI.*
 ```cangjie
 public interface IDataSource<T> {
     func totalCount(): Int64
-    func getData(Int64): T
-    func registerDataChangeListener(DataChangeListener): Unit
-    func unregisterDataChangeListener(DataChangeListener): Unit
+    func getData(index: Int64): T
+    func registerDataChangeListener(listener: DataChangeListener): Unit
+    func unregisterDataChangeListener(listener: DataChangeListener): Unit
 }
 ```
 

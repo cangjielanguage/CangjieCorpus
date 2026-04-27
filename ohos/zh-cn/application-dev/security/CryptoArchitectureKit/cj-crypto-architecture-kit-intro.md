@@ -1,5 +1,11 @@
 # Crypto Architecture Kit简介
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Crypto Architecture Kit提供加解密、签名验签、消息验证码、哈希、安全随机数、密钥派生等相关功能。
 
 由于Crypto Architecture Kit屏蔽了第三方密码学算法库实现差异的算法框架，开发者可以通过调用加解密算法框架服务，忽略底层不同三方算法库的差异，实现快捷开发。

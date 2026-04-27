@@ -1,5 +1,11 @@
 # 安全随机数生成
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 随机数主要用于临时会话密钥生成和非对称加密算法的密钥生成等场景。在加解密场景中，安全随机数生成器需要具备随机性、不可预测性和不可重复性。当前系统生成的随机数满足密码学安全伪随机性的要求。
 
 开发者可以调用接口，完成以下功能：
@@ -25,7 +31,7 @@
 
 | 算法 | 长度（Byte） |
 | -------- | -------- |
-| CTR_DRBG | [1, INT_MAX] |
+| CTR_DRBG | [1, Int32.MAX] |
 
 ## 开发步骤
 
@@ -35,7 +41,7 @@
 
 3. 设置指定字节长度，调用[generateRandom](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#func-generaterandomint32)，生成安全随机数。
 
-   指定字节长度范围为1~INT_MAX。
+   指定字节长度范围为1~Int32.MAX。
 
 ## 示例
 
@@ -45,7 +51,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.BusinessException
 
 func doRand() {

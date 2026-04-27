@@ -1,8 +1,18 @@
-# 构建第一个仓颉应用
+# 构建第一个OpenHarmony应用（仓颉）
 
+<!--Del-->
 > **说明：**
 >
-> 为确保运行效果，本文以使用**最新DevEco Studio版本**为例，点击[此处](https://developer.huawei.com/consumer/cn/download/)获取下载链接。
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+<!--RP2-->
+> **说明：**
+> 
+> - DevEco Studio默认创建的工程为HarmonyOS工程，不再支持直接创建OpenHarmony工程。需要基于创建完成的HarmonyOS工程进行一些字段修改，才能得到OpenHarmony工程。
+> 
+> - 为确保运行效果，本文以使用**最新DevEco Studio版本**为例，点击[此处](https://developer.huawei.com/consumer/cn/download/)获取下载链接。
+<!--RP2End-->
 
 ## 创建仓颉工程
 
@@ -18,9 +28,29 @@
 
 4. 单击 **Finish**，完成工程创建，工具会自动生成基础示例代码和相关资源。<!--Del-->
 
-5. 若需要构建OpenHarmony应用，需要将**build-profile.json5**下的runtimeOS字段改为OpenHarmony：
+5. 在完成创建HarmonyOS工程后，根据如下操作修改工程级build-profile.json5文件（即与entry同级）中相关字段：
+   
+   1. 在工程级build-profile.json5文件添加compileSdkVersion字段。
 
-    ![changeOpenharmony](../../figures/change_openharmony.PNG)
+   2. 将compatibleSdkVersion和compileSdkVersion字段赋值为整数类型，如22，23。
+
+   3. 将runtimeOS从"HarmonyOS"修改为"OpenHarmony"。
+
+   ```json
+   "products": [
+     {
+       "name": "default",
+       "signingConfig": "default", 
+       "compileSdkVersion": 22,    // 指定OpenHarmony应用/原子化服务编译时的版本
+       "compatibleSdkVersion": 22, // 指定OpenHarmony应用/原子化服务兼容的最低版本
+       "runtimeOS": "OpenHarmony",
+     }
+   ],
+   ```
+
+6. 单击**Sync Now**进行同步。
+
+   在Sync Check弹窗中点击Yes，同意将module.json5/config.json文件中的phone切换为OpenHarmony支持的default类型，并删除在OpenHarmony不适用的其他设备类型，同步成功无其他报错则OpenHarmony工程创建完成。
 <!--DelEnd-->
 
 ## 仓颉工程目录结构
@@ -48,7 +78,6 @@ Project_name
 │    ├── hvigorfile.ts
 │    └── oh-package.json5
 ├── hvigor
-│    ├── cangjie-build-support-x.y.z-cj.x.tgz
 │    └── hvigor-config.json5
 ├── oh_modules
 ├── build-profile.json5
@@ -64,7 +93,7 @@ Project_name
 - **AppScope > app.json5**：应用的全局配置信息。
 - **entry**：仓颉工程模块，编译构建生成一个HAP包。
     - **src > main > cangjie**：用于存放仓颉源码。
-    - **src > main > resources**：用于存放应用/服务所用到的资源文件，如图形、多媒体、字符串、布局文件等。关于资源文件，请参见[资源分类与访问](../ide-resource-categories-and-access.md#资源分类与访问)。
+    - **src > main > resources**：用于存放应用/服务所用到的资源文件，如图形、多媒体、字符串、布局文件等。关于资源文件，请参见[资源分类与访问](../cj-ide-resource-categories-and-access.md)。
     - **src > main > module.json5**：stage 模块配置文件，主要包含 HAP 的配置信息、应用在具体设备上的配置信息以及应用的全局配置信息。
     - **build-profile.json5**：当前的模块信息 、编译信息配置项，包括buildOption、targets配置等。
     - **hvigorfile.ts**：模块级编译构建任务脚本。
@@ -72,7 +101,6 @@ Project_name
     - **oh-package.json5**：用来描述包名、版本、入口文件（类型声明文件）和依赖项等信息。
     - **src > ohosTest**：存放仓颉测试源码，用于仓颉Instrument Test。
 - **hvigor**：用于存放当前工程使用的 hvigor。
-    - **cangjie-build-support-x.y.z-cj.x.tgz**：仓颉指定的hvigor任务包。
     - **hvigor-config.json5**：指定工程全局使用的 hvigor 以及 hvigor 参数配置。
 - **oh_modules**：用于存放三方库依赖信息，包含应用/服务所依赖的第三方库文件。
 - **build-profile.json5**：应用级配置信息，包括签名、产品配置等。
@@ -205,6 +233,8 @@ Project_name
    import ohos.arkui.state_macro_manage.State
    import ohos.arkui.state_macro_manage.r
    import ohos.arkui.component.Button
+   import ohos.hilog.Hilog
+   import kit.ArkUI.*
 
    @Entry
    @Component
@@ -295,6 +325,8 @@ Project_name
    import ohos.arkui.state_macro_manage.State
    import ohos.arkui.state_macro_manage.r
    import ohos.arkui.ui_context.* // 导入页面路由模块
+   import ohos.hilog.Hilog
+   import kit.ArkUI.*
 
    @Entry
    @Component
@@ -310,7 +342,7 @@ Project_name
                        .fontWeight(FontWeight.Bold)
                    Button("Back")
                        .onClick ({
-                           evt => Router.back(url: "EntryView") // 实现返回第一页
+                           evt => getUIContext().getRouter().back(url: "EntryView") // 实现返回第一页
                        })
                        .fontSize(30)
                        .width(180)
@@ -357,3 +389,4 @@ Project_name
 3. 在编辑窗口右上角的工具栏，单击![runButton](../../figures/runButton.png)按钮运行。效果同使用真机运行。
 
 您已经成功构建第一个仓颉应用。
+<!--RP1--><!--RP1End-->

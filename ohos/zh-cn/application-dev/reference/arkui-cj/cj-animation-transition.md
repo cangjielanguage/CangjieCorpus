@@ -1,5 +1,11 @@
 # 组件内转场（transition）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 组件内转场主要通过transition属性配置转场参数，在组件插入和删除时显示过渡动效，主要用于容器组件中的子组件插入和删除时，提升用户体验。
 
 > **说明：**
@@ -7,7 +13,7 @@
 > 当前有两种方式触发组件的transition：
 >
 > - 当组件插入或删除时（如if条件改变、ForEach新增删除组件），会递归的触发所有新插入/删除的组件的transition效果。
-> - 当组件[Visibility](./cj-universal-attribute-visibility.md)属性在可见和不可见之间改变时，只触发该组件的transition效果。
+> - 当组件[Visibility](./cj-universal-attribute-visibility.md)属性在可见和不可见（[Visibility.Hidden](./cj-common-types.md#enum-visibility)或[Visibility.None](./cj-common-types.md#enum-visibility)）之间改变时，只触发该组件的transition效果。在[Visibility.Visible](./cj-common-types.md#enum-visibility)与[Visibility.None](./cj-common-types.md#enum-visibility)之间切换时，若直接设置为Visibility.None，会导致组件布局大小为0，此时无法观察到transition效果。而当在动画中修改visiblity属性为[Visibility.None](./cj-common-types.md#enum-visibility)时，组件布局为0是带动画的，将呈现transition与布局动画的叠加效果，形成双动画的复合表现。
 
 ## 导入模块
 
@@ -31,7 +37,7 @@ func transition(value: ?TransitionEffect): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[TransitionEffect](#class-transitioneffect)|是|-|以函数的形式指定转场效果。|
+|value|?[TransitionEffect](#class-transitioneffect)|是|-|设置组件插入显示和删除隐藏的过渡效果。|
 
 **返回值：**
 
@@ -55,7 +61,7 @@ func transition(value: ?TransitionEffect, onFinish: ?TransitionFinishCallback): 
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[TransitionEffect](#class-transitioneffect)|是|-|以函数的形式指定转场效果。|
+|value|?[TransitionEffect](#class-transitioneffect)|是|-|设置组件插入显示和删除隐藏的过渡效果。|
 |onFinish|?[TransitionFinishCallback](./cj-common-types.md#type-transitionfinishcallback)|是|-|组件转场动画的结束回调类型。<br>该参数为true表示该转场回调是出现动画的结束回调，该参数为false表示该转场回调是消失动画的结束回调。|
 
 **返回值：**
@@ -145,9 +151,9 @@ public init(x!: ?Length = None, y!: ?Length = None, z!: ?Length = None)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** x轴上的平移距离。初始值：0.0.vp|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** y轴上的平移距离。初始值：0.0.vp|
-|z|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** z轴上的平移距离。初始值：0.0.vp|
+|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** x轴上的平移距离。<br>初始值：0.0.vp。|
+|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** y轴上的平移距离。<br>初始值：0.0.vp。|
+|z|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** z轴上的平移距离。<br>初始值：0.0.vp。|
 
 ## class ScaleOptions
 
@@ -232,7 +238,7 @@ z < 0: 组件沿z轴反方向缩放。
 public var centerX: ?Length
 ```
 
-**功能：** 变换中心点（锚点）的X坐标。单位为vp。
+**功能：** 变换中心点（锚点）的X坐标。对于数字类型，单位为vp。
 
 **类型：** ?[Length](./cj-common-types.md#interface-length)
 
@@ -248,7 +254,7 @@ public var centerX: ?Length
 public var centerY: ?Length
 ```
 
-**功能：** 变换中心点（锚点）的Y坐标。单位为vp。
+**功能：** 变换中心点（锚点）的Y坐标。对于数字类型，单位为vp。
 
 **类型：** ?[Length](./cj-common-types.md#interface-length)
 
@@ -275,26 +281,26 @@ public init(x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None, cente
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?Float32|否|None|**命名参数。** x轴上的缩放比例。初始值：1.0|
-|y|?Float32|否|None|**命名参数。** y轴上的缩放比例。初始值：1.0|
-|z|?Float32|否|None|**命名参数。** z轴上的缩放比例。初始值：1.0|
-|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的X坐标。单位为vp。初始值：50.percent|
-|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的Y坐标。单位为vp。初始值：50.percent|
+|x|?Float32|否|None|**命名参数。** x轴的缩放倍数。x>1时以x轴方向放大，0<x<1时以x轴方向缩小，x<0时沿x轴反向并缩放。<br>初始值：1.0|
+|y|?Float32|否|None|**命名参数。** y轴的缩放倍数。y>1时以y轴方向放大，0<y<1时以y轴方向缩小，y<0时沿y轴反向并缩放。<br>初始值：1.0|
+|z|?Float32|否|None|**命名参数。** 	z轴的缩放倍数。z>1时以z轴方向放大，0<z<1时以z轴方向缩小，z<0时沿z轴反向并缩放。<br>初始值：1.0|
+|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点x轴坐标。表示组件变换中心点（即锚点）的x方向坐标。对于数字类型，单位为vp。<br>初始值：50.percent|
+|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点y轴坐标。表示组件变换中心点（即锚点）的y方向坐标。对于数字类型，单位为vp。<br>初始值：50.percent|
 
 ## class RotateOptions
 
 ```cangjie
 public class RotateOptions {
-    public var angle: ?Float64
-    public var x: ?Float64
-    public var y: ?Float64
-    public var z: ?Float64
+    public var x: ?Float32
+    public var y: ?Float32
+    public var z: ?Float32
     public var centerX: ?Length
     public var centerY: ?Length
     public var centerZ: ?Length
-    public var perspective: ?Float64
-    public init(angle: ?Float64, x!: ?Float64 = None, y!: ?Float64 = None, z!: ?Float64 = None, centerX!: ?Length = None,
-        centerY!: ?Length = None, centerZ!: ?Length = None, perspective!: ?Float64 = None)
+    public var perspective: ?Float32
+    public var angle: ?Float32
+    public init(angle: ?Float32, x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None, centerX!: ?Length = None,
+        centerY!: ?Length = None, centerZ!: ?Length = None, perspective!: ?Float32 = None)
 }
 ```
 
@@ -307,12 +313,12 @@ public class RotateOptions {
 ### var angle
 
 ```cangjie
-public var angle: ?Float64
+public var angle: ?Float32
 ```
 
 **功能：** 旋转角度。取值为正时相对于旋转轴方向顺时针转动，取值为负时相对于旋转轴方向逆时针转动。
 
-**类型：** ?Float64
+**类型：** ?Float32
 
 **读写能力：** 可读写
 
@@ -323,12 +329,12 @@ public var angle: ?Float64
 ### var x
 
 ```cangjie
-public var x: ?Float64
+public var x: ?Float32
 ```
 
 **功能：** 旋转轴向量的X坐标。
 
-**类型：** ?Float64
+**类型：** ?Float32
 
 **读写能力：** 可读写
 
@@ -339,12 +345,12 @@ public var x: ?Float64
 ### var y
 
 ```cangjie
-public var y: ?Float64
+public var y: ?Float32
 ```
 
 **功能：** 旋转轴向量的Y坐标。
 
-**类型：** ?Float64
+**类型：** ?Float32
 
 **读写能力：** 可读写
 
@@ -355,12 +361,12 @@ public var y: ?Float64
 ### var z
 
 ```cangjie
-public var z: ?Float64
+public var z: ?Float32
 ```
 
 **功能：** 旋转轴向量的Z坐标。
 
-**类型：** ?Float64
+**类型：** ?Float32
 
 **读写能力：** 可读写
 
@@ -419,12 +425,12 @@ public var centerZ: ?Length
 ### var perspective
 
 ```cangjie
-public var perspective: ?Float64
+public var perspective: ?Float32
 ```
 
 **功能：** 相机放置的z轴坐标。数值大小表示视距，即相机到z=0平面的距离。取值的正负决定了相机观察的方向。当perspective=0，系统会自动计算适合的相机z轴位置，取值为负数。旋转轴和旋转中心点都基于坐标系设定，组件发生位移时，坐标系不会随之移动。
 
-**类型：** ?Float64
+**类型：** ?Float32
 
 **读写能力：** 可读写
 
@@ -432,11 +438,11 @@ public var perspective: ?Float64
 
 **起始版本：** 22
 
-### init(?Float64, ?Float64, ?Float64, ?Float64, ?Length, ?Length, ?Length, ?Float64)
+### init(?Float32, ?Float32, ?Float32, ?Float32, ?Length, ?Length, ?Length, ?Float32)
 
 ```cangjie
-public init(angle: ?Float64, x!: ?Float64 = None, y!: ?Float64 = None, z!: ?Float64 = None, centerX!: ?Length = None,
-        centerY!: ?Length = None, centerZ!: ?Length = None, perspective!: ?Float64 = None)
+public init(angle: ?Float32, x!: ?Float32 = None, y!: ?Float32 = None, z!: ?Float32 = None, centerX!: ?Length = None,
+        centerY!: ?Length = None, centerZ!: ?Length = None, perspective!: ?Float32 = None)
 ```
 
 **功能：** RotateOptions构造函数。
@@ -449,19 +455,25 @@ public init(angle: ?Float64, x!: ?Float64 = None, y!: ?Float64 = None, z!: ?Floa
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|angle|?Float64|是|-|角度参数。|
-|x|?Float64|否|None|**命名参数。** 旋转轴向量的X坐标。初始值：0.0|
-|y|?Float64|否|None|**命名参数。** 旋转轴向量的Y坐标。初始值：0.0|
-|z|?Float64|否|None|**命名参数。** 旋转轴向量的Z坐标。初始值：0.0|
-|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的X坐标。单位为vp。初始值：50.percent|
-|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的Y坐标。单位为vp。初始值：50.percent|
-|centerZ|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** Z轴锚点，即3D旋转中心点的z分量。初始值：0|
-|perspective|?Float64|否|None|**命名参数。** 用户到z=0平面的距离。轴和旋转中心是基于坐标系设置的，当组件移动时坐标系保持不变。初始值：0.0|
+|angle|?Float32|是|-|角度参数。|
+|x|?Float32|否|None|**命名参数。** 旋转轴向量的X坐标。<br>初始值：0.0。|
+|y|?Float32|否|None|**命名参数。** 旋转轴向量的Y坐标。<br>初始值：0.0。|
+|z|?Float32|否|None|**命名参数。** 旋转轴向量的Z坐标。<br>初始值：0.0。|
+|centerX|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的X坐标。<br>对于数字类型，单位为vp。<br>初始值：50.percent。|
+|centerY|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 变换中心点（锚点）的Y坐标。<br>对于数字类型，单位为vp。<br>初始值：50.percent。|
+|centerZ|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** Z轴锚点，即3D旋转中心点的z分量。<br>对于数字类型，单位为vp。<br>初始值：0。|
+|perspective|?Float32|否|None|**命名参数。** 用户到z=0平面的距离。轴和旋转中心是基于坐标系设置的，当组件移动时坐标系保持不变。<br>初始值：0.0。<br>单位：px。|
 
 ## class TransitionEffect
 
 ```cangjie
-public class TransitionEffect {}
+public class TransitionEffect {
+    public static let IDENTITY: TransitionEffect
+    public static let OPACITY: TransitionEffect = TransitionEffect.opacity(0.0)
+    public static let SLIDE: TransitionEffect = TransitionEffect.asymmetric(TransitionEffect.move(TransitionEdge.Start),
+        TransitionEffect.move(TransitionEdge.End))
+    public static let SLIDE_SWITCH: TransitionEffect
+}
 ```
 
 **功能：** 以函数形式指定转场效果类型。
@@ -469,6 +481,19 @@ public class TransitionEffect {}
 > **说明：**
 >
 > - TransitionEffect可通过combine函数实现多个转场效果的组合，可以为每个效果分别指定animation参数，且前一效果的animation的参数也可适用于后一效果。例如，TransitionEffect.OPACITY.animation(AnimateParam(duration: 1000)).combine(TransitionEffect.translate(TranslateOptions(x:100)))，则时长为1000ms的动画参数对OPACITY和translate均生效。
+>
+> - 动画参数的生效顺序为：本TransitionEffect指定的animation参数 > 前面的TransitionEffect指定的animation参数 > 触发该组件出现消失的animateTo中的动画参数。
+>
+> - 如果未使用animateTo触发转场动画且TransitionEffect中也无animation参数，则该组件直接出现或者消失。
+>
+> - TransitionEffect中指定的属性值如与默认值相同，则该属性不会产生转场动画。如TransitionEffect.opacity(1.0).animation(duration:1000)，由于opacity默认值也为1.0，未产生透明度动画，该组件直接出现或者消失。
+>
+> - 更详细的关于scale、rotate效果的介绍可参考[图形变换](./cj-universal-attribute-transform.md)。
+>
+> - 如果在动画范围([animateTo](./cj-apis-uicontext-uicontext.md#func-animatetoanimateparam-voidcallback)、[animation](./cj-animation-animation.md#func-animationanimateparam))内触发组件的上下树或可见性(visibility)改变，而根组件没有配置transition，会给该组件加上默认透明度转场，即TransitionEffect.OPACITY，动画参数跟随所处动画环境的参数。如不需要可通过主动配置TransitionEffect.IDENTITY来禁用，使该组件直接出现或消失。
+>
+> - 当通过删除整棵子树的方式触发消失转场，如需看到完整的消失转场过程，需要保证被删除子树的根组件的有充足的消失转场时间，见示例3。
+
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -493,10 +518,10 @@ public static let IDENTITY: TransitionEffect
 ### static let OPACITY
 
 ```cangjie
-public static let OPACITY: TransitionEffect
+public static let OPACITY: TransitionEffect = TransitionEffect.opacity(0.0)
 ```
 
-**功能：** 定义透明度为0的转场效果，等效于TransitionEffect.opacity(0.0)。
+**功能：** 为组件添加透明度转场效果，出现时透明度从0到1、消失时透明度从1到0，相当于TransitionEffect.opacity(0.0)。
 
 **类型：** [TransitionEffect](#class-transitioneffect)
 
@@ -509,10 +534,11 @@ public static let OPACITY: TransitionEffect
 ### static let SLIDE
 
 ```cangjie
-public static let SLIDE: TransitionEffect
+public static let SLIDE: TransitionEffect = TransitionEffect.asymmetric(TransitionEffect.move(TransitionEdge.Start),
+        TransitionEffect.move(TransitionEdge.End))
 ```
 
-**功能：** 定义滑动转场效果。
+**功能：** 相当于TransitionEffect.asymmetric(TransitionEffect.move(TransitionEdge.Start), TransitionEffect.move(TransitionEdge.End))。从Start边滑入，End边滑出。即在LTR模式下，从左侧滑入，右侧滑出；在RTL模式下，从右侧滑入，左侧滑出。
 
 **类型：** [TransitionEffect](#class-transitioneffect)
 
@@ -528,7 +554,7 @@ public static let SLIDE: TransitionEffect
 public static let SLIDE_SWITCH: TransitionEffect
 ```
 
-**功能：** 指定出现时从右先缩小再放大侧滑入、消失时从左侧先缩小再放大滑出的转场效果。自带动画参数，也可覆盖动画参数，自带的动画参数时长600ms，指定动画曲线cubicBezierCurve(0.24, 0.0, 0.50, 1.0)，最小缩放比例为0.8。
+**功能：** 指定出现时从右侧先缩小再放大滑入、消失时从左侧先缩小再放大滑出的转场效果。自带动画参数，也可覆盖动画参数，自带的动画参数时长600ms，指定动画曲线cubicBezierCurve(0.24, 0.0, 0.50, 1.0)，最小缩放比例为0.8。
 
 **类型：** [TransitionEffect](#class-transitioneffect)
 
@@ -554,7 +580,7 @@ public static func opacity(alpha: Float64): TransitionEffect
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|alpha|Float64|是|-|设置组件转场时的透明度效果，为插入时起点和删除时终点的值。取值范围：[0.0, 1.0]。<br> **说明：** <br>设置小于0.0的非法值按0.0处理，大于1.0的非法值按1.0处理。|
+|alpha|Float64|是|-|设置组件转场时的透明度效果，为插入时起点和删除时终点的值。<br>取值范围：[0.0, 1.0]。<br> **说明：** <br>设置小于0.0的非法值按0.0处理，大于1.0的非法值按1.0处理。|
 
 **返回值：**
 
@@ -602,7 +628,7 @@ public static func scale(options: ?ScaleOptions): TransitionEffect
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|options|?[ScaleOptions](#class-scaleoptions)|是|-|设置组件转场时的缩放效果，为插入时起点和删除时终点的值。|
+|options|?[ScaleOptions](#class-scaleoptions)|是|-|	组件转场时的缩放效果，为插入时起点和删除时终点的值。设置的缩放值在组件当前的scale属性上进行叠加，如组件当前scale值为0.8，当转场缩放值设置为0.5时，组件入场动画的缩放值将从0.4开始执行。|
 
 **返回值：**
 
@@ -678,8 +704,8 @@ public static func asymmetric(appear: TransitionEffect, disappear: TransitionEff
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|appear|[TransitionEffect](#class-transitioneffect)|是|-|指定出现的转场效果。|
-|disappear|[TransitionEffect](#class-transitioneffect)|是|-|指定消失的转场效果。|
+|appear|[TransitionEffect](#class-transitioneffect)|是|-|指定出现的转场效果。<br>如不通过asymmetric函数构造TransitionEffect，则表明该效果在组件出现和消失时均生效。|
+|disappear|[TransitionEffect](#class-transitioneffect)|是|-|指定消失的转场效果。<br>如不通过asymmetric函数构造TransitionEffect，则表明该效果在组件出现和消失时均生效。|
 
 **返回值：**
 
@@ -731,7 +757,7 @@ public func combine(transitionEffect: TransitionEffect): TransitionEffect
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|transitionEffect|[TransitionEffect](#class-transitioneffect)|是|-|用于链式组合的组件转场效果。|
+|transitionEffect|[TransitionEffect](#class-transitioneffect)|是|-|被组合的过渡效果。|
 
 **返回值：**
 
@@ -767,7 +793,7 @@ public enum TransitionEdge <: Equatable<TransitionEdge> {
 Top
 ```
 
-**功能：** 顶部边缘。
+**功能：** 窗口的上边缘。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -779,7 +805,7 @@ Top
 Bottom
 ```
 
-**功能：** 窗口的底部边缘。
+**功能：** 窗口的下边缘。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -791,7 +817,7 @@ Bottom
 Start
 ```
 
-**功能：** 窗口的起始边缘，对于从左到右的脚本是左边缘，对于从右到左的脚本是右边缘。
+**功能：** 窗口的起始边缘，LTR时为左边缘，RTL时为右边缘。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -803,7 +829,7 @@ Start
 End
 ```
 
-**功能：** 窗口的结束边缘，对于从左到右的脚本是右边缘，对于从右到左的脚本是左边缘。
+**功能：** 窗口的终止边缘，LTR时为右边缘，RTL时为左边缘。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -941,11 +967,13 @@ class EntryView {
                 })
                 .width(800.px)
                 .height(400.px)
+                .margin(left: 200.px, top: 100.px)
 
             if (this.flag) {
                 Button("abc")
                     .width(800.px)
                     .height(400.px)
+                    .margin(left: 200.px)
                     .transition(
                         TransitionEffect
                             .OPACITY
@@ -955,6 +983,7 @@ class EntryView {
                 Button("abc")
                     .width(800.px)
                     .height(400.px)
+                    .margin(left: 200.px)
                     .transition(
                         TransitionEffect
                             .asymmetric(
@@ -1003,6 +1032,7 @@ class EntryView {
                 })
                 .width(800.px)
                 .height(400.px)
+                .margin(left:50, top: 50)
 
             if (this.flag) {
                 Column() {
@@ -1025,6 +1055,7 @@ class EntryView {
                 }.transition(TransitionEffect
                     .OPACITY
                     .animation(AnimateParam(duration: 1000)))
+                    .margin(left:50)
             }
         }
     }

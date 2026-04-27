@@ -1,6 +1,12 @@
 # ImageSpan
 
-作为[Text](./cj-text-input-text.md#text)组件的子组件，用于显示行内图片。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+作为[Text](./cj-text-input-text.md)组件的子组件，用于显示行内图片。
 
 ## 导入模块
 
@@ -54,7 +60,7 @@ public init(value: ?PixelMap)
 
 通用属性：支持[尺寸设置](./cj-universal-attribute-size.md)、[背景设置](./cj-universal-attribute-background.md)、[边框设置](./cj-universal-attribute-border.md)。
 
-通用事件：仅支持[点击事件](./cj-universal-event-click.md#func-onclick)。
+通用事件：仅支持[点击事件](./cj-universal-event-click.md#func-onclickclickevent---unit)。
 
 ## 组件属性
 

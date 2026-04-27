@@ -1,12 +1,18 @@
 # 公共事件简介
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 CES（Common Event Service，公共事件服务）为应用程序提供订阅、发布、退订公共事件的能力。
 
 ## 公共事件分类
 
 公共事件从系统角度可分为：系统公共事件和自定义公共事件。
 
-- 系统公共事件：CES内部定义的公共事件，当前仅支持系统应用和系统服务发布，例如HAP安装、更新、卸载等公共事件。目前支持的系统公共事件请参见[系统公共事件列表](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#struct-support)。
+- 系统公共事件：CES内部定义的公共事件，当前仅支持系统应用和系统服务发布，例如HAP安装、更新、卸载等公共事件。目前支持的系统公共事件请参见[系统公共事件列表](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-support)。
 - 自定义公共事件：应用定义的公共事件，可用于实现跨进程的事件通信能力。
 
 公共事件按发送方式可分为：无序公共事件、有序公共事件和粘性公共事件。
@@ -26,9 +32,9 @@ CES（Common Event Service，公共事件服务）为应用程序提供订阅、
 ## 安全注意事项
 
 - **公共事件发布方**：如果不加限制，任何应用都可以订阅公共事件并读取相关信息，应避免在公共事件中携带敏感信息。采用以下方式，可以限制公共事件接收方的范围。
-    - 通过[CommonEventPublishData](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#struct-commoneventpublishdata)中的subscriberPermissions参数指定订阅者所需权限。
-    - 通过[CommonEventPublishData](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#struct-commoneventpublishdata)中的bundleName参数指定订阅者的包名。
+    - 通过[CommonEventPublishData](../../reference/BasicServicesKit/cj-apis-common_event_publish_data.md#class-commoneventpublishdata)中的subscriberPermissions参数指定订阅者所需权限。
+    - 通过[CommonEventPublishData](../../reference/BasicServicesKit/cj-apis-common_event_publish_data.md#class-commoneventpublishdata)中的bundleName参数指定订阅者的包名。
 - **公共事件订阅方**：订阅自定义公共事件后，任意应用都可以向订阅者发送潜在的恶意公共事件。采用以下方式，可以限制公共事件发布方的范围。
-    - 通过[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscribeinfo)中的publisherPermission参数指定发布者所需权限。
-    - 通过[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscribeinfo)中的publisherBundleName参数参数指定发布者的包名。
+    - 通过[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_subscribe_info.md#class-commoneventsubscribeinfo)中的publisherPermission参数指定发布者所需权限。
+    - 通过[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_subscribe_info.md#class-commoneventsubscribeinfo)中的publisherBundleName参数指定发布者的包名。
 - 自定义公共事件名称应确保全局唯一，否则可能与其他公共事件冲突。

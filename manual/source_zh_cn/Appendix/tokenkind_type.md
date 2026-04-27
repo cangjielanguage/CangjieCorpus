@@ -1,6 +1,8 @@
 # TokenKind 类型
 
-``` cangjie
+<!-- code_no_check -->
+
+```cangjie
 public enum TokenKind <: ToString {
     DOT|                      /*  "."           */
     COMMA|                    /*  ","           */
@@ -136,7 +138,7 @@ public enum TokenKind <: ToString {
     UNSAFE|                   /*  "unsafe"      */
     OPERATOR|                 /*  "operator"    */
     SPAWN|                    /*  "spawn"       */
-    SYNCHRONIZED|             /*  "synchronized */
+    SYNCHRONIZED|             /*  "synchronized" */
     UPPERBOUND|               /*  "<:"          */
     MAIN|                     /*  "main"        */
     IDENTIFIER|               /*  "x"           */
@@ -160,7 +162,11 @@ public enum TokenKind <: ToString {
     DOLLAR_IDENTIFIER|        /*  e.g. "$x"          */
     ANNOTATION|               /*  e.g. "@When"       */
     AT_EXCL|                  /*  e.g. "@!"          */
-    ILLEGAL|
+    ILLEGAL|<!--Del-->
+    HANDLE|                   /*  "handle"           */
+    PERFORM|                  /*  "perform"          */
+    RESUME|                   /*  "resume"           */
+    THROWING|                 /*  "throwing"         */<!--DelEnd-->
     ...
 }
 ```

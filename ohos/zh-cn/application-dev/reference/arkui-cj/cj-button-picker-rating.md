@@ -1,5 +1,11 @@
 # Rating
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 一个提供在给定范围内选择评分的组件。
 
 ## 导入模块
@@ -83,7 +89,18 @@ public func stepSize(size: ?Float64): This
 public func starStyle(backgroundUri!: ?ResourceStr, foregroundUri!: ?ResourceStr, secondaryUri!: ?ResourceStr = None): This
 ```
 
-**功能：** 设置评分的样式。该属性所支持的图片类型能力参考[Image](./cj-image-video-image.md#image)组件。支持加载本地图片和网络图片，暂不支持PixelMap类型和Resource资源。
+**功能：** 设置评分的样式。该属性所支持的图片类型能力参考[Image](./cj-image-video-image.md)组件。支持加载本地图片和网络图片，暂不支持PixelMap类型和Resource资源。
+
+> **说明：**
+>
+> - backgroundUri：未选中的星级的图片链接，可由用户自定义或使用系统默认图片。
+> - foregroundUri：选中的星级的图片路径，可由用户自定义或使用系统默认图片。
+> - secondaryUri：部分选中的星级的图片路径，可由用户自定义或使用系统默认图片。
+> - rating宽高为[width, height]时，单个图片的绘制区域为[width / stars, height]。
+> - 为了指定绘制区域为方形，建议自定义宽高时采取[height * stars, height], width = height * stars的方式。
+> - backgroundUri或者foregroundUri或者secondaryUri设置的图片路径错误时，图片不显示。
+> - backgroundUri或者foregroundUri设置为空字符串时，rating会选择加载系统默认星型图源。
+> - secondaryUri不设置或者设置的值为空字符串时，优先设置为backgroundUri，效果上等同于只设置了foregroundUri、backgroundUri。
 
 默认图片加载方式为异步，暂不支持同步加载。
 
@@ -98,17 +115,6 @@ public func starStyle(backgroundUri!: ?ResourceStr, foregroundUri!: ?ResourceStr
 |backgroundUri|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** 未选中的星级的图片链接，可由用户自定义或使用系统默认图片。<br>初始值：""。|
 |foregroundUri|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** 选中的星级的图片路径，可由用户自定义或使用系统默认图片。<br>初始值：""。|
 |secondaryUri|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None|**命名参数。** 部分选中的星级的图片路径，可由用户自定义或使用系统默认图片。<br>初始值： 取backgroundUri的值。|
-
-> **说明：**
->
-> - backgroundUri：未选中的星级的图片链接，可由用户自定义或使用系统默认图片。
-> - foregroundUri：选中的星级的图片路径，可由用户自定义或使用系统默认图片。
-> - secondaryUri：部分选中的星级的图片路径，可由用户自定义或使用系统默认图片。
-> - rating宽高为[width, height]时，单个图片的绘制区域为[width / stars, height]。
-> - 为了指定绘制区域为方形，建议自定义宽高时采取[height * stars, height], width = height * stars的方式。
-> - backgroundUri或者foregroundUri或者secondaryUri设置的图片路径错误时，图片不显示。
-> - backgroundUri或者foregroundUri设置为空字符串时，rating会选择加载系统默认星型图源。
-> - secondaryUri不设置或者设置的值为空字符串时，优先设置为backgroundUri，效果上等同于只设置了foregroundUri、backgroundUri。
 
 ## 组件事件
 

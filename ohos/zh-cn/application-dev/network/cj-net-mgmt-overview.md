@@ -1,5 +1,11 @@
 # Network Kit简介
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Network Kit（网络服务）主要提供以下功能：
 
 - [HTTP数据请求](./cj-http-request.md)：通过HTTP发起一个数据请求。

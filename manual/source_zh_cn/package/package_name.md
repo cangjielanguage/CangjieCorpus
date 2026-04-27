@@ -2,8 +2,15 @@
 
 在仓颉编程语言中，包声明以关键字 `package` 开头，后接 root 包至当前包由 `.` 分隔路径上所有包的包名。包名必须是合法的普通标识符（不含原始标识符）。例如：
 
+<!-- compile -->
+
 ```cangjie
 package pkg1      // root 包 pkg1
+```
+
+<!-- compile -->
+
+```cangjie
 package pkg1.sub1 // root 包 pkg1 的子包 sub1
 ```
 
@@ -41,15 +48,17 @@ package test
 ```text
 // The directory structure is as follows:
 src
-`-- directory_0
+|-- directory_0
     |-- directory_1
     |    |-- a.cj
-    |    `-- b.cj
-    `-- c.cj
-`-- main.cj
+    |    |-- b.cj
+    |-- c.cj
+|-- main.cj
 ```
 
 则 `a.cj`、`b.cj`、`c.cj`、`main.cj` 中的包声明可以为:
+
+<!-- compile -->
 
 ```cangjie
 // a.cj
@@ -58,12 +67,16 @@ src
 package default.directory_0.directory_1
 ```
 
+<!-- compile -->
+
 ```cangjie
 // b.cj
 // in file b.cj, the declared package name must correspond to relative path directory_0/directory_1.
 
 package default.directory_0.directory_1
 ```
+
+<!-- compile -->
 
 ```cangjie
 // c.cj
@@ -72,11 +85,13 @@ package default.directory_0.directory_1
 package default.directory_0
 ```
 
+<!-- compile -->
+
 ```cangjie
 // main.cj
 // file main.cj is in the module root directory and may omit package declaration.
 
-main() {
+main(): Int64 {
     return 0
 }
 ```
@@ -84,6 +99,9 @@ main() {
 另外，包声明不能引起命名冲突：子包不能和当前包的顶层声明同名。
 
 以下是一些错误示例：
+
+<!-- compile -->
+<!-- cfg="-p a --output-type=staticlib" -->
 
 ```cangjie
 // a.cj
@@ -111,6 +129,5 @@ import a.B // ambiguous use of 'a.B'
 
 main() {
     a.B.f()
-    return 0
 }
 ```

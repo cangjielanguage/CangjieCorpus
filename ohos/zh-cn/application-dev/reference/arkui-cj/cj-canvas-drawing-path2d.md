@@ -1,5 +1,11 @@
 # Path2D
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 路径对象，支持通过对象的接口进行路径的描述，并通过Canvas的stroke接口或者fill接口进行绘制。
 
 ## 导入模块
@@ -13,7 +19,7 @@ import kit.ArkUI.*
 ```cangjie
 public class Path2D {
     public init()
-    public init(path: String)
+    public init(d: ?String)
 }
 ```
 
@@ -208,7 +214,7 @@ public func quadraticCurveTo(
 ): Unit
 ```
 
-**功能：** 创建二次贝赛尔曲线的路径。
+**功能：** 创建二次贝塞尔曲线的路径。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -236,7 +242,7 @@ public func bezierCurveTo(
 ): Unit
 ```
 
-**功能：** 创建三次贝赛尔曲线的路径。
+**功能：** 创建三次贝塞尔曲线的路径。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 

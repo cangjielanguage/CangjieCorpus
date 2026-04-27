@@ -1,5 +1,11 @@
 # Z序控制
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 组件的Z序，设置组件的堆叠顺序。
 
 ## 导入模块
@@ -11,7 +17,7 @@ import kit.ArkUI.*
 ## func zIndex(?Int32)
 
 ```cangjie
-public func zIndex(value: ?Int32): T
+func zIndex(value: ?Int32): T
 ```
 
 **功能：** 设置组件的Z轴层级。

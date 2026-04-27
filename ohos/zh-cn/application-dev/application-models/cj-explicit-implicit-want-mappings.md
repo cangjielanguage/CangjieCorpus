@@ -1,5 +1,11 @@
 # 显式Want与隐式Want匹配规则
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在启动目标应用组件时，会通过显式[Want](../reference/AbilityKit/cj-apis-app-ability-want.md#class-want)或者隐式[Want](../reference/AbilityKit/cj-apis-app-ability-want.md#class-want)进行目标应用组件的匹配。本章所述的匹配规则是：调用方传入的[Want](../reference/AbilityKit/cj-apis-app-ability-want.md#class-want)参数中设置的参数如何与目标应用组件声明的配置文件进行匹配。
 
 ## 显式Want匹配原理
@@ -39,7 +45,7 @@
 从隐式Want的定义，可得知：
 
 - 调用方传入的want参数，表明调用方需要执行的操作，并提供相关数据以及其他应用类型限制。
-- 待匹配应用组件的skills配置，声明其具备的能力（[module.json5配置文件](../cj-start/basic-knowledge/module-configuration-file.md)中的[skills标签](../cj-start/basic-knowledge/module-configuration-file.md#skills标签)参数）。
+- 待匹配应用组件的skills配置，声明其具备的能力（[module.json5配置文件](../cj-start/basic-knowledge/cj-module-configuration-file.md)中的[skills标签](../cj-start/basic-knowledge/cj-module-configuration-file.md#skills标签)参数）。
 
 系统将调用方传入的want参数（包含action、entities、uri、type和parameters属性）与已安装待匹配应用组件的skills配置（包含actions、entities、uris和type属性）进行匹配。当want参数五个属性匹配均未配置，隐式匹配失败。
 

@@ -2,7 +2,7 @@
 
 > **说明：**
 >
-> 为确保运行效果，本文以**DevEco Studio 5.0.2 Release** 和 **DevEco Studio-Cangjie Plugin 5.0.7.100 Beta1** 版本为例，单击[此处](https://developer.huawei.com/consumer/cn/download/)获取最新版本的下载链接。
+> 为确保运行效果，本文以**DevEco Studio 6.0.2 Release** 和 **DevEco Studio-Cangjie Plugin 6.0.2 Beta2** 版本为例，单击[此处](https://developer.huawei.com/consumer/cn/download/)获取最新版本的下载链接。
 
 本文档适用于对仓颉语言、ArkTS语言、UI框架等有基本概念的OpenHarmony应用开发者。基于一个简单的、支持页面跳转/返回功能的、纯ArkTS开发的应用，通过引入仓颉来开发一些增量业务（比如，仓颉提供一个同步接口给ArkTS调用，仓颉提供一个异步接口给ArkTS调用，在原ArkTS页面中嵌入一个仓颉组件），来帮助开发者快速了解如何在存量ArkTS业务中，快速引入仓颉进行开发，熟悉混合应用的开发流程。
 
@@ -45,7 +45,7 @@ Project_name
 其中：
 
 - **entry** 是通过 **Empty Ability** 工程模板创建的ArkTS模块，该模块会被编译为HAP包。
-- **my_module** 是通过 **Static Library** 工程模块创建的ArkTS静态库模块，该模块会被编译为HAR包，被**entry**模块依赖。
+- **my_module** 是通过工程模板创建的ArkTS模块，该模块会被编译为HAR包，被**entry**模块依赖。**my_module** 模块可以通过 **Shared Library** 工程模板创建，也可以通过 **Static Library** 工程模板创建，下面示例代码通过 **Shared Library** 工程模板创建ArkTS共享库模块。
 
 **entry**和**my_module**模块内各有一个页面，通过Navigation进行页面路由。
 
@@ -67,11 +67,11 @@ Project_name
    │    ├── mock
    │    ├── ohosTest
    │    └── test
+   ├── .gitignore
    ├── build-profile.json5
    ├── hvigorfile.ts
    ├── obfuscation-rules.txt
-   ├── oh-package.json5
-   └── oh-package-lock.json5
+   └── oh-package.json5
    ```
 
     - **entry > src > main > ets > pages > Index.ets** 文件的示例如下：
@@ -120,18 +120,23 @@ Project_name
    ├── src
    │    ├── main
    │    │    ├── ets
-   │    │    │    └── pages
-   │    │    │         └── MyModulePage.ets
+   │    │    │    ├── pages
+   |    │    │    │    ├── Index.ets
+   │    │    │    │    └── MyModulePage.ets
+   |    │    │    └── utils
    │    │    ├── resources
-   │    │    │    └── base
-   │    │    │         ├── element
-   │    │    │         └── profile
-   │    │    │              └──router_map.json
+   │    │    │    ├── base
+   │    │    │    │    ├── element
+   |    │    │    │    ├── media
+   │    │    │    │    └── profile
+   │    │    │    │         ├──main_pages.json
+   │    │    │    │         └──router_map.json
+   │    │    │    └── rawfile
    │    │    └── module.json5
    │    ├── ohosTest
    │    └── test
+   ├── .gitignore
    ├── build-profile.json5
-   ├── BuildProfile.ets
    ├── consumer-rules.txt
    ├── hvigorfile.ts
    ├── Index.ets
@@ -179,7 +184,6 @@ Project_name
     - **my_module > src > main > resources > base > profile > router_map.json**需要配置子页的路由信息，示例如下：
 
    ```json
-   // router_map.json
    {
      "routerMap": [
        {
@@ -207,15 +211,6 @@ Project_name
 
 ## 在ArkTS模块中增量使用仓颉
 
-> **说明：**
->
-> 仓颉模块目前仅支持OpenHarmony的静态库模块，即HAR静态共享包。
-
-仓颉支持在SDK范围为API 12~15、设备类型为 phone、tablet、2in1 的ArkTS HAP模块或HAR模块中，直接使能仓颉开发。
-若当前模块支持的设备类型包括default、phone、tablet、2in1之外的其他设备类型，请将模块下module.json5中的deviceTypes字段中不支持的设备类型删去，修改为支持的设备类型格式（如下图应删去wearable设备），再进行增量使用仓颉的操作。
-
-![deviceTypes](../../figures/deviceTypes.png)
-
 仍以上方原始的ArkTS应用工程为例，介绍如何在ArkTS模块中（即**my_module**）使能仓颉开发。
 
 ### 右键菜单一键使能仓颉-ArkTS混合模块
@@ -228,8 +223,7 @@ Project_name
 
 ```text
 ├── hvigor
-│    ├── cangjie-build-support-x.y.z.tgz
-│    └── hvigor-config.json5
+│    ├── hvigor-config.json5
 └── my_module
     ├── build
     ├── libs
@@ -238,22 +232,29 @@ Project_name
     │    ├── main
     │    │    ├── cangjie
     │    │    │    ├── types
-    │    │    │    │    └── libohos_app_cangjie_entry
+    │    │    │    │    └── libohos_app_cangjie_my_module
     │    │    │    │          ├── Index.d.ts
     │    │    │    │          └── oh-package.json5
     │    │    │    └── index.cj
     │    │    ├── ets
-    │    │    │    └── pages
-    │    │    │         └── MyModulePage.ets
+    │    │    │    ├── pages
+    |    │    │    |    ├── Index.ets
+    │    │    │    |    └── MyModulePage.ets
+    |    │    │    └── utils
     │    │    ├── resources
     │    │    │    └── base
-    │    │    │         ├── element
-    │    │    │         └── profile
-    │    │    │              └── router_map.json
+    │    │    │    |    ├── element
+    |    │    │    |    ├── media
+    │    │    │    |    └── profile
+    |    │    │    |         ├──main_pages.json
+    │    │    │    |         └── router_map.json
+    |    │    │    └── rawfile
     │    │    └── module.json5
     │    ├── ohosTest
     │    └── test
     ├── build-profile.json5
+    ├── cjpm.lock
+    ├── cjpm.toml
     ├── consumer-rules.txt
     ├── hvigorfile.ts
     ├── Index.ets
@@ -263,10 +264,6 @@ Project_name
 ```
 
 可以看出，**my_module** 变成了一个仓颉-ArkTS混合模块。
-
-> **说明：**
->
-> 首次在ArkTS工程中使能仓颉开发时，会在工程的 “hvigor” 目录下同步创建一个“cangjie-build-support-x.y.z.tgz”的插件包，用于支持仓颉相关的编译。
 
 ### 在同一个工程内，纯ArkTS工程跨模块调用仓颉函数
 
@@ -304,7 +301,7 @@ Project_name
 
 2. 自动生成仓颉-ArkTS互操作接口声明。
 
-   打开上述**index.cj**文件，在文件编辑界面中右键单击选择**Generate... > Cangjie-ArkTS Interop API**，则会在**entry > src > main > cangjie > types > libohos_app_cangjie_entry**目录下的**Index.d.ts**文件中自动生成仓颉暴露给ArkTS的.d.ts接口声明，目录结构如下所示：
+   打开上述**index.cj**文件，在文件编辑界面中右键单击选择**Generate... > Cangjie-ArkTS Interop API**，则会在**entry > src > main > cangjie > types > libohos_app_cangjie_my_module**目录下的**Index.d.ts**文件中自动生成仓颉暴露给ArkTS的.d.ts接口声明，目录结构如下所示：
 
    ```text
    my_module
@@ -316,7 +313,7 @@ Project_name
              ├── cangjie
              │    ├── ark_interop_api
              │    ├── types
-             │    │    └── libohos_app_cangjie_entry
+             │    │    └── libohos_app_cangjie_my_module
              │    │         │── Index.d.ts
              │    │         └── oh-package.json5
              │    └── index.cj
@@ -335,9 +332,7 @@ Project_name
    >
    > 创建Cangjie Hybrid Ability混合工程之后，在模块下**my_module > oh-package.json5**文件中会自动将**libohos_app_cangjie_my_module**库添加到**dependencies**字段中作为依赖。
 
-3. 仓颉暴露给ArkTS的.d.ts接口声明生成后，如果需要在纯Arkts模块中引入仓颉接口，需要先修改纯Arkts模块的**hvigorfile.ts**文件。如本例中，需要修改  **entry > hvigorfile.ts**  ，将首行接口 import { hapTasks } from '@ohos/hvigor-ohos-plugin' 修改为 import { hapTasks } from '@ohos/cangjie-build-support'。
-
-4. 完成纯Arkts模块的**hvigorfile.ts**文件修改后，可以直接在ArkTS文件中引入.d.ts文件中接口的依赖。
+3. 完成纯Arkts模块的**hvigorfile.ts**文件修改后，可以直接在ArkTS文件中引入.d.ts文件中接口的依赖。
 
    修改 **my_module > src > main > ets > pages > MyModulePage.ets**文件，示例代码如下：
 
@@ -405,7 +400,7 @@ Project_name
    }
    ```
 
-5. 使用真机或模拟器运行应用。
+4. 使用真机或模拟器运行应用。
 
    应用编译安装成功后，先跳转到**MyModulePage**页面，再单击按钮触发函数调用，其效果如下：
 
@@ -434,9 +429,11 @@ Project_name
         │    │    ├── cangjie_page.cj
         │    │    └── index.cj
         │    ├── ets
-        │    │    └── pages
-        │    │         └── cangjie_page.ets
-        │    │         └── MyModulePage.ets
+        │    │    ├── pages
+        │    │    |    ├── cangjie_page.ets
+        |    │    |    ├── Index.ets
+        │    │    |    └── MyModulePage.ets
+        |    |    └── utils
         │    ├── resources
         │    └── module.json5
         ├── ohosTest

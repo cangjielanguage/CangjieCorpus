@@ -2,7 +2,7 @@
 
 下面是获取各类系统信息示例，以下示例不支持 Windows 平台。
 
-代码如下:
+示例：
 
 <!-- run -->
 
@@ -29,7 +29,7 @@ main(): Int64 {
     var arr: CString = unsafe { LibC.mallocCString(" ") }
     var a: CPointer<UInt8> = arr.getChars()
     var cp: CPointer<UInt32> = CPointer<UInt32>(a)
-    var getg = unsafe{ getgroups(0, cp)}
+    var getg = unsafe { getgroups(0, cp) }
     var s: String = " "
     for (_ in 0..getg) {
         s = s + "\0"
@@ -40,7 +40,7 @@ main(): Int64 {
         unsafe { local = cp.read(Int64(temp)) }
         println("getgroups ==> ${local.toString()}")
     }
-    unsafe { LibC.free(arr)}
+    unsafe { LibC.free(arr) }
     return 0
 }
 ```

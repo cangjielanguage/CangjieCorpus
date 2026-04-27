@@ -1,5 +1,11 @@
 # 列表选择弹窗（ActionSheet）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 列表弹窗。
 
 ## 导入模块
@@ -13,8 +19,8 @@ import kit.ArkUI.*
 ```cangjie
 public class SheetInfo {
     public var title: ?ResourceStr
-    public var action: ?VoidCallback
     public var icon: ?ResourceStr
+    public var action: ?VoidCallback
     public init(
         title!: ?ResourceStr,
         icon!: ?ResourceStr = None,
@@ -105,11 +111,11 @@ public init(
 
 ```cangjie
 public class ActionSheetButtonOptions {
-    public var value: ?ResourceStr
-    public var action: ?VoidCallback
     public var enabled: ?Bool
     public var defaultFocus: ?Bool
     public var style: ?DialogButtonStyle
+    public var value: ?ResourceStr
+    public var action: ?VoidCallback
     public init(
         enabled!: ?Bool = None,
         defaultFocus!: ?Bool = None,
@@ -206,7 +212,7 @@ public var value: ?ResourceStr
 
 **起始版本：** 22
 
-### init(?ResourceStr, ?VoidCallback, ?Bool, ?Bool, ?DialogButtonStyle)
+### init(?Bool, ?Bool, ?DialogButtonStyle, ?ResourceStr, ?VoidCallback)
 
 ```cangjie
 public init(
@@ -240,7 +246,6 @@ public init(
 public class DismissDialogAction {
     public var reason: DismissReason
     public init(reason: DismissReason)
-    public func dismiss(): Unit
 }
 ```
 
@@ -290,7 +295,7 @@ public init(reason: DismissReason)
 public func dismiss(): Unit
 ```
 
-**功能：** Dialog关闭回调函数。开发者需要推出时调用，不需要退出时无需调用。
+**功能：** Dialog关闭回调函数。开发者需要退出时调用，不需要退出时无需调用。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -374,12 +379,12 @@ public init(
 ```cangjie
 public class ActionSheetOptions {
     public var title: ?ResourceStr
-    public var message: ?ResourceStr
-    public var sheets: ?Array<SheetInfo>
     public var subtitle: ?ResourceStr
+    public var message: ?ResourceStr
     public var confirm: ?ActionSheetButtonOptions
-    public var autoCancel: ?Bool
     public var cancel: ?VoidCallback
+    public var sheets: ?Array<SheetInfo>
+    public var autoCancel: ?Bool
     public var alignment: ?DialogAlignment
     public var offset: ?ActionSheetOffset
     public var maskRect: ?Rectangle
@@ -388,14 +393,14 @@ public class ActionSheetOptions {
     public var backgroundColor: ?ResourceColor
     public var backgroundBlurStyle: ?BlurStyle
     public var onWillDismiss: ?Callback<DismissDialogAction, Unit>
+    public var transition: ?TransitionEffect
     public var cornerRadius: ?BorderRadiuses
+    public var width: ?Length
+    public var height: ?Length
     public var borderWidth: ?Length
     public var borderColor: ?ResourceColor
     public var borderStyle: ?EdgeStyles
-    public var width: ?Length
-    public var height: ?Length
     public var shadow: ?ShadowOptions
-    public var transition: ?TransitionEffect
     public init(
         title!: ?ResourceStr,
         subtitle!: ?ResourceStr = None,
@@ -430,15 +435,95 @@ public class ActionSheetOptions {
 
 **起始版本：** 22
 
-### var alignment
+### var title
 
 ```cangjie
-public var alignment: ?DialogAlignment
+public var title: ?ResourceStr
 ```
 
-**功能：** 弹窗在竖直方向上的对齐方式。
+**功能：** 弹窗标题。
 
-**类型：** ?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var subtitle
+
+```cangjie
+public var subtitle: ?ResourceStr
+```
+
+**功能：** 弹窗副标题。
+
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var message
+
+```cangjie
+public var message: ?ResourceStr
+```
+
+**功能：** 弹窗内容。
+
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var confirm
+
+```cangjie
+public var confirm: ?ActionSheetButtonOptions
+```
+
+**功能：** 确认Button的使能状态、默认焦点、按钮风格、文本内容和点击回调。在弹窗获焦且未进行tab键走焦时，该按钮默认响应Enter键，且多重弹窗可自动获焦连续响应。
+
+**类型：** ?[ActionSheetButtonOptions](#class-actionsheetbuttonoptions)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var cancel
+
+```cangjie
+public var cancel: ?VoidCallback
+```
+
+**功能：** 点击遮障层关闭dialog时的回调。
+
+**类型：** ?[VoidCallback](./cj-common-types.md#type-voidcallback)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var sheets
+
+```cangjie
+public var sheets: ?Array<SheetInfo>
+```
+
+**功能：** 设置选项内容，每个选择项支持设置图片、文本和选中的回调。
+
+**类型：** ?Array\<[SheetInfo](#class-sheetinfo)>
 
 **读写能力：** 可读写
 
@@ -462,15 +547,79 @@ public var autoCancel: ?Bool
 
 **起始版本：** 22
 
-### var backgroundBlurStyle
+### var alignment
 
 ```cangjie
-public var backgroundBlurStyle: ?BlurStyle
+public var alignment: ?DialogAlignment
 ```
 
-**功能：** 弹窗背板模糊材质。
+**功能：** 弹窗在竖直方向上的对齐方式。
 
-**类型：** ?[BlurStyle](./cj-common-types.md#enum-blurstyle)
+**类型：** ?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var offset
+
+```cangjie
+public var offset: ?ActionSheetOffset
+```
+
+**功能：** 弹窗相对alignment所在位置的偏移量。
+
+**类型：** ?[ActionSheetOffset](#class-actionsheetoffset)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var maskRect
+
+```cangjie
+public var maskRect: ?Rectangle
+```
+
+**功能：** 弹窗遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。
+
+**类型：** ?[Rectangle](./cj-common-types.md#class-rectangle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var showInSubWindow
+
+```cangjie
+public var showInSubWindow: ?Bool
+```
+
+**功能：** 某弹框需要显示在主窗口之外时，是否在子窗口显示此弹窗。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var isModal
+
+```cangjie
+public var isModal: ?Bool
+```
+
+**功能：** 弹窗是否为模态窗口，模态窗口有蒙层，非模态窗口无蒙层。
+
+**类型：** ?Bool
 
 **读写能力：** 可读写
 
@@ -487,6 +636,118 @@ public var backgroundColor: ?ResourceColor
 **功能：** 弹窗背板颜色。
 
 **类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var backgroundBlurStyle
+
+```cangjie
+public var backgroundBlurStyle: ?BlurStyle
+```
+
+**功能：** 弹窗背板模糊材质。
+
+**类型：** ?[BlurStyle](./cj-common-types.md#enum-blurstyle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var onWillDismiss
+
+```cangjie
+public var onWillDismiss: ?Callback<DismissDialogAction, Unit>
+```
+
+**功能：** 交互式关闭回调函数。
+
+**类型：** ?[Callback](./cj-common-types.md#type-callbackt-v)\<[DismissDialogAction](#class-dismissdialogaction), Unit>
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var transition
+
+```cangjie
+public var transition: ?TransitionEffect
+```
+
+**功能：** 设置弹窗显示和退出的过渡效果。
+
+**类型：** ?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var cornerRadius
+
+```cangjie
+public var cornerRadius: ?BorderRadiuses
+```
+
+**功能：** 设置背板的圆角半径。可分别设置4个圆角的半径。
+
+**类型：** ?[BorderRadiuses](./cj-common-types.md#class-borderradiuses)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var width
+
+```cangjie
+public var width: ?Length
+```
+
+**功能：** 设置弹窗背板的宽度。
+
+**类型：** ?[Length](./cj-common-types.md#interface-length)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var height
+
+```cangjie
+public var height: ?Length
+```
+
+**功能：** 设置弹窗背板的高度。
+
+**类型：** ?[Length](./cj-common-types.md#interface-length)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
+### var borderWidth
+
+```cangjie
+public var borderWidth: ?Length
+```
+
+**功能：** 设置弹窗背板的边框宽度。
+
+**类型：** ?[Length](./cj-common-types.md#interface-length)
 
 **读写能力：** 可读写
 
@@ -526,166 +787,6 @@ public var borderStyle: ?EdgeStyles
 
 **起始版本：** 22
 
-### var borderWidth
-
-```cangjie
-public var borderWidth: ?Length
-```
-
-**功能：** 设置弹窗背板的边框宽度。
-
-**类型：** ?[Length](./cj-common-types.md#interface-length)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var cancel
-
-```cangjie
-public var cancel: ?VoidCallback
-```
-
-**功能：** 点击遮障层关闭dialog时的回调。
-
-**类型：** ?[VoidCallback](./cj-common-types.md#type-voidcallback)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var confirm
-
-```cangjie
-public var confirm: ?ActionSheetButtonOptions
-```
-
-**功能：** 确认Button的使能状态、默认焦点、按钮风格、文本内容和点击回调。在弹窗获焦且未进行tab键走焦时，该按钮默认响应Enter键，且多重弹窗可自动获焦连续响应。
-
-**类型：** ?[ActionSheetButtonOptions](#class-actionsheetbuttonoptions)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var cornerRadius
-
-```cangjie
-public var cornerRadius: ?BorderRadiuses
-```
-
-**功能：** 设置背板的圆角半径。可分别设置4个圆角的半径。
-
-**类型：** ?[BorderRadiuses](./cj-common-types.md#class-borderradiuses)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var height
-
-```cangjie
-public var height: ?Length
-```
-
-**功能：** 设置弹窗背板的高度。
-
-**类型：** ?[Length](./cj-common-types.md#interface-length)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var isModal
-
-```cangjie
-public var isModal: ?Bool
-```
-
-**功能：** 弹窗是否为模态窗口，模态窗口有蒙层，非模态窗口无蒙层。
-
-**类型：** ?Bool
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var maskRect
-
-```cangjie
-public var maskRect: ?Rectangle
-```
-
-**功能：** 弹窗遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。
-
-**类型：** ?[Rectangle](./cj-common-types.md#class-rectangle)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var message
-
-```cangjie
-public var message: ?ResourceStr
-```
-
-**功能：** 弹窗内容。
-
-**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var offset
-
-```cangjie
-public var offset: ?ActionSheetOffset
-```
-
-**功能：** 弹窗相对alignment所在位置的偏移量。
-
-**类型：** ?[ActionSheetOffset](#class-actionsheetoffset)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var onWillDismiss
-
-```cangjie
-public var onWillDismiss: ?Callback<DismissDialogAction, Unit>
-```
-
-**功能：** 交互式关闭回调函数。
-
-**类型：** ?[Callback](./cj-common-types.md#type-callbackt-v)\<[DismissDialogAction](#class-dismissdialogaction), Unit>
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ### var shadow
 
 ```cangjie
@@ -695,102 +796,6 @@ public var shadow: ?ShadowOptions
 **功能：** 设置弹窗背板的阴影。
 
 **类型：** ?[ShadowOptions](./cj-common-types.md#class-shadowoptions)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var sheets
-
-```cangjie
-public var sheets: ?Array<SheetInfo>
-```
-
-**功能：** 设置选项内容，每个选择项支持设置图片、文本和选中的回调。
-
-**类型：** ?Array\<[SheetInfo](#class-sheetinfo)>
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var showInSubWindow
-
-```cangjie
-public var showInSubWindow: ?Bool
-```
-
-**功能：** 某弹框需要显示在主窗口之外时，是否在子窗口显示此弹窗。
-
-**类型：** ?Bool
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var subtitle
-
-```cangjie
-public var subtitle: ?ResourceStr
-```
-
-**功能：** 弹窗副标题。
-
-**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var title
-
-```cangjie
-public var title: ?ResourceStr
-```
-
-**功能：** 弹窗标题。
-
-**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var transition
-
-```cangjie
-public var transition: ?TransitionEffect
-```
-
-**功能：** 设置弹窗显示和退出的过渡效果。
-
-**类型：** ?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)
-
-**读写能力：** 可读写
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-### var width
-
-```cangjie
-public var width: ?Length
-```
-
-**功能：** 设置弹窗背板的宽度。
-
-**类型：** ?[Length](./cj-common-types.md#interface-length)
 
 **读写能力：** 可读写
 

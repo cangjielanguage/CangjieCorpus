@@ -1,5 +1,11 @@
 # 通过用户首选项实现数据持久化
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 用户首选项为应用提供Key-Value键值型的数据处理能力，支持应用持久化轻量级数据，并对其修改和查询。当用户希望有一个全局唯一存储的地方，可以采用用户首选项来进行存储。Preferences会将该数据缓存在内存中。当用户读取时，能够快速从内存中获取数据。当需要持久化时，可以使用flush接口将内存中的数据写入持久化文件中。Preferences会随着存放的数据量越多而导致应用占用的内存越大。因此，Preferences不适合存放过多的数据，也不支持通过配置加密，适用的场景一般为应用保存用户的个性化设置（字体大小，是否开启夜间模式）等。
@@ -17,9 +23,9 @@
 ## 约束限制
 
 - 首选项无法保证进程并发安全，会有文件损坏和数据丢失的风险，不支持在多进程场景下使用。
-- Key键为string类型，要求非空且长度不超过1024个字节。
-- 如果Value值为string类型，请使用UTF-8编码格式，可以为空，不为空时长度不超过16MB。
-- 当存储的数据中包含非UTF-8格式的字符串时，请使用Uint8Array类型存储，否则会造成持久化文件出现格式错误造成文件损坏。
+- Key键为String类型，要求非空且长度不超过1024个字节。
+- 如果Value值为String类型，请使用UTF-8编码格式，可以为空，不为空时长度不超过16MB。
+- 当存储的数据中包含非UTF-8格式的字符串时，请使用Array\<UInt8>类型存储，否则会造成持久化文件出现格式错误造成文件损坏。
 - 当调用removePreferencesFromCache或者deletePreferences后，订阅的数据变更会主动取消订阅，重新getPreferences后需要重新订阅数据变更。
 - 不允许deletePreferences与其他接口多线程、多进程并发调用，否则会发生不可预期行为。
 - 内存会随着存储数据量的增大而增大，所以存储的数据量应该是轻量级的，建议存储的数据不超过一万条，否则会在内存方面产生较大的开销。
@@ -30,15 +36,15 @@
 
 | 接口名称                                             | 描述                                         |
 | --------------------------------------------------- | ----------------------------------------------|
-| getPreferences(context: StageContext, options: PreferencesOptions): Preferences | 获取Preferences实例。|
+| getPreferences(context: UIAbilityContext, options: PreferencesOptions): Preferences | 获取Preferences实例。|
 | put(key: String, value: PreferencesValueType): Unit   | 将数据写入Preferences实例，可通过flush将Preferences实例持久化。 |
 | has(key: String): Bool  | 检查Preferences实例是否包含名为给定Key的存储键值对。给定的Key值不能为空。 |
 | get(key: String, defValue: PreferencesValueType): PreferencesValueType   | 获取键对应的值，如果值为null或者非默认值类型，返回默认数据defValue。 |
 | delete(key: String): Unit  | 从Preferences实例中删除名为给定Key的存储键值对。 |
 | flush(): Unit   | 将当前Preferences实例的数据异步存储到用户首选项持久化文件中。 |
-| on(tp: String, callback: Callback1Argument\<String>): Unit | 订阅数据变更，订阅的数据发生变更后，在执行flush方法后，触发callback回调。 |
-| off(tp: String, callback: Callback1Argument\<String>): Unit | 取消订阅数据变更。  |
-| deletePreferences(context: StageContext, options: PreferencesOptions): Unit | 从内存中移除指定的Preferences实例。若Preferences实例有对应的持久化文件，则同时删除其持久化文件。 |
+| on(event: PreferencesEvent, callback: Callback1Argument\<String>): Unit | 订阅数据变更，订阅的数据发生变更后，在执行flush方法后，触发callback回调。 |
+| off(event: PreferencesEvent, callback!: ?Callback1Argument\<String> = None): Unit | 取消订阅数据变更。  |
+| deletePreferences(context: UIAbilityContext, name: String): Unit | 从内存中移除指定的Preferences实例。若Preferences实例有对应的持久化文件，则同时删除其持久化文件。 |
 
 ## 开发步骤
 
@@ -48,8 +54,12 @@
 
     ```cangjie
     // xxx.cj
-    import kit.ArkData.{ Preferences, PreferencesValueType, PreferencesEvent }
+    import kit.ArkData.*
     import ohos.callback_invoke.Callback1Argument
+    import kit.PerformanceAnalysisKit.Hilog
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.ArkUI.WindowStage
+    import ohos.business_exception.BusinessException
     ```
 
 2. 获取Preferences实例。
@@ -58,11 +68,6 @@
 
     ```cangjie
     // main_ability.cj
-    import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
-    import kit.ArkData.{ Preferences}
-    import ohos.data.preferences.PreferencesOptions
-
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
     var dataPreferences: Option<Preferences> = Option<Preferences>.None
 
@@ -88,7 +93,7 @@
 
             let options = PreferencesOptions("myStore")
             // 获取Preferences实例
-            dataPreferences = Preferences.getPreferences(getStageContext(this.context), options)
+            dataPreferences = Preferences.getPreferences(this.context, options)
         }
         // ...
     }
@@ -103,17 +108,6 @@
     > 当对应的键已经存在时，put()方法会覆盖其值。可以使用has()方法检查是否存在对应键值对。
 
     示例代码如下所示：
-
-    为实现写入数据功能，需要导入如下包：
-
-    <!-- compile -->
-
-    ```cangjie
-    // xxx.cj
-    import ohos.data.preferences.PreferencesValueType
-    ```
-
-    实现写入数据功能的核心代码是：
 
     <!-- compile -->
 

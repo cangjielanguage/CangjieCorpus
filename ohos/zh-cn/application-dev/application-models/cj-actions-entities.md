@@ -1,8 +1,14 @@
 # 常见action与entities（不推荐使用）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## action
 
-表示调用方要执行的通用操作（如查看、分享、应用详情）。在被调用方应用配置文件的[skills字段](../cj-start/basic-knowledge/module-configuration-file.md#skills标签)内声明actions表示该应用支持声明操作。常见的action如下所示。
+表示调用方要执行的通用操作（如查看、分享、应用详情）。在被调用方应用配置文件的[skills字段](../cj-start/basic-knowledge/cj-module-configuration-file.md#skills标签)内声明actions表示该应用支持声明操作。常见的action如下所示。
 
 **常见action:**
 
@@ -13,7 +19,7 @@
 
 ## entities
 
-表示目标应用组件的类别信息（如浏览器、视频播放器）。在被调用方应用配置文件的[skills字段](../cj-start/basic-knowledge/module-configuration-file.md#skills标签)内声明entities表示该应用支持的类别。常见的entities如下。
+表示目标应用组件的类别信息（如浏览器、视频播放器）。在被调用方应用配置文件的[skills字段](../cj-start/basic-knowledge/cj-module-configuration-file.md#skills标签)内声明entities表示该应用支持的类别。常见的entities如下。
 
 **常见entities:**
 

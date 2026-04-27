@@ -1,4 +1,10 @@
-# 密钥协商（仓颉）
+# 密钥协商
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 以协商密钥类型为X25519，并密钥仅在HUKS内使用为例，完成密钥协商。具体的场景介绍及支持的算法规格，请参见[密钥生成支持的算法](./cj-huks-key-generation-overview.md#支持的算法)。
 
@@ -53,9 +59,6 @@
      * 以下以X25519密钥的操作使用为例
      */
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.BasicServicesKit.*
-    import kit.CoreFileKit.*
-    import kit.AbilityKit.*
     import kit.UniversalKeystoreKit.*
 
     func loggerInfo(str: String) {
@@ -323,9 +326,6 @@
      * 以下以 DH密钥的操作使用为例
      */
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.BasicServicesKit.*
-    import kit.CoreFileKit.*
-    import kit.AbilityKit.*
     import kit.UniversalKeystoreKit.*
     import std.math.numeric.BigInt
 

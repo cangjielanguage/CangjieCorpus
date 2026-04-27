@@ -1,8 +1,14 @@
 # TextClock
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 TextClock 组件通过文本将当前系统时间显示在设备上。支持不同时区的时间显示，最高精度到秒级。
 
-在组件不可见时时间变动将停止，组件的可见状态基于[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64-unit---unit)处理，可见阈值ratios大于0即视为可见状态。
+在组件不可见时时间变动将停止，组件的可见状态基于[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)处理，可见阈值ratios大于0即视为可见状态。
 
 ## 导入模块
 
@@ -394,7 +400,7 @@ public var locale: ?String
 #### var localeMatcher
 
 ```cangjie
-public var localeMatcher
+public var localeMatcher: ?String
 ```
 
 **功能：** 区域设置匹配算法。值可以是："lookup"（精确匹配）或"best fit"（最佳匹配）。
@@ -458,7 +464,7 @@ public var numberingSystem: ?String
 #### var second
 
 ```cangjie
-public var second
+public var second: ?String
 ```
 
 **功能：** 秒显示格式。值可以是："numeric"或"2-digit"。

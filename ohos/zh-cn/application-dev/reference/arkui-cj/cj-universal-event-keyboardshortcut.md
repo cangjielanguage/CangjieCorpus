@@ -1,5 +1,11 @@
 # 组件快捷键事件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 开发者可以设置组件的自定义组合键，每个组件可以设置多个组合键。
 
 即使组件未获焦或是在所在页面未展示，只要已经挂载到获焦窗口的组件树上就会响应自定义组合键。
@@ -35,7 +41,7 @@ func keyboardShortcut(value: ?FunctionKey, keys: ?Array<ModifierKey>): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func keyboardShortcut(?String, ?Array\<ModifierKey>)
 
@@ -60,7 +66,7 @@ func keyboardShortcut(value: ?String, keys: ?Array<ModifierKey>): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func keyboardShortcut(?FunctionKey, ?Array\<ModifierKey>, ?() -> Unit)
 
@@ -86,7 +92,7 @@ func keyboardShortcut(value: ?FunctionKey, keys: ?Array<ModifierKey>, action: ?(
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func keyboardShortcut(?String, ?Array\<ModifierKey>, ?() -> Unit)
 
@@ -112,7 +118,7 @@ func keyboardShortcut(value: ?String, keys: ?Array<ModifierKey>, action: ?() -> 
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## 快捷键使用注意事项
 
@@ -122,7 +128,7 @@ func keyboardShortcut(value: ?String, keys: ?Array<ModifierKey>, action: ?() -> 
 |:---|:---|:---|
 |所有支持onClick事件的组件|支持自定义组合键|无|
 |自定义组合键要求|控制键Ctrl、Shift、Alt及它们的组合加上其它可输入字符按键|Button("button1").keyboardShortcut("a",\[ModifierKey.CTRL])|
-|多个不同组件设置相同组合键|只响应结点树上的第一个组件，其它组件不响应快捷键。|Button("button1").keyboardShortcut("a",\[ModifierKey.CTRL])<br>Button("button2").keyboardShortcut("a",\[ModifierKey.CTRL])|
+|多个不同组件设置相同组合键|只响应节点树上的第一个组件，其它组件不响应快捷键。|Button("button1").keyboardShortcut("a",\[ModifierKey.CTRL])<br>Button("button2").keyboardShortcut("a",\[ModifierKey.CTRL])|
 |无论组件是否获得焦点|只要窗口获焦快捷键就会响应|无|
 |绑定单个快捷键时候，通过keyboardShortcut接口value值或者是keys值或两者都是空的情况下。<br>绑定多个快捷键的时候无法取消快捷键。|取消快捷键的设置|Button("button1").keyboardShortcut("",\[ModifierKey.CTRL])<br>Button("button2").keyboardShortcut("a",\[])<br>Button("button3").keyboardShortcut("",\[])|
 |独立pipeline子窗口、主窗口共存的情况下|获焦的窗口响应快捷键|无|

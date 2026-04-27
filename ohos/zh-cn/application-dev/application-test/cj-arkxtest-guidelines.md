@@ -1,5 +1,11 @@
 # 自动化测试框架使用指导
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 仓颉自动化测试框架由两个概念组成，分别是仓颉OpenHarmony单元测试框架与UiTest。
@@ -41,7 +47,7 @@ UI测试框架主要对外提供了UiTest API供开发人员在对应测试场�
 
 ### 搭建环境
 
-DevEco Studio可参考其官网介绍进行[下载](https://developer.harmonyos.com/cn/develop/deveco-studio#download)，并进行相关的配置动作。
+DevEco Studio可参考其官网介绍进行[下载](https://developer.huawei.com/consumer/cn/deveco-studio/#download)，并进行相关的配置动作。
 
 ### 新建和编写测试脚本
 
@@ -72,6 +78,7 @@ DevEco Studio可参考其官网介绍进行[下载](https://developer.harmonyos.
     import std.unittest.*
     import std.unittest.common.*
     import std.unittest.testmacro.*
+    import kit.PerformanceAnalysisKit.Hilog
 
     @Test
     class TestExample00 {
@@ -89,7 +96,6 @@ DevEco Studio可参考其官网介绍进行[下载](https://developer.harmonyos.
             //check top display ability
             let ability = delegator.getCurrentTopAbility()
             Hilog.info(1, "info", "get top ability")
-            @Expect(ability.context.abilityInfo.name, 'EntryAbility')
         }
     }
     ```
@@ -107,7 +113,7 @@ UI测试基于单元测试，UI测试脚本在单元测试脚本上增加了对U
     <!-- compile -->
 
     ```cangjie
-    import ohos.base.*
+    import kit.ArkUI.LengthProp
     import ohos.arkui.component.*
     import ohos.arkui.state_management.*
     import ohos.arkui.state_macro_manage.*
@@ -148,6 +154,7 @@ UI测试基于单元测试，UI测试脚本在单元测试脚本上增加了对U
     import std.unittest.*
     import std.unittest.common.*
     import std.unittest.testmacro.*
+    import kit.PerformanceAnalysisKit.Hilog
 
     @Test
     class TestExample00 {
@@ -160,21 +167,18 @@ UI测试基于单元测试，UI测试脚本在单元测试脚本上增加了对U
             Hilog.info(1, "info", "uitest: TestUiExample begin")
             //start tested ability
             let want = Want(bundleName: bundleName, abilityName: 'EntryAbility')
-            delegator
-                .startAbility(want)
-                .get()
+            delegator.startAbility(want)
             sleep(Duration.second * 5)
             //check top display ability
             let ability = delegator.getCurrentTopAbility()
             Hilog.info(1, "info", "get top ability")
-            @Expect(ability.context.abilityInfo.name, 'EntryAbility')
             // ui test code
             // init driver
             let driver = Driver.create()
             driver.delayMs(1000)
             let button = driver.findComponent(On().text('Next'))
             //click button
-            button.click()
+            button?.click()
             driver.delayMs(1000)
             //check text
             driver.assertComponentExist(On().text('after click'))
@@ -467,7 +471,7 @@ hdc shell uitest uiInput inputText 100 100 hello
 
 > **说明：**
 >
-> 最多支持传入是三个键值，键值的具体取值请参考[KeyCode](../reference/arkui-cj/cj-universal-event-key.md#var-keycode)。
+> 最多支持传入的三个键值，键值的具体取值请参考[keyCode](../reference/arkui-cj/cj-common-types.md#var-keycode)。
 
 ```shell
 # 返回主页。
@@ -524,7 +528,7 @@ hdc shell param set persist.ace.testmode.enabled 1
 
 **问题描述**
 
-UI测试用例执行失败，查看hilog日志发现日志中有“uitest-api dose not allow calling concurrently”错误信息。
+UI测试用例执行失败，查看hilog日志发现日志中有“uitest-api does not allow calling concurrently”错误信息。
 
 **可能原因**
 

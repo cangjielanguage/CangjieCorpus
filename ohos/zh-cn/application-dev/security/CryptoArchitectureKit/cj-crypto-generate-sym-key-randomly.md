@@ -1,4 +1,10 @@
-# 随机生成对称密钥（仓颉）
+# 随机生成对称密钥
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 以AES和SM4为例，随机生成对称密钥（SymKey），并获得二进制数据。
 
@@ -20,7 +26,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func testSyncGenerateAesKey() {
     // 创建SymKeyGenerator实例。
@@ -50,7 +56,7 @@ func testSyncGenerateAesKey() {
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func testSyncGenerateSm4Key() {
     // 创建SymKeyGenerator实例。

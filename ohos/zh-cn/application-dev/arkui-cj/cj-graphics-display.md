@@ -1,5 +1,11 @@
 # 显示图片（Image）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 开发者经常需要在应用中显示一些图片，例如：按钮中的icon、网络图片、本地图片等。在应用中显示图片需要使用Image组件实现，Image支持多种图片格式，包括png、jpg、bmp、svg、gif和heif，具体用法请参考[Image](../reference/arkui-cj/cj-image-video-image.md)组件。
 
 Image通过调用接口来创建，接口调用形式如下：

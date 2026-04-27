@@ -2,6 +2,8 @@
 
 当某个类型的名字比较复杂或者在特定场景中不够直观时，可以选择使用类型别名的方式为此类型设置一个别名。
 
+<!-- code_no_check -->
+
 ```cangjie
 type I64 = Int64
 ```
@@ -9,6 +11,7 @@ type I64 = Int64
 类型别名的定义以关键字 `type` 开头，接着是类型的别名（如上例中的 `I64`），然后是等号 `=`，最后是原类型（即被取别名的类型，如上例中的 `Int64`）。
 
 只能在源文件顶层定义类型别名，并且原类型必须在别名定义处可见。例如，下例中 `Int64` 的别名定义在 `main` 中将报错，`LongNameClassB` 类型在为其定义别名时不可见，同样报错。
+
 <!-- compile.error  -->
 
 ```cangjie
@@ -21,6 +24,7 @@ type B = LongNameClassB // Error, type 'LongNameClassB' is not defined
 ```
 
 一个（或多个）类型别名定义中禁止出现（直接或间接的）循环引用。
+
 <!-- compile.error  -->
 
 ```cangjie
@@ -58,7 +62,7 @@ type C = (B, Int64)
     ```cangjie
     type A = B
     class B {
-        static var b : Int32 = 0;
+        static var b : Int32 = 0
         static func foo() {}
     }
     func foo() {
@@ -81,6 +85,7 @@ type C = (B, Int64)
     ```
 
 需要注意的是，当前用户自定义的类型别名暂不支持在类型转换表达式中使用，参考如下示例：
+
 <!-- compile.error  -->
 
 ```cangjie
@@ -99,7 +104,7 @@ MyInt(0)  // Error, no matching function for operator '()' function call
 ```cangjie
 struct RecordData<T> {
     var a: T
-    public init(x: T){
+    public init(x: T) {
         a = x
     }
 }

@@ -1,6 +1,6 @@
 # 顶层声明的可见性
 
-仓颉编程语言中，可以使用访问修饰符来控制对类型、变量、函数等顶层声明的可见性。仓颉语言有 4 种访问修饰符：`private`、`internal`、`protected`、`public`，在修饰顶层元素时不同访问修饰符的语义如下。
+仓颉编程语言中，可以使用访问修饰符来控制对类型、变量、函数等顶层声明的可见性。仓颉语言有 4 种访问修饰符：`private`、`internal`、`protected`、`public`，在修饰顶层元素时不同访问修饰符的语义如下：
 
 - `private` 表示仅当前文件内可见。不同的文件无法访问这类成员。
 - `internal` 表示仅当前包及子包（包括子包的子包）内可见。同一个包内可以不导入就访问这类成员，当前包的子包（包括子包的子包）内可以通过导入来访问这类成员。
@@ -104,13 +104,13 @@ public func f4() { 4 }    // f4 当前模块内外均可见
     {
       return 0
     }
-    public func f2(a1: Int8) // Ok.
+    public func f2(a1: Int8) // OK.
     {
       var v1 = C1()
       return 0
     }
-    public let v1 = f1(C1()) // Ok.
-    public class C2 // Ok.
+    public let v1 = f1(C1()) // OK.
+    public class C2 // OK.
     {
       var v2 = C1()
     }
@@ -121,11 +121,11 @@ public func f4() { 4 }    // f4 当前模块内外均可见
     <!-- compile -toplevel-->
 
     ```cangjie
-    public var t1: () -> Unit = { => } // Ok.
+    public var t1: () -> Unit = { => } // OK.
     func f1(): Unit {}
-    public let t2 = f1 // Ok.
+    public let t2 = f1 // OK.
 
-    public func f2() // Ok.
+    public func f2() // OK.
     {
       return f1
     }
@@ -137,5 +137,43 @@ public func f4() { 4 }    // f4 当前模块内外均可见
 
     ```cangjie
     var num = 5
-    public var t3 = num // Ok.
+    public var t3 = num // OK.
     ```
+
+> **注意：**
+>
+> 同一个包内，`private` 修饰的同名自定义类型（如 `struct`、`class`、`enum` 和 `interface` 等），在某些场景下不支持，不支持场景由编译器进行报错。
+
+例如在以下程序中，`example1.cj` 与 `example2.cj`文件包名相同，在 `example1.cj` 文件中定义了 `private` 修饰的类 `A`, 在 `example2.cj` 文件中定义了 `private` 修饰的结构体 `A`。
+
+<!-- compile -->
+
+```cangjie
+// example1.cj
+package test
+
+private class A {}
+
+public class D<T> {
+    private let a: A = A()
+}
+```
+
+<!-- compile -->
+
+```cangjie
+// example2.cj
+package test
+
+private struct A {}
+
+public class C<T> {
+    private let a: A = A()
+}
+```
+
+运行以上程序，将输出：
+
+```text
+error: currently, it is not possible to export two private declarations with the same name
+```

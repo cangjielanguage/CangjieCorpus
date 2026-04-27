@@ -1,5 +1,11 @@
 # UIContext
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供UI上下文相关功能。
 
 ## 导入模块
@@ -37,7 +43,7 @@ public func animateTo(value: AnimateParam, event: VoidCallback): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |value|[AnimateParam](./cj-common-types.md#class-animateparam)|是|-|动画参数。|
-|event|[VoidCallback](./cj-common-types.md#type-VoidCallback)|是|-|动画执行的回调函数。|
+|event|[VoidCallback](./cj-common-types.md#type-voidcallback)|是|-|动画执行的回调函数。|
 
 ### func createAnimator(AnimatorOptions)
 
@@ -45,7 +51,7 @@ public func animateTo(value: AnimateParam, event: VoidCallback): Unit
 public func createAnimator(options: AnimatorOptions): AnimatorResult
 ```
 
-**功能：** 创建animator动画结果对象（AnimatorResult）
+**功能：** 创建animator动画结果对象（AnimatorResult）。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 

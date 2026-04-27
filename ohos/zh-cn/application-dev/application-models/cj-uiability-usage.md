@@ -1,5 +1,11 @@
 # UIAbility组件基本用法
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 [UIAbility](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)组件的基本用法包括：指定UIAbility的启动页面以及获取uiability的上下文信息[UIAbilityContext](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)。
 
 ## 指定UIAbility的启动页面
@@ -27,7 +33,7 @@ class MainAbility <: UIAbility {
 
 ## 获取UIAbility的上下文信息
 
-[UIAbility](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)类拥有自身的上下文信息，该信息为[UIAbilityContext](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)类的实例，[UIAbilityContext](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)类拥有abilityInfo、currentHapModuleInfo等属性。通过AbilityContext可以获取Ability的相关配置信息，如包代码路径、Bundle名称、Ability名称和应用程序需要的环境状态等属性信息，以及可以获取操作Ability实例的方法（如[startAbility()](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#func-startabilitywant)、[terminateSelf()](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#func-terminateself)等）。
+[UIAbility](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiability)类拥有自身的上下文信息，该信息为[UIAbilityContext](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)类的实例，[UIAbilityContext](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)类拥有abilityInfo、currentHapModuleInfo等属性。通过AbilityContext可以获取Ability的相关配置信息，如包代码路径、Bundle名称、Ability名称和应用程序需要的环境状态等属性信息，以及可以获取操作Ability实例的方法（如[startAbility()](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#func-startabilitywant-startoptions)、[terminateSelf()](../reference/AbilityKit/cj-apis-app-ability-ui_ability.md#func-terminateself)等）。
 
 - 在UIAbility中可以通过`this.context`获取UIAbility实例的上下文信息。
 
@@ -113,7 +119,7 @@ class MainAbility <: UIAbility {
   <!-- compile -->
 
   ```cangjie
-  internal import kit.PerformanceAnalysisKit.Hilog
+  import kit.PerformanceAnalysisKit.Hilog
   import kit.AbilityKit.{UIAbilityContext, Want}
 
   func getContext(): UIAbilityContext {

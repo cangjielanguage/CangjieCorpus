@@ -1,5 +1,11 @@
 # 应用文件分享
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 应用文件分享是应用之间通过分享URI（Uniform Resource Identifier）进行文件共享的过程。
 
 ## 通过拉起文件处理类应用进行文件分享(startAbility)

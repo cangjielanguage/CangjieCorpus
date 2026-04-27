@@ -1,5 +1,11 @@
 # Blank
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 空白填充组件，在容器主轴方向上，空白填充组件具有自动填充容器空余部分的能力。仅当父组件为[Row](./cj-row-column-stack-row.md)/[Column](./cj-row-column-stack-column.md)/[Flex](./cj-row-column-stack-flex.md)时生效。
 
 ## 导入模块

@@ -1,10 +1,12 @@
-# 获取密钥属性（仓颉）
+# 获取密钥属性
 
-HUKS提供了接口供业务获取指定密钥的相关属性。在获取指定密钥属性前，需要确保已在HUKS中生成或导入持久化存储的密钥。
-
+<!--Del-->
 > **说明：**
 >
-> 轻量级设备不支持获取密钥属性功能。
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+HUKS提供了接口供业务获取指定密钥的相关属性。在获取指定密钥属性前，需要确保已在HUKS中生成或导入持久化存储的密钥。
 
 ## 开发步骤
 
@@ -20,9 +22,6 @@ HUKS提供了接口供业务获取指定密钥的相关属性。在获取指定�
 
 ```cangjie
 import kit.PerformanceAnalysisKit.Hilog
-import kit.BasicServicesKit.*
-import kit.CoreFileKit.*
-import kit.AbilityKit.*
 import kit.UniversalKeystoreKit.*
 
 func loggerInfo(str: String) {

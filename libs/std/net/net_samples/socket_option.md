@@ -9,17 +9,17 @@ import std.net.*
 import std.time.*
 import std.sync.*
 
-main (){
-   try (tcpSocket = TcpSocket("127.0.0.1", 80)) {
-      tcpSocket.readTimeout = Duration.second
-      tcpSocket.noDelay = false
-      tcpSocket.linger = Duration.minute
+main() {
+    try (tcpSocket = TcpSocket("127.0.0.1", 80)) {
+        tcpSocket.readTimeout = Duration.second
+        tcpSocket.noDelay = false
+        tcpSocket.linger = Duration.minute
 
-      tcpSocket.keepAlive = SocketKeepAliveConfig(
-         interval: Duration.second * 7,
-         count: 15
-      )
-   }
+        tcpSocket.keepAlive = SocketKeepAliveConfig(
+            interval: Duration.second * 7,
+            count: 15
+        )
+    }
 }
 ```
 

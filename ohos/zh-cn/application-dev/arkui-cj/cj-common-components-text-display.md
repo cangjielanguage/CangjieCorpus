@@ -1,5 +1,11 @@
 # 文本显示（Text/Span）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Text是文本组件，通常用于展示用户视图，如显示文章的文字内容，支持绑定自定义文本选择菜单，用户可根据需要选择不同功能，同时还可以扩展自定义菜单，丰富可用选项，进一步提升用户体验。Span则用于呈现显示行内文本。具体用法请参见[Text](../reference/arkui-cj/cj-text-input-text.md)和[Span](../reference/arkui-cj/cj-text-input-span.md)组件的使用说明。
 
 ## 创建文本
@@ -482,7 +488,7 @@ Text可通过以下两种方式来创建：
 
 ## 添加事件
 
-Text组件可以添加通用事件，可以绑定[onClick](../reference/arkui-cj/cj-universal-event-click.md#func-onclickclickevent---unit)、[onTouch](../reference/arkui-cj/cj-universal-event-touch.md#func-ontouchtouchevent-unit)等事件来响应操作。
+Text组件可以添加通用事件，可以绑定[onClick](../reference/arkui-cj/cj-universal-event-click.md#func-onclickclickevent---unit)、[onTouch](../reference/arkui-cj/cj-universal-event-touch.md#func-ontouchtouchevent---unit)等事件来响应操作。
 
  <!-- run -->
 

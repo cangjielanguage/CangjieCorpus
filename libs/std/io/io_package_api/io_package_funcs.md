@@ -69,6 +69,7 @@ public func readString<T>(from: T): String where T <: InputStream & Seekable
 异常：
 
 - [ContentFormatException](io_package_exceptions.md#class-contentformatexception) - 当剩余字节不符合 UTF-8 编码规则时，抛出异常。
+
 示例：
 
 <!-- verify -->
@@ -131,11 +132,10 @@ public unsafe func readStringUnchecked<T>(from: T): String where T <: InputStrea
 
 示例：
 
-<!-- run -->
+<!-- verify -->
 ```cangjie
 import std.io.ByteBuffer
 import std.io.readStringUnchecked
-import std.io.ContentFormatException
 
 main(): Unit {
     let inputStream = ByteBuffer()
@@ -149,17 +149,13 @@ main(): Unit {
         let result = readStringUnchecked(inputStream)
         println("Read string: ${result}")
     }
-
-    /* 向输入流写入一个不合法的 UTF-8 字符串 */
-    let sourceDataError: Array<UInt8> = [0xC3, 0x28, 0x48, 0x65, 0x6C, 0x6C, 0x6F]
-    inputStream.write(sourceDataError)
-
-    /* 使用 readString 函数读取输入流中的所有剩余内容，由于 inputStream 的第一位是不合法的UTF-8字符，所以将产生不可期的输出字符 */
-    unsafe {
-        let result = readStringUnchecked(inputStream)
-        println("Read string: ${result}")
-    }
 }
+```
+
+运行结果：
+
+```text
+Read string: Hello, World!
 ```
 
 ## func readToEnd\<T>(T) where T <: InputStream & Seekable

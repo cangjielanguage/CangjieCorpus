@@ -16,6 +16,39 @@ public func assertParentContext(parentMacroName: String): Unit
 
 - parentMacroName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 待检查的外层宏调用的名字。
 
+示例：
+
+<!-- compile.error -macro0-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+
+public macro outer(input: Tokens): Tokens {
+    return input
+}
+
+public macro inner(input: Tokens): Tokens {
+    assertParentContext("NotOuter")
+    return input
+}
+```
+
+<!-- compile.error -macro0-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+// 展开时报错
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
 ## func cangjieLex(String)
 
 ```cangjie
@@ -37,6 +70,29 @@ public func cangjieLex(code: String): Tokens
 - [IllegalMemoryException](../../core/core_package_api/core_package_exceptions.md#class-illegalmemoryexception) - 当申请内存失败时，抛出异常。
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 当输入的 code 无法被正确的解析为 [Tokens](ast_package_classes.md#class-tokens) 时，抛出异常。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main(): Unit {
+    // 用 cangjieLex 将输入字符串转化为 Tokens
+    let tokens = cangjieLex("let x = 10")
+
+    // 输出得到的 Tokens
+    println("tokens.size: ${tokens.size}")
+    println("tokens.toString(): ${tokens.toString()}")
+}
+```
+
+运行结果：
+
+```text
+tokens.size: 4
+tokens.toString(): let x = 10
+```
+
 ## func cangjieLex(String, Bool)
 
 ```cangjie
@@ -56,8 +112,32 @@ public func cangjieLex(code: String, truncated: Bool): Tokens
 
 异常：
 
-- [IllegalMemoryException](../../core/core_package_api/core_package_exceptions.md#class-illegalmemoryexception) - 当申请内存失败，抛出异常时，抛出异常。
+- [IllegalMemoryException](../../core/core_package_api/core_package_exceptions.md#class-illegalmemoryexception) - 当申请内存失败时，抛出异常。
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 当输入的 code 无法被正确的解析为 [Tokens](ast_package_classes.md#class-tokens) 时，抛出异常。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main(): Unit {
+    // 用 cangjieLex 将输入字符串转化为 Tokens
+    let tokens = cangjieLex("let x = 10", false)
+
+    // 输出得到的 Tokens
+    // 末尾相较于传入 true 得到的 Tokens 多了一个 Token(END)
+    println("tokens.size: ${tokens.size}")
+    println("tokens.toString(): ${tokens.toString()}")
+}
+```
+
+运行结果：
+
+```text
+tokens.size: 5
+tokens.toString(): let x = 10
+```
 
 ## func compareTokens(Tokens, Tokens)
 
@@ -65,7 +145,7 @@ public func cangjieLex(code: String, truncated: Bool): Tokens
 public func compareTokens(tokens1: Tokens, tokens2: Tokens): Bool
 ```
 
-功能：用于比较两个[Tokens](ast_package_classes.md#class-tokens)是否一致。
+功能：用于比较两个 [Tokens](ast_package_classes.md#class-tokens) 是否一致。
 
 参数：
 
@@ -75,6 +155,30 @@ public func compareTokens(tokens1: Tokens, tokens2: Tokens): Bool
 返回值：
 
 - [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 如果两个 [Tokens](ast_package_classes.md#class-tokens) 内容相同（除了换行符、结束符和位置信息）则返回 `true`。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main(): Unit {
+    // 创建 Tokens
+    let tokens0 = quote(let x = 10)
+    let tokens1 = quote(let x = 10)
+    let tokens2 = quote(let x = 20)
+
+    println("compareTokens(tokens0, tokens1): ${compareTokens(tokens0, tokens1)}")
+    println("compareTokens(tokens0, tokens2): ${compareTokens(tokens0, tokens2)}")
+}
+```
+
+运行结果：
+
+```text
+compareTokens(tokens0, tokens1): true
+compareTokens(tokens0, tokens2): false
+```
 
 ## func diagReport(DiagReportLevel, Tokens, String, String)
 
@@ -107,6 +211,44 @@ public func diagReport(level: DiagReportLevel, tokens: Tokens, message: String, 
     - 输入的 [Tokens](ast_package_classes.md#class-tokens) 中首位 [Token](ast_package_structs.md#struct-token) 位置早于末位 [Token](ast_package_structs.md#struct-token) 位置；
     - 输入的 [Tokens](ast_package_classes.md#class-tokens) 中的 [Token](ast_package_structs.md#struct-token) 位置范围超出了宏调用的位置范围。
 
+示例：
+
+<!-- compile.error -macro1 -->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package macro_definition
+
+import std.ast.*
+
+public macro testDef(input: Tokens): Tokens {
+    for (i in 0..input.size) {
+        if (input[i].kind == IDENTIFIER) {
+            diagReport(DiagReportLevel.ERROR, input[i..(i + 1)], "This expression is not allowed to contain identifier",
+                "Here is the illegal identifier")
+        }
+    }
+    return input
+}
+```
+
+<!-- compile.error -macro1 -->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+package macro_calling
+
+import std.ast.*
+import macro_definition.*
+
+main(): Int64 {
+    let a = @testDef(1)
+    let b = @testDef(a)
+    let c = @testDef(1 + a)
+    return 0
+}
+```
+
 ## func getChildMessages(String)
 
 ```cangjie
@@ -127,6 +269,54 @@ public func getChildMessages(children:String): ArrayList<MacroMessage>
 
 - [ArrayList](../../collection/collection_package_api/collection_package_class.md#class-arraylistt)\<[MacroMessage](ast_package_classes.md#class-macromessage)> - 返回一组 [MacroMessage](ast_package_classes.md#class-macromessage) 的对象。
 
+示例：
+
+<!-- run -macro2-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+import std.collection.ArrayList
+
+public macro inner(input: Tokens) {
+    // 向外层宏发送 Int64 类型消息
+    setItem("Int64FromInner", 100)
+    return input
+}
+
+public macro outer(input: Tokens) {
+    // 获取名为 inner 的内层宏所发送的全部消息
+    let messages = getChildMessages("inner")
+
+    // 获取内层宏发送的 Int64 消息
+    let msg = messages[0].getInt64("Int64FromInner")
+
+    // 输出 Int64 类型消息
+    println("Message from inner-macro: ${msg}")
+    return input
+}
+```
+
+<!-- run -macro2-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+Message from inner-macro: 100
+```
+
 ## func getTokenKind(UInt16)
 
 ```cangjie
@@ -145,7 +335,27 @@ public func getTokenKind(no: UInt16): TokenKind
 
 > **注意：**
 >
-> 当前 [SINGLE_QUOTED_STRING_LITERAL](ast_package_enums.md#SINGLE_QUOTED_STRING_LITERAL) 和 [STRING_LITERAL](ast_package_enums.md#STRING_LITERAL) 共用序号 147，输入序号 147 只能获得 [STRING_LITERAL](ast_package_enums.md#STRING_LITERAL)，其他 [TokenKind](ast_package_enums.md#enum-tokenkind) 无共用序号情况。
+> 当前 [SINGLE_QUOTED_STRING_LITERAL](ast_package_enums.md#single_quoted_string_literal) 和 [STRING_LITERAL](ast_package_enums.md#string_literal) 共用序号 147，输入序号 147 只能获得 [STRING_LITERAL](ast_package_enums.md#string_literal)，其他 [TokenKind](ast_package_enums.md#enum-tokenkind) 无共用序号情况。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main(): Unit {
+    // 获取 TokenKind
+    let kind = getTokenKind(21)
+
+    println("kind.toString(): ${kind.toString()}")
+}
+```
+
+运行结果：
+
+```text
+kind.toString(): NOT
+```
 
 ## func insideParentContext(String)
 
@@ -168,6 +378,45 @@ public func insideParentContext(parentMacroName: String): Bool
 
 - [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 若当前宏嵌套在特定的宏调用内，返回 true。
 
+示例：
+
+<!-- run -macro3-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+
+public macro inner(input: Tokens) {
+    println("insideParentContext(\"outer\"): ${insideParentContext("outer")}")
+    return input
+}
+
+public macro outer(input: Tokens) {
+    
+    return input
+}
+```
+
+<!-- run -macro3-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+insideParentContext("outer"): true
+```
+
 ## func parseDecl(Tokens, String)
 
 ```cangjie
@@ -185,7 +434,7 @@ public func parseDecl(input: Tokens, astKind!: String = ""): Decl
 - input: [Tokens](ast_package_classes.md#class-tokens) - 待解析源码的词法单元。
 - astKind!: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 用于指定解析特定的节点类型，有效支持的值为：`PrimaryCtorDecl` 和 `PropMemberDecl`。
     - `PrimaryCtorDecl`: 解析主构造函数。
-    - `PropMemberDecl`: 解析prop声明的getter和setter函数。
+    - `PropMemberDecl`: 解析 prop 声明的 getter 和 setter 函数。
 
 返回值：
 
@@ -197,60 +446,64 @@ public func parseDecl(input: Tokens, astKind!: String = ""): Decl
 
 示例：
 
-1. 以下代码展示 `astKind` 设为 `PropMemberDecl` 的案例。在这个参数下，可以使用 `parseDecl` 解析 `prop` 的getter和setter函数，解析结果为 `FuncDecl` 类型（如果不设置`astKind`，则会因为没有 `func` 关键字而无法解析）。
+1. 以下代码展示 `astKind` 设为 `PropMemberDecl` 的案例。在这个参数下，可以使用 `parseDecl` 解析 `prop` 的 getter 和 setter 函数，解析结果为 `FuncDecl` 类型（如果不设置`astKind`，则会因为没有 `func` 关键字而无法解析）。
 
-    ```cangjie
-    import std.ast.*
+<!-- verify -->
 
-    main() {
-        let getter = quote( get() { _val } )
-        let setter = quote( set(v) { _val = v })
-        let getterDecl = parseDecl(getter, astKind: "PropMemberDecl")
-        let setterDecl = parseDecl(setter, astKind: "PropMemberDecl")
-        println((getterDecl as FuncDecl).getOrThrow().block.toTokens())
-        println((setterDecl as FuncDecl).getOrThrow().block.toTokens())
-    }
-    ```
+```cangjie
+import std.ast.*
 
-    运行结果：
+main() {
+    let getter = quote( get() { _val } )
+    let setter = quote( set(v) { _val = v })
+    let getterDecl = parseDecl(getter, astKind: "PropMemberDecl")
+    let setterDecl = parseDecl(setter, astKind: "PropMemberDecl")
+    println((getterDecl as FuncDecl).getOrThrow().block.toTokens())
+    println((setterDecl as FuncDecl).getOrThrow().block.toTokens())
+}
+```
 
-    ```text
-    {
-        _val
-    }
+运行结果：
 
-    {
-        _val = v
-    }
-    ```
+```text
+{
+    _val
+}
 
-2. 以下代码展示 `astKind` 设为 `PrimaryCtorDecl` 的案例。在这个参数下，可以使用 `parseDecl` 解析主构造函数节点，解析结果为 `PrimaryCtorDecl` 类型（如果不设置 `astKind`，则会因为没有 `func` 关键字而无法解析）。
+{
+    _val = v
+}
+```
 
-    ```cangjie
-    import std.ast.*
+1. 以下代码展示 `astKind` 设为 `PrimaryCtorDecl` 的案例。在这个参数下，可以使用 `parseDecl` 解析主构造函数节点，解析结果为 `PrimaryCtorDecl` 类型（如果不设置 `astKind`，则会因为没有 `func` 关键字而无法解析）。
 
-    main() {
-        let ctor = quote(
-            Point(var x: Int32, var y: Int32) {}
-        )
-        let ctorDecl = parseDecl(ctor, astKind: "PrimaryCtorDecl")
-        println(ctorDecl is PrimaryCtorDecl)
-        println(ctorDecl.toTokens())
-    }
-    ```
+<!-- verify -->
 
-    运行结果：
+```cangjie
+import std.ast.*
 
-    ```text
-    true
-    Point(var x: Int32, var y: Int32) {
-    }
-    ```
+main() {
+    let ctor = quote(
+        Point(var x: Int32, var y: Int32) {}
+    )
+    let ctorDecl = parseDecl(ctor, astKind: "PrimaryCtorDecl")
+    println(ctorDecl is PrimaryCtorDecl)
+    println(ctorDecl.toTokens())
+}
+```
+
+运行结果：
+
+```text
+true
+Point(var x: Int32, var y: Int32) {
+}
+```
 
 ## func parseDeclFragment(Tokens, Int64)
 
 ```cangjie
-public func parseDeclFragment(input: Tokens, startFrom !: Int64 = 0): (Decl, Int64)
+public func parseDeclFragment(input: Tokens, startFrom!: Int64 = 0): (Decl, Int64)
 ```
 
 功能：用于解析一组词法单元，获取一个 [Decl](ast_package_classes.md#class-decl) 类型的节点和继续解析节点的索引。
@@ -272,6 +525,40 @@ public func parseDeclFragment(input: Tokens, startFrom !: Int64 = 0): (Decl, Int
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Decl](ast_package_classes.md#class-decl) 节点时，抛出异常，异常中包含报错提示信息。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let tokens = quote(
+        func f0(x: Int64) { return x + 1 }
+        func f1(x: Int64) { return x + 2 }
+    )
+    let (funcDecl0, mid) = parseDeclFragment(tokens)
+
+    // 从第一个 FuncDecl 后继续
+    let (funcDecl1, _) = parseDeclFragment(tokens, startFrom: mid)
+    
+    // 输出两次 parse 的结果
+    println("funcDecl0.toTokens(): ${funcDecl0.toTokens()}")
+    println("funcDecl1.toTokens(): ${funcDecl1.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+funcDecl0.toTokens(): func f0(x: Int64) {
+    return x + 1
+}
+
+funcDecl1.toTokens(): func f1(x: Int64) {
+    return x + 2
+}
+```
+
 ## func parseExpr(Tokens)
 
 ```cangjie
@@ -292,10 +579,32 @@ public func parseExpr(input: Tokens): Expr
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Expr](ast_package_classes.md#class-expr) 节点时，抛出异常，异常中包含报错提示信息。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let expr = parseExpr(quote(a + b))
+    
+    // 输出 parse 的结果
+    println("expr is BinaryExpr: ${expr is BinaryExpr}")
+    println("expr.toTokens(): ${expr.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+expr is BinaryExpr: true
+expr.toTokens(): a + b
+```
+
 ## func parseExprFragment(Tokens, Int64)
 
 ```cangjie
-public func parseExprFragment(input: Tokens, startFrom !: Int64 = 0): (Expr, Int64)
+public func parseExprFragment(input: Tokens, startFrom!: Int64 = 0): (Expr, Int64)
 ```
 
 功能：用于解析一组词法单元，获取一个 [Expr](ast_package_classes.md#class-expr) 类型的节点和继续解析节点的索引。
@@ -312,6 +621,32 @@ public func parseExprFragment(input: Tokens, startFrom !: Int64 = 0): (Expr, Int
 异常：
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Expr](ast_package_classes.md#class-expr) 节点时，抛出异常，异常中包含报错提示信息。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let tokens = quote(a + b, c + d)
+    let (binaryExpr0, mid) = parseExprFragment(tokens)
+
+    // 跳过逗号
+    let (binaryExpr1, _) = parseExprFragment(tokens, startFrom: mid + 1)
+    
+    // 输出两次 parse 的结果
+    println("binaryExpr0.toTokens(): ${binaryExpr0.toTokens()}")
+    println("binaryExpr1.toTokens(): ${binaryExpr1.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+binaryExpr0.toTokens(): a + b
+binaryExpr1.toTokens(): c + d
+```
 
 ## func parsePattern(Tokens)
 
@@ -333,10 +668,32 @@ public func parsePattern(input: Tokens): Pattern
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Pattern](ast_package_classes.md#class-pattern) 节点时，抛出异常，异常中包含报错提示信息。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let pattern = parsePattern(quote((A(a), B(b))))
+    
+    // 输出 parse 的结果
+    println("pattern is TuplePattern: ${pattern is TuplePattern}")
+    println("pattern.toTokens(): ${pattern.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+pattern is TuplePattern: true
+pattern.toTokens(): (A(a), B(b))
+```
+
 ## func parsePatternFragment(Tokens, Int64)
 
 ```cangjie
-public func parsePatternFragment(input: Tokens, startFrom !: Int64 = 0): (Pattern, Int64)
+public func parsePatternFragment(input: Tokens, startFrom!: Int64 = 0): (Pattern, Int64)
 ```
 
 功能：用于解析一组词法单元，获取一个 [Pattern](ast_package_classes.md#class-pattern) 类型的节点和继续解析节点的索引。
@@ -354,6 +711,31 @@ public func parsePatternFragment(input: Tokens, startFrom !: Int64 = 0): (Patter
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Pattern](ast_package_classes.md#class-pattern) 节点时，抛出异常，异常中包含报错提示信息。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let tokens = quote(case A(a) => println(a))
+    let (enumPattern, mid) = parsePatternFragment(tokens, startFrom: 1)
+    
+    // 输出 parse 的结果
+    println("enumPattern is EnumPattern: ${enumPattern is EnumPattern}")
+    println("enumPattern.toTokens(): ${enumPattern.toTokens()}")
+    println("mid: ${mid}")
+}
+```
+
+运行结果：
+
+```text
+enumPattern is EnumPattern: true
+enumPattern.toTokens(): A(a)
+mid: 5
+```
+
 ## func parseProgram(Tokens)
 
 ```cangjie
@@ -361,6 +743,10 @@ public func parseProgram(input: Tokens): Program
 ```
 
 功能：用于解析单个仓颉文件的源码，获取一个 [Program](ast_package_classes.md#class-program) 类型的节点。
+
+> **注意：**
+>
+> 仓颉宏展开后的代码不允许出现包的声明和包导入语句。使用该函数时，若输入的源码中包含包声明或包导入语句，输出的 [Program](ast_package_classes.md#class-program) 节点中也会包含(在 [packageHeader](ast_package_classes.md#prop-packageheader) 和 [importLists](ast_package_classes.md#prop-importlists) 属性中)，因此不能在宏函数中直接将该节点返回为 [Tokens](ast_package_classes.md#class-tokens)。
 
 参数：
 
@@ -373,6 +759,45 @@ public func parseProgram(input: Tokens): Program
 异常：
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [Program](ast_package_classes.md#class-program) 节点时，抛出异常，异常中包含报错提示信息。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    // 利用将一个 Program 转化为 Tokens
+    let tokens = quote(
+        macro package m
+
+        internal import std.ast.*
+        internal import base as mybase
+
+        public macro M(input: Tokens) {
+            return input
+        }
+    )
+    let program = parseProgram(tokens)
+    let importLists = program.importLists
+
+    // 输出 parse 的结果
+    println("importLists.size: ${importLists.size}")
+    println("program.toTokens(): ${program.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+importLists.size: 2
+program.toTokens(): macro package m
+internal import std.ast.*
+internal import base as mybase
+public macro M(input: Tokens) {
+    return input
+}
+```
 
 ## func parseType(Tokens)
 
@@ -394,10 +819,32 @@ public func parseType(input: Tokens): TypeNode
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [TypeNode](ast_package_classes.md#class-typenode) 节点时，抛出异常。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let refType = parseType(quote(MyClass))
+    
+    // 输出 parse 的结果
+    println("refType is RefType: ${refType is RefType}")
+    println("refType.toTokens(): ${refType.toTokens()}")
+}
+```
+
+运行结果：
+
+```text
+refType is RefType: true
+refType.toTokens(): MyClass
+```
+
 ## func parseTypeFragment(Tokens, Int64)
 
 ```cangjie
-public func parseTypeFragment(input: Tokens, startFrom !: Int64 = 0): (TypeNode, Int64)
+public func parseTypeFragment(input: Tokens, startFrom!: Int64 = 0): (TypeNode, Int64)
 ```
 
 功能：用于解析一组词法单元，获取一个 [TypeNode](ast_package_classes.md#class-typenode) 类型的节点和继续解析节点的索引。
@@ -414,6 +861,31 @@ public func parseTypeFragment(input: Tokens, startFrom !: Int64 = 0): (TypeNode,
 异常：
 
 - [ParseASTException](ast_package_exceptions.md#class-parseastexception) - 当输入的 [Tokens](ast_package_classes.md#class-tokens) 类型无法构造为 [TypeNode](ast_package_classes.md#class-typenode) 节点时，抛出异常。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import std.ast.*
+
+main() {
+    let tokens = quote(a is Int64)
+    let (primitiveType, mid) = parseTypeFragment(tokens, startFrom: 2)
+    
+    // 输出 parse 的结果
+    println("primitiveType is PrimitiveType: ${primitiveType is PrimitiveType}")
+    println("primitiveType.toTokens(): ${primitiveType.toTokens()}")
+    println("mid: ${mid}")
+}
+```
+
+运行结果：
+
+```text
+primitiveType is PrimitiveType: true
+primitiveType.toTokens(): Int64
+mid: 3
+```
 
 ## func setItem(String, Bool)
 
@@ -432,6 +904,58 @@ public func setItem(key: String, value: Bool): Unit
 - key: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 发送的关键字，用于检索信息。
 - value: [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) - 要发送的 [Bool](../../core/core_package_api/core_package_intrinsics.md#bool) 类型的信息。
 
+示例：
+
+<!-- run -macro4-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+import std.collection.ArrayList
+
+public macro inner(input: Tokens) {
+    // 向外层宏发送 Bool 类型消息
+    setItem("TrueFromInner", true)
+    setItem("FalseFromInner", false)
+    return input
+}
+
+public macro outer(input: Tokens) {
+    // 获取名为 inner 的内层宏所发送的全部消息
+    let messages = getChildMessages("inner")
+
+    // 获取内层宏发送的 Bool 消息
+    let msg0 = messages[0].getBool("TrueFromInner")
+    let msg1 = messages[0].getBool("FalseFromInner")
+
+    // 输出两个 Bool 类型消息
+    println("Message 0 from inner-macro: ${msg0}")
+    println("Message 1 from inner-macro: ${msg1}")
+    return input
+}
+```
+
+<!-- run -macro4-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+Message 0 from inner-macro: true
+Message 1 from inner-macro: false
+```
+
 ## func setItem(String, Int64)
 
 ```cangjie
@@ -448,6 +972,54 @@ public func setItem(key: String, value: Int64): Unit
 
 - key: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 发送的关键字，用于检索信息。
 - value: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 要发送的 [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) 类型的信息。
+
+示例：
+
+<!-- run -macro5-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+import std.collection.ArrayList
+
+public macro inner(input: Tokens) {
+    // 向外层宏发送 Int64 类型消息
+    setItem("Int64FromInner", 100)
+    return input
+}
+
+public macro outer(input: Tokens) {
+    // 获取名为 inner 的内层宏所发送的全部消息
+    let messages = getChildMessages("inner")
+
+    // 获取内层宏发送的 Int64 消息
+    let msg = messages[0].getInt64("Int64FromInner")
+
+    // 输出 Int64 类型消息
+    println("Message from inner-macro: ${msg}")
+    return input
+}
+```
+
+<!-- run -macro5-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+Message from inner-macro: 100
+```
 
 ## func setItem(String, String)
 
@@ -466,6 +1038,54 @@ public func setItem(key: String, value: String): Unit
 - key: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 发送的关键字，用于检索信息。
 - value: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 要发送的 [String](../../core/core_package_api/core_package_structs.md#struct-string) 类型的信息。
 
+示例：
+
+<!-- run -macro6-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+import std.collection.ArrayList
+
+public macro inner(input: Tokens) {
+    // 向外层宏发送 String 类型消息
+    setItem("StringFromInner", "message")
+    return input
+}
+
+public macro outer(input: Tokens) {
+    // 获取名为 inner 的内层宏所发送的全部消息
+    let messages = getChildMessages("inner")
+
+    // 获取内层宏发送的 String 消息
+    let msg = messages[0].getString("StringFromInner")
+
+    // 输出 String 类型消息
+    println("Message from inner-macro: ${msg}")
+    return input
+}
+```
+
+<!-- run -macro6-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+Message from inner-macro: message
+```
+
 ## func setItem(String, Tokens)
 
 ```cangjie
@@ -482,3 +1102,51 @@ public func setItem(key: String, value: Tokens): Unit
 
 - key: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 发送的关键字，用于检索信息。
 - value: [Tokens](ast_package_classes.md#class-tokens) - 要发送的 [Tokens](ast_package_classes.md#class-tokens) 类型的信息。
+
+示例：
+
+<!-- run -macro7-->
+<!-- cfg="--compile-macro" -->
+```cangjie
+// 宏定义
+macro package M
+
+import std.ast.*
+import std.collection.ArrayList
+
+public macro inner(input: Tokens) {
+    // 向外层宏发送 Tokens 类型消息
+    setItem("TokensFromInner", quote(1 + 1))
+    return input
+}
+
+public macro outer(input: Tokens) {
+    // 获取名为 inner 的内层宏所发送的全部消息
+    let messages = getChildMessages("inner")
+
+    // 获取内层宏发送的 Tokens 消息
+    let msg = messages[0].getTokens("TokensFromInner")
+
+    // 输出 Tokens 类型消息
+    println("Message from inner-macro: ${msg}")
+    return input
+}
+```
+
+<!-- run -macro7-->
+<!-- cfg="--debug-macro" -->
+```cangjie
+// 宏调用
+import M.*
+
+@outer(@inner(var a = 1))
+
+main() {
+}
+```
+
+运行结果：
+
+```text
+Message from inner-macro: 1 + 1
+```

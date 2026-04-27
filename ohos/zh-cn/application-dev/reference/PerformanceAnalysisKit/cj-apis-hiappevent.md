@@ -1,6 +1,12 @@
 # ohos.hiviewdfx.hi_app_event（应用事件打点）
 
-hi_app_event模块提供应用打点和事件订阅能力，包括事件存储、事件订阅、事件清理、打点配置等功能。HiAppEvent将应用运行过程中触发的事件信息统一归纳到[AppEventInfo](#class-appeventinfo)中，并将事件分为系统事件和应用事件两类。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+hi_app_event模块提供应用打点和事件订阅能力，包括事件存储、事件订阅、事件清理、打点配置等功能。[HiAppEvent](#class-hiappevent)将应用运行过程中触发的事件信息统一归纳到[AppEventInfo](#class-appeventinfo)中，并将事件分为系统事件和应用事件两类。
 
 系统事件来源于系统服务，是系统预先定义的事件，这类事件信息中的事件参数对象params包含的字段已由各系统事件定义，具体字段含义在各系统事件指南的介绍中。
 
@@ -60,7 +66,7 @@ public var domain: String
 public var eventTypes: Array<EventType>
 ```
 
-**功能：** 需要订阅的事件类型集合。默认不进行过滤。
+**功能：** 需要订阅的事件类型集合。
 
 **类型：** Array\<[EventType](#enum-eventtype)>
 
@@ -76,7 +82,7 @@ public var eventTypes: Array<EventType>
 public var names: Array<String>
 ```
 
-**功能：** 需要订阅的事件名称集合。默认不进行过滤。
+**功能：** 需要订阅的事件名称集合。
 
 **类型：** Array\<String>
 
@@ -501,7 +507,7 @@ public class AppEventReportConfig {
 public var domain: String
 ```
 
-**功能：** 事件领域。默认为空字符串，事件领域名称支持数字、字母、下划线字符，需要以字母开头且不能以下划线结尾，长度非空且不超过32个字符。
+**功能：** 事件领域。事件领域名称支持数字、字母、下划线字符，需要以字母开头且不能以下划线结尾，长度非空且不超过32个字符。
 
 **类型：** String
 
@@ -517,7 +523,7 @@ public var domain: String
 public var isRealTime: Bool
 ```
 
-**功能：** 是否实时上报事件。默认值为false，配置值为true表示实时上报事件，false表示不实时上报事件。
+**功能：** 是否实时上报事件。配置值为true表示实时上报事件，false表示不实时上报事件。
 
 **类型：** Bool
 
@@ -533,7 +539,7 @@ public var isRealTime: Bool
 public var name: String
 ```
 
-**功能：** 事件名称。默认为空字符串，首字符必须为字母字符或$字符，中间字符必须为数字字符、字母字符或下划线字符，结尾字符必须为数字字符或字母字符，长度非空且不超过48个字符。
+**功能：** 事件名称。首字符必须为字母字符或$字符，中间字符必须为数字字符、字母字符或下划线字符，结尾字符必须为数字字符或字母字符，长度非空且不超过48个字符。
 
 **类型：** String
 
@@ -585,7 +591,7 @@ public class ConfigOption {
 public var disable: Bool
 ```
 
-**功能：** 打点功能开关，默认值为false。true：关闭打点功能，false：开启打点功能。
+**功能：** 打点功能开关。true：关闭打点功能，false：开启打点功能。
 
 **类型：** Bool
 
@@ -601,7 +607,7 @@ public var disable: Bool
 public var maxStorage: String
 ```
 
-**功能：** 打点数据存放目录的配额大小，默认值为“10M”。建议配额大小不超过10M，配额过大可能会影响接口效率。
+**功能：** 打点数据存放目录的配额大小。建议配额大小不超过10M，配额过大可能会影响接口效率。
 
 在目录大小超出配额后，下次打点会触发对目录的清理操作：按从旧到新的顺序逐个删除打点数据文件，直到目录大小不超出配额时结束。
 
@@ -635,8 +641,8 @@ public init(disable!: Bool = false, maxStorage!: String = "10M")
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|disable|Bool|否|false|打点功能开关|
-|maxStorage|String|否|"10M"|打点数据存放目录的配额大小，默认值为“10M”。建议配额大小不超过10M，配额过大可能会影响接口效率。|
+|disable|Bool|否|false|**命名参数。** 打点功能开关。|
+|maxStorage|String|否|"10M"|**命名参数。** 打点数据存放目录的配额大小，默认值为“10M”。建议配额大小不超过10M，配额过大可能会影响接口效率。|
 
 ## class Domain
 
@@ -1226,7 +1232,7 @@ public static func setUserId(name: String, value: String): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |name|String|是|-|用户ID的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。|
-|value|String|是|-|用户ID的值。长度不超过256，当值为null或空字符串时，则清除用户ID。|
+|value|String|是|-|用户ID的值。长度不超过256，当值为空字符串时，则清除用户ID。|
 
 **示例：**
 
@@ -1262,7 +1268,7 @@ public static func setUserProperty(name: String, value: String): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |name|String|是|-|用户属性的key。只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。|
-|value|String|是|-|用户属性的值。长度不超过1024，当值为null或空字符串时，则清除用户属性。|
+|value|String|是|-|用户属性的值。长度不超过1024，当值为空字符串时，则清除用户属性。|
 
 **示例：**
 
@@ -1434,7 +1440,7 @@ public class Processor {
 public var appId: String
 ```
 
-**功能：** 应用id，默认为空字符串。传入字符串长度不能超过8KB，超过时会被置为默认值。
+**功能：** 应用id。传入字符串长度不能超过8KB，超过时会被置为空字符串。
 
 **类型：** String
 
@@ -1450,7 +1456,7 @@ public var appId: String
 public var batchReport: Int32
 ```
 
-**功能：** 事件上报阈值，当事件条数达到阈值时上报事件。传入数值必须大于0且小于1000，不在数值范围内会被置为默认值0，不进行上报。
+**功能：** 事件上报阈值，当事件条数达到阈值时上报事件。传入数值必须大于0且小于1000，不在数值范围内会被置为0，不进行上报。
 
 **类型：** Int32
 
@@ -1466,7 +1472,7 @@ public var batchReport: Int32
 public var debugMode: Bool
 ```
 
-**功能：** 是否开启debug模式，默认值为false。配置值为true表示开启debug模式，false表示不开启debug模式。
+**功能：** 是否开启debug模式。配置值为true表示开启debug模式，false表示不开启debug模式。
 
 **类型：** Bool
 
@@ -1482,7 +1488,7 @@ public var debugMode: Bool
 public var eventConfigs: Array<AppEventReportConfig>
 ```
 
-**功能：** 数据处理者配置id。传入数值必须大于或等于0，小于0时会被置为默认值0。传入的值大于0时，与数据处理者的名称name共同唯一标识数据处理者。
+**功能：** 数据处理者配置id。传入数值必须大于或等于0，小于0时会被置为0。传入的值大于0时，与数据处理者的名称name共同唯一标识数据处理者。
 
 **类型：** Array\<[AppEventReportConfig](#class-appeventreportconfig)>
 
@@ -1498,7 +1504,7 @@ public var eventConfigs: Array<AppEventReportConfig>
 public var name: String
 ```
 
-**功能：**  数据处理者的名称。名称只能包含大小写字母、数字、下划线和 $，不能以数字开头，长度非空且不超过256个字符。
+**功能：** 数据处理者的名称。名称只能包含大小写字母、数字、下划线和$，不能以数字开头，长度非空且不超过256个字符。
 
 **类型：** String
 
@@ -1514,7 +1520,7 @@ public var name: String
 public var onBackgroundReport: Bool
 ```
 
-**功能：** 当应用程序进入后台时是否上报事件，默认值为false。配置值为true表示上报事件，false表示不上报事件。
+**功能：** 当应用程序进入后台时是否上报事件。配置值为true表示上报事件，false表示不上报事件。
 
 **类型：** Bool
 
@@ -1530,7 +1536,7 @@ public var onBackgroundReport: Bool
 public var onStartReport: Bool
 ```
 
-**功能：** 数据处理者在启动时是否上报事件，默认值为false。配置值为true表示上报事件，false表示不上报事件。
+**功能：** 数据处理者在启动时是否上报事件。配置值为true表示上报事件，false表示不上报事件。
 
 **类型：** Bool
 
@@ -1546,7 +1552,7 @@ public var onStartReport: Bool
 public var periodReport: Int32
 ```
 
-**功能：** 事件定时上报时间周期，单位为秒。传入数值必须大于或等于0，小于0时会被置为默认值0，不进行定时上报。
+**功能：** 事件定时上报时间周期，单位为秒。传入数值必须大于或等于0，小于0时会被置为0，不进行定时上报。
 
 **类型：** Int32
 
@@ -1562,7 +1568,7 @@ public var periodReport: Int32
 public var routeInfo: String
 ```
 
-**功能：** 服务器位置信息，默认为空字符串。传入字符串长度不能超过8KB，超过时会被置为默认值。
+**功能：** 服务器位置信息。传入字符串长度不能超过8KB，超过时会被置为空字符串。
 
 **类型：** String
 
@@ -1578,7 +1584,7 @@ public var routeInfo: String
 public var userIds: Array<String>
 ```
 
-**功能：** 数据处理者可以上报的用户ID的name数组。name对应[setUserId](#static-func-setuseridstring-string)接口的name参数。默认为空数组。
+**功能：** 数据处理者可以上报的用户ID的name数组。name对应[setUserId](#static-func-setuseridstring-string)接口的name参数。
 
 **类型：** Array\<String>
 
@@ -1594,7 +1600,7 @@ public var userIds: Array<String>
 public var userProperties: Array<String>
 ```
 
-**功能：** 数据处理者可以上报的用户属性的name数组。name对应[setUserProperty](#static-func-setuserpropertystring-string)接口的name参数。默认为空数组。
+**功能：** 数据处理者可以上报的用户属性的name数组。name对应[setUserProperty](#static-func-setuserpropertystring-string)接口的name参数。
 
 **类型：** Array\<String>
 
@@ -1658,7 +1664,7 @@ public class TriggerCondition {
 public var row: Int32
 ```
 
-**功能：** 满足触发回调的事件总数量，正整数。默认值0，不触发回调。传入负值时，会被置为默认值。
+**功能：** 满足触发回调的事件总数量，正整数。设置为0，不触发回调。传入负值时，会被置为0。
 
 **类型：** Int32
 
@@ -1674,7 +1680,7 @@ public var row: Int32
 public var size: Int32
 ```
 
-**功能：** 满足触发回调的事件总大小，正整数，单位为byte。默认值0，不触发回调。传入负值时，会被置为默认值。
+**功能：** 满足触发回调的事件总大小，正整数，单位为byte。设置为0，不触发回调。传入负值时，会被置为0。
 
 **类型：** Int32
 
@@ -1690,7 +1696,7 @@ public var size: Int32
 public var timeOut: Int32
 ```
 
-**功能：** 满足触发回调的超时时长，正整数，单位为30s。默认值0，不触发回调。传入负值时，会被置为默认值。
+**功能：** 满足触发回调的超时时长，正整数，单位为30s。设置为0，不触发回调。传入负值时，会被置为0。
 
 **类型：** Int32
 
@@ -1748,7 +1754,7 @@ public class Watcher {
 public var appEventFilters: Array<AppEventFilter>
 ```
 
-**功能：** 订阅过滤条件，在需要对订阅事件进行过滤时传入。默认不过滤事件。
+**功能：** 订阅过滤条件，在需要对订阅事件进行过滤时传入。
 
 **类型：** Array\<[AppEventFilter](#class-appeventfilter)>
 
@@ -1822,7 +1828,7 @@ holder：订阅数据持有者对象，可以通过其对订阅事件进行处�
 public var triggerCondition: TriggerCondition
 ```
 
-**功能：** 订阅回调触发条件，需要与回调函数onTrigger一同传入才会生效。默认不触发。
+**功能：** 订阅回调触发条件，需要与回调函数onTrigger一同传入才会生效。
 
 **类型：** [TriggerCondition](#class-triggercondition)
 

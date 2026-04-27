@@ -19,8 +19,7 @@ main(): Unit {
     /* 读取 ByteBuffer 中数据，验证结果 */
     for (i in 0..size) {
         match (streamArr[i]) {
-            case v: ByteBuffer =>
-                println(String.fromUtf8(readToEnd(v)))
+            case v: ByteBuffer => println(String.fromUtf8(readToEnd(v)))
             case _ => throw Exception()
         }
     }

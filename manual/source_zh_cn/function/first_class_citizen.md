@@ -50,7 +50,7 @@ func hello(): Unit {
 
 ## 函数类型的类型参数
 
-可以为函数类型标记显式的类型参数名，下面例子中的 `name` 和 `price` 就是 `类型参数名`。
+可以为函数类型标记显式的类型参数名，下面例子中的 `name` 和 `price` 就是类型参数名。
 
 <!-- run -->
 
@@ -67,6 +67,8 @@ main() {
 ```
 
 另外对于一个函数类型，只允许统一写类型参数名，或者统一不写类型参数名，不能交替存在。
+
+<!-- compile.error -->
 
 ```cangjie
 let handler: (name: String, Int64) -> Int64   // Error
@@ -123,7 +125,9 @@ let f: (Int64, Int64) -> Int64 = add
 
 上述示例中，函数名是 `add`，其类型为 `(Int64, Int64) -> Int64`。变量 `f` 的类型与 `add` 类型相同，`add` 被用来初始化 `f`。
 
-若一个函数在当前作用域中被重载（见[函数重载](./function_overloading.md)）了，那么直接使用该函数名作为表达式可能产生歧义，如果产生歧义编译器会报错，例如：
+若一个函数在当前作用域中被重载（参见[函数重载](./function_overloading.md)），那么直接使用该函数名作为表达式可能产生歧义，如果产生歧义编译器会报错，例如：
+
+<!-- compile.error -->
 
 ```cangjie
 func add(i: Int64, j: Int64) {

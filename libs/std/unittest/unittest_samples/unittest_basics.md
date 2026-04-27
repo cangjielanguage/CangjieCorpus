@@ -11,8 +11,9 @@
 每个测试用例都是测试类内部的一个函数。
 上一节中的示例，相同的测试可以改写为如下所示的测试类：
 
+<!-- run -->
 ```cangjie
-func add(a:Int64, b:Int64) {
+func add(a: Int64, b: Int64) {
     a + b
 }
 @Test
@@ -52,8 +53,9 @@ cjpm test success
 断言有两种：`@Expect` 和 `@Assert` 。
 创建一个错误的测试来说明两者的区别：
 
+<!-- run -->
 ```cangjie
-func add(a:Int64, b:Int64) {
+func add(a: Int64, b: Int64) {
     a + b
 }
 @Test
@@ -74,8 +76,9 @@ func testAddIncorrect() {
 
 在这个例子中，用 `@Assert` 替换 `@Expect` 不会有什么变化。添加一个检查项后，再次运行：
 
+<!-- run -->
 ```cangjie
-func add(a:Int64, b:Int64) {
+func add(a: Int64, b: Int64) {
     a + b
 }
 @Test
@@ -102,8 +105,9 @@ func testAddIncorrect() {
 可以在输出中看到这两个检查的结果。
 但是，如果用 `@Assert` 替换 `@Expect` ：
 
+<!-- run -->
 ```cangjie
-func add(a:Int64, b:Int64) {
+func add(a: Int64, b: Int64) {
     a + b
 }
 @Test
@@ -145,9 +149,16 @@ func testAddIncorrectAssert() {
 失败断言可以让测试用例运行失败。`@Fail` 采用快速失败机制，运行至此断言则整个测试用例失败，后续断言都不再检查。`@FailExpect` 运行至此断言会使得用例失败，但后续断言依然会被检查。
 前述宏的参数为描述失败原因的字符串，`@Fail` 的返回值类型为 `Nothing` ， `@FailExpect` 的类型为 `Unit` 。
 
-举例来说:
+举例来说：
 
+<!-- run -->
 ```cangjie
+import std.time.*
+
+func generateRandomEven(): Int64 {
+    return DateTime.now().nanosecond
+}
+
 @Test
 func validate_even_number_generator() {
     let even = generateRandomEven()
@@ -169,24 +180,25 @@ func validate_even_number_generator() {
 运行至此断言当预期抛出的异常类型未被抛出时，用例将失败，`@AssertThrows` 将不再进行后续检查，而 `@ExpectThrows` 将继续检查。
 前述宏的属性入参为预期抛出的异常类型列表，通过 `|` 隔离不同异常类型，当没有属性入参时预期抛出异常基类 `Exception` 。入参为预期抛出异常的表达式或代码块。
 
-举例来说:
+举例来说：
 
+<!-- code_no_check -->
 ```cangjie
 // No.1
 @AssertThrows(throw Exception())
-
+ 
 // 语义上与 No.1 相同
 @AssertThrows[Exception](throw Exception())
-
+ 
 @AssertThrows[IllegalStateException | NoneValueException](random.seed = 42u64)
-
+ 
 @ExpectThrows[OutOfMemoryError](foo())
-
+ 
 @ExpectThrows({
     foo()
     boo()
 })
-
+ 
 @ExpectThrows[OutOfMemoryError]({
     for (i in list) {
         foo(i)
@@ -198,12 +210,14 @@ func validate_even_number_generator() {
 
 如果指定的异常不超过一个，则返回类型与预期抛出的异常类型相同：
 
+<!-- code_no_check -->
 ```cangjie
 let e: NoneValueException = @AssertThrows[NoneValueException](foo())
 ```
 
 如果指定的异常超过一个，则返回类型为预期抛出的异常类型的最小公共超类型：
 
+<!-- code_no_check -->
 ```cangjie
 // A <: C
 // B <: C
@@ -214,19 +228,77 @@ let e: C = @AssertThrows[A | B](foo())
 
 `@ExpectThrows` 检查失败后也会继续执行，在指定的异常不超过一个时，它返回的类型是 Option\<T>，其中 `T` 是预期的异常类型：
 
+<!-- code_no_check -->
 ```cangjie
 let e: ?NoneValueException = @ExpectThrows[NoneValueException](foo())
 ```
 
 在指定的异常超过一个时，返回的类型是 ?Exception ：
 
+<!-- code_no_check -->
 ```cangjie
 let e: ?Exception = @ExpectThrows[NoneValueException | IllegalMemoryException](foo())
 ```
 
+#### 近似相等
+
+一些被比较的参数类型可能不能准确计算，例如浮点数，此时我们可以使用近似计算获得其是否相等的结果。
+
+本包提供了近似计算相关的接口 [NearEquatable](../unittest_package_api/unittest_package_interfaces.md#interface-nearequatablect-d) ，对于需要判断近似相等的类型，可通过扩展该接口，并在 `@Assert` `@Expect` `@PowerAssert` 等宏中使用 delta 参数，使能近似相等功能。
+
+近似相等的计算逻辑如下：
+
+```text
+a <= b with delta <=> a.isNear(b, delta) || a <= b
+a >= b with delta <=> a.isNear(b, delta) || a >= b
+a != b with delta <=> !a.isNear(b, delta)
+a == b with delta <=> a.isNear(b, delta)
+a < b with delta <=> !a.isNear(b, delta) && a < b
+a > b with delta <=> !a.isNear(b, delta) && a > b
+```
+
+对于浮点类型，还提供了相对的 delta 结构 [RelativeDelta](../unittest_package_api/unittest_package_structs.md#struct-relativedeltat):
+
+示例如下：
+
+<!-- run -->
+```cangjie
+// 基础类型
+import std.math.*
+
+@Test
+func test1() {
+    @Expect(1.0, 1.001, delta: 0.001) // 解糖为 @Expect(1.0 == 1.001, delta: 0.001)
+    @Expect(1.0 == 1.001, delta: 0.001)
+    @Expect(1.0 != 1.901, delta: RelativeDelta(absolute: 0.001, relative: 0.02))
+    @Expect(1.0 < 1.401, delta: 0.001)
+}
+// 自定义类型
+class Point <: NearEquatable<Point, Point> {
+    Point(let x: Int64, let y: Int64) { }
+
+    public func isNear(obj: Point, delta!: Point): Bool {
+        if (x < 0 || y < 0) {
+            throw IllegalArgumentException("Coordinates must be non negative. Actual: ($x, $y)")
+        }
+        abs(x - obj.x) < delta.x && abs(y - obj.y) < delta.y
+    }
+}
+
+// 测试用例
+@Test
+func test() {
+    let p1 = Point(1, 5)
+    let p2 = Point(5, 5)
+    let delta = Point(1, 1)
+
+    @Expect(p1 != p2, delta: delta)
+}
+```
+
 ## 测试生命周期
 
-测试用例之间有时可以共享创建或清理代码。测试框架支持4个生命周期步骤，分别通过相应的宏来设置。只能为 `@Test` 测试类指定生命周期步骤，不能为 `@Test` 顶层函数指定生命周期步骤。
+测试用例之间有时可以共享创建或清理代码。测试框架支持 4 个生命周期步骤，分别通过相应的宏来设置。只能为 `@Test` 测试类指定生命周期步骤，不能为 `@Test` 顶层函数指定生命周期步骤。
 
 | 宏 | 生命周期 |
 | ---  | --- |
@@ -237,6 +309,7 @@ let e: ?Exception = @ExpectThrows[NoneValueException | IllegalMemoryException](f
 
 这些宏必须配置在 `@Test` 测试类的成员或静态函数上。`@BeforeAll` 和 `@AfterAll` 函数不能声明任何参数。 `@BeforeEach` 和 `@AfterEach` 函数可以声明一个 `String` 类型的参数（或者不声明参数）。
 
+<!-- run -->
 ```cangjie
 @Test
 class FooTest {
@@ -272,6 +345,7 @@ class FooTest {
 
 `@BeforeEach` 和 `@AfterEach` 可以访问正在创建或删除的测试用例，只需要在相应的函数中指定一个 `String` 类型的参数即可。
 
+<!-- run -->
 ```cangjie
 @Test
 class Foo {
@@ -291,7 +365,7 @@ class Foo {
 }
 ```
 
-为[参数化测试](./unittest_parameterized_tests.md#参数化测试)或参数化性能测试配置生命周期时，注意标识为 **before each** 或 **after each** 的步骤仅在执行测试用例或基准之前或之后为其所有参数执行一次。也就是说，从生命周期的角度看，使用不同参数执行多次的测试主体会被视为单个测试用例。
+为[参数化测试](./unittest_parameterized_tests.md)或参数化性能测试配置生命周期时，注意标识为 **before each** 或 **after each** 的步骤仅在执行测试用例或基准之前或之后为其所有参数执行一次。也就是说，从生命周期的角度看，使用不同参数执行多次的测试主体会被视为单个测试用例。
 
 如果参数化测试的每个参数都需要单独创建清理，需要将相应的代码配置在测试用例主体本身中。此外，还可以访问参数本身。
 
@@ -329,7 +403,7 @@ class Foo {
 1. `--filter=*` 匹配所有测试类
 2. `--filter=*.*` 匹配所有测试类所有测试用例（结果和*相同）
 3. `--filter=*.*Test,*.*case*` 匹配所有测试类中以 Test 结尾的用例，或者所有测试类中名字中带有 case 的测试用例
-4. `--filter=MyTest*.*Test,*.*case*,-*.*myTest` 匹配所有 MyTest 开头测试类中以 Test 结尾的用例，或者名字中带有 case的用例，或者名字中不带有 myTest 的测试用例
+4. `--filter=MyTest*.*Test,*.*case*,-*.*myTest` 匹配所有 MyTest 开头测试类中以 Test 结尾的用例，或者名字中带有 case 的用例，或者名字中不带有 myTest 的测试用例。
 
 ### `--dry-run`
 
@@ -344,9 +418,11 @@ class Foo {
 3. `--include-tags=Unittest+Smoke` 运行所有的带有 `@Tag[Unittest]`和`@Tag[Smoke]` 的测试用例。
 4. `--include-tags=Unittest+Smoke+JiraTask3271,Backend` 运行所有的带有 `@Tag[Backend]`和/或`@Tag[Unittest, Smoke, JiraTask3271]` 的测试用例。
 
-> ** 注意 **
+> **注意：**
+>
 > 如果没有符合指定标签类别的测试用例。框架将不运行任何内容。
-> 可以与 `exclude-tags` 结合。详见 [`--exclude-tags`](./unittest_basics.md#--exclude-tags)。
+>
+> 可以与 `exclude-tags` 结合。详见 [`--exclude-tags`](#--exclude-tags)。
 
 ### `--exclude-tags`
 
@@ -357,8 +433,15 @@ class Foo {
 3. `--exclude-tags=Unittest+Smoke` 运行所有的**未**同时带有 `@Tag[Unittest]`、`@Tag[Smoke]` 的测试用例。
 4. `--include-tags=Unittest --exclude-tags=Smoke` 运行所有带有 `@Tag[Unittest]` 但不带有 `@Tag[Smoke]` 的测试用例。
 
-> ** 注意 **
+> **注意：**
+>
 > `exclude-tags` 的优先级高于 `include-tags`，如果用例被排除，则必定不会被执行，例如 `--include-tags=Unittest+Smoke --exclude-tags=Smoke` 则带有 `@Tag[Smoke]` 的用例不会被执行。
+
+### `--show-tags`
+
+若需要在测试报告中显示测试用例中 [`@Tag`](../../unittest_testmacro/unittest_testmacro_package_api/unittest_testmacro_package_macros.md#tag-宏) 的信息，可使用 `--show-tags` 运行选项。
+
+在 `--dry-run` 模式下，并且测试报告为 `xml` 格式时，将始终包含 `Tag` 信息。
 
 ### `--timeout-each=timeout`
 
@@ -368,10 +451,10 @@ class Foo {
     `number ('millis' | 's' | 'm' | 'h')`
 例如： `10s`, `9millis` 等。
 
-- millis : 毫秒
-- s : 秒
-- m : 分钟
-- h : 小时
+- millis: 毫秒
+- s: 秒
+- m: 分钟
+- h: 小时
 
 ### `--parallel`
 
@@ -380,7 +463,7 @@ class Foo {
 程序静态初始化可能会发生多次。
 不允许与 `--bench` 同时使用。由于性能用例对底层资源敏感，用例是否并行执行，将影响性能用例的结果，因此禁止与 `--bench` 同时使用。
 
-- `--parallel=<BOOL>` `<BOOL>` 可为 `true` 或 `false` ，指定为 `true` 时，测试类可被并行运行，并行进程个数将受运行系统上的CPU核数控制。另外，`--parallel` 可省略 `=true` 。
+- `--parallel=<BOOL>` `<BOOL>` 可为 `true` 或 `false` ，指定为 `true` 时，测试类可被并行运行，并行进程个数将受运行系统上的 CPU 核数控制。另外，`--parallel` 可省略 `=true` 。
 - `--parallel=nCores` 指定了并行的测试进程个数应该等于可用的 CPU 核数。
 - `--parallel=NUMBER` 指定了并行的测试进程个数值。该数值应该为正整数。
 - `--parallel=NUMBERnCores` 指定了并行的测试进程个数值为可用的 CPU 核数的指定数值倍。该数值应该为正数（支持浮点数或整数）。
@@ -412,9 +495,9 @@ class Foo {
 
 基准测试支持：
 
-- `csv`: csv 报告中有统计数据。
-- `csv-raw`: csv-raw 报告中只有批次的原始测量值。
-- `html`: html 报告包含显示的所有结果和各种统计属性。可以在任何浏览器中查看。对于每个基准测试函数，html 报告包含：
+- `csv`：csv 报告中有统计数据。
+- `csv-raw`： csv-raw 报告中只有批次的原始测量值。
+- `html`：html 报告包含显示的所有结果和各种统计属性。可以在任何浏览器中查看。对于每个基准测试函数，html 报告包含：
     - 每个基准参数的摘要。
     - 执行环境相关信息的汇总，例如硬件信息、操作系统信息、编译信息、环境变量。
     - 每个基准参数的选项卡包含详细的统计信息。
@@ -422,7 +505,7 @@ class Foo {
     - 原始测量值及其线性回归图。
     - 具有统计属性（例如平均值、中位数、R 平方、框架开销、标准差）及其置信区间的表。
 
-基准测试的默认使用的格式为:
+基准测试的默认使用的格式为：
 
 - `csv`
 

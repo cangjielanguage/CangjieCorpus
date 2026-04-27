@@ -1,5 +1,11 @@
 # ohos.file.photo_access_helper（相册管理模块）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 photo_access_helper模块提供相册管理模块能力，包括创建相册以及访问、修改相册中的媒体数据信息等。
 
 ## 导入模块
@@ -53,7 +59,7 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
+  | 13900020 | Invalid argument. |
 
 **示例：**
 
@@ -226,9 +232,9 @@ public func getAssets(options: FetchOptions): PhotoAssetResult
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -323,9 +329,9 @@ public func commitModify(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -395,8 +401,8 @@ public func getAllObjects(): Array<Album>
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -405,22 +411,55 @@ public func getAllObjects(): Array<Album>
 ```cangjie
 // index.cj
 
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.ArkData.*
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
-try {
-    let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    let phAccessHelper = getPhotoAccessHelper(ctx)
-    let predicates = DataSharePredicates()
-    predicates.equalTo('album_name', StringValue('test1'))
-    let fetchOptions: FetchOptions = FetchOptions([], predicates)
-    let fetchResult = phAccessHelper.getAlbums(AlbumType.User,
-        AlbumSubtype.UserGeneric, options: fetchOptions)
-    let albums = fetchResult.getAllObjects()
-} catch (e: BusinessException) {
-    Hilog.info(0, "test", "${e.message}")
+@Component
+class ChildItem {
+    @Prop var item: String
+    func build() {
+        Text(this.item)
+        .fontSize(50)
+    }
+}
+
+func getAlbumList(): Array<Album> {
+    try {
+        // Global 的实现请参见本文"使用说明"小节
+        let ctx = Global.abilityContext
+        let phAccessHelper = getPhotoAccessHelper(ctx)
+        let predicates = DataSharePredicates()
+        predicates.equalTo('album_name', StringValue('test1'))
+        let fetchOptions: FetchOptions = FetchOptions([], predicates)
+        let fetchResult = phAccessHelper.getAlbums(AlbumType.User,
+            AlbumSubtype.UserGeneric, options: fetchOptions)
+        // 获取文件检索结果中的所有相册资产，后续可以遍历相册数组获取每一个相册的信息
+        let albums = fetchResult.getAllObjects()
+        return albums
+    } catch (e: BusinessException) {
+        Hilog.info(0, "test", "${e.message}")
+        throw e
+    }
+}
+
+@Entry
+@Component
+class EntryView {
+    @State
+    var albumList: Array<Album> = getAlbumList()
+
+    func build() {
+        Row {
+            Column {
+                ForEach(this.albumList, itemGeneratorFunc: {item: Album,idx:Int64 =>
+            ChildItem(item: item.albumUri)}, keyGeneratorFunc: {item: Album, idx: Int64 => return item.albumUri})
+            }.width(100.percent)
+        }.height(100.percent)
+    }
 }
 ```
 
@@ -448,8 +487,8 @@ public func getFirstObject(): Album
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -501,8 +540,8 @@ public func getLastObject(): Album
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -555,8 +594,8 @@ public func getNextObject(): Album
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -614,8 +653,8 @@ public func getObjectByPosition(index: Int32): Album
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -821,7 +860,7 @@ public var fetchColumns: Array<String>
 public var predicates: DataSharePredicates
 ```
 
-**功能：** 谓词查询，显示过滤条件。
+**功能：** 谓词查询，指定过滤条件。
 
 **类型：** [DataSharePredicates](../ArkData/cj-apis-data_share_predicates.md#class-datasharepredicates)
 
@@ -848,7 +887,7 @@ public init(fetchColumns: Array<String>, predicates: DataSharePredicates)
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |fetchColumns|Array\<String>|是|-| 检索条件，指定列名查询。|
-|predicates|[DataSharePredicates](../ArkData/cj-apis-data_share_predicates.md#class-datasharepredicates)|是|-| 谓词查询，显示过滤条件。|
+|predicates|[DataSharePredicates](../ArkData/cj-apis-data_share_predicates.md#class-datasharepredicates)|是|-| 谓词查询，指定过滤条件。|
 
 ## class FetchResult
 
@@ -880,8 +919,8 @@ public func close(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -931,8 +970,8 @@ public func getCount(): Int32
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -982,8 +1021,8 @@ public func isAfterLast(): Bool
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1051,7 +1090,7 @@ public init(album: Album)
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1103,8 +1142,8 @@ public func addAssets(assets: Array<PhotoAsset>): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1160,7 +1199,7 @@ public func getAlbum(): Album
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1169,23 +1208,57 @@ public func getAlbum(): Album
 ```cangjie
 // index.cj
 
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.ArkData.*
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
-try {
-    let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    let phAccessHelper = getPhotoAccessHelper(ctx)
-    let predicates = DataSharePredicates()
-    let fetchOptions: FetchOptions = FetchOptions([], predicates)
-    let fetchResult = phAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric,
-        options: fetchOptions)
-    let album = fetchResult.getFirstObject()
-    let albumChangeRequest = MediaAlbumChangeRequest(album)
-    var changeRequestAlbum = albumChangeRequest.getAlbum()
-} catch (e: BusinessException) {
-    Hilog.info(0, "test", "${e.message}")
+@Component
+class ChildItem {
+    @Prop var item: String
+    func build() {
+        Text(this.item)
+        .fontSize(50)
+    }
+}
+
+func getPhotoAssetList(): Array<PhotoAsset> {
+    try {
+        // Global 的实现请参见本文"使用说明"小节
+        let ctx = Global.abilityContext
+        let phAccessHelper = getPhotoAccessHelper(ctx)
+        let predicates = DataSharePredicates()
+        let fetchOptions: FetchOptions = FetchOptions([], predicates)
+        let albumList = phAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric,
+            options: fetchOptions)
+        let album = albumList.getFirstObject()
+        let albumChangeRequest = MediaAlbumChangeRequest(album)
+        // 获取当前相册变更请求中的相册，后续可以调用接口获取相册相关信息
+        let changeRequestAlbum = albumChangeRequest.getAlbum()
+        let fetchResult = changeRequestAlbum.getAssets(fetchOptions)
+        return fetchResult.getAllObjects()
+    } catch (e: BusinessException) {
+        Hilog.info(0, "test", "${e.message}")
+        throw e
+    }
+}
+
+@Entry
+@Component
+class EntryView {
+    @State
+    var albumList: Array<PhotoAsset> = getPhotoAssetList()
+
+    func build() {
+        Row {
+            Column {
+                ForEach(this.albumList, itemGeneratorFunc: {item: PhotoAsset,idx:Int64 =>
+            ChildItem(item: item.displayName)}, keyGeneratorFunc: {item: PhotoAsset, idx: Int64 => return item.displayName})
+            }.width(100.percent)
+        }.height(100.percent)
+    }
 }
 ```
 
@@ -1213,8 +1286,8 @@ public func removeAssets(assets: Array<PhotoAsset>): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1276,7 +1349,7 @@ public func setAlbumName(name: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1348,7 +1421,7 @@ public init(asset: PhotoAsset)
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1409,7 +1482,7 @@ public static func createAssetRequest(context: UIAbilityContext, photoType: Phot
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1468,7 +1541,7 @@ public static func createImageAssetRequest(context: UIAbilityContext, fileUri: S
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 13900002 | The file corresponding to the URI is not in the app sandbox. |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1527,7 +1600,7 @@ public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: S
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 13900002 | The file corresponding to the URI is not in the app sandbox. |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1579,9 +1652,9 @@ public static func deleteAssets(context: UIAbilityContext, assets: Array<PhotoAs
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
+  | 201 | Permission denied. |
   | 14000002 | The uri format is incorrect or does not exist. |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1635,9 +1708,9 @@ public static func deleteAssets(context: UIAbilityContext, assets: Array<String>
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
+  | 201 | Permission denied. |
   | 14000002 | The uri format is incorrect or does not exist. |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1691,8 +1764,8 @@ public func addResource(resourceType: ResourceType, fileUri: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1747,8 +1820,8 @@ public func addResource(resourceType: ResourceType, data: Array<Byte>): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1794,8 +1867,8 @@ public func discardCameraPhoto(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | Internal system error |
-  | 14000016 | Operation Not Support |
+  | 14000011 | Internal system error. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1850,7 +1923,7 @@ public func getAsset(): PhotoAsset
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -1906,9 +1979,9 @@ public func getWriteCacheHandler(): Int32
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 201 | Permission denied. |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -1917,21 +1990,47 @@ public func getWriteCacheHandler(): Int32
 ```cangjie
 // index.cj
 
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.CoreFileKit.*
+import kit.ImageKit.{createImageSource, PixelMap}
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
-try {
-    let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    let phAccessHelper = getPhotoAccessHelper(ctx)
-    let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(ctx,
-        PhotoType.Video, "mp4")
-    let fd = assetChangeRequest.getWriteCacheHandler()
-    FileIo.close(fd)
-    phAccessHelper.applyChanges(assetChangeRequest)
-} catch (e: BusinessException) {
-    Hilog.info(0, "test", "${e.message}")
+func getPixelMap(): PixelMap {
+    try {
+        // Global 的实现请参见本文"使用说明"小节
+        let ctx = Global.abilityContext
+        let phAccessHelper = getPhotoAccessHelper(ctx)
+        let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(ctx,
+            PhotoType.Image, "jpg")
+        // 获取临时文件写句柄，后续可以通过该句柄写入数据
+        let fd = assetChangeRequest.getWriteCacheHandler()
+        // write data into fd..
+        FileIo.write(fd, Array<UInt8>(96, repeat: 0))
+        let imageSource = createImageSource(fd)
+        let pixelMap = imageSource.createPixelMap()
+        FileIo.close(fd)
+        phAccessHelper.applyChanges(assetChangeRequest)
+        return pixelMap
+    } catch (e: BusinessException) {
+        Hilog.info(0, "test", "${e.message}")
+        throw e
+    }
+}
+
+@Entry
+@Component
+class EntryView {
+
+    func build() {
+        Row {
+            Column {
+                Image(getPixelMap())
+            }.width(100.percent)
+        }.height(100.percent)
+    }
 }
 ```
 
@@ -1953,8 +2052,8 @@ public func saveCameraPhoto(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
-  | 14000016 | Operation Not Support |
+  | 14000011 | System inner fail. |
+  | 14000016 | Operation Not Support. |
 
 **示例：**
 
@@ -2013,7 +2112,7 @@ title参数规格为：
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | System inner fail |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2081,8 +2180,8 @@ public func applyChanges(mediaChangeRequest: MediaChangeRequest): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2148,9 +2247,9 @@ public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2208,9 +2307,9 @@ public func getAssets(options: FetchOptions): PhotoAssetResult
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2268,8 +2367,8 @@ public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetR
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 14000011 | Internal system error |
+  | 201 | Permission denied. |
+  | 14000011 | Internal system error. |
 
 **示例：**
 
@@ -2301,7 +2400,7 @@ try {
 public func registerChange(uri: String, forChildUris: Bool, callback: Callback1Argument<ChangeData>): Unit
 ```
 
-**功能：** 注册对指定uri的监听，使用callback方式返回异步结果。
+**功能：** 注册对指定uri的监听，使用callback方式返回结果。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -2313,7 +2412,7 @@ public func registerChange(uri: String, forChildUris: Bool, callback: Callback1A
 |:---|:---|:---|:---|:---|
 |uri|String|是|-|PhotoAsset的uri, Album的uri或[DefaultChangeUri](#enum-defaultchangeuri)的值。|
 |forChildUris|Bool|是|-|是否模糊监听。uri为相册uri时：forChildUris为true，能监听到相册中文件的变化。如果是false，只能监听相册本身变化；uri为photoAsset时：forChildUris为true、false没有区别；uri为DefaultChangeUri时：forChildUris必须为true，如果为false将找不到该uri，收不到任何消息。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[ChangeData](#class-changedata)>|是|-|返回要监听的[ChangeData](#class-changedata)。注：uri可以注册多个不同的callback监听，[unregisterChange](#func-unregisterchangestring-callback1argumentchangedata)可以关闭该uri所有监听，也可以关闭指定callback的监听。。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[ChangeData](#class-changedata)>|是|-|返回要监听的[ChangeData](#class-changedata)。注：uri可以注册多个不同的callback监听，[unregisterChange](#func-unregisterchangestring-callback1argumentchangedata)可以关闭该uri所有监听，也可以关闭指定callback的监听。。|
 
 **异常：**
 
@@ -2321,8 +2420,8 @@ public func registerChange(uri: String, forChildUris: Bool, callback: Callback1A
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900012 | Permission denied |
-  | 13900020 | Invalid argument |
+  | 13900012 | Permission denied. |
+  | 13900020 | Invalid argument. |
 
 **示例：**
 
@@ -2386,8 +2485,8 @@ public func release(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2425,7 +2524,7 @@ public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationCo
 
 > **说明：**
 >
-> - 当传入uri为沙箱路径时，可正常保存图片/视频，但无界面预览。
+> 当传入uri为沙箱路径时，可正常保存图片/视频，但无界面预览。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -2437,7 +2536,7 @@ public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationCo
 |:---|:---|:---|:---|:---|
 |srcFileUris|Array\<String>|是|-|需保存到媒体库中的图片/视频文件对应的媒体库uri。<br>**注意：**<br>- 一次弹窗最多保存100张图片。<br>- 仅支持处理图片、视频uri。<br>- 不支持手动拼接的uri，需调用接口获取。|
 |photoCreationConfigs|Array\<[PhotoCreationConfig](#class-photocreationconfig)>|是|-|保存图片或视频到媒体库的配置，包括文件名等，与srcFileUris保持一一对应。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<Array\<String>>|是|-|回调函数，返回给应用的媒体库文件uri列表。uri已对应用授权，支持应用写入数据。如果生成uri异常，则返回批量创建错误码。<br>返回-3006表示不允许出现非法字符；返回-2004表示图片类型和后缀不符；返回-203表示文件操作异常。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<Array\<String>>|是|-|回调函数，返回给应用的媒体库文件uri列表。uri已对应用授权，支持应用写入数据。如果生成uri异常，则返回批量创建错误码。<br>返回-3006表示不允许出现非法字符；返回-2004表示图片类型和后缀不符；返回-203表示文件操作异常。|
 
 **异常：**
 
@@ -2445,7 +2544,7 @@ public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationCo
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | Internal system error |
+  | 14000011 | Internal system error. |
 
 **示例：**
 
@@ -2517,7 +2616,7 @@ public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeDa
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |uri|String|是|-|PhotoAsset的uri, Album的uri或[DefaultChangeUri](#enum-defaultchangeuri)的值。|
-|callback|?[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[ChangeData](#class-changedata)>|否|None|**命名参数。** 取消[registerChange](#func-registerchangestring-bool-callback1argumentchangedata)注册时的callback的监听，不填时，取消该uri的所有监听。注：off指定注册的callback后不会进入此回调。|
+|callback|?[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[ChangeData](#class-changedata)>|否|None|**命名参数。** 取消[registerChange](#func-registerchangestring-bool-callback1argumentchangedata)注册时的callback的监听，不填时，取消该uri的所有监听。注：off指定注册的callback后不会进入此回调。|
 
 **异常：**
 
@@ -2525,8 +2624,8 @@ public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeDa
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900012 | Permission denied |
-  | 13900020 | Invalid argument |
+  | 13900012 | Permission denied. |
+  | 13900020 | Invalid argument. |
 
 **示例：**
 
@@ -2655,10 +2754,10 @@ public func commitModify(): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 201 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000001 | Invalid display name |
-  | 14000011 | System inner fail |
+  | 201 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000001 | Invalid display name. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2719,7 +2818,7 @@ public func get(member: String): MemberType
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
+  | 13900020 | Invalid argument. |
   | 14000014 | The provided member must be a property name of PhotoKey. |
 
 **示例：**
@@ -2756,7 +2855,7 @@ public func getThumbnail(size!: ?Size = Size(256, 256)): PixelMap
 
 **功能：** 获取文件的缩略图，传入缩略图尺寸。
 
-**需要权限：** ohos.permission.WRITE_IMAGEVIDEO
+**需要权限：** ohos.permission.READ_IMAGEVIDEO
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -2780,9 +2879,9 @@ public func getThumbnail(size!: ?Size = Size(256, 256)): PixelMap
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900012 | Permission denied |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900012 | Permission denied. |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2835,7 +2934,7 @@ public func set(member: String, value: String): Unit
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
+  | 13900020 | Invalid argument. |
   | 14000014 | The provided member must be a property name of PhotoKey. |
 
 **示例：**
@@ -2905,8 +3004,8 @@ public func getAllObjects(): Array<PhotoAsset>
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2956,8 +3055,8 @@ public func getFirstObject(): PhotoAsset
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -3007,8 +3106,8 @@ public func getLastObject(): PhotoAsset
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -3040,7 +3139,7 @@ try {
 public func getNextObject(): PhotoAsset
 ```
 
-**功能：** 获获取文件检索结果中的下一个文件资产。此方法使用promise方式来异步返回。
+**功能：** 获取文件检索结果中的下一个文件资产。
 在调用此方法之前，必须使用[isAfterLast()](#func-isafterlast)来检查当前位置是否为最后一行。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
@@ -3059,8 +3158,8 @@ public func getNextObject(): PhotoAsset
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -3116,8 +3215,8 @@ public func getObjectByPosition(index: Int32): PhotoAsset
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900020 | Invalid argument |
-  | 14000011 | System inner fail |
+  | 13900020 | Invalid argument. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -3183,7 +3282,7 @@ public var fileNameExtension: String
 public var photoType: PhotoType
 ```
 
-**功能：** 创建的文件类型[PhotoType](#phototype)，IMAGE或者VIDEO。
+**功能：** 创建的文件类型[PhotoType](#phototype)，Image或者Video。
 
 **类型：** [PhotoType](#enum-phototype)
 
@@ -3199,7 +3298,7 @@ public var photoType: PhotoType
 public var subtype: PhotoSubtype
 ```
 
-**功能：** 图片或者视频的文件子类型[PhotoSubtype](#enum-photosubtype)，不传入时默认为DEFAULT。
+**功能：** 图片或者视频的文件子类型[PhotoSubtype](#enum-photosubtype)。
 
 **类型：** [PhotoSubtype](#enum-photosubtype)
 
@@ -3250,7 +3349,7 @@ public init(fileNameExtension: String, photoType: PhotoType, title!: String = ""
 |fileNameExtension|String|是|-|文件扩展名，例如'jpg'。|
 |photoType|[PhotoType](#enum-phototype)|是|-|创建的文件类型[PhotoType](#phototype)，IMAGE或者VIDEO。|
 |title|String|否|""| **命名参数。** 图片或者视频的标题，不传入时由系统生成。|
-|subtype|[PhotoSubtype](#enum-photosubtype)|否|Default| **命名参数。** 图片或者视频的文件子类型[PhotoSubtype](#enum-photosubtype)，不传入时默认为DEFAULT。|
+|subtype|[PhotoSubtype](#enum-photosubtype)|否|Default| **命名参数。** 图片或者视频的文件子类型[PhotoSubtype](#enum-photosubtype)，不传入时默认为Default。|
 
 ## class RequestOptions
 
@@ -3679,7 +3778,7 @@ public enum DefaultChangeUri <: ToString {
 DefaultAlbumUri
 ```
 
-**功能：** 默认相册的uri，与forSubUri{true}一起使用，将接收所有相册的更改通知。
+**功能：** 默认相册的uri，与forChildUris{true}一起使用，将接收所有相册的更改通知。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -3691,7 +3790,7 @@ DefaultAlbumUri
 DefaultPhotoUri
 ```
 
-**功能：** 默认PhotoAsset的uri，与forSubUri{true}一起使用，将接收所有PhotoAsset的更改通知。
+**功能：** 默认PhotoAsset的uri，与forChildUris{true}一起使用，将接收所有PhotoAsset的更改通知。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -4340,7 +4439,7 @@ DisplayName
 
 - 文件名字符串长度为1~255。
 
-- 文件主名中不允许出现的非法英文字符，包括：. .. \ / : * ? " ' ` < > \| { } [ ]。
+- 文件主名中不允许出现的非法英文字符，包括：. .. \ / : * ? " ' ` < > \| { } [ ]
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 

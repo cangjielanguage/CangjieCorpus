@@ -17,6 +17,8 @@ mock 框架处理 mock/spy 对象成员（或静态成员或顶层函数或顶�
 
 无论是否为单个成员定义了多个桩，每个桩都有自己的预期，需要满足这些[预期](./mock_framework_basics.md#预期)才能通过测试。
 
+<!-- code_no_check -->
+
 ```cangjie
 @On(foo.bar(1)).returns(1)
 @On(foo.bar(2)).returns(2)
@@ -28,6 +30,8 @@ foo.bar(2)
 ## 重新定义桩
 
 如果希望在测试中更改桩的行为，可以重新定义桩。
+
+<!-- code_no_check -->
 
 ```cangjie
 @On(service.request()).returns(testData)
@@ -43,13 +47,17 @@ foo.bar(2)
 
 示例：
 
+<!-- code_no_check -->
+
 ```cangjie
-@On(storage.get(_)).returns(None)                  // 1
+@On(storage.get(_)).returns(None) // 1
 @On(storage.get(TEST_ID)).returns(Some(TEST_DATA)) // 2
 ```
 
 示例中，`storage` 为除 `TEST_ID` 之外的所有参数返回 `None` 。
 如果从未使用 `TEST_ID` 参数调用 `get` ，则测试失败，因为桩 **2** 未使用。如果始终使用 `TEST_ID` 参数调用 `get` ，则测试失败，因为桩 **1** 未使用。这些限制确保测试代码是纯净的，让开发人员知道桩何时变为未使用。如果用例不需要此功能，则使用 `anyTimes()` 基数说明符来提升这些预期。
+
+<!-- code_no_check -->
 
 ```cangjie
 // 实现经常更改，但不希望测试中断
@@ -60,12 +68,16 @@ foo.bar(2)
 
 鉴于桩优先级是**从下到上**，以下用法都不正确。
 
+<!-- code_no_check -->
+
 ```cangjie
 @On(storage.get(TEST_ID)).returns(Some(TEST_DATA)) // 不正确，这个桩永远不会被触发
-@On(storage.get(_)).returns(None)                  // 在上面的桩始终会被隐藏
+@On(storage.get(_)).returns(None) // 在上面的桩始终会被隐藏
 ```
 
 您还可以使用预期来检查调用的参数。
+
+<!-- code_no_check -->
 
 ```cangjie
 let renderer = spy(Renderer())
@@ -82,45 +94,33 @@ let isVisible = { c: Component => c.isVisible }
 在同一测试类下的测试用例之间共享 mock 或 spy 对象时，可以将它们放在该类的实例变量中。
 
 桩声明中隐含了预期，因此更难处理共享桩。测试用例之间不能共享预期。
-只有2个位置可以声明桩：
+可以声明桩的位置：
 
 * 测试用例主体（无论是 `@Test` 函数还是`@Test`类中的`@TestCase`）：检查预期。
-* 在 `@Test` 类中的 `beforeAll` 中：在测试用例之间共享桩。这样的桩不能声明预期，预期也不会被检查。不允许使用基数说明符。只允许 `returns(value)`、`throws(exception)`、`fails()`、`callsOriginal()` 等*无状态*操作。可以将这些桩视为具有隐式 `anyTimes()` 基数。
+* 在 `@Test` 类的 `BeforeAll` 宏修饰的函数或者 `beforeAll` 函数中：在测试用例之间共享桩。这样的桩不能声明预期，预期也不会被检查。不允许使用基数说明符。只允许 `returns(value)`、`throws(exception)`、`fails()`、`callsOriginal()` 等*无状态*操作。可以将这些桩视为具有隐式 `anyTimes()` 基数。
+* 如果测试用例的预期相同，则可以在测试用例主体中提取和调用函数（测试类中非测试用例的成员函数）。
 
-如果测试用例的预期相同，则可以在测试用例主体中提取和调用函数（测试类中非测试用例的成员函数）。
+> **说明：**
+>
+> 不要在测试类构造函数中声明桩。否则可能导致框架运行内部错误。
 
-使用 `beforeAll` ：
+在测试用例主体（`@Test`类中的`@TestCase`）中声明桩的示例：
 
+<!--compile-testBar0-->
 ```cangjie
-@Test
-class TestFoo {
-    let foo = mock<Foo>()
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
 
-    // 单元测试框架会在执行测试用例之前调用以下内容
-    public func beforeAll(): Unit {
-        // 在所有测试用例之间共享默认行为
-        // 此桩无需在每个测试用例中使用
-        @On(foo.bar(_)).returns("default")
-    }
-
-    @TestCase
-    func testZero() {
-        @On(foo.bar(0)).returns("zero") // 本测试用例中需要使用此桩
-        foo.bar(0) // 返回 "zero"
-        foo.bar(1) // 返回 "default"
-    }
-
-    @TestCase
-    func testOne() {
-        @On(foo.bar(0)).returns("one")
-        foo.bar(0) // 返回 "one"
+class Foo {
+    public func bar(x: Int64): String {
+        match (x) {
+            case 0 => "zero"
+            case 1 => "one"
+            case _ => "default"
+        }
     }
 }
-```
 
-使用函数：
-
-```cangjie
 @Test
 class TestFoo {
     let foo = mock<Foo>()
@@ -149,22 +149,55 @@ class TestFoo {
 }
 ```
 
-> **不**要在测试类构造函数中声明桩。无法保证何时调用测试类构造函数。
+在 `@Test` 类的 `beforeAll` 函数中使用的示例：
+
+<!--compile-testBar1-->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+@Test
+class TestFoo2 {
+    let foo = mock<Foo>()
+
+    // 单元测试框架会在执行测试用例之前调用以下内容
+    @BeforeAll
+    public func beforeAll(): Unit {
+        // 在所有测试用例之间共享默认行为
+        // 此桩无需在每个测试用例中使用
+        @On(foo.bar(_)).returns("default")
+    }
+
+    @TestCase
+    func testZero() {
+        @On(foo.bar(0)).returns("zero") // 本测试用例中需要使用此桩
+        foo.bar(0) // 返回 "zero"
+        foo.bar(1) // 返回 "default"
+    }
+
+    @TestCase
+    func testOne() {
+        @On(foo.bar(0)).returns("one")
+        foo.bar(0) // 返回 "one"
+    }
+}
+```
 
 ## 捕获参数
-<!-- 链接至值侦听器API （自动生成的 API 手册） -->
+<!-- 链接至值监听器API （自动生成的 API 手册） -->
 
 mock 框架使用 `captor(ValueListener)` 参数匹配器**捕获**参数来检查传递到桩声明的实际参数。只要触发了桩，`ValueListener` 就会拦截相应的参数，并检查参数和/或添加验证参数。
 
 每次调用时，还可以使用 ValueListener.onEach 静态函数来验证某个条件。接受 lambda 后，触发桩时都会调用这个 lambda 。lambda 用于接收参数的值。
 
+<!--compile.onlyformat-->
 ```cangjie
 let renderer = spy(TextRenderer())
 let markUpRenderer = MarkupRenderer(renderer)
 
 // 创建验证器
-let validator = ValueListener.onEach { str: String =>
-    @Assert(str == "must be bold")
+let validator = ValueListener.onEach {
+    str: String => @Assert(str == "must be bold")
 }
 
 // 使用 'capture' 参数匹配器绑定参数到验证器
@@ -175,11 +208,13 @@ markUpRenderer.render("text inside tag <b>must be bold</b>")
 
 另外 `ValueListener` 还提供了 `allValues()` 和 `lastValue()` 函数来检查参数。模式如下：
 
+<!-- code_no_check -->
+
 ```cangjie
-//创建捕获器
+// 创建捕获器
 let captor = ValueListener<String>.new()
 
-//使用'capture'参数匹配器绑定参数到捕获器
+// 使用'capture'参数匹配器绑定参数到捕获器
 @On(renderer.renderBold(capture(captor))).callsOriginal()
 
 markUpRenderer.render("text inside tag <b>must be bold</b>")
@@ -191,6 +226,8 @@ let argumentValues = captor.allValues()
 `argThat` 匹配器是一个结合了参数过滤和捕获的重载函数。`argThat(listener, filter)` 接受 `ValueListener` 实例和 `filter` 谓词。`listener` 只收集通过 `filter` 检查的参数。
 
 <!-- 链接至argThat匹配器 （自动生成的 API 手册） -->
+
+<!-- code_no_check -->
 
 ```cangjie
 let filter = { arg: String => arg.contains("bold") }
@@ -217,6 +254,8 @@ markUpRenderer.render("text inside tag <b>must be bold</b>")
 
 如下示例为在测试用例之间共享匹配器：
 
+<!-- code_no_check -->
+
 ```cangjie
 @On(foo.bar(oddNumbers())).returns("Odd")
 @On(foo.bar(evenNumbers())).returns("Even")
@@ -227,26 +266,31 @@ foo.bar(1) // "Odd"
 由于每个匹配器都只是 `Matchers` 类的静态函数，因此可以使用**扩展**来自定义参数匹配器。新参数匹配器需要调用现有的（实例）。
 
 <!-- 链接至Matchers类 （自动生成的 API 手册） -->
-<!--compile-->
+<!-- compile -->
 ```cangjie
+import std.unittest.mock.*
+
 extend Matchers {
     static func evenNumbers(): TypedMatcher<Int> {
-        argThat { arg: Int => arg % 2 == 0}
+        argThat {arg: Int => arg % 2 == 0}
     }
 
     static func oddNumbers(): TypedMatcher<Int> {
-        argThat { arg: Int => arg % 2 == 1}
+        argThat {arg: Int => arg % 2 == 1}
     }
 }
 ```
 
 函数参数匹配器可以包含参数。
-<!--compile-->
+
+<!-- compile -->
 ```cangjie
+import std.unittest.mock.*
+
 extend Matchers {
     // 只接受Int参数。
     static func isDivisibleBy(n: Int): TypedMatcher<Int> {
-        argThat { arg: Int => arg % n == 0}
+        argThat {arg: Int => arg % n == 0}
     }
 }
 ```
@@ -261,6 +305,8 @@ setter 类似于返回 `Unit` 的函数。特殊操作 `doesNothing()` 可用于
 
 可变属性打桩的常用模式如下：
 
+<!-- code_no_check -->
+
 ```cangjie
 @On(foo.prop).returns("value")  // 配置getter
 @On(foo.prop = _).doesNothing() // 忽略setter调用
@@ -274,7 +320,11 @@ setter 类似于返回 `Unit` 的函数。特殊操作 `doesNothing()` 可用于
 
 <!-- 待办：链接至字段操作 -->
 
+<!-- compile -->
 ```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
 interface Foo {
     mut prop bar: String
 }
@@ -283,14 +333,14 @@ interface Foo {
 func test() {
     let foo = mock<Foo>()
     let syntheticField = SyntheticField.create(initialValue: "initial")
-    @On(foo.bar).getsField(syntheticField)     // 对属性的读取访问即为读取合成字段
+    @On(foo.bar).getsField(syntheticField) // 对属性的读取访问即为读取合成字段
     @On(foo.bar = _).setsField(syntheticField) // 为属性写入新值
 
     // 此时'bar'属性表现为字段
 }
 ```
 
-> **注意：**
+> **注意:**
 >
 > 如果多个测试用例之间共享 `SyntheticField` 对象，则该字段本身的值会在每个测试用例之前重置为 `initialValue` ，避免在测试之间共享可变状态。
 
@@ -315,6 +365,8 @@ public func mock<T>(modes: Array<StubMode>): T
 ### ReturnsDefaults 模式
 
 在此模式下，当成员的返回类型在如下表格中时，无需显式配置桩，即可调用。
+
+<!-- code_no_check -->
 
 ```cangjie
 let foo = mock<Foo>(ReturnsDefaults)
@@ -343,6 +395,8 @@ let foo = mock<Foo>(ReturnsDefaults)
 
 `SyntheticFields` 将通过 mock 框架为所有属性和字段隐式创建对应类型的合成字段。但是，这些字段只能在被赋值后读取。仅对可变属性和字段生效。
 
+<!-- code_no_check -->
+
 ```cangjie
 let foo = mock<Foo>(SyntheticFields)
 // can simply assign a value to a mutable property
@@ -353,6 +407,8 @@ foo.bar = "Hello"
 赋给属性和字段的值仅在相应的测试用例中可见。
 
 当同时启用 `SyntheticFields` 和 `ReturnsDefaults` 时，赋的值优先于默认值。但是，只要字段或属性尚未被赋值，就可以使用默认值。
+
+<!-- code_no_check -->
 
 ```cangjie
 let foo = mock<Foo>(ReturnsDefaults, SyntheticFields)

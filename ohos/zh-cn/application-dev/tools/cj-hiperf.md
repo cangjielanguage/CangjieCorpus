@@ -1,5 +1,11 @@
 # hiperf
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 hiperf为开发人员提供用于调试的命令行工具，用于抓取特定程序或者系统的性能数据，类似内核的perf工具，该工具支持在 Windows/Linux/Mac 等操作系统上运行。
 
 ## 环境要求
@@ -324,7 +330,7 @@ hiperf report --limit-percent 1
 
 ## 脚本
 
-一般用户用脚本执行采样操作，可生成可视化的火焰图。工具可在[developtools_hiperf仓库](https://gitee.com/openharmony/developtools_hiperf/tree/master/script)中获取。
+一般用户用脚本执行采样操作，可生成可视化的火焰图。工具可在[developtools_hiperf仓库](https://gitcode.com/openharmony/developtools_hiperf/tree/master/script)中获取。
 
 1. 采样。
 

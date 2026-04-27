@@ -4,8 +4,8 @@
 
 ```cangjie
 public enum SeekPosition {
-    | Begin(Int64)
     | Current(Int64)
+    | Begin(Int64)
     | End(Int64)
 }
 ```
@@ -18,7 +18,7 @@ public enum SeekPosition {
 Begin(Int64)
 ```
 
-功能：表示从起点开始移动。
+功能：表示从起点开始移动指定的长度。
 
 ### Current(Int64)
 
@@ -26,7 +26,7 @@ Begin(Int64)
 Current(Int64)
 ```
 
-功能：表示从当前位置开始移动。
+功能：表示从当前位置开始移动指定的长度。
 
 ### End(Int64)
 
@@ -34,4 +34,4 @@ Current(Int64)
 End(Int64)
 ```
 
-功能：表示从末尾开始移动。
+功能：表示从末尾开始移动指定的长度。

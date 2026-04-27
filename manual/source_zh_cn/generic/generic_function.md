@@ -14,7 +14,7 @@ func id<T>(a: T): T {
 }
 ```
 
-其中 `(a: T)` 是函数声明的形参，其中使用到了 `id` 函数声明的类型形参 `T`，并且在 `id` 函数的返回类型使用。
+其中， `(a: T)` 是函数声明的形参，它使用到了 `id` 函数声明的类型形参 `T`，并且在 `id` 函数的返回类型使用。
 
 再比如另一个复杂的例子，定义如下一个泛型函数 `composition`，该函数声明了 3 个类型形参，分别是 `T1, T2, T3`，其功能是把两个函数 `f: (T1) -> T2, g: (T2) -> T3` 复合成类型为 `(T1) -> T3` 的函数。
 
@@ -45,7 +45,6 @@ func times2plus10(a: Int64) {
 
 main() {
   println(times2plus10(9))
-  return 0
 }
 ```
 
@@ -74,7 +73,6 @@ func foo(a: Int64) {
 
 main() {
     println(foo(1))
-    return 0
 }
 ```
 
@@ -86,7 +84,7 @@ true
 
 ## 泛型成员函数
 
-class、struct 与 enum 的成员函数可以是泛型的。例如：
+class、struct、enum 与 interface 的成员函数可以是泛型的。例如：
 
 <!-- verify -->
 
@@ -111,13 +109,38 @@ enum C {
     }
 }
 
+interface I {
+    func doo<T>(a: T): Unit where T <: ToString
+}
+class D <: I {
+    public func doo<T>(a: T): Unit where T <: ToString {
+        println("${a}")
+    }
+}
+abstract class E {
+    public func eoo1<T>(a: T): Unit where T <: ToString
+    public open func eoo2<T>(a: T): Unit where T <: ToString
+}
+class F <: E {
+    public func eoo1<T>(a: T): Unit where T <: ToString {
+        println("${a}")
+    }
+    public func eoo2<T>(a: T): Unit where T <: ToString {
+        println("${a}")
+    }
+}
 main() {
     var a = A()
     var b = B()
     var c = C.X
+    var d = D()
+    var f = F()
     a.foo<Int64>(10)
     b.bar<String>("abc")
     c.coo<Bool>(false)
+    d.doo<String>("doo")
+    f.eoo1<String>("eoo1")
+    f.eoo2<String>("eoo2")
     return 0
 }
 ```
@@ -128,6 +151,9 @@ main() {
 10
 abc
 false
+doo
+eoo1
+eoo2
 ```
 
 在为类型使用 extend 声明进行扩展时，扩展中的函数也可以是泛型的，例如可以为 `Int64` 类型增加一个泛型成员函数：
@@ -162,7 +188,7 @@ interface、class、struct、enum 与 extend 中可以定义静态泛型函数�
 <!-- run -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 
 class ToPair {
     public static func fromArray<T>(l: ArrayList<T>): (T, T) {
@@ -173,6 +199,5 @@ class ToPair {
 main() {
     var res: ArrayList<Int64> = ArrayList([1,2,3,4])
     var a: (Int64, Int64) = ToPair.fromArray<Int64>(res)
-    return 0
 }
 ```

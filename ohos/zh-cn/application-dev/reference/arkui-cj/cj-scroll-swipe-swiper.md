@@ -1,5 +1,11 @@
 # Swiper
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 滑块视图容器，提供子组件滑动轮播显示的能力。
 
 ## 导入模块
@@ -393,7 +399,7 @@ public class DigitIndicator <: Indicator {
 
 > **说明：**
 >
-> 按组翻页时，数字导航点显示的子节点数量，不包括占位节点。数字导航点文本最大的字体缩放倍数[maxFontScale](./cj-text-input-text.md#func-maxfontscalefloat32)为2。
+> 按组翻页时，数字导航点显示的子节点数量，不包括占位节点。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -671,15 +677,6 @@ public func selectedItemWidth(value: ?Length): This
 
 ```cangjie
 public open class Indicator {
-    public func bottom(?Length): This
-    public func end(?Length): This
-    public func left(?Length): This
-    public func right(?Length): This
-    public func start(?Length): This
-    public func top(?Length): This
-    public static func digit(): DigitIndicator
-    public static func dot(): DotIndicator
-    public init()
 }
 ```
 
@@ -689,17 +686,6 @@ public open class Indicator {
 
 **起始版本：** 22
 
-#### init()
-
-```cangjie
-public init()
-```
-
-**功能：** 指示器的构造函数。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 #### static func digit()
 
@@ -789,7 +775,7 @@ public func left(value: ?Length): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[Length](./cj-common-types.md#interface-length)|是|-|设置导航点左侧相对于Swiper的位置。<br>未设置left和right时，进行自适应大小布局，按照指示器本身大小和Swiper的大小在主轴方向上进行居中对齐。<br>设置为0时：按照0位置布局计算。<br>优先级：高于right属性。<br>取值范围：[0,Swiper宽度-导航点区域宽度]，超出该范围时，取最近的的边界值。|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|设置导航点左侧相对于Swiper的位置。<br>未设置left和right时，进行自适应大小布局，按照指示器本身大小和Swiper的大小在主轴方向上进行居中对齐。<br>设置为0时：按照0位置布局计算。<br>优先级：高于right属性。<br>取值范围：[0,Swiper宽度-导航点区域宽度]，超出该范围时，取最近的边界值。|
 
 #### func right(?Length)
 
@@ -807,7 +793,7 @@ public func right(value: ?Length): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[Length](./cj-common-types.md#interface-length)|是|-|设置导航点右侧相对于Swiper的位置。<br>未设置left和right时，进行自适应大小布局，按照指示器本身大小和Swiper的大小在主轴方向上进行居中对齐。设置为0时：按照0位置布局计算。<br>优先级：低于left属性。<br>取值范围：[0,Swiper宽度-导航点区域宽度]，超出该范围时，取最近的的边界值。|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|设置导航点右侧相对于Swiper的位置。<br>未设置left和right时，进行自适应大小布局，按照指示器本身大小和Swiper的大小在主轴方向上进行居中对齐。设置为0时：按照0位置布局计算。<br>优先级：低于left属性。<br>取值范围：[0,Swiper宽度-导航点区域宽度]，超出该范围时，取最近的边界值。|
 
 #### func start(?Length)
 

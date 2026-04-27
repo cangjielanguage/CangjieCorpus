@@ -1,5 +1,11 @@
 # @Reusable宏：组件复用
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 @Reusable宏装饰任意自定义组件时，表示该自定义组件可以复用。
 
 ## 概述
@@ -53,14 +59,14 @@
     }
     ```
 
-- @Reuasble宏不支持嵌套使用，存在增加内存和不方便维护的问题。
+- @Reusable宏不支持嵌套使用，存在增加内存和不方便维护的问题。
 
     > **说明：**
     >
-    > - 不支持嵌套使用，只是标记，会多增加一个缓存池，各自的复用缓存池存在相同树状结构，复用效率低，引发复用内存增加;
-    > - 嵌套使用形成各自独立的复用缓存池之后，生命周期的传递存在问题，资源和变量管理无法共享，并不方便维护，容易引发问题;
-    > - 示例中PlayButton形成的复用缓存池，并不能在PlayButton02的复用缓存池使用，但PlayButton02自己形成复用缓存相互可以使用;
-    > - 在PlayButton隐藏时已经触发PlayButton02的aboutToRecycle，但是在PlayButton02单独显示时却无法执行aboutToReuse，组件复用的生命周期方法存在无法成对调用问题;
+    > - 不支持嵌套使用，只是标记，会多增加一个缓存池，各自的复用缓存池存在相同树状结构，复用效率低，引发复用内存增加；
+    > - 嵌套使用形成各自独立的复用缓存池之后，生命周期的传递存在问题，资源和变量管理无法共享，并不方便维护，容易引发问题；
+    > - 示例中PlayButton形成的复用缓存池，并不能在PlayButton02的复用缓存池使用，但PlayButton02自己形成复用缓存相互可以使用；
+    > - 在PlayButton隐藏时已经触发PlayButton02的aboutToRecycle，但是在PlayButton02单独显示时却无法执行aboutToReuse，组件复用的生命周期方法存在无法成对调用问题；
     > - 综上，不建议嵌套使用。
 
     <!-- run -->
@@ -115,7 +121,7 @@
                 // 默认隐藏按钮控制
                 Text("Hiddenchild==is ${if(isPlaying01) {""} else {"not"}} playing").fontSize(14)
                 Button("Button===hiddenchild==control==${isPlaying01}").margin(14).onClick({
-                   e  => isPlaying01 = !isPlaying01
+                   e => isPlaying01 = !isPlaying01
                 })
                 Text("==================").fontSize(14)
 

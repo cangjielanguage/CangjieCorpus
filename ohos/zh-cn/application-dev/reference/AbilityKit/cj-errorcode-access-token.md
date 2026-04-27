@@ -1,5 +1,11 @@
 # 访问控制错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 > **说明：**
 >
 > 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
@@ -31,7 +37,7 @@ TokenId does not exist.
 
 **可能原因**
 
-1. 指定的tokenid不存在。
+1. 指定的tokenId不存在。
 2. 指定的tokenId对应的进程非应用进程。
 
 **处理步骤**
@@ -47,12 +53,12 @@ Permission does not exist.
 **可能原因**
 
 1. 指定的permissionName不存在。
-2. 请求授权/撤销权限场景下，指定的应用tokenid未申请过指定的permissionName。
+2. 请求授权/撤销权限场景下，指定的应用tokenId未申请过指定的permissionName。
 3. 权限使用记录场景下，指定的permissionName非用户授权的敏感权限。
 
 **处理步骤**
 
-检查入参，修正参数值为有效值。[权限列表](../../security/AccessToken/cj-app-permissions.md#应用权限列表)。
+检查入参，修正参数值为有效值。[权限列表](../../security/AccessToken/cj-app-permissions.md)。
 
 ## 12100004 接口未配套使用
 
@@ -94,12 +100,12 @@ The specified application does not support the permissions granted or ungranted 
 
 **可能原因**
 
-1. 输入的tokenid是远端设备的身份标识，尚未支持分布式授权和取消授权。
-2. 入参指定的tokenid为沙箱应用，被禁止申请指定的权限。
+1. 输入的tokenId是远端设备的身份标识，尚未支持分布式授权和取消授权。
+2. 入参指定的tokenId为沙箱应用，被禁止申请指定的权限。
 
 **处理步骤**
 
-1. 请确认tokenid的获取方式是否正确。
+1. 请确认tokenId的获取方式是否正确。
 2. 确认待授权的沙箱应用是否为特殊的受限沙箱应用进程，部分模式下的沙箱应用被禁止授予大部分权限。
 
 ## 12100007 系统服务工作异常

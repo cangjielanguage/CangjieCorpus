@@ -1,5 +1,11 @@
 # uitest错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 > **说明：**
 >
 > 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
@@ -21,24 +27,6 @@ Initialize failed.
 **处理步骤**
 
 执行param set persist.ace.testmode.enabled 1，并重启设备。
-
-## 17000002 当前无法调用
-
-**错误信息**
-
-API does not allow calling concurrently.
-
-**错误描述**
-
-当前无法调用API。
-
-**可能原因**
-
-API没有使用await进行异步调用，造成堵塞。
-
-**处理步骤**
-
-检查测试用例，确保异步接口使用await调用。
 
 ## 17000003 断言失败
 

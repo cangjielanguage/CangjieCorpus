@@ -1,4 +1,11 @@
 # 通用事件
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 <!--Del-->
 - [点击事件](cj-universal-event-click.md)
 - [触摸事件](cj-universal-event-touch.md)

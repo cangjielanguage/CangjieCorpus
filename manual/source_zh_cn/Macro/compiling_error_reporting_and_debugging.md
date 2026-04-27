@@ -54,7 +54,6 @@ class Demo {
 
 main() {
     println("test macro")
-    0
 }
 ```
 
@@ -85,11 +84,11 @@ cjc macros/m.cj --compile-macro --output-dir ./target
 cjc src/demo.cj -o demo.exe --import-path ./target --output-dir ./target
 ```
 
-如果宏包还依赖其他动态库，则需要保证宏包在运行态（宏展开依赖宏包内方法的执行）下能够找到这些依赖。在 Linux 下可以通过设置 `LD_LIBRAYR_PATH`（Windows 下设置 `PATH`）环境变量添加所依赖动态库的路径。
+如果宏包还依赖其他动态库，则需要保证宏包在运行态（宏展开依赖宏包内方法的执行）下能够找到这些依赖。在 Linux 下可以通过设置 `LD_LIBRARY_PATH`（Windows 下设置 `PATH`）环境变量添加所依赖动态库的路径。
 
 > **说明：**
 >
-> 宏替换过程依赖仓颉 runtime ，宏替换过程中仓颉 runtime 的初始化配置采用宏提供的默认配置，配置参数支持使用仓颉 runtime 运维日志进行查询，其中 cjHeapSize 与 cjStackSize 支持用户修改，其余暂不支持，仓颉 runtime 初始化配置可参见[runtime 初始化可选配置](../Appendix/runtime_env.md#runtime初始化可选配置)章节。
+> 宏替换过程依赖仓颉 runtime ，宏替换过程中仓颉 runtime 的初始化配置采用宏提供的默认配置，配置参数支持使用仓颉 runtime 运维日志进行查询，其中 cjHeapSize 与 cjStackSize 支持用户修改，其余暂不支持。注意所有配置参数在 OpenHarmony 平台下均无效，OpenHarmony 平台下仓颉运行时使用默认值。<!--Del-->仓颉 runtime 初始化配置可参见[runtime 初始化可选配置](../Appendix/runtime_env.md#runtime-初始化可选配置)章节。<!--DelEnd-->
 
 ## 并行宏展开
 
@@ -105,7 +104,7 @@ cjc src/demo.cj -o demo.exe --import-path ./target --output-dir ./target
 ```cangjie
 macro package define
 import std.ast.*
-import std.collection.*
+import std.collection.HashMap
 
 var Counts = HashMap<String, Int64>()
 
@@ -139,6 +138,8 @@ public macro B(input: Tokens) {
 自定义报错接口提供同原生编译器报错一样的输出格式，允许用户报 warning 和 error 两类错误提示信息。
 
 `diagReport` 的函数原型如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 public func diagReport(level: DiagReportLevel, tokens: Tokens, message: String, hint: String): Unit
@@ -289,13 +290,15 @@ cjc --debug-macro demo.cj --import-path ./target
 
 > **注意：**
 >
-> 如果使用仓颉的 `CJPM` 包管理工具进行编译，可在配置文件 `cjpm.toml` 中添加 `--debug-macro` 的编译选项来使用宏的 _debug_ 模式。
+> 如果使用仓颉的 `CJPM` 项目管理工具进行编译，可在配置文件 `cjpm.toml` 中添加 `--debug-macro` 的编译选项来使用宏的 _debug_ 模式。
 >
 > ```text
 > compile-option = "--debug-macro"
 > ```
 
 在 _debug_ 模式下，会生成临时文件 _demo.cj.macrocall_，对应宏展开的部分如下：
+
+<!-- code_no_check -->
 
 ```cangjie
 // demo.cj.macrocall
@@ -311,41 +314,4 @@ cjc --debug-macro demo.cj --import-path ./target
 /* ===== End of the Emit ===== */
 ```
 
-如果宏展开后的代码有语义错误，则编译器的错误信息会溯源到宏展开后代码的具体行列号。仓颉宏的 _debug_ 模式有以下注意事项：
-
-- 宏的 _debug_ 模式会重排源码的行列号信息，不适用于某些特殊的换行场景。例如：
-
-  ```cangjie
-  // before expansion
-  @M{} - 2 // macro M return 2
-
-  // after expansion
-  // ===== Emmitted my Macro M at line 1 ===
-  2
-  // ===== End of the Emit =====
-  - 2
-  ```
-
-  这些因换行符导致语义改变的情形，不应使用 _debug_ 模式。
-
-- 不支持宏调用在宏定义内的调试，会编译报错。
-
-  ```cangjie
-  public macro M(input: Tokens) {
-      let a = @M2(1+2) // M2 is in macro M, not suitable for debug mode.
-      return input + quote($a)
-  }
-  ```
-
-- 不支持带括号宏的调试。
-
-  ```cangjie
-  // main.cj
-
-  main() {
-      // For macro with parenthesis, newline introduced by debug will change the semantics
-      // of the expression, so it is not suitable for debug mode.
-      let t = @M(1+2)
-      0
-  }
-  ```
+如果宏展开后的代码有语义错误，则编译器的错误信息会溯源到宏展开后代码的具体行列号。

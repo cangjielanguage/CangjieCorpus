@@ -1,5 +1,11 @@
 # CanvasRenderingContext2D
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 使用RenderingContext在Canvas组件上进行绘制，绘制对象可以是矩形、文本、图片等。
 
 > **说明**
@@ -25,10 +31,6 @@ public interface FillStyle {}
 
 **起始版本：** 22
 
-## Int64
-
-**功能：** Int64类型定义的描述
-
 ### extend Int64 <: FillStyle
 
 ```cangjie
@@ -36,10 +38,6 @@ extend Int64 <: FillStyle {}
 ```
 
 **功能：** 扩展Int64为FillStyle子类。
-
-## UInt32
-
-**功能：** UInt32类型定义的描述
 
 ### extend UInt32 <: FillStyle
 
@@ -49,10 +47,6 @@ extend UInt32 <: FillStyle {}
 
 **功能：** 扩展UInt32为FillStyle子类。
 
-## Color
-
-**功能：** Color类型定义的描述
-
 ### extend Color <: FillStyle
 
 ```cangjie
@@ -61,10 +55,6 @@ extend Color <: FillStyle {}
 
 **功能：** 扩展Color为FillStyle子类。
 
-## CanvasGradient
-
-**功能：** CanvasGradient类型定义的描述
-
 ### extend CanvasGradient <: FillStyle
 
 ```cangjie
@@ -72,10 +62,6 @@ extend CanvasGradient <: FillStyle {}
 ```
 
 **功能：** 扩展CanvasGradient为FillStyle子类。
-
-## CanvasPattern
-
-**功能：** CanvasPattern类型定义的描述
 
 ### extend CanvasPattern <: FillStyle
 
@@ -97,10 +83,6 @@ public interface StrokeStyle {}
 
 **起始版本：** 22
 
-## Int64
-
-**功能：** Int64类型定义的描述
-
 ### extend Int64 <: StrokeStyle
 
 ```cangjie
@@ -108,10 +90,6 @@ extend Int64 <: StrokeStyle {}
 ```
 
 **功能：** 扩展Int64为StrokeStyle子类。
-
-## UInt32
-
-**功能：** UInt32类型定义的描述
 
 ### extend UInt32 <: StrokeStyle
 
@@ -121,10 +99,6 @@ extend UInt32 <: StrokeStyle {}
 
 **功能：** 扩展UInt32为StrokeStyle子类。
 
-## Color
-
-**功能：** Color类型定义的描述
-
 ### extend Color <: StrokeStyle
 
 ```cangjie
@@ -133,10 +107,6 @@ extend Color <: StrokeStyle {}
 
 **功能：** 扩展Color为StrokeStyle子类。
 
-## CanvasGradient
-
-**功能：** CanvasGradient类型定义的描述
-
 ### extend CanvasGradient <: StrokeStyle
 
 ```cangjie
@@ -144,10 +114,6 @@ extend CanvasGradient <: StrokeStyle {}
 ```
 
 **功能：** 扩展CanvasGradient为StrokeStyle子类。
-
-## CanvasPattern
-
-**功能：** CanvasPattern类型定义的描述
 
 ### extend CanvasPattern <: StrokeStyle
 
@@ -161,7 +127,7 @@ extend CanvasPattern <: StrokeStyle {}
 
 ```cangjie
 public class CanvasRenderingContext2D {
-    public init(?RenderingContextSettings)
+    public init(settings: ?RenderingContextSettings)
 }
 ```
 
@@ -622,10 +588,10 @@ public func clearRect(x: Float64, y: Float64, w: Float64, h: Float64): Unit
 |w|Float64|是|-|指定矩形的宽度。<br>默认单位：vp。|
 |h|Float64|是|-|指定矩形的高度。<br>默认单位：vp。|
 
-### func fillText(String, Float64, Float64, ?Float64)
+### func fillText(String, Float64, Float64, Option\<Float64>)
 
 ```cangjie
-public func fillText(text: String, x: Float64, y: Float64, maxWidth!: ?Float64 = Option.None): Unit
+public func fillText(text: String, x: Float64, y: Float64, maxWidth!: Option<Float64> = Option.None): Unit
 ```
 
 **功能：** 在指定位置填充指定的文本。
@@ -641,12 +607,12 @@ public func fillText(text: String, x: Float64, y: Float64, maxWidth!: ?Float64 =
 |text|String|是|-|需要绘制的文本内容。|
 |x|Float64|是|-|需要绘制的文本的左下角x坐标。<br>默认单位：vp。|
 |y|Float64|是|-|需要绘制的文本的左下角y坐标。<br>默认单位：vp。|
-|maxWidth|?Float64|否|Option.None|**命名参数。** 指定文本允许的最大宽度。<br>默认单位：vp。<br>初始值：不限制宽度。|
+|maxWidth|Option\<Float64>|否|Option.None|**命名参数。** 指定文本允许的最大宽度。<br>默认单位：vp。<br>初始值：不限制宽度。|
 
-### func strokeText(String, Float64, Float64, ?Float64)
+### func strokeText(String, Float64, Float64, Option\<Float64>)
 
 ```cangjie
-public func strokeText(text: String, x: Float64, y: Float64, maxWidth!: ?Float64 = Option.None): Unit
+public func strokeText(text: String, x: Float64, y: Float64, maxWidth!: Option<Float64> = Option.None): Unit
 ```
 
 **功能：** 绘制描边类文本。
@@ -662,7 +628,7 @@ public func strokeText(text: String, x: Float64, y: Float64, maxWidth!: ?Float64
 |text|String|是|-|需要绘制的文本内容。|
 |x|Float64|是|-|需要绘制的文本的左下角x坐标。<br>默认单位：vp。|
 |y|Float64|是|-|需要绘制的文本的左下角y坐标。<br>默认单位：vp。|
-|maxWidth|?Float64|否|Option.None|**命名参数。** 需要绘制的文本的最大宽度。<br>默认单位：vp。|
+|maxWidth|Option\<Float64>|否|Option.None|**命名参数。** 需要绘制的文本的最大宽度。<br>默认单位：vp。|
 
 ### func measureText(?String)
 
@@ -811,7 +777,7 @@ public func createPattern(image: ?ImageBitmap, repetition: Option<Repetition>): 
 public func bezierCurveTo(cp1x: Float64, cp1y: Float64, cp2x: Float64, cp2y: Float64, x: Float64, y: Float64): Unit
 ```
 
-**功能：** 创建三次贝赛尔曲线的路径。
+**功能：** 创建三次贝塞尔曲线的路径。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -834,7 +800,7 @@ public func bezierCurveTo(cp1x: Float64, cp1y: Float64, cp2x: Float64, cp2y: Flo
 public func quadraticCurveTo(cpx: Float64, cpy: Float64, x: Float64, y: Float64): Unit
 ```
 
-**功能：** 创建二次贝赛尔曲线的路径。
+**功能：** 创建二次贝塞尔曲线的路径。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -877,7 +843,7 @@ public func arc(
 |radius|Float64|是|-|弧线的圆半径。<br>默认单位：vp。|
 |startAngle|Float64|是|-|弧线的起始弧度。<br>单位：弧度。|
 |endAngle|Float64|是|-|弧线的终止弧度。<br>单位：弧度。|
-|counterclockwise|?Bool|否|None|**命名参数。** 是否逆时针绘制圆弧。<br>是否逆时针绘制圆弧。<br>true：逆时针方向绘制椭圆。<br>false：顺时针方向绘制椭圆。|
+|counterclockwise|?Bool|否|None|**命名参数。** 是否逆时针绘制圆弧。<br>true：逆时针方向绘制椭圆。<br>false：顺时针方向绘制椭圆。|
 
 ### func arcTo(Float64, Float64, Float64, Float64, Float64)
 
@@ -1127,10 +1093,10 @@ public func setTransform(
 |e|Float64|是|-|指定水平移动值。<br>默认单位：vp。|
 |f|Float64|是|-|指定垂直移动值。<br>默认单位：vp。|
 
-### func setTransform(?Matrix2D)
+### func setTransform(Option\<Matrix2D>)
 
 ```cangjie
-public func setTransform(matrix: ?Matrix2D): Unit
+public func setTransform(matrix: Option<Matrix2D>): Unit
 ```
 
 **功能：** 以Matrix2D对象为模板重置现有的变换矩阵并创建新的变换矩阵。
@@ -1143,7 +1109,7 @@ public func setTransform(matrix: ?Matrix2D): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|matrix|?Matrix2D|是|-|变换矩阵。|
+|matrix|Option\<[Matrix2D](cj-canvas-drawing-matrix2d.md#class-matrix2d)>|是|-|变换矩阵。|
 
 ### func translate(Float64, Float64)
 

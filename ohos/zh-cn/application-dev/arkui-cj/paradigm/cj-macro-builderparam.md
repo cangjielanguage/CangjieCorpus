@@ -1,5 +1,11 @@
 # @BuilderParam宏：引用@Builder函数
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 当开发者创建了自定义组件，并想对该组件添加特定功能，例如想在某一个指定的自定义组件中添加一个点击跳转操作，此时若直接在组件内嵌入事件方法，将会导致所有该自定义组件的实例都增加了功能。为解决此问题，ArkUI引入了@BuilderParam宏，@BuilderParam用来修饰指向@Builder方法的变量（@BuilderParam是用来承接@Builder函数的）。开发者可以在初始化自定义组件时，使用不同的方式（如：参数修改、父组件初始化等）对@BuilderParam修饰的自定义构建函数进行传参赋值，在自定义组件内部通过调用@BuilderParam为组件增加特定的功能。该宏用于声明任意UI描述的一个元素，类似slot占位符。
 
 在阅读本文档前，建议提前阅读：[@Builder](./cj-macro-builder.md)。

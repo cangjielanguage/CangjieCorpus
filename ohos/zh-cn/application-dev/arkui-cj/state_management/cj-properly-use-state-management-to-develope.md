@@ -1,5 +1,11 @@
 # 状态管理合理使用开发指导
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 由于对状态管理当前的特性并不了解，许多开发者在使用状态管理进行开发时会遇到UI不刷新、刷新性能差的情况。对此，本篇将从两个方向，对一共五个典型场景进行分析，同时提供相应的正例和反例，帮助开发者学习如何合理使用状态管理进行开发。
 
 ## 合理使用属性
@@ -24,7 +30,7 @@
 
 开发过程中常将对象数组与[ForEach](../rendering_control/cj-rendering-control-foreach.md)结合使用，但写法不当会导致 UI 不刷新。
 
- <!-- run -->
+<!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
@@ -64,7 +70,7 @@ class EntryView {
                         Hilog.info(0, "AppLogCj", "change font size")
                     })
             List() {
-                ForEach(this.styleList, {
+                ForEach(this.styleList, itemGeneratorFunc: {
                         item: TextStyles, _: Int64 =>
                         ListItem(){
                             Text("Hello World")
@@ -81,7 +87,7 @@ class EntryView {
 
 由于 ForEach 中生成的 item 是常量，因此在点击改变 item 内容时，无法触发 UI 刷新，尽管日志显示 item 的值已经改变（打印了“change font size”）。因此，需要使用 ObservedArrayList，配合 \@Publish 修饰自定义类属性来实现可观测能力。
 
- <!-- run -->
+<!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
@@ -120,7 +126,7 @@ class EntryView {
                     Hilog.info(0,"AppLog: info","change font size")
                 })
             List(){
-                ForEach(this.styleList ,{
+                ForEach(this.styleList ,itemGeneratorFunc: {
                         item: TextStyles, _:Int64 =>
                         ListItem(){
                             Text("Hello World")

@@ -20,12 +20,13 @@
 
 ## 示例
 
+<!--compile.onlyformat-->
 ```cangjie
 let foo = mock<Foo>()
-//配置foo
+// 配置 foo
 @On(foo.bar()).returns()
 foo.bar()
-Verify.that(@Called(foo.bar())) // 验证bar至少被调用一次
+Verify.that(@Called(foo.bar())) // 验证 bar 至少被调用一次
 ```
 
 ## 验证语句和 `@Called` 宏
@@ -36,6 +37,7 @@ Verify.that(@Called(foo.bar())) // 验证bar至少被调用一次
 
 示例：
 
+<!--compile.onlyformat-->
 ```cangjie
 @Called(foo.bar(1, _)) // 匹配 bar 方法调用的验证语句，其中第一个参数为 '1'
 @Called(Foo.baz)       // 匹配 baz 静态属性 getter 调用的验证语句
@@ -54,6 +56,7 @@ Verify.that(@Called(foo.bar())) // 验证bar至少被调用一次
 
 调用这些函数会返回相同的 `VerifyStatement` 实例。同一语句不能重置基数，且必须在语句传递到验证块生成器函数之前设置基数。如果没有显式设置基数，则使用默认基数。
 
+<!--compile.onlyformat-->
 ```cangjie
 Verify.that(@Called(foo.bar()).atLeastOnce())
 Verify.that(@Called(foo.bar()).once())
@@ -79,6 +82,7 @@ Verify.that(@Called(foo.bar()).once())
 
 `ordered` 静态函数接收一个验证语句数组。
 
+<!--compile.onlyformat-->
 ```cangjie
 for (i in 0..4) {
     foo.bar(i % 2)
@@ -94,12 +98,12 @@ Verify.ordered(
 
 允许检查多个对象的调用顺序。
 
+<!--compile.onlyformat-->
 ```cangjie
 for (i in 0..4) {
     if (i % 2 == 0) {
         fooEven.bar(i)
-    }
-    else {
+    } else {
         forOdd.bar(i)
     }
 }
@@ -114,6 +118,7 @@ Verify.ordered(
 
 **有序**验证的默认基数说明符是 `once()` 。如有需要，可使用其他基数说明符。
 
+<!--compile.onlyformat-->
 ```cangjie
 for (i in 0..4) {
     foo1.bar(i)
@@ -131,6 +136,7 @@ Verify.ordered(
 
 对于**有序**验证，须列出对（块中提到的） mock/spy 对象的所有调用。任何未列出的调用都会导致验证失败。
 
+<!--compile.onlyformat-->
 ```cangjie
 foo.bar(0)
 foo.bar(10)
@@ -156,27 +162,26 @@ Verify.ordered(
 
 对于**无序**验证，除非显式指定，否则使用 `atLeastOnce()` 基数，即检查至少进行了一次的调用。
 
+<!--compile.onlyformat-->
 ```cangjie
 for (i in 0..4) {
     foo.bar(i % 2)
 }
 
-//验证是否至少调用了一次使用参数0和参数1的bar
+// 验证是否至少调用了一次使用参数 0 和参数 1 的 bar
 Verify.unordered(
     @Called(foo.bar(0)),
     @Called(foo.bar(1))
 )
 
-//验证是否调用了两次使用参数0和参数1的bar
+// 验证是否调用了两次使用参数 0 和参数 1 的 bar
 Verify.unordered(
     @Called(foo.bar(0)).times(2),
     @Called(foo.bar(1)).times(2)
 )
 
-//验证是否总共调用了四次bar
-Verify.unordered(
-    @Called(foo.bar(_)).times(4)
-)
+// 验证是否总共调用了四次 bar
+Verify.unordered(@Called(foo.bar(_)).times(4))
 ```
 
 **无序**验证包括 **Partial** 和 **Exhaustive** 。
@@ -184,19 +189,21 @@ Verify.unordered(
 默认为 **Exhaustive** ，需要列出验证语句所提到的 mock/spy 对象的所有调用。
 **Partial** 只列出**部分**调用。
 
+<!--compile.onlyformat-->
 ```cangjie
 for (i in 0..4) {
     foo.bar(i)
 }
 
-//失败，foo.bar()的两次调用未在块中列出
+// 失败，foo.bar() 的两次调用未在块中列出
 Verify.unordered(
     @Called(foo.bar(0)).once(),
     @Called(foo.bar(1)).once()
 )
 
-//忽略无关调用
-Verify.unordered(Partial,
+// 忽略无关调用
+Verify.unordered(
+    Partial,
     @Called(foo.bar(0)).once(),
     @Called(foo.bar(1)).once()
 )
@@ -208,14 +215,15 @@ Verify.unordered(Partial,
 
 示例：
 
+<!--compile.onlyformat-->
 ```cangjie
 let totalTimes = 40
 for (i in 0..totalTimes) {
     foo.bar(i % 2)
 }
 
-Verify.ordered { v =>
-    for (j in 0..totalTimes) {
+Verify.ordered {
+    v => for (j in 0..totalTimes) {
         v.checkThat(@Called(foo.bar(eq(j % 2))))
     }
 }
@@ -226,11 +234,12 @@ Verify.ordered { v =>
 另外，`Verify` 类还提供了以下工具。
 
 * that(statement: VerifyStatement) 为 Verify.unordered(Paritial, statement) 的别名，用于检查单个语句，不需要列出对应 mock/spy 对象的所有调用。
-* noInteractions(mocks: Array<Object>) 用于检查没有进行调用的 mock/spy 对象。
+* noInteractions(mocks: Array\<Object>) 用于检查没有进行调用的 mock/spy 对象。
 * `clearInvocationLog()` 将日志重置为空状态。这会影响后面的所有验证块，但并不影响桩预期。
 
 示例：
 
+<!--compile.onlyformat-->
 ```cangjie
 foo.bar()
 Verify.that(@Called(foo.bar())) // OK
@@ -242,34 +251,37 @@ Verify.that(@Called(foo.bar())) // 失败
 
 ## `Verify` 类 API
 
+<!--compile.onlyformat-->
 ```cangjie
-public static func that(statement: VerifyStatement): Unit
+public class Verify {
+    public static func that(statement: VerifyStatement): Unit
 
-public static func unordered(
-    exhaustive: Exhaustiveness,
-    collectStatements: (UnorderedVerifier) -> Unit
-): Unit
+    public static func unordered(
+        exhaustive: Exhaustiveness,
+        collectStatements: (UnorderedVerifier) -> Unit
+    ): Unit
 
-public static func unordered(
-    collectStatements: (UnorderedVerifier) -> Unit
-): Unit
+    public static func unordered(
+        collectStatements: (UnorderedVerifier) -> Unit
+    ): Unit
 
-public static func unordered(statements: Array<VerifyStatement>): Unit
+    public static func unordered(statements: Array<VerifyStatement>): Unit
 
-public static func unordered(
-    exhaustive: Exhaustiveness,
-    statements: Array<VerifyStatement>
-): Unit
+    public static func unordered(
+        exhaustive: Exhaustiveness,
+        statements: Array<VerifyStatement>
+    ): Unit
 
-public static func ordered(
-    collectStatements: (OrderedVerifier) -> Unit
-): Unit
+    public static func ordered(
+        collectStatements: (OrderedVerifier) -> Unit
+    ): Unit
 
-public static func ordered(statements: Array<VerifyStatement>): Unit
+    public static func ordered(statements: Array<VerifyStatement>): Unit
 
-public static func clearInvocationLog(): Unit
+    public static func clearInvocationLog(): Unit
 
-public static func noInteractions(mocks: Array<Object>): Unit
+    public static func noInteractions(mockObjects: Array<Object>): Unit
+}
 ```
 
 ## 验证错误
@@ -297,9 +309,13 @@ public static func noInteractions(mocks: Array<Object>): Unit
 
 ### 验证调用数量
 
+<!--compile.onlyformat-->
 ```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
 func testDataCaching() {
-    // 创建必要的spy或mock对象
+    // 创建必要的 spy 或 mock 对象
     let uncachedRepo = spy(Repository())
     let invalidationTracker = mock<InvalidationTracker>()
     @On(invalidationTracker.getTimestamp()).returns(0)
@@ -312,8 +328,9 @@ func testDataCaching() {
         cachedRepo.get(TEST_ID)
     }
 
-    // 验证得出只查询了一次基础repo，没有对未缓存repo的其他调用
-    Verify.unordered(Exhaustive,
+    // 验证得出只查询了一次基础 repo，没有对未缓存 repo 的其他调用
+    Verify.unordered(
+        Exhaustive,
         @Called(uncachedRepo.get(TEST_ID)).once()
     )
 
@@ -328,7 +345,8 @@ func testDataCaching() {
     }
 
     // 自上次清除后只进行了一次调用
-    Verify.unordered(Exhaustive,
+    Verify.unordered(
+        Exhaustive,
         @Called(uncachedRepo.get(TEST_ID)).once()
     )
 }
@@ -336,7 +354,11 @@ func testDataCaching() {
 
 ### 验证带特定参数的调用
 
+<!--compile.onlyformat-->
 ```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
 func testDrawingTriangle() {
     // 创建必要的 spy 或 mock 对象
     let canvas = spy(Canvas())
@@ -344,44 +366,38 @@ func testDrawingTriangle() {
     // 运行代码
     canvas.draw(Triangle())
 
-    // 测试三角形由3条线和3个点组成
+    // 测试三角形由 3 条线和 3 个点组成
 
     // 使用 'that' 块
-    Verify.that(
-        @Called(canvas.draw(ofType<Dot>())).times(3)
-    )
-    Verify.that(
-        @Called(canvas.draw(ofType<Line>())).times(3)
-    )
+    Verify.that(@Called(canvas.draw(ofType<Dot>())).times(3))
+    Verify.that(@Called(canvas.draw(ofType<Line>())).times(3))
 
     // 或者使用部分无序验证块
 
-    Verify.unordered(Partial, // 未知线条和点实际绘制的顺序
+    Verify.unordered(
+        Partial, // 未知线条和点实际绘制的顺序
         @Called(canvas.draw(ofType<Dot>())).times(3),
         @Called(canvas.draw(ofType<Line>())).times(3)
     )
 
     // 使用枚举块时，必须枚举出所有调用
-    Verify.unordered(Exhaustive,
+    Verify.unordered(
+        Exhaustive,
         @Called(canvas.draw(ofType<Triangle>())).once(),
         @Called(canvas.draw(ofType<Dot>())).times(3),
         @Called(canvas.draw(ofType<Line>())).times(3)
     )
 
     // 验证用例从未调用入参为 Square 类型的 draw 函数
-    Verify.that(
-        @Called(canvas.draw(ofType<Square>)).never()
-    )
+    Verify.that(@Called(canvas.draw(ofType<Square>)).never())
 
     // 如果想通过更复杂的条件来区分参数
     // 可以使用下面的模式
-    let isDot = { f: Figure =>
-        f is Dot // 此为更复杂的逻辑
+    let isDot = {
+        f: Figure => f is Dot // 此为更复杂的逻辑
     }
 
-    Verify.that(
-        @Called(canvas.draw(argThat(isDot))).times(3)
-    )
+    Verify.that(@Called(canvas.draw(argThat(isDot))).times(3))
 
     // 注意，属于同一个块的语句必须明确只匹配了一个调用
     // 以下为反例，有些调用匹配了两个语句
@@ -394,7 +410,11 @@ func testDrawingTriangle() {
 
 ### 验证调用顺序
 
+<!--compile.onlyformat-->
 ```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
 func testBuildFlight() {
     let plane = spy(Plane())
 
@@ -411,10 +431,11 @@ func testBuildFlight() {
 
 ## 预期与验证 API
 
-配置桩时，可以设置**预期**和验证API覆盖测试代码的一些断言。这种情况别无他法，只能选择更能反映测试意图的方法。
+配置桩时，可以设置**预期**和验证 API 覆盖测试代码的一些断言。这种情况别无他法，只能选择更能反映测试意图的方法。
 
 一般情况下，建议避免重复验证块中的配置步骤。
 
+<!--compile.onlyformat-->
 ```cangjie
 let foo = mock<Foo>()
 @On(foo.bar(_)).returns() // 如果从未使用此桩，测试失败
@@ -427,7 +448,7 @@ Verify.that(
     @Called(foo.bar(_)).atLeastOnce()
 )
 
-//但可以检查调用的数量和具体的参数
+// 但可以检查调用的数量和具体的参数
 Verify.unordered(
     @Called(foo.bar(1)).once(),
     @Called(foo.bar(2)).once()
@@ -436,6 +457,7 @@ Verify.unordered(
 
 上面的示例可以使用预期重写：
 
+<!--compile.onlyformat-->
 ```cangjie
 let foo = mock<Foo>()
 @On(foo.bar(1)).returns().once() // 预期只被调用一次，参数为`1`
@@ -444,5 +466,5 @@ let foo = mock<Foo>()
 foo.bar(1)
 foo.bar(2)
 
-//如果没有桩被触发，则测试失败
+// 如果没有桩被触发，则测试失败
 ```

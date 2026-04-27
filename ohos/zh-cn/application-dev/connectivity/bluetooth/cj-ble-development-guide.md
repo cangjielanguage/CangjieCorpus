@@ -1,5 +1,11 @@
 # 查找设备
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 简介
 
 本指南主要提供了BLE扫描和BLE广播相关操作的开发指导。可以实现发现周边BLE设备和其他设备发现本机设备的场景。
@@ -28,13 +34,11 @@
 | startBleScanning() | 发起BLE扫描流程。 |
 | stopBleScanning() | 停止BLE扫描流程。 |
 | startAdvertising() | 开始发送BLE广播。 |
-| disableAdvertising() | 临时停止BLE广播。 |
-| enableAdvertising() | 临时启动BLE广播。 |
 | stopAdvertising() | 停止发送BLE广播。 |
-| on(`type`: BluetoothBleCallbackType) | 订阅BLE广播状态。 |
-| off(`type`: BluetoothBleCallbackType) | 取消订阅BLE广播状态。 |
-| on(`type`: BluetoothBleCallbackType) | 订阅BLE设备发现上报事件。 |
-| off(`type`: BluetoothBleCallbackType) | 取消订阅BLE设备发现上报事件。  |
+| on(eventType: BluetoothBleCallbackType) | 订阅BLE广播状态。 |
+| off(eventType: BluetoothBleCallbackType) | 取消订阅BLE广播状态。 |
+| on(eventType: BluetoothBleCallbackType) | 订阅BLE设备发现上报事件。 |
+| off(eventType: BluetoothBleCallbackType) | 取消订阅BLE设备发现上报事件。  |
 
 ## 主要场景开发步骤
 
@@ -140,6 +144,7 @@
     import ohos.business_exception.*
     import std.collection.{HashMap, ArrayList}
     import std.math.numeric.BigInt
+    import kit.PerformanceAnalysisKit.Hilog
 
     const BLE_ADV_TYPE_FLAG = 0x01
     const BLE_ADV_TYPE_16_BIT_SERVICE_UUIDS_INCOMPLETE = 0x02
@@ -340,3 +345,8 @@
     ```
 
 8. 错误码请参见[蓝牙服务子系统错误码](../../reference/ConnectivityKit/cj-errorcode-bluetooth_manager.md)。
+<!--Del-->
+## 示例代码
+
+[开启、关闭广播](https://gitcode.com/openharmony/applications_app_samples_cangjie/tree/master/code/BasicFeature/Connectivity/Broadcast)
+<!--DelEnd-->

@@ -71,7 +71,7 @@ For example, to sort a list of integer pairs, use a custom comparison function a
 
 ```
 let pairs = [(1, 2), (2, 1), (0, 2), (0, 3), (2, 0)]
-sory(pairs, by: {p1, p2 =>
+sort(pairs, by: {p1, p2 =>
     match (p1[0].compare(p2[0])) {
         case Ordering.LT => Ordering.LT
         case Ordering.GT => Ordering.GT

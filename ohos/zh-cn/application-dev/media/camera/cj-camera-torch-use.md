@@ -1,4 +1,10 @@
-# 手电筒使用（仓颉）
+# 手电筒使用
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 手电筒模式的使用是通过操作终端启用手电筒功能，使设备的手电筒功能持续保持常亮状态。
 
@@ -18,7 +24,7 @@
 
     ```cangjie
     import kit.CameraKit.*
-    import ohos.hilog.Hilog
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.callback_invoke.Callback1Argument
     import ohos.business_exception.BusinessException
     ```

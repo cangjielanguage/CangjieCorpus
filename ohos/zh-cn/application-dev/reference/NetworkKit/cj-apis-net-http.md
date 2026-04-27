@@ -1,5 +1,11 @@
 # ohos.net.http（数据请求）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 http模块提供HTTP数据请求能力。应用可以通过HTTP发起一个数据请求，支持常见的GET、POST、OPTIONS、HEAD、PUT、DELETE、TRACE、CONNECT方法。
 
 ## 导入模块
@@ -31,7 +37,7 @@ public func createHttp(): HttpRequest
 
 > **说明：**
 >
-> - 当该请求使用完毕时，需调用destroy方法主动销毁HttpRequest对象，否则会出现资源泄露问题。
+> 当该请求使用完毕时，需调用destroy方法主动销毁HttpRequest对象，否则会出现资源泄露问题。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -145,7 +151,7 @@ public var certPath: String
 public var certType: CertType
 ```
 
-**功能：** 证书类型，默认是PEM。
+**功能：** 证书类型。
 
 **类型：** [CertType](#enum-certtype)
 
@@ -161,7 +167,7 @@ public var certType: CertType
 public var keyPassword: String
 ```
 
-**功能：** 证书密钥的密码。默认值为空字符串。
+**功能：** 证书密钥的密码。
 
 **类型：** String
 
@@ -177,7 +183,7 @@ public var keyPassword: String
 public var keyPath: String
 ```
 
-**功能：** 证书秘钥的路径。
+**功能：** 证书密钥的路径。
 
 **类型：** String
 
@@ -204,8 +210,8 @@ public init(certPath: String, keyPath: String, certType!: CertType = CertType.Pe
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |certPath|String|是|-|证书路径。|
-|keyPath|String|是|-|证书秘钥的路径。|
-|certType|[CertType](#enum-certtype)|否|CertType.Pem|**命名参数。** 证书类型，默认是PEM。|
+|keyPath|String|是|-|证书密钥的路径。|
+|certType|[CertType](#enum-certtype)|否|CertType.Pem|**命名参数。** 证书类型，默认是CertType.Pem。|
 |keyPassword|String|否|""|**命名参数。** 证书密钥的密码。默认值为空字符串。|
 
 ## class DataReceiveProgressInfo
@@ -340,7 +346,6 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let httpRequest = createHttp()
-
     httpRequest.destroy()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -364,7 +369,7 @@ public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Uni
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|要取消订阅的HTTP请求事件类型。|
-|callback|?[CallbackObject](../arkinterop/cj-api-callback_invoke.md#class-callbackobject)|否|None|回调函数。可以指定传入on中的callback取消对应的订阅，也可以不指定callback清空所有订阅。|
+|callback|?[CallbackObject](../arkinterop/cj-api-callback_invoke.md#class-callbackobject)|否|None|**命名参数。** 回调函数。可以指定传入on中的callback取消对应的订阅，也可以不指定callback清空所有订阅。|
 
 **异常：**
 
@@ -425,7 +430,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<Stri
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|HTTP请求事件类型，仅支持HeadersReceive事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<HashMap\<String,String>>|是|-|回调函数，返回HTTP响应头对象。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<HashMap\<String,String>>|是|-|回调函数，返回HTTP响应头对象。|
 
 **异常：**
 
@@ -484,7 +489,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|HTTP请求事件类型，仅支持DataReceive事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<Array\<Byte>>|是|-|回调函数，用于接收HTTP流式响应数据。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<Array\<Byte>>|是|-|回调函数，用于接收HTTP流式响应数据。|
 
 **异常：**
 
@@ -600,7 +605,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveP
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|HTTP请求事件类型，仅支持DataReceiveProgress事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[DataReceiveProgressInfo](#class-datareceiveprogressinfo)>|是|-|回调函数，用于接收数据接收进度信息，参数为DataReceiveProgressInfo对象。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[DataReceiveProgressInfo](#class-datareceiveprogressinfo)>|是|-|回调函数，用于接收数据接收进度信息，参数为DataReceiveProgressInfo对象。|
 
 **异常：**
 
@@ -658,7 +663,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProg
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|HTTP请求事件类型，仅支持DataSendProgress事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[DataSendProgressInfo](#class-datasendprogressinfo)>|是|-|回调函数，用于接收数据发送进度信息，参数为DataSendProgressInfo对象。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[DataSendProgressInfo](#class-datasendprogressinfo)>|是|-|回调函数，用于接收数据发送进度信息，参数为DataSendProgressInfo对象。|
 
 **异常：**
 
@@ -706,7 +711,7 @@ try {
 public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<String, String>>): Unit
 ```
 
-**功能：** 订阅HTTP Response Header 事件，只能触发一次。触发之后，订阅器就会被移除。使用callback方式作为异步方法。
+**功能：** 订阅HTTP Response Header 事件，只能触发一次。触发之后，订阅器就会被移除。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -717,7 +722,7 @@ public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<St
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |event|[HttpRequestEvent](#enum-httprequestevent)|是|-|HTTP请求事件类型，仅支持HeadersReceive事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<HashMap\<String,String>>|是|-|回调函数。返回HTTP响应头对象。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<HashMap\<String,String>>|是|-|回调函数。返回HTTP响应头对象。|
 
 **异常：**
 
@@ -733,7 +738,7 @@ public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<St
 public func request(url: String, options: HttpRequestOptions, callback: AsyncCallback<HttpResponse>): Unit
 ```
 
-**功能：** 根据URL地址，发起HTTP网络请求，使用callback方式作为异步方法。
+**功能：** 根据URL地址，发起HTTP网络请求，
 
 > **说明：**
 >
@@ -755,7 +760,7 @@ public func request(url: String, options: HttpRequestOptions, callback: AsyncCal
 |:---|:---|:---|:---|:---|
 |url|String|是|-|发起网络请求的URL地址。|
 |options|[HttpRequestOptions](#class-httprequestoptions)|是|-|参考[HttpRequestOptions](#class-httprequestoptions)。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<[HttpResponse](#class-httpresponse)>|是|-|回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<[HttpResponse](#class-httpresponse)>|是|-|回调函数。|
 
 **异常：**
 
@@ -831,7 +836,7 @@ try {
 public func request(url: String, callback: AsyncCallback<HttpResponse>): Unit
 ```
 
-**功能：** 根据URL地址，发起HTTP网络请求，使用callback方式作为异步方法。
+**功能：** 根据URL地址，发起HTTP网络请求，
 
 > **说明：**
 >
@@ -852,7 +857,7 @@ public func request(url: String, callback: AsyncCallback<HttpResponse>): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |url|String|是|-|发起网络请求的URL地址。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<[HttpResponse](#class-httpresponse)>|是|-|回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<[HttpResponse](#class-httpresponse)>|是|-|回调函数。|
 
 **异常：**
 
@@ -929,7 +934,7 @@ try {
 public func requestInStream(url: String, options: HttpRequestOptions, callback: AsyncCallback<UInt32>): Unit
 ```
 
-**功能：** 根据URL地址和相关配置项，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+**功能：** 根据URL地址和相关配置项，发起HTTP网络请求并返回流式响应，
 
 **需要权限：** ohos.permission.INTERNET
 
@@ -943,7 +948,7 @@ public func requestInStream(url: String, options: HttpRequestOptions, callback: 
 |:---|:---|:---|:---|:---|
 |url|String|是|-|发起网络请求的URL地址。|
 |options|[HttpRequestOptions](#class-httprequestoptions)|是|-|参考[HttpRequestOptions](#class-httprequestoptions)。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<UInt32>|是|-|回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<UInt32>|是|-|回调函数。|
 
 **异常：**
 
@@ -1019,7 +1024,7 @@ try {
 public func requestInStream(url: String, callback: AsyncCallback<UInt32>): Unit
 ```
 
-**功能：** 根据URL地址，发起HTTP网络请求并返回流式响应，使用callback方式作为异步方法。
+**功能：** 根据URL地址，发起HTTP网络请求并返回流式响应。
 
 **需要权限：** ohos.permission.INTERNET
 
@@ -1032,7 +1037,7 @@ public func requestInStream(url: String, callback: AsyncCallback<UInt32>): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |url|String|是|-|发起网络请求的URL地址。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<UInt32>|是|-|回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<UInt32>|是|-|回调函数。|
 
 **异常：**
 
@@ -1180,7 +1185,7 @@ public var clientCert: ClientCert
 public var connectTimeout: UInt32
 ```
 
-**功能：** 连接超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。
+**功能：** 连接超时时间。单位为毫秒（ms）。传入值需为UInt32范围内的整数。
 
 **类型：** UInt32
 
@@ -1228,7 +1233,7 @@ public var dnsServers: Array<String>
 public var expectDataType:?HttpDataType
 ```
 
-**功能：** 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。
+**功能：** 指定返回数据的类型。如果设置了此参数，系统将优先返回指定的类型。
 
 **类型：** ?[HttpDataType](#enum-httpdatatype)
 
@@ -1244,11 +1249,11 @@ public var expectDataType:?HttpDataType
 public var extraData: HttpData
 ```
 
-**功能：** 发送请求的额外数据，默认无此字段。
+**功能：** 发送请求的额外数据。
 
 > **说明：**
 >
-> - 没有额外数据时，避免添加该参数；若必须添加，请填写undefined或者null，避免直接传入"。
+> 没有额外数据时，避免添加该参数；若必须添加，避免直接传入空字符串或者空数组。
 
 1. 当HTTP请求为POST、PUT、DELETE等方法时，此字段为HTTP请求的content，以UTF-8编码形式作为请求体。
 
@@ -1298,7 +1303,7 @@ public var header: HashMap<String, String>
 public var maxLimit: UInt32
 ```
 
-**功能：** 响应消息的最大字节限制。<br />默认值为5\*1024\*1024，以字节为单位。最大值为100\*1024\*1024，以字节为单位。
+**功能：** 响应消息的最大字节限制。<br />最大值为100\*1024\*1024，以字节为单位。
 
 **类型：** UInt32
 
@@ -1314,7 +1319,7 @@ public var maxLimit: UInt32
 public var method: RequestMethod
 ```
 
-**功能：** 请求方式，默认为GET。
+**功能：** 请求方式，默认为Get。
 
 **类型：** [RequestMethod](#enum-requestmethod)
 
@@ -1346,7 +1351,7 @@ public var multiFormDataList: Array<MultiFormData>
 public var priority: UInt32
 ```
 
-**功能：** HTTP/HTTPS请求并发优先级，值越大优先级越高，范围[1,1000]，默认为1。
+**功能：** HTTP/HTTPS请求并发优先级，值越大优先级越高，范围[1,1000]。
 
 **类型：** UInt32
 
@@ -1362,7 +1367,7 @@ public var priority: UInt32
 public var readTimeout: UInt32
 ```
 
-**功能：** 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。<br />设置为0表示不会出现超时情况。
+**功能：** 读取超时时间。单位为毫秒（ms）。传入值需为uint32_t范围内的整数。<br />设置为0表示不会出现超时情况。
 
 **类型：** UInt32
 
@@ -1410,7 +1415,7 @@ public var resumeTo: Int64
 public var usingCache: Bool
 ```
 
-**功能：** 是否使用缓存，true表示请求时优先读取缓存，false表示不使用缓存；默认为true，请求时优先读取缓存。缓存跟随当前进程生效，新缓存会替换旧缓存。
+**功能：** 是否使用缓存，true表示请求时优先读取缓存，false表示不使用缓存；请求时优先读取缓存。缓存跟随当前进程生效，新缓存会替换旧缓存。
 
 **类型：** Bool
 
@@ -1426,7 +1431,7 @@ public var usingCache: Bool
 public var usingProtocol: ?HttpProtocol
 ```
 
-**功能：** 使用协议。默认值由系统自动指定。
+**功能：** 使用协议。
 
 **类型：** ?[HttpProtocol](#enum-httpprotocol)
 
@@ -1475,15 +1480,15 @@ public init(method!: RequestMethod = RequestMethod.Get, extraData!: HttpData = H
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|method|[RequestMethod](#enum-requestmethod)|否|RequestMethod.Get|**命名参数。** 请求方式，默认为GET。|
+|method|[RequestMethod](#enum-requestmethod)|否|RequestMethod.Get|**命名参数。** 请求方式，默认为RequestMethod.Get。|
 |extraData|[HttpData](#enum-httpdata)|否|HttpData.StringData("")|**命名参数。** 发送请求的额外数据，默认无此字段。|
-|expectDataType|?[HttpDataType](#enum-httpdatatype)|否|None|**命名参数。** 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。当指定其类型为Object时，最大长度为65536字符数。|
+|expectDataType|?[HttpDataType](#enum-httpdatatype)|否|None|**命名参数。** 指定返回数据的类型，默认无此字段。如果设置了此参数，系统将优先返回指定的类型。|
 |usingCache|Bool|否|true|**命名参数。** 是否使用缓存，true表示请求时优先读取缓存，false表示不使用缓存；默认为true，请求时优先读取缓存。缓存跟随当前进程生效，新缓存会替换旧缓存。|
 |priority|UInt32|否|1|**命名参数。** HTTP/HTTPS请求并发优先级，值越大优先级越高，范围[1,1000]，默认为1。|
 |header|HashMap\<String,String>|否|HashMap<String,String>()|**命名参数。** HTTP请求头字段。当请求方式为"POST" "PUT" "DELETE" 或者""时，默认{'content-Type': 'application/json'}， 否则默认{'content-Type': 'application/x-www-form-urlencoded'}。<br />如果head中包含number类型的字段，最大支持int64的整数。|
 |readTimeout|UInt32|否|60000|**命名参数。** 读取超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。<br />设置为0表示不会出现超时情况。|
 |connectTimeout|UInt32|否|60000|**命名参数。** 连接超时时间。单位为毫秒（ms），默认为60000ms。传入值需为uint32_t范围内的整数。|
-|usingProtocol|?[HttpProtocol](#enum-httpprotocol)|否|None|**命名参数。** 使用协议，默认值由系统自动指定。|
+|usingProtocol|?[HttpProtocol](#enum-httpprotocol)|否|None|**命名参数。** 使用协议，默认值由系统自动指定为None。|
 |usingProxy|[UsingProxy](#enum-usingproxy)|否|UsingProxy.UseDefault|**命名参数。** HTTP代理配置，该项不配置时表示不使用代理。<br />- 当usingProxy为布尔类型true时，使用默认网络代理，为false时，不使用代理。<br />- 当usingProxy为HttpProxy类型时，使用指定网络代理。当前HttpProxy不支持指定username和password字段。|
 |caPath|String|否|""|**命名参数。** 如果设置了此参数，系统将使用用户指定路径的CA证书（开发者需保证该路径下CA证书的可访问性），否则将使用系统预设CA证书。<br />系统预设CA证书位置：/etc/ssl/certs/cacert.pem。证书路径为沙箱映射路径（开发者可通过UIAbilityContext提供的能力获取应用沙箱路径）。目前仅支持后缀名为.pem的文本格式证书。|
 |resumeFrom|Int64|否|0|**命名参数。** 用于设置下载起始位置，该参数只能用于GET方法，不能用于其他。HTTP标准（RFC 7233第3.1节）允许服务器忽略范围请求。<br />- 使用HTTP PUT时，不能使用该选项，因为该选项可能与其他选项冲突。<br />- 取值范围是：[1，4294967296（4GB）]，超出范围则不生效。|
@@ -1791,7 +1796,7 @@ public var filePath: String
 
 > **说明：**
 >
-> - 需传入文件管理模块支持的格式，可以通过文件管理的[access](../CoreFileKit/cj-apis-file_fs.md#static-func-accessstring-accessmodetype-accessflagtype)接口，验证文件是否存在且可访问。
+> 需传入文件管理模块支持的格式，可以通过文件管理的[access](../CoreFileKit/cj-apis-file_fs.md#static-func-accessstring-accessmodetype-accessflagtype)接口，验证文件是否存在且可访问。
 
 **类型：** String
 
@@ -2070,7 +2075,7 @@ public enum CertType {
 Der
 ```
 
-**功能：** 证书类型DER。
+**功能：** 证书类型Der。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2094,7 +2099,7 @@ P12
 Pem
 ```
 
-**功能：** 证书类型PEM。
+**功能：** 证书类型Pem。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2236,7 +2241,7 @@ Http3
 ## enum HttpRequestEvent
 
 ```cangjie
-public enum HttpRequestEvent <: Equatable<HttpRequestEvent> & Hashable & ToString {
+public enum HttpRequestEvent <: Equatable<HttpRequestEvent> & Hashable {
     | HeadersReceive
     | DataReceive
     | DataEnd
@@ -2256,7 +2261,6 @@ public enum HttpRequestEvent <: Equatable<HttpRequestEvent> & Hashable & ToStrin
 
 - Equatable\<HttpRequestEvent>
 - Hashable
-- ToString
 
 ### DataEnd
 
@@ -2412,7 +2416,7 @@ public enum RequestMethod {
 Connect
 ```
 
-**功能：** CONNECT方法建立到由目标资源标识的服务器的隧道。
+**功能：** Connect方法建立到由目标资源标识的服务器的隧道。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2424,7 +2428,7 @@ Connect
 Delete
 ```
 
-**功能：** DELETE方法用于删除指定的资源。
+**功能：** Delete方法用于删除指定的资源。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2436,7 +2440,7 @@ Delete
 Get
 ```
 
-**功能：** GET方法请求指定资源的表示。使用GET的请求应该只检索数据，不应该包含请求内容。
+**功能：** Get方法请求指定资源的表示。使用Get的请求应该只检索数据，不应该包含请求内容。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2448,7 +2452,7 @@ Get
 Head
 ```
 
-**功能：** HEAD方法请求与GET请求相同的响应，但没有响应主体。
+**功能：** Head方法请求与Get请求相同的响应，但没有响应主体。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2460,7 +2464,7 @@ Head
 Options
 ```
 
-**功能：** OPTIONS方法描述了目标资源的通信选项。
+**功能：** Options方法描述了目标资源的通信选项。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2472,7 +2476,7 @@ Options
 Post
 ```
 
-**功能：** POST方法将实体提交给指定的资源，通常会导致服务器上的状态更改。
+**功能：** Post方法将实体提交给指定的资源，通常会导致服务器上的状态更改。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2484,7 +2488,7 @@ Post
 Put
 ```
 
-**功能：** PUT方法将目标资源的所有当前表示替换为请求内容。
+**功能：** Put方法将目标资源的所有当前表示替换为请求内容。
 
 **系统能力：** SystemCapability.Communication.NetStack
 
@@ -2496,7 +2500,7 @@ Put
 Trace
 ```
 
-**功能：** TRACE方法沿到达目标资源的路径执行消息环回测试。
+**功能：** Trace方法沿到达目标资源的路径执行消息环回测试。
 
 **系统能力：** SystemCapability.Communication.NetStack
 

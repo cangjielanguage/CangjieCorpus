@@ -1,5 +1,11 @@
 # TextPicker
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 滑动选择文本内容的组件。
 
 ## 导入模块
@@ -113,10 +119,6 @@ public type OnTextPickerChangeCallback = (String, UInt32) -> Unit
 **功能：** TextPicker项目被选中事件的回调。
 
 **类型：** (String, UInt32) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 

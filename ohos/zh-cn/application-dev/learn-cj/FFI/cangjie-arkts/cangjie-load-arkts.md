@@ -18,7 +18,7 @@ public func requireArkModule(src: String): JSValue
 
 > **注意：**
 >
-> 当前在spawn(Main)或context.postJSTask的回调里直接调用该接口将失败，该限制计划在后续的版本里移除。
+> 当前在spawn(UIThread)或context.postJSTask的回调里直接调用该接口将失败，该限制计划在后续的版本里移除。
 
 ## 支持场景
 

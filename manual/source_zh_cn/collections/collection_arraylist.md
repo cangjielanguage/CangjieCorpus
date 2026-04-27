@@ -16,6 +16,8 @@ ArrayList 具备非常好的扩容能力，适合于需要频繁增加和删除�
 
 ArrayList 的可变性是一个非常有用的特征，可以让同一个 ArrayList 实例的所有引用都共享同样的元素，并且对它们统一进行修改。
 
+<!-- code_no_check -->
+
 ```cangjie
 var a: ArrayList<Int64> = ... // ArrayList whose element type is Int64
 var b: ArrayList<String> = ... // ArrayList whose element type is String
@@ -24,6 +26,8 @@ var b: ArrayList<String> = ... // ArrayList whose element type is String
 元素类型不相同的 ArrayList 是不相同的类型，所以它们之间不可以互相赋值。
 
 因此以下例子是不合法的。
+
+<!-- code_no_check -->
 
 ```cangjie
 b = a // Type mismatch
@@ -48,7 +52,7 @@ let e = ArrayList<String>(2, {x: Int64 => x.toString()}) // Created an ArrayList
 <!-- verify -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 
 main() {
     let list = ArrayList<Int64>([0, 1, 2])
@@ -71,7 +75,7 @@ The element is 2
 <!-- verify -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 
 main() {
     let list = ArrayList<Int64>([0, 1, 2])
@@ -90,6 +94,8 @@ The size of arraylist is 3
 ```
 
 当想访问单个指定位置的元素时，可以使用下标语法访问（下标的类型必须是 Int64）。非空 ArrayList 的第一个元素总是从位置 0 开始的。可以从 0 开始访问 ArrayList 的任意一个元素，直到最后一个位置（ArrayList 的 size - 1）。使用负数或大于等于 size 的索引会触发运行时异常。
+
+<!-- code_no_check -->
 
 ```cangjie
 let a = list[0] // a == 0
@@ -124,12 +130,12 @@ list2[0] = 3
 // list2 contains elements 3, 1, 2
 ```
 
-如果需要将单个元素添加到 ArrayList 的末尾，请使用 add 函数。如果希望同时添加多个元素到末尾，可以使用 `add(all!: Collection<T>)` 函数，这个函数可以接受其他相同元素类型的 Collection 类型（例如 Array）。
+如果需要将单个元素添加到 ArrayList 的末尾，请使用 add 函数。如果希望同时添加多个元素到末尾，可以使用 `add(all!: Collection<T>)` 函数，这个函数可以接受其他相同元素类型的 Collection 类型，如 Array。Collection 类型详见[基础 Collection 类型概述](collection_overview.md)。
 
 <!-- run -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 
 main() {
     let list = ArrayList<Int64>()
@@ -167,7 +173,7 @@ list.remove(at: 1) // Delete the element at subscript 1, now the list contains e
 <!-- run -->
 
 ```cangjie
-import std.collection.*
+import std.collection.ArrayList
 
 main() {
     let list = ArrayList<Int64>(100) // Allocate space at once

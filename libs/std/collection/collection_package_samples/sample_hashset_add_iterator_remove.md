@@ -1,8 +1,8 @@
 # HashSet 的 add/iterator/remove 函数
 
-此用例展示了 HashSet 的基本使用方法。
+此示例展示了 HashSet 的基本使用方法。
 
-代码如下：
+示例：
 
 <!-- verify -->
 
@@ -16,14 +16,16 @@ main() {
     set.add("orange") // set: ["apple", "banana", "orange"], not in order
     set.add("peach") // set: ["apple", "banana", "orange", "peach"], not in order
     var itset = set.iterator()
-    while(true) {
+    while (true) {
         var value = itset.next()
-        match(value) {
+        match (value) {
             case Some(v) =>
                 if (!set.contains(v)) {
                     print("Operation failed")
                     return 1
-                } else { println(v) }
+                } else {
+                    println(v)
+                }
             case None => break
         }
     }

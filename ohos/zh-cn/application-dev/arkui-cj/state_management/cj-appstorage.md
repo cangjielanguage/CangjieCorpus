@@ -1,5 +1,11 @@
 # AppStorage：应用全局的UI状态存储
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 AppStorage是应用全局的UI状态存储，是和应用的进程绑定的，由UI框架在应用程序启动时创建，为应用程序UI状态属性提供中央存储。
 
 和AppStorage不同的是，LocalStorage是页面级的，通常应用于页面内的数据共享。而AppStorage是应用级的全局状态共享，还相当于整个应用的“中枢”，[持久化数据PersistentStorage](./cj-persiststorage.md)和[环境变量Environment](./cj-environment.md)都是通过AppStorage中转，才可以和UI交互。
@@ -12,7 +18,7 @@ AppStorage是应用全局的UI状态存储，是和应用的进程绑定的，�
 
 AppStorage是应用全局的UI状态存储，不同于@State等宏仅能在组件树上传递，AppStorage的目的是为了给开发者提供更大范围的跨ability基本的数据共享。在阅读本文档前，建议开发者对状态管理框架中AppStorage的定位有一个宏观了解。建议提前阅读：[状态管理概述](cj-state-management-overview.md)。
 
-AppStorage还提供了API接口，可以让开发者通过接口在自定义组件外手动触发AppStorage对应key的增删改查，建议配合[AppStorage API文档](../../reference/arkui-cj/cj-state-rendering-appstatemanagement.md#appstorage应用全局的ui状态存储)阅读。
+AppStorage还提供了API接口，可以让开发者通过接口在自定义组件外手动触发AppStorage对应key的增删改查，建议配合[AppStorage API文档](../../reference/arkui-cj/cj-state-rendering-appstatemanagement.md#class-appstorage)阅读。
 
 ## 概述
 

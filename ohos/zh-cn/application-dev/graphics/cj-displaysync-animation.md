@@ -1,5 +1,11 @@
 # 请求动画绘制帧率
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 在应用开发中，[属性动画](../reference/arkui-cj/cj-animation-animation.md)和[显式动画](../reference/arkui-cj/cj-apis-uicontext-uicontext.md)能够使用可选参数[ExpectedFrameRateRange](../reference/arkui-cj/cj-common-types.md#class-expectedframeraterange)，为不同的动画配置不同的期望绘制帧率。
 
 ## 请求属性动画的绘制帧率
@@ -39,7 +45,7 @@ class EntryView {
         }.height(100.percent)
     }
 }
- ```
+```
 
 ## 请求显式动画的绘制帧率
 
@@ -48,7 +54,6 @@ class EntryView {
 <!-- compile -->
 
 ```cangjie
-import ohos.arkui.ui_context.*
 import kit.ArkUI.*
 
 @Entry
@@ -90,7 +95,6 @@ class EntryView {
 
 ```cangjie
 import kit.ArkUI.*
-import ohos.arkui.ui_context.*
 
 let animateOpt1 = AnimateParam(
     duration: 1200,

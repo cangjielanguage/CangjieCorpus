@@ -1,6 +1,6 @@
 # Decimal 基础数学运算示例
 
-以下为通过不同构造函数初始化 `Decimal` 对象的，并进行基础数学运算示例：
+以下为通过不同构造函数初始化 `Decimal` 对象，并进行基础数学运算的示例：
 <!-- verify -->
 
 ```cangjie
@@ -14,7 +14,8 @@ main() {
     println("${decimal1} - ${decimal2} = ${decimal1 - decimal2}")
     println("${decimal1} * ${decimal2} = ${decimal1 * decimal2}")
     println("${decimal1} / ${decimal2} = ${decimal1 / decimal2}")
-    println("${decimal1} / ${decimal2} with precision 10 and rounding mode HalfEven = ${decimal1.divWithPrecision(decimal2, 10, roundingMode: HalfEven)}")
+    println(
+        "${decimal1} / ${decimal2} with precision 10 and rounding mode HalfEven = ${decimal1.divWithPrecision(decimal2, 10, roundingMode: HalfEven)}")
     let (quo, rem) = decimal1.divAndMod(decimal2)
     println("${decimal1} / ${decimal2} = ${quo} .. ${rem}")
     return 0

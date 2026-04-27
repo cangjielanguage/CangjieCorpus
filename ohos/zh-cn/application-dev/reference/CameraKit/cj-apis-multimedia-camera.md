@@ -1,5 +1,11 @@
 # ohos.multimedia.camera（相机管理）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 camera模块为开发者提供一套简单且易于理解的相机服务接口，开发者通过调用接口可以开发相机应用。应用通过访问和操作相机硬件，实现基础操作，如预览、拍照和录像；还可以通过接口组合完成更多操作，如控制闪光灯和曝光时间、对焦或调焦等。
 
 ## 导入模块
@@ -108,7 +114,7 @@ func getExposureMode(): ExposureMode
 
 > **说明：**
 >
-> - 若未通过[setExposureMode](#func-setexposuremodeexposuremode)接口进行设置，直接调用该接口查询当前曝光模式，会返回无效值。
+> 若未通过[setExposureMode](#func-setexposuremodeexposuremode)接口进行设置，直接调用该接口查询当前曝光模式，会返回无效值。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -670,7 +676,7 @@ func setColorSpace(colorSpace: ColorSpace): Unit
 应用可以下发不同的色彩空间(ColorSpace)参数来支持P3广色域以及HDR的功能。
 当应用不主动设置色彩空间时，拍照模式默认为SDR拍摄效果。
 在拍照模式下若需要获取HDR高显效果的图片可通过设置色彩空间P3色域实现。
-应用针对不同模式使能HDR效果、设置的色彩空间以及设置相机输出流[Profile](#class-profile)中的[CameraFormat](#enum-cameraformat)一一对应关系可参考下表。例如，在录像模式下若需要选择HDR拍摄，相机预览输出流和录像输出流[Profile](#class-profile)中的[CameraFormat](#enum-cameraformat)可选择CAMERA_FORMAT_YCRCB_P010，色彩空间ColorSpace可选择设置2020_HLG_LIMIT。
+应用针对不同模式使能HDR效果、设置的色彩空间以及设置相机输出流[Profile](#class-profile)中的[CameraFormat](#enum-cameraformat)一一对应关系可参考下表。例如，在录像模式下若需要选择HDR拍摄，相机预览输出流和录像输出流[Profile](#class-profile)中的[CameraFormat](#enum-cameraformat)可选择CameraFormatYcrcbP010，色彩空间ColorSpace可选择设置Bt2020HlgLimit。
 
 在录像模式下，使能SDR或HDR_VIVID拍摄效果时，CameraFormat与ColorSpace必须按照下列表格中的对应关系配置，若不满足表格中CameraFormat与ColorSpace配置，会导致预览异常等问题。
 
@@ -678,15 +684,15 @@ func setColorSpace(colorSpace: ColorSpace): Unit
 
 | SDR/HDR拍摄         | CameraFormat             | ColorSpace       |
 |--------------------|--------------------------|------------------|
-| SDR                | CAMERA_FORMAT_YUV_420_SP | BT709_LIMIT      |
-| HDR_VIVID          | CAMERA_FORMAT_YCRCB_P010<br>CAMERA_FORMAT_YCBCR_P010 | BT2020_HLG_LIMIT<br>BT2020_HLG_FULL |
+| SDR                | CameraFormatYuv420Sp | Bt709Limit      |
+| HDR_VIVID          | CameraFormatYcrcbP010<br>CameraFormatYcbcrP010 | Bt2020HlgLimit |
 
 **拍照模式：**
 
 | SDR/HDR拍摄        | ColorSpace |
 |--------------------|------------|
-| SDR(Default)       | SRGB       |
-| HDR                | DISPLAY_P3 |
+| SDR(Default)       | Srgb      |
+| HDR                | DisplayP3 |
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -1938,11 +1944,11 @@ public interface Stabilization <: StabilizationQuery {
 
 **功能：** 提供设备在录像模式下设置视频防抖的操作。
 
- > **说明：**
- >
- > - 需要会话中有录像流（[VideoOutput](#class-videooutput)）的前提下，才可以对视频进行防抖设置，
- >
- > - 其中[VideoStabilizationMode](#enum-videostabilizationmode)中的枚举HIGH需要在[Profile](#class-profile)的分辨率为1920*1080的场景下生效。
+> **说明：**
+>
+> - 对视频进行防抖设置的前提是会话中有录像流（[VideoOutput](#class-videooutput)）。
+>
+> - 设置防抖操作时，[VideoStabilizationMode.HIGH](#high)需要在[Profile](#class-profile)的分辨率为1920*1080的场景下生效。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -2654,7 +2660,7 @@ public func on(eventType: CameraEvents, camera: CameraDevice, callback: Callback
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -2827,7 +2833,7 @@ public class CameraManager {}
 public func createCameraInput(camera: CameraDevice): CameraInput
 ```
 
-**功能：** 使用CameraDevice对象创建CameraInput实例，同步返回结果。
+**功能：** 使用CameraDevice对象创建CameraInput实例。
 
 该接口使用前首先通过[getSupportedCameras](#func-getsupportedcameras)接口查询当前设备支持的相机设备信息列表，开发者需要根据具体使用场景选择符合需求的相机设备，然后使用该接口创建CameraInput实例。
 
@@ -3055,10 +3061,15 @@ import kit.PerformanceAnalysisKit.Hilog
 try {
     let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     let cameraManager = getCameraManager(ctx)
+    let cameraDevices = cameraManager.getSupportedCameras()
+    let camera = cameraDevices[0]
+    let mode = cameraManager.getSupportedSceneModes(camera)[0]
+    let cameraOutputCapability = cameraManager.getSupportedOutputCapability(camera, mode)
+    let profile = cameraOutputCapability.previewProfiles[0]
     let size = ImageSize(8, 8192)
     let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
     let surfaceId: String = receiver.getReceivingSurfaceId()
-    let previewOutput = cameraManager.createPreviewOutput(surfaceId)
+    let previewOutput = cameraManager.createPreviewOutput(profile, surfaceId)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -3221,19 +3232,20 @@ public func createVideoOutput(profile: VideoProfile, surfaceId: String): VideoOu
 // index.cj
 
 import kit.CameraKit.*
-import kit.ImageKit.createImageReceiver
-import kit.ImageKit.Size as ImageSize
-import kit.ImageKit.ImageFormat
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     let cameraManager = getCameraManager(ctx)
-    let size = ImageSize(8, 8192)
-    let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-    let surfaceId: String = receiver.getReceivingSurfaceId()
-    let videoOutput = cameraManager.createVideoOutput(surfaceId)
+    let cameraDevices = cameraManager.getSupportedCameras()
+    let camera = cameraDevices[0]
+    let mode = cameraManager.getSupportedSceneModes(camera)[0]
+    let cameraOutputCapability = cameraManager.getSupportedOutputCapability(camera, mode)
+    let profile = cameraOutputCapability.videoProfiles[0]
+    // 假设从AVRecorder获取surfaceId
+    let surfaceId: String = "surfaceId_from_avrecorder"
+    let videoOutput = cameraManager.createVideoOutput(profile, surfaceId)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -3606,7 +3618,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<CameraStatu
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CameraStatus。CameraManager对象获取成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CameraStatusInfo](#class-camerastatusinfo)>|是|-|回调函数。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CameraStatusInfo](#class-camerastatusinfo)>|是|-|回调函数。|
 
 **异常：**
 
@@ -3653,7 +3665,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<FoldStatusI
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FoldStatusChange。表示折叠设备折叠状态发生变化。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FoldStatusInfo](#class-foldstatusinfo)>|是|-|回调函数。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FoldStatusInfo](#class-foldstatusinfo)>|是|-|回调函数。|
 
 **异常：**
 
@@ -3700,7 +3712,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<TorchStatus
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为TorchStatusChange。CameraManager对象获取成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[TorchStatusInfo](#class-torchstatusinfo)>|是|-|回调函数。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[TorchStatusInfo](#class-torchstatusinfo)>|是|-|回调函数。|
 
 **异常：**
 
@@ -3782,11 +3794,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<CameraStatusInfo>): Unit
 ```
 
-**功能：** 相机设备状态回调，通过注册回调函数获取相机的状态变化。使用callback异步回调。
+**功能：** 相机设备状态回调，通过注册回调函数获取相机的状态变化。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -3797,7 +3809,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<CameraStatus
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CameraStatus。CameraManager对象获取成功后可监听。目前只支持对设备打开或者关闭会触发该事件并返回对应信息。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CameraStatusInfo](#class-camerastatusinfo)>|是|-|回调函数，用于获取镜头状态变化信息。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CameraStatusInfo](#class-camerastatusinfo)>|是|-|回调函数，用于获取镜头状态变化信息。|
 
 **异常：**
 
@@ -3843,11 +3855,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<FoldStatusInfo>): Unit
 ```
 
-**功能：** 注册折叠设备折叠状态变化的监听。使用callback异步回调。
+**功能：** 注册折叠设备折叠状态变化的监听。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -3858,7 +3870,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<FoldStatusIn
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FoldStatusChange。表示折叠设备折叠状态发生变化。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FoldStatusInfo](#class-foldstatusinfo)>|是|-|回调函数。返回折叠设备折叠信息。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FoldStatusInfo](#class-foldstatusinfo)>|是|-|回调函数。返回折叠设备折叠信息。|
 
 **异常：**
 
@@ -3904,11 +3916,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusInfo>): Unit
 ```
 
-**功能：** 手电筒状态变化回调，通过注册回调函数获取手电筒状态变化。使用callback异步回调。
+**功能：** 手电筒状态变化回调，通过注册回调函数获取手电筒状态变化。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -3919,7 +3931,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<TorchStatusI
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为TorchStatusChange。cameraManager对象获取成功后可监听。目前只支持手电筒打开，手电筒关闭，手电筒不可用，手电筒恢复可用会触发该事件并返回对应信息。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[TorchStatusInfo](#class-torchstatusinfo)>|是|-|回调函数，用于获取手电筒状态变化信息。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[TorchStatusInfo](#class-torchstatusinfo)>|是|-|回调函数，用于获取手电筒状态变化信息。|
 
 **异常：**
 
@@ -4514,7 +4526,7 @@ public class PhotoCaptureSetting {
 public var location:?Location
 ```
 
-**功能：** 图片地理位置信息(默认以设备硬件信息为准)。
+**功能：** 图片地理位置信息。
 
 **类型：** ?[Location](#class-location)
 
@@ -4530,7 +4542,7 @@ public var location:?Location
 public var mirror: Bool
 ```
 
-**功能：** 镜像使能开关（默认关）。使用之前需要使用[isMirrorSupported](#func-ismirrorsupported)进行判断是否支持。true表示使能，false表示不使能。
+**功能：** 镜像使能开关。使用之前需要使用[isMirrorSupported](#func-ismirrorsupported)进行判断是否支持。true表示使能，false表示不使能。
 
 **类型：** Bool
 
@@ -4546,7 +4558,7 @@ public var mirror: Bool
 public var quality: QualityLevel
 ```
 
-**功能：** 图片质量(默认低)。
+**功能：** 图片质量。
 
 **类型：** [QualityLevel](#enum-qualitylevel)
 
@@ -4562,7 +4574,7 @@ public var quality: QualityLevel
 public var rotation: ImageRotation
 ```
 
-**功能：** 图片旋转角度(默认0度，顺时针旋转)。
+**功能：** 图片旋转角度。
 
 **类型：** [ImageRotation](#enum-imagerotation)
 
@@ -4583,7 +4595,7 @@ public init(
 )
 ```
 
-**功能：** 创建PhoroCaptureSetting对象。
+**功能：** 创建PhotoCaptureSetting对象。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -4654,7 +4666,7 @@ try {
     let mode = cameraManager.getSupportedSceneModes(device)[0]
     let ability = cameraManager.getSupportedOutputCapability(device, mode)
     let output = cameraManager.createPhotoOutput(profile:ability.photoProfiles[0])
-    output.capture(PhotoCaptureSetting())
+    output.capture()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -5093,7 +5105,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureStar
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CaptureStartWithInfo，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CaptureStartInfo](#class-capturestartinfo)>|是|-|回调函数，用于处理[CaptureStartInfo](#class-capturestartinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CaptureStartInfo](#class-capturestartinfo)>|是|-|回调函数，用于处理[CaptureStartInfo](#class-capturestartinfo)。|
 
 **异常：**
 
@@ -5144,7 +5156,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutte
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FrameShutter，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FrameShutterInfo](#class-frameshutterinfo)>|是|-|回调函数，用于处理[FrameShutterInfo](#class-frameshutterinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FrameShutterInfo](#class-frameshutterinfo)>|是|-|回调函数，用于处理[FrameShutterInfo](#class-frameshutterinfo)。|
 
 **异常：**
 
@@ -5195,7 +5207,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<CaptureEndI
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CaptureEnd，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CaptureEndInfo](#class-captureendinfo)>|是|-|回调函数，用于处理[CaptureEndInfo](#class-captureendinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CaptureEndInfo](#class-captureendinfo)>|是|-|回调函数，用于处理[CaptureEndInfo](#class-captureendinfo)。|
 
 **异常：**
 
@@ -5246,7 +5258,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<FrameShutte
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FrameShutterEnd，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FrameShutterEndInfo](#class-frameshutterendinfo)>|是|-|回调函数，用于处理[FrameShutterEndInfo](#class-frameshutterendinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FrameShutterEndInfo](#class-frameshutterendinfo)>|是|-|回调函数，用于处理[FrameShutterEndInfo](#class-frameshutterendinfo)。|
 
 **异常：**
 
@@ -5348,7 +5360,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<Float64>): 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为EstimatedCaptureDuration，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<Float64>|是|-|回调函数，用于获取预估的拍照时间（毫秒）。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<Float64>|是|-|回调函数，用于获取预估的拍照时间（毫秒）。|
 
 **异常：**
 
@@ -5438,11 +5450,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStartInfo>): Unit
 ```
 
-**功能：** 监听拍照开始，通过注册回调函数获取CaptureStartInfo。使用callback异步回调。
+**功能：** 监听拍照开始，通过注册回调函数获取CaptureStartInfo。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5453,7 +5465,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureStart
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CaptureStartWithInfo，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CaptureStartInfo](#class-capturestartinfo)>|是|-|回调函数，用于处理[CaptureStartInfo](#class-capturestartinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CaptureStartInfo](#class-capturestartinfo)>|是|-|回调函数，用于处理[CaptureStartInfo](#class-capturestartinfo)。|
 
 **异常：**
 
@@ -5503,7 +5515,7 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterInfo>): Unit
 ```
 
-**功能：** 监听拍照帧输出捕获，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听拍照帧输出捕获，通过注册回调函数获取结果。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5514,7 +5526,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutter
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FrameShutter，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FrameShutterInfo](#class-frameshutterinfo)>|是|-|回调函数，用于处理[FrameShutterInfo](#class-frameshutterinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FrameShutterInfo](#class-frameshutterinfo)>|是|-|回调函数，用于处理[FrameShutterInfo](#class-frameshutterinfo)。|
 
 **异常：**
 
@@ -5564,11 +5576,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndInfo>): Unit
 ```
 
-**功能：** 监听拍照结束，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听拍照结束，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5579,7 +5591,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<CaptureEndIn
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为CaptureEnd。photoOutput创建成功后可监听。拍照完全结束可触发该事件发生并返回相应信息。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[CaptureEndInfo](#class-captureendinfo)>|是|-|回调函数，用于处理[CaptureEndInfo](#class-captureendinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[CaptureEndInfo](#class-captureendinfo)>|是|-|回调函数，用于处理[CaptureEndInfo](#class-captureendinfo)。|
 
 **异常：**
 
@@ -5629,11 +5641,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutterEndInfo>): Unit
 ```
 
-**功能：** 监听拍照曝光结束捕获，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听拍照曝光结束捕获，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5644,7 +5656,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<FrameShutter
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FrameShutterEnd，photoOutput创建成功后可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FrameShutterEndInfo](#class-frameshutterendinfo)>|是|-|回调函数，用于处理[FrameShutterEndInfo](#class-frameshutterendinfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FrameShutterEndInfo](#class-frameshutterendinfo)>|是|-|回调函数，用于处理[FrameShutterEndInfo](#class-frameshutterendinfo)。|
 
 **异常：**
 
@@ -5694,11 +5706,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 ```
 
-**功能：** 监听可拍下一张或拍照错误，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听可拍下一张或拍照错误，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5759,11 +5771,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): Unit
 ```
 
-**功能：** 监听预估的拍照时间，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听预估的拍照时间，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -5774,7 +5786,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<Float64>): U
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为EstimatedCaptureDuration，photoOutput创建成功后可监听。拍照完全结束可触发该事件发生并返回相应信息。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<Float64>|是|-|回调函数，用于获取预估的单次拍照底层出sensor采集帧时间，单位：毫秒。如果上报-1，代表没有预估时间。 |
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<Float64>|是|-|回调函数，用于获取预估的单次拍照底层出sensor采集帧时间，单位：毫秒。如果上报-1，代表没有预估时间。 |
 
 **异常：**
 
@@ -6046,7 +6058,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FocusStateChange，session创建成功可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于处理[FocusState](#enum-focusstate)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于处理[FocusState](#enum-focusstate)。|
 
 **示例：**
 
@@ -6087,7 +6099,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomI
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为SmoothZoomInfoAvailable，session创建成功可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于处理[SmoothZoomInfo](#class-smoothzoominfo)。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于处理[SmoothZoomInfo](#class-smoothzoominfo)。|
 
 **示例：**
 
@@ -6164,11 +6176,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 ```
 
-**功能：** 监听普通拍照会话的错误事件，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听普通拍照会话的错误事件，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -6221,11 +6233,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit
 ```
 
-**功能：** 监听相机聚焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听相机聚焦的状态变化，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -6236,7 +6248,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>)
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FocusStateChange，session创建成功可监听。仅当自动对焦模式时，且相机对焦状态发生改变时可触发该事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于获取当前对焦状态。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于获取当前对焦状态。|
 
 **示例：**
 
@@ -6251,11 +6263,11 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class SmoothZoomInfoAvailableCallback1 <: Callback1Argument<SmoothZoomInfo> {
+class FocusStateChangeCallback <: Callback1Argument<FocusState> {
     public static var invoked = false
 
-    public func invoke(err: ?BusinessException, info: SmoothZoomInfo) {
-        Hilog.info(0, "AppLogCj", "[multimedia_camera | SmoothZoomInfoAvailable Callback]: info: ${info.duration}")
+    public func invoke(err: ?BusinessException, state: FocusState) {
+        Hilog.info(0, "AppLogCj", "[multimedia_camera | FocusStateChange Callback]: state: ${state.toString()}")
         invoked = true
     }
 }
@@ -6265,8 +6277,8 @@ try {
     let cameraManager = getCameraManager(ctx)
     let photoSession = cameraManager.createSession(SceneMode.NormalPhoto) as PhotoSession
     let session = photoSession.getOrThrow()
-    let callback = SmoothZoomInfoAvailableCallback1()
-    session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
+    let callback = FocusStateChangeCallback()
+    session.on(CameraEvents.FocusStateChange, callback)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -6278,11 +6290,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit
 ```
 
-**功能：** 监听相机平滑变焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听相机平滑变焦的状态变化，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -6293,7 +6305,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomIn
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为SmoothZoomInfoAvailable，session创建成功可监听。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于获取当前平滑变焦状态。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于获取当前平滑变焦状态。|
 
 **示例：**
 
@@ -6717,7 +6729,7 @@ public func off(eventType: CameraEvents, callback: Callback0Argument): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一，否则抛出401参数错误。|
+|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一。|
 |callback|[Callback0Argument](../arkinterop/cj-api-callback_invoke.md#class-callback0argument)|是|-|回调函数。|
 
 **异常：**
@@ -6820,11 +6832,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 ```
 
-**功能：** 监听预览帧启动，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听预览帧启动，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 不支持在on监听的回调方法里调用off注销回调。
+> 不支持在on监听的回调方法里调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -6834,7 +6846,7 @@ public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一，否则抛出401参数错误。|
+|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一。|
 |callback|[Callback0Argument](../arkinterop/cj-api-callback_invoke.md#class-callback0argument)|是|-|回调函数。|
 
 **异常：**
@@ -6946,7 +6958,7 @@ public func setFrameRate(minFps: Int32, maxFps: Int32): Unit
 
 > **说明：**
 >
-> - 仅在[PhotoSession](#class-photosession)或[VideoSession](#class-videosession)模式下支持。
+> 仅在[PhotoSession](#class-photosession)或[VideoSession](#class-videosession)模式下支持。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -7539,7 +7551,7 @@ public func getVideoRotation(deviceDegree: Int32): ImageRotation
 
 |类型|说明|
 |:----|:----|
-|[ImageRotation](#enum-imagerotation)|设备旋转角度，单位度，取值范围0-360。+|
+|[ImageRotation](#enum-imagerotation)|设备旋转角度，单位度，取值范围0-360。|
 
 **异常：**
 
@@ -7596,7 +7608,7 @@ public func off(eventType: CameraEvents, callback: Callback0Argument): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一，videoOutput创建成功后可监听|
+|eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为[FrameStart, FrameEnd, CameraError]其中之一，videoOutput创建成功后可监听。|
 |callback|[Callback0Argument](../arkinterop/cj-api-callback_invoke.md#class-callback0argument)|是|-|回调函数，要取消的callback。|
 
 **异常：**
@@ -7703,7 +7715,7 @@ public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -8025,7 +8037,7 @@ public class VideoSession <: Session & Flash & AutoExposure & Focus & Zoom & Sta
 
 > **说明：**
 >
-> - 默认的视频录制模式，适用于一般场景。支持720P、1080p等多种分辨率的录制，可选择不同帧率（如30fps、60fps）。
+> 默认的视频录制模式，适用于一般场景。支持720P、1080p等多种分辨率的录制，可选择不同帧率（如30fps、60fps）。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -8162,7 +8174,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<FocusState>
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FocusStateChange，session创建成功之后可监听该接口。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FocusState](#enum-focusstate)>|是|-|回调函数，取消对应callback。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FocusState](#enum-focusstate)>|是|-|回调函数，取消对应callback。|
 
 **异常：**
 
@@ -8211,7 +8223,7 @@ public func off(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomI
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为SmoothZoomInfoAvailable，session创建成功之后可监听该接口。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，取消对应callback。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，取消对应callback。|
 
 **异常：**
 
@@ -8297,11 +8309,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback0Argument): Unit
 ```
 
-**功能：** 监听普通录像会话的错误事件，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听普通录像会话的错误事件，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -8362,11 +8374,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>): Unit
 ```
 
-**功能：** 监听相机聚焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听相机聚焦的状态变化，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -8377,7 +8389,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<FocusState>)
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为FocusStateChange，session创建成功之后可监听该接口。仅当自动对焦模式时，且相机对焦状态发生改变时可触发该事件。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于获取当前对焦状态。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[FocusState](#enum-focusstate)>|是|-|回调函数，用于获取当前对焦状态。|
 
 **异常：**
 
@@ -8400,11 +8412,11 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class SmoothZoomInfoAvailableCallback5 <: Callback1Argument<SmoothZoomInfo> {
+class FocusStateChangeCallback1 <: Callback1Argument<FocusState> {
     public static var invoked = false
 
-    public func invoke(err: ?BusinessException, info: SmoothZoomInfo) {
-        Hilog.info(0, "AppLogCj", "[multimedia_camera | SmoothZoomInfoAvailable Callback]: info: ${info.duration}")
+    public func invoke(err: ?BusinessException, state: FocusState) {
+        Hilog.info(0, "AppLogCj", "[multimedia_camera | FocusStateChange Callback]: state: ${state.toString()}")
         invoked = true
     }
 }
@@ -8414,8 +8426,8 @@ try {
     let cameraManager = getCameraManager(ctx)
     let videoSession = cameraManager.createSession(SceneMode.NormalVideo) as VideoSession
     let session = videoSession.getOrThrow()
-    let callback = SmoothZoomInfoAvailableCallback5()
-    session.on(CameraEvents.SmoothZoomInfoAvailable, callback)
+    let callback = FocusStateChangeCallback1()
+    session.on(CameraEvents.FocusStateChange, callback)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -8427,11 +8439,11 @@ try {
 public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomInfo>): Unit
 ```
 
-**功能：** 监听相机平滑变焦的状态变化，通过注册回调函数获取结果。使用callback异步回调。
+**功能：** 监听相机平滑变焦的状态变化，通过注册回调函数获取结果。
 
 > **说明：**
 >
-> - 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
+> 当前注册监听接口，不支持在on监听的回调方法里，调用off注销回调。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -8442,7 +8454,7 @@ public func on(eventType: CameraEvents, callback: Callback1Argument<SmoothZoomIn
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |eventType|[CameraEvents](#enum-cameraevents)|是|-|监听事件，必须为SmoothZoomInfoAvailable，session创建成功之后可监听该接口。|
-|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于获取当前平滑变焦状态。|
+|callback|[Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[SmoothZoomInfo](#class-smoothzoominfo)>|是|-|回调函数，用于获取当前平滑变焦状态。|
 
 **异常：**
 
@@ -10026,7 +10038,7 @@ public enum FoldStatus {
 }
 ```
 
-**功能：** 枚举，折叠机折叠状态。+
+**功能：** 枚举，折叠机折叠状态。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -11259,7 +11271,7 @@ Auto
 High
 ```
 
-**功能：** 使用防抖效果最好的防抖算法，防抖效果优于MIDDLE类型。
+**功能：** 使用防抖效果最好的防抖算法，防抖效果优于Middle类型。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 
@@ -11283,7 +11295,7 @@ Low
 Middle
 ```
 
-**功能：** 使用防抖效果一般的防抖算法，防抖效果优于LOW类型。
+**功能：** 使用防抖效果一般的防抖算法，防抖效果优于Low类型。
 
 **系统能力：** SystemCapability.Multimedia.Camera.Core
 

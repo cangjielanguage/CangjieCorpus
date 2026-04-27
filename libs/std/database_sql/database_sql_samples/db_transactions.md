@@ -12,7 +12,7 @@ main() {
     let SQL_INSERT = "INSERT INTO EMPLOYEE (NAME, SALARY, CREATED_DATE) VALUES (?, ?, ?)"
     let drv = DriverManager.getDriver("opengauss") ?? return
     let db = drv.open("opengauss://localhost:5432/testdb")
-    try(cn = db.connect()) {
+    try (cn = db.connect()) {
         let psInsert = cn.prepareStatement(SQL_INSERT)
 
         // 创建事务对象
@@ -32,12 +32,11 @@ main() {
 
             // 如果连接到数据库，测试回滚 SQLException：未为参数3指定值。
             psInsert.set<String>(0, "mkyong")
-            psInsert.set<Array<Byte>>(1, Array<Byte>(5, {i  => UInt8(i + 1)}))
+            psInsert.set<Array<Byte>>(1, Array<Byte>(5, {i => UInt8(i + 1)}))
             psInsert.update()
 
             // 提交事务
             tx.commit()
-
         } catch (e1: SqlException) {
             e1.printStackTrace()
             try {
@@ -69,7 +68,7 @@ main() {
     let SQL_INSERT = "INSERT INTO EMPLOYEE (NAME, SALARY, CREATED_DATE) VALUES (?, ?, ?)"
     let drv = DriverManager.getDriver("opengauss") ?? return
     let db = drv.open("opengauss://localhost:5432/testdb")
-    try(cn = db.connect()) {
+    try (cn = db.connect()) {
         let psInsert = cn.prepareStatement(SQL_INSERT)
 
         let tx = cn.createTransaction()
@@ -91,7 +90,7 @@ main() {
             // 创建保存点 3
             tx.save("save3")
             psInsert.set<String>(0, "mkyong")
-            psInsert.set<Array<Byte>>(1, Array<Byte>(5, {i  => UInt8(i + 1)}))
+            psInsert.set<Array<Byte>>(1, Array<Byte>(5, {i => UInt8(i + 1)}))
             psInsert.update()
 
             // 回滚到保存点 2

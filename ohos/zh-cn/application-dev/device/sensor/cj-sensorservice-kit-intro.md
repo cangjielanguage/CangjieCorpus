@@ -1,5 +1,11 @@
 # Sensor Service Kit开发简介
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 使用场景
 
 Sensor Service Kit（传感器服务）使应用程序能够从传感器获取原始数据，并提供振感控制能力。

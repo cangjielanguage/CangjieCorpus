@@ -1,5 +1,11 @@
 # ohos.display（屏幕属性）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供屏幕属性相关功能。
 
 ## 导入模块
@@ -40,16 +46,17 @@ public func getAllDisplays(): Array<Display>
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
 
 func getAllDisplaysExample() {
     try {
         let displayClass: Array<Display> = getAllDisplays()
         if (displayClass.size > 0) {
-            println(displayClass[0].name)
+            Hilog.info(0, "CangjieTest", displayClass[0].name)
         }
     } catch (exception: Exception) {
-        AppLog.error(exception.toString())
+        Hilog.error(0, "CangjieTest", exception.toString())
     }
 }
 ```
@@ -85,13 +92,15 @@ public func getCurrentFoldCreaseRegion(): FoldCreaseRegion
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+
 func getCurrentFoldCreaseRegionExample() {
     try {
         let region = getCurrentFoldCreaseRegion()
-        println(region.displayId)
+        Hilog.info(0, "CangjieTest", "${region.displayId}")
     } catch (exception: Exception) {
-        AppLog.error(exception.toString())
+        Hilog.error(0, "CangjieTest", exception.toString())
     }
 }
 ```
@@ -128,13 +137,15 @@ public func getDefaultDisplaySync(): Display
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+
 func getDefaultDisplaySyncExample() {
     try {
         let displayClass: Display = getDefaultDisplaySync()
-        println(displayClass.name)
+        Hilog.info(0, "CangjieTest", displayClass.name)
     } catch (exception: Exception) {
-        AppLog.error(exception.toString())
+        Hilog.error(0, "CangjieTest", exception.toString())
     }
 }
 ```
@@ -244,26 +255,32 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldDisp
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.callback_invoke.Callback1Argument
+import ohos.business_exception.BusinessException
+
 class TestCallback <: Callback1Argument<FoldDisplayMode> {
     public init() {}
-    public open func invoke(value: FoldDisplayMode): Unit {
-        AppLog.info(
-            "Display fold status changed, current fold status: " + match (value) {
-                case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
-                case FoldDisplayModeFull => "FoldDisplayModeFull"
-                case FoldDisplayModeMain => "FoldDisplayModeMain"
-                case FoldDisplayModeSub => "FoldDisplayModeSub"
-                case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
-                case _ => "Failed to get fold display mode."
-            })
+    public open func invoke(error: ?BusinessException, value: FoldDisplayMode): Unit {
+        Hilog.info(0, "CangjieTest", "Display fold status changed, current fold status: " + match (value) {
+            case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
+            case FoldDisplayModeFull => "FoldDisplayModeFull"
+            case FoldDisplayModeMain => "FoldDisplayModeMain"
+            case FoldDisplayModeSub => "FoldDisplayModeSub"
+            case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
+            case _ => "Failed to get fold display mode."
+        })
     }
 }
-let testCallback = TestCallback()
-try {
-    var temp: Unit = off(ListenerTypeFoldDisplayModeChange, testCallback)
-} catch (e: BusinessException) {
-    AppLog.error(exception.toString())
+
+func test() {
+    let testCallback = TestCallback()
+    try {
+        var temp: Unit = off(ListenerTypeFoldDisplayModeChange, testCallback)
+    } catch (e: BusinessException) {
+        Hilog.error(0, "CangjieTest", e.toString())
+    }
 }
 ```
 
@@ -300,26 +317,31 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldStat
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.callback_invoke.Callback1Argument
+import ohos.business_exception.BusinessException
+
 class TestCallback <: Callback1Argument<FoldStatus> {
     public init() {}
-    public open func invoke(value: FoldStatus): Unit {
-        AppLog.info(
-            "Display fold status changed, current fold status: " + match (value) {
-                case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
-                case FoldDisplayModeFull => "FoldDisplayModeFull"
-                case FoldDisplayModeMain => "FoldDisplayModeMain"
-                case FoldDisplayModeSub => "FoldDisplayModeSub"
-                case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
-                case _ => "Failed to get fold display mode."
-            })
+    public open func invoke(error: ?BusinessException, value: FoldStatus): Unit {
+        Hilog.info(0, "CangjieTest", "Display fold status changed, current fold status: " + match (value) {
+            case FoldStatusUnknown => "FoldStatusUnknown"
+            case FoldStatusExpanded => "FoldStatusExpanded"
+            case FoldStatusFolded => "FoldStatusFolded"
+            case FoldStatusHalfFolded => "FoldStatusHalfFolded"
+            case _ => "Failed to get fold status."
+        })
     }
 }
-let testCallback = TestCallback()
-try {
-    var temp: Unit = off(ListenerTypeFoldStatusChange, testCallback)
-} catch (e: BusinessException) {
-    AppLog.error(e.toString())
+
+func test() {
+    let testCallback = TestCallback()
+    try {
+        var temp: Unit = off(ListenerTypeFoldStatusChange, testCallback)
+    } catch (e: BusinessException) {
+        Hilog.error(0, "CangjieTest", e.toString())
+    }
 }
 ```
 
@@ -356,26 +378,32 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldDispl
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.callback_invoke.Callback1Argument
+import ohos.business_exception.BusinessException
+
 class TestCallback <: Callback1Argument<FoldDisplayMode> {
     public init() {}
-    public open func invoke(value: FoldDisplayMode): Unit {
-        AppLog.info(
-            "Display fold status changed, current fold status: " + match (value) {
-                case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
-                case FoldDisplayModeFull => "FoldDisplayModeFull"
-                case FoldDisplayModeMain => "FoldDisplayModeMain"
-                case FoldDisplayModeSub => "FoldDisplayModeSub"
-                case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
-                case _ => "Failed to get fold display mode."
-            })
+    public open func invoke(error: ?BusinessException, value: FoldDisplayMode): Unit {
+        Hilog.info(0, "CangjieTest", "Display fold status changed, current fold status: " + match (value) {
+            case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
+            case FoldDisplayModeFull => "FoldDisplayModeFull"
+            case FoldDisplayModeMain => "FoldDisplayModeMain"
+            case FoldDisplayModeSub => "FoldDisplayModeSub"
+            case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
+            case _ => "Failed to get fold display mode."
+        })
     }
 }
-let testCallback = TestCallback()
-try {
-    var temp: Unit = on(ListenerTypeFoldDisplayModeChange, testCallback)
-} catch (e: BusinessException) {
-    AppLog.error(e.toString())
+
+func test() {
+    let testCallback = TestCallback()
+    try {
+        var temp: Unit = on(ListenerTypeFoldDisplayModeChange, testCallback)
+    } catch (e: BusinessException) {
+        Hilog.error(0, "CangjieTest", e.toString())
+    }
 }
 ```
 
@@ -412,26 +440,31 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldStatu
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
+import ohos.callback_invoke.Callback1Argument
+import ohos.business_exception.BusinessException
+
 class TestCallback <: Callback1Argument<FoldStatus> {
     public init() {}
-    public open func invoke(value: FoldStatus): Unit {
-        AppLog.info(
-            "Display fold status changed, current fold status: " + match (value) {
-                case FoldDisplayModeUnknown => "FoldDisplayModeUnknown"
-                case FoldDisplayModeFull => "FoldDisplayModeFull"
-                case FoldDisplayModeMain => "FoldDisplayModeMain"
-                case FoldDisplayModeSub => "FoldDisplayModeSub"
-                case FoldDisplayModeCoordination => "FoldDisplayModeCoordination"
-                case _ => "Failed to get fold display mode."
-            })
+    public open func invoke(error: ?BusinessException, value: FoldStatus): Unit {
+        Hilog.info(0, "CangjieTest", "Display fold status changed, current fold status: " + match (value) {
+            case FoldStatusUnknown => "FoldStatusUnknown"
+            case FoldStatusExpanded => "FoldStatusExpanded"
+            case FoldStatusFolded => "FoldStatusFolded"
+            case FoldStatusHalfFolded => "FoldStatusHalfFolded"
+            case _ => "Failed to get fold status."
+        })
     }
 }
-let testCallback = TestCallback()
-try {
-    var temp: Unit = on(ListenerTypeFoldStatusChange, testCallback)
-} catch (e: BusinessException) {
-    AppLog.error(e.toString())
+
+func test() {
+    let testCallback = TestCallback()
+    try {
+        var temp: Unit = on(ListenerTypeFoldStatusChange, testCallback)
+    } catch (e: BusinessException) {
+        Hilog.error(0, "CangjieTest", e.toString())
+    }
 }
 ```
 
@@ -704,12 +737,12 @@ public prop state: DisplayState
 ### prop width
 
 ```cangjie
-public prop width: Int32
+public prop width: Int64
 ```
 
 **功能：** 显示屏宽度，以像素为单位。
 
-**类型：** Int32
+**类型：** Int64
 
 **读写能力：** 只读
 
@@ -736,12 +769,12 @@ public prop xDpi: Float64
 ### prop yDpi
 
 ```cangjie
-public prop yDpi: Float32
+public prop yDpi: Float64
 ```
 
-**功能：** y轴上的Dpi。
+**功能：** y轴上的DPI。
 
-**类型：** Float32
+**类型：** Float64
 
 **读写能力：** 只读
 
@@ -781,15 +814,16 @@ public func getCutoutInfo(): CutoutInfo
 <!-- code_check_manual -->
 
 ```cangjie
-import ohos.display.*
+import kit.ArkUI.*
+import kit.PerformanceAnalysisKit.Hilog
 
 func getCutoutInfoExample() {
     try {
         let displayClass = getDefaultDisplaySync()
         let cutout = displayClass.getCutoutInfo()
-        println(cutout.boundingRects.size)
+        Hilog.info(0, "CangjieTest", cutout.boundingRects.size)
     } catch (exception: Exception) {
-        AppLog.error(exception.toString())
+        Hilog.error(0, "CangjieTest", exception.toString())
     }
 }
 ```
@@ -798,14 +832,36 @@ func getCutoutInfoExample() {
 
 ```cangjie
 public class FoldCreaseRegion {
+    public let displayId: UInt32
     public let creaseRects: Array<Rect>
-    public let displayId: Int64
     public init(
-        displayId!: Int64,
+        displayId!: UInt32,
         creaseRects!: Array<Rect>
     )
 }
 ```
+
+**功能：** 构造一个FoldCreaseRegion类型的对象。
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**起始版本：** 22
+
+### let displayId
+
+```cangjie
+public let displayId: UInt32
+```
+
+**功能：** 显示ID，用于标识crease所在的屏幕。
+
+**类型：** UInt32
+
+**读写能力：** 只读
+
+**系统能力：** SystemCapability.Window.SessionManager
+
+**起始版本：** 22
 
 **功能：** 折叠 crease 区域。
 
@@ -829,27 +885,11 @@ public let creaseRects: Array<Rect>
 
 **起始版本：** 22
 
-### let displayId
-
-```cangjie
-public let displayId: Int64
-```
-
-**功能：** 显示ID，用于标识crease所在的屏幕。
-
-**类型：** UInt32
-
-**读写能力：** 只读
-
-**系统能力：** SystemCapability.Window.SessionManager
-
-**起始版本：** 22
-
-### init(Int64, Array\<Rect>)
+### init(UInt32, Array\<Rect>)
 
 ```cangjie
 public init(
-    displayId!: Int64,
+    displayId!: UInt32,
     creaseRects!: Array<Rect>
 )
 ```
@@ -864,17 +904,17 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|displayId|Int64|是|-| **命名参数。** 显示屏ID。|
+|displayId|UInt32|是|-| **命名参数。** 显示屏ID。|
 |creaseRects|Array\<[Rect](#class-rect)>|是|-| **命名参数。** crease区域。|
 
 ## class Rect
 
 ```cangjie
 public class Rect {
-    public var height: UInt32
     public var left: Int32
     public var top: Int32
     public var width: UInt32
+    public var height: UInt32
     public init(
     left!: Int32,
     top!: Int32,
@@ -984,10 +1024,10 @@ public init(
 
 ```cangjie
 public class WaterfallDisplayAreaRects {
-    public let bottom: Rect
     public let left: Rect
-    public let right: Rect
     public let top: Rect
+    public let right: Rect
+    public let bottom: Rect
     public init(
     left!: Rect,
     top!: Rect,
@@ -1433,7 +1473,7 @@ FoldStatusExpanded
 FoldStatusFolded
 ```
 
-**功能：** 折叠状态。对于双折叠轴设备，第一个折叠轴折叠，第二个折叠轴折叠。
+**功能：** 折叠状态。对于双折叠轴设备，第一个轴处于折叠状态，第二个轴也处于折叠状态。
 
 **系统能力：** SystemCapability.Window.SessionManager
 

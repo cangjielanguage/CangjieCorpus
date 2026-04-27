@@ -1,5 +1,11 @@
 # 受限开放权限
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 申请方式
 
 <!--RP1-->
@@ -112,44 +118,6 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 
 **起始版本：** 12
 
-### ohos.permission.READ_WRITE_DESKTOP_DIRECTORY
-
-允许应用访问公共目录下Desktop目录及子目录。
-
-<!--RP15-->
-当前仅2in1设备和平板上的应用可申请此权限。
-<!--RP15End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 用户授权（user_grant）
-
-**起始版本：** 12
-
-### ohos.permission.ACCESS_DDK_USB
-
-允许扩展外设驱动访问USB DDK接口开发USB总线扩展外设驱动。
-
-<!--RP31--><!--RP31End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
-### ohos.permission.ACCESS_DDK_HID
-
-允许扩展外设驱动访问HID DDK接口开发HID类扩展外设驱动。
-
-<!--RP30--><!--RP30End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
 ### ohos.permission.READ_PASTEBOARD
 
 允许应用读取剪贴板。
@@ -167,18 +135,6 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 允许应用支持持久化访问文件Uri。
 
 **权限级别：** normal
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
-### ohos.permission.INTERCEPT_INPUT_EVENT
-
-允许应用拦截输入事件。
-
-<!--RP24--><!--RP24End-->
-
-**权限级别：** system_basic
 
 **授权方式：** 系统授权（system_grant）
 
@@ -210,41 +166,11 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 
 **起始版本：** 12
 
-### ohos.permission.READ_WRITE_USER_FILE
-
-允许应用访问并修改用户目录下的文件。
-
-<!--RP19-->
-当前仅2in1设备应用可申请此权限。
-<!--RP19End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
-### ohos.permission.READ_WRITE_USB_DEV
-
-允许应用连接设备，并通过USB调试读写该设备。
-
-<!--RP20-->
-当前仅2in1设备应用可申请此权限。
-<!--RP20End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
 ### ohos.permission.GET_WIFI_PEERS_MAC
 
 允许应用获取对端Wi-Fi设备的MAC地址。
 
 在获取Wi-Fi扫描结果时，如果需要获取对端设备的MAC地址，则需要申请该权限。
-
-<!--RP14--><!--RP14End-->
 
 **权限级别：** system_basic
 
@@ -259,7 +185,7 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 允许应用禁用本应用的代码运行时完整性保护。
 
 <!--RP11-->
-针对使用跨平台框架开发的应用，用于应用豁免代码运行时的完整性保护。当前仅平板、2in1设备应用可申请此权限。
+针对使用跨平台框架开发的应用，用于应用豁免代码运行时的完整性保护。当前仅平板设备应用可申请此权限。
 <!--RP11End-->
 
 **权限级别：** system_basic
@@ -273,7 +199,7 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 允许应用申请可写可执行匿名内存。
 
 <!--RP10-->
-针对使用跨平台框架开发的应用，用于应用申请可写可执行的匿名内存。当前仅平板、2in1设备应用可申请此权限。
+针对使用跨平台框架开发的应用，用于应用申请可写可执行的匿名内存。当前仅平板设备应用可申请此权限。
 <!--RP10End-->
 
 **权限级别：** system_basic
@@ -412,8 +338,6 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 
 通过BLE扫描、BR扫描或连接监听获取到对端蓝牙设备MAC对应的虚拟随机地址，申请该权限后，可保持该虚拟随机地址长时间保持，即使是开/关/重启蓝牙也不发生变化。
 
-<!--RP36--><!--RP36End-->
-
 **权限级别：** system_basic
 
 **授权方式：** 系统授权（system_grant）
@@ -425,8 +349,6 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 允许应用管控虚拟屏。
 
 获得该权限的应用可以调用虚拟屏相关接口管理虚拟屏，包括创建虚拟屏，使虚拟屏，销毁虚拟屏等。
-
-<!--RP37--><!--RP37End-->
 
 **权限级别：** system_basic
 
@@ -445,20 +367,6 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 **授权方式：** 系统授权（system_grant）
 
 **起始版本：** 12
-
-### ohos.permission.GET_WIFI_LOCAL_MAC
-
-允许应用获取本机的Wi-Fi设备的MAC地址。
-
-<!--RP43--><!--RP43End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**起始版本：** 12
-
-**变更信息：** API 12-15该权限仅向系统应用开放；从API 16开始，在PC/2in1设备上面向普通应用开放，在其余设备上仍仅面向系统应用开放。
 
 ### ohos.permission.kernel.ALLOW_USE_JITFORT_INTERFACE
 
@@ -542,20 +450,7 @@ HarmonyAppProvision配置文件示例如下所示，修改"bundle-info" &gt; "ap
 
 **授权方式：** 系统授权（system_grant）
 
-**支持设备：** Phone | PC/2in1 | Tablet
+**支持设备：** Phone | Tablet
 
 **起始版本：** 20
 
-### ohos.permission.GET_ABILITY_INFO
-
-允许应用根据URI查询Ability信息。
-
-<!--RP42--><!--RP42End-->
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**支持设备**: PC/2in1
-
-**起始版本：** 20

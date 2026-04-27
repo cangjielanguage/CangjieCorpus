@@ -1,5 +1,11 @@
 # TabContent
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 仅在Tabs中使用，对应一个切换页签的内容视图。
 
 ## 导入模块
@@ -85,7 +91,8 @@ public func tabBar(content: ?CustomBuilder): This
 
 > **说明：**
 >
-> 如果设置的内容超出TabBar提供的空间，则会被裁剪。
+> - 如果设置的内容超出TabBar提供的空间，则会被裁剪。
+> - 传入[CustomBuilder](./cj-common-types.md#type-custombuilder)类型的参数时，需使用bind管理自定义构建函数的调用，bind使用方式请参见[框架接口](./cj-ui-framework.md)中的bind函数说明。
 
 ### func tabBar(?ResourceStr)
 
@@ -117,6 +124,11 @@ public func tabBar(icon!: ?ResourceStr = None, text!: ?ResourceStr = None): This
 
 **功能：** 设置TabBar上显示内容。
 
+> **说明：**
+>
+> - 底部标签样式不包含指示器。
+> - 当图标显示错误时，会显示灰色空白块。
+
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
@@ -127,11 +139,6 @@ public func tabBar(icon!: ?ResourceStr = None, text!: ?ResourceStr = None): This
 |:---|:---|:---|:---|:---|
 |icon|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None| **命名参数。** TabBar图标。初始值：""。|
 |text|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None| **命名参数。** TabBar文本。初始值：""。|
-
-> **说明：**
->
-> - 底部标签样式不包含指示器。
-> - 当图标显示错误时，会显示灰色空白块。
 
 ## 示例代码
 

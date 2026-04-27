@@ -54,6 +54,8 @@ main() {
 
 示例 2：捕获的变量必须在闭包定义时可见。
 
+<!-- compile.error -->
+
 ```cangjie
 func f() {
     let x = 99
@@ -61,28 +63,30 @@ func f() {
         println(x)
     }
     let f2 = { =>
-        println(y)      // Error, cannot capture 'y' which is not defined yet
+        println(y)  // Error, cannot capture 'y' which is not defined yet
     }
     let y = 88
-    f1()     // Print 99
+    f1()            // Print 99
     f2()
 }
 ```
 
 示例 3：捕获的变量必须在闭包定义前完成初始化。
 
+<!-- compile.error -error-->
+
 ```cangjie
 func f() {
     let x: Int64
     func f1() {
-        println(x)     // Error, x is not initialized yet
+        println(x) // Error, x is not initialized yet
     }
     x = 99
     f1()
 }
 ```
 
-如果捕获的变量是引用类型，可修改其可变实例成员变量的值。
+示例 4：如果捕获的变量是引用类型，可修改其可变实例成员变量的值。
 
 <!-- run -->
 
@@ -103,11 +107,13 @@ func returnIncrementer(): () -> Unit {
 
 main() {
     let f = returnIncrementer()
-    f()     // c.num increases by 1
+    f() // c.num increases by 1
 }
 ```
 
-为了防止捕获了 `var` 声明变量的闭包逃逸，这类闭包只能被调用，不能作为一等公民使用，包括不能赋值给变量，不能作为实参或返回值使用，不能直接将闭包的名字作为表达式使用。
+示例 5：为了防止捕获了 `var` 声明变量的闭包逃逸，这类闭包只能被调用，不能作为一等公民使用，包括不能赋值给变量，不能作为实参或返回值使用，不能直接将闭包的名字作为表达式使用。其中，闭包逃逸是指在函数执行完毕后仍然可以在函数外部被调用的闭包。
+
+<!-- compile.error -->
 
 ```cangjie
 func f() {
@@ -115,35 +121,37 @@ func f() {
     let y = 2
 
     func g() {
-        println(x)  // OK, captured a mutable variable
+        println(x)  // OK, captured a mutable variable.
     }
-    let b = g  // Error, g cannot be assigned to a variable
+    let b = g       // Error, g cannot be assigned to a variable
 
-    g  // Error, g cannot be used as an expression
-    g()  // OK, g can be invoked
+    g               // Error, g cannot be used as an expression
+    g()             // OK, g can be invoked
 
-    g  // Error, g cannot be used as a return value
+    g               // Error, g cannot be used as a return value
 }
 ```
 
-需要注意的是，捕获具有传递性。如果一个函数 `f` 调用了捕获 `var` 变量的函数 `g`，且 `g` 捕获的 `var` 变量不在函数 `f` 内定义，那么函数 `f` 同样捕获了 `var` 变量，此时，`f` 也不能作为一等公民使用。
+示例 6：需要注意的是，捕获具有传递性。如果一个函数 `f` 调用了捕获 `var` 变量的函数 `g`，且 `g` 捕获的 `var` 变量不在函数 `f` 内定义，那么函数 `f` 同样捕获了 `var` 变量，此时，`f` 也不能作为一等公民使用。
 
-以下示例中，`g` 捕获了 `var` 声明的变量 `x`，`f` 调用了 `g`，且 `g` 捕获的 `x` 不在 `f` 内定义，`f` 同样不能作为一等公民使用：
+示例 6.1：`g` 捕获了 `var` 声明的变量 `x`，`f` 调用了 `g`，且 `g` 捕获的 `x` 不在 `f` 内定义，`f` 同样不能作为一等公民使用：
+
+<!-- compile.error -error-->
 
 ```cangjie
 func h(){
     var x = 1
 
-    func g() {  x }   // captured a mutable variable
+    func g() { x }  // captured a mutable variable
 
     func f() {
-        g()      // invoked g
+        g()         // invoked g
     }
-    return f // Error
+    return f        // Error
 }
 ```
 
-以下示例中，`g` 捕获了 `var` 声明的变量 `x`，`f` 调用了 `g`。但 `g` 捕获的 `x` 在 `f` 内定义，`f` 没有捕获其他 `var` 声明的变量。因此，`f` 仍作为一等公民使用：
+示例 6.2：`g` 捕获了 `var` 声明的变量 `x`，`f` 调用了 `g`。但 `g` 捕获的 `x` 在 `f` 内定义，`f` 没有捕获其他 `var` 声明的变量。因此，`f` 仍作为一等公民使用：
 
 <!-- compile -->
 
@@ -151,15 +159,15 @@ func h(){
 func h(){
     func f() {
         var x = 1
-        func g() { x }   // captured a mutable variable
+        func g() { x } // captured a mutable variable
 
         g()
     }
-    return f // Ok
+    return f // OK
 }
 ```
 
-静态成员变量和全局变量的访问，不属于变量捕获，因此访问了 `var` 修饰的全局变量、静态成员变量的函数或 lambda 仍可作为一等公民使用。
+示例 7：静态成员变量和全局变量的访问，不属于变量捕获，因此访问了 `var` 修饰的全局变量、静态成员变量的函数或 lambda 仍可作为一等公民使用。
 
 <!-- compile -->
 
@@ -167,7 +175,7 @@ func h(){
 class C {
     static public var a: Int32 = 0
     static public func foo() {
-        a++       // OK
+        a++ // OK
         return a
     }
 }
@@ -177,7 +185,7 @@ var globalV1 = 0
 func countGlobalV1() {
     globalV1++
     C.a = 99
-    let g = C.foo  // OK
+    let g = C.foo // OK
 }
 
 func g(){

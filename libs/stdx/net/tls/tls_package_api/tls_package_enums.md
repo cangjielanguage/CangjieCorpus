@@ -1,49 +1,5 @@
 # 枚举
 
-## enum CertificateVerifyMode
-
-```cangjie
-public enum CertificateVerifyMode {
-    | CustomCA(Array<X509Certificate>)
-    | Default
-    | TrustAll
-}
-```
-
-功能：对证书验证的处理模式。
-
-> **说明：**
->
-> CustomCA 模式可使用用户配置的证书地址，适用于用户证书无法设置为系统证书的场景。
->
-> 证书认证模式，TCP 连接建立成功后，客户端和服务端可交换证书，Default 模式使用系统证书。
->
-> 在开发测试阶段，可使用 TrustAll 模式，该模式表示本端不作对对端证书的校验。此模式本端信任任意建立连接对象，一般仅在开发测试阶段使用。
-
-### CustomCA(Array\<X509Certificate>)
-
-```cangjie
-CustomCA(Array<X509Certificate>)
-```
-
-功能：表示根据提供的 CA 列表与系统 CA 进行验证。
-
-### Default
-
-```cangjie
-Default
-```
-
-功能：表示默认验证模式，根据系统 CA 验证证书。
-
-### TrustAll
-
-```cangjie
-TrustAll
-```
-
-功能：表示信任所有证书。
-
 ## enum SignatureAlgorithm
 
 ```cangjie
@@ -88,10 +44,30 @@ public func toString():String
 
 - String - 签名算法名称。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let sigAlg = SignatureAlgorithm.SignatureScheme(RSA_PKCS1_SHA256)
+    let str = sigAlg.toString()
+    println("签名算法的字符串表示: ${str}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名算法的字符串表示: rsa_pkcs1_sha256
+```
+
 ### operator func !=(SignatureAlgorithm)
 
 ```cangjie
-public operator func !=(other: SignatureAlgorithm) : Bool
+public operator func !=(other: SignatureAlgorithm): Bool
 ```
 
 功能：判断签名算法类型是否不同。
@@ -104,10 +80,32 @@ public operator func !=(other: SignatureAlgorithm) : Bool
 
 - Bool - 不相同返回 `true`；否则，返回 `false`。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+import stdx.crypto.digest.*
+
+main() {
+    let sigAlg1 = SignatureAlgorithm.SignatureAndHashAlgorithm(SignatureType.RSA, HashType.SHA256)
+    let sigAlg2 = SignatureAlgorithm.SignatureAndHashAlgorithm(SignatureType.ECDSA, HashType.SHA256)
+    let isNotEqual = sigAlg1 != sigAlg2
+    println("签名算法是否不同: ${isNotEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名算法是否不同: true
+```
+
 ### operator func ==(SignatureAlgorithm)
 
 ```cangjie
-public operator func ==(other: SignatureAlgorithm) : Bool
+public operator func ==(other: SignatureAlgorithm): Bool
 ```
 
 功能：判断签名算法类型是否相同。
@@ -119,6 +117,28 @@ public operator func ==(other: SignatureAlgorithm) : Bool
 返回值：
 
 - Bool - 相同返回 `true`；否则，返回 `false`。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+import stdx.crypto.digest.*
+
+main() {
+    let sigAlg1 = SignatureAlgorithm.SignatureAndHashAlgorithm(SignatureType.RSA, HashType.SHA256)
+    let sigAlg2 = SignatureAlgorithm.SignatureAndHashAlgorithm(SignatureType.RSA, HashType.SHA256)
+    let isEqual = sigAlg1 == sigAlg2
+    println("签名算法是否相同: ${isEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名算法是否相同: true
+```
 
 ## enum SignatureSchemeType
 
@@ -274,6 +294,26 @@ public func toString(): String
 
 - String - 加密算法类型的字符串表示。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let schemeType = SignatureSchemeType.RSA_PKCS1_SHA256
+    let str = schemeType.toString()
+    println("签名方案类型的字符串表示: ${str}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名方案类型的字符串表示: rsa_pkcs1_sha256
+```
+
 ### operator func !=(SignatureSchemeType)
 
 ```cangjie
@@ -290,6 +330,27 @@ public operator func !=(other: SignatureSchemeType): Bool
 
 - Bool - 不相同返回 true；否则，返回 false。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let schemeType1 = SignatureSchemeType.RSA_PKCS1_SHA256
+    let schemeType2 = SignatureSchemeType.ECDSA_SECP256R1_SHA256
+    let isNotEqual = schemeType1 != schemeType2
+    println("签名方案类型是否不同: ${isNotEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名方案类型是否不同: true
+```
+
 ### operator func ==(SignatureSchemeType)
 
 ```cangjie
@@ -305,6 +366,27 @@ public operator func ==(other: SignatureSchemeType): Bool
 返回值：
 
 - Bool - 相同返回 true；否则，返回 false。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let schemeType1 = SignatureSchemeType.RSA_PKCS1_SHA256
+    let schemeType2 = SignatureSchemeType.RSA_PKCS1_SHA256
+    let isEqual = schemeType1 == schemeType2
+    println("签名方案类型是否相同: ${isEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名方案类型是否相同: true
+```
 
 ## enum SignatureType
 
@@ -359,10 +441,30 @@ public func toString(): String
 
 - String - 签名算法的名称。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let sigType = SignatureType.RSA
+    let str = sigType.toString()
+    println("签名类型的字符串表示: ${str}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名类型的字符串表示: RSA
+```
+
 ### operator func !=(SignatureType)
 
 ```cangjie
-public operator func !=(other: SignatureType) : Bool
+public operator func !=(other: SignatureType): Bool
 ```
 
 功能：判断两者是否为不同的签名算法。
@@ -375,10 +477,31 @@ public operator func !=(other: SignatureType) : Bool
 
 - Bool - 不相同返回 `true`；否则，返回 `false`。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let sigType1 = SignatureType.RSA
+    let sigType2 = SignatureType.ECDSA
+    let isNotEqual = sigType1 != sigType2
+    println("签名类型是否不同: ${isNotEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名类型是否不同: true
+```
+
 ### operator func ==(SignatureType)
 
 ```cangjie
-public operator func ==(other: SignatureType) : Bool
+public operator func ==(other: SignatureType): Bool
 ```
 
 功能：判断两者是否为相同的签名算法。
@@ -390,6 +513,27 @@ public operator func ==(other: SignatureType) : Bool
 返回值：
 
 - Bool - 相同返回 `true`；否则，返回 `false`。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.net.tls.*
+
+main() {
+    let sigType1 = SignatureType.RSA
+    let sigType2 = SignatureType.RSA
+    let isEqual = sigType1 == sigType2
+    println("签名类型是否相同: ${isEqual}")
+    return 0
+}
+```
+
+运行结果：
+
+```text
+签名类型是否相同: true
+```
 
 ## enum TlsClientIdentificationMode
 
@@ -426,55 +570,3 @@ Required
 ```
 
 功能：表示服务端校验客户端证书，并且要求客户端必须提供证书和公钥，即双向认证。
-
-## enum TlsVersion
-
-```cangjie
-public enum TlsVersion <: ToString {
-    | V1_2
-    | V1_3
-    | Unknown
-}
-```
-
-功能：TLS 协议版本。
-
-父类型：
-
-- ToString
-
-### Unknown
-
-```cangjie
-Unknown
-```
-
-功能：表示未知协议版本。
-
-### V1_2
-
-```cangjie
-V1_2
-```
-
-功能：表示 TLS 1.2 版本。
-
-### V1_3
-
-```cangjie
-V1_3
-```
-
-功能：表示 TLS 1.3 版本。
-
-### func toString()
-
-```cangjie
-public override func toString(): String
-```
-
-功能：返回当前 [TlsVersion](tls_package_enums.md#enum-tlsversion) 的字符串表示。
-
-返回值：
-
-- String - 当前 [TlsVersion](tls_package_enums.md#enum-tlsversion) 的字符串表示。

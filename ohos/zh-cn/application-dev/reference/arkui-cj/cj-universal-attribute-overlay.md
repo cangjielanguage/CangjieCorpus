@@ -1,5 +1,11 @@
 # 浮层
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 设置组件的遮罩文本。
 
 ## 导入模块
@@ -11,8 +17,8 @@ import kit.ArkUI.*
 ## func overlay(?String, ?Alignment, ?OverlayOffset)
 
 ```cangjie
-public func overlay(value!: ?String, align!: ?Alignment = None,
-    offset!: ?OverlayOffset = None): T
+func overlay(value!: ?String, align!: ?Alignment,
+    offset!: ?OverlayOffset): T
 ```
 
 **功能：** 在当前组件上，增加遮罩文本作为该组件的浮层。
@@ -26,8 +32,8 @@ public func overlay(value!: ?String, align!: ?Alignment = None,
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |value|?String|是|-|**命名参数。** 遮罩文本内容。|
-|align|?[Alignment](./cj-common-types.md#enum-alignment)|否|None|**命名参数。** 浮层相对于组件的方位。初始值:  Alignment.Center|
-|offset|?[OverlayOffset](./cj-common-types.md#class-overlayoffset)|否|None|**命名参数。** 浮层基于自身左上角的偏移量。浮层默认处于组件左上角。初始值:  OverlayOffset(x: 0.0, y: 0.0)|
+|align|?[Alignment](./cj-common-types.md#enum-alignment)|是|-|**命名参数。** 浮层相对于组件的方位。初始值：Alignment.Center|
+|offset|?[OverlayOffset](./cj-common-types.md#class-overlayoffset)|是|-|**命名参数。** 浮层基于自身左上角的偏移量。浮层默认处于组件左上角。初始值：OverlayOffset(x: 0.0, y: 0.0)|
 
 > **说明：**
 >

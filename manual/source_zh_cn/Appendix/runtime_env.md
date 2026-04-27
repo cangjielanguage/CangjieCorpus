@@ -23,10 +23,11 @@ $ export VARIABLE=value
 1. 所有整型参数为 Int64 类型，浮点型参数为 Float64 类型;
 2. 所有参数如果未显式规定最大值，默认隐式最大值为该类型最大值;
 3. 所有参数若超出范围则设置无效，自动使用默认值。
+4. 所有参数在 OpenHarmony 平台下均无效，OpenHarmony 平台下仓颉运行时使用默认值。
 
 ### `cjHeapSize`
 
-指定仓颉堆的最大值，支持单位为 kb（KB）、mb（MB）、gb（GB），支持设置范围为[4MB, 系统物理内存]，超出范围的设置无效，仍旧使用默认值。若物理内存低于 1GB，默认值为 64 MB，否则为 256 MB。
+指定仓颉堆的最大值，支持单位为 kb（KB）、mb（MB）、gb（GB），支持设置范围为[4MB, 系统物理内存]，超出范围的设置无效，仍旧使用默认值。若物理内存低于 1GB，默认值为 64MB，否则为 256MB。OpenHarmony 和 Android 平台支持的最小配置值为 64MB，指定小于此值时使用默认值。
 
 例如：
 
@@ -36,7 +37,7 @@ export cjHeapSize=4GB
 
 ### `cjRegionSize`
 
-指定 region 分配器 thread local buffer 的大小，支持单位为 kb（KB）、mb（MB）、gb（GB)，支持设置范围为[4kb, 2048kb]，超出范围的设置无效，仍旧使用默认值。默认值为 64 KB。
+指定 region 分配器 thread local buffer 的大小，支持单位为 kb（KB）、mb（MB）、gb（GB），支持设置范围为[4kb, 2048kb]，超出范围的设置无效，仍旧使用默认值。默认值为 64KB。macOS 平台支持的最小配置值为 16KB，指定小于此值时使用默认值。
 
 例如：
 
@@ -48,7 +49,7 @@ export cjRegionSize=1024kb
 
 需要大量连续内存空间的对象（例如长数组）称为大对象。堆内频繁分配大对象可能导致堆内连续空间不足，从而触发堆溢出问题。通过增加大对象的最大值，可以提升堆内空间的连续性。
 
-在仓颉语言中，大对象的阈值为 `cjLargeThresholdSize` 和 `cjRegionSize` 的较小者。`cjLargeThresholdSize` 支持的单位有 kb（KB）、mb（MB）、gb（GB)，支持的范围是 [4KB, 2048KB]，超出范围的设置无效，仍旧使用默认值。默认值为 32 KB。
+在仓颉语言中，大对象的阈值为 `cjLargeThresholdSize` 和 `cjRegionSize` 的较小者。`cjLargeThresholdSize` 支持的单位有 kb（KB）、mb（MB）、gb（GB），支持的范围是 [4KB, 2048KB]，超出范围的设置无效，仍旧使用默认值。默认值为 32KB。
 
 > **说明：**
 >
@@ -90,24 +91,24 @@ export cjHeapUtilization=0.8
 export cjHeapGrowth=0.15
 ```
 
-### `cjAlloctionRate`
+### `cjAllocationRate`
 
 指定仓颉运行时分配对象的速率，该值必须大于 0，单位为 MB/s，表示每秒可分配对象的数量。默认值为 10240，表示每秒可分配 10240 MB 对象。
 
 例如：
 
 ```shell
-export cjAlloctionRate=10240
+export cjAllocationRate=10240
 ```
 
-### `cjAlloctionWaitTime`
+### `cjAllocationWaitTime`
 
 指定仓颉运行时分配对象时的等待时间，该值必须大于 0，支持单位为 s、ms、us、ns，推荐单位为纳秒（ns）。若本次分配对象距离上一次分配对象的时间间隔小于此值，则将等待。默认值为 1000 ns。
 
 例如：
 
 ```shell
-export cjAlloctionWaitTime=1000ns
+export cjAllocationWaitTime=1000ns
 ```
 
 ### `cjGCThreshold`
@@ -270,4 +271,127 @@ CJ_SOF_SIZE 未配置，默认打印栈顶开始 32 层调用栈；
 
 ```shell
 export CJ_SOF_SIZE=30
+```
+
+### 仓颉 GWP-Asan 内存安全检测
+
+在仓颉与 C 代码互操作的过程中，可能出现一些仓颉堆内存安全问题。仓颉 GWP-Asan 提供了一种内存安全检测功能。它可以在仓颉程序运行过程中检测代码是否存在仓颉堆内存安全问题。GWP-Asan 通过对仓颉语言标准库提供的 acquireArrayRawData 和 releaseArrayRawData 接口（参见《仓颉编程语言库 API 文档》std.core 包一节）进行采样，并记录对比采样对象前后内存的 Canary 数据，从而检测仓颉与 C 语言互操作过程中是否出现了仓颉堆内存安全问题。
+
+仓颉 GWP-Asan 是一种基于采样的检测工具，可以通过设置不同的值来调整采样频率，以平衡性能影响和检测覆盖率。在默认或更低采样频率下，CPU 性能损失和额外的内存占用极低。
+
+> **说明：**
+>
+> 仓颉 GWP-Asan 内存安全检测仅支持 Linux 和 OpenHarmony 操作系统。
+
+#### cjEnableGwpAsan
+
+仓颉 GWP-Asan 内存安全检测功能默认关闭。通过将环境变量 `cjEnableGwpAsan` 设置为 `1`、`true` 或 `TRUE` 可以开启该功能。Linux 下设置参考如下：
+
+```shell
+export cjEnableGwpAsan=true
+```
+
+#### cjGwpAsanSampleRate
+
+在仓颉 GWP-Asan 内存安全检测功能开启状态下，通过环境变量 `cjGwpAsanSampleRate` 设置采样频率。`cjGwpAsanSampleRate` 支持设置为 32 位整形数值范围内的正整数，即 $(0, 2^{31} - 1]$ 。默认值为 5000，即每 5000 次 acquireArrayRawData 接口调用，进行一次采样。Linux 设置参考如下：
+
+```shell
+export cjGwpAsanSampleRate=1000
+```
+
+> **说明：**
+>
+> 仓颉 GWP-Asan 内存安全检测中，采样会影响性能。采样率越高，对性能影响越大，能检出更多的问题；采样率越低，其对性能影响越小，能检出更少的问题。请根据实际情况设置采样率。
+
+#### cjGwpAsanHelp
+
+通过环境变量 `cjGwpAsanHelp` 可以设置是否在控制台输出 GWP-Asan 帮助信息。默认不开启。`cjGwpAsanHelp` 设置为`1`、`true` 或 `TRUE` 时，表示在控制台输出帮助信息。Linux 设置参考如下：
+
+```shell
+export cjGwpAsanHelp=true
+```
+
+#### 约束限制
+
+- 仓颉 GWP-Asan 是一种基于采样的内存检查工具，内存越界问题可能无法完全检出。
+- 仓颉 GWP-Asan 对仓颉堆内存的越界检测范围有限，无法检测内存读越界访问，仅能检测部分写越界访问：向前写越界 8 字节以内；向后写越界到尾部的填充区域（根据数组对象长度的不同，填充区域可能为 0-7 字节）。
+
+#### 异常检测类型
+
+**堆内存写越界**
+
+堆内存写越界指的是，指针实际访问的内存长度超过了数组申请的长度，造成仓颉堆内存写越界。
+
+1. 向前越界
+
+    向前越界数组时，runtime 会报告 Head canary 检测失败，使用 `array[-1]` 表示。例如：
+
+    <!-- compile -->
+
+    ```cangjie
+    unsafe {
+        var array = Array<UInt8>(4, repeat: 1)
+        var cp = acquireArrayRawData<UInt8>(array)
+        cp.pointer.write(-1, 2)
+        releaseArrayRawData(cp)
+    }
+    ```
+
+    对应的错误报告如下：
+
+    ```text
+    2025-05-22 10:57:13.432786 41217 F Gwp-Asan sanity check failed on raw array addr 0x7f7c887368
+    2025-05-22 10:57:13.432863 41217 F Head canary (array[-1]) mismatch: expect: 0x4, actual: 0x200000000000004
+    2025-05-22 10:57:13.432878 41217 F Gwp-Asan Aborted.
+    ```
+
+2. 向后越界
+
+    向后越界数组时，runtime 会报告 Tail canary 检测失败，并给出相对该数组（`array`）的位置。例如：
+
+    <!-- compile -->
+
+    ```cangjie
+    unsafe {
+        let array = Array<UInt8>(4, repeat: 0)
+        let cp = acquireArrayRawData(array)
+
+        // array 数组实际可访问的范围是 [0, 4)，而下述写操作访问了第 6 个字节，导致仓颉堆内存向前溢出 2 个字节。错误报告中使用 array[size+1] 表示该向后越界行为。
+        cp.pointer.write(5, 2)
+        releaseArrayRawData(cp)
+    }
+    ```
+
+    对应的错误报告如下：
+
+    ```text
+    2025-05-22 10:53:09.564580 37872 F Gwp-Asan sanity check failed on raw array addr 0x7f6278a368
+    2025-05-22 10:53:09.564761 37872 F Tail canary (array[size+1]) mismatch: expect: 0x4, actual: 0x2
+    2025-05-22 10:53:09.564788 37872 F Gwp-Asan Aborted.
+    ```
+
+**仓颉 GC（Garbage Collection）异常**
+
+使用 acquireArrayRawData 获取了数组的指针，但是未配套使用 releaseArrayRawData 释放数组的引用，可能造成仓颉 GC（Garbage Collection）异常。
+
+在 runtime 退出时会检测被采样的数组是否调用了 releaseArrayRawData 释放。未释放时，会报告所有未释放的数组对应的堆地址。例如：
+
+<!-- compile -->
+
+```cangjie
+unsafe {
+    let array = Array<UInt8>(4, repeat: 0)
+    let cp = acquireArrayRawData(array)
+    cp.pointer.read()
+
+    // 未使用 releaseArrayRawData
+    return
+}
+```
+
+对应的错误报告如下：
+
+```text
+2025-05-22 10:53:09.564761 1248614 F Unreleased array: 0x7fffd77f92d8
+2025-05-22 10:53:09.564788 1248614 F Detect un-released array
 ```

@@ -4,7 +4,9 @@
 
 fs（file system）包提供对文件、文件夹、路径、文件元数据信息的一些操作函数。
 
-目前支持 Linux，macOS，Windows 和 HarmonyOS 平台下使用。
+> **注意：**
+>
+> 仅能对有相应权限的文件，目录或其他相关信息做出操作，例如: `iOS` 由于沙盒机制的原因，系统仅允许对应用的 Documents, Library, tmp 等目录下的文件和文件夹进行操作。
 
 ## API 列表
 
@@ -32,7 +34,7 @@ fs（file system）包提供对文件、文件夹、路径、文件元数据信�
 | [Directory](./fs_package_api/fs_package_classes.md#class-directory) | 对应文件系统中的目录，它提供创建、查询属性以及遍历目录等能力。  |
 | [File](./fs_package_api/fs_package_classes.md#class-file) | 提供一些对文件进行操作的函数，包括文件的打开、创建、关闭、文件的流式读写操作、查询属性以及一些其他函数。   |
 | [HardLink](./fs_package_api/fs_package_classes.md#class-hardlink) | 提供处理文件系统硬链接相关接口。 |
-| [SymbolicLink](./fs_package_api/fs_package_classes.md#class-symbolicLink) | 提供处理文件系统符号链接相关接口。 |
+| [SymbolicLink](./fs_package_api/fs_package_classes.md#class-symboliclink) | 提供处理文件系统符号链接相关接口。 |
 
 ### 枚举
 

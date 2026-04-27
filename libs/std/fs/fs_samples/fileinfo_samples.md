@@ -2,7 +2,7 @@
 
 ## FileInfo 一些基础操作演示
 
-代码如下：
+示例：
 <!-- verify -->
 
 ```cangjie
@@ -12,7 +12,7 @@ import std.time.DateTime
 main() {
     // 在当前目录下创建一个临时文件，以便下面 FileInfo 的演示
     let curDirPath: Path = canonicalize(Path("./"))
-    let file: File =  File.createTemp(curDirPath)
+    let file: File = File.createTemp(curDirPath)
     file.write("123456789\n".toArray())
     let fileInfo: FileInfo = file.info
 
@@ -25,14 +25,14 @@ main() {
     /* 获得这个文件的路径 */
     /*
     let filePath: Path = fileInfo.path
-    */
+     */
 
     /* 获取这个文件的创建时间、最后访问时间、最后修改时间 */
     /*
     let creationTime: DateTime = fileInfo.creationTime
     let lastAccessTime: DateTime = fileInfo.lastAccessTime
     let lastModificationTime: DateTime = fileInfo.lastModificationTime
-    */
+     */
 
     /*
      * 获取这个文件的 length
@@ -41,7 +41,7 @@ main() {
      */
     /*
     let length: Int64 = fileInfo.size
-    */
+     */
 
     /* 判断这个文件是否是软链接、普通文件、目录 */
     checkResult(fileInfo.isSymbolicLink(), "The file is a symbolic link.")

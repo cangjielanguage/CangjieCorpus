@@ -1,6 +1,12 @@
 # ohos.file.fileuri（文件URI）
 
-fileuri模块提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI），后续可通过使用[ohos.file_fs（文件管理）](cj-apis-file_fs.md)进行相关open、read、write等操作，实现文件分享。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+fileuri模块提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file_fs（文件管理）](cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
 
 ## 导入模块
 
@@ -75,7 +81,7 @@ public class FileUri {
 }
 ```
 
-**功能：** 提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI），后续可通过使用[ohos.file.fs](./cj-apis-file_fs.md)进行相关open、read、write等操作，实现文件分享。
+**功能：** 提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file.fs](./cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
 
 **系统能力：** SystemCapability.FileManagement.AppFileService
 
@@ -103,8 +109,8 @@ public prop name: String
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900042 | Unknown error |
+  | 13900005 | I/O error. |
+  | 13900042 | Unknown error. |
 
 ### prop path
 
@@ -146,11 +152,11 @@ public init(uriOrPath: String)
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 13900005 | I/O error |
-  | 13900011 | Out of memory |
-  | 13900020 | Invalid argument |
-  | 13900042 | Unknown error |
-  | 14300002 | Invalid uri |
+  | 13900005 | I/O error. |
+  | 13900011 | Out of memory. |
+  | 13900020 | Invalid argument. |
+  | 13900042 | Unknown error. |
+  | 14300002 | Invalid uri. |
 
 ### func toString()
 

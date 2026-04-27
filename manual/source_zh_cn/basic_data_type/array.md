@@ -34,7 +34,7 @@ let a: Array<String> = [] // Created an empty Array whose element type is String
 let b = [1, 2, 3, 3, 2, 1] // Created a Array whose element type is Int64, containing elements 1, 2, 3, 3, 2, 1
 ```
 
-也可以使用构造函数的方式构造一个指定元素类型的 Array。其中，repeat 属于 Array 构造函数中的一个命名参数。
+也可以使用构造函数的方式构造一个指定元素类型的 Array。其中， repeat 属于 Array 构造函数中的一个命名参数。
 
 需要注意的是，当通过 repeat 指定的初始值初始化 Array 时，该构造函数不会拷贝 repeat，如果 repeat 是一个引用类型，构造后数组的每一个元素都将指向相同的引用。
 
@@ -172,7 +172,7 @@ arr2[0] = 3
 <!-- compile.error -->
 
 ```cangjie
-type varr1 = VArray<Int64, $3> // Ok
+type varr1 = VArray<Int64, $3> // OK
 type varr2 = VArray // Error
 ```
 

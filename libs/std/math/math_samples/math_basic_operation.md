@@ -14,17 +14,17 @@ func clampTest() {
     let max: Float16 = 0.123
     let v: Float16 = 0.121
     let c = clamp(v, min, max)
-    println("${c==v}")
+    println("${c == v}")
     let min2: Float16 = -0.999
     let max2: Float16 = 10.123
     let v2: Float16 = 11.121
     let c2 = clamp(v2, min2, max2)
-    println("${c2==max2}")
+    println("${c2 == max2}")
     let min3: Float16 = -0.999
     let max3: Float16 = 10.123
     let v3: Float16 = -1.121
     let c3 = clamp(v3, min3, max3)
-    println("${c3==min3}")
+    println("${c3 == min3}")
 }
 
 // 求两个数的最大公约数
@@ -41,7 +41,7 @@ func lcmTest() {
     println("a=${a}")
 }
 
-// 整数按二进制某一位前后翻转
+// 整数按二进制某一位前后旋转
 func rotateTest() {
     let a: Int8 = rotate(Int8(92), Int8(4))
     println("a=${a}")

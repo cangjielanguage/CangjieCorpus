@@ -1,5 +1,11 @@
 # ohos.system_date_time（系统时间、时区）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 system_date_time模块主要由系统时间和系统时区功能组成。开发者可以获取系统时间及系统时区。
 
 ## 导入模块
@@ -88,7 +94,7 @@ public static func getTimezone(): String
 
 |类型|说明|
 |:----|:----|
-|String|返回系统时区。具体可见[支持的系统时区](#ohossystem_date_time系统时间时区)。|
+|String|返回系统时区。|
 
 **示例：**
 

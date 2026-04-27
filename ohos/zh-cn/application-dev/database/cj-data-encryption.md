@@ -1,5 +1,11 @@
 # 数据库加密
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 为了增强数据库的安全性，数据库提供了一个安全适用的数据库加密能力，从而对数据库存储的内容实施有效保护。通过数据库加密等安全方法实现了数据库数据存储的保密性和完整性要求，使得数据库以密文方式存储并在密态方式下工作，确保了数据安全。
@@ -21,7 +27,7 @@
     ```cangjie
     // main_ability.cj
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
 
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -52,11 +58,9 @@
 
     ```cangjie
     // xxx.cj
-    import kit.ArkData.{DistributedKVStore, KVManagerConfig}
+    import kit.ArkData.*
     import ohos.business_exception.BusinessException
-    import kit.AbilityKit.*
-    import ohos.data.distributed_kv_store.KVOptions
-    import ohos.data.distributed_kv_store.KVSecurityLevel
+    import kit.PerformanceAnalysisKit.Hilog
     ```
 
     实现加密功能的核心代码是：
@@ -100,7 +104,7 @@
     ```cangjie
     // main_ability.cj
     import kit.PerformanceAnalysisKit.Hilog
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason, UIAbilityContext}
 
     var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -130,7 +134,8 @@
     <!-- compile -->
 
     ```cangjie
-    import kit.ArkData.{ getRdbStore, StoreConfig, RelationalStoreSecurityLevel }
+    import kit.ArkData.*
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.business_exception.BusinessException
     ```
 

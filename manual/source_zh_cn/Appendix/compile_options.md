@@ -11,9 +11,18 @@
 
 ## 基本选项
 
-### `--output-type=[exe|staticlib|dylib]` <sup>[frontend]</sup>
+### `--output-type=[exe|staticlib|dylib|obj]` <sup>[frontend]</sup>
 
-指定输出文件的类型。`exe` 模式下会生成可执行文件，`staticlib` 模式下会生成静态库文件（ `.a` 文件），`dylib` 模式下会生成动态库文件（Linux 平台为 `.so` 文件、Windows 平台为 `.dll` 文件，macOS 平台为 `.dylib` 文件）。
+指定输出文件的类型，各模式的输出产物如下：
+
+- `exe` 模式下会生成可执行文件。
+- `staticlib` 模式下会生成静态库文件（ `.a` 文件）。
+- `dylib` 模式下会生成动态库文件（Linux 平台为 `.so` 文件、Windows 平台为 `.dll` 文件，macOS 平台为 `.dylib` 文件）。
+- `obj` 模式下会生成目标文件（Windows 平台为 `.obj` 文件， Linux、 macOS 为 `.o` 文件）。
+
+> **注意：**
+>
+> `obj` 模式为实验性功能，使用 `--output-type=[chir|obj]` 可能有风险，必须配合 `--experimental` 选项一同使用。`obj` 模式需要与下列 `--compile-target` 选项配合使用（具体用法见 `--compile-target`）。
 
 `cjc` 默认为 `exe` 模式。
 
@@ -25,15 +34,52 @@ $ cjc tool.cj --output-type=dylib
 
 可以将 `tool.cj` 编译成一个动态链接库，在 Linux 平台上，`cjc` 会生成一个名为 `libtool.so` 的动态链接库文件。
 
-**值得注意的是**，若编译可执行程序时链接了仓颉的动态库文件，必须同时指定 `--dy-std` 与 `--dy-libs` 选项，详情请见 [`--dy-std` 选项说明](#--dy-std)。
+**值得注意的是**，若编译可执行程序时链接了仓颉的动态库文件，必须指定 `--dy-std` 选项，详情请见 [`--dy-std` 选项说明](#--dy-std)。
 
 <sup>[frontend]</sup> 在 `cjc-frontend` 中，编译流程仅进行至 `LLVM IR`，因此输出总是 `.bc` 文件，但不同的 `--output-type` 类型仍会影响前端编译的策略。
+
+### `--compile-target=[exe|staticlib|dylib]` <sup>[frontend]</sup>
+
+该选项专用于 `--output-type=obj` 模式，默认为 `exe`。因生成的 `.obj/.o` 文件属于编译中间产物，通过指定 `--compile-target` 可明确编译器采用对应编译策略，生成适配不同最终产物类型的中间文件；后续编译器可直接将该 `.obj/.o` 文件作为输入进行链接。
+
+> **注意：**
+>
+> 该选项为实验性功能，使用存在潜在风险，且必须配合 `--experimental` 选项使用。
+
+例如以下命令分步编译链接生成可执行文件：
+
+<!--compile-->
+```cangjie
+// main.cj
+main(){
+  println("hello cangjie")
+}
+```
+
+```shell
+# 1.指定 --output-type 为 obj，并明确 --compile-target 为 exe
+cjc main.cj --output-type=obj --experimental -o main.o --compile-target=exe 
+
+# 2.将中间产物链接为可执行文件
+cjc main.o -lcangjie-std-core -o main --experimental
+```
+
+在步骤 2 中，`-lcangjie-std-core` 用于指定编译过程中的标准库依赖。手动链接场景下，依赖项名称必须严格遵循上述格式（例如 `-lcangjie-std-math`， `-lcangjie-std-collection.concurrent` 等形式），否则会导致符号未定义错误。
+
+**规格说明：**
+
+1. 不支持以 `.o` 文件作为输入并再次指定 `--output-type=obj` 的场景。 无效用法示例：`cjc main.o --output-type=obj --compile-target=exe` 。
+2. 当 `--output-type` 指定为其他非 `obj` 类型时，`--compile-target` 选项不会生效（将被忽略）。无效用法示例：`cjc main.cj --output-type=exe --compile-target=dylib` 。
+3. 若输入文件仅为 `.o` 中间目标文件，当前步骤配置的 `--output-type`（默认值为 `exe`）必须与生成该 `.o` 文件时指定的 `--compile-target` 保持逻辑一致。例如，若 `.o` 文件是通过 `--compile-target=dylib` 编译生成（用于构建动态库），则链接该文件时也需将 `--output-type` 指定为 `dylib` ，否则可能导致链接失败或产物类型不匹配。
 
 ### `--package`, `-p` <sup>[frontend]</sup>
 
 编译包，使用此选项时需要指定一个目录作为输入，目录中的源码文件需要属于同一个包。
 
 假设有文件 `log/printer.cj`：
+
+<!-- compile -p -->
+<!-- cfg="-p log --output-type=staticlib" -->
 
 ```cangjie
 package log
@@ -44,6 +90,9 @@ public func printLog(message: String) {
 ```
 
 与文件 `main.cj`:
+
+<!-- compile -p -->
+<!-- cfg="liblog.a" -->
 
 ```cangjie
 import log.*
@@ -71,43 +120,9 @@ $ cjc main.cj liblog.a
 
 ### `--module-name <value>` <sup>[frontend]</sup>
 
-指定要编译的模块的名称。
-
-假设有文件 `my_module/src/log/printer.cj`：
-
-```cangjie
-package log
-
-public func printLog(message: String) {
-    println("[Log]: ${message}")
-}
-```
-
-与文件 `main.cj`:
-
-```cangjie
-import my_module.log.*
-
-main() {
-    printLog("Everything is great")
-}
-```
-
-可以使用
-
-```shell
-$ cjc -p my_module/src/log --module-name my_module --output-type=staticlib -o my_module/liblog.a
-```
-
-来编译 `log` 包并指定其模块名为 `my_module`，`cjc` 会在 `my_module` 目录下生成一个 `my_module/liblog.a` 文件。
-
-然后可以使用 `liblog.a` 文件来编译导入了 `log` 包的 `main.cj` ，编译命令如下：
-
-```shell
-$ cjc main.cj my_module/liblog.a
-```
-
-`cjc` 会将 `main.cj` 与 `liblog.a` 一同编译成一个可执行文件 `main` 。
+> **说明：**
+>
+> 该选项已废弃，并会在未来版本被移除。当前版本使用该选项没有功能性作用。
 
 ### `--output <value>`, `-o <value>`, `-o<value>` <sup>[frontend]</sup>
 
@@ -145,7 +160,9 @@ void printHello() {
 }
 ```
 
-与仓颉文件 `main.cj`：
+仓颉文件 `main.cj`：
+
+<!-- code_check_manual -->
 
 ```cangjie
 foreign func printHello(): Unit
@@ -253,12 +270,14 @@ Hello World
 .
 ├── libs
 |   └── myModule
-|       ├── log.cjo
-|       └── libmyModule.a
+|       ├── myModule.log.cjo
+|       └── libmyModule.log.a
 └── main.cj
 ```
 
 且有如下 `main.cj` 文件：
+
+<!-- code_check_manual -->
 
 ```cangjie
 import myModule.log.printLog
@@ -268,13 +287,15 @@ main() {
 }
 ```
 
-可以通过使用 `--import-path ./libs` 来将 `./libs` 加入导入模块的 AST 文件搜索路径，`cjc` 会使用 `./libs/myModule/log.cjo` 文件来对 `main.cj` 文件进行语义检查与编译。
+可以通过使用 `--import-path ./libs` 来将 `./libs` 加入导入模块的 AST 文件搜索路径，`cjc` 会使用 `./libs/myModule/myModule.log.cjo` 文件来对 `main.cj` 文件进行语义检查与编译。
 
 `--import-path` 提供与 `CANGJIE_PATH` 环境变量相同的功能，但通过 `--import-path` 设置的路径拥有更高的优先级。
 
 ### `--scan-dependency` <sup>[frontend]</sup>
 
 通过 `--scan-dependency` 指令可以获得指定包源码或者一个包的 `cjo` 文件对于其他包的直接依赖以及其他信息，以 `json` 格式输出。
+
+<!-- code_check_manual -->
 
 ```cangjie
 // this file is placed under directory pkgA
@@ -400,7 +421,7 @@ cjc --scan-dependency pkgA.cjo
 
 **值得注意的是：**
 
-`--static` 选项仅适用于 Linux 平台，在其他平台不生效。
+`--static` 选项适用于 Linux、Windows 和 macOS 平台。
 
 ### `--static-std`
 
@@ -410,7 +431,7 @@ cjc --scan-dependency pkgA.cjo
 
 当编译可执行程序时（即指定了 `--output-type=exe` 时），`cjc` 默认静态链接仓颉库的 std 模块。
 
-### <span id="--dy-std">`--dy-std`
+### `--dy-std`
 
 动态链接仓颉库的 std 模块。
 
@@ -420,28 +441,29 @@ cjc --scan-dependency pkgA.cjo
 
 **值得注意的是：**
 
-1. `--static-std` 和 `--dy-std` 选项一起使用时，仅最后一个选项生效。
-2. `--dy-std` 与 `--static-libs` 选项不可一起使用，否则会报错。
-3. 当编译可执行程序时链接了仓颉动态库（即通过 `--output-type=dylib` 选项编译的产物），必须显式指定 `--dy-std` 选项动态链接标准库，否则可能导致程序集中出现多份标准库，最终可能会导致运行时问题。
+1. `--static-std` 和 `--dy-std` 选项一起叠加使用，仅最后的那个选项生效。
+2. 当编译可执行程序时链接了仓颉动态库（即通过 `--output-type=dylib` 选项编译的产物），必须显式指定 `--dy-std` 选项动态链接标准库，否则可能导致程序集中出现多份标准库，最终可能会导致运行时问题。
+3. 各个平台支持能力如下：
+
+| 目标平台 | 产物是否支持 --static-std | 产物是否支持--dy-std |
+|:-------------------|:--------------:|:----------:|
+| Linux         |       支持        |     支持      |
+| macOS        |       支持        |     支持      |
+| Windows       |       支持        |     支持      |
+| OpenHarmony          |       不支持        |     支持      |
+| Android       |       支持        |     支持      |
 
 ### `--static-libs`
 
-静态链接仓颉库中除 std 及运行时模块外的其他模块。
-
-此选项仅在编译动态链接库或可执行文件时生效。`cjc` 默认静态链接仓颉库中除 std 及运行时模块外的其他模块。
+> **说明：**
+>
+> 该选项已废弃，并会在未来版本被移除。当前版本使用该选项没有功能性作用。
 
 ### `--dy-libs`
 
-动态链接仓颉库非 std 的其他模块。
-
-此选项仅在编译动态链接库或可执行文件时生效。
-
-**值得注意的是：**
-
-1. `--static-libs` 和 `--dy-libs` 选项一起使用时，仅最后一个选项生效；
-2. `--static-std` 与 `--dy-libs` 选项不可一起使用，否则会报错；
-3. `--dy-std` 单独使用时，会默认生效 `--dy-libs` 选项，并有相关告警信息提示；
-4. `--dy-libs` 单独使用时，会默认生效 `--dy-std` 选项，并有相关告警信息提示。
+> **说明：**
+>
+> 该选项已废弃，并会在未来版本被移除。当前版本使用该选项没有功能性作用。
 
 ### `--stack-trace-format=[default|simple|all]`
 
@@ -493,7 +515,7 @@ cjc --scan-dependency pkgA.cjo
     >
     > `LTO` 模式下的静态库（`.bc` 文件）输入时需要将该文件的路径输入仓颉编译器。
 
-3. 在 `LTO` 模式下，静态链接标准库（`--static-std` & `--static-libs`）时，标准库的代码也会参与 `LTO` 优化，并静态链接到可执行文件；动态链接标准库（`--dy-std` & `--dy-libs`）时，在 `LTO` 模式下依旧使用标准库中的动态库参与链接。
+3. 在 `LTO` 模式下，静态链接标准库（`--static-std`）时，标准库的代码也会参与 `LTO` 优化，并静态链接到可执行文件；动态链接标准库（`--dy-std`）时，在 `LTO` 模式下依旧使用标准库中的动态库参与链接。
 
     ```shell
     # 静态链接，标准库代码也参与 LTO 优化
@@ -502,9 +524,23 @@ cjc --scan-dependency pkgA.cjo
     $ cjc test.cj --lto=full --dy-std
     ```
 
-### `--pgo-instr-gen`
+### `--compile-as-exe`
+
+该选项启用后，将屏蔽 LTO 模式下加载 BC 文件的符号可见性，仅保留 package init 符号的可见性。基于此，LLVM 原生优化会执行激进的无效符号剔除操作。该选项仅在开启 `--lto` 编译参数时生效。
+
+``` shell
+# 编译通过
+$ cjc test.cj --lto=[full|thin] --compile-as-exe
+# 编译报错
+$ cjc test.cj --compile-as-exe
+```
+
+### `--pgo-instr-gen`, `--pgo-instr-gen=<.profraw>`
 
 使能插桩编译，生成携带插桩信息的可执行程序。
+
+- 如果指定了 `<.profraw>` 的路径参数，会将 profile 信息写入到指定的路径文件下。
+- 如果不指定路径参数，profile 信息会写入到执行仓颉程序时的当前路径下的 `default.profraw` 文件中。
 
 编译 macOS 与 Windows 目标时暂不支持使用该功能。
 
@@ -518,6 +554,11 @@ cjc --scan-dependency pkgA.cjo
 # 生成支持源码执行信息统计（携带插桩信息）的可执行程序 test
 $ cjc test.cj --pgo-instr-gen -o test
 # 运行可执行程序 test 结束后，生成 default.profraw 配置文件
+$ ./test
+
+# 生成支持源码执行信息统计（携带插桩信息）的可执行程序 test，同时指定执行信息的导出路径
+$ cjc test.cj --pgo-instr-gen=./cjpgo/cj.profraw -o test
+# 运行可执行程序 test 结束后，生成 ./cjpgo/cj.profraw 配置文件
 $ ./test
 ```
 
@@ -545,7 +586,7 @@ $ cjc test.cj --pgo-instr-use=default.profdata -o testOptimized
 参数 `<value>` 一般为符合以下格式的字符串：`<arch>(-<vendor>)-<os>(-<env>)`。其中：
 
 - `<arch>` 表示目标平台的系统架构，例如 `aarch64`，`x86_64` 等；
-- `<vendor>` 表示开发目标平台的厂商，常见的例如 `pc`，`apple` 等，在没有明确平台厂商或厂商不重要的情况下也经常写作 `unknown` 或直接省略；
+- `<vendor>` 表示开发目标平台的厂商，常见的例如 `apple` 等，在没有明确平台厂商或厂商不重要的情况下也经常写作 `unknown` 或直接省略；
 - `<os>` 表示目标平台的操作系统，例如 `Linux`，`Win32` 等；
 - `<env>` 表示目标平台的 ABI 或标准规范，用于更细粒度地区分同一操作系统的不同运行环境，例如 `gnu`，`musl` 等。在操作系统不需要根据 `<env>` 进行更细地区分的时候，此项也可以省略。
 
@@ -555,6 +596,16 @@ $ cjc test.cj --pgo-instr-use=default.profdata -o testOptimized
 | ------------------ | ------------------ |
 | x86_64-linux-gnu   | x86_64-windows-gnu     |
 | aarch64-linux-gnu   | x86_64-windows-gnu     |
+| <!--DelRow-->x86_64-windows-gnu   | aarch64-linux-ohos |
+| <!--DelRow-->x86_64-windows-gnu   | x86_64-linux-ohos  |
+| <!--DelRow-->x86_64-apple-darwin  | aarch64-linux-ohos |
+| <!--DelRow-->x86_64-apple-darwin  | x86_64-linux-ohos  |
+| <!--DelRow-->aarch64-apple-darwin | aarch64-linux-ohos |
+| <!--DelRow-->aarch64-apple-darwin| aarch64-apple-ios-simulator |
+| <!--DelRow-->aarch64-apple-darwin| x86_64-apple-ios-simulator |
+| <!--DelRow-->x86_64-linux-gnu| aarch64-linux-android26 |
+| <!--DelRow-->x86_64-apple-darwin | aarch64-linux-android26 |
+| <!--DelRow-->x86_64-windows-gnu | aarch64-linux-android26 |
 
 在使用 `--target` 指定目标平台进行交叉编译之前，请准备好对应目标平台的交叉编译工具链，以及可以在本地平台上运行的、向该目标平台编译的对应 Cangjie SDK 版本。
 
@@ -796,11 +847,17 @@ cjc --target=arch-os-env --sysroot /usr/sdk/arch-os-env hello.cj -o hello
 
 编译 Windows 目标时不支持使用该功能。
 
+### `--link-option <value>`<sup>1</sup>
+
+指定链接器选项。
+
+`cjc` 会将该选项的值作为一个参数透传给链接器。可用的参数会因（系统或指定的）链接器的不同而不同。可以多次使用 `--link-option` 指定多个链接器选项。
+
 ### `--link-options <value>`<sup>1</sup>
 
 指定链接器选项。
 
-`cjc` 会将该选项的参数透传给链接器。可用的参数会因系统或指定的链接器不同而不同。可以多次使用 `--link-options` 指定多个链接器选项。
+`cjc` 会将该选项的多个参数透传给链接器，参数之间用空格分隔。可用的参数会因（系统或指定的）链接器的不同而不同。可以多次使用 `--link-options` 指定多个链接器选项。
 
 <sup>1</sup> 上标表示链接器透传选项可能会因为链接器的不同而不同，具体支持的选项请查阅链接器文档。
 
@@ -814,11 +871,48 @@ cjc --target=arch-os-env --sysroot /usr/sdk/arch-os-env hello.cj -o hello
 
 ### `--profile-compile-time` <sup>[frontend]</sup>
 
-打印各编译阶段的时间消耗数据。
+输出各编译阶段时间消耗数据到一份文件中，该文件以 .time.prof 为后缀， 保存在 `output` 指定的目录中，若`output` 指定的是一个文件，则 .time.prof 与该文件同级。
 
 ### `--profile-compile-memory` <sup>[frontend]</sup>
 
-打印各编译阶段的内存消耗数据。
+输出各编译阶段内存消耗数据到一份文件中，该文件以 .mem.prof 为后缀， 保存在 `output` 指定的目录中，若`output` 指定的是一个文件，则 .mem.prof 与该文件同级。
+
+### `--sanitize==[address|thread|hwsaddress]` <sup>[frontend]</sup>
+
+用于开启 sanitizer 编译期间插桩功能，运行时检测程序中的各种错误。并链接对应 sanitizer 的库。使用该选项前需下载支持 sanitizer 功能的专属 SDK 包（如 cangjie-sdk-linux-aarch64-sanitizer.tar.gz），并确保 SDK 已正确部署。
+
+- `--sanitize=address` 用于检测内存错误，对应 sdk 中的 cangjie/runtime/lib/linux_aarch64_cjnative/asan 目录。
+- `--sanitize=thread` 用于检测数据竞争，对应 sdk 中的 cangjie/runtime/lib/linux_aarch64_cjnative/tsan 目录。
+- `--sanitize=hwaddress` 用于检测内存访问错误行为，对应 sdk 中的 cangjie/runtime/lib/linux_aarch64_cjnative/hwasan 目录。
+
+使用示例：
+
+```shell
+# 编译 cangjie 文件 
+cjc --sanitize=address main.cj -o main
+
+# 手动指定 sanitizer 运行时库路径（必填，否则运行时找不到库）
+export LD_LIBRARY_PATH=${CANGJIE_HOME}/runtime/lib/arch/Asan:$LD_LIBRARY_PATH 
+
+# 运行
+./main
+```
+
+> **注意：**
+>
+> `--sanitize` 选项不能与 `--compile-macro` 同时使用，否则会报错。
+
+### --sanitize-set-rpath <sup>[frontend]</sup>
+
+该选项用于自动将对应 sanitizer 运行时库的路径写入程序的 RPATH 字段，无需用户额外执行 `export LD_LIBRARY_PATH=${CANGJIE_HOME}/runtime/lib/arch/[asan|tsan|hwasan]:$LD_LIBRARY_PATH` 指定库路径，可简化命令。
+
+使用示例：
+
+```shell
+cjc --sanitize=address main.cj -o main --sanitize-set-rpath
+
+./main
+```
 
 ## 单元测试选项
 
@@ -827,7 +921,9 @@ cjc --target=arch-os-env --sysroot /usr/sdk/arch-os-env hello.cj -o hello
 `unittest` 测试框架提供的入口，由宏自动生成。当使用 `cjc --test` 选项编译时，程序入口不再是 `main`，而是 `test_entry`。unittest 测试框架的使用方法请参见《仓颉编程语言标准库 API》文档。
 
 对于 `pkgc` 目录下的仓颉文件 `a.cj`:
+
 <!-- run -->
+<!-- cfg="--test" -->
 
 ```cangjie
 import std.unittest.*
@@ -854,7 +950,7 @@ cjc a.cj --test
 >
 > 不保证用例每次执行的用时都相同。
 
-```cangjie
+```text
 case1
 --------------------------------------------------------------------------------------------------
 TP: default, time elapsed: 29710 ns, Result:
@@ -880,14 +976,16 @@ application
 可以在 `application`目录下使用 `-p` 编译选项配合编译整包：
 
 ```shell
-cjc pkgc --test -p
+cjc --test -p pkgc
 ```
 
 来编译整个 `pkgc` 包下的测试用例 `a1.cj` 和 `a2.cj`。
 
+<!-- code_check_manual -->
+
 ```cangjie
 /*a1.cj*/
-package a
+package pkgc
 
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -901,9 +999,11 @@ public class TestA {
 }
 ```
 
+<!-- code_check_manual -->
+
 ```cangjie
 /*a2.cj*/
-package a
+package pkgc
 
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -919,7 +1019,7 @@ public class TestB {
 
 执行 `main` 会有如下输出（**输出信息仅供参考**）：
 
-```cangjie
+```text
 case1
 --------------------------------------------------------------------------------------------------
 TP: a, time elapsed: 367800 ns, Result:
@@ -956,7 +1056,9 @@ Summary: TOTAL: 2
 >
 > 使用此选项时，应单独以常规模式编译相同的包，然后通过 `-L`/`-l` 链接选项添加依赖，或在使用 `LTO` 选项时添加依赖的 `.bc` 文件。否则，编译器将报缺少依赖的符号的错误。
 
-示例:
+示例：
+<!-- run -my_pkg -->
+<!-- cfg="-p my_pkg --output-type=staticlib -o=output/libmain.a" -->
 
 ```cangjie
 /*main.cj*/
@@ -966,11 +1068,13 @@ func concatM(s1: String, s2: String): String {
     return s1 + s2
 }
 
-main() {
+main(): Int64 {
     println(concatM("a", "b"))
     0
 }
 ```
+<!-- run -my_pkg-->
+<!-- cfg="-p my_pkg --test-only -L output -lmain --import-path output" -->
 
 ```cangjie
 /*main_test.cj*/
@@ -989,9 +1093,9 @@ class Tests {
 
 ```shell
 # Compile the production part of the package first, only `main.cj` file would be compiled here
-cjc -p my_pkg --output-type=static -o=output/libmain.a
+cjc -p my_pkg --output-type=staticlib -o=output/libmain.a
 # Compile the test part of the package, Only `main_test.cj` file would be compiled here
-cjc -p my_pkg --test-only -L output -lmain
+cjc -p my_pkg --test-only -L output -lmain --import-path output
 ```
 
 ### `--mock <on|off|runtime-error>` <sup>[frontend]</sup>
@@ -1006,7 +1110,7 @@ cjc -p my_pkg --test-only -L output -lmain
 
 ## 宏选项
 
-`cjc` 支持以下宏选项，关于宏的更多内容请参见[“宏”](./Chapter_15_Macro.md)章节。
+`cjc` 支持以下宏选项，关于宏的更多内容请参见<!--RP1-->[宏](../Macro/macro_introduction.md)<!--RP1End-->章节。
 
 ### `--compile-macro` <sup>[frontend]</sup>
 
@@ -1022,7 +1126,7 @@ cjc -p my_pkg --test-only -L output -lmain
 
 ## 条件编译选项
 
-`cjc` 支持以下条件编译选项，关于条件编译的更多内容请参见[“条件编译”](../compile_and_build/conditional_compilation.md)。
+`cjc` 支持以下条件编译选项，关于条件编译的更多内容请参见<!--RP2-->[条件编译](../compile_and_build/conditional_compilation.md)<!--RP2End-->。
 
 ### `--cfg <value>` <sup>[frontend]</sup>
 
@@ -1074,8 +1178,8 @@ cjc -p my_pkg --test-only -L output -lmain
 
 - 若该编译选项未设置，编译器将根据场景默认开启或关闭激进并行编译：
 
-    - `-O0` 或 `-g`：激进并行编译将由编译器默认开启，且激进并行编译的并行数与 `--jobs` 一致；可以通过 `--aggressive-parallel-compile=<value>` 或 `--apc=<value>` 且 `value <= 1` 关闭激进并行编译。
-    - 非 `-O0` 且非 `-g`：激进并行编译将由编译器默认关闭；可以通过 `--aggressive-parallel-compile=<value>` 或 `--apc=<value>` 且 `value > 1` 开启激进并行编译。
+    - `-O0` ：激进并行编译将由编译器默认开启，且激进并行编译的并行数与 `--jobs` 一致；可以通过 `--aggressive-parallel-compile=<value>` 或 `--apc=<value>` 且 `value <= 1` 关闭激进并行编译。
+    - 非 `-O0` ：激进并行编译将由编译器默认关闭；可以通过 `--aggressive-parallel-compile=<value>` 或 `--apc=<value>` 且 `value > 1` 开启激进并行编译。
 
 ## 优化选项
 
@@ -1135,7 +1239,7 @@ cjc -p my_pkg --test-only -L output -lmain
 
 ## 代码混淆选项
 
-`cjc` 支持代码混淆功能，以提供对代码的额外安全保护，默认不开启。
+`cjc` 支持代码混淆功能，以提供额外的安全保护。代码混淆功能默认不开启。
 
 `cjc` 支持以下代码混淆选项：
 
@@ -1153,7 +1257,7 @@ cjc -p my_pkg --test-only -L output -lmain
 
 开启常量混淆。
 
-混淆代码中使用的数值常量，将数值运算指令替换成等效的、更复杂的数值运算指令序列。
+混淆代码中使用的数值常量，将其数值运算指令替换成等效的、更复杂的数值运算指令序列。
 
 ### `--fno-obf-const`
 
@@ -1294,6 +1398,8 @@ obf_func2 name2
 
 例如，假设在包 `packA` 中有以下代码：
 
+<!-- compile -->
+
 ```cangjie
 package packA
 class MyClassA {
@@ -1309,7 +1415,7 @@ class MyClassA {
 obf-cf-flatten packA.MyClassA.funcA(std.core.String, Int64)
 ```
 
-用户也可以使用通配符编写更加灵活的规则，达到一条规则保留多个对象的效果。目前支持的通配符包含以下 3 类：
+用户也可以使用通配符编写更加灵活的规则，达到一条规则保留多个对象的目的。目前支持的通配符包含以下 3 类：
 
 混淆功能通配符：
 
@@ -1575,7 +1681,67 @@ void __sanitizer_cov_trace_switch(uint64_t Val, uint64_t *Cases);
 - Array==: __sanitizer_weak_hook_memcmp
 - ArrayList==: __sanitizer_weak_hook_memcmp
 
-## 实验性功能选项
+## 实验性功能选项<!--Del-->
+
+### `--enable-eh` <sup>[frontend]</sup>
+
+启用该选项后，仓颉将支持效应处理器（Effect Handlers），Effect Handlers 是一种先进的控制流机制，用于实现模块化、可恢复的副作用处理。
+
+Effect Handler 允许程序员将副作用操作与其处理逻辑解耦，从而编写出更清晰、更具可组合性的代码。这种机制有助于提高抽象层次，尤其适用于处理日志记录、输入输出、状态变更等操作，从而避免主流程被副作用逻辑污染。
+
+效应的工作机制类似异常处理，但不使用 `throw` 和 `catch`，而是通过 `perform` 执行效应，使用 `handle` 进行捕获与处理。每个效应需通过继承 `stdx.effect.Command` 类来定义。
+
+与传统异常机制不同，Effect Handler 在处理效应后可以选择 恢复执行（`resume`），即向原始调用点注入一个值并继续运行。这种“恢复”能力使得程序员可以对控制流进行更精细的操作，特别适合用于构建模拟器、解释器或协作式多任务系统等需要高度控制的场景。
+
+示例：
+
+<!-- verify -->
+<!-- cfg="--enable-eh --experimental" -->
+
+```cangjie
+import stdx.effect.Command
+
+// 定义一个名为 GetNumber 的 Command
+class GetNumber <: Command<Int64> {}
+
+main() {
+    try {
+        println("About to perform")
+
+        // 执行 GetNumber 效应
+        let a = perform GetNumber()
+
+        // handler 恢复后将从此处继续执行
+        println("It is resumed, a = ${a}")
+    } handle(e: GetNumber) {
+        // 处理 GetNumber 效应
+        println("It is performed")
+
+        // 恢复执行，并注入值 9
+        resume with 9
+    }
+    0
+}
+```
+
+在上述示例中，定义了一个新的 `Command` 的子类 `GetNumber`。
+
+- 在 `main` 函数中，使用 `try-handle` 结构来处理该效应。
+- 在 `try` 块中，首先打印一行提示信息（`"About to perform"`），然后使用 `perform GetNumber()` 执行效应，`perform` 表达式的返回值会被赋给变量 `a`，执行一个效应会将执行流跳转到捕获这个效应的 `handle` 块。
+- 在 `handle` 块中，捕获并处理 `GetNumber` 效应，先打印一条信息（`"It is performed"`），然后使用 `resume with 9` 将常数 `9` 注入回原始调用点，然后恢复 `perform`  之后的执行流，打印（`"It is resumed, a = 9"`）。
+
+输出结果如下：
+
+```text
+About to perform
+It is performed
+It is resumed, a = 9
+```
+
+> **注意：**
+>
+> - Effect Handler 当前仍属于实验性特性，该选项可能在未来版本中发生变化，请谨慎使用。
+> - 使用 Effect Handler 需引入 `stdx.effect` 库。<!--DelEnd-->
 
 ### `--experimental` <sup>[frontend]</sup>
 
@@ -1584,6 +1750,12 @@ void __sanitizer_cov_trace_switch(uint64_t Val, uint64_t *Cases);
 > **注意：**
 >
 > 使用实验性功能生成的二进制文件可能存在潜在的运行时问题，请注意使用该选项的风险。
+
+## 编译插件选项
+
+### `--plugin <value>` <sup>[frontend]</sup>
+
+提供编译器插件能力，但作为实验特性，仅做内部验证，暂不支持开发者自定义插件使用，否则可能报错。
 
 ## 其他功能
 
@@ -1605,12 +1777,48 @@ void __sanitizer_cov_trace_switch(uint64_t Val, uint64_t *Cases);
 
 ### 增量编译
 
-通过 `--incremental-compile`<sup>[frontend]</sup>开启增量编译。开启后，`cjc`会在编译时根据前次编译的缓存文件加快此次编译的速度。
+通过 `--incremental-compile` <sup>[frontend]</sup> 开启增量编译。开启后，`cjc`会在编译时根据前次编译的缓存文件加快此次编译的速度。
 
 > **注意：**
 >
 > 该选项为实验性功能，使用该功能生成的二进制有可能会存在潜在的运行时问题，请注意使用该选项的风险。此选项必须配合 `--experimental` 选项一同使用。
 > 指定此选项时会保存增量编译缓存及日志到输出文件路径下的 `.cached`目录。
+
+### 输出 CHIR
+
+通过 `--emit-chir=[raw|opt]` <sup>[frontend]</sup> 指定输出 CHIR 编译阶段的序列化产物，`raw` 输出编译器优化前的 CHIR，`opt` 输出编译器优化后的 CHIR。使用 `--emit-chir` 则默认输出编译器优化后的 CHIR。
+
+### `--no-prelude` <sup>[frontend]</sup>
+
+关闭标准库 core 包自动导入功能。
+
+> **注意：**
+>
+> 该选项仅能用于编译仓颉标准库 core 包，不能用于编译其他仓颉代码的场景。
+
+### 打印 AST
+
+可通过 `--dump-ast` <sup>[frontend]</sup> 打印 AST。默认输出到文件，产物目录会创建以包名（或使用 `-o` 指定的产物名）命名的 *_AST 目录，文件命名为 `编号_阶段名称_ast.txt`。加上 `--dump-to-screen` <sup>[frontend]</sup> 可输出到屏幕。
+
+### 打印 CHIR
+
+可通过 `--dump-chir` <sup>[frontend]</sup> 打印 CHIR。默认输出到文件，产物目录会创建以包名（或使用 `-o` 指定的产物名）命名的 *_CHIR 目录，文件命名为 `编号_阶段名称.chirtxt`。加上 `--dump-to-screen` <sup>[frontend]</sup> 可输出到屏幕。
+
+### 打印 LLVM IR
+
+可通过 `--dump-ir` <sup>[frontend]</sup> 打印 LLVM IR。默认输出到文件，产物目录会创建以包名（或使用 `-o` 指定的产物名）命名的 *_IR 目录并在 *_IR 目录下创建 `编号_阶段名称` 子文件夹，文件名为 `子模块编号-包名.ll`，子模块的编号和数量与编译并发度相关。加上 `--dump-to-screen` <sup>[frontend]</sup> 可输出到屏幕。
+
+### 打印 AST, CHIR, LLVM IR
+
+可通过 `--dump-all` <sup>[frontend]</sup> 打印 AST, CHIR, LLVM IR。默认输出到文件，产物目录会创建以包名（或使用 `-o` 指定的产物名）命名的 *_AST, *_CHIR, *_IR 目录。加上 `--dump-to-screen` <sup>[frontend]</sup> 可输出到屏幕。
+
+### 将 dump 内容打印到屏幕上
+
+可通过 `--dump-to-screen` <sup>[frontend]</sup> 配合前端相关的转储选项（如 `--dump-ast` <sup>[frontend]</sup>， `--dump-chir` <sup>[frontend]</sup>, `--dump-ir` <sup>[frontend]</sup> 和 `--dump-all` <sup>[frontend]</sup>）将相应的中间表示文本内容打印到屏幕上。
+
+> **注意：**
+>
+> 输出到屏幕时仅显示最终结果；输出到文件时会在产物目录下创建以 `_AST`, `_CHIR`, `_IR` 为后缀的目录，用以保存中间过程的详细信息。
 
 ## `cjc` 用到的环境变量
 

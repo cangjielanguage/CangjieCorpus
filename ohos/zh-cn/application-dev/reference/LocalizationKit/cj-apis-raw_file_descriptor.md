@@ -1,5 +1,11 @@
 # ohos.raw_file_descriptor
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 raw_file_descriptor模块表示rawfile的描述符信息。
 
 ## 导入模块

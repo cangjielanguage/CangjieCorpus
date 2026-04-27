@@ -1,5 +1,11 @@
 # 编辑图片EXIF信息
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 图片工具当前主要提供图片EXIF信息的读取与编辑能力。
 
 EXIF（Exchangeable image file format）是专门为数码相机的照片设定的文件格式，可以记录数码照片的属性信息和拍摄数据。当前仅支持JPEG格式图片。

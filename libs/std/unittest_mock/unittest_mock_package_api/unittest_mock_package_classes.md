@@ -13,7 +13,7 @@ public sealed abstract class ActionSelector {}
 ### func fails()
 
 ```cangjie
-func fails(): Unit
+public func fails(): Unit
 ```
 
 功能：定义调用桩签名将导致测试失败，执行至桩签名即抛出 [AssertionException](../../unittest/unittest_package_api/unittest_package_exceptions.md#class-assertexception) 异常的行为。
@@ -33,7 +33,7 @@ public class AnyMatcher <: ArgumentMatcher {}
 ### func matchesAny(Any)
 
 ```cangjie
-public func matchesAny(_: Any)
+public func matchesAny(_: Any): Bool
 ```
 
 功能：匹配任意类型的任意值。
@@ -109,7 +109,7 @@ public func forParameter(name: String): ArgumentMatcher
 ### func matchesAny(Any)
 
 ```cangjie
-public func matchesAny(arg: Any)
+public func matchesAny(arg: Any): Bool
 ```
 
 功能：匹配任意类型的任意值。
@@ -136,10 +136,42 @@ public class CardinalitySelector<A> where A <: ActionSelector {}
 - 桩签名的调用次数超过指定次数将立即抛出 [ExpectationFailedException](./unittest_mock_package_exceptions.md#class-expectationfailedexception) 。
 - 桩签名的调用次数不足时，框架将在测试用例执行完成后抛出 [ExceptionFailedException](./unittest_mock_package_exceptions.md#class-expectationfailedexception) 。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printer = mock<Printer>()
+    @On(printer.print("abc")).returns(true)
+
+    printer.print("abc")
+    Verify.that(@Called(printer.print("abc")).once())
+
+    printer.print("abc")
+    Verify.that(@Called(printer.print("abc")).atLeastOnce())
+    Verify.that(@Called(printer.print("abc")).times(2))
+    Verify.that(@Called(printer.print("abc")).times(min: 1, max: 3))
+    Verify.that(@Called(printer.print("abc")).atLeastTimes(2))
+
+    Verify.that(@Called(printer.print("xyz")).times(0))
+    Verify.that(@Called(printer.print("xyz")).atLeastTimes(0))
+    Verify.that(@Called(printer.print("xyz")).never())
+}
+
+```
+
 ### func anyTimes()
 
 ```cangjie
-func anyTimes(): Unit
+public func anyTimes(): Unit
 ```
 
 功能：定义“桩行为”可以执行任意次数。此函数对桩签名的调用次数不做任何校验。
@@ -147,7 +179,7 @@ func anyTimes(): Unit
 ### func atLeastOnce()
 
 ```cangjie
-func atLeastOnce(): Unit
+public func atLeastOnce(): Unit
 ```
 
 功能：定义“桩行为”最少被执行一次。验证不到一次时，抛出异常。
@@ -159,7 +191,7 @@ func atLeastOnce(): Unit
 ### func atLeastTimes(Int64)
 
 ```cangjie
-func atLeastTimes(minTimesExpected: Int64): Unit
+public func atLeastTimes(minTimesExpected: Int64): Unit
 ```
 
 功能：定义“桩行为”最少被执行指定次数的行为。验证实际执行次数低于最少指定次数时，抛出异常。
@@ -176,14 +208,14 @@ func atLeastTimes(minTimesExpected: Int64): Unit
 ### func once()
 
 ```cangjie
-func once(): Continuation<R>
+public func once(): Continuation<A>
 ```
 
 功能：定义“桩行为”仅被执行一次。此函数将在验证桩签名执行次数超出一次时，抛出异常。
 
 返回值：
 
-- [Continuation](#class-continuationa)\<R> - 对象实例可调用方法继续生成 [ActionSelector](#class-actionselector) 对象。
+- [Continuation](#class-continuationa)\<A> - 对象实例可调用方法继续生成 [ActionSelector](#class-actionselector) 对象。
 
 异常：
 
@@ -192,7 +224,7 @@ func once(): Continuation<R>
 ### func times(Int64)
 
 ```cangjie
-func times(expectedTimes: Int64): Continuation<R>
+public func times(expectedTimes: Int64): Continuation<A>
 ```
 
 功能：定义“桩行为”被执行指定次数。验证不是指定次数时，抛出异常。
@@ -203,7 +235,7 @@ func times(expectedTimes: Int64): Continuation<R>
 
 返回值：
 
-- [Continuation](#class-continuationa)\<R> - 对象实例可调用方法继续生成 [ActionSelector](#class-actionselector) 对象。
+- [Continuation](#class-continuationa)\<A> - 对象实例可调用方法继续生成 [ActionSelector](#class-actionselector) 对象。
 
 异常：
 
@@ -213,7 +245,7 @@ func times(expectedTimes: Int64): Continuation<R>
 ### func times(Int64, Int64)
 
 ```cangjie
-func times(min!: Int64, max!: Int64): Unit
+public func times(min!: Int64, max!: Int64): Unit
 ```
 
 功能：定义“桩行为”执行指定次数范围。验证超出指定次数范围时，抛出异常。
@@ -236,13 +268,12 @@ public class ConfigureMock {}
 
 功能：配置 `mock object` 。
 
-### static func stubGetter\<TObj, TRet>(() -> TRet,TObj,String,String,String,Int64)
+### static func stubGetter\<TRet>(() -> TRet,Option\<String>,String,String,Int64)
 
 ```cangjie
-public static func stubGetter<TObj, TRet>(
+public static func stubGetter<TRet>(
     stubCall: () -> TRet,
-    objectReference: TObj,
-    objectName: String,
+    prefixRefName: Option<String>,
     fieldOrPropertyName: String,
     callDescription: String,
     lineNumber: Int64
@@ -254,8 +285,7 @@ public static func stubGetter<TObj, TRet>(
 参数：
 
 - stubCall: () -> TRet - 桩签名对应的调用表达式。
-- objectReference: TObj - 被插桩的对象的引用。
-- objectName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的对象的名称。
+- prefixRefName: [Option](../../core/core_package_api/core_package_enums.md#enum-optiont)\<[String](../../core/core_package_api/core_package_structs.md#struct-string)> - 用于模拟类/接口成员的对象引用令牌，用于模拟静态声明的类型引用令牌，用于顶级声明的时为 None。
 - fieldOrPropertyName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的字段或属性名称。
 - callDescription: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 桩签名对应的调用表达式的字符串表达。
 - lineNumber: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 对应的调用表达式的行号。
@@ -264,14 +294,13 @@ public static func stubGetter<TObj, TRet>(
 
 - [GetterActionSelector](#class-getteractionselectortret)\<TRet> - 针对属性的 Getter 方法插入桩代码的操作器对象。
 
-### static func stubMethod\<TObj, TRet>(() -> TRet,Array\<ArgumentMatcher>,TObj,String,String,String,Int64)
+### static func stubFunction\<TRet>(() -> TRet, Array\<ArgumentMatcher>, Option\<String>, String, String, Int64)
 
 ```cangjie
-public static func stubMethod<TObj, TRet>(
+public static func stubFunction<TRet>(
     stubCall: () -> TRet,
     matchers: Array<ArgumentMatcher>,
-    objectReference: TObj,
-    objectName: String,
+    prefixRefName: Option<String>,
     methodName: String,
     callDescription: String,
     lineNumber: Int64
@@ -284,9 +313,8 @@ public static func stubMethod<TObj, TRet>(
 
 - stubCall: () -> TRet - 桩签名对应的调用表达式。
 - matchers: Array\<[ArgumentMatcher](#class-argumentmatcher)> - 对应入参的参数匹配器。
-- objectReference: TObj - 被插桩的对象的引用。
-- objectName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的对象的名称。
-- methodName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的方法名称。
+- prefixRefName: [Option](../../core/core_package_api/core_package_enums.md#enum-optiont)\<[String](../../core/core_package_api/core_package_structs.md#struct-string)> - 用于模拟类/接口成员的对象引用令牌，用于模拟静态声明的类型引用令牌，用于顶级声明的时为 None。
+- methodName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 方法的名称。
 - callDescription: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 桩签名对应的调用表达式的字符串表达。
 - lineNumber: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 对应的调用表达式的行号。
 
@@ -294,15 +322,14 @@ public static func stubMethod<TObj, TRet>(
 
 - [MethodActionSelector](#class-methodactionselectortret)\<TRet> - 针对普通成员方法插入桩代码的操作器对象。
 
-### static func stubSetter\<TObj, TRet>(() -> Unit, () -> TArg,ArgumentMatcher,TObj,String,String,String,Int64)
+### static func stubSetter\<TArg>(() -> Unit, () -> TArg,ArgumentMatcher,Option\<String>,String,String,Int64)
 
 ```cangjie
-public static func stubSetter<TObj, TArg>(
+public static func stubSetter<TArg>(
     stubCall: () -> Unit,
     _: () -> TArg,
     matcher: ArgumentMatcher,
-    objectReference: TObj,
-    objectName: String,
+    prefixRefName: Option<String>,
     fieldOrPropertyName: String,
     callDescription: String,
     lineNumber: Int64
@@ -316,15 +343,14 @@ public static func stubSetter<TObj, TArg>(
 - stubCall: () -> Unit - 桩签名对应的调用表达式。
 - _: () -> TArg - 用于捕获属性或者字段的类型。
 - matcher: [ArgumentMatcher](#class-argumentmatcher) - 入参的参数匹配器。
-- objectReference: TObj - 被插桩的对象的引用。
-- objectName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的对象的名称。
+- prefixRefName: [Option](../../core/core_package_api/core_package_enums.md#enum-optiont)\<[String](../../core/core_package_api/core_package_structs.md#struct-string)> - 用于模拟类/接口成员的对象引用令牌，用于模拟静态声明的类型引用令牌，用于顶级声明的时为 None。
 - fieldOrPropertyName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 被插桩的属性或字段的名称。
 - callDescription: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 桩签名对应的调用表达式的字符串表达。
 - lineNumber: [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) - 对应的调用表达式的行号。
 
 返回值：
 
-- [MethodActionSelector](#class-methodactionselectortret)\<TRet> - 针对普通成员方法插入桩代码的操作器对象。
+- [SetterActionSelector](#class-setteractionselectortarg)\<TArg> - 针对普通成员方法插入桩代码的操作器对象。
 
 ## class Continuation\<A>
 
@@ -338,10 +364,33 @@ public class Continuation<A> where A <: ActionSelector {}
 - 允许当先前的操作得到满足时，桩签名将执行额外的操作。仅当后面跟着一个行为定义时，`Continuation` 实例才有意义。
 - 当先前的操作未得到满足时，将抛出 [MockFrameworkException](./unittest_mock_package_exceptions.md#class-mockframeworkexception) 异常。并不保证抛出此异常的确切位置。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printer = mock<Printer>()
+    @On(printer.print("abc")).returns(true).times(2).then().returns(false)
+
+    @Assert(printer.print("abc") == true)
+    @Assert(printer.print("abc") == true)
+    @Assert(printer.print("abc") == false)
+    @Assert(printer.print("abc") == false)
+}
+```
+
 ### func then()
 
 ```cangjie
-func then(): A
+public func then(): A
 ```
 
 功能：当链中的先前操作完成时，返回 [ActionSelector](unittest_mock_package_classes.md#class-actionselector) 的子类对象。
@@ -366,6 +415,8 @@ public class GetterActionSelector<TRet> <: ActionSelector {}
 父类型：
 
 - [ActionSelector](#class-actionselector)
+
+参考示例：[SyntheticField](#class-syntheticfieldt)。
 
 ### func getsField(SyntheticField\<TRet>)
 
@@ -430,7 +481,7 @@ public func returns(valueFactory: () -> TRet): CardinalitySelector<GetterActionS
 ### func returnsConsecutively(Array\<TRet>)
 
 ```cangjie
-public func returnsConsecutively(values: Array<TRet>)
+public func returnsConsecutively(values: Array<TRet>): Continuation<GetterActionSelector<TRet>>
 ```
 
 功能：指定返回多个值。
@@ -441,12 +492,12 @@ public func returnsConsecutively(values: Array<TRet>)
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [Continuation](#class-continuationa)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
 
 ### func returnsConsecutively(ArrayList\<TRet>)
 
 ```cangjie
-public func returnsConsecutively(values: ArrayList<TRet>)
+public func returnsConsecutively(values: ArrayList<TRet>): Continuation<GetterActionSelector<TRet>>
 ```
 
 功能：指定返回多个值。
@@ -457,7 +508,7 @@ public func returnsConsecutively(values: ArrayList<TRet>)
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [Continuation](#class-continuationa)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
 
 ### func throws(Exception)
 
@@ -499,17 +550,49 @@ extend MethodActionSelector<Unit> {}
 
 功能：扩展 [MethodActionSelector](#class-methodactionselectortret) 。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printerMock = mock<Printer>()
+    @On(printerMock.print(_)).returns(false)
+    @On(printerMock.print("throw")).throws(TimeoutException())
+    @On(printerMock.print("fail")).fails()
+
+    @ExpectThrows[TimeoutException](printerMock.print("throw"))
+    @Expect(printerMock.print("something"), false)
+    // printerMock.print("fail") // expected to fail
+
+    let printer = Printer()
+    let printerSpy = spy(printer)
+    @On(printerSpy.print(_)).callsOriginal()
+    @On(printerSpy.print("hello")).returns(false)
+
+    @Expect(printerSpy.print("hello"), false)
+    @Expect(printerSpy.print("something"), true)
+}
+```
+
 #### func returns()
 
 ```cangjie
-public func returns(): CardinalitySelector<MethodActionSelector<TRet>>
+public func returns(): CardinalitySelector<MethodActionSelector<Unit>>
 ```
 
 功能：指定桩函数什么都不做。
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[MethodActionSelector](#class-methodactionselectortret)\<Unit>> - 预期执行次数的操作器。
 
 ## class Matchers
 
@@ -525,6 +608,8 @@ public class Matchers {}
 
 - 为不同的参数指定不同的行为。例如：
 
+    <!-- code_no_check -->
+
     ```cangjie
     // 当 bar 的入参为 5 时，返回某个值
     @On(foo.bar(eq(5))).returns(...)
@@ -533,6 +618,8 @@ public class Matchers {}
     ```
 
 - 确保只有某些参数被传递到某些桩签名中。
+
+    <!-- code_no_check -->
 
     ```cangjie
     let foo = mock<Foo>()
@@ -543,6 +630,8 @@ public class Matchers {}
     > **注意：**
     >
     > 上例仅适用于 `mock object` 。`spy object` 的行为不同。
+
+    <!-- code_no_check -->
 
     ```cangjie
     let foo = spy(Foo())
@@ -617,7 +706,11 @@ public static func argThatNot<T>(predicate: (T) -> Bool): TypedMatcher<T>
 public static func capture<T>(listener: ValueListener<T>): TypedMatcher<T>
 ```
 
-允许 listener 值监听器对类型为 T 的传入参数值进行处理。当 capture 的类型参数未指定时，将使用值监听器的类型参数值。
+功能：允许 listener 值监听器对类型为 T 的传入参数值进行处理。当 capture 的类型参数未指定时，将使用值监听器的类型参数值。
+
+> **注意：**
+>
+> 值监听器不允许在 @Called 的参数范围内使用。
 
 参数：
 
@@ -626,8 +719,6 @@ public static func capture<T>(listener: ValueListener<T>): TypedMatcher<T>
 返回值：
 
 - [TypedMatcher](#class-typedmatchert)\<T> - 拥有值监听器的类型匹配器。
-
-注意：值监听器不允许在 @Called 的参数范围内使用。
 
 ### static func default\<T>(T)
 
@@ -720,7 +811,7 @@ public class MethodActionSelector<TRet> <: ActionSelector {}
 ```
 
 功能：此类提供了为成员函数指定一个[操作 API](../unittest_mock_samples/mock_framework_basics.md#操作-api) ，并允许链式调用。
-入参为 `mock object` 或 `spy object` 的某个成员函数的调用表达式的 `@On` 宏调用表达式，将返回 [ActionSelector](#class-actionselector)\<R> 的实例（其中 `R` 代表正在配置的函数成员的返回值类型）。
+入参为 `mock object` 或 `spy object` 的某个成员函数的调用表达式的 `@On` 宏调用表达式，将返回 [ActionSelector](#class-actionselector)\<TRet> 的实例（其中 `TRet` 代表正在配置的函数成员的返回值类型）。
 即，此类中的 API 可为成员函数插入桩代码。
 
 父类型：
@@ -730,82 +821,82 @@ public class MethodActionSelector<TRet> <: ActionSelector {}
 ### func callsOriginal()
 
 ```cangjie
-func callsOriginal(): CardinalitySelector<R>
+public func callsOriginal(): CardinalitySelector<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名执行原始代码逻辑的行为。
 
 返回值：
 
-- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> - 定义了桩签名执行原始代码逻辑的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
+- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<[MethodActionSelector](#class-methodactionselectortret)\<TRet>> - 定义了桩签名执行原始代码逻辑的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<TRet> 对象实例。
 
-### func returns(() -> R)
+### func returns(() -> TRet)
 
 ```cangjie
-func returns(valueFactory: () -> R): CardinalitySelector<R>
+public func returns(valueFactory: () -> TRet): CardinalitySelector<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名返回指定的值的行为，该值由传入的闭包生成。
 
 参数：
 
-- valueFactory: () ->R - 生成预期返回值的闭包函数（生成器）。
+- valueFactory: () -> TRet - 生成预期返回值的闭包函数（生成器）。
 
 返回值：
 
-- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> - 定义了桩签名返回指定值的行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
+- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<[MethodActionSelector](#class-methodactionselectortret)\<TRet>> - 定义了桩签名返回指定值的行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<TRet> 对象实例。
 
-### func returns(R)
+### func returns(TRet)
 
 ```cangjie
-func returns(value: R): CardinalitySelector<R>
+public func returns(value: TRet): CardinalitySelector<MethodActionSelector<TRet>>
 ```
 
 功能：定义[桩签名](../unittest_mock_samples/mock_framework_basics.md#桩签名)返回指定值的行为。
 
 参数：
 
-- value: R - 预期桩签名的返回值。
+- value: TRet - 预期桩签名的返回值。
 
 返回值：
 
-- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> - 定义了桩签名返回行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
+- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<[MethodActionSelector](#class-methodactionselectortret)\<TRet>> - 定义了桩签名返回行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<TRet> 对象实例。
 
-### func returnsConsecutively(Array\<R>)
+### func returnsConsecutively(Array\<TRet>)
 
 ```cangjie
-func returnsConsecutively(values: Array<R>): Continuation<R>
+public func returnsConsecutively(values: Array<TRet>): Continuation<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名按列表顺序返回指定的值的行为。桩签名将被调用多次，次数与数组内值的个数相同。
 
 参数：
 
-- values: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<R> - 桩签名的返回值列表。
+- values: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<TRet> - 桩签名的返回值列表。
 
 返回值：
 
-- [Continuation](#class-continuationa)\<R> - 定义了桩签名按序返回指定值的行为的 [Continuation](#class-continuationa)\<R>  对象实例。
+- [Continuation](#class-continuationa)\<[MethodActionSelector](#class-methodactionselectortret)\<TRet>> - 定义了桩签名按序返回指定值的行为的 [Continuation](#class-continuationa)\<TRet>  对象实例。
 
 异常：
 
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 当参数列表为空时，抛出异常。
 
-### func returnsConsecutively(ArrayList\<R>)
+### func returnsConsecutively(ArrayList\<TRet>)
 
 ```cangjie
-func returnsConsecutively(values: ArrayList<R>): Continuation<R>
+public func returnsConsecutively(values: ArrayList<TRet>): Continuation<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名按列表顺序返回指定的值的行为。桩签名将被连续调用多次，次数与数组列表内值的个数相同。
 
 参数：
 
-- values: [ArrayList](../../collection/collection_package_api/collection_package_class.md#class-arraylistt)\<R> - 桩签名的返回值列表。
+- values: [ArrayList](../../collection/collection_package_api/collection_package_class.md#class-arraylistt)\<TRet> - 桩签名的返回值列表。
 
 返回值：
 
-- [Continuation](#class-continuationa)\<R> - 定义了桩签名按序返回指定值的 [Continuation](#class-continuationa)\<R> 对象实例。
+- [Continuation](#class-continuationa)\<[MethodActionSelector](#class-methodactionselectortret)\<TRet>> - 定义了桩签名按序返回指定值的 [Continuation](#class-continuationa)\<TRet> 对象实例。
 
 异常：
 
@@ -814,7 +905,7 @@ func returnsConsecutively(values: ArrayList<R>): Continuation<R>
 ### func throws(() -> Exception)
 
 ```cangjie
-func throws(exceptionFactory: () -> Exception): CardinalitySelector<R>
+public func throws(exceptionFactory: () -> Exception): CardinalitySelector<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名抛出异常的行为，异常由参数闭包函数生成。
@@ -832,12 +923,12 @@ func throws(exceptionFactory: () -> Exception): CardinalitySelector<R>
 
 返回值：
 
-- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> - 定义了桩签名抛出异常行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
+- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<[MethodActionSelector](unittest_mock_package_classes.md#class-methodactionselectortret)\<TRet>> - 定义了桩签名抛出异常行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
 
 ### func throws(Exception)
 
 ```cangjie
-func throws(exception: Exception): CardinalitySelector<R>
+public func throws(exception: Exception): CardinalitySelector<MethodActionSelector<TRet>>
 ```
 
 功能：定义桩签名抛出异常的行为。
@@ -848,7 +939,7 @@ func throws(exception: Exception): CardinalitySelector<R>
 
 返回值：
 
-- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> - 定义了桩签名抛出异常的行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
+- [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<[MethodActionSelector](unittest_mock_package_classes.md#class-methodactionselectortret)\<TRet>>  - 定义了桩签名抛出异常的行为的 [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 对象实例。
 
 ## class MockFramework
 
@@ -858,7 +949,7 @@ public class MockFramework {}
 
 功能：提供用例执行所需的框架准备与结束回收阶段的函数。
 
-### static func openSession
+### static func openSession(String, MockSessionKind)
 
 ```cangjie
 public static func openSession(name: String, sessionKind: MockSessionKind): Unit
@@ -867,14 +958,14 @@ public static func openSession(name: String, sessionKind: MockSessionKind): Unit
 功能：打开一个新会话。会话形成一个类似堆栈的结构。
 会话关闭的顺序与开始时的顺序相反。
 在给定会话期间创建的 `mock object` 只能在该会话或其任何内部会话内部访问。
-每个会话都保留自己的调用日志，因此对最新打开会话内进行的调用执行任何验证， 只有在会议结束时才能验证期望。
+每个会话都保留自己的调用日志，因此对最新打开会话内进行的调用执行任何验证， 只有在会话结束时才能验证期望。
 
 参数：
 
 - name: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 会话的名称。
 - sessionKind: [MockSessionKind](./unittest_mock_package_enums.md#enum-mocksessionkind) - 指定允许的桩类型。
 
-### static func closeSession
+### static func closeSession()
 
 ```cangjie
 public static func closeSession(): Unit
@@ -883,7 +974,7 @@ public static func closeSession(): Unit
 功能：打开一个新会话。会话形成一个类似堆栈的结构。
 会话关闭的顺序与开始时的顺序相反。
 在给定会话期间创建的 `mock object` 只能在该会话或其任何内部会话内部访问。
-每个会话都保留自己的调用日志，因此对最新打开会话内进行的调用执行任何验证， 只有在会议结束时才能验证期望。
+每个会话都保留自己的调用日志，因此对最新打开会话内进行的调用执行任何验证， 只有在会话结束时才能验证期望。
 
 异常：
 
@@ -902,7 +993,7 @@ public class NoneMatcher <: ArgumentMatcher {}
 
 - [ArgumentMatcher](#class-argumentmatcher)
 
-### func matchesAny
+### func matchesAny(Any)
 
 ```cangjie
 public override func matchesAny(arg: Any): Bool
@@ -944,7 +1035,37 @@ public func value<T>(): Option<T>
 public class OrderedVerifier {}
 ```
 
-功能：此类型用于收集 “验证语句”，可在 ordered 函数中动态传入验证行为。
+功能：此类型用于收集 “验证语句”，可在 [ordered](#static-func-orderedarrayverifystatement) 函数中动态传入验证行为。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+func printMessage(printer: Printer) {
+    printer.print("hello")
+    printer.print("world")
+}
+
+@Test
+func test() {
+    let printer = Printer()
+    let spyPrinter = spy<Printer>(printer)
+
+    printMessage(spyPrinter)
+
+    Verify.ordered(
+        @Called(spyPrinter.print("hello")),
+        @Called(spyPrinter.print("world"))
+    )
+}
+```
 
 ### func checkThat(VerifyStatement)
 
@@ -962,10 +1083,10 @@ public func checkThat(statement: VerifyStatement): OrderedVerifier
 
 - [OrderedVerifier](unittest_mock_package_classes.md#class-orderedverifier) - 返回对象自身。
 
-## class SetterActionSelector\<TRet>
+## class SetterActionSelector\<TArg>
 
 ```cangjie
-public class SetterActionSelector<TRet> <: ActionSelector {}
+public class SetterActionSelector<TArg> <: ActionSelector {}
 ```
 
 功能：此类提供了为属性 `Setter` 函数指定一个[操作 API](../unittest_mock_samples/mock_framework_basics.md#操作-api) ，并允许链式调用的方法。
@@ -974,6 +1095,8 @@ public class SetterActionSelector<TRet> <: ActionSelector {}
 父类型：
 
 - [ActionSelector](#class-actionselector)
+
+参考示例：[SyntheticField](#class-syntheticfieldt)。
 
 ### func doesNothing()
 
@@ -985,7 +1108,7 @@ public func doesNothing(): CardinalitySelector<SetterActionSelector<TArg>>
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[SetterActionSelector](#class-setteractionselectortarg)\<TArg>> - 预期执行次数的操作器。
 
 ### func setsOriginal()
 
@@ -997,9 +1120,9 @@ public func setsOriginal(): CardinalitySelector<SetterActionSelector<TArg>>
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[SetterActionSelector](#class-setteractionselectortarg)\<TArg>> - 预期执行次数的操作器。
 
-### func setsField(SyntheticField\<TRet>)
+### func setsField(SyntheticField\<TArg>)
 
 ```cangjie
 public func setsField(field: SyntheticField<TArg>): CardinalitySelector<SetterActionSelector<TArg>>
@@ -1009,16 +1132,16 @@ public func setsField(field: SyntheticField<TArg>): CardinalitySelector<SetterAc
 
 参数：
 
-- field: [SyntheticField](#class-syntheticfieldt)\<TRet> - 合成字段，处理可变属性。
+- field: [SyntheticField](#class-syntheticfieldt)\<TArg> - 合成字段，处理可变属性。
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[SetterActionSelector](#class-setteractionselectortarg)\<TArg>> - 预期执行次数的操作器。
 
 ### func throws(Exception)
 
 ```cangjie
-public func throws(exception: Exception): CardinalitySelector<GetterActionSelector<TRet>>
+public func throws(exception: Exception): CardinalitySelector<SetterActionSelector<TArg>>
 ```
 
 功能：指定抛出异常。
@@ -1029,12 +1152,12 @@ public func throws(exception: Exception): CardinalitySelector<GetterActionSelect
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[SetterActionSelector](#class-setteractionselectortarg)\<TArg>> - 预期执行次数的操作器。
 
 ### func throws(() -> Exception)
 
 ```cangjie
-public func throws(exceptionFactory: () -> Exception): CardinalitySelector<GetterActionSelector<TRet>>
+public func throws(exceptionFactory: () -> Exception): CardinalitySelector<SetterActionSelector<TArg>>
 ```
 
 功能：指定抛出异常。
@@ -1045,7 +1168,7 @@ public func throws(exceptionFactory: () -> Exception): CardinalitySelector<Gette
 
 返回值：
 
-- [CardinalitySelector](#class-cardinalityselectora)\<[GetterActionSelector](#class-getteractionselectortret)\<TRet>> - 预期执行次数的操作器。
+- [CardinalitySelector](#class-cardinalityselectora)\<[SetterActionSelector](#class-setteractionselectortarg)\<TArg>> - 预期执行次数的操作器。
 
 ## class SyntheticField\<T>
 
@@ -1054,6 +1177,35 @@ public class SyntheticField<T> {}
 ```
 
 功能：合成字段。用于处理可变属性和字段。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    mut prop name: String {
+        get() { "nop" }
+        set(x) {}
+    }
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printer = mock<Printer>(SyntheticFields)
+    let syntheticField = SyntheticField.create(initialValue: "tty0")
+    @On(printer.name).getsField(syntheticField)
+    @On(printer.name = _).setsField(syntheticField)
+
+    @Assert(printer.name, "tty0")
+
+    printer.name = "virtual0"
+    @Assert(printer.name, "virtual0")
+}
+```
 
 ### static func create(T)
 
@@ -1102,7 +1254,7 @@ public func matches(arg: T): Bool
 ### func matchesAny(Any)
 
 ```cangjie
-public func matchesAny(arg: Any): Bool
+public override func matchesAny(arg: Any): Bool
 ```
 
 功能：检查入参类型是否与预期相符。
@@ -1123,10 +1275,10 @@ extend<T> TypedMatcher<T> {}
 
 功能：扩展 [TypedMatcher](#class-typedmatchert) 。
 
-#### func value\<T>()
+#### func value()
 
 ```cangjie
-public func value<T>(): T
+public func value(): T
 ```
 
 功能：框架需要调用的参数匹配器的返回值。
@@ -1141,7 +1293,42 @@ public func value<T>(): T
 public class UnorderedVerifier{}
 ```
 
-功能：此类型用于收集 “验证语句”， 可在 unordered 函数中动态传入验证行为。
+功能：此类型用于收集 “验证语句”， 可在 [unordered](#static-func-unorderedarrayverifystatement) 函数中动态传入验证行为。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+func printMessage(printer: Printer) {
+    printer.print("hello")
+    printer.print("world")
+}
+
+@Test
+func test() {
+    let printer = Printer()
+    let spyPrinter = spy<Printer>(printer)
+
+    printMessage(spyPrinter)
+
+    Verify.unordered(
+        @Called(spyPrinter.print("hello")),
+        @Called(spyPrinter.print("world"))
+    )
+
+    Verify.unordered(
+        @Called(spyPrinter.print("world")),
+        @Called(spyPrinter.print("hello"))
+    )
+}
+```
 
 ### func checkThat(VerifyStatement)
 
@@ -1165,7 +1352,7 @@ public func checkThat(statement: VerifyStatement):UnorderedVerifier
 public class Verify {}
 ```
 
-功能：[Verify](unittest_mock_package_classes.md#class-verify) 提供了一系列静态方法来支持定义所需验证的动作，如 `that` 、 `ordered` 以及 `unorder` 。
+功能：[Verify](unittest_mock_package_classes.md#class-verify) 提供了一系列静态方法来支持定义所需验证的动作，如 `that` 、 `ordered` 以及 `unordered` 。
 
 一个验证动作可以包含多个由 `@Called` 生成的[验证语句](../unittest_mock_samples/mock_framework_verification.md#验证语句和-called-宏)，来描述需要验证的动作。
 通常验证的范围为所在测试用例的函数体，但 [Verify](unittest_mock_package_classes.md#class-verify) 提供了 `clearInvocationLog` 函数来清除此前的执行记录，以缩小验证范围。
@@ -1185,6 +1372,8 @@ public class Verify {}
 
 举例来说：
 
+<!-- code_no_check -->
+
 ```cangjie
 let foo = mock<Foo>()
 // 定义“桩签名”的“桩行为”
@@ -1197,6 +1386,38 @@ Verify.that(@Called(foo.bar()))
 
 值得注意的是， [CardinalitySelector](unittest_mock_package_classes.md#class-cardinalityselectora)\<R> 提供了一些 API ，其支持验证一些行为 。因此，用户可自由选择不同的方式进行行为验证。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printer = mock<Printer>()
+    @On(printer.print("abc")).returns(true)
+    @On(printer.print("xyz")).returns(false)
+
+    @Expect(printer.print("abc"), true)
+    @Expect(printer.print("xyz"), false)
+
+    Verify.that(@Called(printer.print("abc")).once())
+    Verify.that(@Called(printer.print("xyz")).atLeastOnce())
+    Verify.ordered(@Called(printer.print("abc")), @Called(printer.print("xyz")))
+    Verify.unordered(@Called(printer.print("xyz")), @Called(printer.print("abc")))
+    Verify.unordered(Partial, @Called(printer.print("xyz")))
+    @ExpectThrows[VerificationFailedException](Verify.unordered(Exhaustive, @Called(printer.print("xyz"))))
+
+    Verify.clearInvocationLog()
+    Verify.noInteractions(printer)
+}
+```
+
 ### static func clearInvocationLog()
 
 ```cangjie
@@ -1208,14 +1429,14 @@ public static func clearInvocationLog(): Unit
 ### static func noInteractions(Array\<Object>)
 
 ```cangjie
-public static func noInteractions(mocks: Array<Object>): Unit
+public static func noInteractions(mockObjects: Array<Object>): Unit
 ```
 
 功能：在验证范围内，对象没有任何执行动作时，验证通过。
 
 参数：
 
-- mocks: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[Object](../../core/core_package_api/core_package_classes.md#class-object)> - 被验证的对象列表。
+- mockObjects: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[Object](../../core/core_package_api/core_package_classes.md#class-object)> - 被验证的对象列表。
 
 异常：
 
@@ -1306,6 +1527,8 @@ public static func unordered(collectStatements: (UnorderedVerifier) -> Unit): Un
 验证模式为 `exhaustive` (全量匹配，验证范围内的所有执行情况都应在验证动作中被指定)。
 “验证语句”通过入参中的闭包动态增加。举例来说：
 
+<!-- code_no_check -->
+
 ```cangjie
 
 let totalTimes = getTimes()
@@ -1339,6 +1562,8 @@ public static func unordered(statements: Array<VerifyStatement>): Unit
 验证模式为 `exhaustive` (全量匹配，验证范围内的所有执行情况都应在验证动作中被指定)。
 
 举例来说:
+
+<!-- code_no_check -->
 
 ```cangjie
 let foo = mock<Foo>()
@@ -1415,10 +1640,35 @@ public static func unordered(exhaustive: Exhaustiveness, statements: Array<Verif
 public class VerifyStatement {}
 ```
 
-功能：此类型表示对“桩签名”在验证范围内的单个验证验证语句（即上文中的“验证语句”），提供了成员函数指定“桩签名”的执行次数。
+功能：此类型表示对“桩签名”在验证范围内的单个验证语句（即上文中的“验证语句”），提供了成员函数指定“桩签名”的执行次数。
 该类型的对象仅可通过 `@Called` 宏调用表达式创建。
 对一个对象连续调用多个成员函数没有意义，并且会抛出异常。即，执行次数仅可被指定一次。
 当未调用成员函数指定执行次数时，将基于语句所在的验证动作类型定义默认的执行次数验证值。例如在 [Verify](unittest_mock_package_classes.md#class-verify).ordered() 中的“验证语句”默认为验证执行一次。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.mock.*
+import std.unittest.mock.mockmacro.*
+
+class Printer {
+    func print(message: String): Bool { return true }
+}
+
+@Test
+func test() {
+    let printer = mock<Printer>()
+    @On(printer.print("abc")).returns(true)
+
+    printer.print("abc")
+    Verify.that(@Called(printer.print("abc")).once())
+
+    printer.print("abc")
+    Verify.that(@Called(printer.print("abc")).atLeastOnce())
+    Verify.that(@Called(printer.print("abc")).times(2))
+}
+```
 
 ### func atLeastOnce()
 
@@ -1515,3 +1765,43 @@ public func times(min!: Int64, max!: Int64): VerifyStatement
 
 - [MockFrameworkException](./unittest_mock_package_exceptions.md#class-mockframeworkexception) - 当对象已被指定过执行次数或已被传入过“验证动作”中时，将抛出异常。
 - [IllegalArgumentException](../../core/core_package_api/core_package_exceptions.md#class-illegalargumentexception) - 当传入的`min`或`max`参数为负数时，抛出异常。
+
+### static func fromStub\<R>(() -> R, Array\<ArgumentMatcher>, Option\<String>, String, String, Int64)
+
+```cangjie
+public static func fromStub<R>(
+    stubCall: () -> R,
+    matchers: Array<ArgumentMatcher>,
+    objName: Option<String>,
+    declarationName: String,
+    callDescription: String,
+    lineNumber: Int64
+): VerifyStatement
+```
+
+功能：构造一个 [VerifyStatement](unittest_mock_package_classes.md#class-verifystatement)。框架内部使用，不建议用户直接调用。
+
+参数：
+
+- stubCall: () -> R - 桩签名对应的调用表达式。
+- matchers: [Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[ArgumentMatcher](#class-argumentmatcher)> - 入参的参数匹配器。
+- objName: [Option](../../core/core_package_api/core_package_enums.md#enum-optiont)\<[String](../../core/core_package_api/core_package_structs.md#struct-string)> - 被插桩的对象的名称。
+- declarationName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 声明的名称。
+- callDescription: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 桩签名对应的调用表达式的字符串表达。
+- lineNumber: Int64 - 行号。
+
+返回值：
+
+- [VerifyStatement](unittest_mock_package_classes.md#class-verifystatement) - 返回对象自身。
+
+### func never()
+
+```cangjie
+public func never(): VerifyStatement
+```
+
+功能：指明这条语句将永远不会被执行。
+
+返回值：
+
+- [VerifyStatement](unittest_mock_package_classes.md#class-verifystatement) - 返回对象自身。

@@ -61,7 +61,7 @@ BufferedOutputStream 构造示例：
 <!-- run -->
 
 ```cangjie
-import std.io.*
+import std.io.{ByteBuffer, BufferedOutputStream, readToEnd}
 
 main(): Unit {
     let arr1 = "01234".toArray()
@@ -104,7 +104,7 @@ StringReader 使用示例：
 <!-- run -->
 
 ```cangjie
-import std.io.*
+import std.io.{ByteBuffer, StringReader}
 
 main(): Unit {
     let arr1 = "012\n346789".toArray()
@@ -127,7 +127,7 @@ StringWriter 使用示例：
 <!-- run -->
 
 ```cangjie
-import std.io.*
+import std.io.{ByteBuffer, StringWriter, readToEnd}
 
 main(): Unit {
     let byteBuffer = ByteBuffer()

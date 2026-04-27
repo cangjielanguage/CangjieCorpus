@@ -1,6 +1,12 @@
 # ohos.i18n（国际化-I18n）
 
-i18n模块提供系统相关的或者增强的国际化能力，包括区域管理、电话号码处理、日历等，相关接口为ECMA 402标准中未定义的补充接口。Intl模块提供了ECMA 402标准定义的基础国际化接口，与本模块共同使用可提供完整地国际化支持能力。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+i18n模块提供系统相关的或者增强的[国际化](../../internationalization/cj-i18n-l10n.md)能力，包括区域管理、电话号码处理、日历等，相关接口为ECMA 402标准中未定义的补充接口。
 
 ## 导入模块
 
@@ -34,7 +40,7 @@ public func getCalendar(locale: String, calendarType!: ?CalendarType = None): Ca
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |locale|String|是|-|表示区域信息的字符串，由语言、脚本、国家地区组成，例如zh-Hans-CN。|
-|calendarType|?CalendarType|否|None|表示历法，取值包括：buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。<br>默认值：区域默认的历法。|
+|calendarType|?CalendarType|否|None|**命名参数。** 表示历法，取值包括：buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。<br>默认值：区域默认的历法。|
 
 **返回值：**
 
@@ -88,7 +94,7 @@ public func add(field: String, amount: Int32): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|field|String|是|-|指定的日历属性，目前支持的属性值有&nbsp;year,&nbsp;month,&nbsp;week_of_year,&nbsp;week_of_month,&nbsp;date,&nbsp;day_of_year,&nbsp;day_of_week,&nbsp;day_of_week_in_month,&nbsp;hour,&nbsp;hour_of_day,&nbsp;minute,&nbsp;second,&nbsp;millisecond。<br>各取值代表的含义请参考[get](#func-getstring)。。|
+|field|String|是|-|指定的日历属性，目前支持的属性值有&nbsp;year,&nbsp;month,&nbsp;week_of_year,&nbsp;week_of_month,&nbsp;date,&nbsp;day_of_year,&nbsp;day_of_week,&nbsp;day_of_week_in_month,&nbsp;hour,&nbsp;hour_of_day,&nbsp;minute,&nbsp;second,&nbsp;millisecond。<br>各取值代表的含义请参考[get](#func-getstring)。|
 |amount|Int32|是|-|进行加减操作的具体数值。|
 
 **异常：**

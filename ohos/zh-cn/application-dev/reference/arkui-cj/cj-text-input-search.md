@@ -1,5 +1,11 @@
 # Search
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供搜索框组件，用于提供用户搜索内容的输入区域。
 
 ## 导入模块
@@ -64,7 +70,7 @@ public func searchButton(value: ?ResourceStr): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** 搜索框末尾搜索按钮文本内容。初始值：""。|
+|value|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|搜索框末尾搜索按钮文本内容。初始值：""。|
 
 ### func placeholderColor(?ResourceColor)
 

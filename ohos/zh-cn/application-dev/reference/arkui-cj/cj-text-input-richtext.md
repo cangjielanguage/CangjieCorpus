@@ -1,5 +1,11 @@
 # RichText
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 富文本组件，解析并显示HTML格式文本。
 
 - 适用场景：
@@ -52,7 +58,7 @@ public init(content: ?ResourceStr)
 
 ## 通用属性/通用事件
 
-通用属性：只支持通用属性中[width](./cj-universal-attribute-size.md#func-widthlength)，[height](./cj-universal-attribute-size.md#func-heightlength)，[size](./cj-universal-attribute-size.md#func-sizelength-length)，[layoutWeight](./cj-universal-attribute-size.md#func-layoutweightint32)四个属性。由于[padding](./cj-universal-attribute-size.md#func-paddinglength)，[margin](./cj-universal-attribute-size.md#func-marginlength)，[constraintSize](./cj-universal-attribute-size.md#func-constraintsizelength-length-length-length)属性使用时与通用属性描述不符，暂不支持。
+通用属性：只支持通用属性中[width](./cj-universal-attribute-size.md#func-widthoptionlength)，[height](./cj-universal-attribute-size.md#func-heightoptionlength)，[size](./cj-universal-attribute-size.md#func-sizelength-length)，[layoutWeight](./cj-universal-attribute-size.md#func-layoutweightint32)四个属性。由于[padding](./cj-universal-attribute-size.md#func-paddinglength)，[margin](./cj-universal-attribute-size.md#func-marginlength)，[constraintSize](./cj-universal-attribute-layoutconstraints.md#func-constraintsizelength-length-length-length)属性使用时与通用属性描述不符，暂不支持。
 
 通用事件：全部支持。
 

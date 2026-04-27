@@ -1,5 +1,11 @@
 # LocalStorage：页面级UI状态存储
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 LocalStorage是页面级的UI状态存储，通过@Entry宏接收的参数可以在页面内共享同一个LocalStorage实例。LocalStorage支持UIAbility实例内多个页面间状态共享。
 
 本文仅介绍LocalStorage使用场景和相关的宏：@LocalStorageProp和@LocalStorageLink。

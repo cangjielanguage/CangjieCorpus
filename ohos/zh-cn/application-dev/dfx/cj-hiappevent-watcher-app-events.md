@@ -1,4 +1,10 @@
-# 订阅应用事件（仓颉）
+# 订阅应用事件
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 HiAppEvent提供了事件订阅接口，用于本地获取应用事件。
 
@@ -29,8 +35,6 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
 
     ```cangjie
     import kit.PerformanceAnalysisKit.*
-    import kit.PerformanceAnalysisKit.{Watcher as hiWatcher}
-    import ohos.base.*
     ```
 
 2. 编辑工程中的“entry > src > main > cangjie > main_ability.cj” 文件，在onCreate函数中添加对用户点击按钮事件的订阅，示例代码如下：
@@ -40,7 +44,7 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
     ```cangjie
     var condition = TriggerCondition(row: 1, size: 120, timeOut: 0)
     var appEventFilter = [AppEventFilter("cangjie_watcher")]
-    var watcher = hiWatcher(
+    var watcher = Watcher(
         "watcher1",
         triggerCondition: condition,
         appEventFilters: appEventFilter,
@@ -69,8 +73,8 @@ API接口的具体使用说明（参数使用限制、具体取值范围等）�
 
     ```cangjie
     import kit.PerformanceAnalysisKit.*
-    import kit.PerformanceAnalysisKit.{Watcher as hiWatcher}
-    import ohos.base.*
+    import kit.ArkUI.Button
+    import std.collection.HashMap
     ```
 
 4. 编辑工程中的“entry > src > main > cangjie > index.cj” 文件，添加一个按钮并在其onClick函数中进行事件打点，以记录按钮点击事件，示例代码如下：

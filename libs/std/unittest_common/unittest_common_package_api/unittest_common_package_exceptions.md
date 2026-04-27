@@ -1,9 +1,9 @@
-# 异常
+# 异常类
 
 ## class UnittestOptionValidationException
 
 ```cangjie
-public class UnittestOptionValidationException <: Exception
+public class UnittestOptionValidationException <: Exception {}
 ```
 
 功能：框架验证选项值合法性过程中抛出的异常。

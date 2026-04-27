@@ -1,5 +1,11 @@
 # 线性布局（Row/Column）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 线性布局（LinearLayout）是开发中最常用的布局，通过线性容器[Row](../reference/arkui-cj/cj-row-column-stack-row.md)和[Column](../reference/arkui-cj/cj-row-column-stack-column.md)构建。线性布局是其他布局的基础，其子元素在线性方向上（水平方向和垂直方向）依次排列。线性布局的排列方向由所选容器组件决定，Column容器内子元素按照垂直方向排列，Row容器内子元素按照水平方向排列。根据不同的排列方向，开发者可选择使用Row或Column容器创建线性布局。

@@ -1,5 +1,11 @@
 # ohos.rpc（RPC通信）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 rpc模块提供进程间通信能力，包括设备内的进程间通信（IPC）和设备间的进程间通信（RPC），前者基于Binder驱动，后者基于软总线驱动。
 
 ## 导入模块
@@ -333,7 +339,7 @@ public func closeAshmem(): Unit
 
 > **说明：**
 >
-> - 关闭Ashmem对象前需要先解除地址映射。
+> 关闭Ashmem对象前需要先解除地址映射。
 
 **系统能力：** SystemCapability.Communication.IPC.Core
 
@@ -656,7 +662,7 @@ public func writeDataToAshmem(buf: Array<Byte>, size: Int64, offset: Int64): Uni
 
 > **说明：**
 >
-> - 对Ashmem对象进行写操作时，需要先调用[mapReadWriteAshmem](#func-mapreadwriteashmem)进行映射。
+> 对Ashmem对象进行写操作时，需要先调用[mapReadWriteAshmem](#func-mapreadwriteashmem)进行映射。
 
 **系统能力：** SystemCapability.Communication.IPC.Core
 
@@ -691,7 +697,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let ashmem = Ashmem.create("ashmem", 1024*1024)
+    ashmem.mapReadWriteAshmem()
     ashmem.writeDataToAshmem([1], 1, 0)
+    ashmem.unmapAshmem()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1572,7 +1580,7 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let data = MessageSequence.create()
-    let fd = data.readException()
+    data.readException()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1899,7 +1907,7 @@ try {
 public func readLongArray(): Array<Int64>
 ```
 
-**功能：** 从MessageSequence实例中读取所有的长整数数组。
+**功能：** 从MessageSequence实例中读取长整数数组。
 
 **系统能力：** SystemCapability.Communication.IPC.Core
 

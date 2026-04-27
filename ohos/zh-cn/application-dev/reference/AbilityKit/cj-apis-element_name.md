@@ -1,5 +1,11 @@
 # ohos.element_name
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 element_name模块描述应用组件结构体，包含bundleName、moduleName和abilityName等。
 
 ## 导入模块
@@ -96,7 +102,7 @@ public var moduleName: String
 public init(bundleName: String, abilityName: String, deviceId!: String = "", moduleName!: String = "")
 ```
 
-**功能：** 通过指定设备ID，应用Bundle名称，Ability名称，模块名称构造ElementName。
+**功能：** 通过指定设备ID、应用Bundle名称、Ability名称和模块名称构造ElementName对象。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 
@@ -108,8 +114,8 @@ public init(bundleName: String, abilityName: String, deviceId!: String = "", mod
 |:---|:---|:---|:---|:---|
 |bundleName|String|是|-|应用Bundle名称。|
 |abilityName|String|是|-|Ability名称。|
-|deviceId|String|否|""|设备ID。|
-|moduleName|String|否|""|Ability所属的HAP的模块名称。|
+|deviceId|String|否|""|**命名参数。** 设备ID。|
+|moduleName|String|否|""|**命名参数。** Ability所属的HAP的模块名称。|
 
 **示例：**
 

@@ -1,5 +1,11 @@
 # 富文本（RichEditor）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 RichEditor是支持图文混排和文本交互式编辑的组件，通常用于响应用户对图文混合内容的输入操作，例如可以输入图文的评论区。具体用法请参见[RichEditor](../reference/arkui-cj/cj-text-input-richeditor.md)。
 
 ## 创建不使用属性字符串构建的RichEditor组件
@@ -307,11 +313,11 @@ class EntryView {
 }
 ```
 
-![zhantie](figures/zhantie.jpg)
+![paste](figures/paste.png)
 
 ## 添加文本内容
 
-除了直接在组件内输入内容，也可以通过[addTextSpan](../reference/arkui-cj/cj-text-input-richeditor.md#func-addtextspanresourcestr-richeditortextspanoptions)添加文本内容。
+除了直接在组件内输入内容，也可以通过[addTextSpan](../reference/arkui-cj/cj-text-input-richeditor.md)添加文本内容。
 
 此接口可以实现文本样式多样化，例如需要创建混合样式文本。
 
@@ -352,7 +358,7 @@ class EntryView {
 
 ## 添加图片内容
 
-通过[addImageSpan](../reference/arkui-cj/cj-text-input-richeditor.md#func-addimagespanresourcestr-richeditorimagespanoptions)添加图片内容。
+通过[addImageSpan](../reference/arkui-cj/cj-text-input-richeditor.md)添加图片内容。
 
 此接口可用于内容丰富与可视化展示，例如在新闻中加入图片，在文档中加入数据可视化图形等。
 

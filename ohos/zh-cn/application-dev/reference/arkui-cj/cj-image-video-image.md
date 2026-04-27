@@ -1,12 +1,18 @@
 # Image
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Image为图片组件，常用于在应用中显示图片。支持png、jpg、jpeg、bmp、svg、webp、gif和heif类型的图片格式。
 
 > 说明：
 >
-> - 使用快捷组合键对Image组件复制时，Image组件必须处于[获焦状态](./cj-universal-attribute-focus.md#func-focusontouchbool)。Image组件默认不获焦，需将[focusable](cj-apis-window.md#var-focusable)属性设置为true，即可使用TAB键将焦点切换到组件上，再将[focusOnTouch](./cj-universal-attribute-focus.md#func-focusontouchbool)  属性设置为true，即可实现点击获焦。
+> - 使用快捷组合键对Image组件复制时，Image组件必须处于[获焦状态](./cj-universal-attribute-focus.md#func-focusontouchbool)。Image组件默认不获焦，需将[focusable](cj-apis-window.md#var-focusable)属性设置为true，即可使用TAB键将焦点切换到组件上，再将[focusOnTouch](./cj-universal-attribute-focus.md#func-focusontouchbool)属性设置为true，即可实现点击获焦。
 > - 图片格式支持SVG图源，SVG标签文档请参考[SVG标签说明](../ImageKit/cj-apis-image.md#svg标签说明)。
-> - 动图的播放依赖于Image节点的可见性变化，其默认行为是不播放的。当节点可见时，通过回调启动动画，当节点不可见时，停止动画。可见性状态的判断是通过[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)事件触发的，当可见阈值raitos大于0时，表明Image处于可见状态。
+> - 动图的播放依赖于Image节点的可见性变化，其默认行为是不播放的。当节点可见时，通过回调启动动画，当节点不可见时，停止动画。可见性状态的判断是通过[onVisibleAreaChange](./cj-universal-event-visibleareachange.md#func-onvisibleareachangearrayfloat64-bool-float64---unit)事件触发的，当可见阈值ratios大于0时，表明Image处于可见状态。
 
 ## 导入模块
 
@@ -547,7 +553,7 @@ public var contentHeight: Float64
 #### var contentOffsetX
 
 ```cangjie
-public var contentOffsetX: ?Float64
+public var contentOffsetX: Float64
 ```
 
 **功能：** 实际绘制内容相对于组件自身的x轴偏移，单位为px。
@@ -662,10 +668,6 @@ public type ImageCompleteCallback = (ImageLoadResult) -> Unit
 
 **类型：** ([ImageLoadResult](#class-imageloadresult)) -> Unit
 
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
 ## type ImageErrorCallback
 
 ```cangjie
@@ -675,10 +677,6 @@ public type ImageErrorCallback = (ImageError) -> Unit
 **功能：** 图片加载错误回调函数类型。
 
 **类型：** ([ImageError](#class-imageerror)) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 
@@ -892,7 +890,9 @@ class EntryView {
             Image(this.imageSrcList[this.imageSrcIndex])
                 .width(100)
                 .height(100)
+                .margin(left: 100, top: 100)
             Button("点击切换Image的src")
+                .margin(left: 100, top: 20)
                 .padding(20)
                 .onClick({
                     evt =>

@@ -1,6 +1,12 @@
 # ohos.app.ability.ui_ability
 
-ui_ability模块提供Ability相关的枚举，包括应用启动原因LaunchReason、上次退出原因LastExitReason、迁移结果OnContinueResult等。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+ui_ability模块提供UIAbility应用组件的核心API，包括UIAbility生命周期管理、上下文（Context）体系、Ability启动与销毁、以及与ArkTS的互操作能力。通过本模块，开发者可以创建和管理包含UI界面的应用组件，实现组件的创建、销毁、前后台切换等生命周期回调，并通过Context实现获取应用资源、启动其他Ability等能力。
 
 ## 导入模块
 
@@ -20,8 +26,8 @@ ohos.permission.PRIVACY_WINDOW
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -42,7 +48,7 @@ public func createAbilityStageContextFromJSValue(context: JSContext, input: JSVa
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[JSContext](../arkinterop/cj-apis-ark_interop.md#class-jscontext)|是|-|ArkTS互操作上下文。|
-|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|是|-|ArkTS统一类型。|
+|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|是|-|ArkTS统一类型。|
 
 **返回值：**
 
@@ -72,7 +78,7 @@ class MyAbilityStage1 <: AbilityStage {
 public func createApplicationContextFromJSValue(context: JSContext, input: JSValue): ApplicationContext
 ```
 
-**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)转换为[ApplicationContext](#class-applicationcontext)类型。该转换仅可在函数传递中使用。
+**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)转换为[ApplicationContext](#class-applicationcontext)类型。该转换仅可在函数传递中使用。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -83,7 +89,7 @@ public func createApplicationContextFromJSValue(context: JSContext, input: JSVal
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[JSContext](../arkinterop/cj-apis-ark_interop.md#class-jscontext)|是|-| ArkTS互操作上下文。|
-|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|是|-|ArkTS统一类型。|
+|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|是|-|ArkTS统一类型。|
 
 **返回值：**
 
@@ -114,7 +120,7 @@ class MyAbilityStage2 <: AbilityStage {
 public func createContextFromJSValue(context: JSContext, input: JSValue): Context
 ```
 
-**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)转换为[Context](./cj-apis-app-ability-ui_ability.md#class-context)类型。该转换仅可在函数传递中使用。
+**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)转换为[Context](./cj-apis-app-ability-ui_ability.md#class-context)类型。该转换仅可在函数传递中使用。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -125,7 +131,7 @@ public func createContextFromJSValue(context: JSContext, input: JSValue): Contex
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[JSContext](../arkinterop/cj-apis-ark_interop.md#class-jscontext)|是|-| ArkTS互操作上下文。|
-|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|是|-| ArkTS统一类型。|
+|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|是|-| ArkTS统一类型。|
 
 **返回值：**
 
@@ -155,7 +161,7 @@ class MyAbilityStage3 <: AbilityStage {
 public func createUIAbilityContextFromJSValue(context: JSContext, input: JSValue): UIAbilityContext
 ```
 
-**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)转换为[UIAbilityContext](#class-uiabilitycontext)类型。
+**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)转换为[UIAbilityContext](#class-uiabilitycontext)类型。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -166,13 +172,13 @@ public func createUIAbilityContextFromJSValue(context: JSContext, input: JSValue
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[JSContext](../arkinterop/cj-apis-ark_interop.md#class-jscontext)|是|-|ArkTS互操作上下文。|
-|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|是|-|ArkTS统一类型。|
+|input|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|是|-|ArkTS统一类型。|
 
 **返回值：**
 
 |类型|说明|
 |:----|:----|
-|[UIAbilityContext](#class-uiabilitycontext)|返回AbilityContext类型实例。|
+|[UIAbilityContext](#class-uiabilitycontext)|返回UIAbilityContext类型实例。|
 
 **示例：**
 
@@ -198,7 +204,7 @@ public interface SystemObjectInteropTypeToJS {
 }
 ```
 
-**功能：** 系统对象专用的拓展接口，以实现与[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)的互转。
+**功能：** 系统对象专用的拓展接口，以实现与[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)的互转。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -210,7 +216,7 @@ public interface SystemObjectInteropTypeToJS {
 func toJSValue(context: JSContext): JSValue
 ```
 
-**功能：** 将仓颉对象转换成[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)。
+**功能：** 将仓颉对象转换成[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -226,7 +232,7 @@ func toJSValue(context: JSContext): JSValue
 
 |类型|说明|
 |:----|:----|
-|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|ArkTS统一类型。|
+|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|ArkTS统一类型。|
 
 **示例：**
 
@@ -255,7 +261,6 @@ abstract sealed class Ability {}
 **系统能力：** SystemCapability.Ability.AbilityRuntime.AbilityCore
 
 **起始版本：** 22
-
 
 ## class AbilityStageContext
 
@@ -328,7 +333,7 @@ public class ApplicationContext <: Context {}
 public open class Context <: BaseContext {}
 ```
 
-**功能：** Context提供了ability或application的上下文的能力，包括访问特定应用程序的资源等。
+**功能：** Context为ability或application提供上下文支持能力，包括访问特定应用程序的资源等。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -460,7 +465,7 @@ class MyUIAbility6 <: UIAbility {
 public func toJSValue(context: JSContext): JSValue
 ```
 
-**功能：** 将仓颉对象转换成[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)。
+**功能：** 将仓颉对象转换成[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -476,7 +481,7 @@ public func toJSValue(context: JSContext): JSValue
 
 |类型|说明|
 |:----|:----|
-|[JSValue](../arkinterop/cj-apis-ark_interop.md#struct-jsvalue)|ArkTS统一类型。|
+|[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)|ArkTS统一类型。|
 
 ## class UIAbility
 
@@ -504,7 +509,7 @@ public open class UIAbility <: Ability {}
 public mut prop context: UIAbilityContext
 ```
 
-**功能：** UIAbility的上下文。
+**功能：** 提供UIAbility运行所需的上下文环境。
 
 **类型：** [UIAbilityContext](#class-uiabilitycontext)
 
@@ -535,9 +540,9 @@ public mut prop lastRequestWant: Want
 
 **功能：** 最近一次拉起UIAbility请求的Want参数。
 
-首次拉起UIAbility时，取值为[onCreate](#func-oncreatewant-launchparam)接收到的Want参数。
+当UIAbility被首次创建并拉起时，取值为[onCreate](#func-oncreatewant-launchparam)接收到的Want参数。
 
-重复拉起UIAbility时，取值为[onNewWant](#func-onnewwantwant-launchparam)最近一次接收到的Want参数。
+当UIAbility被再次拉起时，取值为[onNewWant](#func-onnewwantwant-launchparam)最近一次接收到的Want参数。
 
 **类型：** [Want](./cj-apis-app-ability-want.md#class-want)
 
@@ -656,7 +661,7 @@ public open func onDestroy(): Unit
 
 > **说明：**
 >
-> - 该回调仅在UIAbility正常退出时触发，当UIAbility异常退出（例如低内存终止进程）时，该回调将不被触发。
+> 该回调仅在UIAbility正常退出时触发，当UIAbility异常退出（例如低内存终止进程）时，该回调将不被触发。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.AbilityCore
 
@@ -843,7 +848,7 @@ class MyUIAbility17 <: UIAbility {
 public func requestDialogService(want: Want, result: AsyncCallback<RequestResult>): Unit
 ```
 
-**功能：** 启动一个支持模态弹框的ServiceExtensionAbility。ServiceExtensionAbility被启动后，应用弹出模态弹框。使用callback异步回调。仅支持在主线程调用。
+**功能：** 启动一个支持模态弹框的ServiceExtensionAbility。ServiceExtensionAbility被启动后，应用弹出模态弹框。仅支持在主线程调用。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -854,7 +859,7 @@ public func requestDialogService(want: Want, result: AsyncCallback<RequestResult
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |want|[Want](./cj-apis-app-ability-want.md#class-want)|是|-|启动ServiceExtensionAbility的Want信息。|
-|result|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<[RequestResult](./cj-apis-app-ability-dialog_request.md#class-requestresult)>|是|-| 回调函数，当启动一个支持模态弹框的ServiceExtensionAbility成功，err中code为0，data为模态弹框请求结果；否则err会返回对应的错误码和错误信息。|
+|result|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<[RequestResult](./cj-apis-app-ability-dialog_request.md#class-requestresult)>|是|-| 回调函数，当启动一个支持模态弹框的ServiceExtensionAbility成功，err中code为0，data为模态弹框请求结果；否则err会返回对应的错误码和错误信息。|
 
 **异常：**
 
@@ -911,7 +916,7 @@ public func startAbility(want: Want, options!: ?StartOptions = None): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |want|[Want](./cj-apis-app-ability-want.md#class-want)|是|-|启动UIAbility的必要信息。|
-|options|?[StartOptions](./cj-apis-app-ability-start_options.md#class-startoptions)|否|None|启动UIAbility所携带的参数。|
+|options|?[StartOptions](./cj-apis-app-ability-start_options.md#class-startoptions)|否|None|**命名参数。** 启动UIAbility所携带的参数。|
 
 **异常：**
 
@@ -970,13 +975,13 @@ class MyUIAbility19 <: UIAbility {
 public func startAbilityForResult(want: Want, callback: AsyncCallback<AbilityResult>): Unit
 ```
 
-**功能：** 启动一个UIAbility，并通过回调函数接收被拉起的UIAbility退出时的返回结果。使用callback异步回调。仅支持在主线程调用。
+**功能：** 启动一个UIAbility，并通过回调函数接收被拉起的UIAbility退出时的返回结果。仅支持在主线程调用。
 
 UIAbility被启动后，有如下情况：
 
-- 正常情况下可以通过调用[terminateSelfWithResult](#func-terminateselfwithresultabilityresult)接口销毁自身，并将结果返回给调用方。
+- 在正常情况下，可以通过调用[terminateSelfWithResult](#func-terminateselfwithresultabilityresult)接口销毁自身，并将结果返回给调用方。
 
-- 异常情况下比如杀死UIAbility会将异常结果返回给调用方，异常结果中resultCode为-1。
+- 在异常情况下，如杀死UIAbility，会将异常结果返回给调用方，异常结果中resultCode为-1。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -987,7 +992,7 @@ UIAbility被启动后，有如下情况：
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |want|[Want](./cj-apis-app-ability-want.md#class-want)|是|-|启动Ability的必要信息。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<[AbilityResult](./cj-apis-ability-ability_result.md#class-abilityresult)>|是|-| 执行结果回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<[AbilityResult](./cj-apis-ability-ability_result.md#class-abilityresult)>|是|-| 执行结果回调函数。|
 
 **异常：**
 
@@ -1045,13 +1050,13 @@ class MyUIAbility20 <: UIAbility {
 public func startAbilityForResult(want: Want, options: StartOptions, callback: AsyncCallback<AbilityResult>): Unit
 ```
 
-**功能：** 启动一个UIAbility，并通过回调函数接收被拉起的UIAbility退出时的返回结果。使用callback异步回调。仅支持在主线程调用。
+**功能：** 启动一个UIAbility，并通过回调函数接收被拉起的UIAbility退出时的返回结果。仅支持在主线程调用。
 
 UIAbility被启动后，有如下情况：
 
-- 正常情况下可以通过调用[terminateSelfWithResult](#func-terminateselfwithresultabilityresult)接口销毁自身，并将结果返回给调用方。
+- 在正常情况下，可以通过调用[terminateSelfWithResult](#func-terminateselfwithresultabilityresult)接口销毁自身，并将结果返回给调用方。
 
-- 异常情况下比如杀死UIAbility会将异常结果返回给调用方，异常结果中resultCode为-1。
+- 在异常情况下，如杀死UIAbility，会将异常结果返回给调用方，异常结果中resultCode为-1。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -1063,7 +1068,7 @@ UIAbility被启动后，有如下情况：
 |:---|:---|:---|:---|:---|
 |want|[Want](./cj-apis-app-ability-want.md#class-want)|是|-|启动Ability的必要信息。|
 |options|StartOptions|是|-|启动Ability所携带的参数。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<AbilityResult>|是|-|执行结果回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<AbilityResult>|是|-|执行结果回调函数。|
 
 **异常：**
 
@@ -1123,7 +1128,7 @@ public func terminateSelf(): Unit
 
 > **说明：**
 >
-> - 调用该接口后，任务中心的任务默认不会清理。
+> 调用该接口后，任务中心的任务默认不会被清理。如需清理，请进行配置。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -1159,13 +1164,13 @@ class MyUIAbility22 <: UIAbility {
 public func terminateSelfWithResult(parameter: AbilityResult): Unit
 ```
 
-**功能：** 销毁UIAbility自身。使用callback异步回调。仅支持在主线程调用。
+**功能：** 销毁UIAbility自身。仅支持在主线程调用。
 
 仅当UIAbility通过[startAbilityForResult](#func-startabilityforresultwant-asynccallbackabilityresult)接口拉起时，调用terminateSelfWithResult接口销毁UIAbility，才会返回结果给调用方。
 
 > **说明：**
 >
-> - 调用该接口后，任务中心的任务默认不会清理，如需清理，需要配置
+> 调用该接口后，任务中心的任务默认不会被清理。如需清理，请进行配置。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 

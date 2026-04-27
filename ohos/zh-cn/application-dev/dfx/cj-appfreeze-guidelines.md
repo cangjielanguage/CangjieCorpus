@@ -1,5 +1,11 @@
 # 分析AppFreeze（应用无响应）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 用户在使用应用时会出现点击没反应、应用无响应等情况，其超过一定时间限制后即被定义为应用无响应(appfreeze)。系统提供了检测应用无响应的机制，并生成appfreeze日志供应用开发分析。
 
 > **说明：**
@@ -38,7 +44,7 @@
 
 ### 生命周期切换超时
 
-生命周期切换超时指的是[Ability生命周期](../application-models/cj-uiability-lifecycle.md#uiability组件生命周期)切换超时。
+生命周期切换超时指的是[Ability生命周期](../application-models/cj-uiability-lifecycle.md)切换超时。
 
 该故障出现在生命周期切换的过程中，影响当前应用内Ability的切换。
 
@@ -540,7 +546,7 @@ PROCESS NAME:com.xxx.xxx
     No. 4 : Event { send thread = 35862, send time = 2024-08-08 12:17:34.530, handle time = 2024-08-08 12:17:34.530, id = 1, caller = [watchdog.cpp(Timer:156)]}
     No. 5 : Event { send thread = 35862, send time = 2024-08-08 12:17:37.526, handle time = 2024-08-08 12:17:37.526, id = 1, caller = [watchdog.cpp(Timer:156)]}
     No. 6 : Event { send thread = 35862, send time = 2024-08-08 12:17:40.526, handle time = 2024-08-08 12:17:40.526, id = 1, caller = [watchdog.cpp(Timer:156)]}
-    No. 7 : Event { send thread = 35862, send time = 2024-08-08 12:17:43.544, handle time = 2024-08-08 12:17:43.544 ,id = 1, caller = [watchdog.cpp(Timer:156)]}
+    No. 7 : Event { send thread = 35862, send time = 2024-08-08 12:17:43.544, handle time = 2024-08-08 12:17:43.544, id = 1, caller = [watchdog.cpp(Timer:156)]}
     Total size of High events : 7
     ```
 
@@ -696,7 +702,7 @@ binder信息抓取时机：存在半周期检测的故障类型是在warning事�
 
 2. 线程号为0。
 
-    表示该应用为IPC_FULL，即应用的ipc线程都在使用中，没有空闲线程分配来完成本次请求，导致阻塞，如上面示例中的1386进程，可参照其stack分析:
+    表示该应用为IPC_FULL，即应用的ipc线程都在使用中，没有空闲线程分配来完成本次请求，导致阻塞，如上面示例中的1386进程，可参照其stack分析：
 
     ```text
     pid     context     request   started    max     ready   free_async_space
@@ -716,7 +722,7 @@ binder信息抓取时机：存在半周期检测的故障类型是在warning事�
     1474     binder      0          2        16       4         520192
     ```
 
-    可以看到此时 1386 进程处于 ready 态的线程为 0，验证了上述说法。此情况说明该进程的其他ipc线程可能全部被阻塞了，需要分析排查为什么其他ipc线程不释放。常见场景为：某一ipc线程持锁阻塞，导致其他线程等锁appfreeze。
+    可以看到此时1386进程处于ready态的线程为0，验证了上述说法。此情况说明该进程的其他ipc线程可能全部被阻塞了，需要分析排查为什么其他ipc线程不释放。常见场景为：某一ipc线程持锁阻塞，导致其他线程等锁appfreeze。
 
     另一种情况为 free_async_space 消耗殆尽，导致新的ipc线程没有足够的 buffer 空间完成请求。值得说明的是，同步和异步请求都会消耗该值，常见场景为：某短时间段内大批量异步请求。
 
@@ -764,15 +770,15 @@ binder信息抓取时机：存在半周期检测的故障类型是在warning事�
 
 #### 一般分析步骤
 
-根据故障日志确定上报[时间点](#获取故障发生时间点)，再根据具体场景下的故障类型推断appfreeze开始发生的时间点，查看对应时间段的hilog日志，分析日志得出应用对应线程运行状态：
+根据故障日志确定上报时间点，再根据具体场景下的故障类型推断appfreeze开始发生的时间点，查看对应时间段的hilog日志，分析日志得出应用对应线程运行状态：
 
-- 应用日志完全无打应输出：appfreeze在最后日志打印的接口调用处。
+- 应用日志完全无打印输出：appfreeze在最后日志打印的接口调用处。
 
    ![appfreeze_06](figures/appfreeze_06.png)
 
    ![appfreeze_07](figures/appfreeze_07.png)
 
-   例如上图案例：APP_INPUT_BLOCK 类型在 07:24:08.167 上报，应用主线程在 07:24:01.581 后就没有打印了，可排查是否为 FormManagerService:
+   例如上图案例：APP_INPUT_BLOCK 类型在 07:24:08.167 上报，应用主线程在 07:24:01.581 后就没有打印了，可排查是否为 FormManagerService：
 
    [form_mgr_proxy.cpp(GetFormsInfoByApp:1128)] 中的逻辑超时。
 

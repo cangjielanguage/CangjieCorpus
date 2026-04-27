@@ -1,5 +1,11 @@
 # 使用画布绘制自定义图形（Canvas）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 Canvas提供画布组件，用于自定义绘制图形，开发者使用CanvasRenderingContext2D对象和OffscreenCanvasRenderingContext2D对象在Canvas组件上进行绘制，绘制对象可以是基础形状、文本、图片等。
 
 ## 使用画布组件绘制自定义图形
@@ -159,7 +165,7 @@ class EntryView {
 
 ## 画布组件常用方法
 
-OffscreenCanvasRenderingContext2D对象和CanvasRenderingContext2D对象提供了大量的属性和方法，可以用来绘制文本、图形，处理像素等，是Canvas组件的核心。常用接口有[fill](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-fill)（对封闭路径进行填充）、[clip](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-clip)（设置当前路径为剪切路径）、[stroke](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroke)（进行边框绘制操作）等等，同时提供了[fillStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-fillstylecanvasgradient)（指定绘制的填充色）、[globalAlpha](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-globalalphafloat64)（设置透明度）与[strokeStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-strokestylecanvasgradient)（设置描边的颜色）等属性修改绘制内容的样式。将通过以下几个方面简单介绍画布组件常见使用方法：
+OffscreenCanvasRenderingContext2D对象和CanvasRenderingContext2D对象提供了大量的属性和方法，可以用来绘制文本、图形，处理像素等，是Canvas组件的核心。常用接口有[fill](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-fillcanvasfillrule)（对封闭路径进行填充）、[clip](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-clipcanvasfillrule)（设置当前路径为剪切路径）、[stroke](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroke)（进行边框绘制操作）等等，同时提供了[fillStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#interface-fillstyle)（指定绘制的填充色）、[globalAlpha](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-globalalpha)（设置透明度）与[strokeStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-strokestyle)（设置描边的颜色）等属性修改绘制内容的样式。将通过以下几个方面简单介绍画布组件常见使用方法：
 
 - 基础形状绘制。
 
@@ -210,7 +216,7 @@ OffscreenCanvasRenderingContext2D对象和CanvasRenderingContext2D对象提供�
 
 - 文本绘制。
 
-  可以通过[fillText](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-filltextstring-float64-float64)（文本填充）、[strokeText](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroketextstring-float64-float64)（文本描边）等接口进行文本绘制，示例中设置了font为50像素高加粗的"sans-serif"字体，然后调用fillText方法在(50, 100)处绘制文本"Hello World!"，设置strokeStyle为红色，lineWidth为0.7，font为50像素高加粗的"sans-serif"字体，然后调用strokeText方法在(50, 120)处绘制文本"Hello World!"的轮廓。
+  可以通过[fillText](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-filltextstring-float64-float64-optionfloat64)（文本填充）、[strokeText](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroketextstring-float64-float64-optionfloat64)（文本描边）等接口进行文本绘制，示例中设置了font为50像素高加粗的"sans-serif"字体，然后调用fillText方法在(50, 100)处绘制文本"Hello World!"，设置strokeStyle为红色，lineWidth为0.7，font为50像素高加粗的"sans-serif"字体，然后调用strokeText方法在(50, 120)处绘制文本"Hello World!"的轮廓。
 
      <!-- run -->
 

@@ -1,5 +1,11 @@
 # User-Agent开发指导
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 <!--RP1-->
 User-Agent（简称UA）是一个特殊的字符串，包含设备类型、操作系统及其版本等关键信息。在Web开发中，这个字符串使服务器能够识别请求的来源设备及其特性，从而据此提供定制化的内容和服务。如果页面无法正确识别UA，可能会导致多种异常情况。例如，为移动设备优化的页面布局可能会在桌面设备上显示错乱，反之亦然。此外，某些浏览器功能或CSS样式可能仅在特定浏览器版本中受支持，如果页面无法根据UA字符串作出正确判断，就可能出现渲染问题或逻辑错误。
 
@@ -21,7 +27,7 @@ User-Agent（简称UA）是一个特殊的字符串，包含设备类型、操�
 
   | 字段                  | 含义                                                         |
   | :--------------------- | :------------------------------------------------------------ |
-  | DeviceType            | 当前的设备类型。<br>取值范围：<br>- Phone：手机<br>- Tablet：平板设备<br>-  PC：2in1设备 |
+  | DeviceType            | 当前的设备类型。<br>取值范围：<br>- Phone：手机<br>- Tablet：平板设备 |
   | OSName                | 基础操作系统名称。<br>默认取值：OpenHarmony                  |
   | OSVersion             | 基础操作系统版本，两位数字，M.S。<br>通过系统参数const.ohos.fullname解析版本号，取版本号中M.S的前两位。<br>默认取值：例如5.0  |
   | ChromeCompatibleVersion | 兼容Chrome主版本的版本号，从114版本开始演进。<br>默认取值：114            |
@@ -33,7 +39,7 @@ User-Agent（简称UA）是一个特殊的字符串，包含设备类型、操�
 > **说明：**
 >
 > - 当前默认User-Agent的ArkWeb字段前有两个空格。
-> - 当前通过User-Agent中是否含有"Mobile"字段来判断是否开启前端HTML页面中meta标签的viewport属性。当User-Agent中不含有"Mobile"字段时，meta标签中viewport属性默认关闭，此时可通过显性设置[metaViewport](../reference/arkui-cj/cj-web-web.md#func-metaviewportbool)属性为true覆盖关闭状态。
+> - 当前通过User-Agent中是否含有"Mobile"字段来判断是否开启前端HTML页面中meta标签的viewport属性。当User-Agent中不含有"Mobile"字段时，meta标签中viewport属性默认关闭。
 > - 建议通过OpenHarmony关键字识别是否为OpenHarmony设备，同时通过DeviceType识别设备类型，以适配不同设备的页面显示（ArkWeb关键字表示设备使用的Web内核，OpenHarmony关键字表示设备使用的操作系统，因此推荐通过OpenHarmony关键字识别是否为OpenHarmony设备）。
 
 ## 自定义User-Agent结构
@@ -119,8 +125,6 @@ OpenHarmony设备的识别主要通过User-Agent中的系统、系统版本和�
    // 检测是否为平板设备  
    const isTablet = () => /Tablet/i.test(navigator.userAgent);
 
-   // 检测是否为2in1设备  
-   const is2in1 = () => /PC/i.test(navigator.userAgent);
    ```
 
 ### 如何模拟OpenHarmony操作系统的User-Agent进行前端调试

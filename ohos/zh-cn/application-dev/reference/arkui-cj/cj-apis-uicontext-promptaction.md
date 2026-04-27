@@ -1,5 +1,11 @@
 # PromptAction
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 创建并显示即时反馈、对话框、操作菜单以及自定义弹窗。
 
 > **说明：**
@@ -64,7 +70,7 @@ public func openCustomDialog(options: CustomDialogOptions, callBack: (Int32) -> 
 ### func showActionMenu(ActionMenuOptions, ShowActionMenuCallBack)
 
 ```cangjie
-public func showActionMenu(option: ActionMenuOptions, callback!: ShowActionMenuCallBack = DEFAULT_CALLBACK)
+public func showActionMenu(option: ActionMenuOptions, callback!: ShowActionMenuCallBack = defaultCallback)
 ```
 
 **功能：** 在给定设置中显示操作菜单。此API使用异步回调返回结果。
@@ -78,7 +84,7 @@ public func showActionMenu(option: ActionMenuOptions, callback!: ShowActionMenuC
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |option|[ActionMenuOptions](#class-actionmenuoptions)|是|-| 操作菜单选项。|
-|callback|[ShowActionMenuCallBack](#type-showactionmenucallback)|否|DEFAULT_CALLBACK| **命名参数。** 用于返回操作菜单响应结果的回调。DEFAULT_CALLBACK表示{_: Option\<BusinessException>, _: Option\<Int32> =>}|
+|callback|[ShowActionMenuCallBack](#type-showactionmenucallback)|否|defaultCallback| **命名参数。** 用于返回操作菜单响应结果的回调。defaultCallback表示{_: Option\<BusinessException>, _: Option\<Int32> =>}|
 
 **异常：**
 
@@ -91,7 +97,7 @@ public func showActionMenu(option: ActionMenuOptions, callback!: ShowActionMenuC
 ### func showDialog(ShowDialogOptions, ShowDialogCallBack)
 
 ```cangjie
-public func showDialog(option: ShowDialogOptions, callback!: ShowDialogCallBack = DEFAULT_CALLBACK)
+public func showDialog(option: ShowDialogOptions, callback!: ShowDialogCallBack = defaultCallback)
 ```
 
 **功能：** 在给定设置中显示对话框。此API使用异步回调返回结果。
@@ -105,7 +111,7 @@ public func showDialog(option: ShowDialogOptions, callback!: ShowDialogCallBack 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |option|[ShowDialogOptions](#class-showdialogoptions)|是|-| 对话框选项。|
-|callback|[ShowDialogCallBack](#type-showdialogcallback)|否|DEFAULT_CALLBACK|**命名参数。** 用于返回对话框响应结果的回调。DEFAULT_CALLBACK表示{_: Option\<BusinessException>, _: Option\<Int32> =>}|
+|callback|[ShowDialogCallBack](#type-showdialogcallback)|否|defaultCallback|**命名参数。** 用于返回对话框响应结果的回调。defaultCallback表示{_: Option\<BusinessException>, _: Option\<Int32> =>}|
 
 **异常：**
 
@@ -145,10 +151,10 @@ public func showToast(option: ShowToastOptions): Unit
 
 ```cangjie
 public open class ActionMenuOptions {
-    public var buttons: Array<ButtonInfo>
-    public var isModal: Bool
-    public var showInSubWindow: Bool
     public var title: ResourceStr
+    public var buttons: Array<ButtonInfo>
+    public var showInSubWindow: Bool
+    public var isModal: Bool
     public init(
         title!: ResourceStr = '',
         buttons!: Array<ButtonInfo>,
@@ -258,21 +264,21 @@ public init(
 
 ```cangjie
 public open class BaseDialogOptions {
-    public var alignment: DialogAlignment
-    public var autoCancel: Bool
-    public var enableHoverMode: Bool
-    public var hoverModeArea: HoverModeAreaType
-    public var isModal: Bool
-    public var keyboardAvoidMode: KeyboardAvoidMode
-    public var maskColor: ResourceColor
     public var maskRect: Rectangle
+    public var alignment: DialogAlignment
     public var offset: Offset
+    public var isModal: Bool
+    public var showInSubWindow: Bool
+    public var autoCancel: Bool
+    public var maskColor: ResourceColor
+    public var transition: TransitionEffect
     public var onDidAppear: () -> Unit
     public var onDidDisappear: () -> Unit
     public var onWillAppear: () -> Unit
     public var onWillDisappear: () -> Unit
-    public var showInSubWindow: Bool
-    public var transition: TransitionEffect
+    public var keyboardAvoidMode: KeyboardAvoidMode
+    public var enableHoverMode: Bool
+    public var hoverModeArea: HoverModeAreaType
     public init(
         maskRect!: Rectangle = Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent),
         alignment!: DialogAlignment = DialogAlignment.Default,
@@ -591,9 +597,9 @@ public init(
 
 ```cangjie
 public class ButtonInfo {
+    public var text: ResourceStr
     public var color: ResourceColor
     public var primary: Bool
-    public var text: ResourceStr
     public init(text!: ResourceStr, color!: ResourceColor, primary!: Bool = false)
 }
 ```
@@ -676,16 +682,16 @@ public init(text!: ResourceStr, color!: ResourceColor, primary!: Bool = false)
 
 ```cangjie
 public class CustomDialogOptions <: BaseDialogOptions {
-    public var backgroundColor: ResourceColor
-    public var borderColor: EdgeColors
-    public var cornerRadius: BorderRadiuses
-    public var borderStyle: EdgeStyles
-    public var borderWidth: EdgeWidths
     public var builder: () -> Unit
-    public var backgroundBlurStyle: BlurStyle
+    public var backgroundColor: ResourceColor
+    public var cornerRadius: BorderRadiuses
+    public var borderWidth: EdgeWidths
+    public var borderColor: EdgeColors
+    public var borderStyle: EdgeStyles
+    public var width: Length
     public var height: Length
     public var shadow: ?ShadowOptions
-    public var width: Length
+    public var backgroundBlurStyle: BlurStyle
     public init(
         builder!: () -> Unit,
         maskRect!: Rectangle = Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent),
@@ -960,10 +966,10 @@ public init(
 
 ```cangjie
 public class EdgeColors {
+    public var top: ResourceColor
+    public var right: ResourceColor
     public var bottom: ResourceColor
     public var left: ResourceColor
-    public var right: ResourceColor
-    public var top: ResourceColor
     public init(
         top!: ResourceColor = Color.Black,
         right!: ResourceColor = Color.Black,
@@ -1073,19 +1079,19 @@ public init(
 
 ```cangjie
 public open class ShowDialogOptions {
+    public var title: ResourceStr
+    public var message: ResourceStr
+    public var buttons: Array<ButtonInfo>
     public var alignment: DialogAlignment
+    public var offset: Offset
+    public var maskRect: Rectangle
+    public var showInSubWindow: Bool
+    public var isModal: Bool
     public var backgroundColor: ResourceColor
     public var backgroundBlurStyle: BlurStyle
-    public var buttons: Array<ButtonInfo>
+    public var shadow: ?ShadowOptions
     public var enableHoverMode: Bool
     public var hoverModeArea: HoverModeAreaType
-    public var isModal: Bool
-    public var maskRect: Rectangle
-    public var message: ResourceStr
-    public var offset: Offset
-    public var shadow: ?ShadowOptions
-    public var showInSubWindow: Bool
-    public var title: ResourceStr
     public init(
         title!: ResourceStr = '',
         message!: ResourceStr = '',
@@ -1366,18 +1372,18 @@ public init(
 
 ```cangjie
 public class ShowToastOptions {
-    public var alignment: Alignment
-    public var backgroundColor: ResourceColor
-    public var bottom: Length
-    public var duration: UInt32
-    public var enableHoverMode: Bool
-    public var hoverModeArea: HoverModeAreaType
     public var message: ResourceStr
+    public var duration: UInt32
+    public var bottom: Length
+    public var showMode: ToastShowMode
+    public var alignment: Alignment
     public var offset: Offset
+    public var backgroundColor: ResourceColor
+    public var textColor: ResourceColor
     public var backgroundBlurStyle: BlurStyle
     public var shadow: ?ShadowOptions = None
-    public var showMode: ToastShowMode
-    public var textColor: ResourceColor
+    public var enableHoverMode: Bool
+    public var hoverModeArea: HoverModeAreaType
     public init(
         message!: ResourceStr,
         duration!: UInt32 = 1500,
@@ -1919,11 +1925,7 @@ public type ShowDialogCallBack = AsyncCallback<Int32>
 
 **功能：** ShowDialogCallBack回调函数
 
-**类型：** [AsyncCallback\<Int32>](../arkinterop/cj-api-business_exception.md#type-asynccallback)
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
+**类型：** [AsyncCallback\<Int32>](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)
 
 ## type ShowActionMenuCallBack
 
@@ -1933,8 +1935,4 @@ public type ShowActionMenuCallBack = AsyncCallback<Int32>
 
 **功能：** ShowActionMenuCallBack回调函数
 
-**类型：** [AsyncCallback\<Int32>](../arkinterop/cj-api-business_exception.md#type-asynccallback)
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
+**类型：** [AsyncCallback\<Int32>](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)

@@ -1,5 +1,11 @@
 # 分析Cangjie Crash（进程崩溃）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 当未捕获的仓颉异常导致应用意外退出时，应用会在抛出未捕获异常时崩溃，并生成对应的 `Crash` 日志文件。开发者可通过错误日志确认引起崩溃的代码位置并分析原因。
 
 ## 仓颉 Crash 日志规格
@@ -69,7 +75,6 @@ Stacktrace:                               // 异常代码调用栈
 <!-- compile -->
 
 ```cangjie
-
 var bigArray = Array<Rune>(1024 * 1024 * 60, repeat: r'a')
 func foo(): Unit {
     var smallArray = Array<Rune>(1024 * 1024 * 5, repeat: r'a')

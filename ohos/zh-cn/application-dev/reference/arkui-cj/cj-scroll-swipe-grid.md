@@ -1,5 +1,11 @@
 # Grid
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 网格容器，由"行"和"列"分割的单元格所组成，通过指定"项目"所在的单元格做出各种各样的布局。
 
 ## 导入模块
@@ -73,7 +79,7 @@ public func cachedCount(value: ?Int32): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Int32|是|-|预加载的GridItem的数量。初始值:  1|
+|value|?Int32|是|-|预加载的GridItem的数量。初始值：1|
 
 ### func cachedCount(?Int32, ?Bool)
 
@@ -83,7 +89,7 @@ public func cachedCount(count: ?Int32, show: ?Bool): This
 
 **功能：** 设置预加载的GridItem数量，并配置是否显示预加载节点。
 
-设置缓存后会在Grid显示区域上下各缓存cachedCount*列数个GridItem。配合[裁剪](./cj-universal-attribute-shapclip.md#func-clip)或[内容裁剪](./cj-universal-attribute-shapclip.md#func-clip)属性可以显示出预加载节点。
+设置缓存后会在Grid显示区域上下各缓存cachedCount*列数个GridItem。配合[裁剪](./cj-universal-attribute-shapclip.md#func-clipbool)或[内容裁剪](./cj-universal-attribute-shapclip.md#func-clipbool)属性可以显示出预加载节点。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -93,8 +99,8 @@ public func cachedCount(count: ?Int32, show: ?Bool): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|count|?Int32|是|-|预加载的GridItem的数量。初始值:  1|
-|show|?Bool|是|-|被预加载的GridItem是否需要显示。初始值:  false|
+|count|?Int32|是|-|预加载的GridItem的数量。初始值：1|
+|show|?Bool|是|-|被预加载的GridItem是否需要显示。初始值：false|
 
 ### func columnsGap(?Length)
 
@@ -112,7 +118,7 @@ public func columnsGap(value: ?Length): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[Length](./cj-common-types.md#interface-length)|是|-|列与列的间距。初始值:  0.vp|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|列与列的间距。初始值：0.vp|
 
 ### func columnsTemplate(?String)
 
@@ -139,7 +145,7 @@ auto-stretch模式只支持track-size为一个有效列宽值，并且track-size
 
 > **说明：**
 >
-> - 设置包含单位的track-size时，需按照数字+单位的格式，如'16vp'、'20%'，与填写Length类型的格式不同。
+> 设置包含单位的track-size时，需按照数字+单位的格式，如'16vp'、'20%'，与填写Length类型的格式不同。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -149,7 +155,7 @@ auto-stretch模式只支持track-size为一个有效列宽值，并且track-size
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?String|是|-|当前网格布局列的数量或最小列宽值。初始值:  "1fr"|
+|value|?String|是|-|当前网格布局列的数量或最小列宽值。初始值："1fr"|
 
 ### func rowsGap(?Length)
 
@@ -167,7 +173,7 @@ public func rowsGap(value: ?Length): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[Length](./cj-common-types.md#interface-length)|是|-|用于设置行与行的间距。初始值:  0.vp|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|用于设置行与行的间距。初始值：0.vp|
 
 ### func rowsTemplate(?String)
 
@@ -177,7 +183,7 @@ public func rowsTemplate(value: ?String): This
 
 **功能：** 设置当前网格布局行的数量、固定行高或最小行高值，不设置时默认1行。
 
-例如，'1fr 1fr 2fr'是将父组件分3行，将父组件允许的高分为4等份，第一行占1份，第二行占一份，第三行占2份。
+例如，'1fr 1fr 2fr'是将父组件分3行，将父组件允许的高分为4等份，第一行占1份，第二行占1份，第三行占2份。
 
 - rowsTemplate('repeat(auto-fit, track-size)')是设置最小行高值为track-size，自动计算行数和实际行高。
 - rowsTemplate('repeat(auto-fill, track-size)')是设置固定行高值为track-size，自动计算行数。
@@ -223,7 +229,7 @@ Grid组件根据rowsTemplate、columnsTemplate属性的设置情况，可分为�
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?String|是|-|当前网格布局行的数量或最小行高值。初始值:  "1fr"|
+|value|?String|是|-|当前网格布局行的数量或最小行高值。初始值："1fr"|
 
 ## 示例代码
 

@@ -1,5 +1,11 @@
 # ohos.bluetooth.constant（蓝牙constant模块）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 constant模块提供了蓝牙中常量的定义。
 
 ## 导入模块

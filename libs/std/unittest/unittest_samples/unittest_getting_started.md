@@ -4,8 +4,6 @@
 
 <!--compile -unittest -->
 ```cangjie
-package example
-
 func add(left: Int64, right: Int64) {
     return left + right
 }
@@ -15,8 +13,6 @@ func add(left: Int64, right: Int64) {
 
 <!--compile -unittest -->
 ```cangjie
-package example
-
 @Test
 func addTest() {
     @Expect(add(2, 3), 5)
@@ -70,7 +66,7 @@ cjc add.cj add_test.cj --test -o add_test
 ```
 
 注意，对于复杂项目来说，不建议直接运行 `cjc` 编译器。
-对于结构庞大的大型项目，建议使用 `cjpm` 包管理器。
+对于结构庞大的大型项目，建议使用 `cjpm` 项目管理器。
 以 `cjpm` 项目测试为例。
 
 首先创建一个简单的 `cjpm` 项目，其中包含一个名为 `example` 的包。
@@ -88,10 +84,10 @@ cjc add.cj add_test.cj --test -o add_test
 原文件已指明它们属于 `example` 包，因此只需运行以下命令即可初始化 `cjpm` 项目：
 
 ```bash
-cjpm init example example
+cjpm init --name example
 ```
 
-`cjpm` 包管理器内置支持运行单元测试，所以直接运行即可：
+`cjpm` 项目管理器内置支持运行单元测试，所以直接运行即可：
 
 ```bash
 cjpm test
@@ -117,4 +113,4 @@ TP: example/example, time elapsed: 60989 ns, Result:
 
 单元测试框架 API 已经存在于 `std` 模块的 `unittest` 包中，宏也存在于 `std` 模块的 `unittest.testmacro` 包中，因此不需要在测试文件中显式导入。
 
-如需了解更多关于 unittest 框架的基本概念，请参考[单元测试基础](./unittest_basics.md#unittest-基础概念及用法)。
+如需了解更多关于 unittest 框架的基本概念，请参考[单元测试基础](./unittest_basics.md)。

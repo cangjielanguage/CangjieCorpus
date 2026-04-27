@@ -59,6 +59,28 @@ public override func toString(): String
 
 - String - 证书携带的公钥算法名称字符串。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建一个PublicKeyAlgorithm枚举值
+    let algorithm = PublicKeyAlgorithm.RSA
+
+    // 获取算法的字符串表示
+    let str = algorithm.toString()
+    println("Algorithm String: ${str}")
+}
+```
+
+运行结果：
+
+```text
+Algorithm String: Public Key Algorithm: rsaEncryption
+```
+
 ### operator func !=(PublicKeyAlgorithm)
 
 ```cangjie
@@ -74,6 +96,34 @@ public override operator func !=(other: PublicKeyAlgorithm): Bool
 返回值：
 
 - Bool - 若公钥算法不同，返回 true；否则，返回 false。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建两个PublicKeyAlgorithm枚举值
+    let alg1 = PublicKeyAlgorithm.RSA
+    let alg2 = PublicKeyAlgorithm.ECDSA
+
+    // 比较两个算法是否不相等
+    let isNotEqual = alg1 != alg2
+    println("RSA != ECDSA: ${isNotEqual}")
+
+    // 比较两个相同算法是否不相等
+    let isNotEqualSame = alg1 != PublicKeyAlgorithm.RSA
+    println("RSA != RSA: ${isNotEqualSame}")
+}
+```
+
+运行结果：
+
+```text
+RSA != ECDSA: true
+RSA != RSA: false
+```
 
 ### operator func ==(PublicKeyAlgorithm)
 
@@ -91,6 +141,34 @@ public override operator func ==(other: PublicKeyAlgorithm): Bool
 
 - Bool - 若公钥算法相同，返回 true；否则，返回 false。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建两个PublicKeyAlgorithm枚举值
+    let alg1 = PublicKeyAlgorithm.RSA
+    let alg2 = PublicKeyAlgorithm.ECDSA
+
+    // 比较两个算法是否相等
+    let isEqual = alg1 == alg2
+    println("RSA == ECDSA: ${isEqual}")
+
+    // 比较两个相同算法是否相等
+    let isEqualSame = alg1 == PublicKeyAlgorithm.RSA
+    println("RSA == RSA: ${isEqualSame}")
+}
+```
+
+运行结果：
+
+```text
+RSA == ECDSA: false
+RSA == RSA: true
+```
+
 ## enum SignatureAlgorithm
 
 ```cangjie
@@ -104,6 +182,10 @@ public enum SignatureAlgorithm <: Equatable<SignatureAlgorithm> & ToString {
 功能：证书签名算法（[Signature](x509_package_structs.md#struct-signature) Algorithm）是用于数字证书签名的算法，它是一种将数字证书中的公钥和其他信息进行加密的算法，以确保数字证书的完整性和真实性。
 
 目前支持签名算法的种类包括：MD2WithRSA 、MD5WithRSA 、SHA1WithRSA 、SHA256WithRSA 、SHA384WithRSA、SHA512WithRSA、DSAWithSHA1、DSAWithSHA256、ECDSAWithSHA1、ECDSAWithSHA256、ECDSAWithSHA384 和 ECDSAWithSHA512。
+
+> **注意：**
+>
+> MD2WithRSA、MD5WithRSA、SHA1WithRSA、DSAWithSHA1、ECDSAWithSHA1 已被证明存在安全漏洞，请谨慎使用。
 
 父类型：
 
@@ -180,7 +262,7 @@ MD5WithRSA
 SHA1WithRSA
 ```
 
-功能：SHA1withRSA签名算法。
+功能：SHA1withRSA 签名算法。
 
 ### SHA256WithRSA
 
@@ -226,6 +308,28 @@ public override func toString(): String
 
 - String - 证书签名算法名称字符串。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建一个SignatureAlgorithm枚举值
+    let algorithm = SignatureAlgorithm.SHA256WithRSA
+
+    // 获取算法的字符串表示
+    let str = algorithm.toString()
+    println("Algorithm String: ${str}")
+}
+```
+
+运行结果：
+
+```text
+Algorithm String: Signature Algorithm: sha256WithRSAEncryption
+```
+
 ### operator func != (SignatureAlgorithm)
 
 ```cangjie
@@ -242,6 +346,34 @@ public override operator func !=(other: SignatureAlgorithm): Bool
 
 - Bool - 若签名算法不同，返回 true；否则，返回 false。
 
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建两个SignatureAlgorithm枚举值
+    let alg1 = SignatureAlgorithm.SHA256WithRSA
+    let alg2 = SignatureAlgorithm.ECDSAWithSHA256
+
+    // 比较两个算法是否不相等
+    let isNotEqual = alg1 != alg2
+    println("SHA256WithRSA != ECDSAWithSHA256: ${isNotEqual}")
+
+    // 比较两个相同算法是否不相等
+    let isNotEqualSame = alg1 != SignatureAlgorithm.SHA256WithRSA
+    println("SHA256WithRSA != SHA256WithRSA: ${isNotEqualSame}")
+}
+```
+
+运行结果：
+
+```text
+SHA256WithRSA != ECDSAWithSHA256: true
+SHA256WithRSA != SHA256WithRSA: false
+```
+
 ### operator func == (SignatureAlgorithm)
 
 ```cangjie
@@ -257,3 +389,31 @@ public override operator func ==(other: SignatureAlgorithm): Bool
 返回值：
 
 - Bool - 若签名算法相同，返回 true；否则，返回 false。
+
+示例：
+
+<!-- verify -->
+```cangjie
+import stdx.crypto.x509.*
+
+main() {
+    // 创建两个SignatureAlgorithm枚举值
+    let alg1 = SignatureAlgorithm.SHA256WithRSA
+    let alg2 = SignatureAlgorithm.ECDSAWithSHA256
+
+    // 比较两个算法是否相等
+    let isEqual = alg1 == alg2
+    println("SHA256WithRSA == ECDSAWithSHA256: ${isEqual}")
+
+    // 比较两个相同算法是否相等
+    let isEqualSame = alg1 == SignatureAlgorithm.SHA256WithRSA
+    println("SHA256WithRSA == SHA256WithRSA: ${isEqualSame}")
+}
+```
+
+运行结果：
+
+```text
+SHA256WithRSA == ECDSAWithSHA256: false
+SHA256WithRSA == SHA256WithRSA: true
+```

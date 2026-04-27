@@ -1,5 +1,11 @@
 # MVVM模式
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 当开发者掌握了状态管理的基本概念后，往往想开发一款自己的应用。然而，如果在应用开发初期未能精心规划项目结构，随着项目的不断扩展和复杂化，状态变量的增多将导致组件间关系变得错综复杂。此时，开发任何新功能都可能引起连锁反应，维护成本也会增加。为此，本文旨在介绍MVVM模式以及ArkUI的UI开发模式与MVVM的关系，指引开发者如何去设计自己的项目结构，从而在产品迭代和升级时，能更容易的去开发和维护。
 
 本文档涵盖了大多数状态管理V1装饰器，所以在阅读本文档前，建议开发者对状态管理V1有一定的了解。建议提前阅读：[状态管理概述](cj-state-management-overview.md)和状态管理V1装饰器相关文档。
@@ -369,7 +375,7 @@ class EntryView {
 
             List(){
                 ForEach(
-                    this.planList, {item: String, _:Int64 =>
+                    this.planList, itemGeneratorFunc: {item: String, _:Int64 =>
                         ListItem(){
                             // 待办事项
                             ThingsComponent(isFinished: this.isFinished, things: item)
@@ -499,7 +505,7 @@ class EntryView{
             AllChooseComponent(isFinished: this.isFinished)
             List() {
                 ForEach(
-                    this.data.planList, {item: String, _:Int64 =>
+                    this.data.planList, itemGeneratorFunc: {item: String, _:Int64 =>
                         ListItem(){
                             ThingsComponent(isFinished: this.isFinished, things: item)
                         }.margin(top: 10.vp).width(100.percent)
@@ -521,7 +527,7 @@ class EntryView{
 
 ### 总结
 
-通过对代码结构的一步步优化，可以看到@Enrty组件作为页面的入口，其build函数应该只需要考虑将需要的组件进行组合，类似于搭积木，将需要的组件搭起来。被page调用的子组件则类似积木，等着被需要的page进行调用。状态变量类似于粘合剂，当触发UI刷新事件时，状态变量能自动完成对应绑定的组件的刷新，从而实现page的按需刷新。
+通过对代码结构的一步步优化，可以看到@Entry组件作为页面的入口，其build函数应该只需要考虑将需要的组件进行组合，类似于搭积木，将需要的组件搭起来。被page调用的子组件则类似积木，等着被需要的page进行调用。状态变量类似于粘合剂，当触发UI刷新事件时，状态变量能自动完成对应绑定的组件的刷新，从而实现page的按需刷新。
 
 虽然现有的架构并未使用到MVVM的设计理念，但是MVVM的核心理念已经呼之欲出，这也是为什么说ArkUI的UI开发天生属于MVVM模式，page和组件就是View层，page负责搭积木，组件就是积木被page组织；组件需要刷新，通过状态变量驱动组件刷新从而更新page；ViewModel的数据需要有来源，这就是Model层来源。
 
@@ -550,7 +556,7 @@ ViewModel层是为视图服务的数据层。它的设计一般来说，有两�
 
 #### View层
 
-View层根据需要来组织，但View层需要区分一下三种组件：
+View层根据需要来组织，但View层需要区分以下三种组件：
 
 - 页面组件：提供整体页面布局，实现多页面之间的跳转，前后台事件处理等页面内容。
 - 业务组件：被页面引用，构建出页面。
@@ -797,7 +803,7 @@ View层根据需要来组织，但View层需要区分一下三种组件：
             Column() {
                 List() {
                     ForEach(
-                        this.thingViewModelArray, {item: ThingViewModel, _:Int64 =>
+                        this.thingViewModelArray, itemGeneratorFunc: {item: ThingViewModel, _:Int64 =>
                             ListItem() {
                                 ThingComponent(thingViewModel: item)
                             }

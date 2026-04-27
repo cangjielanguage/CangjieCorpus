@@ -1,4 +1,10 @@
-# ohos.component_utils（ComponentUtils）
+# ohos.arkui.component_utils（ComponentUtils）
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 提供获取组件绘制区域坐标和大小的能力。
 
@@ -14,7 +20,7 @@ import kit.ArkUI.*
 public class ComponentUtils {}
 ```
 
-**功能：** 提供获取指定组件绘制区域坐标和大小。
+**功能：** 提供获取指定组件绘制区域坐标和大小的能力。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -709,7 +715,3 @@ public type Matrix4Result = VArray<Float64, $16>
 **功能：** 4x4变换矩阵结果类型。
 
 **类型：** VArray<Float64, $16>
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22

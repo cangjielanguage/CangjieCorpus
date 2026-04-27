@@ -1,5 +1,11 @@
 # 基础自定义弹出框（CustomDialog）（不推荐）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 CustomDialog是自定义弹出框，可用于广告、中奖、警告、软件更新等与用户交互响应操作。开发者可以通过CustomDialogController类显示自定义弹出框。具体用法请参见[自定义弹出框](../reference/arkui-cj/cj-dialog-customdialog.md)。
 
 > **说明：**
@@ -60,13 +66,13 @@ CustomDialog是自定义弹出框，可用于广告、中奖、警告、软件�
                 Button("click me")
                     .onClick({evt =>
                         dialogController.openDialog()
-                    })
+                    }).position(x: 30.percent, y: 20.percent).width(40.percent).height(15.percent)
             }
         }
     }
     ```
 
-    ![gouzao](figures/zidingyi.jpg)
+    ![constructor](figures/customize.png)
 
 ## 弹出框的交互
 
@@ -89,12 +95,12 @@ CustomDialog是自定义弹出框，可用于广告、中奖、警告、软件�
             Flex(justifyContent: FlexAlign.SpaceEvenly, alignItems: ItemAlign.Center) {
                 Text("我是内容").fontSize(20)
 
-                Button("cancel").onClick { evt =>
+             Button("cancel").onClick({ evt =>
                     controller?.closeDialog()
-                }
-                Button("confirm").onClick { evt =>
+                })
+                Button("confirm").onClick({ evt =>
                     controller?.closeDialog()
-                }
+                })
             }.height(500.px)
         }
     }

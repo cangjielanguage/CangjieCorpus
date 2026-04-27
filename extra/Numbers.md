@@ -4,9 +4,9 @@
 
 Operation on integers are mostly as usual. Make note of the following.
 
-* Taking remainder uses `%`, only integer types are supports.
-* Taking power uses `**`, only `Int64` or `Float64` are supports on the left side. If the
-  left side is `Int64`, the right side must be either `UInt64`, with the result being `Int64`.
+* Taking remainder uses `%`, only integer types are supported.
+* Taking power uses `**`, only `Int64` or `Float64` are supported on the left side. If the
+  left side is `Int64`, the right side must be `UInt64`, with the result being `Int64`.
   If the left side is `Float64`, the right side must be `Int64` or `Float64`, with the result
   being `Float64`.
 
@@ -74,11 +74,11 @@ to desired type of target value if necessary). This conversion rounds the floati
 
 ```
 println(Int64(3.4))  // prints 3
-println(Int64(3.6))  // prints 4
+println(Int64(3.6))  // prints 3
 ```
 
-To obtain better control of rounding, the functions `floor`, `ceil` and `round` is also
-available after importing `std,math.*`. These functions still return floating-point numbers,
+To obtain better control of rounding, the functions `floor`, `ceil` and `round` are also
+available after importing `std.math.*`. These functions still return floating-point numbers,
 so another `Int64(.)` is needed. For example:
 
 ```

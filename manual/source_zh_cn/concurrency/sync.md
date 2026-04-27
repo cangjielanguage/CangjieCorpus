@@ -31,6 +31,7 @@
 
 以 `Int8` 类型为例，对应的原子操作类型声明如下：
 
+<!-- code_no_check -->
 ```cangjie
 class AtomicInt8 {
     public func load(): Int8
@@ -49,6 +50,7 @@ class AtomicInt8 {
 
 类似的，其他整数类型对应的原子操作类型有：
 
+<!-- code_no_check -->
 ```cangjie
 class AtomicInt16 {...}
 class AtomicInt32 {...}
@@ -64,9 +66,8 @@ class AtomicUInt64 {...}
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
-import std.collection.*
+import std.sync.AtomicInt64
+import std.collection.ArrayList
 
 let count = AtomicInt64(0)
 
@@ -91,7 +92,6 @@ main(): Int64 {
     println("count = ${val}")
     return 0
 }
-
 ```
 
 输出结果应为：
@@ -106,11 +106,11 @@ count = 1000
 
 ```cangjie
 var obj: AtomicInt32 = AtomicInt32(1)
-var x = obj.load() // x: 1, the type is Int32
+var x: Int32 = obj.load() // x: 1
 x = obj.swap(2) // x: 1
 x = obj.load() // x: 2
-var y = obj.compareAndSwap(2, 3) // y: true, the type is Bool.
-y = obj.compareAndSwap(2, 3) // y: false, the value in obj is no longer 2 but 3. Therefore, the CAS operation fails.
+var y: Bool = obj.compareAndSwap(2, 3) // y: true
+y = obj.compareAndSwap(2, 3) // y: false, the value in obj is no longer 2 but 3. Therefore, the CAS operation fails
 x = obj.fetchAdd(1) // x: 3
 x = obj.load() // x: 4
 ```
@@ -133,13 +133,13 @@ x = obj.load() // x: 4
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
+import std.sync.{AtomicBool, AtomicReference}
 
 class A {}
 
 main() {
     var obj = AtomicBool(true)
-    var x1 = obj.load() // x1: true, the type is Bool
+    var x1 : Bool = obj.load() // x1: true
     println(x1)
     var t1 = A()
     var obj2 = AtomicReference(t1)
@@ -174,6 +174,7 @@ true
 
 `Mutex` 提供的主要成员函数如下：
 
+<!-- code_no_check -->
 ```cangjie
 public class Mutex <: UniqueLock {
     // Create a Mutex.
@@ -200,9 +201,8 @@ public class Mutex <: UniqueLock {
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
-import std.collection.*
+import std.sync.Mutex
+import std.collection.ArrayList
 
 var count: Int64 = 0
 let mtx = Mutex()
@@ -239,11 +239,11 @@ count = 1000
 
 下方示例演示了如何使用 `tryLock`：
 
-<!-- compile -->
+<!-- run -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
+import std.sync.Mutex
+
 
 main(): Int64 {
     let mtx: Mutex = Mutex()
@@ -257,14 +257,14 @@ main(): Int64 {
         future.get(Duration.millisecond * 10)
     } catch (e: TimeoutException) {
         if (mtx.tryLock()) {
-            println("tryLock sucess, do something")
+            println("tryLock success, do something")
             mtx.unlock()
-            return 1
+            return 0
         }
         println("tryLock failed, do nothing")
         return 0
     }
-    return 2
+    return 0
 }
 ```
 
@@ -278,8 +278,11 @@ get the lock, do something
 
 错误示例 1：线程操作临界区后没有解锁，导致其他线程无法获得锁而阻塞。
 
+<!-- compile.error -->
+<!-- cfg="libcangjie-std-sync" -->
+
 ```cangjie
-import std.sync.*
+import std.sync.Mutex
 
 var sum: Int64 = 0
 let mutex = Mutex()
@@ -301,8 +304,11 @@ main() {
 
 错误示例 2：在本线程没有持有锁的情况下调用 `unlock` 将会抛出异常。
 
+<!-- compile.error -->
+<!-- cfg="libcangjie-std-sync" -->
+
 ```cangjie
-import std.sync.*
+import std.sync.Mutex
 
 var sum: Int64 = 0
 let mutex = Mutex()
@@ -313,14 +319,17 @@ main() {
         mutex.unlock() // Error, Unlock without obtaining the lock and throw an exception: IllegalSynchronizationStateException.
     }
     foo.get()
-    0
 }
 ```
 
 错误示例 3：`tryLock()` 并不保证获取到锁，可能会造成不在锁的保护下操作临界区和在没有持有锁的情况下调用 `unlock` 抛出异常等行为。
 
+<!-- compile.error -->
+<!-- cfg="libcangjie-std-sync" -->
+
 ```cangjie
-import std.sync.*
+import std.sync.Mutex
+
 var sum: Int64 = 0
 let mutex = Mutex()
 
@@ -346,8 +355,7 @@ main() {
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
+import std.sync.Mutex
 
 var count: Int64 = 0
 let mtx = Mutex()
@@ -392,6 +400,7 @@ count = 220
 
 `Condition` 是与某个互斥锁绑定的条件变量（也就是等待队列），`Condition` 实例由互斥锁创建，一个互斥锁可以创建多个 `Condition` 实例。`Condition` 可以使线程阻塞并等待来自另一个线程的信号以恢复执行。这是一种利用共享变量进行线程同步的机制，主要提供如下方法：
 
+<!-- code_no_check -->
 ```cangjie
 public class Mutex <: UniqueLock {
     // ...
@@ -423,23 +432,13 @@ public interface Condition {
 3. 等待某个其他线程使用同一个 `Condition` 实例的 `notify` 或 `notifyAll` 方法向该线程发出信号；
 4. 当前线程被唤醒后，会自动尝试重新获取锁，且持有锁的重入状态与第 2 步记录的重入次数相同；但是如果尝试获取锁失败，则当前线程会阻塞在该锁上。
 
-`wait` 方法接受一个可选参数 `timeout`。需要注意的是，业界很多常用的常规操作系统不保证调度的实时性，因此无法保证一个线程会被阻塞“精确的 N 纳秒”——可能会观察到与系统相关的不精确情况。此外，当前语言规范明确允许实现产生虚假唤醒——在这种情况下，`wait` 返回值是由实现决定的——可能为 `true` 或 `false`。因此鼓励开发者始终将 `wait` 包在一个循环中：
-
-```cangjie
-synchronized (obj) {
-  while (<condition is not true>) {
-    obj.wait()
-  }
-}
-```
-
+`wait` 方法接受一个可选参数 `timeout`。需要注意的是，业界很多常用的常规操作系统不保证调度的实时性，因此无法保证一个线程会被阻塞“精确的 N 纳秒”——可能会观察到与系统相关的不精确情况。此外，当前语言规范明确允许实现产生虚假唤醒——在这种情况下，`wait` 返回值是由实现决定的——可能为 `true` 或 `false`。因此鼓励开发者始终将 `wait` 包在一个循环中。
 以下是使用 `Condition` 的一个正确示例：
 
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
+import std.sync.Mutex
 
 let mtx = Mutex()
 let condition = synchronized(mtx) {
@@ -490,8 +489,10 @@ New thread: after wait
 
 以下是使用条件变量的一些错误示例：
 
+<!-- run.error -->
+
 ```cangjie
-import std.sync.*
+import std.sync.Mutex
 
 let m1 = Mutex()
 let c1 = synchronized(m1) {
@@ -533,14 +534,15 @@ main() {
     foo1()
     foo2()
     c1.wait()
-    return 0
 }
 ```
 
 有时在复杂的线程间同步的场景下需要对同一个锁对象生成多个 `Condition` 实例，以下示例实现了一个长度固定的有界 `FIFO` 队列。当队列为空，`get()` 会被阻塞；当队列已满，`put()` 会被阻塞。
 
+<!-- compile -->
+
 ```cangjie
-import std.sync.*
+import std.sync.{Mutex, Condition}
 
 class BoundedQueue {
     // Create a Mutex, two Conditions.
@@ -623,9 +625,8 @@ class BoundedQueue {
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
-import std.collection.*
+import std.sync.Mutex
+import std.collection.ArrayList
 
 var count: Int64 = 0
 let mtx = Mutex()
@@ -673,8 +674,8 @@ count = 1000
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.collection.*
+import std.sync.Mutex
+import std.collection.ArrayList
 
 var count: Int64 = 0
 var mtx: Mutex = Mutex()
@@ -718,6 +719,7 @@ in main, count = 10
 
 使用 core 包中的 `ThreadLocal` 可以创建并使用线程局部变量，每一个线程都有它独立的一个存储空间来保存这些线程局部变量。因此，在每个线程可以安全地访问他们各自的线程局部变量，而不受其他线程的影响。
 
+<!-- code_no_check -->
 ```cangjie
 public class ThreadLocal<T> {
     /* 构造一个携带空值的仓颉线程局部变量 */
@@ -732,6 +734,8 @@ public class ThreadLocal<T> {
 ```
 
 下方示例代码演示了如何通过 `ThreadLocal`类来创建并使用各自线程的局部变量：
+
+<!-- run -->
 
 ```cangjie
 

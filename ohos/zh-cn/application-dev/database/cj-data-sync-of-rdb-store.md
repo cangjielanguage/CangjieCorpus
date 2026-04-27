@@ -1,5 +1,11 @@
 # 关系型数据库跨设备数据同步
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 当应用程序本地存储的关系型数据存在跨设备同步的需求时，可以将需要同步的表数据迁移到新的支持跨设备的表中，也可以在刚完成表创建时设置其支持跨设备。
@@ -42,9 +48,8 @@
 
 | 接口名称 | 描述 |
 | -------- | -------- |
-| sync(mode: SyncMode, predicates: RdbPredicates): Array\<(String, Int32)> | 分布式数据同步。 |
-| onDataChange(`type`: SubscribeType, callback: Callback1Argument\<Array\<String>>): Unit | 订阅分布式数据变化。 |
-| offDataChange(`type`: SubscribeType, callback: Callback1Argument\<Array\<String>>): Unit | 取消订阅分布式数据变化。 |
+| on(event: String, interProcess: Bool, observer: Callback0Argument): Unit | 订阅分布式数据变化。 |
+| off(event: String, interProcess: Bool, observer!: ?Callback0Argument = None): Unit | 取消订阅分布式数据变化。 |
 
 ## 开发步骤
 
@@ -57,7 +62,10 @@
     <!-- compile -->
 
     ```cangjie
-    import ohos.data.relational_store.RelationalStoreSecurityLevel
+    import kit.ArkData.*
+    import kit.AbilityKit.{UIAbility, Want, LaunchParam, LaunchReason}
+    import kit.ArkUI.WindowStage
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.business_exception.BusinessException
     ```
 
@@ -73,11 +81,6 @@
 
     ```cangjie
     // main_ability.cj
-    import kit.AbilityKit.{UIAbility, AbilityStage, Want, LaunchParam, LaunchReason, UIAbilityContext}
-    import ohos.data.relational_store.RdbStore
-    import kit.ArkData.{StoreConfig, getRdbStore, RdbPredicates}
-    import kit.ArkUI.WindowStage
-
     var rdbStore: Option<RdbStore> = Option<RdbStore>.None
 
     class MainAbility <: UIAbility {

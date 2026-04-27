@@ -1,22 +1,23 @@
 # ArrayList 的 remove/clear/slice 函数
 
-此用例展示了 ArrayList 的 remove/clear/slice 函数的使用方法。
+此示例展示了 ArrayList 的 remove/clear/slice 函数的使用方法。
 
-代码如下：
+示例：
 
 <!-- verify -->
 
 ```cangjie
 import std.collection.*
+
 main() {
     var list: ArrayList<Int64> = ArrayList<Int64>([97, 100, 99]) // Function call syntactic sugar of variable-length
     list.remove(at: 1) // list: [97, 99]
     var b = list.get(1)
     print("b=${b.getOrThrow()},")
     list.clear()
-    list.add(11) // list: [97, 99, 11]
+    list.add(11) // list: [11]
     var arr: Array<Int64> = [1, 2, 3]
-    list.add(all: arr, at: 0) // list: [1, 2, 3, 97, 99]
+    list.add(all: arr, at: 0) // list: [1, 2, 3, 11]
     var g = list.get(0)
     print("g=${g.getOrThrow()},")
     let r: Range<Int64> = 1..=2 : 1

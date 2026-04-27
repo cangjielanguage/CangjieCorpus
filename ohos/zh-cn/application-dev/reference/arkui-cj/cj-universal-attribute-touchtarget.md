@@ -1,5 +1,11 @@
 # 触摸热区设置
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 设置组件的响应热区。在ArkUI开发框架中，处理触屏事件和鼠标事件时，会在事件触发前进行按压点与组件响应热区的触摸测试，以收集需响应事件的组件。
 
 ## 导入模块
@@ -30,7 +36,7 @@ func responseRegion(value: ?Rectangle): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|
 
 ## func responseRegion(?Array\<Rectangle>)
 
@@ -54,4 +60,4 @@ func responseRegion(value: ?Array<Rectangle>): T
 
 |类型|说明|
 |:---|:---|
-|T|返回通用方法接口类型|
+|T|返回通用方法接口类型。|

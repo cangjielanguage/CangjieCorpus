@@ -1,8 +1,8 @@
-# env 相关操作
+# env 示例
 
 ## 当前进程相关操作
 
-代码如下：
+示例：
 
 <!-- compile -->
 
@@ -12,8 +12,8 @@ import std.env.*
 main(): Int64 {
     println(getProcessId())
     println(getCommand())
-    println(getCommandLine().toString())
-    println(getWorkingDirectory().toString())
+    println(getCommandLine())
+    println(getWorkingDirectory())
     atExit(printText)
     exit(0)
     return 0
@@ -24,7 +24,7 @@ func printText(): Unit {
 }
 ```
 
-运行结果可能如下（输出结果中main为当前进程执行命令名，回调执行完成后当前进程会退出）：
+运行结果可能如下（输出结果中 main 为当前进程执行命令名，回调执行完成后当前进程会退出）：
 
 ```text
 28481

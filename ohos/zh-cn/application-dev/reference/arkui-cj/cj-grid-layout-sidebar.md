@@ -1,5 +1,11 @@
 # SideBarContainer
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供可以显示和隐藏的侧边栏容器，通过子组件定义侧边栏和内容区，第一个子组件表示侧边栏，第二个子组件表示内容区。
 
 ## 导入模块
@@ -14,7 +20,7 @@ import kit.ArkUI.*
 
 > **说明：**
 >
-> - 子组件类型：系统组件和自定义组件，不支持支持渲染控制类型（[if/else](../../arkui-cj/rendering_control/cj-rendering-control-ifelse.md)、[ForEach](cj-state-rendering-foreach.md)、[LazyForEach](cj-state-rendering-lazyforeach.md)）。
+> - 子组件类型：系统组件和自定义组件，不支持渲染控制类型（[if/else](../../arkui-cj/rendering_control/cj-rendering-control-ifelse.md)、[ForEach](cj-state-rendering-foreach.md)、[LazyForEach](cj-state-rendering-lazyforeach.md)）。
 > - 子组件个数：必须且仅包含2个子组件。
 > - 子组件个数异常时：3个或以上子组件，显示第一个和第二个。1个子组件，显示侧边栏，内容区为空白。
 
@@ -57,7 +63,7 @@ public func autoHide(value: ?Bool): This
 
 > **说明：**
 >
-> - 受[minSideBarWidth](#func-minsidebarwidthlength)属性方法影响，当[minSideBarWidth](#func-minsidebarwidthlength)属性方法未设置值时使用初始值。
+> - 受[minSideBarWidth](#func-minsidebarwidthlength)属性方法影响，当该属性方法未设置值时使用初始值。
 > - 拖拽过程中判断是否要自动隐藏。小于最小宽度时需要阻尼效果触发隐藏（越界一段距离）。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
@@ -86,7 +92,7 @@ public func controlButton(value: ?ButtonStyle): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[ButtonStyle](./cj-button-picker-button.md#enum-buttontype)|是|-|侧边栏控制按钮的属性。|
+|value|?[ButtonStyle](#class-buttonstyle)|是|-|侧边栏控制按钮的属性。|
 
 ### func divider(?DividerStyle)
 

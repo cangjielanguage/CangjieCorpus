@@ -1,5 +1,11 @@
 # ohos.graphics.color_space_manager（色彩管理）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 color_space_manager模块提供管理抽象化色域对象的一些基础能力，包括色域对象的创建与色域基础属性的获取等。
 
 ## 导入模块
@@ -33,7 +39,7 @@ public func create(colorSpaceType: ColorSpace): ColorSpaceManager
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|colorSpaceType|[ColorSpace](#enum-colorspace)|是|-|标准色域类型枚举值。UNKNOWN与CUSTOM不可用于直接创建色域对象。|
+|colorSpaceType|[ColorSpace](#enum-colorspace)|是|-|标准色域类型枚举值。Unknown与Custom不可用于直接创建色域对象。|
 
 **返回值：**
 
@@ -90,7 +96,7 @@ public func create(primaries: ColorSpacePrimaries, gamma: Float32): ColorSpaceMa
 
 |类型|说明|
 |:----|:----|
-|[ColorSpaceManager](#class-colorspacemanager)|返回当前创建的色域对象实例。<br>色域类型定义为[ColorSpace](#custom)枚举值`CUSTOM`。|
+|[ColorSpaceManager](#class-colorspacemanager)|返回当前创建的色域对象实例。<br>色域类型定义为[ColorSpace](#enum-colorspace)枚举值`CUSTOM`。|
 
 **异常：**
 
@@ -226,7 +232,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
-    let colorSpaceManagerInstance = create(Srgb)
+    let colorSpaceManagerInstance = create(ColorSpace.Srgb)
     let colorSpace = colorSpaceManagerInstance.getGamma()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -271,7 +277,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 try {
-    let colorSpaceManagerInstance = create(Srgb)
+    let colorSpaceManagerInstance = create(ColorSpace.Srgb)
     let colorSpace = colorSpaceManagerInstance.getWhitePoint()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -540,7 +546,7 @@ Bt2020Hlg
 
 转换函数为HLG类型。
 
-编码范围为Limit类型。
+编码范围为Full类型。
 
 **系统能力：** SystemCapability.Graphic.Graphic2D.ColorManager.Core
 
@@ -792,7 +798,7 @@ RGB色域为Display P3类型。
 DisplayP3Srgb
 ```
 
-**功能：** 与DISPLAY_P3相同。
+**功能：** 与DisplayP3相同。
 
 RGB色域为Display P3类型。
 
@@ -842,7 +848,7 @@ LinearBt2020
 LinearBt709
 ```
 
-**功能：** 与LINEAR_SRGB相同。
+**功能：** 与LinearSrgb相同。
 
 RGB色域为BT709类型。
 

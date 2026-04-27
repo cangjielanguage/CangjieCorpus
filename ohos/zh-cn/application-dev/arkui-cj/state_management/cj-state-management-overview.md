@@ -1,5 +1,11 @@
 # 状态管理概述
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 如果希望构建一个动态的、有交互的界面，就需要引入“状态”的概念。
 
 **图1** 效果图
@@ -95,9 +101,9 @@ class Parent {
 
 [管理应用拥有的状态](./cj-application-state-management-overview.md)，即图中Application级别的状态管理：
 
-- [AppStorage](./cj-appstorage.md)是应用程序中的一个特殊的单例[LocalStorage](./cj-localstorage.md)对象，是应用级的数据库，和进程绑定，通过[@StorageProp](./cj-appstorage.md#StorageProp)和[@StorageLink](./cj-appstorage.md#StorageLink)装饰器可以和组件联动。
+- [AppStorage](./cj-appstorage.md)是应用程序中的一个特殊的单例[LocalStorage](./cj-localstorage.md)对象，是应用级的数据库，和进程绑定，通过[@StorageProp](./cj-appstorage.md#storageprop)和[@StorageLink](./cj-appstorage.md#storagelink)装饰器可以和组件联动。
 - AppStorage是应用状态的“中枢”，将需要与组件（UI）交互的数据存入AppStorage，比如持久化数据[PersistentStorage](./cj-persiststorage.md)和环境变量[Environment](./cj-environment.md)。UI再通过AppStorage提供的装饰器或者API接口，访问这些数据。
-- 框架还提供了LocalStorage，AppStorage是LocalStorage特殊的单例。LocalStorage是应用程序声明的应用状态的内存“数据库”，通常用于页面级的状态共享，通过[@LocalStorageProp](./cj-localstorage.md#LocalStorageProp)和[@LocalStorageLink](./cj-localstorage.md#LocalStorageLink)装饰器可以和UI联动。
+- 框架还提供了LocalStorage，AppStorage是LocalStorage特殊的单例。LocalStorage是应用程序声明的应用状态的内存“数据库”，通常用于页面级的状态共享，通过[@LocalStorageProp](./cj-localstorage.md#localstorageprop)和[@LocalStorageLink](./cj-localstorage.md#localstoragelink)装饰器可以和UI联动。
 
 ### 其他状态管理V1功能
 

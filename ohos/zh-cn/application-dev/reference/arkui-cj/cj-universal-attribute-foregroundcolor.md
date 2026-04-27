@@ -1,5 +1,11 @@
 # 前景色设置
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 设置组件的前景色。
 
 ## 导入模块
@@ -74,16 +80,19 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     func build() {
         Column(space: 100) {
+            Button("ORANGE")
+                .width(50.percent)
+                .height(80)
+                .fontSize(20)
+                .foregroundColor(0xED6F21)
+                .margin(top: 200)
+                .backgroundColor(0xD1D1D6)
             Button("GREEN")
                 .width(50.percent)
                 .height(80)
                 .fontSize(20)
-                .foregroundColor(Color.Green)
-            Button("RED")
-                .width(50.percent)
-                .height(80)
-                .fontSize(20)
-                .foregroundColor(Color.Red)
+                .foregroundColor(0x64BB5C)
+                .backgroundColor(0xD1D1D6)
             }
             .width(100.percent)
         }
@@ -108,16 +117,14 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     func build() {
         Column(space: 100) {
-            Button("NO INVERT")
-                .width(100.percent)
+            Circle()
+                .width(60)
                 .height(80)
-                .fontSize(20)
-                .backgroundColor(Color.Blue)
-            Button("INVERT")
-                .width(100.percent)
+                .margin(top: 100)
+            Circle()
+                .width(60)
                 .height(80)
-                .fontSize(20)
-                .backgroundColor(Color.Blue)
+                .backgroundColor(Color.Black)
                 .foregroundColor(ColoringStrategy.Invert)
             }
             .width(100.percent)

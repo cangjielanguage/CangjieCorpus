@@ -1,5 +1,11 @@
 # Progress
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 进度条组件，用于显示内容加载或操作处理等进度。
 
 ## 导入模块
@@ -80,7 +86,7 @@ public func style(strokeWidth!: ?Length = None, scaleCount!: ?Int32 = None, scal
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|strokeWidth|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置进度条宽度（不支持百分比设置）。初始值：10.vp。|
+|strokeWidth|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置进度条宽度（不支持百分比设置）。初始值：4.vp。|
 |scaleCount|?Int32|否|None|**命名参数。** 设置环形进度条总刻度数。初始值：120。|
 |scaleWidth|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置环形进度条刻度粗细（不支持百分比设置），刻度粗细大于进度条宽度时，为系统默认粗细。初始值：2.vp。|
 

@@ -2,5 +2,5 @@
 
 - 媒体开发指导
     - 媒体信息查询
-        - [使用AVImageGenerator提取视频指定时间图像（仓颉）](cj-avimagegenerator.md)
-    - [AVCodec支持的格式](cj-avcodec-support-formats.md)
+        - [使用AVImageGenerator提取视频指定时间图像](cj-avimagegenerator.md)（Beta特性）
+    - [AVCodec支持的格式](cj-avcodec-support-formats.md)（Beta特性）

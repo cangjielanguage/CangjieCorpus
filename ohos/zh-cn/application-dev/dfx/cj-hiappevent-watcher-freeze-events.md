@@ -1,8 +1,14 @@
-# appfreeze事件介绍
+# 应用冻屏事件介绍
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 HiAppEvent提供接口用于订阅系统appfreeze事件。
 
-[订阅appfreeze事件（仓颉）](./cj-hiappevent-watcher-freeze-events-cangjie.md)
+[订阅应用冻屏事件](./cj-hiappevent-watcher-freeze-events-cangjie.md)
 
 appfreeze事件信息中params属性的详细描述如下：
 
@@ -26,8 +32,8 @@ appfreeze事件信息中params属性的详细描述如下：
 | peer_binder | Array\<String> | binder调用信息。 |
 | threads | Array\<Thread> | 全量线程调用栈，详情请参见thread属性。 |
 | memory | Memory | 内存信息，详情请参见memory属性。 |
-| external_log<sup>12+</sup> | Array\<String> | 故障日志文件路径。**为避免目录空间超限（限制参考log_over_limit），导致新生成的日志文件写入失败，日志文件处理完后请及时删除。** |
-| log_over_limit<sup>12+</sup> | Bool | 生成的故障日志文件与已存在的日志文件总大小是否超过5M上限。true表示超过上限，日志写入失败；false表示未超过上限。 |
+| external_log | Array\<String> | 故障日志文件路径。**为避免目录空间超限（限制参考log_over_limit），导致新生成的日志文件写入失败，日志文件处理完后请及时删除。** |
+| log_over_limit | Bool | 生成的故障日志文件与已存在的日志文件总大小是否超过5M上限。true表示超过上限，日志写入失败；false表示未超过上限。 |
 
 **exception属性：**
 

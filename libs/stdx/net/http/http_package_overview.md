@@ -10,7 +10,7 @@ http 包提供 HTTP/1.1、HTTP/2 和 WebSocket 协议的 server、client 端实�
 
 - 对于 `Linux` 操作系统，可参考以下方式：
     - 如果系统的包管理工具支持安装 `OpenSSL 3` 开发工具包，可通过这个方式安装，并确保系统安装目录下含有 `libssl.so`、`libssl.so.3`、`libcrypto.so` 和 `libcrypto.so.3` 这些动态库文件，例如 `Ubuntu 22.04` 系统上可使用 `sudo apt install libssl-dev` 命令安装 `libssl-dev` 工具包；
-    - 如果无法通过上面的方式安装，可自行下载 `OpenSSL 3.x.x` 源码编译安装软件包，并确保安装目录下含有 `libssl.so`、`libssl.so.3`、`libcrypto.so` 和 `libcrypto.so.3` 这些动态库文件，然后可选择下面任意一种方式来保证系统链接器可以找到这些文件:
+    - 如果无法通过上面的方式安装，可自行下载 `OpenSSL 3.x.x` 源码编译安装软件包，并确保安装目录下含有 `libssl.so`、`libssl.so.3`、`libcrypto.so` 和 `libcrypto.so.3` 这些动态库文件，然后可选择下面任意一种方式来保证系统链接器可以找到这些文件：
         - 在系统未安装 OpenSSL 的场景，安装时选择直接安装到系统路径下；
         - 安装在自定义目录的场景，将这些文件所在目录设置到环境变量 `LD_LIBRARY_PATH` 以及 `LIBRARY_PATH` 中。
 - 对于 `Windows` 操作系统，可按照以下步骤：
@@ -19,9 +19,13 @@ http 包提供 HTTP/1.1、HTTP/2 和 WebSocket 协议的 server、client 端实�
     - 将 `libssl.dll.a`（或 `libssl.lib`）、`libcrypto.dll.a`（或 `libcrypto.lib`）所在的目录路径设置到环境变量 `LIBRARY_PATH` 中，将 `libssl-3-x64.dll`、`libcrypto-3-x64.dll` 所在的目录路径设置到环境变量 `PATH` 中。
 - 对于 `macOS` 操作系统，可参考以下方式：
     - 使用 `brew install openssl@3` 安装，并确保系统安装目录下含有 `libcrypto.dylib` 和 `libcrypto.3.dylib` 这两个动态库文件；
-    - 如果无法通过上面的方式安装，可自行下载 `OpenSSL 3.x.x` 源码编译安装软件包，并确保安装目录下含有 `libcrypto.dylib` 和 `libcrypto.3.dylib` 这两个动态库文件，然后可选择下面任意一种方式来保证系统链接器可以找到这些文件:
+    - 如果无法通过上面的方式安装，可自行下载 `OpenSSL 3.x.x` 源码编译安装软件包，并确保安装目录下含有 `libcrypto.dylib` 和 `libcrypto.3.dylib` 这两个动态库文件，然后可选择下面任意一种方式来保证系统链接器可以找到这些文件：
         - 在系统未安装 OpenSSL 的场景，安装时选择直接安装到系统路径下；
         - 安装在自定义目录的场景，将这些文件所在目录设置到环境变量 `DYLD_LIBRARY_PATH` 以及 `LIBRARY_PATH` 中。
+- 对于 `Android` 操作系统，可参考以下方式：
+    - 由于 `Android` 系统默认自带的 `OpenSSL` 是裁剪版本，部分接口可能找不到符号而抛出异常，因此需要用户自行编译安装完整的 `OpenSSL 3.x.x` 版本；
+    - 可自行下载 `OpenSSL 3.x.x` 源码，使用 Android NDK 交叉编译生成对应架构（当前只支持 `arm64-v8a`）的动态库文件，确保编译产物中含有 `libssl.so`、`libssl.so.3`、`libcrypto.so` 和 `libcrypto.so.3` 这些动态库文件；
+    - 将这些文件所在目录设置到环境变量 `LD_LIBRARY_PATH` 中。
 
 如果未安装 `OpenSSL 3`软件包或者安装低版本的软件包，程序可能无法使用并抛出 TLS 相关异常。
 
@@ -46,7 +50,7 @@ Client、Server 的大多数参数在构建后便不允许修改，如果想要�
 - 通过 Server 实例，用户可以配置 request 转发处理器，启动 http server。在 server handler 中，用户可以通过 HttpContext 获取 client 发来的 request 的详细信息，构造发送给 client 的 response。
 Server 端根据 Client 端请求，创建对应的 ProtocolService 实例，同一个 Server 实例可同时支持两种协议：HTTP/1.1、HTTP/2。
 
-- 在 client 端，用户通过 HttpRequestBuilder 构造 request，构建过程可以指定多个参数，如 method、url、version、headers、body、trailers 等等；构建之后的request 不允许再进行修改。
+- 在 client 端，用户通过 HttpRequestBuilder 构造 request，构建过程可以指定多个参数，如 method、url、version、headers、body、trailers 等等；构建之后的 request 不允许再进行修改。
 
 - 在 server 端，用户通过 HttpResponseBuilder 构造 response，构建过程可以指定多个参数，如 status、headers、body、trailers 等等；构建之后的 response 不允许再进行修改。
 
@@ -97,10 +101,10 @@ Server 端根据 Client 端请求，创建对应的 ProtocolService 实例，同
 | [HttpResponse](./http_package_api/http_package_classes.md#class-httpresponse) | Http 响应类。  |
 | [HttpResponseBuilder](./http_package_api/http_package_classes.md#class-httpresponsebuilder) | 用于构造 HttpResponse 实例。  |
 | [HttpResponsePusher](./http_package_api/http_package_classes.md#class-httpresponsepusher) | HTTP/2 服务器推送。  |
-| [HttpResponseWriter](./http_package_api/http_package_classes.md#class-httpresponsewriter) | HTTP response消息体 Writer，支持用户控制消息体的发送过程。  |
+| [HttpResponseWriter](./http_package_api/http_package_classes.md#class-httpresponsewriter) | HTTP response 消息体 Writer，支持用户控制消息体的发送过程。  |
 | [NotFoundHandler](./http_package_api/http_package_classes.md#class-notfoundhandler) | 便捷的 Http 请求处理器，`404 Not Found` 处理器。  |
 | [OptionsHandler](./http_package_api/http_package_classes.md#class-optionshandler) | 便捷的 Http 处理器，用于处理 OPTIONS 请求。固定返回 "Allow: OPTIONS，GET，HEAD，POST，PUT，DELETE" 响应头。  |
-| [ProtocolService](./http_package_api/http_package_classes.md#class-protocolservice) | Http协议服务实例，为单个客户端连接提供 Http 服务，包括对客户端 request 报文的解析、 request 的分发处理、 response 的发送等。  |
+| [ProtocolService](./http_package_api/http_package_classes.md#class-protocolservice) | Http 协议服务实例，为单个客户端连接提供 Http 服务，包括对客户端 request 报文的解析、 request 的分发处理、 response 的发送等。  |
 | [RedirectHandler](./http_package_api/http_package_classes.md#class-redirecthandler) | 便捷的 Http 处理器，用于回复重定向响应。  |
 | [Server](./http_package_api/http_package_classes.md#class-server) | 提供 HTTP 服务的 Server 类。  |
 | [ServerBuilder](./http_package_api/http_package_classes.md#class-serverbuilder) | 提供 Server 实例构建器。  |
@@ -127,7 +131,7 @@ Server 端根据 Client 端请求，创建对应的 ProtocolService 实例，同
 
 |            异常类名          |           功能           |
 | --------------------------- | ------------------------ |
-| [ConnectionException](./http_package_api/http_package_exceptions.md#class-connectionexception) | Http 的tcp连接异常类。  |
+| [ConnectionException](./http_package_api/http_package_exceptions.md#class-connectionexception) | Http 的 tcp 连接异常类。  |
 | [CoroutinePoolRejectException](./http_package_api/http_package_exceptions.md#class-coroutinepoolrejectexception) | Http 的协程池拒绝请求处理异常类。  |
 | [HttpException](./http_package_api/http_package_exceptions.md#class-httpexception) | Http 的通用异常类。  |
 | [HttpStatusException](./http_package_api/http_package_exceptions.md#class-httpstatusexception) | Http 的响应状态异常类。  |

@@ -1,5 +1,11 @@
 # ListItemGroup
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 该组件用来展示列表item分组，宽度默认充满[List](cj-scroll-swipe-list.md)组件，必须配合List组件来使用。
 
 > **说明：**
@@ -246,6 +252,10 @@ public operator func !=(other: ListItemGroupStyle): Bool
 
 **功能：** 比较两个枚举值是否不相等。
 
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
 **参数：**
 
 |参数名|类型|必填|默认值|说明|
@@ -266,6 +276,10 @@ public operator func ==(other: ListItemGroupStyle): Bool
 
 **功能：** 比较两个枚举值是否相等。
 
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 22
+
 **参数：**
 
 |参数名|类型|必填|默认值|说明|
@@ -282,7 +296,7 @@ public operator func ==(other: ListItemGroupStyle): Bool
 
 ### 示例1（设置吸顶/吸底）
 
-该示例通过stick实现了Header吸顶和Footer吸底的效果。
+该示例实现了Header吸顶和Footer吸底的效果。
 
 <!-- run -->
 
@@ -316,7 +330,7 @@ class EntryView {
         .fontSize(20)
         .backgroundColor(0xAABBCC)
         .width(100.percent)
-        .padding(10)
+        .padding(20)
     }
 
     @Builder func itemFoot(num:Int64) {
@@ -324,7 +338,7 @@ class EntryView {
         .fontSize(16)
         .backgroundColor(0xAABBCC)
         .width(100.percent)
-        .padding(5)
+        .padding(20)
   }
 
     func build() {

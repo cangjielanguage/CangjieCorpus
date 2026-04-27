@@ -32,7 +32,7 @@ class Rectangle {
 >
 > `class` 只能定义在源文件的顶层作用域。
 
-使用 `abstract` 修饰的类为抽象类，与普通类不同的是，在抽象类中除了可以定义普通的函数，还允许声明抽象函数（没有函数体）。抽象类定义时的 `open` 修饰符是可选的，也可以使用 `sealed` 修饰符修饰抽象类，表示该抽象类只能在本包被继承。下例中在抽象类 `AbRectangle` 中定义了抽象函数 `foo`。
+使用 `abstract` 修饰的类为抽象类，与普通类不同的是，在抽象类中除了可以定义普通的函数，还允许声明抽象函数（没有函数体）。抽象类定义时的 `open` 修饰符是可选的，也可以使用 `sealed` 修饰符修饰抽象类。`sealed` 修饰符表示该抽象类只能在本包被继承，详见 [class 的继承小节](#class-的继承)。下例中在抽象类 `AbRectangle` 中定义了抽象函数 `foo`。
 
 <!-- compile -->
 
@@ -71,7 +71,7 @@ let l = Rectangle.height // l = 20
 class Rectangle {
     let width = 10
     let height: Int64
-    init(h: Int64){
+    init(h: Int64) {
         height = h
     }
 }
@@ -145,7 +145,7 @@ class Rectangle {
         this.height = width
     }
 
-    public init(width: Int64, height: Int64) { // Ok: overloading with the first init function
+    public init(width: Int64, height: Int64) { // OK: overloading with the first init function
         this.width = width
         this.height = height
     }
@@ -244,7 +244,7 @@ let r = Rectangle() // r.width = 10，r.height = 20
 
 ### class 终结器
 
-`class` 支持定义终结器，这个函数在类的实例被垃圾回收的时候被调用。终结器的函数名固定为 `~init`。终结器通常用于释放系统资源：
+`class` 支持定义终结器，当类的实例被垃圾回收时，会触发该函数。终结器的函数名固定为 `~init`，通常用于释放系统资源。如下示例中的 `unsafe`，详见 [unsafe 小节](../FFI/cangjie-c.md)：
 
 <!-- compile -->
 
@@ -280,8 +280,8 @@ class C {
     <!-- run -->
 
     ```cangjie
-    import std.collection.*
-    import std.runtime.*
+    import std.collection.ArrayList
+    import std.runtime.gc
 
     class Test {
         public static var t0 : Int32 = 0
@@ -305,7 +305,7 @@ class C {
         return 0
     }
 
-    main() : Int64 {
+    main(): Int64 {
         var i : Int64 = 0
         while (i < 100) {
             if (foo() != 0) {
@@ -376,6 +376,7 @@ class Rectangle {
 
 ```cangjie
 package a
+
 public open class Rectangle {
     public var width: Int64
     protected var height: Int64
@@ -393,9 +394,9 @@ public open class Rectangle {
 }
 
 func samePkgFunc() {
-    var r = Rectangle(10, 20) // Ok: constructor 'Rectangle' can be accessed here
-    r.width = 8               // Ok: public 'width' can be accessed here
-    r.height = 24             // Ok: protected 'height' can be accessed here
+    var r = Rectangle(10, 20) // OK: constructor 'Rectangle' can be accessed here
+    r.width = 8               // OK: public 'width' can be accessed here
+    r.height = 24             // OK: protected 'height' can be accessed here
     r.area = 30               // Error, private 'area' cannot be accessed here
 }
 ```
@@ -405,6 +406,7 @@ func samePkgFunc() {
 ```cangjie
 package b
 import a.*
+
 public class Cuboid <: Rectangle {
     private var length: Int64
     public init(width: Int64, height: Int64, length: Int64) {
@@ -412,14 +414,14 @@ public class Cuboid <: Rectangle {
         this.length = length
     }
     public func volume() {
-        this.width * this.height * this.length // Ok: protected 'height' can be accessed here
+        this.width * this.height * this.length // OK: protected 'height' can be accessed here
     }
 }
 
 main() {
     var r = Rectangle(10, 20, 2) // Error, Rectangle has no `public` constructor with three parameters
     var c = Cuboid(20, 20, 20)
-    c.width = 8               // Ok: public 'width' can be accessed here
+    c.width = 8               // OK: public 'width' can be accessed here
     c.height = 24             // Error, protected 'height' cannot be accessed here
     c.area = 30               // Error, private 'area' cannot be accessed here
 }
@@ -449,16 +451,18 @@ open class C1 {
 }
 class C2 <: C1 {
     // member function f is inherited from C1, and its type is `() -> C2` now
-    public override func f3(): This { // Ok
+    public override func f3(): This { // OK
         return this
     }
 }
 
-var obj1: C2 = C2()
-var obj2: C1 = C2()
+main() {
+    var obj1: C2 = C2()
+    var obj2: C1 = C2()
 
-var x = obj1.f()    // During compilation, the type of x is C2
-var y = obj2.f()    // During compilation, the type of y is C1
+    var x = obj1.f()    // During compilation, the type of x is C2
+    var y = obj2.f()    // During compilation, the type of y is C1
+}
 ```
 
 ## 创建对象
@@ -481,10 +485,13 @@ class Rectangle {
         this.width * this.height
     }
 }
-let r = Rectangle(10, 20) // r.width = 10, r.height = 20
-let width = r.width       // width = 10
-let height = r.height     // height = 20
-let a = r.area()          // a = 200
+
+main() {
+    let r = Rectangle(10, 20) // r.width = 10, r.height = 20
+    let width = r.width       // width = 10
+    let height = r.height     // height = 20
+    let a = r.area()          // a = 200
+}
 ```
 
 如果希望通过对象去修改成员变量的值（不鼓励这种方式，最好还是通过成员函数去修改），需要将 `class` 类型中的成员变量定义为可变成员变量（即使用 `var` 定义）。举例如下：
@@ -555,7 +562,7 @@ open class A {
     let a: Int64 = 10
 }
 
-class B <: A { // Ok: 'B' Inheritance 'A'
+class B <: A { // OK: 'B' Inheritance 'A'
     let b: Int64 = 20
 }
 
@@ -597,7 +604,7 @@ class B <: A {
     let b: Int64 = 20
 }
 
-let a: A = B() // Ok: subclass objects can be assigned to superclass variables
+let a: A = B() // OK: subclass objects can be assigned to superclass variables
 ```
 
 <!-- compile.error -->
@@ -619,7 +626,7 @@ let b: B = A() // Error, superclass objects can not be assigned to subclass vari
 <!-- compile.error -->
 
 ```cangjie
-class A <: A {}  // Error, 'A' inherits itself.
+class A <: A {}  // Error, 'A' inherits itself
 ```
 
 抽象类可以使用 `sealed` 修饰符，表示被修饰的类定义只能在本定义所在的包内被其他类继承。`sealed` 已经蕴含了 `public`/`open` 的语义，因此定义 sealed abstract class 时若提供 `public`/`open` 修饰符，编译器将会告警。`sealed` 的子类可以不是 `sealed` 类，仍可被 `open`/`sealed` 修饰，或不使用任何继承性修饰符。若 `sealed` 类的子类被 `open` 修饰，则其子类可在包外被继承。`sealed` 的子类可以不被 `public` 修饰。
@@ -628,6 +635,7 @@ class A <: A {}  // Error, 'A' inherits itself.
 
 ```cangjie
 package A
+
 public sealed abstract class C1 {}   // Warning, redundant modifier, 'sealed' implies 'public'
 sealed open abstract class C2 {}     // Warning, redundant modifier, 'sealed' implies 'open'
 sealed abstract class C3 {}          // OK, 'public' is optional when 'sealed' is used
@@ -645,8 +653,8 @@ package B
 import A.*
 
 class SS1 <: S2 {}  // OK
-class SS2 <: S3 {}  // Error, S3 is sealed class, cannot be inherited here.
-sealed class SS3 {} // Error, 'sealed' cannot be used on non-abstract class.
+class SS2 <: S3 {}  // Error, S3 is sealed class, cannot be inherited here
+sealed class SS3 {} // Error, 'sealed' cannot be used on non-abstract class
 ```
 
 ### 父类构造函数调用
@@ -779,7 +787,7 @@ open class A {
 }
 
 class B <: A {
-    public override func f(a!: Int32): Int32 { // Ok
+    public override func f(a!: Int32): Int32 { // OK
         a + 2
     }
 }

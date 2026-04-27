@@ -1,4 +1,10 @@
-# 使用SM4对称密钥（GCM模式）加解密（仓颉）
+# 使用SM4对称密钥（GCM模式）加解密
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 对应的算法规格请参见[对称密钥加解密算法规格：SM4](./cj-crypto-sym-encrypt-decrypt-spec.md#sm4)。
 
@@ -23,7 +29,7 @@
 
     由于已使用update传入数据，此处data传入None。
 
-6. 读取[GcmParamsSpec](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#struct-gcmparamsspec).authTag作为解密的认证信息。
+6. 读取[GcmParamsSpec](../../reference/CryptoArchitectureKit/cj-apis-crypto.md#class-gcmparamsspec).authTag作为解密的认证信息。
 
     在GCM模式下，需要从加密后的数据中取出末尾16字节，作为解密时初始化的认证信息。示例中authTag恰好为16字节。
 
@@ -45,7 +51,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func generateRandom(len: Int32) {
     let rand = createRandom()

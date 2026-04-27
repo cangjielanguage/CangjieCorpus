@@ -1,5 +1,11 @@
 # ohos.request（上传下载）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 request模块给应用提供上传下载文件、后台代理传输的基础功能。
 
 ## 导入模块
@@ -16,8 +22,8 @@ ohos.permission.INTERNET
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -27,7 +33,7 @@ API示例代码使用说明：
 public func create(context: UIAbilityContext, config: Config): Task
 ```
 
-**功能：** 创建需要上传或下载的任务，并将其排入队列。支持HTTP/HTTPS协议，每个应用最多支持创建10个未完成的任务。
+**功能：** 创建需要上传或下载的任务，并将其排入队列。支持HTTP/HTTPS协议。
 
 **需要权限：** ohos.permission.INTERNET
 
@@ -205,7 +211,7 @@ public func search(filter!: Filter = Filter()): Array<String>
 
 | 参数名 | 类型                    | 必填 | 默认值   | 说明       |
 | :----- | :---------------------- | :--- | :------- | :--------- |
-| filter | [Filter](#class-filter) | 否   | Filter() | 过滤条件。 |
+| filter | [Filter](#class-filter) | 否   | Filter() | **命名参数。** 过滤条件。 |
 
 **返回值：**
 
@@ -422,7 +428,7 @@ DOWNLOAD表示下载任务。
 public var begins: Int64
 ```
 
-**功能：** 文件起点，通常情况下用于断点续传。默认值为0，取值为闭区间，表示从头开始传输。
+**功能：** 文件起点，通常情况下用于断点续传。
 
 下载时，请求读取服务器开始下载文件时的起点位置（HTTP协议中设置"Range"选项）。
 
@@ -442,9 +448,9 @@ public var begins: Int64
 public var data:?ConfigData
 ```
 
-**功能：** - 下载时，data为字符串类型，通常情况下使用json格式（object将被转换为json文本），默认为空。
+**功能：** 下载时，data为字符串类型，通常情况下使用json格式（object将被转换为json文本）。
 
-上传时，data是表单项数组Array&lt;[FormItem](#class-formitem)&gt;。创建单个任务可以上传最多100个文件。默认为空
+上传时，data是表单项数组Array&lt;[FormItem](#class-formitem)&gt;。创建单个任务可以上传最多100个文件。
 
 **类型：** ?[ConfigData](#enum-configdata)
 
@@ -460,7 +466,7 @@ public var data:?ConfigData
 public var description: String
 ```
 
-**功能：** 任务的详细信息，其最大长度为1024个字符，默认值为空字符串。
+**功能：** 任务的详细信息，其最大长度为1024个字符。
 
 **类型：** String
 
@@ -496,7 +502,7 @@ public var ends: Int64
 public var extras: HashMap<String, String>
 ```
 
-**功能：** 配置的附加功能，默认为空。
+**功能：** 配置的附加功能。
 
 **类型：** HashMap\<String,String>
 
@@ -512,7 +518,7 @@ public var extras: HashMap<String, String>
 public var gauge: Bool
 ```
 
-**功能：** 后台任务的过程进度通知策略，仅应用于后台任务，默认值为false。
+**功能：** 后台任务的过程进度通知策略，仅应用于后台任务。
 
 false：代表仅完成或失败的通知。
 
@@ -552,7 +558,7 @@ public var headers: HashMap<String, String>
 public var index: UInt32
 ```
 
-**功能：** 任务的路径索引，通常情况下用于任务断点续传，默认为0。
+**功能：** 任务的路径索引，通常情况下用于任务断点续传。
 
 **类型：** UInt32
 
@@ -568,7 +574,7 @@ public var index: UInt32
 public var metered: Bool
 ```
 
-**功能：** 是否允许在按流量计费的网络中工作，默认为false。
+**功能：** 是否允许在按流量计费的网络中工作。
 
 true：是
 
@@ -608,7 +614,7 @@ public var method:?String
 public var mode: Mode
 ```
 
-**功能：** 任务模式，默认为后台任务。下载到用户文件场景必须为request.agent.Mode.FOREGROUND。
+**功能：** 任务模式，默认为后台任务。下载到用户文件场景必须为Mode.Foreground。
 
 **类型：** [Mode](#enum-mode)
 
@@ -624,7 +630,7 @@ public var mode: Mode
 public var network: Network
 ```
 
-**功能：** 网络选项，当前支持无线网络WIFI和蜂窝数据网络CELLULAR，默认为ANY（WIFI或CELLULAR）。
+**功能：** 网络选项，当前支持无线网络Wifi和蜂窝数据网络Cellular。
 
 **类型：** [Network](#enum-network)
 
@@ -640,7 +646,7 @@ public var network: Network
 public var overwrite: Bool
 ```
 
-**功能：** 下载过程中路径已存在时的解决方案选择，默认为false。
+**功能：** 下载过程中路径已存在时的解决方案选择。
 
 true，覆盖已存在的文件。
 
@@ -664,11 +670,9 @@ false，下载失败。
 public var precise: Bool
 ```
 
-**功能：** - 如果设置为true，在上传/下载无法获取文件大小时任务失败。
+**功能：** 如果设置为true，在上传/下载无法获取文件大小时任务失败。
 
 如果设置为false，将文件大小设置为-1时任务继续。
-
-默认值为false。
 
 **类型：** Bool
 
@@ -684,7 +688,7 @@ public var precise: Bool
 public var priority: UInt32
 ```
 
-**功能：** 任务的优先级。前台任务的优先级比后台任务高。任务模式相同的情况下，该配置项的数字越小优先级越高，默认值为0。
+**功能：** 任务的优先级。前台任务的优先级比后台任务高。任务模式相同的情况下，该配置项的数字越小优先级越高。
 
 **类型：** UInt32
 
@@ -700,7 +704,7 @@ public var priority: UInt32
 public var redirect: Bool
 ```
 
-**功能：** 是否允许重定向，默认为true。
+**功能：** 是否允许重定向。
 
 true：是
 
@@ -720,7 +724,7 @@ false：否
 public var retry: Bool
 ```
 
-**功能：** 是否为后台任务启用自动重试，仅应用于后台任务，默认为true。
+**功能：** 是否为后台任务启用自动重试，仅应用于后台任务。
 
 true：是
 
@@ -740,7 +744,7 @@ false：否
 public var roaming: Bool
 ```
 
-**功能：** 是否允许在漫游网络中工作，默认为true。
+**功能：** 是否允许在漫游网络中工作。
 
 true：是
 
@@ -784,7 +788,7 @@ file协议路径，支持应用文件和用户文件，应用文件必须匹配�
 public var title:?String
 ```
 
-**功能：** 任务标题，其最大长度为256个字符，默认值为小写的 upload 或 download，与上面的 action 保持一致。
+**功能：** 任务标题，其最大长度为256个字符。
 
 **类型：** ?String
 
@@ -800,7 +804,7 @@ public var title:?String
 public var token: ?String
 ```
 
-**功能：** 任务令牌。查询带有token的任务需提供token并通过[request.agent.touch](#func-touchstring-string)查询，否则无法查询到指定任务。其最小为8个字节，最大为2048个字节。默认为空。
+**功能：** 任务令牌。查询带有token的任务需提供token并通过[request.agent.touch](#func-touchstring-string)查询，否则无法查询到指定任务。其最小为8个字节，最大为2048个字节。
 
 **类型：** String
 
@@ -848,7 +852,7 @@ public init(action: Action, url: String, title!: ?String = None, description!: S
 
 | 参数名      | 类型 | 必填 | 默认值                     | 说明 |
 | :---------- | :--------- | :--- | :------- | :-------- |
-| action      | [Action](#enum-action) | 是   | - | **命名参数。**任务操作选项。|
+| action      | [Action](#enum-action) | 是   | - | **命名参数。** 任务操作选项。|
 | url         | String | 是   | - | **命名参数。** 资源地址。最大长度为8192个字符。支持HTTP拦截功能。|
 | title       | ?String | 否   | None | **命名参数。** 任务标题，其最大长度为256个字符，默认值为小写的 upload 或 download，与上面的 action 保持一致。|
 | description | String | 否   | "" | **命名参数。** 任务的详细信息，其最大长度为1024个字符，默认值为空字符串。|
@@ -858,7 +862,7 @@ public init(action: Action, url: String, title!: ?String = None, description!: S
 | headers     | HashMap\<String,String>  | 否   | HashMap<String,String>()   | **命名参数。** 添加要包含在任务中的HTTP协议标志头。|
 | data        | ?[ConfigData](#enum-configdata) | 否   | None | **命名参数。** - 下载时，data为字符串类型，通常情况下使用json格式（object将被转换为json文本），默认为空。|
 | saveas      | String | 否   | "./" | **命名参数。** 保存下载文件的路径。|
-| network     | [Network](#enum-network)  | 否   | Network.AnyType | **命名参数。** 网络选项，当前支持无线网络WIFI和蜂窝数据网络CELLULAR，默认为ANY（WIFI或CELLULAR）。|
+| network     | [Network](#enum-network)  | 否   | Network.AnyType | **命名参数。** 网络选项，当前支持无线网络Wifi和蜂窝数据网络Cellular，默认为Network.AnyType（Wifi或Cellular）。|
 | metered     | Bool | 否   | false  | **命名参数。** 是否允许在按流量计费的网络中工作，默认为false。|
 | roaming     | Bool | 否   | true | **命名参数。** 是否允许在漫游网络中工作，默认为true。|
 | retry       | Bool | 否   | true | **命名参数。** 是否为后台任务启用自动重试，仅应用于后台任务，默认为true。|
@@ -936,7 +940,7 @@ public class FileSpec {
 public var extras: HashMap<String, String>
 ```
 
-**功能：** 文件信息的附加内容，该参数不会体现在HTTP请求中。
+**功能：** 文件信息的附加内容，该属性不会体现在HTTP请求中。
 
 **类型：** HashMap\<String,String>
 
@@ -952,7 +956,7 @@ public var extras: HashMap<String, String>
 public var filename:?String
 ```
 
-**功能：** 文件名，默认值通过路径获取。
+**功能：** 文件名。
 
 **类型：** ?String
 
@@ -968,7 +972,7 @@ public var filename:?String
 public var mimeType:?String
 ```
 
-**功能：** 文件的mimeType，通过文件名获取，默认值为文件名后缀。
+**功能：** 文件的mimeType，通过文件名获取。
 
 **类型：** ?String
 
@@ -1148,11 +1152,9 @@ public var action:?Action
 
 **功能：** 任务操作选项。
 
- UPLOAD表示上传任务。
+Upload表示上传任务。
 
- DOWNLOAD表示下载任务。
-
- 如果未填写，则查询所有任务。
+Download表示下载任务。
 
 **类型：** ?[Action](#enum-action)
 
@@ -1168,7 +1170,7 @@ public var action:?Action
 public var after:?Int64
 ```
 
-**功能：** 开始的Unix时间戳（毫秒），默认值为调用时刻减24小时。
+**功能：** 开始的Unix时间戳（毫秒）。
 
 **类型：** ?Int64
 
@@ -1184,7 +1186,7 @@ public var after:?Int64
 public var before:?Int64
 ```
 
-**功能：** 结束的Unix时间戳（毫秒），默认为调用时刻。
+**功能：** 结束的Unix时间戳（毫秒）。
 
 **类型：** ?Int64
 
@@ -1202,11 +1204,9 @@ public var mode:?Mode
 
 **功能：** 任务模式。
 
-FOREGROUND表示前台任务。
+Foreground表示前台任务。
 
-BACKGROUND表示后台任务。
-
-如果未填写，则查询所有任务。
+Background表示后台任务。
 
 **类型：** ?[Mode](#enum-mode)
 
@@ -1222,7 +1222,7 @@ BACKGROUND表示后台任务。
 public var state:?State
 ```
 
-**功能：** 指定任务的状态。如果未填写，则查询所有任务。
+**功能：** 指定任务的状态。
 
 **类型：** ?[State](#enum-state)
 
@@ -1253,8 +1253,8 @@ public init(before!: ?Int64 = None, after!: ?Int64 = None, state!: ?State = None
 | before | ?Int64 | 否   | None   | **命名参数。** 结束的Unix时间戳（毫秒），默认为调用时刻。|
 | after  | ?Int64 | 否   | None   | **命名参数。** 开始的Unix时间戳（毫秒），默认值为调用时刻减24小时。|
 | state  | ?[State](#enum-state)   | 否   | None   | **命名参数。** 指定任务的状态。如果未填写，则查询所有任务。|
-| action | ?[Action](#enum-action) | 否   | None   | **命名参数。** 任务操作选项。|
-| mode   | ?[Mode](#enum-mode)     | 否   | None   | **命名参数。** 任务模式。|
+| action | ?[Action](#enum-action) | 否   | None   | **命名参数。** 任务操作选项。如果未填写，则查询所有任务。|
+| mode   | ?[Mode](#enum-mode)     | 否   | None   | **命名参数。** 任务模式。如果未填写，则查询所有任务。|
 
 **示例：**
 
@@ -1711,7 +1711,7 @@ public func on(event: EventCallbackType, callback: Callback1Argument<HttpRespons
 | 参数名   | 类型  | 必填 | 默认值 | 说明  |
 | :------- | :----  | :--- | :----- | :----  |
 | event    | [EventCallbackType](#enum-eventcallbacktype)  | 是   | -      | 订阅的事件类型。<br>- 取值为Response，表示任务响应。     |
-| callback | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<HttpResponse> | 是   | -      | 发生相关的事件时触发该回调方法，返回任务响应头的数据结构。 |
+| callback | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<HttpResponse> | 是   | -      | 发生相关的事件时触发该回调方法，返回任务响应头的数据结构。 |
 
 **示例：**
 
@@ -1763,7 +1763,7 @@ public func on(event: EventCallbackType, callback: Callback1Argument<Progress>):
 | 参数名   | 类型 | 必填 | 默认值 | 说明 |
 | :------- | :---  | :--- | :----- | :----  |
 | event    | [EventCallbackType](#enum-eventcallbacktype) | 是   | -      | 订阅的事件类型。<br>- 取值为Progress，表示任务进度，任务进度有进展时触发该事件。 |
-| callback | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<[Progress](#class-progress)> | 是   | -      | 发生相关的事件时触发该回调方法，返回任务信息的数据结构。 |
+| callback | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<[Progress](#class-progress)> | 是   | -      | 发生相关的事件时触发该回调方法，返回任务信息的数据结构。 |
 
 **示例：**
 
@@ -1805,7 +1805,7 @@ try {
 public func pause(): Unit
 ```
 
-**功能：** 暂停任务，可以暂停正在等待/正在运行/正在重试的任务，已暂停的任务可被[resume](#resume)恢复
+**功能：** 暂停任务，可以暂停正在等待/正在运行/正在重试的任务，已暂停的任务可被[resume](#resume)恢复。
 
 **系统能力：** SystemCapability.Request.FileTransferAgent
 
@@ -2033,9 +2033,9 @@ public let action: Action
 
 **功能：** 任务操作选项。
 
-UPLOAD表示上传任务。
+Upload表示上传任务。
 
-DOWNLOAD表示下载任务。
+Download表示下载任务。
 
 **类型：** [Action](#enum-action)
 
@@ -2055,7 +2055,7 @@ public let ctime: UInt64
 
 > **说明：**
 >
-> - 使用[request.agent.search](#func-searchfilter)进行查询时，该值需处于[after,before]区间内才可正常查询到任务id，before和after信息详见[Filter](#class-filter)。
+> 使用[request.agent.search](#func-searchfilter)进行查询时，该值需处于[after,before]区间内才可正常查询到任务id，before和after信息详见[Filter](#class-filter)。
 
 **类型：** UInt64
 
@@ -2121,7 +2121,7 @@ public let extras: HashMap<String, String>
 public let faults: Faults
 ```
 
-**功能：** 任务的失败原因。OTHERS表示其他故障。DISCONNECT表示网络断开连接。TIMEOUT表示任务超时。PROTOCOL表示协议错误。FSIO表示文件系统io错误。
+**功能：** 任务的失败原因。Others表示其他故障。Disconnected表示网络断开连接。Timeout表示任务超时。Protocol表示协议错误。Fsio表示文件系统io错误。
 
 **类型：** [Faults](#enum-faults)
 
@@ -2175,9 +2175,9 @@ public let mode: Mode
 
 **功能：** 任务模式。
 
-FOREGROUND表示前台任务。
+Foreground表示前台任务。
 
-BACKGROUND表示后台任务。
+Background表示后台任务。
 
 **类型：** [Mode](#enum-mode)
 
@@ -2537,7 +2537,7 @@ public enum ConfigData {
 FormItems(Array<FormItem>)
 ```
 
-**功能：** 表示上传时，data是表单项数组Array&lt;FormItem&gt;，默认为空。
+**功能：** 表示上传时，data是表单项数组Array&lt;FormItem&gt;。
 
 **系统能力：** SystemCapability.Request.FileTransferAgent
 
@@ -2549,7 +2549,7 @@ FormItems(Array<FormItem>)
 StringValue(String)
 ```
 
-**功能：** 下载时，data为字符串类型，通常使用json(object将被转换为json文本)，默认为空。
+**功能：** 表示下载时，data为字符串类型，通常使用json(object将被转换为json文本)。
 
 **系统能力：** SystemCapability.Request.FileTransferAgent
 
@@ -2682,7 +2682,7 @@ public operator func !=(other: EventCallbackType): Bool
 
 | 参数名 | 类型                                         | 必填 | 默认值 | 说明     |
 | :----- | :------------------------------------------- | :--- | :----- | :------- |
-| other  | [EventCallbackType](#enum-eventcallbacktype) | 是   | -      | 回调事件 |
+| other  | [EventCallbackType](#enum-eventcallbacktype) | 是   | -      | 另一个订阅事件类型。 |
 
 **返回值：**
 
@@ -2706,7 +2706,7 @@ public operator func ==(other: EventCallbackType): Bool
 
 | 参数名 | 类型                                         | 必填 | 默认值 | 说明     |
 | :----- | :------------------------------------------- | :--- | :----- | :------- |
-| other  | [EventCallbackType](#enum-eventcallbacktype) | 是   | -      | 回调事件 |
+| other  | [EventCallbackType](#enum-eventcallbacktype) | 是   | -      | 另一个订阅事件类型。 |
 
 **返回值：**
 
@@ -2730,7 +2730,7 @@ public func hashCode(): Int64
 
 | 类型  | 说明                   |
 | :---- | :--------------------- |
-| Int64 | 回调事件的哈希值表示。 |
+| Int64 | 当前枚举的哈希值表示。 |
 
 ### func toString()
 
@@ -2967,7 +2967,7 @@ public operator func !=(other: Mode): Bool
 
 | 参数名 | 类型               | 必填 | 默认值 | 说明     |
 | :----- | :----------------- | :--- | :----- | :------- |
-| other  | [Mode](#enum-mode) | 是   | -      | 模式状态 |
+| other  | [Mode](#enum-mode) | 是   | -      | 另一个模式选项。 |
 
 **返回值：**
 
@@ -2991,7 +2991,7 @@ public operator func ==(other: Mode): Bool
 
 | 参数名 | 类型               | 必填 | 默认值 | 说明     |
 | :----- | :----------------- | :--- | :----- | :------- |
-| other  | [Mode](#enum-mode) | 是   | -      | 模式状态 |
+| other  | [Mode](#enum-mode) | 是   | -      | 另一个模式选项。 |
 
 **返回值：**
 
@@ -3093,7 +3093,7 @@ public operator func !=(other: Network): Bool
 
 | 参数名 | 类型                     | 必填 | 默认值 | 说明     |
 | :----- | :----------------------- | :--- | :----- | :------- |
-| other  | [Network](#enum-network) | 是   | -      | 网络状态 |
+| other  | [Network](#enum-network) | 是   | -      | 另一个网络选项。|
 
 **返回值：**
 
@@ -3117,7 +3117,7 @@ public operator func ==(other: Network): Bool
 
 | 参数名 | 类型                     | 必填 | 默认值 | 说明     |
 | :----- | :----------------------- | :--- | :----- | :------- |
-| other  | [Network](#enum-network) | 是   | -      | 网络状态 |
+| other  | [Network](#enum-network) | 是   | -      | 另一个网络选项。 |
 
 **返回值：**
 

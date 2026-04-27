@@ -1,5 +1,11 @@
 # 共享元素转场（sharedTransition）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 可以通过设置组件的 sharedTransition 属性将该元素标记为共享元素并设置对应的共享元素转场动效。sharedTransition仅发生在页面路由（[router](cj-apis-uicontext-router.md#class-router)）跳转时。
 
 ## 导入模块
@@ -29,7 +35,7 @@ func sharedTransition(id: String, options!: ?SharedTransitionOptions): T
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |id|String|是|-|两个页面中id值相同且不为空字符串的组件即为共享元素，在页面转场时可显示共享元素转场动效。|
-|options|?[SharedTransitionOptions](./cj-common-types.md#class-sharedtransitionoptions)|否|None|**命名参数。** 共享元素转场动画参数。<br>初始值：SharedTransitionOptions()。|
+|options|?[SharedTransitionOptions](./cj-common-types.md#class-sharedtransitionoptions)|是|-|**命名参数。** 共享元素转场动画参数。<br>初始值：SharedTransitionOptions()。|
 
 **返回值：**
 

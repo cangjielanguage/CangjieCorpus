@@ -17,7 +17,7 @@ main() {
     list.add(12, at: 1) // list: [1, 12, 120, 3]
     var c = list.get(2)
     print("c=${c.getOrThrow()},")
-    var arr1: Array<Int64> = [1,2,3]
+    var arr1: Array<Int64> = [1, 2, 3]
     list.add(all: arr1, at: 1) // list: [1, 1, 2, 3, 12, 120, 3]
     var d = list.get(2)
     print("d=${d.getOrThrow()}")

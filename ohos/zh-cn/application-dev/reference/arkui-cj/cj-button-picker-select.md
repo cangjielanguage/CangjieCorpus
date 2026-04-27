@@ -1,5 +1,11 @@
 # Select
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供下拉选择菜单，可以让用户在多个选项之间选择。
 
 ## 导入模块
@@ -493,10 +499,6 @@ public type OnSelectCallback = (Int32, String) -> Unit
 **功能：** 定义选择回调函数类型。
 
 **类型：** (Int32, String) -> Unit
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
 
 ## 示例代码
 

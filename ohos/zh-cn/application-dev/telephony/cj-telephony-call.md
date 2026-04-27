@@ -1,5 +1,11 @@
 # 拨打电话
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 开发者可以通过以下方式实现拨打电话的功能：
@@ -13,10 +19,10 @@
 
 | 名称                | 说明                               |
 | :------------------ | :--------------------------------- |
-| CALL_STATE_UNKNOWN | 无效状态，当获取呼叫状态失败时返回。   |
-| CALL_STATE_IDLE    | 表示没有正在进行的呼叫。              |
-| CALL_STATE_RINGING | 表示来电正在振铃或等待。              |
-| CALL_STATE_OFFHOOK | 表示至少有一个呼叫处于拨号、通话中或呼叫保持状态，并且没有新的来电振铃或等待。 |
+| CallStateUnknown | 无效状态，当获取呼叫状态失败时返回。   |
+| CallStateIdle    | 表示没有正在进行的呼叫。              |
+| CallStateRinging | 表示来电正在振铃或等待。              |
+| CallStateOffhook | 表示至少有一个呼叫处于拨号、通话中或呼叫保持状态，并且没有新的来电振铃或等待。 |
 
 ## 约束与限制
 
@@ -24,10 +30,6 @@
 2. 设备需插入可用的SIM卡。
 
 ## 接口说明
-
-> **说明：**
->
-> 为了保证应用的运行效率，大部分API调用都是异步的，对于异步调用的API均提供了callback和Promise两种方式，以下示例均采用callback函数。
 
 | 接口名 | 描述 |
 | :------------------------------------------- | :--------------------------------- |
@@ -63,14 +65,14 @@ class EntryView {
                 Text(this.message)
                     .fontSize(50)
                     .fontWeight(FontWeight.Bold)
-                    .onClick {
+                    .onClick ({
                         evt =>
                         let isSupport = Call.hasVoiceCapability()
                         if (isSupport) {
                             // 如果设备支持呼叫能力，则继续跳转到拨号界面，并显示拨号的号码
                             Call.makeCall(ctx.getOrThrow(), "130xxxx")                  
                         }
-                    }
+                    })
             }.width(100.percent)
         }.height(100.percent)
     }
@@ -81,8 +83,6 @@ class EntryView {
 
 ```cangjie
 // main_ability.cj
-import ohos.ability.AbilityStage
-import ohos.ability.LaunchReason
 
 class MainAbility <: UIAbility {
     public init() {
@@ -93,7 +93,7 @@ class MainAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         Hilog.info(1, "info", "MainAbility OnCreated.${want.abilityName}")
         match (launchParam.launchReason) {
-            case LaunchReason.START_ABILITY => Hilog.info(1, "info", "START_ABILITY")
+            case LaunchReason.StartAbility => Hilog.info(1, "info", "START_ABILITY")
             case _ => ()
         }
     }
@@ -106,3 +106,8 @@ class MainAbility <: UIAbility {
     }
 }
 ```
+<!--Del-->
+## 示例代码
+
+[拨打电话](https://gitcode.com/openharmony/applications_app_samples_cangjie/tree/master/code/BasicFeature/Telephony/MakeCall)
+<!--DelEnd-->

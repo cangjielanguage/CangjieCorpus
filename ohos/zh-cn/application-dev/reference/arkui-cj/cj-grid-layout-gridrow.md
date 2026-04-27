@@ -1,5 +1,11 @@
 # GridRow
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 栅格布局可以为布局提供规律性的结构，解决多尺寸多设备的动态布局问题，保证不同设备上各个模块的布局一致性。
 
 栅格容器组件，仅可以和栅格子组件([GridCol](./cj-grid-layout-gridcol.md))在栅格布局场景中使用。
@@ -129,7 +135,7 @@ public init(
 
 ## 通用属性/通用事件
 
-通用属性：除文本样式外，其余全部支持。
+通用属性：全部支持。
 
 通用事件：全部支持。
 
@@ -785,7 +791,7 @@ public operator func !=(other: GridRowDirection): Bool
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
-**起始版本：** 22。
+**起始版本：** 22
 
 **参数：**
 

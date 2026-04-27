@@ -1,4 +1,4 @@
-# 学习仓颉语言（Beta特性）
+# 学习仓颉语言
 
 - [初识仓颉语言](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/first_understanding/basic.md)
 - 基本概念
@@ -113,28 +113,28 @@
             - [构建第一个仓颉与ArkTS混合应用](FFI/cangjie-arkts/cj-quick-start-first-cangjie-hybrid-app.md)
             - [在已有ArkTS工程中增量使用仓颉](FFI/cangjie-arkts/cj-quick-start-first-cangjie-hybrid-module.md)
             - [在仓颉代码里导入ArkTS模块](FFI/cangjie-arkts/cangjie-load-arkts.md)
-        - [概述](FFI/cangjie-arkts/cangjie_arkts_overview.md)
-        - [场景](FFI/cangjie-arkts/interoperability_senario.md)
+        - [仓颉-ArkTS 互操作概述](FFI/cangjie-arkts/cangjie_arkts_overview.md)
+        - [仓颉-ArkTS 互操作场景](FFI/cangjie-arkts/cj-arkts_interoperability_senario.md)
             - [ArkTS 应用中使用仓颉](FFI/cangjie-arkts/using_cangjie.md)
                 - [增加仓颉页面](FFI/cangjie-arkts/add_cangjie_page.md)
                 - [增加仓颉模块](FFI/cangjie-arkts/add_cangjie_module.md)
-            - [仓颉应用中使用 ArkTS](FFI/cangjie-arkts/using_arkts.md)
+            - [仓颉应用中使用 ArkTS](FFI/cangjie-arkts/cj-using_arkts.md)
         - 互操作用法
             - [ArkTS 调用仓颉](FFI/cangjie-arkts/method_of_ArkTS_calling_cangjie.md)
                 - 仓颉侧实现互操作代码
-                    - [声明式互操作宏](FFI/cangjie-arkts/interoperability_macro.md)
-                    - [互操作库](FFI/cangjie-arkts/interoperability_lib.md)
+                    - [仓颉-ArkTS 声明式互操作宏](FFI/cangjie-arkts/cj-arkts_interoperability_macro.md)
+                    - [仓颉-ArkTS 互操作库](FFI/cangjie-arkts/cj-arkts_interoperability_lib.md)
                 - [ArkTS 侧使用互操作代码](FFI/cangjie-arkts/arkts_import_cangjie.md)
             - 仓颉调用 ArkTS
-                - [ArkTS 侧互操作准备](FFI/cangjie-arkts/prepare_arkts_module.md)
-                - [仓颉侧调用互操作代码](FFI/cangjie-arkts/using_arkts_module.md)
-        - [互操作使用案例](FFI/cangjie-arkts/using_example.md)
-            - [仓颉访问 ArkTS 数据](FFI/cangjie-arkts/operating_ArkTS_data.md)
+                - [ArkTS 侧获取互操作模块名](FFI/cangjie-arkts/cj-prepare_arkts_module.md)
+                - [仓颉侧调用 ArkTS 模块](FFI/cangjie-arkts/cj-using_arkts_module.md)
+        - [互操作使用案例](FFI/cangjie-arkts/cj-arkts_using_example.md)
+            - [仓颉访问 ArkTS 数据](FFI/cangjie-arkts/cj-operating_ArkTS_data.md)
             - [ArkTS 访问仓颉数据](FFI/cangjie-arkts/operating_cangjie_objects.md)
-            - [仓颉多线程中使用互操作](FFI/cangjie-arkts/using_interoperability_lib_multithread.md)
+            - [仓颉多线程中使用互操作库](FFI/cangjie-arkts/cj-using_interoperability_lib_multithread.md)
             - [仓颉调用ArkTS三方模块](FFI/cangjie-arkts/cj-quick-start-dts2cj-plugin-usage.md)
-        - [仓颉与 ArkTS 互操作辅助库](FFI/cangjie-arkts/auxiliary_lib.md)
-        - [仓颉-ArkTS 互操作开发规范](FFI/cangjie-arkts/interop_guidelines.md)
+        - [仓颉-ArkTS 互操作辅助库](FFI/cangjie-arkts/cj-arkts_auxiliary_lib.md)
+        - [仓颉-ArkTS 互操作开发规范](FFI/cangjie-arkts/cj-arkts_interop_guidelines.md)
 - 编译和构建
     - [cjc 使用](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/cjc_usage.md)
     - [cjpm 介绍](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/cjpm_usage.md)

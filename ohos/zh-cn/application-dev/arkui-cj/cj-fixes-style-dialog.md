@@ -1,16 +1,22 @@
 # 固定样式弹出框
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 固定样式弹出框采用固定的布局格式，这使得开发者无需关心具体的显示布局细节，只需输入所需显示的文本内容，从而简化了使用流程，提升了便捷性。
 
 ## 使用约束
 
-- 操作菜单（showActionMenu）、对话框（showDialog）需先使用[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getPromptAction)方法获取到PromptAction对象，再通过该对象调用对应方法。
+- 操作菜单（showActionMenu）、对话框（showDialog）需先使用[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getpromptaction)方法获取到PromptAction对象，再通过该对象调用对应方法。
 
 - 操作菜单（showActionMenu）、对话框（showDialog）、列表选择弹出框（ActionSheet）、警告弹出框（AlertDialog）可以设置isModal为false，变成非模态弹窗。
 
 ## 操作菜单（showActionMenu）
 
-操作菜单通过[UIContext](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#class-uicontext)中的[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getPromptAction)方法获取到PromptAction对象，支持在回调或开发者自定义类中使用。
+操作菜单通过[UIContext](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#class-uicontext)中的[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getpromptaction)方法获取到PromptAction对象，支持在回调或开发者自定义类中使用。
 
 创建并显示操作菜单后，菜单的响应结果会异步返回选中按钮在buttons数组中的索引。
 
@@ -60,7 +66,7 @@ class EntryView {
 
 ## 对话框（showDialog）
 
-对话框通过[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getPromptAction)方法获取到PromptAction对象，支持在回调或开发者自定义类中使用。
+对话框通过[getPromptAction](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-getpromptaction)方法获取到PromptAction对象，支持在回调或开发者自定义类中使用。
 
  <!-- run -->
 

@@ -1,5 +1,11 @@
 # 通用错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 201 权限校验失败
 
 **错误信息**
@@ -12,7 +18,7 @@ Permission verification failed. The application does not have the permission req
 
 **可能原因**
 
-该错误码表示权限校验失败，通常为没有权限，却调用了需要权限的API。
+该错误码表示权限校验失败，通常是因为没有权限却调用了需要权限的API。
 
 **处理步骤**
 
@@ -30,11 +36,11 @@ Permission verification failed. A non-system application calls a system API.
 
 **可能原因**
 
-非系统应用，使用了系统API，请校验是否使用了系统API。
+请确认非系统应用是否使用了系统API，并进行校验。
 
 **处理步骤**
 
-请检查是否调用了系统API，并且去掉。
+请检查是否调用了系统API，如果调用了请移除。
 
 ## 401 参数检查失败
 
@@ -52,7 +58,7 @@ Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 
 
 **可能原因**
 
-1. 必选参数没有传入。
+1. 必填参数没有传入。
 
 2. 参数类型错误 (Type Error)。
 
@@ -66,7 +72,7 @@ Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 
 
 **处理步骤**
 
-请检查必选参数是否传入，或者传入的参数类型是否错误。对于参数校验失败，阅读参数规格约束，按照可能原因进行排查。
+请检查必填参数是否传入，或者传入的参数类型是否正确。对于参数校验失败的情况，阅读参数规格约束，按照可能原因进行排查。
 
 ## 801 该设备不支持此API
 
@@ -76,7 +82,7 @@ Capability not supported. Failed to call the API due to limited device capabilit
 
 **错误描述**
 
-该设备不支持此API，通常用于在设备已支持该SysCap时，针对其少量的API的支持处理。
+当设备支持SysCap但不支持特定API时，会出现此错误，表明设备只能处理该SysCap的部分API。
 
 **可能原因**
 

@@ -110,7 +110,7 @@ To remove an element from an ArrayList, you can use the `remove` function, which
 
 ```
 let list = ArrayList<String>(["a", "b", "c", "d"])  // list contains the elements "a", "b", "c", "d"
-list.remove(at: 1) // Delete the element at subscrip 1, now the list contains elements "a", "c", "d"
+list.remove(at: 1) // Delete the element at subscript 1, now the list contains elements "a", "c", "d"
 ```
 
 To remove a range of elements from an ArrayList, you can also use the `remove` function, which requires you to specify the range to be removed, The elements that follow the index are moved forward to fill the space.
@@ -131,12 +131,12 @@ for (element in arr) {
 }
 ```
 
-Note there is no pattern matching before `in`. If the elements of an array are tuples,
-access entries of the tuple individually, e.g.:
+If the elements of an ArrayList are tuples, the loop variable can be written as a tuple
+pattern to destructure each element, e.g.:
 
 ```
 var a = ArrayList<(Int64, Int64)>([(2, 3), (3, 4)])
-for (pair in a) {
-    println("(${pair[0]}, ${pair[1]})")
+for ((x, y) in a) {
+    println("(${x}, ${y})")
 }
 ```

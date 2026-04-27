@@ -1,5 +1,11 @@
 # GridCol
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 栅格子组件，必须作为栅格容器组件([GridRow](./cj-grid-layout-gridrow.md))的子组件使用。
 
 ## 导入模块
@@ -367,7 +373,7 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    var bgColors: Array<Color> = [Color.Red, Color.Green, Color.Gray, Color.Red, Color.Green, Color.Blue, Color.Gray]
+    var bgColors: Array<Color> = [Color(0xD4344C), Color(0x64BB5C), Color(0xED6F21), Color(0x0A59F7), Color(0xD1D1D6), Color(0xFBD7DD), Color(0x4D0A59F7)]
     var currentBp: String = ""
     func build() {
         Column {
@@ -392,7 +398,7 @@ class EntryView {
                         .width(100.percent)
                         .height(40.vp)
                 }
-                .borderColor(Color.Blue)
+                .borderColor(0xD4344C)
                 .borderWidth(2.vp)
                 .span(2)
                 //构造第2个GridCol子组件，栅格占2列，离上一个栅格的偏移列数为1列，因此该栅格占第4.5列
@@ -405,7 +411,7 @@ class EntryView {
                     .width(100.percent)
                     .height(40.vp)
                 }
-                .borderColor(Color.Green)
+                .borderColor(0x64BB5C)
                 .borderWidth(2.vp)
                 .span(2)
                 .gridColOffset(1)
@@ -419,7 +425,7 @@ class EntryView {
                     .width(100.percent)
                     .height(40.vp)
                 }
-                .borderColor(Color.Red)
+                .borderColor(0xED6F21)
                 .borderWidth(2.vp)
                 .span(1)
                 .gridColOffset(2)

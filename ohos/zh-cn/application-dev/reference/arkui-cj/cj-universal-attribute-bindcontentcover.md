@@ -1,5 +1,11 @@
 # 全屏模态转场
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 通过bindContentCover属性为组件绑定全屏模态页面，在组件插入和删除时可通过设置转场参数ModalTransition显示过渡动效。
 
 > **说明：**
@@ -16,7 +22,7 @@ import kit.ArkUI.*
 ## func bindContentCover(?Bool, ?CustomBuilder, ?ContentCoverOptions)
 
 ```cangjie
-public func bindContentCover(isShow: ?Bool, builder: ?CustomBuilder, options!: ?ContentCoverOptions = None): T
+func bindContentCover(isShow: ?Bool, builder: ?CustomBuilder, options!: ?ContentCoverOptions): T
 ```
 
 **功能：** 给组件绑定全屏模态页面，点击后显示模态页面。模态页面内容自定义，显示方式可设置无动画过渡，上下切换过渡以及透明渐变过渡方式。
@@ -31,7 +37,7 @@ public func bindContentCover(isShow: ?Bool, builder: ?CustomBuilder, options!: ?
 |:---|:---|:---|:---|:---|
 |isShow|?Bool|是|-|是否显示全屏模态页面。<br/>初始值：false。|
 |builder|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|是|-|配置全屏模态页面内容。<br>初始值：{ => }。|
-|options|?[ContentCoverOptions](./cj-common-types.md#class-contentcoveroptions)|否|None|**命名参数。** 配置全屏模态页面的可选属性。<br/>初始值：ContentCoverOptions()。|
+|options|?[ContentCoverOptions](./cj-common-types.md#class-contentcoveroptions)|是|-|**命名参数。** 配置全屏模态页面的可选属性。<br/>初始值：ContentCoverOptions()。|
 
 **返回值：**
 

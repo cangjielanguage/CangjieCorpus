@@ -1,5 +1,11 @@
 # MenuItemGroup
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 该组件用来展示菜单MenuItem的分组。
 
 ## 导入模块
@@ -33,6 +39,10 @@ public init(header!: ?CustomBuilder, footer!: ?CustomBuilder, child!: () -> Unit
 |header|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|是|-|**命名参数。** 设置对应group的标题显示信息。初始值：{ => }。|
 |footer|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|是|-|**命名参数。** 设置对应group的尾部显示信息。初始值：{ => }。|
 |child|() -> Unit|否|{=>}|**命名参数。** 声明容器内的子组件。|
+
+> **说明：**
+>
+> 传入[CustomBuilder](./cj-common-types.md#type-custombuilder)类型的参数时，需使用bind管理自定义构建函数的调用，bind使用方式请参见[框架接口](./cj-ui-framework.md)中的bind函数说明。
 
 ### init(?ResourceStr, ?ResourceStr, () -> Unit)
 

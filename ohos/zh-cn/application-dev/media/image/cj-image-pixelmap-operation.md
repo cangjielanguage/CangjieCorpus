@@ -1,5 +1,11 @@
 # 使用PixelMap完成位图操作
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 当需要对目标图片中的部分区域进行处理时，可以使用位图操作功能。此功能常用于图片美化等操作。
 
 如下图所示，一张图片中，将指定的矩形区域像素数据读取出来，进行修改后，再写回原图片对应区域。
@@ -19,7 +25,6 @@
     <!-- compile -->
 
     ```cangjie
-    import kit.ImageKit.*
     // 获取图像像素的总字节数。
     let pixelBytesNumber = pixelMap.getPixelBytesNumber()
     // 获取图像像素每行字节数。

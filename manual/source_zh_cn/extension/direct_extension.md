@@ -37,21 +37,23 @@ the size is 3
 
 一种是针对特定泛型实例化类型进行扩展，关键字 `extend` 后允许带一个任意实例化完全的泛型类型。为这些类型增加的功能只有在类型完全匹配时才能使用，且泛型类型的类型实参必须符合泛型类型定义处的约束要求。
 
-例如下面所示的 `Foo<T>`。
+例如下面所示的 `Foo<T>`：
+
 <!-- compile.error -->
 
 ```cangjie
 class Foo<T> where T <: ToString {}
 
-extend Foo<Int64> {} // Ok
+extend Foo<Int64> {} // OK
 
 class Bar {}
-extend Foo<Bar> {} // Error
+extend Foo<Bar> {} // Error, generics type arguments do not match the constraint of 'Class-Foo<Generics-T>'
 ```
 
 另一种是在 `extend` 后面引入泛型形参的泛型扩展。泛型扩展可以用来扩展未实例化或未完全实例化的泛型类型。在 `extend` 后声明的泛型形参必须被直接或间接使用在被扩展的泛型类型上。为这些类型增加的功能只有在类型和约束完全匹配时才能使用。
 
-例如下面所示的 `MyList<T>`。
+例如下面所示的 `MyList<T>`：
+
 <!-- compile.error -->
 
 ```cangjie
@@ -59,21 +61,17 @@ class MyList<T> {
     public let data: Array<T> = Array<T>()
 }
 
-extend<T> MyList<T> {} // OK
-extend<R> MyList<R> {} // OK
-extend<T, R> MyList<(T, R)> {} // OK
-extend MyList {} // Error
-extend<T, R> MyList<T> {} // Error
-extend<T, R> MyList<T, R> {} // Error
+extend<T> MyList<T> {}          // OK
+extend<R> MyList<R> {}          // OK
+extend<T, R> MyList<(T, R)> {}  // OK
+extend MyList {}                // Error, generic type should be used with type argument
+extend<T, R> MyList<T> {}       // Error, type parameter 'R' must be used in extended type
+extend<T, R> MyList<T, R> {}    // Error, type argument's number does not match type parameter's number
 ```
 
 对于泛型类型的扩展，可以在其中声明额外的泛型约束，来实现一些有限情况下才能使用的函数。
 
-例如可以定义一个叫 Pair 的类型，这个类型可以方便地存储两个元素（类似于 Tuple）。
-
-希望 Pair 类型可以容纳任何类型，因此两个泛型变元不应该有任何约束，这样才能保证 Pair 能容纳所有类型。
-
-但同时又希望当两个元素可以判等的时候，让 Pair 也可以判等，这时就可以用扩展来实现这个功能。
+例如可以定义一个叫 Pair 的类型，这个类型可以方便地存储两个元素（类似于 Tuple）。希望 Pair 类型可以容纳任何类型，因此两个泛型变元不应该有任何约束，这样才能保证 Pair 能容纳所有类型。但同时又希望当两个元素可以判等的时候，让 Pair 也可以判等，这时就可以用扩展来实现这个功能。
 
 如下面的代码所示，使用扩展语法，约束了 T1 和 T2 在支持 equals 的情况下，Pair 也可以实现 equals 函数。
 

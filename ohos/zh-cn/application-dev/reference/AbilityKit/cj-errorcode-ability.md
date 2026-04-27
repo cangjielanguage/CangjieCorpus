@@ -1,5 +1,11 @@
 # 元能力子系统错误码
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 > **说明：**
 >
 > 以下仅介绍本模块特有错误码，通用错误码请参考[通用错误码说明文档](../cj-errorcode-universal.md)。
@@ -12,7 +18,7 @@ The specified ability does not exist.
 
 **错误描述**
 
-当指定的Ability名称不存在时，方法将返回该错误码。
+当指定的Ability名称不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -41,7 +47,7 @@ Incorrect ability type.
 
 **错误描述**
 
-当接口调用Ability类型错误时，方法将返回该错误码。
+当接口调用Ability类型错误时，该错误码将被返回。
 
 **可能原因**
 
@@ -60,7 +66,7 @@ The specified ID does not exist.
 
 **错误描述**
 
-当指定的ID不存在时，方法将返回该错误码。
+当指定的ID不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -78,7 +84,7 @@ Failed to start the invisible ability.
 
 **错误描述**
 
-当可见性校验失败时，方法将返回该错误码。
+当可见性校验失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -97,7 +103,7 @@ The specified process does not have the permission.
 
 **错误描述**
 
-当指定的进程权限校验失败时，方法将返回该错误码。
+当指定的进程权限校验失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -115,7 +121,7 @@ Cross-user operations are not allowed.
 
 **错误描述**
 
-当应用跨用户操作时，方法将返回该错误码。
+当应用跨用户操作时，该错误码将被返回。
 
 **可能原因**
 
@@ -133,7 +139,7 @@ Service busy. There are concurrent tasks. Try again later.
 
 **错误描述**
 
-当服务繁忙时，方法将返回该错误码。
+当服务繁忙时，该错误码将被返回。
 
 **可能原因**
 
@@ -151,7 +157,7 @@ The crowdtesting application expires.
 
 **错误描述**
 
-当众测应用到期时，方法将返回该错误码。
+当众测应用到期时，该错误码将被返回。
 
 **可能原因**
 
@@ -169,7 +175,7 @@ An ability cannot be started or stopped in Wukong mode.
 
 **错误描述**
 
-当wukong模式下，启动/停止ability时，方法将返回该错误码。
+在wukong模式下，启动/停止ability时，该错误码将被返回。
 
 **可能原因**
 
@@ -187,7 +193,7 @@ The call with the continuation flag is forbidden.
 
 **错误描述**
 
-当调用携带迁移flag时，方法将返回该错误码。
+当调用携带迁移flag时，该错误码将被返回。
 
 **可能原因**
 
@@ -205,7 +211,7 @@ The context does not exist.
 
 **错误描述**
 
-当上下文对象不存在时，方法将返回该错误码。
+当上下文对象不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -223,7 +229,7 @@ The application is controlled.
 
 **错误描述**
 
-当应用受到应用市场管控时，方法将返回该错误码。
+当应用受到应用市场管控时，该错误码将被返回。
 
 **可能原因**
 
@@ -241,7 +247,7 @@ The application is controlled by EDM.
 
 **错误描述**
 
-当应用受到企业设备管理Enterprise Device Manager管控时，方法将返回该错误码。
+当应用受到企业设备管理Enterprise Device Manager管控时，该错误码将被返回。
 
 **可能原因**
 
@@ -259,7 +265,7 @@ Service timeout.
 
 **错误描述**
 
-当服务超时时，方法将返回该错误码。
+服务超时的情况下，该错误码将被返回。
 
 **可能原因**
 
@@ -277,11 +283,11 @@ Another ability is being started. Wait until it finishes starting.
 
 **错误描述**
 
-需要启动的Ability过多，由于系统处理能力有限，会先将请求缓存在队列中，按照顺序依次处理。
+由于系统处理能力有限，当需要启动的Ability过多时，会先将请求缓存在队列中，按照顺序依次处理。
 
 **可能原因**
 
-系统并发大。
+系统并发请求量过大。
 
 **处理步骤**
 
@@ -295,7 +301,7 @@ Redirection to a third-party application is not allowed in API version 11 or lat
 
 **错误描述**
 
-当应用API版本大于11的时候，不允许显式跳转到其他三方应用。
+当API版本大于11时，应用不允许显式跳转到其他三方应用。
 
 **处理步骤**
 
@@ -323,7 +329,7 @@ Internal error.
 
 **错误描述**
 
-当内存申请、多线程处理异常等内部处理错误时，方法将返回该错误码。
+当内存申请、多线程处理异常等内部处理错误时，该错误码将被返回。
 
 **可能原因**
 
@@ -343,7 +349,7 @@ Network error.
 
 **错误描述**
 
-当网络异常时，方法将返回该错误码。
+当网络异常时，该错误码将被返回。
 
 **可能原因**
 
@@ -351,7 +357,7 @@ Network error.
 
 **处理步骤**
 
-网络异常，请稍后重试，或者重连网络尝试。
+网络异常，请稍后重试或重新连接网络。
 
 ## 16000052 不支持免安装
 
@@ -361,7 +367,7 @@ Installation-free is not supported.
 
 **错误描述**
 
-当前应用不支持免安装时，方法将返回该错误码。
+当前应用不支持免安装时，该错误码将被返回。
 
 **可能原因**
 
@@ -379,11 +385,11 @@ The ability is not on the top of the UI.
 
 **错误描述**
 
-当前应用未显示在界面顶层时，方法将返回该错误码。
+当前应用未显示在界面顶层时，该错误码将被返回。
 
 **可能原因**
 
-用户执行免安装启动时需要确保应用在前台，但应用未显示在界面顶层。
+用户执行免安装启动时需要确保应用显示在界面顶层，但当前应用未显示在界面顶层。
 
 **处理步骤**
 
@@ -397,7 +403,7 @@ The installation-free service is busy. Try again later.
 
 **错误描述**
 
-当免安装服务繁忙时，方法将返回该错误码。
+当免安装服务繁忙时，该错误码将被返回。
 
 **可能原因**
 
@@ -415,7 +421,7 @@ Installation-free timed out.
 
 **错误描述**
 
-当免安装超时时，方法将返回该错误码。
+当免安装超时时，该错误码将被返回。
 
 **可能原因**
 
@@ -433,7 +439,7 @@ Installation-free is not allowed for other applications.
 
 **错误描述**
 
-当免安装其他应用时，方法将返回该错误码。
+当免安装其他应用时，该错误码将被返回。
 
 **可能原因**
 
@@ -451,7 +457,7 @@ Cross-device installation-free is not supported.
 
 **错误描述**
 
-当不支持跨设备免安装时，方法将返回该错误码。
+当不支持跨设备免安装时，该错误码将被返回。
 
 **可能原因**
 
@@ -505,7 +511,7 @@ A sandbox application cannot grant URI permission.
 
 **错误描述**
 
-当沙箱应用授权URI时，方法将返回该错误码。
+当沙箱应用授权URI时，该错误码将被返回。
 
 **可能原因**
 
@@ -577,7 +583,7 @@ Restart too frequently. Try again at least 10s later.
 
 **错误描述**
 
-当重启应用拉起指定组件时，10s内再次调用，返回该错误码。
+当重启应用拉起指定组件时，10s内再次调用会返回该错误码。
 
 **可能原因**
 
@@ -595,7 +601,7 @@ The API can be called only when the ability is running in the foreground.
 
 **错误描述**
 
-当Ability不在前台时，方法将返回该错误码。
+当Ability不在前台时，该错误码将被返回。
 
 **可能原因**
 
@@ -613,11 +619,11 @@ An ability cannot switch to the foreground or background in Wukong mode.
 
 **错误描述**
 
-当wukong模式下，移动Ability到前台/后台时，方法将返回该错误码。
+当wukong模式下，移动Ability到前台/后台时，该错误码将被返回。
 
 **可能原因**
 
-wukong模式，不允许移动Ability到前台/后台。
+wukong模式下，不允许移动Ability到前台/后台。
 
 **处理步骤**
 
@@ -654,7 +660,7 @@ The ability is already running.
 
 **可能原因**
 
-调用startAbility时，指定了processMode和startupVisibility，目标Ability的launchType是singleton或者specified，并且目标Ability正在运行中，则返回该错误码。
+调用startAbility时，指定了processMode和startupVisibility，目标Ability的launchType是singleton或specified，并且目标Ability正在运行中，则返回该错误码。
 
 **处理步骤**
 
@@ -742,12 +748,12 @@ The app clone index is invalid.
 
 **错误描述**
 
-传入一个无效的appCloneIndex，返回该错误码。
+传入一个无效的appCloneIndex时，返回该错误码。
 
 **可能原因**
 
 1.调用startAbility时，使用ohos.extra.param.key.appCloneIndex携带的appCloneIndex是一个无效值，则返回该错误码。
-2.调用isAppRunning是，入参appCloneIndex是一个无效值，则返回该错误码。
+2.调用isAppRunning时，入参appCloneIndex是一个无效值，则返回该错误码。
 
 **处理步骤**
 
@@ -847,8 +853,7 @@ The multi-instance is not supported.
 
 **处理步骤**
 
-1. 对目标应用配置多实例。
-2. 在2in1设备上调用该方法。
+对目标应用配置多实例。
 
 ## 16000079 不支持指定APP_INSTANCE_KEY
 
@@ -858,7 +863,7 @@ The APP_INSTANCE_KEY cannot be specified.
 
 **错误描述**
 
-APP_INSTANCE_KEY和CREATE_APP_INSTANCE_KEY不支持同时指定。当指定CREATE_APP_INSTANCE_KEY的同时指定APP_INSTANCE_KEY，返回该错误码。
+APP_INSTANCE_KEY和CREATE_APP_INSTANCE_KEY不支持同时指定。当同时指定两者时，返回该错误码。
 
 **可能原因**
 
@@ -956,7 +961,7 @@ Failed to run the shell command.
 
 **错误描述**
 
-当命令不是有效的shell命令时，方法将返回该错误码。
+当命令不是有效的shell命令时，该错误码将被返回。
 
 **可能原因**
 
@@ -974,7 +979,7 @@ Invalid wantAgent object.
 
 **错误描述**
 
-当传入接口的wantAgent对象无效时，方法将返回该错误码。
+当传入接口的wantAgent对象无效时，该错误码将被返回。
 
 **可能原因**
 
@@ -992,7 +997,7 @@ The wantAgent object does not exist.
 
 **错误描述**
 
-当传入接口的wantAgent对象不存在时，方法将返回该错误码。
+当传入接口的wantAgent对象不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1010,7 +1015,7 @@ The wantAgent object has been canceled.
 
 **错误描述**
 
-当传入接口的wantAgent对象已取消时，方法将返回该错误码。
+当传入接口的wantAgent对象已取消时，该错误码将被返回。
 
 **可能原因**
 
@@ -1028,7 +1033,7 @@ The ability with the specified URI does not exist.
 
 **错误描述**
 
-当指定Uri的Ability不存在时，方法将返回该错误码。
+当指定Uri的Ability不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1046,7 +1051,7 @@ Incorrect ability type.
 
 **错误描述**
 
-当接口调用Ability类型错误时，方法将返回该错误码。
+当接口调用Ability类型错误时，该错误码将被返回。
 
 **可能原因**
 
@@ -1065,11 +1070,11 @@ The caller has been released.
 
 **错误描述**
 
-当通用组件客户端(Caller)已回收时，方法将返回该错误码。
+当通用组件客户端（Caller）已回收时，该错误码将被返回。
 
 **可能原因**
 
-通用组件客户端(Caller)已回收。
+通用组件客户端（Caller）已回收。
 
 **处理步骤**
 
@@ -1085,7 +1090,7 @@ The callee does not exist.
 
 **错误描述**
 
-当通用组件服务端(Callee)无效时，方法将返回该错误码。
+当通用组件服务端(Callee)无效时，该错误码将被返回。
 
 **可能原因**
 
@@ -1103,7 +1108,7 @@ Release error. The caller does not call any callee.
 
 **错误描述**
 
-当回收失败时，方法将返回该错误码。
+当回收失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1121,7 +1126,7 @@ The method has been registered.
 
 **错误描述**
 
-当方法已注册时，方法将返回该错误码。
+当方法已注册时，该错误码将被返回。
 
 **可能原因**
 
@@ -1139,7 +1144,7 @@ The method has not been registered.
 
 **错误描述**
 
-当方法未注册时，方法将返回该错误码。
+当方法未注册时，该错误码将被返回。
 
 **可能原因**
 
@@ -1175,7 +1180,7 @@ Mission not found.
 
 **错误描述**
 
-当指定的任务不存在时，方法将返回该错误码。
+当指定的任务不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1193,7 +1198,7 @@ The specified mission listener does not exist.
 
 **错误描述**
 
-当指定的任务监听器不存在时，方法将返回该错误码。
+当指定的任务监听器不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1211,7 +1216,7 @@ The target application is not the current application.
 
 **错误描述**
 
-当被拉起的应用程序不是自身应用程序时，方法将返回该错误码。
+当被拉起的应用程序不是自身应用程序时，该错误码将被返回。
 
 **可能原因**
 
@@ -1229,7 +1234,7 @@ The bundle does not exist or no patch has been applied.
 
 **错误描述**
 
-当指定的包名无效时，方法将返回该错误码。
+当指定的包名无效时，该错误码将被返回。
 
 **可能原因**
 
@@ -1247,7 +1252,7 @@ Invalid patch package.
 
 **错误描述**
 
-当指定的补丁包无效，补丁包不存在或不可访问时，方法将返回该错误码。
+当指定的补丁包无效，补丁包不存在或不可访问时，该错误码将被返回。
 
 **可能原因**
 
@@ -1266,7 +1271,7 @@ Failed to deploy the patch.
 
 **错误描述**
 
-当补丁包部署失败时，方法将返回该错误码。
+当补丁包部署失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1290,7 +1295,7 @@ Failed to enable the patch package.
 
 **错误描述**
 
-当补丁包使能失败时，方法将返回该错误码。
+当补丁包使能失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1308,7 +1313,7 @@ Failed to remove the patch package.
 
 **错误描述**
 
-当补丁包删除失败时，方法将返回该错误码。
+当补丁包删除失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1326,7 +1331,7 @@ Failed to load the patch.
 
 **错误描述**
 
-当加载补丁失败时，方法将返回该错误码。
+当加载补丁失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1344,7 +1349,7 @@ Failed to unload the patch.
 
 **错误描述**
 
-当方舟引擎卸载旧补丁失败时，方法将返回该错误码。
+当方舟引擎卸载旧补丁失败时，该错误码将被返回。
 
 **可能原因**
 
@@ -1362,7 +1367,7 @@ Internal error.
 
 **错误描述**
 
-当内存申请、多线程处理异常等内部处理错误时，方法将返回该错误码。
+当内存申请、多线程处理异常等内部处理错误时，该错误码将被返回。
 
 **可能原因**
 
@@ -1380,7 +1385,7 @@ The application has an ongoing quick fix task.
 
 **错误描述**
 
-该应用当前有正在处理的快速修复任务时，方法将返回该错误码。
+该应用当前有正在处理的快速修复任务时，该错误码将被返回。
 
 **可能原因**
 
@@ -1398,7 +1403,7 @@ observer not found.
 
 **错误描述**
 
-当监听器不存在时，方法将返回该错误码。
+当监听器不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1416,7 +1421,7 @@ The target bundle does not exist.
 
 **错误描述**
 
-预加载应用的包信息不存在时，方法将返回该错误码。
+预加载应用的包信息不存在时，该错误码将被返回。
 
 **可能原因**
 
@@ -1434,11 +1439,11 @@ Internal error.
 
 **错误描述**
 
-当图片保存时发生内存申请、多线程处理异常等内部错误时，方法将返回该错误码。
+当图片保存时发生内存申请、多线程处理异常等内部错误时，该错误码将被返回。
 
 **可能原因**
 
-内存申请、多线程处理等内核通用错误。具体原因可能包括：内部对象为空、处理超时等等。
+内存申请、多线程处理等内核通用错误。具体原因可能包括：内部对象为空、处理超时等。
 
 **处理步骤**
 
@@ -1453,7 +1458,7 @@ Image input error.
 
 **错误描述**
 
-当图片uri不存在或无法解析图片时，方法将返回该错误码。
+当图片uri不存在或无法解析图片时，该错误码将被返回。
 
 **可能原因**
 
@@ -1475,7 +1480,7 @@ Image too big.
 
 **可能原因**
 
-当入参图片大小超过50M时，方法将返回该错误码。
+当入参图片大小超过50M时，该错误码将被返回。
 
 **处理步骤**
 
@@ -1490,11 +1495,11 @@ The target free install task does not exist.
 
 **错误描述**
 
-为原子化服务窗口打开窗口时，指定的原子化服务的下载安装任务不存在时，方法将返回该错误码。
+为原子化服务窗口打开窗口时，指定的原子化服务的下载安装任务不存在时，该错误码将被返回。
 
 **可能原因**
 
-传入的bundleName、moduleName、abilityName或startTime错误，导致查询不到相关原子化服务原子化服务的下载安装任务信息。
+传入的bundleName、moduleName、abilityName或startTime错误，导致查询不到相关原子化服务的下载安装任务信息。
 
 **处理步骤**
 

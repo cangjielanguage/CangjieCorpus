@@ -1,5 +1,11 @@
 # UTD预置列表
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 标准化数据类型（Uniform Type Descriptor，简称UTD）用于解决系统中的类型模糊问题，即针对同一种数据类型，存在不同的类型描述方式：MIME Type、文件扩展名等。例如描述jpg/jpeg类型图片时，可以使用image/jpeg、.jpg、.jpeg或image/picture等方式进行描述，详情可见[UTD基础类型](#基础类型)表格。
 
 当相关类型的数据进行跨应用、跨设备传输时，目标端应用/设备需要进行多方面的适配，才能够对数据内容进行相关处理，且存在无法识别的情况。
@@ -23,7 +29,7 @@
 | general.content-form | general.object | - | - | 数据内容卡片类型。 |
 | general.image                       | general.media                 |                  -                     |                                        -                                        | 所有图片的基类型。                           |
 | general.png                         | general.image                 | .png                                   | image/png                                                                              | PNG图片类型。                           |
-| general.jpeg                        | general.image                 | .jpg, .jpeg,.jpe                       | image/jpeg                                                                             | JPEG图片类型。                           |
+| general.jpeg                        | general.image                 | .jpg, .jpeg, .jpe                       | image/jpeg                                                                             | JPEG图片类型。                           |
 | general.tiff                        | general.image                 | .tif, .tiff                            | image/tiff                                                                             | TIFF图片类型。                           |
 | general.raw-image                   | general.image                 |                 -                      |                                            -                                           | 所有原始图像格式的基类型。                       |
 | general.fax                         | general.image                 |                -                       |                                       -                                                | 传真图像的基本类型。                          |
@@ -105,7 +111,7 @@
 | general.cpio-archive                | general.archive               | .cpio                                  | application/x-cpio                                                                     | Unix CPIO压缩文件类型。                    |
 | general.web-archive                 | general.archive               | .mht, .mhtml                           | application/x-mimearchive                                                              | 网页归档文件类型。                           |
 | general.ustar                       | general.archive               | .ustar                                 | application/x-ustar                                                                    | 统一的标准磁带归档格式类型。                      |
-| general.taz-archive                 | general.tar-archive           | .taz,.tar.z,.tz                        | application/x-gtar                                                                     | TAZ压缩文件类型。                          |
+| general.taz-archive                 | general.tar-archive           | .taz, .tar.z, .tz                        | application/x-gtar                                                                     | TAZ压缩文件类型。                          |
 | general.bz-archive                  | general.archive               | .bz                                    | application/x-bzip                                                                     | Bzip压缩文件类型。                         |
 | general.tar-bzip-archive            | general.bz-archive            | .tbz                                   | application/x-bzip-compressed-tar                                                      | Bzip压缩后的TAR压缩文件类型。                  |
 | general.tar-bzip2-archive           | general.bz2-archive           | .tbz2                                  | application/x-bzip2-compressed-tar                                                     | Bzip2压缩后的TAR压缩文件类型。                 |

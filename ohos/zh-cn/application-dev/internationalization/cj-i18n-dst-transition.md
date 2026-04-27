@@ -1,12 +1,18 @@
 # 夏令时跳变
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 功能介绍
 
 夏令时是一种为节约能源而人为规定地方时间的制度，即在天亮早的夏季人为将时间调快一小时，可以使人们早起早睡，减少照明时间，从而节约照明用电。
 
 ## 实现原理
 
-系统会配置夏令时跳变规则，当本地时间到达跳变点时，会自动实现跳变。若应用通过一般的ts接口（例如 Date()）获取和显示时间，则到夏令时跳变时间点时，应用会同步显示夏令时时间。
+系统会配置夏令时跳变规则，当本地时间到达跳变点时，会自动实现跳变。若应用通过一般的cj接口（例如 Date()）获取和显示时间，则到夏令时跳变时间点时，应用会同步显示夏令时时间。
 
 **夏令时跳变规则如下：**
 
@@ -21,12 +27,12 @@
    import kit.LocalizationKit.*
 
    let calendar: Calendar = getCalendar('zh-Hans')
-    calendar.setTimeZone('Europe/London')
-    calendar.set(2021, 2, 27, hour: 16, minute: 0, second: 0) // 夏令时开始前的时间
-    let startTime: Float64 = calendar.getTimeInMillis()
-    calendar.set(2021, 2, 28, hour: 16, minute: 0, second: 0) // 处于夏令时期间的时间
-    let finishTime: Float64 = calendar.getTimeInMillis()
-    let hours: Float64 = (finishTime - startTime) / 3600000.0 // hours = 23.0
+   calendar.setTimeZone('Europe/London')
+   calendar.set(2021, 2, 27, hour: 16, minute: 0, second: 0) // 夏令时开始前的时间
+   let startTime: Float64 = calendar.getTimeInMillis()
+   calendar.set(2021, 2, 28, hour: 16, minute: 0, second: 0) // 处于夏令时期间的时间
+   let finishTime: Float64 = calendar.getTimeInMillis()
+   let hours: Float64 = (finishTime - startTime) / 3600000.0 // hours = 23.0
    ```
 
 2. 存储和显示数据。

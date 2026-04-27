@@ -1,5 +1,11 @@
 # 显隐控制
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 控制组件是否可见。
 
 ## 导入模块
@@ -11,7 +17,7 @@ import kit.ArkUI.*
 ## func visibility(?Visibility)
 
 ```cangjie
-public func visibility(value: ?Visibility): T
+func visibility(value: ?Visibility): T
 ```
 
 **功能：** 设置组件的可见性。

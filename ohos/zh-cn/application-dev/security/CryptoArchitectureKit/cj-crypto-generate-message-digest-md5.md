@@ -1,4 +1,10 @@
-# 消息摘要计算MD5（仓颉）
+# 消息摘要计算MD5
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 对应的算法规格请参见[消息摘要计算算法规格](./cj-crypto-generate-message-digest-overview.md#支持的算法与规格)。
 
@@ -24,7 +30,7 @@
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func doMd() {
     let mdAlgName = 'MD5' // 摘要算法名。
@@ -55,7 +61,7 @@ func doMd() {
 
 ```cangjie
 import kit.CryptoArchitectureKit.*
-import ohos.hilog.Hilog
+import kit.PerformanceAnalysisKit.Hilog
 
 func doLoopMd() {
     let mdAlgName = "MD5" // 摘要算法名。

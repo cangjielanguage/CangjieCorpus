@@ -6,6 +6,7 @@
 
 ```cangjie
 import std.ast.*
+
 main() {
     let input: Tokens = quote(
         class Data {

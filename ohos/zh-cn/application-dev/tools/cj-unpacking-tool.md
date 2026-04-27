@@ -1,5 +1,11 @@
 # 拆包工具
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 拆包工具是OpenHarmony提供的一种调测工具，支持通过命令行方式将HAP、HSP、App等文件解压成文件夹，并且提供Java接口对HAP、HSP、App等文件进行解析。
 
 拆包所用的app_unpacking_tool.jar，可以在本地下载的OpenHarmony的SDK库中找到。

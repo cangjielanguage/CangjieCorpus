@@ -1,5 +1,11 @@
 # GridItem
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 网格容器中单项内容容器。
 
 > **说明：**
@@ -37,7 +43,7 @@ public init()
 public init(child: () -> Unit)
 ```
 
-**功能：** 创建一个可包含子组件的网格容器中单项内容组件。
+**功能：** 创建一个可包含子组件的网格容器单项内容组件。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -73,7 +79,7 @@ public func columnEnd(value: ?Int32): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Int32|是|-|当前元素终点列号，与columnStart配套使用。需要指定GridItem起始行列号和所占行列数的场景推荐使用[Grid的layoutOptions参数](./cj-scroll-swipe-grid.md#class-gridlayoutoptions)。<br/>取值范围：[0, 总列数-1]。初始值:  0|
+|value|?Int32|是|-|当前元素终点列号，与columnStart配套使用。|
 
 ### func columnStart(?Int32)
 
@@ -91,7 +97,7 @@ public func columnStart(value: ?Int32): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Int32|是|-|当前元素起始列号，与columnEnd配套使用。需要指定GridItem起始行列号和所占行列数的场景推荐使用[Grid的layoutOptions参数](./cj-scroll-swipe-grid.md#class-gridlayoutoptions)。<br/>取值范围：[0, 总列数-1]初始值:  0|
+|value|?Int32|是|-|当前元素起始列号，与columnEnd配套使用。|
 
 ### func rowEnd(?Int32)
 
@@ -109,7 +115,7 @@ public func rowEnd(value: ?Int32): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Int32|是|-|当前元素终点行号，与rowStart配套使用。需要指定GridItem起始行列号和所占行列数的场景推荐使用[Grid的layoutOptions参数](./cj-scroll-swipe-grid.md#class-gridlayoutoptions)。<br/>取值范围：[0, 总行数-1]初始值:  0|
+|value|?Int32|是|-|当前元素终点行号，与rowStart配套使用。|
 
 ### func rowStart(?Int32)
 
@@ -127,13 +133,13 @@ public func rowStart(value: ?Int32): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Int32|是|-|当前元素起始行号，与rowEnd配套使用。需要指定GridItem起始行列号和所占行列数的场景推荐使用[Grid的layoutOptions参数](./cj-scroll-swipe-grid.md#class-gridlayoutoptions)。<br/>取值范围：[0, 总行数-1]初始值:  0|
+|value|?Int32|是|-|当前元素起始行号，与rowEnd配套使用。|
 
 ## 示例代码
 
 ### 示例1（GridItem设置自身位置）
 
-GridItem通过设置合理的ColumnStart、ColumnEnd、RowStart、RowEnd属性来设置自身位置。需要指定GridItem起始行列号和所占行列数的场景推荐使用[Grid的layoutOptions参数](./cj-scroll-swipe-grid.md#class-gridlayoutoptions)。
+GridItem通过设置合理的ColumnStart、ColumnEnd、RowStart、RowEnd属性来设置自身位置。
 
 <!-- run -->
 

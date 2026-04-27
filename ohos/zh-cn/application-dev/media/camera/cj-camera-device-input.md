@@ -1,4 +1,10 @@
-# 设备输入（仓颉）
+# 设备输入
+
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
 
 在开发相机应用时，需要先参考开发准备[申请相关权限](./cj-camera-preparation.md)。
 
@@ -15,7 +21,7 @@
     ```cangjie
     import kit.CameraKit.*
     import ohos.business_exception.BusinessException
-    import ohos.hilog.Hilog
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.callback_invoke.Callback0Argument
     ```
 

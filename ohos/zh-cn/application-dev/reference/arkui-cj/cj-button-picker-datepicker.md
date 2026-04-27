@@ -1,5 +1,11 @@
 # DatePicker
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 日期选择器组件，用于根据指定日期范围创建日期滑动选择器。
 
 ## 导入模块
@@ -136,7 +142,7 @@ public func onDateChange(callback: ?Callback<DateTime, Unit>): This
 
 | 参数名      | 类型                                                                                                                                       | 必填  | 默认值 | 说明                                      |
 |:-------- |:---------------------------------------------------------------------------------------------------------------------------------------- |:--- |:--- |:--------------------------------------- |
-| callback | ?[Callback](../arkinterop/cj-api-callback_invoke.md#type-callback)\<[DateTime](../ImageKit/cj-apis-image.md#datetime),Unit> | 是   | -   | 返回选中的时间，年月日为选中的日期，时分取决于当前系统时间的时分，秒恒为00。<br>初始值: { _ => } |
+| callback | ?[Callback](./cj-common-types.md#type-callbackt-v)\<[DateTime](../ImageKit/cj-apis-image.md#datetime),Unit> | 是   | -   | 返回选中的时间，年月日为选中的日期，时分取决于当前系统时间的时分，秒恒为00。<br>初始值: { _ => } |
 
 ## 基础类型定义
 

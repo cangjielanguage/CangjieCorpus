@@ -1,5 +1,11 @@
 # 向用户申请授权
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 当应用需要访问用户的隐私信息或使用系统能力时，例如获取位置信息、访问日历、使用相机拍摄照片或录制视频等，应该向用户请求授权，这部分权限是user_grant权限。
 
 当应用申请user_grant权限时，需要完成以下步骤：
@@ -28,13 +34,13 @@
 
 - 每次执行需要目标权限的操作时，应用都必须检查自己是否已经具有该权限。
 
-  如需检查用户是否已向您的应用授予特定权限，可以使用[checkAccessToken()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-checkaccesstokenuint32-permissions)函数，此方法会返回[PERMISSION_GRANTED](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#enum-grantstatus)或[PERMISSION_DENIED](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#enum-grantstatus)。具体示例可参考下文。
+  如需检查用户是否已向您的应用授予特定权限，可以使用[checkAccessToken()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-checkaccesstokenuint32-permissions)函数，此方法会返回[PermissionGranted](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#enum-grantstatus)或[PermissionDenied](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#enum-grantstatus)。具体示例可参考下文。
 
 - 每次访问受目标权限保护的接口之前，都需要使用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)接口请求相应的权限。
 
   用户可能在动态授予权限后通过系统设置来取消应用的权限，因此不能将之前授予的授权状态持久化。
 
-- 应用在onWindowStageCreate()回调中申请授权时，需要等待异步接口loadContent()/setUIContent()执行结束后或在loadContent()/setUIContent()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackexpermissionrequestresult)，否则在Content加载完成前，requestPermissionsFromUser会调用失败。
+- 应用在onWindowStageCreate()回调中申请授权时，需要等待异步接口loadContent()/setUIContent()执行结束后或在loadContent()/setUIContent()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)，否则在Content加载完成前，requestPermissionsFromUser会调用失败。
   <!--RP1--><!--RP1End-->
 
 ## 开发步骤
@@ -57,7 +63,7 @@
 
     ```cangjie
     import kit.AbilityKit.{Permissions, AbilityAccessCtrl, GrantStatus, BundleManager, BundleFlag}
-    import ohos.hilog.Hilog
+    import kit.PerformanceAnalysisKit.Hilog
     import ohos.bundle.bundle_manager.BundleInfo
 
     func checkPermissionGrant(permission: Permissions): GrantStatus {
@@ -92,11 +98,11 @@
 
 3. 动态向用户申请授权。
 
-    动态向用户申请权限是指在应用程序运行时向用户请求授权的过程。可以通过调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackexpermissionrequestresult)方法来实现。该方法接收一个权限列表参数，例如位置、日历、相机、麦克风等。用户可以选择授予权限或者拒绝授权。
+    动态向用户申请权限是指在应用程序运行时向用户请求授权的过程。可以通过调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)方法来实现。该方法接收一个权限列表参数，例如位置、日历、相机、麦克风等。用户可以选择授予权限或者拒绝授权。
 
-    可以在Ability的onWindowStageCreate()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackexpermissionrequestresult)方法来动态申请权限，也可以根据业务需要在UI中向用户申请授权。
+    可以在Ability的onWindowStageCreate()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)方法来动态申请权限，也可以根据业务需要在UI中向用户申请授权。
 
-    应用在onWindowStageCreate()回调中申请授权时，需要等待异步接口loadContent()/setUIContent()执行结束后或在loadContent()/setUIContent()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackexpermissionrequestresult)，否则在Content加载完成前，requestPermissionsFromUser会调用失败。
+    应用在onWindowStageCreate()回调中申请授权时，需要等待异步接口loadContent()/setUIContent()执行结束后或在loadContent()/setUIContent()回调中调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)，否则在Content加载完成前，requestPermissionsFromUser会调用失败。
 
     <!--RP1--><!--RP1End-->
 
@@ -109,7 +115,7 @@
         ```cangjie
         // main_ability.cj
         import kit.AbilityKit.*
-        import ohos.hilog.Hilog
+        import kit.PerformanceAnalysisKit.Hilog
         import ohos.business_exception.*
         import ohos.window.WindowStage
 
@@ -156,7 +162,7 @@
             // main_ability.cj
             import kit.AbilityKit.*
             import ohos.window.WindowStage
-            import ohos.hilog.Hilog
+            import kit.PerformanceAnalysisKit.Hilog
 
             var globalAbilityContext: Option<UIAbilityContext> = Option<UIAbilityContext>.None
 
@@ -191,7 +197,7 @@
             // index.cj
             import kit.AbilityKit.*
             import ohos.business_exception.*
-            import ohos.hilog.Hilog
+            import kit.PerformanceAnalysisKit.Hilog
             import ohos.arkui.component.button.Button
             import ohos.arkui.state_macro_manage.Entry
             import ohos.arkui.state_macro_manage.Component
@@ -222,7 +228,7 @@
                         }
                     }
                     let atManager = AbilityAccessCtrl.createAtManager()
-                    let stageContext = Global.abilityContext
+                    let stageContext = globalAbilityContext.getOrThrow()
                     let permissionList = ["ohos.permission.LOCATION", "ohos.permission.APPROXIMATELY_LOCATION"]
                     atManager.requestPermissionsFromUser(stageContext, permissionList, resultCallback)
                 }
@@ -246,7 +252,7 @@
 
 4. 处理授权结果。
 
-    调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackexpermissionrequestresult)方法后，应用程序将等待用户授权的结果。如果用户授权，则可以继续访问目标操作。如果用户拒绝授权，则需要提示用户必须授权才能访问当前页面的功能，并引导用户到系统应用“设置”中打开相应的权限。
+    调用[requestPermissionsFromUser()](../../reference/AbilityKit/cj-apis-ability_access_ctrl.md#func-requestpermissionsfromuseruiabilitycontext-arraypermissions-asynccallbackpermissionrequestresult)方法后，应用程序将等待用户授权的结果。如果用户授权，则可以继续访问目标操作。如果用户拒绝授权，则需要提示用户必须授权才能访问当前页面的功能，并引导用户到系统应用“设置”中打开相应的权限。
     <!--RP3-->
 
     路径：设置 > 隐私 > 权限管理 > 应用 > 目标应用<!--RP3End-->

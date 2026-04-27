@@ -1,5 +1,11 @@
 # 创建列表（List）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 列表是一种复杂的容器，当列表项达到一定数量，内容超过屏幕大小时，可以自动提供滚动功能。它适合用于呈现同类数据类型或数据类型集，例如图片和文本。在列表中显示数据集合是许多应用程序中的常见要求（如通讯录、音乐列表、购物清单等）。
@@ -543,7 +549,7 @@ public class EntryView {
 
 ![List14](figures/List14.gif)
 
-ListItem的[swipeAction属性](../reference/arkui-cj/cj-scroll-swipe-listitem.md#func-swipeaction---unit----unit-swipeedgeeffect-float64---unit)可用于实现列表项的左右滑动功能。swipeAction属性方法初始化时有必填参数SwipeActionOptions，其中，start参数表示设置列表项右滑时起始端滑出的组件，end参数表示设置列表项左滑时尾端滑出的组件。
+ListItem的[swipeAction属性](../reference/arkui-cj/cj-scroll-swipe-listitem.md#func-swipeactioncustombuilder-custombuilder-swipeedgeeffect-float64---unit)可用于实现列表项的左右滑动功能。swipeAction属性方法初始化时有必填参数SwipeActionOptions，其中，start参数表示设置列表项右滑时起始端滑出的组件，end参数表示设置列表项左滑时尾端滑出的组件。
 
 在消息列表中，end参数表示设置ListItem左滑时尾端划出自定义组件，即删除按钮。在初始化end方法时，将滑动列表项的索引传入删除按钮组件，当用户点击删除按钮时，可以根据索引值来删除列表项对应的数据，从而实现侧滑删除功能。
 
@@ -576,7 +582,7 @@ ListItem的[swipeAction属性](../reference/arkui-cj/cj-scroll-swipe-listitem.md
     ListItem(){
         Text('1111').height(20)
     }
-    .swipeAction(end: { => bind(this.itemEnd, this)(index)}) // index为该    ListItem在List中的索引值
+    .swipeAction(end: { => bind(this.itemEnd, this)(index)}) // index为该ListItem在List中的索引值
     ```
 
 ## 给列表项添加标记

@@ -1,5 +1,11 @@
 # 企业类应用可用权限
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 以下权限面向<!--Del-->系统应用和<!--DelEnd-->企业类应用开放，企业类应用包括企业普通应用和MDM（Mobile Device Management）设备管理应用。
 
 企业类应用有以下特征：
@@ -112,23 +118,6 @@
 
 **变更信息：** API 12-13该权限仅向系统应用开放；从API 14开始，开放范围从系统应用变更为企业普通应用。
 
-## ohos.permission.GET_WIFI_CONFIG
-
-允许应用获取Wi-Fi的配置信息。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-**支持设备：** PC/2in1
-
-<!--Del-->
-**ACL使能：** true<!--DelEnd-->
-
-**起始版本：** 12
-
-**变更信息：** API 12-14该权限仅向系统应用开放；从API 15开始，开放范围从系统应用变更为企业普通应用。
-
 ## ohos.permission.SET_WIFI_CONFIG
 
 允许应用配置Wi-Fi信息。
@@ -193,7 +182,7 @@
 
 **变更信息：** API 12-13该权限仅向系统应用开放；从API 14开始，开放范围从系统应用变更为企业普通应用。
 
-### ohos.permission.SET_TELEPHONY_ESIM_STATE_OPEN
+## ohos.permission.SET_TELEPHONY_ESIM_STATE_OPEN
 
 允许系统应用和运营商应用设置eSIM昵称和激活eSIM。
 
@@ -236,40 +225,6 @@
 **ACL使能：** true<!--DelEnd-->
 
 **起始版本：** 18
-
-## ohos.permission.MANAGE_NET_FIREWALL
-
-允许系统应用配置防火墙规则。
-
-当前仅2in1设备应用可申请此权限。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-<!--Del-->
-**ACL使能：** true<!--DelEnd-->
-
-**起始版本：** 12
-
-**变更信息：** API 12-14该权限仅向系统应用开放；从API 15开始，开放范围变更为企业普通应用。
-
-## ohos.permission.GET_NET_FIREWALL
-
-允许系统应用查询防火墙规则和查询防火墙拦截记录。
-
-当前仅2in1设备应用可申请此权限。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-<!--Del-->
-**ACL使能：** true<!--DelEnd-->
-
-**起始版本：** 12
-
-**变更信息：** API 12-14该权限仅向系统应用开放；从API 15开始，开放范围变更为企业普通应用。
 
 ## ohos.permission.GET_DOMAIN_ACCOUNT_SERVER_CONFIGS
 
@@ -335,37 +290,3 @@
 **ACL使能：** true<!--DelEnd-->
 
 **起始版本：** 18
-
-## ohos.permission.SUPPORT_APP_SERVICE_EXTENSION
-
-允许应用作为AppServiceExtension被拉起。
-
-获取此权限后，应用可作为AppServiceExtension被同应用或同在"appidentifierAllowList"配置中的应用拉起或连接。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-<!--Del-->
-**ACL使能：** true<!--DelEnd-->
-
-**支持设备：** PC/2in1
-
-**起始版本：** 20
-
-## ohos.permission.ENTERPRISE_MANAGE_EAP
-
-允许企业网络安全软件在EAP报文中新增私有信息。
-
-获取此权限后，允许企业网络安全软件获取802.1x报文并新增信息，完成定制化认证需求。
-
-**权限级别：** system_basic
-
-**授权方式：** 系统授权（system_grant）
-
-<!--Del-->
-**ACL使能：** true<!--DelEnd-->
-
-**支持设备：** PC/2in1
-
-**起始版本：** 20

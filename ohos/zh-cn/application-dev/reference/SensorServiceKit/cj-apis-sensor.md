@@ -1,6 +1,12 @@
 # ohos.sensor（传感器）
 
-sensor模块提供了获取传感器数据的能力，包括获取传感器属性列表，订阅传感器数据，以及一些通用的传感器算法。
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
+sensor模块提供了获取传感器数据的能力，包括获取传感器属性列表、订阅传感器数据以及一些通用的传感器算法。
 
 ## 导入模块
 
@@ -201,8 +207,8 @@ public func on<T>(sensorType: SensorId, callback: Callback1Argument<T>, option!:
 | 参数名        | 类型 | 必填  | 默认值  | 说明 |
 |:---------- |:--------- |:--- |:---- |:---- |
 | sensorType | [SensorId](#enum-sensorid) | 是   | -    | 传感器类型。|
-| callback   | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<T> | 是   | -    | 回调函数。|
-| option     | ?[Options](#class-options) | 否   | None | 可选参数列表，用于设置传感器上报频率，默认值为200000000ns。 |
+| callback   | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<T> | 是   | -    | 回调函数。|
+| option     | ?[Options](#class-options) | 否   | None | **命名参数。** 可选参数列表，用于设置传感器上报频率，默认值为200000000ns。 |
 
 **异常：**
 
@@ -255,9 +261,10 @@ public func once<T>(sensorType: SensorId, callback: Callback1Argument<T>): Unit 
 
 **参数：**
 
-| 参数名        | 类型 | 必填  | 默认值 | 说明 | |
-| sensorType | [SensorId](#enum-sensorid)                                                                  | 是   | -   | 传感器类型。                            |
-| callback   | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argument)\<T> | 是   | -   | 回调函数，异步上报的传感器数据，每种传感器类型对应的数据类型不同。 |
+| 参数名 | 类型 | 必填 | 默认值 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| sensorType | [SensorId](#enum-sensorid) | 是 | - | 传感器类型。 |
+| callback   | [Callback1Argument](../arkinterop/cj-api-callback_invoke.md#class-callback1argumenta)\<T> | 是   | -   | **命名参数。** 回调函数，异步上报的传感器数据，每种传感器类型对应的数据类型不同。 |
 
 **异常：**
 
@@ -933,7 +940,7 @@ public class LightResponse <: Response {
 public var colorTemperature:?Float32
 ```
 
-**功能：** 色温（单位：开尔文），可选参数，如果该参数不支持则返回固定值（固定值由传感器自定义），支持则返回正常数值。
+**功能：** 色温（单位：开尔文），如果不支持该属性则返回固定值（固定值由传感器自定义），支持则返回正常数值。
 
 **类型：** ?Float32
 
@@ -949,7 +956,7 @@ public var colorTemperature:?Float32
 public var infraredLuminance:?Float32
 ```
 
-**功能：** 红外亮度（单位：cd/m²），可选参数，如果该参数不支持则返回固定值（固定值由传感器自定义），支持则返回正常数值。
+**功能：** 红外亮度（单位：cd/m²），如果不支持该属性则返回固定值（固定值由传感器自定义），支持则返回正常数值。
 
 **类型：** ?Float32
 
@@ -1069,7 +1076,7 @@ public class MagneticFieldResponse <: Response {
 public var x: Float32
 ```
 
-**功能：** x轴环境磁场强度，单位 : μT。
+**功能：** x轴环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1085,7 +1092,7 @@ public var x: Float32
 public var y: Float32
 ```
 
-**功能：** y轴环境磁场强度，单位 : μT。
+**功能：** y轴环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1101,7 +1108,7 @@ public var y: Float32
 public var z: Float32
 ```
 
-**功能：** z轴环境磁场强度，单位 : μT。
+**功能：** z轴环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1140,7 +1147,7 @@ public class MagneticFieldUncalibratedResponse <: Response {
 public var biasX: Float32
 ```
 
-**功能：** x轴未校准环境磁场强度偏量，单位 : μT。
+**功能：** x轴未校准环境磁场强度偏量，单位：μT。
 
 **类型：** Float32
 
@@ -1156,7 +1163,7 @@ public var biasX: Float32
 public var biasY: Float32
 ```
 
-**功能：** y轴未校准环境磁场强度偏量，单位 : μT。
+**功能：** y轴未校准环境磁场强度偏量，单位：μT。
 
 **类型：** Float32
 
@@ -1172,7 +1179,7 @@ public var biasY: Float32
 public var biasZ: Float32
 ```
 
-**功能：** z轴未校准环境磁场强度偏量，单位 : μT。
+**功能：** z轴未校准环境磁场强度偏量，单位：μT。
 
 **类型：** Float32
 
@@ -1188,7 +1195,7 @@ public var biasZ: Float32
 public var x: Float32
 ```
 
-**功能：** x轴未校准环境磁场强度，单位 : μT。
+**功能：** x轴未校准环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1204,7 +1211,7 @@ public var x: Float32
 public var y: Float32
 ```
 
-**功能：** y轴未校准环境磁场强度，单位 : μT。
+**功能：** y轴未校准环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1220,7 +1227,7 @@ public var y: Float32
 public var z: Float32
 ```
 
-**功能：** z轴未校准环境磁场强度，单位 : μT。
+**功能：** z轴未校准环境磁场强度，单位：μT。
 
 **类型：** Float32
 
@@ -1252,7 +1259,7 @@ public class Options {
 public var interval: IntervalOption
 ```
 
-**功能：** 表示传感器的上报频率，默认值为200000000ns。该属性有最小值和最大值的限制，由硬件支持的上报频率决定，当设置频率大于最大值时以最大值上报数据，小于最小值时以最小值上报数据。
+**功能：** 表示传感器的上报频率。该属性有最小值和最大值的限制，由硬件支持的上报频率决定，当设置频率大于最大值时以最大值上报数据，小于最小值时以最小值上报数据。
 
 **类型：** [IntervalOption](#enum-intervaloption)
 
@@ -1294,8 +1301,8 @@ public init(interval!: IntervalOption = NormalMode, sensorInfoParam!: ?SensorInf
 
 | 参数名 | 类型 | 必填  | 默认值  | 说明       |
 |:--------------- |:------ |:--- |:---------- |:-------- |
-| interval        | [IntervalOption](#enum-intervaloption)     | 否   | NormalMode | 表示传感器的上报频率，默认值为200000000ns。该属性有最小值和最大值的限制，由硬件支持的上报频率决定，当设置频率大于最大值时以最大值上报数据，小于最小值时以最小值上报数据。 |
-| sensorInfoParam | ?[SensorInfoParam](#class-sensorinfoparam) | 否   | None       | 传感器传入设置参数，可指定deviceId、sensorIndex。 |
+| interval        | [IntervalOption](#enum-intervaloption)     | 否   | NormalMode | **命名参数。** 表示传感器的上报频率，默认值为NormalMode。该属性有最小值和最大值的限制，由硬件支持的上报频率决定，当设置频率大于最大值时以最大值上报数据，小于最小值时以最小值上报数据。 |
+| sensorInfoParam | ?[SensorInfoParam](#class-sensorinfoparam) | 否   | None       | **命名参数。** 传感器传入设置参数，可指定deviceId、sensorIndex。 |
 
 ## class OrientationResponse
 
@@ -1407,7 +1414,7 @@ public class PedometerResponse <: Response {
 }
 ```
 
-**功能：** 计步传感器数据，。
+**功能：** 计步传感器数据。
 
 **系统能力：** SystemCapability.Sensors.Sensor
 
@@ -1488,7 +1495,7 @@ public open class Response {
 public var accuracy: SensorAccuracy
 ```
 
-**功能：** 传感器数据上报的精度挡位值。
+**功能：** 传感器数据上报的精度档位值。
 
 **类型：** [SensorAccuracy](#enum-sensoraccuracy)
 
@@ -1804,7 +1811,7 @@ public class SensorInfoParam {
 public var deviceId: Int32
 ```
 
-**功能：** 设备ID：默认值为-1，表示本地设备，设备ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
+**功能：** 设备ID：设置为-1，表示本地设备，设备ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
 
 **类型：** Int32
 
@@ -1820,7 +1827,7 @@ public var deviceId: Int32
 public var sensorIndex: Int32
 ```
 
-**功能：** 传感器索引：默认值为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
+**功能：** 传感器索引：设置为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
 
 **类型：** Int32
 
@@ -1846,8 +1853,8 @@ public init(deviceId!: Int32 = -1, sensorIndex!: Int32 = 0)
 
 | 参数名         | 类型    | 必填  | 默认值 | 说明     |
 |:----------- |:----- |:--- |:--- |:------ |
-| deviceId    | Int32 | 否   | - 1 | 设备ID：默认值为-1，表示本地设备，设备ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。  |
-| sensorIndex | Int32 | 否   | 0   | 传感器索引：默认值为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。 |
+| deviceId    | Int32 | 否   | - 1 | **命名参数。** 设备ID：默认值为-1，表示本地设备，设备ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。  |
+| sensorIndex | Int32 | 否   | 0   | **命名参数。** 传感器索引：默认值为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。 |
 
 ## class SignificantMotionResponse
 
@@ -1937,7 +1944,7 @@ public enum IntervalOption <: Equatable<IntervalOption> & ToString {
 
 **父类型：**
 
-- [Equatable\<IntervalOption>](../arkui-cj/cj-common-types.md#class-equatable)
+- Equatable\<[IntervalOption](#enum-intervaloption)>
 - ToString
 
 ### GameMode
@@ -1946,7 +1953,7 @@ public enum IntervalOption <: Equatable<IntervalOption> & ToString {
 GameMode
 ```
 
-**功能：** 用于指定传感器上报频率，频率值为20000000ns，该频率被设置在硬件支持的频率范围内时会生效。
+**功能：** 用于指定传感器上报频率，频率值为20000000ns，该频率被设置在硬件支持的频率范围内时会生效，值固定为'game'字符串。
 
 **系统能力：** SystemCapability.Sensors.Sensor
 
@@ -1982,7 +1989,7 @@ SensorNumber(Int64)
 UIMode
 ```
 
-**功能：** 用于指定传感器上报频率，频率值为60000000ns，该频率被设置在硬件支持的频率范围内时会生效。
+**功能：** 用于指定传感器上报频率，频率值为60000000ns，该频率被设置在硬件支持的频率范围内时会生效，值固定为'ui'字符串。
 
 **系统能力：** SystemCapability.Sensors.Sensor
 
@@ -2074,7 +2081,7 @@ public enum SensorAccuracy  <: Equatable<SensorAccuracy> & ToString {
 
 **父类型：**
 
-- [Equatable\<SensorAccuracy>](../arkui-cj/cj-common-types.md#class-equatable)
+- Equatable\<[SensorAccuracy](#enum-sensoraccuracy)>
 - ToString
 
 ### AccuracyHigh
@@ -2228,7 +2235,7 @@ public enum SensorId <: Equatable<SensorId> & ToString {
 
 **父类型：**
 
-- [Equatable\<SensorId>](../arkui-cj/cj-common-types.md#class-equatable)
+- Equatable\<[SensorId](#enum-sensorid)>
 - ToString
 
 ### Accelerometer
@@ -2284,7 +2291,7 @@ try {
 AccelerometerUncalibrated
 ```
 
-**功能：** 未校准加速度计传感器。
+**功能：** 未校准加速度传感器。
 
 **系统能力：** SystemCapability.Sensors.Sensor
 

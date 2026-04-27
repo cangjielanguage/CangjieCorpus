@@ -40,13 +40,47 @@ func test2(n!: Int64 = @sourceLine()) { /* at line 5 */
 
 为了提升与 `C` 语言互操作的性能，仓颉提供 `@FastNative` 标记用于优化对 `C` 函数的调用。值得注意的是 `@FastNative` 只能用于 `foreign` 声明的函数。
 
-使用示例如下：
+首先编译以下 C 语言程序得到动态库文件 `libcProg.so`，示例如下：
 
-<!-- run -->
+```c
+#include <stdio.h>
+
+char* foo()
+{
+    static char str[] = "this is an example";
+    return str;
+}
+```
+
+仓颉文件 `main.cj`：
+
+<!-- code_no_check -->
 
 ```cangjie
 @FastNative
-foreign func strlen(str: CPointer<UInt8>): UIntNative
+foreign func foo(): CPointer<Int32>
+
+@FastNative
+foreign func printf(fmt: CPointer<Int32>, ...): Int32
+
+main(): Int32 {
+    unsafe{
+        let str = foo()
+        printf(str)
+    }
+}
+```
+
+具体的编译介绍，详情请参见[附录](../Appendix/compile_options.md)。下面为该用例对应的编译命令：
+
+```shell
+cjc -L . -lcProg ./main.cj
+```
+
+执行上述命令编译 `main.cj` 之后生成一个可执行文件 `main`，其执行结果如下：
+
+```text
+this is an example
 ```
 
 开发者在使用 `@FastNative` 修饰 `foreign` 函数时，应确保对应的 `C` 函数满足以下两点要求：
@@ -58,17 +92,10 @@ foreign func strlen(str: CPointer<UInt8>): UIntNative
 
 `@Frozen` 标记可用于修饰函数和属性。如果确定某个函数、属性在将来的版本更新中不会去修改它的内部实现，那么可以使用 `@Frozen` 对其进行标记，该标记代表开发者对该函数/属性在未来版本演进的一种承诺。被 `@Frozen` 修饰的函数和属性，在后续的升级版本中，签名和函数体都不能发生任何变化。这意味着，前后两个代码版本，在相同编译器、相同编译选项的情况下，该函数或属性的生成产物完全一致。
 
-`@Frozen` 标记可被用于修饰：
+`@Frozen` 注解仅可用于修饰：
 
-- 全局函数
-- 类、结构、接口、扩展、枚举中的函数
-- 类、接口、扩展中的属性
-
-`@Frozen` 标记不可被用于修饰：
-
-- 除了函数和属性以外的其他类型声明
-- 嵌套函数
-- 表达式
+- 除局部（嵌套）函数外的所有种类的函数定义，包括全局函数、成员函数、构造函数、主构造函数和析构函数。
+- 所有种类的成员属性定义。
 
 使用示例如下：
 
@@ -93,6 +120,8 @@ public class testClass {
 
 仓颉语言内部提供 `@Attribute` 标记，开发者通过内置的 `@Attribute` 来对某个声明设置属性值，从而达到标记声明的目的。属性值可以是 `identifier` 或者 `string`，下面是一个简单的例子，这段示例代码为变量 `cnt` 添加了一个 `identifier` 类型的属性 `State`，为变量 `bcnt` 添加了一个 `string` 类型的属性 `"Binding"`。
 
+<!-- compile -->
+
 ```cangjie
 @Attribute[State] var cnt = 0       // identifier
 @Attribute["Binding"] var bcnt = 0  // string
@@ -102,10 +131,15 @@ public class testClass {
 
 宏定义如下：
 
+<!-- run -macro0 -->
+<!-- cfg="--compile-macro" -->
+
 ```cangjie
+macro package define
+
 public macro Component(input: Tokens): Tokens {
     var varDecl = parseDecl(input)
-    if (varDecl.hasAttr("State")) { // 如果该节点被标记了属性且值为 “State” 返回 true, 否则返回 false
+    if (varDecl.hasAttr("State")) { // 如果该节点被标记了属性且值为 "State"，则返回 true，否则返回 false
         var attrs = varDecl.getAttrs() // 返回一组 Tokens
         println(attrs[0].value)
     }
@@ -115,15 +149,24 @@ public macro Component(input: Tokens): Tokens {
 
 宏调用如下：
 
+<!-- run -macro0 -->
+<!-- cfg="--debug-macro" -->
+
 ```cangjie
+import define.Component
+
 @Component(
     @Attribute[State] var cnt = 0
 )
+
+main() {}
 ```
 
 ## @Deprecated
 
 `@Deprecated` 表示此 API 已废弃，虽然暂时可用，但未来将被移除或更改，建议其他开发者不要调用此 API。例如：
+
+<!-- compile -->
 
 ```cangjie
 @Deprecated["用boo代替", since: "1.3.4"]
@@ -169,6 +212,8 @@ warning: function 'foo' is deprecated since 1.3.4. 用boo代替
 - `message: String` - 描述声明为何废弃、如何迁移等。
 - `since!: ?String` - 废弃版本。
 - `strict!: Bool` - 默认值为 `false`，在被该标记修饰的 API 的调用处会触发警告。如果设置为 `true`，则会触发编译错误。
+
+<!-- compile.error -->
 
 ```cangjie
 @Deprecated["Use Macro2", since: "1990", strict: true]

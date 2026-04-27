@@ -1,5 +1,11 @@
 # Connectivity Kit简介
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## Connectivity Kit开发概述
 
 移动终端设备已经深入人民日常生活的方方面面，如连接蓝牙耳机听音乐、连接WIFI上网、使用NFC进行一碰开门等已成为终端用户日常生活中常见的行为。
@@ -15,7 +21,7 @@
 
 - **BLE模块（低功耗蓝牙）**
 
-  BLE是Bluetooth Low Energy的缩写，意为“低功耗蓝牙”。它是一种能够在低功耗情况下进行通信的蓝牙技术，与传统蓝牙相比，BLE的功耗更低，适用于需要长时间运行的低功耗设备，如智能手表、健康监测设备、智能家居等。
+  BLE是Bluetooth Low Energy的缩写，意为“低功耗蓝牙”。它是一种能够在低功耗情况下进行通信的蓝牙技术，与传统蓝牙相比，BLE的功耗更低，适用于需要长时间运行的低功耗设备。
 
   详情请参见[ohos.bluetooth.ble API参考](../reference/ConnectivityKit/cj-apis-bluetooth-ble.md)。
 
@@ -47,10 +53,6 @@ WLAN系统为用户提供接入WLAN网络功能（STA模式）、点对点的数
   AP模式为加入无线局域网的成员设备（即客户端）提供下行数据业务，它提供以无线方式组建无线局域网WLAN，相当于WLAN的中心设备。
 
   详情请参见[ohos.wifiManager API参考](../reference/ConnectivityKit/cj-apis-wifi_manager.md)。
-
-### NFC简介
-
-NFC英文全称Near Field Communication，近距离无线通信。NFC服务提供NFC开关控制、NFC标签读写、NFC卡模拟等业务功能。
 
 ### 运作机制
 

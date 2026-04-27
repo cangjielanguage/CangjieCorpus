@@ -1,14 +1,20 @@
 # ohos.hi_trace_meter（性能打点）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 hi_trace_meter模块提供了跟踪进程轨迹，度量程序执行性能的打点能力。本模块打点的数据供hiTraceMeter工具分析使用。
 
 > **说明**
 >
-> 性能打点接口startTrace、finishTrace、traceByValue无法指定跟踪输出级别，默认均为COMMERCIAL级别性能打点。
+> - 性能打点接口startTrace、finishTrace、traceByValue无法指定跟踪输出级别，默认均为COMMERCIAL级别性能打点。
 >
-> 用户态trace格式使用竖线 | 作为分隔符，所以通过性能打点接口传递的字符串类型参数应避免包含该字符，防止trace解析异常。
+> - 用户态trace格式使用竖线 | 作为分隔符，所以通过性能打点接口传递的字符串类型参数应避免包含该字符，防止trace解析异常。
 >
-> 用户态trace总长度限制512字符，超过的部分将会被截断。
+> - 用户态trace总长度限制512字符，超过的部分将会被截断。
 
 ## 导入模块
 

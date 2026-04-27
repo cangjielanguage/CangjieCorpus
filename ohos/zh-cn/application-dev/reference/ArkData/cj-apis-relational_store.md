@@ -1,5 +1,11 @@
 # ohos.data.relational_store（关系型数据库）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 关系型数据库（Relational Database，RDB）是一种基于关系模型来管理数据的数据库。关系型数据库基于SQLite组件提供了一套完整的对本地数据库进行管理的机制，对外提供了一系列的增、删、改、查等接口，也可以直接运行用户输入的SQL语句来满足复杂的场景需要。不支持Worker线程。
 
 仓颉侧支持的基本数据类型：Int64、Float64、String、二进制类型数据、Bool。为保证插入并读取数据成功，建议一条数据不要超过2M。超出该大小，插入成功，读取失败。
@@ -24,8 +30,8 @@ ohos.permission.DISTRIBUTED_DATASYNC
 
 API示例代码使用说明：
 
-- 若示例代码首行有"// index.cj"注释，表示该示例可在仓颉模板工程的"index.cj"文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的"main_ability.cj"文件中进行配置。
+- 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
+- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -37,7 +43,7 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit
 
 **功能：** 使用指定的数据库文件配置删除数据库。
 
-删除成功后，建议将数据库对象置为null。建立数据库时，若在[StoreConfig](#class-storeconfig)中配置了自定义路径，则调用此接口进行删库无效，必须使用[deleteRdbStore(UIAbilityContext, StoreConfig)](#func-deleterdbstoreuiabilitycontext-storeconfig)接口进行删库。
+建立数据库时，若在[StoreConfig](#class-storeconfig)中配置了自定义路径，则调用此接口进行删库无效，必须使用[deleteRdbStore(UIAbilityContext, StoreConfig)](#func-deleterdbstoreuiabilitycontext-storeconfig)接口进行删库。
 
 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的[RdbStore](#class-rdbstore)和[ResultSet](#class-resultset)均已成功关闭。
 
@@ -91,7 +97,7 @@ public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit
 
 **功能：** 使用指定的数据库文件配置删除数据库。
 
-删除成功后，建议将数据库对象置为null。若数据库文件处于公共沙箱目录下，则删除数据库时必须使用该接口，当存在多个进程操作同一个数据库的情况，建议向其他进程发送数据库删除通知使其感知并处理。建立数据库时，若在[StoreConfig](#class-storeconfig)中配置了自定义路径，则必须调用此接口进行删库。
+若数据库文件处于公共沙箱目录下，则删除数据库时必须使用该接口。当存在多个进程操作同一个数据库的情况，建议向其他进程发送数据库删除通知使其感知并处理。建立数据库时，若在[StoreConfig](#class-storeconfig)中配置了自定义路径，则必须调用此接口进行删库。
 
 当使用向量数据库时，在调用deleteRdbStore接口前，应当确保向量数据库已打开的RdbStore和ResultSet均已成功关闭。
 
@@ -321,7 +327,7 @@ public var size: String
 public var status: AssetStatus
 ```
 
-**功能：** 资产的状态，默认值为AssetNormal。
+**功能：** 资产的状态。
 
 **类型：** [AssetStatus](#enum-assetstatus)
 
@@ -370,7 +376,7 @@ public init(name: String, uri: String, path: String, createTime: String, modifyT
 |createTime|String|是|-|资产被创建出来的时间。|
 |modifyTime|String|是|-|资产最后一次被修改的时间。|
 |size|String|是|-|资产占用空间的大小。|
-|status|[AssetStatus](#enum-assetstatus)|否|AssetStatus.AssetNormal|资产的状态，默认值为ASSET_NORMAL。|
+|status|[AssetStatus](#enum-assetstatus)|否|AssetStatus.AssetNormal|**命名参数。** 资产的状态，默认值为AssetStatus.AssetNormal。|
 
 ## class CryptoParam
 
@@ -402,7 +408,7 @@ public class CryptoParam {
 public var cryptoPageSize: UInt32
 ```
 
-**功能：** 整数类型，指定数据库加解密使用的页大小。如不指定，默认值为1024字节。
+**功能：** 整数类型，指定数据库加解密使用的页大小。
 
 用户指定的页大小应为1024到65536范围内的整数，并且为2<sup>n</sup>。若指定值非整数，则向下取整。
 
@@ -420,7 +426,7 @@ public var cryptoPageSize: UInt32
 public var encryptionAlgo: EncryptionAlgo
 ```
 
-**功能：** 定数据库加解密使用的加密算法。如不指定，默认值为 Aes256Gcm。
+**功能：** 指定数据库加解密使用的加密算法。
 
 **类型：** [EncryptionAlgo](#enum-encryptionalgo)
 
@@ -456,7 +462,7 @@ public var encryptionKey: Array<UInt8>
 public var hmacAlgo: HmacAlgo
 ```
 
-**功能：** 指定数据库加解密使用的HMAC算法。如不指定，默认值为SHA256。
+**功能：** 指定数据库加解密使用的HMAC算法。
 
 **类型：** [HmacAlgo](#enum-hmacalgo)
 
@@ -472,11 +478,9 @@ public var hmacAlgo: HmacAlgo
 public var iterationCount: Int32
 ```
 
-**功能：** 整数类型，指定数据库PBKDF2算法的迭代次数，默认值为10000。
+**功能：** 整数类型，指定数据库PBKDF2算法的迭代次数。
 
 迭代次数应当为大于零的整数。
-
-不指定此参数或指定为零时，使用默认值10000，并使用默认加密算法Aes256Gcm。
 
 **类型：** Int32
 
@@ -492,7 +496,7 @@ public var iterationCount: Int32
 public var kdfAlgo:?KdfAlgo
 ```
 
-**功能：** 指定数据库加解密使用的PBKDF2算法。如不指定，默认使用和HMAC算法相等的算法。
+**功能：** 指定数据库加解密使用的PBKDF2算法。
 
 **类型：** ?[KdfAlgo](#enum-kdfalgo)
 
@@ -522,11 +526,11 @@ public init(encryptionKey: Array<UInt8>, iterationCount!: Int32 = 10000,
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |encryptionKey|Array\<UInt8>|是|-|指定数据库加/解密使用的密钥。|
-|iterationCount|Int32|否|10000|整数类型，指定数据库PBKDF2算法的迭代次数，默认值为10000。|
-|encryptionAlgo|[EncryptionAlgo](#enum-encryptionalgo)|否|EncryptionAlgo.Aes256Gcm|指定数据库加解密使用的加密算法。如不指定，默认值为Aes256Gcm。|
-|hmacAlgo|[HmacAlgo](#enum-hmacalgo)|否|HmacAlgo.Sha256|指定数据库加解密使用的HMAC算法。如不指定，默认值为Sha256。|
-|kdfAlgo|?[KdfAlgo](#enum-kdfalgo)|否|None|指定数据库加解密使用的PBKDF2算法。如不指定，默认使用和HMAC算法相等的算法。|
-|cryptoPageSize|UInt32|否|1024|整数类型，指定数据库加解密使用的页大小，单位为字节。如不指定，默认值为1024字节。|
+|iterationCount|Int32|否|10000|**命名参数。** 整数类型，指定数据库PBKDF2算法的迭代次数，默认值为10000。|
+|encryptionAlgo|[EncryptionAlgo](#enum-encryptionalgo)|否|EncryptionAlgo.Aes256Gcm|**命名参数。** 指定数据库加解密使用的加密算法。如不指定，默认值为EncryptionAlgo.Aes256Gcm。|
+|hmacAlgo|[HmacAlgo](#enum-hmacalgo)|否|HmacAlgo.Sha256|**命名参数。** 指定数据库加解密使用的HMAC算法。如不指定，默认值为HmacAlgo.Sha256。|
+|kdfAlgo|?[KdfAlgo](#enum-kdfalgo)|否|None|**命名参数。** 指定数据库加解密使用的PBKDF2算法。如不指定，默认使用和HMAC算法相等的算法。|
+|cryptoPageSize|UInt32|否|1024|**命名参数。** 整数类型，指定数据库加解密使用的页大小，单位为字节。如不指定，默认值为1024字节。|
 
 ## class RdbPredicates
 
@@ -570,7 +574,7 @@ public func inValues(field: String, value: Array<RelationalStoreValueType>): Rdb
 
 > **说明：**
 >
-> - `value`集合不能为空。如果传入空集，此条件将失效，导致操作针对所有数据（如全量查询、更新或删除）。请在调用前判断`value`是否为空集，避免误操作。
+> `value`集合不能为空。如果传入空集，此条件将失效，导致操作针对所有数据（如全量查询、更新或删除）。请在调用前判断`value`是否为空集，避免误操作。
 
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
@@ -1007,7 +1011,7 @@ try {
 public func glob(field: String, value: String): RdbPredicates
 ```
 
-**功能：** 配置谓词匹配数据字段为string的指定字段。
+**功能：** 配置谓词匹配数据字段为value的指定字段。
 
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
@@ -1238,7 +1242,7 @@ public func isNotNull(field: String): RdbPredicates
 
 |类型|说明|
 |:----|:----|
-|[RdbPredicates](#class-rdbpredicates)|<返回与指定字段匹配的谓词。|
+|[RdbPredicates](#class-rdbpredicates)|返回与指定字段匹配的谓词。|
 
 **示例：**
 
@@ -1579,7 +1583,7 @@ try {
 public func notInValues(field: String, value: Array<RelationalStoreValueType>): RdbPredicates
 ```
 
-**功能：** 将谓词配置为匹配数据字段为ValueType且值超出给定范围的指定字段。
+**功能：** 将谓词配置为匹配数据字段为RelationalStoreValueType且值超出给定范围的指定字段。
 
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
@@ -2240,7 +2244,7 @@ public func executeSql(sql: String, bindArgs!: Array<RelationalStoreValueType> =
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |sql|String|是|-|指定要执行的SQL语句。|
-|bindArgs|Array\<[RelationalStoreValueType](#enum-relationalstorevaluetype)>|否|[]|SQL语句中参数的值。该值与sql参数语句中的占位符相对应。当sql参数语句完整时，该参数不填。|
+|bindArgs|Array\<[RelationalStoreValueType](#enum-relationalstorevaluetype)>|否|[]|**命名参数。** SQL语句中参数的值。该值与sql参数语句中的占位符相对应。当sql参数语句完整时，该参数不填。|
 
 **异常：**
 
@@ -2307,7 +2311,7 @@ public func insert(table: String, values: ValuesBucket,
 |:---|:---|:---|:---|:---|
 |table|String|是|-|指定的目标表名。|
 |values|[ValuesBucket](#type-valuesbucket)|是|-|表示要插入到表中的数据行。|
-|conflict|[ConflictResolution](#enum-conflictresolution)|否|ConflictResolution.OnConflictNone|指定冲突解决方式。|
+|conflict|[ConflictResolution](#enum-conflictresolution)|否|ConflictResolution.OnConflictNone|**命名参数。** 指定冲突解决方式。|
 
 **返回值：**
 
@@ -2389,7 +2393,7 @@ public func off(event: String, interProcess: Bool, observer!: ?Callback0Argument
 |:---|:---|:---|:---|:---|
 |event|String|是|-|取消订阅事件名称。事件名称与on接口调用时订阅事件的名称一致。|
 |interProcess|Bool|是|-|指定是进程间还是本进程取消订阅。<br/> true：进程间。<br/> false：本进程。|
-|observer|?[Callback0Argument](../arkinterop/cj-api-callback_invoke.md#class-callback0argument)|否|None|该参数存在，则取消指定Callback监听回调，否则取消该event事件的所有监听回调。|
+|observer|?[Callback0Argument](../arkinterop/cj-api-callback_invoke.md#class-callback0argument)|否|None|**命名参数。** 该参数存在，则取消指定Callback监听回调，否则取消该event事件的所有监听回调。|
 
 **异常：**
 
@@ -2512,7 +2516,7 @@ public func query(predicates: RdbPredicates, columns!: Array<String> = []): Resu
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |predicates|[RdbPredicates](#class-rdbpredicates)|是|-|RdbPredicates的实例对象指定的查询条件。|
-|columns|Array\<String>|否|[]|表示要查询的列。如果值为空，则查询应用于所有列。|
+|columns|Array\<String>|否|[]|**命名参数。** 表示要查询的列。如果值为空，则查询应用于所有列。|
 
 **返回值：**
 
@@ -2577,7 +2581,7 @@ public func querySql(sql: String, bindArgs!: Array<RelationalStoreValueType> = [
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |sql|String|是|-|指定要执行的SQL语句。|
-|bindArgs|Array\<[RelationalStoreValueType](#enum-relationalstorevaluetype)>|否|[]|SQL语句中参数的值。该值与sql参数语句中的占位符相对应。当sql参数语句完整时，该参数不填。|
+|bindArgs|Array\<[RelationalStoreValueType](#enum-relationalstorevaluetype)>|否|[]|**命名参数。** SQL语句中参数的值。该值与sql参数语句中的占位符相对应。当sql参数语句完整时，该参数不填。|
 
 **返回值：**
 
@@ -2774,7 +2778,7 @@ public func update(values: ValuesBucket, predicates: RdbPredicates,
 |:---|:---|:---|:---|:---|
 |values|[ValuesBucket](#type-valuesbucket)|是|-|values指示数据库中要更新的数据行。键值对与数据库表的列名相关联。|
 |predicates|[RdbPredicates](#class-rdbpredicates)|是|-|RdbPredicates的实例对象指定的更新条件。|
-|conflict|[ConflictResolution](#enum-conflictresolution)|否|ConflictResolution.OnConflictNone|指定冲突解决方式。|
+|conflict|[ConflictResolution](#enum-conflictresolution)|否|ConflictResolution.OnConflictNone|**命名参数。** 指定冲突解决方式。|
 
 **返回值：**
 
@@ -3683,6 +3687,10 @@ public func goTo(offset: Int32): Bool
 
 **功能：** 指定相对当前结果集指针位置的偏移量，以移动结果集的指针位置。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -3697,7 +3705,7 @@ public func goTo(offset: Int32): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -3754,6 +3762,10 @@ public func goToFirstRow(): Bool
 
 **功能：** 转到结果集的第一行。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -3762,7 +3774,7 @@ public func goToFirstRow(): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -3819,6 +3831,10 @@ public func goToLastRow(): Bool
 
 **功能：** 转到结果集的最后一行。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -3827,7 +3843,7 @@ public func goToLastRow(): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -3884,6 +3900,10 @@ public func goToNextRow(): Bool
 
 **功能：** 转到结果集的下一行。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -3892,7 +3912,7 @@ public func goToNextRow(): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -3949,6 +3969,10 @@ public func goToPreviousRow(): Bool
 
 **功能：** 转到结果集的上一行。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -3957,7 +3981,7 @@ public func goToPreviousRow(): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -4014,6 +4038,10 @@ public func goToRow(position: Int32): Bool
 
 **功能：** 转到结果集的指定行。
 
+> **注意：** 
+> 
+> 此接口在失败时不会返回`false`，而是抛出异常。请确保调用时针对错误码提示进行适当的处理。
+
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 
 **起始版本：** 22
@@ -4028,7 +4056,7 @@ public func goToRow(position: Int32): Bool
 
 |类型|说明|
 |:----|:----|
-|Bool|如果成功移动结果集，则为true；否则返回false。|
+|Bool|如果成功移动结果集，则为true。|
 
 **异常：**
 
@@ -4191,11 +4219,7 @@ public class StoreConfig {
 public var allowRebuild: Bool
 ```
 
-**功能：** 指定数据库是否支持异常时自动删除，并重建一个空库空表，默认不删除。
-
-true：自动删除。
-
-false：不自动删除。
+**功能：** 指定数据库是否支持异常时自动删除，并重建一个空库空表，true表示自动删除，false表示不自动删除。
 
 **类型：** Bool
 
@@ -4211,7 +4235,7 @@ false：不自动删除。
 public var autoCleanDirtyData: Bool
 ```
 
-**功能：** 指定是否自动清理云端删除后同步到本地的数据，true表示自动清理，false表示手动清理，默认自动清理。
+**功能：** 指定是否自动清理云端删除后同步到本地的数据，true表示自动清理，false表示手动清理。
 
 对于端云协同的数据库，当云端删除的数据同步到设备端时，可通过该参数设置设备端是否自动清理。
 
@@ -4230,10 +4254,6 @@ public var cryptoParam: CryptoParam
 ```
 
 **功能：** 指定用户自定义的加密参数。
-
-当此参数不填时，使用默认的加密参数，见[CryptoParam](#class-cryptoparam)各参数默认值。
-
-此配置只有在encrypt选项设置为真或密钥非空时才有效。
 
 **类型：** [CryptoParam](#class-cryptoparam)
 
@@ -4271,7 +4291,7 @@ public var dataGroupId: String
 
 **功能：** 应用组ID，<!--RP1-->暂不支持指定dataGroupId在对应的沙箱路径下创建RdbStore实例。<!--RP1End-->
 
-dataGroupId共享沙箱的方式不支持多进程访问加密数据库，当此参数不填时，默认在本应用沙箱目录下创建RdbStore实例。
+dataGroupId共享沙箱的方式不支持多进程访问加密数据库。
 
 **类型：** String
 
@@ -4287,7 +4307,7 @@ dataGroupId共享沙箱的方式不支持多进程访问加密数据库，当此
 public var enableSemanticIndex: Bool
 ```
 
-**功能：** 指定数据库是否启用语义索引处理功能。true表示启用语义索引处理功能，false表示不启用。默认为false。
+**功能：** 指定数据库是否启用语义索引处理功能。true表示启用语义索引处理功能，false表示不启用。
 
 **类型：** Bool
 
@@ -4303,7 +4323,7 @@ public var enableSemanticIndex: Bool
 public var encrypt: Bool
 ```
 
-**功能：**  指定数据库是否加密，默认不加密。
+**功能：**  指定数据库是否加密。
 
 true：加密。
 
@@ -4343,7 +4363,7 @@ false：允许对数据库进行读写操作。
 public var name: String
 ```
 
-**功能：** 数据库文件名，也是数据库唯一标识符
+**功能：** 数据库文件名，也是数据库唯一标识符。
 
 **类型：** String
 
@@ -4359,7 +4379,7 @@ public var name: String
 public var persist: Bool
 ```
 
-**功能：** 指定数据库是否需要持久化。true表示持久化，false表示不持久化，即内存数据库。默认为true。
+**功能：** 指定数据库是否需要持久化。true表示持久化，false表示不持久化，即内存数据库。
 
 内存数据库不支持加密、backup、restore、跨进程访问及分布式能力，securityLevel属性会被忽略。
 
@@ -4459,7 +4479,7 @@ public var tokenizer: Tokenizer
 public var vector: Bool
 ```
 
-**功能：** 指定数据库是否是向量数据库，true表示向量数据库，false表示关系型数据库，默认为false。
+**功能：** 指定数据库是否是向量数据库，true表示向量数据库，false表示关系型数据库。
 
 向量数据库适用于存储和处理高维向量数据，关系型数据库适用于存储和处理结构化数据。
 
@@ -4957,7 +4977,7 @@ Sha256
 Sha512
 ```
 
-**功能：**  HMAC_SHA512算法。
+**功能：** HMAC_SHA512算法。
 
 **系统能力：** SystemCapability.DistributedDataManager.RelationalStore.Core
 

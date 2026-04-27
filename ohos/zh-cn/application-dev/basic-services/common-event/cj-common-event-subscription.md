@@ -1,5 +1,11 @@
 # 动态订阅公共事件
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 场景介绍
 
 动态订阅是指当应用在运行状态时，对某个公共事件进行订阅。在运行期间，如果有订阅的事件发布，那么订阅了这个事件的应用将会收到该事件及其传递的参数。
@@ -18,8 +24,8 @@
 
 | 接口名 | 接口描述 |
 | -------- | -------- |
-| createSubscriber(subscribeInfo:&nbsp;[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscribeinfo)): [CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscriber)| 创建订阅者对象。 |
-| subscribe(subscriber:&nbsp;[CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscriber),&nbsp;callback: ([CommonEventData](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#struct-commoneventdata)) -> Unit): Unit | 订阅公共事件。 |
+| createSubscriber(subscribeInfo:&nbsp;[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_subscribe_info.md#class-commoneventsubscribeinfo)): [CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_subscriber.md#class-commoneventsubscriber)| 创建订阅者对象。 |
+| subscribe(subscriber:&nbsp;[CommonEventSubscriber](../../reference/BasicServicesKit/cj-apis-common_event_subscriber.md#class-commoneventsubscriber),&nbsp;callback: ([CommonEventData](../../reference/BasicServicesKit/cj-apis-common_event_data.md#class-commoneventdata)) -> Unit): Unit | 订阅公共事件。 |
 
 ## 开发步骤
 
@@ -29,9 +35,11 @@
 
    ```cangjie
    import kit.BasicServicesKit.*
+   import kit.PerformanceAnalysisKit.Hilog
+   import ohos.business_exception.*
    ```
 
-2. 创建订阅者信息，详细的订阅者信息数据类型及包含的参数请见[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#class-commoneventsubscribeinfo)文档介绍。
+2. 创建订阅者信息，详细的订阅者信息数据类型及包含的参数请见[CommonEventSubscribeInfo](../../reference/BasicServicesKit/cj-apis-common_event_subscribe_info.md#class-commoneventsubscribeinfo)文档介绍。
 
    <!-- compile -->
 
@@ -53,12 +61,12 @@
    subscriber = CommonEventManager.createSubscriber(subscribeInfo)
    ```
 
-4. 创建订阅回调函数，订阅回调函数会在接收到事件时触发。订阅回调函数返回的data内包含了公共事件的名称、发布者携带的数据等信息，公共事件数据的详细参数和数据类型请见[CommonEventData](../../reference/BasicServicesKit/cj-apis-common_event_manager.md#struct-commoneventdata)文档介绍。
+4. 创建订阅回调函数，订阅回调函数会在接收到事件时触发。订阅回调函数返回的data内包含了公共事件的名称、发布者携带的数据等信息，公共事件数据的详细参数和数据类型请见[CommonEventData](../../reference/BasicServicesKit/cj-apis-common_event_data.md#class-commoneventdata)文档介绍。
 
    <!-- compile -->
 
    ```cangjie
-      // 订阅公共事件回调
+   // 订阅公共事件回调
    let callback = {
       a: ?BusinessException, b: ?CommonEventData =>
          Hilog.info(0, "TestCEM", "=======================================")

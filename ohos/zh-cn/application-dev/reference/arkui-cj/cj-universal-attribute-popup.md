@@ -1,5 +1,11 @@
 # Popup控制
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 给组件绑定popup弹窗，并设置弹窗内容，交互逻辑和显示状态。
 
 > **说明：**
@@ -28,8 +34,8 @@ func bindPopup(show: ?Bool, popup: ?PopupOptions): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-| show | ?Bool | 是 | \- | 弹窗显示状态。popup弹窗必须等待页面全部构建完成才能展示，因此show不能在页面构建中设置为true，否则会导致popup弹窗显示位置及形状错误。<br>初始值：false。|
-| popup | ?[PopupOptions](./cj-common-types.md#class-popupoptions) | 是 | \- | 配置当前弹窗提示的参数。 |
+| show | ?Bool | 是 | - | 弹窗显示状态。popup弹窗必须等待页面全部构建完成才能展示，因此show不能在页面构建中设置为true，否则会导致popup弹窗显示位置及形状错误。<br>初始值：false。|
+| popup | ?[PopupOptions](./cj-common-types.md#class-popupoptions) | 是 | - | 配置当前弹窗提示的参数。 |
 
 **返回值：**
 
@@ -53,8 +59,8 @@ func bindPopup(show: ?Bool, popup: ?CustomPopupOptions): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-| show | ?Bool | 是 | \- | 弹窗显示状态。popup弹窗必须等待页面全部构建完成才能展示，因此show不能在页面构建中设置为true，否则会导致popup弹窗显示位置及形状错误。<br>初始值：false。|
-| popup | ?[CustomPopupOptions](./cj-common-types.md#class-custompopupoptions) | 是 | \- | 配置当前弹窗提示的参数。 |
+| show | ?Bool | 是 | - | 弹窗显示状态。popup弹窗必须等待页面全部构建完成才能展示，因此show不能在页面构建中设置为true，否则会导致popup弹窗显示位置及形状错误。<br>初始值：false。|
+| popup | ?[CustomPopupOptions](./cj-common-types.md#class-custompopupoptions) | 是 | - | 配置当前弹窗提示的参数。 |
 
 **返回值：**
 
@@ -94,11 +100,11 @@ class EntryView {
 
     public func build() {
         Flex(direction: FlexDirection.Column) {
-            Text(msg)
-            Text(dismiss)
-            Text(custom)
+            Text(msg).margin(left: 100, top: 50)
+            Text(dismiss).margin(left: 100)
+            Text(custom).margin(left: 100)
             Button('PopupOptions')
-                .margin(top: 200)
+                .margin(left: 100, top: 200)
                 .onClick({ e =>
                     this.handlePopup = !this.handlePopup
                 })
@@ -156,6 +162,7 @@ class EntryView {
                     )
                 )
             Button("CustomPopupOptions")
+                .margin(left: 100, top: 10)
                 .onClick({ e => customPopup = !customPopup})
                 .bindPopup(
                     customPopup,

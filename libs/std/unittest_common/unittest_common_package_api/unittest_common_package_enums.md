@@ -11,7 +11,7 @@ public enum Color <: Equatable<Color> {
     | CYAN
     | MAGENTA
     | GRAY
-    | DEFAULT_COLOR;
+    | DEFAULT_COLOR
 }
 ```
 
@@ -20,6 +20,18 @@ public enum Color <: Equatable<Color> {
 父类型：
 
 - [Equatable](../../core/core_package_api/core_package_interfaces.md#interface-equatablet)\<[Color](#enum-color)>
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.common.*
+
+main(): Unit {
+    let pp = PrettyText()
+    pp.colored(Color.BLUE, "blue text!")
+}
+```
 
 ### RED
 
@@ -135,7 +147,7 @@ public enum OptionValidity {
 UnknownOptionType
 ```
 
-功能: 未知状态，仅在验证出现内部错误时出现。
+功能：未知状态，仅在验证出现内部错误时出现。
 
 ### InvalidOption(String)
 
@@ -143,7 +155,7 @@ UnknownOptionType
 InvalidOption(String)
 ```
 
-功能: 选项验证无效，包含无效的原因。
+功能：选项验证无效，包含无效的原因。
 
 ### ValidOption(ConfigurationKey)
 
@@ -151,4 +163,4 @@ InvalidOption(String)
 ValidOption(ConfigurationKey)
 ```
 
-功能: 选项值有效，包含选项值在配置项中对应键值对的键名。
+功能：选项值有效，包含选项值在配置项中对应键值对的键名。

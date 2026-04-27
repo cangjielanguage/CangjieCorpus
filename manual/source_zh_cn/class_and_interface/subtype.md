@@ -15,8 +15,8 @@
 <!-- compile -->
 
 ```cangjie
-open class Super { }
-class Sub <: Super { }
+open class Super {}
+class Sub <: Super {}
 ```
 
 ## 实现接口带来的子类型关系
@@ -26,14 +26,14 @@ class Sub <: Super { }
 <!-- compile -->
 
 ```cangjie
-interface I1 { }
-interface I2 { }
+interface I1 {}
+interface I2 {}
 
-interface I3 <: I1 & I2 { }
+interface I3 <: I1 & I2 {}
 
-class C <: I1 { }
+class C <: I1 {}
 
-extend Int64 <: I2 { }
+extend Int64 <: I2 {}
 ```
 
 ## 元组类型的子类型关系
@@ -43,11 +43,11 @@ extend Int64 <: I2 { }
 <!-- compile -->
 
 ```cangjie
-open class C1 { }
-class C2 <: C1 { }
+open class C1 {}
+class C2 <: C1 {}
 
-open class C3 { }
-class C4 <: C3 { }
+open class C3 {}
+class C4 <: C3 {}
 
 let t1: (C1, C3) = (C2(), C4()) // OK
 let t2: (C3, C1) = (C4(), C2()) // OK
@@ -60,19 +60,18 @@ let t2: (C3, C1) = (C4(), C2()) // OK
 <!-- compile -->
 
 ```cangjie
-open class U1 { }
-class U2 <: U1 { }
+open class U1 {}
+class U2 <: U1 {}
 
-open class S1 { }
-class S2 <: S1 { }
-
+open class S1 {}
+class S2 <: S1 {}
 
 func f(a: U1): S2 { S2() }
 func g(a: U2): S1 { S1() }
 
 func call1() {
-    g(U2()) // Ok.
-    f(U2()) // Ok.
+    g(U2()) // OK
+    f(U2()) // OK
 }
 
 func h(lam: (U2) -> S1): S1 {
@@ -80,8 +79,8 @@ func h(lam: (U2) -> S1): S1 {
 }
 
 func call2() {
-    h(g) // Ok.
-    h(f) // Ok.
+    h(g) // OK
+    h(f) // OK
 }
 ```
 
@@ -105,12 +104,12 @@ func call2() {
 <!-- compile -->
 
 ```cangjie
-interface I1 { }
-interface I2 <: I1 { }
+interface I1 {}
+interface I2 <: I1 {}
 
-class C <: I2 { }
+class C <: I2 {}
 
-extend Bool <: I2 { }
+extend Bool <: I2 {}
 ```
 
 ## 泛型类型的子类型关系

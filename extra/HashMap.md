@@ -23,9 +23,7 @@ let e = HashMap<Int64, Int64>(10, {x: Int64 => (x, x * x)})  // creates map {1: 
 ```
 ### Access elements
 
-When we want to access the element corresponding to the specified key, we can use the subscript syntax
-to access it (the type of the subscript must be the ky=ey type). Using a non-existent key as an index will
-trigger a runtime exception.
+When we want to access the element corresponding to the specified key, we can use the subscript syntax to access it (the type of the subscript must be the key type). Using a non-existent key as an index will trigger a runtime exception.
 
 ```
 let map = HashMap<String, Int64>([("a", 0), ("b", 1), ("c", 2)])
@@ -38,14 +36,14 @@ To access elements while allowing for the possibility of non-existent key, one s
 together with `getOrDefault` on the option, for example:
 
 ```
-let m = HashMap(("a", 1), ("b", 2))
+let m = HashMap<String, Int64>([("a", 1), ("b", 2)])
 println(m.get("a").getOrDefault({ => 0}))  // 1
 println(m.get("c").getOrDefault({ => 0}))  // 0
 ```
 
 ### Iteration
 
-To iterate over a HashSet, use for-loop as follows:
+To iterate over a HashMap, use for-loop as follows:
 
 ```
 let map = HashMap<String, Int64>([("a", 0), ("b", 1), ("c", 2)])

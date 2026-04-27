@@ -8,6 +8,7 @@
 
 `Future<T>` 的原型声明如下：
 
+<!-- code_no_check -->
 ```cangjie
 public class Future<T> {
     // Blocking the current thread, waiting for the result of the thread corresponding to the current Future object.
@@ -28,10 +29,9 @@ public class Future<T> {
 
 下方示例代码演示了如何使用 `Future<T>` 在 `main` 中等待新创建的线程执行完成：
 
-```cangjie
-import std.sync.*
-import std.time.*
+<!-- run -->
 
+```cangjie
 main(): Int64 {
     let fut: Future<Unit> = spawn { =>
         println("New thread before sleeping")
@@ -61,9 +61,6 @@ New thread after sleeping
 <!-- verify -->
 
 ```cangjie
-import std.sync.*
-import std.time.*
-
 main(): Int64 {
     let fut: Future<Unit> = spawn { =>
         println("New thread before sleeping")
@@ -97,9 +94,6 @@ Main thread
     <!-- verify -->
 
     ```cangjie
-    import std.sync.*
-    import std.time.*
-
     main(): Int64 {
         let fut: Future<Int64> = spawn {
             sleep(Duration.second) // sleep for 1s.
@@ -160,9 +154,9 @@ Main thread
 
 `Thread` 类的部分方法定义如下（完整的方法描述可参考《仓颉编程语言库 API》）。
 
+<!-- code_no_check -->
 ```cangjie
 class Thread {
-    ... ...
     // Get the currently running thread
     static prop currentThread: Thread
 
@@ -176,6 +170,8 @@ class Thread {
 
 下列示例代码在创建新线程后分别通过两种方式获取线程标识。由于主线程和新线程获取的是同一个 `Thread` 对象，所以他们能够打印出相同的线程标识。
 
+<!-- run -->
+
 ```cangjie
 main(): Unit {
     let fut = spawn {
@@ -186,7 +182,7 @@ main(): Unit {
 }
 ```
 
-输出结果如下：
+输出结果如下（其中线程 id 会变化，也可能为其他值）:
 
 ```text
 New thread id: 1

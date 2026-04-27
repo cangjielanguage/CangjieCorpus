@@ -1,13 +1,14 @@
 # HashMap 的 get/add/contains 函数
 
-此用例展示了 HashMap 的基本使用方法。
+此示例展示了 HashMap 的基本使用方法。
 
-代码如下：
+示例：
 
 <!-- verify -->
 
 ```cangjie
 import std.collection.*
+
 main() {
     var map: HashMap<String, Int64> = HashMap<String, Int64>()
     map.add("a", 99) // map : [("a", 99)]
@@ -15,7 +16,7 @@ main() {
     var a = map.get("a")
     var bool = map.contains("a")
     print("a=${a.getOrThrow()} ")
-    print("bool=${bool.toString()}")
+    print("bool=${bool}")
     return 0
 }
 ```

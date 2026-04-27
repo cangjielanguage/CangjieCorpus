@@ -9,7 +9,7 @@
 
 ## 语料库结构
 
-当前语料库适配 **仓颉编程语言 v1.0.0**（对应官网文档发布日期：2025-07-01），完整覆盖该版本核心知识体系，结构说明如下：    
+当前语料库适配 **仓颉编程语言 v1.1.0**，在保持 v1.0.0 目录组织方式的基础上，同步更新 v1.1.0 官方文档内容，结构说明如下：    
 
 ###  `extra`
 
@@ -18,14 +18,14 @@
 
 ### `libs`
 
-- **对应范围**：完整映射 [仓颉官网标准库 std API 文档](https://cangjie-lang.cn/docs?url=%2F0.53.18%2Flibs%2Flibs_overview.html) 和 [非核心标准库 stdx](https://gitcode.com/Cangjie/cangjie_stdx/tree/main) API 文档，涵盖全量内置库与标准接口。
+- **对应范围**：完整映射 [仓颉标准库 std API 文档](https://gitcode.com/Cangjie/cangjie_runtime/tree/release/1.1/stdlib/doc) 和 [非核心标准库 stdx API 文档](https://gitcode.com/Cangjie/cangjie_stdx/tree/release/1.1/doc)，涵盖全量内置库与标准接口。
 - **核心内容**：
   - 各模块 API 定义与参数说明
   - 典型调用示例与异常处理指南
 
 ### `manual`
 
-- **对应范围**：同步仓颉官网 [用户开发指南](https://cangjie-lang.cn/docs?url=%2F0.53.18%2Fuser_manual%2Fsource_zh_cn%2Ffirst_understanding%2Fbasic.html)，聚焦开发者核心知识需求。
+- **对应范围**：同步仓颉官方 [开发指南](https://gitcode.com/Cangjie/cangjie_docs/tree/release/1.1/docs/dev-guide)，聚焦开发者核心知识需求。
 - **核心内容**：
   - 语言基础语法与编程范式详解
   - 多端应用开发流程与工程化实践
@@ -33,7 +33,7 @@
 
 ### `ohos`
 
-- **对应范围**：同步 [OpenHarmony 仓颉开发者文档](https://gitcode.com/openharmony-sig/docs_cangjie/tree/master)，覆盖鸿蒙生态分布式开发、设备协同等典型场景。
+- **对应范围**：同步 [OpenHarmony 仓颉开发者文档](https://gitcode.com/openharmony/docs_cangjie/tree/OpenHarmony-6.1-Release/zh-cn)，覆盖鸿蒙生态分布式开发、设备协同等典型场景。
 - **核心内容**：
   - 分布式应用架构设计与实现指南
   - ArkUI 声明式开发范式与 UI 组件详解
@@ -42,13 +42,13 @@
 
 ### `tools`
 
-- **对应范围**：同步仓颉官网 [工具指南](https://cangjie-lang.cn/docs?url=/1.0.0/tools/source_zh_cn/IDE/ide_plug-in_overview_community.html)，覆盖工具集官方标准用法。
+- **对应范围**：同步仓颉官方 [工具指南](https://gitcode.com/Cangjie/cangjie_docs/tree/release/1.1/docs/tools)，覆盖工具集官方标准用法。
 - **核心内容**：
   - 系统化整合仓颉语言全生命周期开发工具链
-  - IDE 插件使用指南, 包括安装、创建仓颉工程、编译构建、调试等
   - 命令行工具使用指南
+  - 语言服务、格式化、静态检查、调试、构建、覆盖率等配套工具说明
 
 
 ### 版本一致性说明
 
-所有目录内容对齐仓颉官方文档结构，保留原文标题层级与技术术语定义，确保与 **v1.0.0** 编译器及工具链完全兼容。开发者可通过目录结构快速定位官方文档对应章节，实现知识检索与应用开发的高效衔接.
+所有目录内容对齐仓颉官方文档结构，保留原文标题层级与技术术语定义，确保与 **v1.1.0** 编译器及工具链保持一致。开发者可通过目录结构快速定位官方文档对应章节，实现知识检索与应用开发的高效衔接。

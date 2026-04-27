@@ -1,5 +1,11 @@
 # ohos.common_event_manager（公共事件模块）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 common_event_manager模块提供了公共事件相关的能力，包括发布公共事件、订阅公共事件、以及退订公共事件。
 
 ## 导入模块
@@ -70,7 +76,6 @@ public static func createSubscriber(subscribeInfo: CommonEventSubscribeInfo): Co
 
 import kit.BasicServicesKit.*
 import kit.PerformanceAnalysisKit.Hilog
-import ohos.base.*
 import ohos.business_exception.*
 
 let subscriber: CommonEventSubscriber //用于保存创建成功的订阅者对象，后续使用其完成订阅及退订的动作
@@ -156,7 +161,7 @@ public static func subscribe(subscriber: CommonEventSubscriber, callback: AsyncC
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |subscriber|[CommonEventSubscriber](cj-apis-common_event_subscriber.md#class-commoneventsubscriber)|是|-|表示订阅者对象。|
-|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallback)\<[CommonEventData](cj-apis-common_event_data.md#class-commoneventdata)>|是|-|表示接收公共事件数据的回调函数。|
+|callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<[CommonEventData](cj-apis-common_event_data.md#class-commoneventdata)>|是|-|表示接收公共事件数据的回调函数。|
 
 **异常：**
 
@@ -435,7 +440,7 @@ public class Support {
 public static const COMMON_EVENT_ABILITY_ADDED: String = "common.event.ABILITY_ADDED"
 ```
 
-**功能：** （预留事件，暂未支持）表示已添加能力的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示已添加能力的公共事件的动作。
 
 **类型：** String
 
@@ -449,7 +454,7 @@ public static const COMMON_EVENT_ABILITY_ADDED: String = "common.event.ABILITY_A
 public static const COMMON_EVENT_ABILITY_REMOVED: String = "common.event.ABILITY_REMOVED"
 ```
 
-**功能：** （预留事件，暂未支持）表示已删除能力的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示已删除能力的公共事件的动作。
 
 **类型：** String
 
@@ -463,7 +468,7 @@ public static const COMMON_EVENT_ABILITY_REMOVED: String = "common.event.ABILITY
 public static const COMMON_EVENT_ABILITY_UPDATED: String = "common.event.ABILITY_UPDATED"
 ```
 
-**功能：** （预留事件，暂未支持）表示能力已更新的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示能力已更新的公共事件的动作。
 
 **类型：** String
 
@@ -477,7 +482,7 @@ public static const COMMON_EVENT_ABILITY_UPDATED: String = "common.event.ABILITY
 public static const COMMON_EVENT_ACCOUNT_DELETED: String = "usual.event.data.ACCOUNT_DELETED"
 ```
 
-**功能：** （预留事件，暂未支持）删除账户的公共事件的动作。
+**功能：**（预留事件，暂未支持）删除账户的公共事件的动作。
 
 **类型：** String
 
@@ -555,7 +560,7 @@ public static const COMMON_EVENT_BATTERY_OKAY: String = "usual.event.BATTERY_OKA
 public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_AUDIO_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsink.AUDIO_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙A2DP宿的音频状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙A2DP宿的音频状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -569,7 +574,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_AUDIO_STATE_UPDATE: String =
 public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_CONNECT_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsink.CONNECT_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙A2DP连接状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙A2DP连接状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -583,7 +588,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_CONNECT_STATE_UPDATE: String
 public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_PLAYING_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsink.PLAYING_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）蓝牙A2DP播放状态改变的普通事件的动作。
+**功能：**（预留事件，暂未支持）蓝牙A2DP播放状态改变的普通事件的动作。
 
 **类型：** String
 
@@ -597,7 +602,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSINK_PLAYING_STATE_UPDATE: String
 public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_AVRCP_CONNECT_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsource.AVRCP_CONNECT_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙A2DP的AVRCP连接状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙A2DP的AVRCP连接状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -611,7 +616,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_AVRCP_CONNECT_STATE_UPDATE
 public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CODEC_VALUE_UPDATE: String = "usual.event.bluetooth.a2dpsource.CODEC_VALUE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙A2DP音频编解码状态更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙A2DP音频编解码状态更改的公共事件的动作。
 
 **类型：** String
 
@@ -625,7 +630,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CODEC_VALUE_UPDATE: String
 public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CONNECT_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsource.CONNECT_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）蓝牙A2DP连接状态公共事件的动作。
+**功能：**（预留事件，暂未支持）蓝牙A2DP连接状态公共事件的动作。
 
 **类型：** String
 
@@ -639,7 +644,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CONNECT_STATE_UPDATE: Stri
 public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CURRENT_DEVICE_UPDATE: String = "usual.event.bluetooth.a2dpsource.CURRENT_DEVICE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示使用蓝牙A2DP连接的设备处于活动状态的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示使用蓝牙A2DP连接的设备处于活动状态的公共事件的动作。
 
 **类型：** String
 
@@ -653,7 +658,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_CURRENT_DEVICE_UPDATE: Str
 public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_PLAYING_STATE_UPDATE: String = "usual.event.bluetooth.a2dpsource.PLAYING_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）蓝牙A2DP播放状态改变的普通事件的动作。
+**功能：**（预留事件，暂未支持）蓝牙A2DP播放状态改变的普通事件的动作。
 
 **类型：** String
 
@@ -667,7 +672,7 @@ public static const COMMON_EVENT_BLUETOOTH_A2DPSOURCE_PLAYING_STATE_UPDATE: Stri
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AG_CALL_STATE_UPDATE: String = "usual.event.bluetooth.handsfreeunit.AG_CALL_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙免提呼叫状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙免提呼叫状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -681,7 +686,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AG_CALL_STATE_UPDATE: S
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AG_COMMON_EVENT: String = "usual.event.bluetooth.handsfreeunit.AG_COMMON_EVENT"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙免提音频网关状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙免提音频网关状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -695,7 +700,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AG_COMMON_EVENT: String
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AUDIO_STATE_UPDATE: String = "usual.event.bluetooth.handsfreeunit.AUDIO_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙免提音频状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙免提音频状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -709,7 +714,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_AUDIO_STATE_UPDATE: Str
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_CONNECT_STATE_UPDATE: String = "usual.event.bluetooth.handsfreeunit.CONNECT_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙免提连接状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙免提连接状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -723,7 +728,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREEUNIT_CONNECT_STATE_UPDATE: S
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREE_AG_AUDIO_STATE_UPDATE: String = "usual.event.bluetooth.handsfree.ag.AUDIO_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示蓝牙A2DP连接状态已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示蓝牙A2DP连接状态已更改的公共事件的动作。
 
 **类型：** String
 
@@ -737,7 +742,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREE_AG_AUDIO_STATE_UPDATE: Stri
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREE_AG_CONNECT_STATE_UPDATE: String = "usual.event.bluetooth.handsfree.ag.CONNECT_STATE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）蓝牙免提通信连接状态公共事件的动作。
+**功能：**（预留事件，暂未支持）蓝牙免提通信连接状态公共事件的动作。
 
 **类型：** String
 
@@ -751,7 +756,7 @@ public static const COMMON_EVENT_BLUETOOTH_HANDSFREE_AG_CONNECT_STATE_UPDATE: St
 public static const COMMON_EVENT_BLUETOOTH_HANDSFREE_AG_CURRENT_DEVICE_UPDATE: String = "usual.event.bluetooth.handsfree.ag.CURRENT_DEVICE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示连接到蓝牙免提的设备处于活动状态的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示连接到蓝牙免提的设备处于活动状态的公共事件的动作。
 
 **类型：** String
 
@@ -807,7 +812,7 @@ public static const COMMON_EVENT_BLUETOOTH_HOST_NAME_UPDATE: String = "usual.eve
 public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_DISABLE: String = "usual.event.bluetooth.host.REQ_DISABLE"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户关闭蓝牙请求的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户关闭蓝牙请求的公共事件的动作。
 
 **类型：** String
 
@@ -821,7 +826,7 @@ public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_DISABLE: String = "usual.eve
 public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_DISCOVERABLE: String = "usual.event.bluetooth.host.REQ_DISCOVERABLE"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户允许扫描蓝牙请求的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户允许扫描蓝牙请求的公共事件的动作。
 
 **类型：** String
 
@@ -835,7 +840,7 @@ public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_DISCOVERABLE: String = "usua
 public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_ENABLE: String = "usual.event.bluetooth.host.REQ_ENABLE"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户打开蓝牙请求的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户打开蓝牙请求的公共事件的动作。
 
 **类型：** String
 
@@ -849,7 +854,7 @@ public static const COMMON_EVENT_BLUETOOTH_HOST_REQ_ENABLE: String = "usual.even
 public static const COMMON_EVENT_BLUETOOTH_HOST_SCAN_MODE_UPDATE: String = "usual.event.bluetooth.host.SCAN_MODE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）设备蓝牙扫描模式更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）设备蓝牙扫描模式更改的公共事件的动作。
 
 **类型：** String
 
@@ -877,7 +882,7 @@ public static const COMMON_EVENT_BLUETOOTH_HOST_STATE_UPDATE: String = "usual.ev
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_ACL_CONNECTED: String = "usual.event.bluetooth.remotedevice.ACL_CONNECTED"
 ```
 
-**功能：** （预留事件，暂未支持）表示已与远程蓝牙设备建立低级别（ACL）连接的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示已与远程蓝牙设备建立低级别（ACL）连接的公共事件的动作。
 
 **类型：** String
 
@@ -891,7 +896,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_ACL_CONNECTED: String = 
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_ACL_DISCONNECTED: String = "usual.event.bluetooth.remotedevice.ACL_DISCONNECTED"
 ```
 
-**功能：** （预留事件，暂未支持）表示低电平（ACL）连接已从远程蓝牙设备断开的普通事件的动作。
+**功能：**（预留事件，暂未支持）表示低电平（ACL）连接已从远程蓝牙设备断开的普通事件的动作。
 
 **类型：** String
 
@@ -905,7 +910,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_ACL_DISCONNECTED: String
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_BATTERY_VALUE_UPDATE: String = "usual.event.bluetooth.remotedevice.BATTERY_VALUE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备的电池电量首次被检索或自上次检索以来被更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备的电池电量首次被检索或自上次检索以来被更改的公共事件的动作。
 
 **类型：** String
 
@@ -919,7 +924,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_BATTERY_VALUE_UPDATE: St
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CLASS_VALUE_UPDATE: String = "usual.event.bluetooth.remotedevice.CLASS_VALUE_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备的蓝牙类别已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备的蓝牙类别已更改的公共事件的动作。
 
 **类型：** String
 
@@ -933,7 +938,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CLASS_VALUE_UPDATE: Stri
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_CANCEL: String = "usual.event.bluetooth.remotedevice.CONNECT_CANCEL"
 ```
 
-**功能：** （预留事件，暂未支持）表示取消与远程蓝牙设备的连接的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示取消与远程蓝牙设备的连接的公共事件的动作。
 
 **类型：** String
 
@@ -947,7 +952,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_CANCEL: String =
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_REPLY: String = "usual.event.bluetooth.remotedevice.CONNECT_REPLY"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备连接请求响应的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备连接请求响应的公共事件的动作。
 
 **类型：** String
 
@@ -961,7 +966,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_REPLY: String = 
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_REQ: String = "usual.event.bluetooth.remotedevice.CONNECT_REQ"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备连接请求的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备连接请求的公共事件的动作。
 
 **类型：** String
 
@@ -975,7 +980,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_CONNECT_REQ: String = "u
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_DISCOVERED: String = "usual.event.bluetooth.remotedevice.DISCOVERED"
 ```
 
-**功能：** （预留事件，暂未支持）表示发现远程蓝牙设备的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示发现远程蓝牙设备的公共事件的动作。
 
 **类型：** String
 
@@ -989,7 +994,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_DISCOVERED: String = "us
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_NAME_UPDATE: String = "usual.event.bluetooth.remotedevice.NAME_UPDATE"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备的友好名称首次被检索或自上次检索以来被更改的公共事件的操作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备的友好名称首次被检索或自上次检索以来被更改的公共事件的操作。
 
 **类型：** String
 
@@ -1003,7 +1008,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_NAME_UPDATE: String = "u
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_PAIRING_CANCEL: String = "usual.event.bluetooth.remotedevice.PAIRING_CANCEL"
 ```
 
-**功能：** （预留事件，暂未支持）取消蓝牙配对的公共事件的动作。
+**功能：**（预留事件，暂未支持）取消蓝牙配对的公共事件的动作。
 
 **类型：** String
 
@@ -1017,7 +1022,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_PAIRING_CANCEL: String =
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_PAIRING_REQ: String = "usual.event.bluetooth.remotedevice.PAIRING_REQ"
 ```
 
-**功能：** （预留事件，暂未支持）表示远程蓝牙设备配对请求的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示远程蓝牙设备配对请求的公共事件的动作。
 
 **类型：** String
 
@@ -1047,7 +1052,7 @@ public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_PAIR_STATE: String = "us
 public static const COMMON_EVENT_BLUETOOTH_REMOTEDEVICE_SDP_RESULT: String = "usual.event.bluetooth.remotedevice.SDP_RESULT"
 ```
 
-**功能：** （预留事件，暂未支持）远程蓝牙设备SDP状态公共事件的动作。
+**功能：**（预留事件，暂未支持）远程蓝牙设备SDP状态公共事件的动作。
 
 **类型：** String
 
@@ -1151,7 +1156,7 @@ public static const COMMON_EVENT_CHARGING: String = "usual.event.CHARGING"
 public static const COMMON_EVENT_CLOSE_SYSTEM_DIALOGS: String = "usual.event.CLOSE_SYSTEM_DIALOGS"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户关闭临时系统对话框的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户关闭临时系统对话框的公共事件的动作。
 
 **类型：** String
 
@@ -1165,7 +1170,7 @@ public static const COMMON_EVENT_CLOSE_SYSTEM_DIALOGS: String = "usual.event.CLO
 public static const COMMON_EVENT_CONFIGURATION_CHANGED: String = "usual.event.CONFIGURATION_CHANGED"
 ```
 
-**功能：** （预留事件，暂未支持）表示设备状态（例如，方向和区域设置）已更改的公共事件的操作。
+**功能：**（预留事件，暂未支持）表示设备状态（例如，方向和区域设置）已更改的公共事件的操作。
 
 **类型：** String
 
@@ -1203,7 +1208,7 @@ public static const COMMON_EVENT_CONNECTIVITY_CHANGE: String = "usual.event.CONN
 public static const COMMON_EVENT_DATE_CHANGED: String = "usual.event.DATE_CHANGED"
 ```
 
-**功能：** （预留事件，暂未支持）表示系统日期已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示系统日期已更改的公共事件的动作。
 
 **类型：** String
 
@@ -1249,7 +1254,7 @@ public static const COMMON_EVENT_DISCHARGING: String = "usual.event.DISCHARGING"
 public static const COMMON_EVENT_DISK_BAD_REMOVAL: String = "usual.event.data.DISK_BAD_REMOVAL"
 ```
 
-**功能：** （预留事件，暂未支持）外部存储设备状态变更为挂载状态下移除时发送此公共事件。
+**功能：**（预留事件，暂未支持）外部存储设备状态变更为挂载状态下移除时发送此公共事件。
 
 **类型：** String
 
@@ -1263,7 +1268,7 @@ public static const COMMON_EVENT_DISK_BAD_REMOVAL: String = "usual.event.data.DI
 public static const COMMON_EVENT_DISK_EJECT: String = "usual.event.data.DISK_EJECT"
 ```
 
-**功能：** （预留事件，暂未支持）用户已表示希望删除外部存储介质时发送此公共事件。
+**功能：**（预留事件，暂未支持）用户已表示希望删除外部存储介质时发送此公共事件。
 
 **类型：** String
 
@@ -1277,7 +1282,7 @@ public static const COMMON_EVENT_DISK_EJECT: String = "usual.event.data.DISK_EJE
 public static const COMMON_EVENT_DISK_MOUNTED: String = "usual.event.data.DISK_MOUNTED"
 ```
 
-**功能：** （预留事件，暂未支持）外部存储设备状态变更为挂载时发送此公共事件。
+**功能：**（预留事件，暂未支持）外部存储设备状态变更为挂载时发送此公共事件。
 
 **类型：** String
 
@@ -1291,7 +1296,7 @@ public static const COMMON_EVENT_DISK_MOUNTED: String = "usual.event.data.DISK_M
 public static const COMMON_EVENT_DISK_REMOVED: String = "usual.event.data.DISK_REMOVED"
 ```
 
-**功能：** （预留事件，暂未支持）外部存储设备状态变更为移除时发送此公共事件。
+**功能：**（预留事件，暂未支持）外部存储设备状态变更为移除时发送此公共事件。
 
 **类型：** String
 
@@ -1305,7 +1310,7 @@ public static const COMMON_EVENT_DISK_REMOVED: String = "usual.event.data.DISK_R
 public static const COMMON_EVENT_DISK_UNMOUNTABLE: String = "usual.event.data.DISK_UNMOUNTABLE"
 ```
 
-**功能：** （预留事件，暂未支持）外部存储设备状态变更为插卡情况下无法挂载时发送此公共事件。
+**功能：**（预留事件，暂未支持）外部存储设备状态变更为插卡情况下无法挂载时发送此公共事件。
 
 **类型：** String
 
@@ -1319,7 +1324,7 @@ public static const COMMON_EVENT_DISK_UNMOUNTABLE: String = "usual.event.data.DI
 public static const COMMON_EVENT_DISK_UNMOUNTED: String = "usual.event.data.DISK_UNMOUNTED"
 ```
 
-**功能：** （预留事件，暂未支持）外部存储设备状态变更为卸载时发送此公共事件。
+**功能：**（预留事件，暂未支持）外部存储设备状态变更为卸载时发送此公共事件。
 
 **类型：** String
 
@@ -1397,7 +1402,7 @@ public static const COMMON_EVENT_DISTRIBUTED_ACCOUNT_TOKEN_INVALID: String = "co
 public static const COMMON_EVENT_DRIVE_MODE: String = "common.event.DRIVE_MODE"
 ```
 
-**功能：** （预留事件，暂未支持）表示系统处于驾驶模式的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示系统处于驾驶模式的公共事件的动作。
 
 **类型：** String
 
@@ -1411,7 +1416,7 @@ public static const COMMON_EVENT_DRIVE_MODE: String = "common.event.DRIVE_MODE"
 public static const COMMON_EVENT_EXTERNAL_APPLICATIONS_AVAILABLE: String = "usual.event.EXTERNAL_APPLICATIONS_AVAILABLE"
 ```
 
-**功能：** （预留事件，暂未支持）表示安装在外部存储上的应用程序对系统可用的公共事件的操作。
+**功能：**（预留事件，暂未支持）表示安装在外部存储上的应用程序对系统可用的公共事件的操作。
 
 **类型：** String
 
@@ -1425,7 +1430,7 @@ public static const COMMON_EVENT_EXTERNAL_APPLICATIONS_AVAILABLE: String = "usua
 public static const COMMON_EVENT_EXTERNAL_APPLICATIONS_UNAVAILABLE: String = "usual.event.EXTERNAL_APPLICATIONS_UNAVAILABLE"
 ```
 
-**功能：** （预留事件，暂未支持）表示安装在外部存储上的应用程序对系统不可用的公共事件的操作。
+**功能：**（预留事件，暂未支持）表示安装在外部存储上的应用程序对系统不可用的公共事件的操作。
 
 **类型：** String
 
@@ -1439,7 +1444,7 @@ public static const COMMON_EVENT_EXTERNAL_APPLICATIONS_UNAVAILABLE: String = "us
 public static const COMMON_EVENT_FOUNDATION_READY: String = "common.event.FOUNDATION_READY"
 ```
 
-**功能：** （预留事件，暂未支持）表示foundation已准备好的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示foundation已准备好的公共事件的动作。
 
 **类型：** String
 
@@ -1453,7 +1458,7 @@ public static const COMMON_EVENT_FOUNDATION_READY: String = "common.event.FOUNDA
 public static const COMMON_EVENT_HOME_MODE: String = "common.event.HOME_MODE"
 ```
 
-**功能：** （预留事件，暂未支持）表示系统处于HOME模式的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示系统处于HOME模式的公共事件的动作。
 
 **类型：** String
 
@@ -1483,7 +1488,7 @@ public static const COMMON_EVENT_HTTP_PROXY_CHANGE: String = "usual.event.HTTP_P
 public static const COMMON_EVENT_IVI_ACTIVE: String = "common.event.IVI_ACTIVE"
 ```
 
-**功能：** （预留事件，暂未支持）表示电池服务处于活动状态的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示电池服务处于活动状态的公共事件的动作。
 
 **类型：** String
 
@@ -1497,7 +1502,7 @@ public static const COMMON_EVENT_IVI_ACTIVE: String = "common.event.IVI_ACTIVE"
 public static const COMMON_EVENT_IVI_EXTREME_TEMPERATURE: String = "common.event.IVI_EXTREME_TEMPERATURE"
 ```
 
-**功能：** （预留事件，暂未支持）表示IVI温度极高。
+**功能：**（预留事件，暂未支持）表示IVI温度极高。
 
 **类型：** String
 
@@ -1511,7 +1516,7 @@ public static const COMMON_EVENT_IVI_EXTREME_TEMPERATURE: String = "common.event
 public static const COMMON_EVENT_IVI_HIGH_TEMPERATURE: String = "common.event.IVI_HIGH_TEMPERATURE"
 ```
 
-**功能：** （预留事件，暂未支持）表示IVI温度过高。
+**功能：**（预留事件，暂未支持）表示IVI温度过高。
 
 **类型：** String
 
@@ -1525,7 +1530,7 @@ public static const COMMON_EVENT_IVI_HIGH_TEMPERATURE: String = "common.event.IV
 public static const COMMON_EVENT_IVI_LAST_MODE_SAVE: String = "common.event.IVI_LASTMODE_SAVE"
 ```
 
-**功能：** （预留事件，暂未支持）表示第三方应用保存其最后一个模式的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示第三方应用保存其最后一个模式的公共事件的动作。
 
 **类型：** String
 
@@ -1539,7 +1544,7 @@ public static const COMMON_EVENT_IVI_LAST_MODE_SAVE: String = "common.event.IVI_
 public static const COMMON_EVENT_IVI_PAUSE: String = "common.event.IVI_PAUSE"
 ```
 
-**功能：** （预留事件，暂未支持）表示IVI已休眠，并通知应用程序停止播放。
+**功能：**（预留事件，暂未支持）表示IVI已休眠，并通知应用程序停止播放。
 
 **类型：** String
 
@@ -1553,7 +1558,7 @@ public static const COMMON_EVENT_IVI_PAUSE: String = "common.event.IVI_PAUSE"
 public static const COMMON_EVENT_IVI_SLEEP: String = "common.event.IVI_SLEEP"
 ```
 
-**功能：** （预留事件，暂未支持）表示表示车辆的车载信息娱乐（IVI）系统正在休眠的常见事件的动作。
+**功能：**（预留事件，暂未支持）表示表示车辆的车载信息娱乐（IVI）系统正在休眠的常见事件的动作。
 
 **类型：** String
 
@@ -1567,7 +1572,7 @@ public static const COMMON_EVENT_IVI_SLEEP: String = "common.event.IVI_SLEEP"
 public static const COMMON_EVENT_IVI_STANDBY: String = "common.event.IVI_STANDBY"
 ```
 
-**功能：** （预留事件，暂未支持）表示第三方应用暂停当前工作的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示第三方应用暂停当前工作的公共事件的动作。
 
 **类型：** String
 
@@ -1581,7 +1586,7 @@ public static const COMMON_EVENT_IVI_STANDBY: String = "common.event.IVI_STANDBY
 public static const COMMON_EVENT_IVI_TEMPERATURE_ABNORMAL: String = "common.event.IVI_TEMPERATURE_ABNORMAL"
 ```
 
-**功能：** （预留事件，暂未支持）表示车载系统具有极端温度的常见事件的动作。
+**功能：**（预留事件，暂未支持）表示车载系统具有极端温度的常见事件的动作。
 
 **类型：** String
 
@@ -1595,7 +1600,7 @@ public static const COMMON_EVENT_IVI_TEMPERATURE_ABNORMAL: String = "common.even
 public static const COMMON_EVENT_IVI_TEMPERATURE_RECOVERY: String = "common.event.IVI_TEMPERATURE_RECOVERY"
 ```
 
-**功能：** （预留事件，暂未支持）表示车载系统温度恢复正常的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示车载系统温度恢复正常的公共事件的动作。
 
 **类型：** String
 
@@ -1609,7 +1614,7 @@ public static const COMMON_EVENT_IVI_TEMPERATURE_RECOVERY: String = "common.even
 public static const COMMON_EVENT_IVI_VOLTAGE_ABNORMAL: String = "common.event.IVI_VOLTAGE_ABNORMAL"
 ```
 
-**功能：** （预留事件，暂未支持）表示车辆电源系统电压异常的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示车辆电源系统电压异常的公共事件的动作。
 
 **类型：** String
 
@@ -1623,7 +1628,7 @@ public static const COMMON_EVENT_IVI_VOLTAGE_ABNORMAL: String = "common.event.IV
 public static const COMMON_EVENT_IVI_VOLTAGE_RECOVERY: String = "common.event.IVI_VOLTAGE_RECOVERY"
 ```
 
-**功能：** （预留事件，暂未支持）表示车辆电源系统电压恢复正常的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示车辆电源系统电压恢复正常的公共事件的动作。
 
 **类型：** String
 
@@ -1652,7 +1657,7 @@ public static const COMMON_EVENT_LOCALE_CHANGED: String = "usual.event.LOCALE_CH
 public static const COMMON_EVENT_LOCATION_MODE_STATE_CHANGED: String = "usual.event.location.MODE_STATE_CHANGED"
 ```
 
-**功能：** （预留事件，暂未支持）表示系统定位模式已更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示系统定位模式已更改的公共事件的动作。
 
 **类型：** String
 
@@ -1666,7 +1671,7 @@ public static const COMMON_EVENT_LOCATION_MODE_STATE_CHANGED: String = "usual.ev
 public static const COMMON_EVENT_LOCKED_BOOT_COMPLETED: String = "usual.event.LOCKED_BOOT_COMPLETED"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户已完成引导，系统已加载，但屏幕仍锁定的公共事件。
+**功能：**（预留事件，暂未支持）表示用户已完成引导，系统已加载，但屏幕仍锁定的公共事件。
 
 **类型：** String
 
@@ -1694,7 +1699,7 @@ public static const COMMON_EVENT_MANAGE_PACKAGE_STORAGE: String = "usual.event.M
 public static const COMMON_EVENT_MY_PACKAGE_REPLACED: String = "usual.event.MY_PACKAGE_REPLACED"
 ```
 
-**功能：** （预留事件，暂未支持）表示设备上安装了新版本的应用程序包并替换了旧版本的应用程序包的动作，不包含额外的数据，只发送给被替换的应用程序。
+**功能：**（预留事件，暂未支持）表示设备上安装了新版本的应用程序包并替换了旧版本的应用程序包的动作，不包含额外的数据，只发送给被替换的应用程序。
 
 **类型：** String
 
@@ -1800,7 +1805,7 @@ public static const COMMON_EVENT_NFC_ACTION_RF_FIELD_ON_DETECTED: String = "usua
 public static const COMMON_EVENT_OFFICE_MODE: String = "common.event.OFFICE_MODE"
 ```
 
-**功能：** （预留事件，暂未支持）表示系统处于办公模式的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示系统处于办公模式的公共事件的动作。
 
 **类型：** String
 
@@ -1828,7 +1833,7 @@ public static const COMMON_EVENT_PACKAGES_SUSPENDED: String = "usual.event.PACKA
 public static const COMMON_EVENT_PACKAGES_UNSUSPENDED: String = "usual.event.PACKAGES_UNSUSPENDED"
 ```
 
-**功能：** （预留事件，暂未支持）表示包已经被解除挂起。
+**功能：**（预留事件，暂未支持）表示包已经被解除挂起。
 
 **类型：** String
 
@@ -1848,7 +1853,7 @@ public static const COMMON_EVENT_PACKAGE_ADDED: String = "usual.event.PACKAGE_AD
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的安装事件。
+> 三方应用只能监听自身应用的安装事件。
 
 **类型：** String
 
@@ -1868,7 +1873,7 @@ public static const COMMON_EVENT_PACKAGE_CACHE_CLEARED: String = "usual.event.PA
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的缓存清理事件。
+> 三方应用只能监听自身应用的缓存清理事件。
 
 **类型：** String
 
@@ -1888,7 +1893,7 @@ public static const COMMON_EVENT_PACKAGE_CHANGED: String = "usual.event.PACKAGE_
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的更改事件。
+> 三方应用只能监听自身应用的更改事件。
 
 **类型：** String
 
@@ -1908,7 +1913,7 @@ public static const COMMON_EVENT_PACKAGE_DATA_CLEARED: String = "usual.event.PAC
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的数据清理事件。
+> 三方应用只能监听自身应用的数据清理事件。
 
 **类型：** String
 
@@ -1922,7 +1927,7 @@ public static const COMMON_EVENT_PACKAGE_DATA_CLEARED: String = "usual.event.PAC
 public static const COMMON_EVENT_PACKAGE_FIRST_LAUNCH: String = "usual.event.PACKAGE_FIRST_LAUNCH"
 ```
 
-**功能：** （预留事件，暂未支持）应用程序在安装后首次启动。
+**功能：**（预留事件，暂未支持）应用程序在安装后首次启动。
 
 **类型：** String
 
@@ -1950,7 +1955,7 @@ public static const COMMON_EVENT_PACKAGE_FULLY_REMOVED: String = "usual.event.PA
 public static const COMMON_EVENT_PACKAGE_NEEDS_VERIFICATION: String = "usual.event.PACKAGE_NEEDS_VERIFICATION"
 ```
 
-**功能：** （预留事件，暂未支持）当一个包需要被验证时，由系统包验证者发送。
+**功能：**（预留事件，暂未支持）当一个包需要被验证时，由系统包验证者发送。
 
 **类型：** String
 
@@ -1970,7 +1975,7 @@ public static const COMMON_EVENT_PACKAGE_REMOVED: String = "usual.event.PACKAGE_
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的卸载事件。
+> 三方应用只能监听自身应用的卸载事件。
 
 **类型：** String
 
@@ -1984,7 +1989,7 @@ public static const COMMON_EVENT_PACKAGE_REMOVED: String = "usual.event.PACKAGE_
 public static const COMMON_EVENT_PACKAGE_REPLACED: String = "usual.event.PACKAGE_REPLACED"
 ```
 
-**功能：** （预留事件，暂未支持）表示设备上安装了新版本的应用程序包并替换了旧版本的动作。数据包含包的名称。
+**功能：**（预留事件，暂未支持）表示设备上安装了新版本的应用程序包并替换了旧版本的动作。数据包含包的名称。
 
 **类型：** String
 
@@ -2004,7 +2009,7 @@ public static const COMMON_EVENT_PACKAGE_RESTARTED: String = "usual.event.PACKAG
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的重启事件。
+> 三方应用只能监听自身应用的重启事件。
 
 **类型：** String
 
@@ -2018,7 +2023,7 @@ public static const COMMON_EVENT_PACKAGE_RESTARTED: String = "usual.event.PACKAG
 public static const COMMON_EVENT_PACKAGE_VERIFIED: String = "usual.event.PACKAGE_VERIFIED"
 ```
 
-**功能：** （预留事件，暂未支持）当一个包被验证时，由系统包验证者发送。
+**功能：**（预留事件，暂未支持）当一个包被验证时，由系统包验证者发送。
 
 **类型：** String
 
@@ -2086,7 +2091,7 @@ public static const COMMON_EVENT_QUICK_FIX_APPLY_RESULT: String = "usual.event.Q
 
 > **说明：**
 >
-> - 三方应用只能监听自身应用的快速修复事件。
+> 三方应用只能监听自身应用的快速修复事件。
 
 **类型：** String
 
@@ -2131,7 +2136,7 @@ public static const COMMON_EVENT_SCREEN_LOCKED: String = "usual.event.SCREEN_LOC
 public static const COMMON_EVENT_SCREEN_OFF: String = "usual.event.SCREEN_OFF"
 ```
 
-**功能：** 表表示由电源服务发起的设备灭屏完成的普通事件的动作。
+**功能：** 表示由电源服务发起的设备灭屏完成的普通事件的动作。
 
 当由电源服务发起的设备灭屏完成时，将会触发事件通知服务发布该系统公共事件。
 
@@ -2336,7 +2341,7 @@ public static const COMMON_EVENT_TIME_TICK: String = "usual.event.TIME_TICK"
 public static const COMMON_EVENT_UID_REMOVED: String = "usual.event.UID_REMOVED"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户ID已从系统中删除的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户ID已从系统中删除的公共事件的动作。
 
 **类型：** String
 
@@ -2350,7 +2355,7 @@ public static const COMMON_EVENT_UID_REMOVED: String = "usual.event.UID_REMOVED"
 public static const COMMON_EVENT_USB_ACCESSORY_ATTACHED: String = "usual.event.hardware.usb.action.USB_ACCESSORY_ATTACHED"
 ```
 
-**功能：** （预留事件，暂未支持）表示已连接USB附件的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示已连接USB附件的公共事件的动作。
 
 **类型：** String
 
@@ -2364,7 +2369,7 @@ public static const COMMON_EVENT_USB_ACCESSORY_ATTACHED: String = "usual.event.h
 public static const COMMON_EVENT_USB_ACCESSORY_DETACHED: String = "usual.event.hardware.usb.action.USB_ACCESSORY_DETACHED"
 ```
 
-**功能：** （预留事件，暂未支持）表示USB附件被卸载的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示USB附件被卸载的公共事件的动作。
 
 **类型：** String
 
@@ -2456,7 +2461,7 @@ public static const COMMON_EVENT_USER_ADDED: String = "usual.event.USER_ADDED"
 public static const COMMON_EVENT_USER_BACKGROUND: String = "usual.event.USER_BACKGROUND"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户已被带到后台的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户已被带到后台的公共事件的动作。
 
 **类型：** String
 
@@ -2470,7 +2475,7 @@ public static const COMMON_EVENT_USER_BACKGROUND: String = "usual.event.USER_BAC
 public static const COMMON_EVENT_USER_FOREGROUND: String = "usual.event.USER_FOREGROUND"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户已被带到前台的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户已被带到前台的公共事件的动作。
 
 **类型：** String
 
@@ -2514,7 +2519,7 @@ public static const COMMON_EVENT_USER_REMOVED: String = "usual.event.USER_REMOVE
 public static const COMMON_EVENT_USER_STARTED: String = "usual.event.USER_STARTED"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户已启动的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户已启动的公共事件的动作。
 
 **类型：** String
 
@@ -2528,7 +2533,7 @@ public static const COMMON_EVENT_USER_STARTED: String = "usual.event.USER_STARTE
 public static const COMMON_EVENT_USER_STARTING: String = "usual.event.USER_STARTING"
 ```
 
-**功能：** （预留事件，暂未支持）表示要启动用户的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示要启动用户的公共事件的动作。
 
 **类型：** String
 
@@ -2542,7 +2547,7 @@ public static const COMMON_EVENT_USER_STARTING: String = "usual.event.USER_START
 public static const COMMON_EVENT_USER_STOPPED: String = "usual.event.USER_STOPPED"
 ```
 
-**功能：** （预留事件，暂未支持）表示用户已停止的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示用户已停止的公共事件的动作。
 
 **类型：** String
 
@@ -2556,7 +2561,7 @@ public static const COMMON_EVENT_USER_STOPPED: String = "usual.event.USER_STOPPE
 public static const COMMON_EVENT_USER_STOPPING: String = "usual.event.USER_STOPPING"
 ```
 
-**功能：** （预留事件，暂未支持）表示要停止用户的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示要停止用户的公共事件的动作。
 
 **类型：** String
 
@@ -2600,7 +2605,7 @@ public static const COMMON_EVENT_USER_UNLOCKED: String = "usual.event.USER_UNLOC
 public static const COMMON_EVENT_VISIBLE_ACCOUNTS_UPDATED: String = "usual.event.data.VISIBLE_ACCOUNTS_UPDATED"
 ```
 
-**功能：** （预留事件，暂未支持）表示账户可见更改的公共事件的动作。
+**功能：**（预留事件，暂未支持）表示账户可见更改的公共事件的动作。
 
 **类型：** String
 

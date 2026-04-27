@@ -60,6 +60,8 @@ struct Rectangle {
 
 一个 `struct` 中最多允许定义一个静态初始化器，否则报重定义错误。
 
+<!-- compile.error -->
+
 ```cangjie
 struct Rectangle {
     static let degree: Int64
@@ -78,6 +80,8 @@ struct Rectangle {
 
 普通构造函数以关键字 `init` 开头，后跟参数列表和函数体，函数体中必须完成对所有未初始化的实例成员变量的初始化（如果参数名和成员变量名无法区分，可以在成员变量前使用 `this` 加以区分，`this` 表示 `struct` 的当前实例），否则编译报错。
 
+<!-- compile.error -->
+
 ```cangjie
 struct Rectangle {
     let width: Int64
@@ -91,6 +95,8 @@ struct Rectangle {
 
 一个 `struct` 中可以定义多个普通构造函数，但它们必须构成重载（参见[函数重载](../function/function_overloading.md)），否则报重定义错误。
 
+<!-- compile.error -->
+
 ```cangjie
 struct Rectangle {
     let width: Int64
@@ -101,7 +107,7 @@ struct Rectangle {
         this.height = width
     }
 
-    public init(width: Int64, height: Int64) { // Ok: overloading with the first init function
+    public init(width: Int64, height: Int64) { // OK: overloading with the first init function
         this.width = width
         this.height = height
     }
@@ -190,7 +196,7 @@ struct Rectangle {
 
 ## struct 成员的访问修饰符
 
-`struct` 的成员（包括成员变量、成员属性、构造函数、成员函数、操作符函数（详见[操作符重载](../function/operator_overloading.md)章节））用 4 种访问修饰符修饰：`private`、`internal`、`protected` 和 `public`，缺省的修饰符是 `internal`。
+`struct` 的成员包括成员变量、成员属性、构造函数、成员函数、操作符函数（详见[操作符重载](../function/operator_overloading.md)），这些成员可使用四种访问修饰符：`private`、`internal`、`protected` 和 `public`，缺省的修饰符是 `internal`。
 
 - `private` 表示在 `struct` 定义内可见。
 - `internal` 表示仅当前包及子包（包括子包的子包，详见[包](../package/toplevel_access.md)章节）内可见。
@@ -199,37 +205,50 @@ struct Rectangle {
 
 下面的例子中，`width` 是 `public` 修饰的成员，在类外可以访问，`height` 是缺省访问修饰符的成员，仅在当前包及子包可见，其他包无法访问。
 
+<!-- compile.error -->
+
 ```cangjie
 package a
 public struct Rectangle {
     public var width: Int64
     var height: Int64
     private var area: Int64
-    ...
+
+    public init(width: Int64, height: Int64, area: Int64) {
+        this.width = width
+        this.height = height
+        this.area = area
+    }
 }
 
 func samePkgFunc() {
-    var r = Rectangle(10, 20)
-    r.width = 8               // Ok: public 'width' can be accessed here
-    r.height = 24             // Ok: 'height' has no modifier and can be accessed here
+    var r = Rectangle(10, 20, 40)
+    r.width = 8               // OK: public 'width' can be accessed here
+    r.height = 24             // OK: 'height' has no modifier and can be accessed here
     r.area = 30               // Error, private 'area' can't be accessed here
 }
 ```
 
+<!-- compile.error -->
+<!-- cfg="-p b --output-type=staticlib" -->
+<!-- cfg="liba.a" -->
+
 ```cangjie
 package b
 import a.*
+
 main() {
-    var r = Rectangle(10, 20)
-    r.width = 8               // Ok: public 'width' can be accessed here
-    r.height = 24             // Error, no modifier 'height' can't be accessed here
-    r.area = 30               // Error, private 'area' can't be accessed here
+    r.width = 8     // OK: public 'width' can be accessed here
+    r.height = 24   // Error, no modifier 'height' can't be accessed here
+    r.area = 30     // Error, private 'area' can't be accessed here
 }
 ```
 
 ## 禁止递归 struct
 
 递归和互递归定义的 `struct` 均是非法的。例如：
+
+<!-- compile.error -->
 
 ```cangjie
 struct R1 { // Error, 'R1' recursively references itself

@@ -1,5 +1,11 @@
 # 创建网格（Grid/GridItem）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 概述
 
 网格布局是由“行”和“列”分割的单元格所组成，通过指定“项目”所在的单元格做出各种各样的布局。网格布局具有较强的页面均分能力，子组件占比控制能力，是一种重要自适应布局，其使用场景有九宫格图片展示、日历、计算器等。
@@ -202,7 +208,7 @@ class EntryView {
 
 ![GridItem7](figures/GridItem7.gif)
 
-Grid组件初始化时，可以绑定一个[Scroller](../reference/arkui-cj/cj-scroll-swipe-scroll.md#scroll)对象，用于进行滚动控制，例如通过Scroller对象的[scrollPage](../reference/arkui-cj/cj-scroll-swipe-scroll.md#func-scrollpagebool)方法进行翻页。
+Grid组件初始化时，可以绑定一个[Scroller](../reference/arkui-cj/cj-scroll-swipe-scroll.md)对象，用于进行滚动控制，例如通过Scroller对象的scrollPage方法进行翻页。
 
 ```cangjie
 var scroller: Scroller = Scroller()

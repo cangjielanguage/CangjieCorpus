@@ -1,27 +1,28 @@
 # HashMap 的 add/remove/clear 函数
 
-此用例展示了 HashMap 的基本使用方法。
+此示例展示了 HashMap 的基本使用方法。
 
-代码如下：
+示例：
 
 <!-- verify -->
 
 ```cangjie
 import std.collection.*
+
 main() {
     var map: HashMap<String, Int64> = HashMap<String, Int64>()
     var arr: Array<(String, Int64)> = [("d", 11), ("e", 12)]
     map.add("a", 13)
     print("a=${map.get("a").getOrThrow()} ")
-    map.add(all: arr) // map : [("d", 11), ("e", 12)]
+    map.add(all: arr) // map : [("a", 13), ("d", 11), ("e", 12)]
     var d = map.get("d")
     print("d=${d.getOrThrow()} ")
-    map.remove("d") // map : [("e", 12)]
+    map.remove("d") // map : [("a", 13), ("e", 12)]
     var bool = map.contains("d")
-    print("bool=${bool.toString()} ")
+    print("bool=${bool} ")
     map.clear() // map: []
     var bool1 = map.contains("e")
-    print("bool1=${bool1.toString()}")
+    print("bool1=${bool1}")
     return 0
 }
 ```

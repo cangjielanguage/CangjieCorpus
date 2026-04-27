@@ -1,5 +1,11 @@
 # 拉起文件处理类应用（startAbility）
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 使用场景
 
 例如，浏览器下应用下载PDF文件，可以调用此接口选择文件处理应用打开此PDF文件。开发者需要在请求中设置待打开文件的URI路径（[uri](#接口关键参数说明)）、文件格式（[type](#接口关键参数说明)）等字段，以便系统能够识别，直接拉起文件打开应用或弹出一个选择框，让用户选择合适的应用来打开文件，效果示意如下图所示。
@@ -18,8 +24,8 @@
 |----------|--------|----------|----------|
 | uri      | String | 是       | 表示待打开文件的URI路径，一般配合type使用。<br/>uri格式为：file:\/\/bundleName\/path<br/>- file：文件URI的标志。<br/>- bundleName：该文件资源的属主。<br/>- path：文件资源在应用沙箱中的路径。 |
 | type     | String | 否       | 表示打开文件的类型，推荐使用[UTD类型](../database/cj-uniform-data-type-list.md#基础类型)，比如：'general.plain-text'、'general.image'。目前也可以兼容使用[MIME type类型](https://www.iana.org/assignments/media-types/media-types.xhtml?utm_source=ld246.com)，如：'text/xml' 、 'image/*'等。<br/>**说明：** <br/>1. type为可选字段，如果不传type，系统会尝试根据uri后缀名判断文件类型进行匹配；如果传入type，必须确保与uri的文件类型一致，否则会导致无法匹配到合适的应用。文件后缀与文件类型的映射关系参见[Uniform Type Descriptor(UTD)预置列表](../database/cj-uniform-data-type-list.md)。<br/>2. 不支持传\*/\*。|
-| parameters | String      | 否         | 表示由系统定义，由开发者按需赋值的自定义参数，文件打开场景请参见表2。                                                                                                                                                                                       |
-| flags | UInt32 | 否 | 表示处理方式，文件打开场景请参见表3。                                                                                                                                                                                       |
+| parameters | String      | 否         | 表示由系统定义，由开发者按需赋值的自定义参数，文件打开场景请参见表2。|
+| flags | UInt32 | 否 | 表示处理方式，文件打开场景请参见表3。|
 
 **表2** [parameters](../reference/AbilityKit/cj-apis-app-ability-want_constant.md#class-params)相关参数说明
 
@@ -45,7 +51,6 @@
     <!-- compile -->
 
     ```cangjie
-
     import kit.AbilityKit.{UIAbility, Want, LaunchParam, Flags, WantValueType}
     import kit.ArkUI.WindowStage
     import kit.CoreFileKit.FileUri
@@ -59,7 +64,6 @@
     <!-- compile -->
 
     ```cangjie
-
     // 假设应用bundleName值为com.example.demo
     class MainAbility <: UIAbility {
         public override func onWindowStageCreate(windowStage: WindowStage): Unit {
@@ -80,7 +84,6 @@
     <!-- compile -->
 
     ```cangjie
-
     // 假设应用bundleName值为com.example.demo
     class MainAbility <: UIAbility {
         public override func onWindowStageCreate(windowStage: WindowStage): Unit {
@@ -115,10 +118,9 @@
     <!-- compile -->
 
     ```cangjie
-
     class MainAbility <: UIAbility {
         public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            // 打印日志，Hilog用法见[使用hilog打印日志仓颉](../dfx/cj-hilog-guidelines.md#使用hilog打印日志仓颉)
+            // 打印日志
             Hilog.info(1, "info", "MainAbility onWindowStageCreate.")
             // 获取文件沙箱路径
             let filePath = this
@@ -157,7 +159,7 @@
 
 1. 声明文件打开能力。
 
-    支持打开文件的应用需要在[module.json5](../cj-start/basic-knowledge/module-configuration-file.md)配置文件中声明文件打开能力。其中uris字段表示接收URI的类型，其中scheme固定为file。type字段表示支持打开的文件类型（参见[MIME type类型](https://www.iana.org/assignments/media-types/media-types.xhtml?utm_source=ld246.com)），如下举例中类型为txt文件。
+    支持打开文件的应用需要在[module.json5](../cj-start/basic-knowledge/cj-module-configuration-file.md)配置文件中声明文件打开能力。其中uris字段表示接收URI的类型，其中scheme固定为file。type字段表示支持打开的文件类型（参见[MIME type类型](https://www.iana.org/assignments/media-types/media-types.xhtml?utm_source=ld246.com)），如下举例中类型为txt文件。
 
     ```json
     {
@@ -194,7 +196,6 @@
     <!-- compile -->
 
     ```cangjie
-
     import kit.AbilityKit.{UIAbility, Want, LaunchParam}
     import kit.ArkUI.{WindowStage}
     import kit.CoreFileKit.{FileIo, OpenMode}

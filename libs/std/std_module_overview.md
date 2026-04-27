@@ -1,4 +1,4 @@
-# 仓颉编程语言标准库 API
+# 仓颉编程语言标准库概述
 
 仓颉编程语言标准库（std）是安装仓颉 SDK 时默认自带的库。标准库预先定义了一组函数、类、结构体等，旨在提供常用的功能和工具，以便开发者能够更快速、更高效地编写程序。
 
@@ -7,6 +7,26 @@
 - 使用方便：标准库随编译器、工具链一起发布，不需要用户另外下载，开箱即用。
 - 功能通用：标准库提供了开发者最常使用的一些库能力，旨在为开发者解决大部分基础问题。
 - 质量标杆：标准库追求在性能、代码风格等方面为其他仓颉库树立范例和标杆。
+
+## 平台支持说明
+
+标准库提供的 API 支持在如下操作系统上运行：
+
+> **注意：**
+>
+> 部分 API 不支持在特定的操作系统运行，详情请参见对应 API 描述。
+
+| 操作系统       | CPU 架构  | 环境及其版本要求 |
+| ------------- | --------- | --------------- |
+| Linux         | x86_64    | glibc 2.22；Linux Kernel 4.12 或更高版本；系统安装 libstdc++ 6.0.24 或更高版本 |
+| Linux         | aarch64   | glibc 2.27；Linux Kernel 4.15 或更高版本；系统安装 libstdc++ 6.0.24 或更高版本 |
+| Windows       | x86_64    | Windows 10 或更高版本 |
+| macOS         | aarch64   | macOS 12.0 或更高版本 |
+| OpenHarmony   | aarch64   | OpenHarmony 5.1 或更高版本 |
+| OpenHarmony   | arm32     | OpenHarmony 5.1 或更高版本 |
+| HarmonyOS     | aarch64   | HarmonyOS 5.1 或更高版本 |
+| iOS           | aarch64   | iOS 11 或更高版本（ast 库需要 iOS 12 或更高版本） |
+| Android       | aarch64   | Android API 26 或更高版本 |
 
 ## 使用指导
 
@@ -76,7 +96,7 @@ std 含若干包，提供丰富的基础功能：
 | [net](./net/net_package_overview.md)                        | net 包提供常见的网络通信功能。 |
 | [objectpool](./objectpool/objectpool_package_overview.md)                        | objectpool 包提供了对象缓存和复用的功能。 |
 | [overflow](./overflow/overflow_package_overview.md)                        | overflow 包提供了溢出处理相关能力。 |
-| [posix](./posix/posix_package_overview.md)                        | posix 包主要适配 POSIX 系统接口。 |
+| [posix](./posix/posix_package_overview.md)                        | posix 包封装 POSIX 系统调用，提供跨平台的系统操作接口。 |
 | [process](./process/process_package_overview.md)                        | process 包主要提供 Process 进程操作接口，主要包括进程创建，标准流获取，进程等待，进程信息查询等。 |
 | [random](./random/random_package_overview.md)                        | random 包提供生成伪随机数的能力。 |
 | [reflect](./reflect/reflect_package_overview.md)                        | reflect 包提供了反射功能，使得程序在运行时能够获取到各种实例的类型信息，并进行各种读写和调用操作。 |

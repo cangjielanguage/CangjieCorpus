@@ -132,8 +132,8 @@ an initial value. The general syntax is:
 reduce({old, curr => new})(collection)  // returns Option value
 ```
 
-The return value has `Option` type, which is `None` of `collection` is empty.
-If you are sure the `collcetion` is nonempty, you can use `getOrThrow()` on
+The return value has `Option` type, which is `None` if `collection` is empty.
+If you are sure the `collection` is nonempty, you can use `getOrThrow()` on
 the result. 
 
 Using the pipe operator `|>` and the syntactic sugar of lambda function, one can equivalently write the above code
@@ -194,7 +194,7 @@ println(b)  // [1, 4, 9, 16]
 ```
 
 **Note:** the function `map` is used with collection as an argument at the end. Using
-syntax like `a.map(...)` is in correct.
+syntax like `a.map(...)` is incorrect.
 
 ## Using `flatMap` function
 

@@ -90,7 +90,7 @@ A
 
 绑定模式使用 `id` 表示，`id` 是一个合法的标识符。与通配符模式相比，绑定模式同样可以匹配任意值，但绑定模式会将匹配到的值与 `id` 进行绑定，在 `=>` 之后可以通过 `id` 访问其绑定的值。
 
-下面的例子中，最后一个 `case` 中使用了绑定模式，用于绑定非 `0` 值：
+下面的例子中，最后一个 `case` 中使用了绑定模式。其中，变量 `n` 属于 `id` 标识，用于绑定非 `0` 值：
 
 <!-- verify -->
 
@@ -242,7 +242,7 @@ main() {
 
 假设有如下两个类，`Base` 和 `Derived`，并且 `Derived` 是 `Base` 的子类，`Base` 的无参构造函数中将 `a` 的值设置为 `10`，`Derived` 的无参构造函数中将 `a` 的值设置为 `20`：
 
-<!-- verify -extend -->
+<!-- verify -mergeCase -->
 
 ```cangjie
 open class Base {
@@ -261,10 +261,10 @@ class Derived <: Base {
 
 下面的代码展示了使用类型模式并匹配成功的例子：
 
-<!-- verify -extend -->
+<!-- verify -mergeCase -->
 
 ```cangjie
-main() {
+func test1() {
     var d = Derived()
     var r = match (d) {
         case b: Base => b.a // Matched.
@@ -274,45 +274,36 @@ main() {
 }
 ```
 
-编译执行上述代码，输出结果为：
-
-<!-- verify -extend -->
-
-```text
-r = 20
-```
-
 下面的代码展示了使用类型模式但类型模式匹配失败的例子：
 
-<!-- verify -->
+<!-- verify -mergeCase -->
 
 ```cangjie
-open class Base {
-    var a: Int64
-    public init() {
-        a = 10
-    }
-}
-
-class Derived <: Base {
-    public init() {
-        a = 20
-    }
-}
-
-main() {
+func test2() {
     var b = Base()
     var r = match (b) {
-        case d: Derived => d.a // Type pattern match failed.
-        case _ => 0 // Matched.
+        case d: Derived => d.a  // Type pattern match failed.
+        case _ => 0             // Matched.
     }
     println("r = ${r}")
 }
 ```
 
-编译执行上述代码，输出结果为：
+<!-- verify -mergeCase -->
+
+```cangjie
+main() {
+    test1()
+    test2()
+}
+```
+
+编译执行上述代码，输出结果为（第一行为 test1 的输出结果，第二行则是 test2 的输出结果）：
+
+<!-- verify -mergeCase -->
 
 ```text
+r = 20
 r = 0
 ```
 
@@ -348,7 +339,7 @@ main() {
 x has 24 months
 ```
 
-使用 `|` 连接多个 enum 模式：
+当使用 `|` 连接多个 enum 模式时，每个模式必须独立且不能引入新的变量。这是因为 `|` 表示“或”的关系，而变量的引入需要明确的上下文，不能在多个模式之间共享。下面示例为反例示范，其中第五、六个 `case` 不符合该条规则：
 
 <!-- compile.error -->
 
@@ -361,13 +352,18 @@ enum TimeUnit {
 main() {
     let x = Year(2)
     let s = match (x) {
-        case Year(0) | Year(1) | Month(_) => "Ok" // Ok
-        case Year(2) | Month(m) => "invalid" // Error, Variable cannot be introduced in patterns connected by '|'
-        case Year(n: UInt64) | Month(n: UInt64) => "invalid" // Error, Variable cannot be introduced in patterns connected by '|'
+        case Year(5) => "1:OK"
+        case Month(m) => "2:OK"
+        case Year(0) | Year(1) | Month(_) => "3:OK"
+        case Year(_) => "4:OK"
+        case Year(2) | Month(m) => "5:invalid" // Error, Variable cannot be introduced in patterns connected by '|'
+        case Year(n: UInt64) | Month(n: UInt64) => "6:invalid" // Error, Variable cannot be introduced in patterns connected by '|'
     }
     println(s)
 }
 ```
+
+上述示例中，第二个 `case` 引入了一个新变量 `m`，但没有使用 `|` 连接其他模式，故此是合法的。
 
 使用 `match` 表达式匹配 `enum` 值时，要求 `case` 之后的模式要覆盖待匹配 `enum` 类型中的所有构造器，如果未做到完全覆盖，编译器将报错：
 

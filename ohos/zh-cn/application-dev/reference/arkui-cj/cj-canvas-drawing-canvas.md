@@ -1,5 +1,11 @@
 # Canvas
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 提供画布组件，用于自定义绘制图形。
 
 ## 导入模块
@@ -34,7 +40,7 @@ public init(context: ?CanvasRenderingContext2D)
 
 ## 通用属性/通用事件
 
-通用属性: 全部支持。
+通用属性：全部支持。
 
 通用事件：全部支持。
 
@@ -159,9 +165,7 @@ public let height: Float64
 ### class CanvasGradient
 
 ```cangjie
-public class CanvasGradient {
-    public func addColorStop(offset: Float64, color: ?ResourceColor): Unit
-}
+public class CanvasGradient {}
 ```
 
 **功能：** 描述渐变的不透明对象，由createLinearGradient()或createRadialGradient()创建。

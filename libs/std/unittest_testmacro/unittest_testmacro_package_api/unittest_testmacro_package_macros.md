@@ -4,9 +4,74 @@
 
 功能：声明测试类中的函数为[测试生命周期](../../unittest/unittest_samples/unittest_basics.md#测试生命周期)函数。被该宏修饰的函数在所有测试用例之后运行一次。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+class MyTestSuite {
+    @BeforeAll
+    func beforeAll() {
+        println("setup test suites's resources")
+    }
+
+    @AfterAll
+    func afterAll() {
+        println("cleanup test suite's resources")
+    }
+
+    @BeforeEach
+    func beforeEach() {
+        println("setup test cases' resources")
+    }
+
+    @AfterEach
+    func afterEach() {
+        println("cleanup test cases' resources")
+    }
+
+    @TestCase
+    func testCase1() {
+        println("test case 1")
+    }
+
+    @TestCase
+    func testCase2() {
+        println("test case 2")
+    }
+}
+```
+
+可能的运行结果：
+
+```text
+setup test suites's resources
+setup test cases' resources
+test case 1
+cleanup test cases' resources
+setup test cases' resources
+test case 2
+cleanup test cases' resources
+cleanup test suite's resources
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 422436 ns, RESULT:
+    TCS: MyTestSuite, time elapsed: 420615 ns, RESULT:
+    [ PASSED ] CASE: testCase1 (139573 ns)
+    [ PASSED ] CASE: testCase2 (13360 ns)
+Summary: TOTAL: 2
+    PASSED: 2, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@AfterEach` 宏
 
 功能：声明测试类中的函数为[测试生命周期](../../unittest/unittest_samples/unittest_basics.md#测试生命周期)函数。被该宏修饰的函数在每个测试用例之后运行一次。
+
+参考示例：[`@AfterAll`](#afterall-宏).
 
 ## `@Assert` 宏
 
@@ -15,32 +80,60 @@
 1. `@Assert(leftExpr, rightExpr)` ，比较 `leftExpr` 和 `rightExpr` 值是否相同。
 2. `@Assert(condition: Bool)` ，比较 `condition` 是否为 `true` ，即 `@Assert(condition: Bool)` 等同于 `@Assert(condition: Bool, true)` 。
 3. `@Assert[customAssertion](arguments...)`, 使用指定的参数 `arguments` 调用 `customAssertion` 函数，详见 [`@CustomAssertion`](#customassertion-宏)。
+4. `@Assert(leftExpr, rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
+5. `@Assert(leftExpr <comparison_operator> rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
+
+参考示例：[断言](../../unittest/unittest_samples/unittest_basics.md#断言)
 
 ## `@AssertThrows` 宏
 
 功能：声明[预期异常的断言](../../unittest/unittest_samples/unittest_basics.md#预期异常的断言)，测试函数内部使用，断言失败停止用例。
 
+参考示例：[断言](../../unittest/unittest_samples/unittest_basics.md#预期异常的断言)
+
 ## `@BeforeAll` 宏
 
 功能：声明测试类中的函数为[测试生命周期](../../unittest/unittest_samples/unittest_basics.md#测试生命周期)函数。被该宏修饰的函数在所有测试用例之前运行一次。
+
+参考示例：[`@AfterAll`](#afterall-宏).
 
 ## `@BeforeEach` 宏
 
 功能：声明测试类中的函数为[测试生命周期](../../unittest/unittest_samples/unittest_basics.md#测试生命周期)函数。被该宏修饰的函数在每个测试用例之前运行一次。
 
+参考示例：[`@AfterAll`](#afterall-宏).
+
 ## `@Bench` 宏
 
 功能：`@Bench` 宏用于标记要执行多次的函数并计算该函数的预期执行时间。
 
+示例：
+
+<!-- run -->
+```cangjie
+@Test
+class Foo {
+    var x = 0
+    @Bench
+    func foo() {
+        x += 1
+    }
+}
+```
+
+您可以在[基准测试入门](../../unittest/unittest_samples/unittest_benchmarks.md#基准测试入门)章节中阅读更多关于基准测试的内容并找到更多示例。
+
 此类函数将分批执行，并针对整个批次测量执行时间。这种测量将重复多次以获得结果的统计分布，并将计算该分布的各种统计参数。
-当前支持的参数如下:
+当前支持的参数如下：
 
 - 中位数
 - 用作误差估计的中位数 99% 置信区间的绝对值
 - 中位数 99% 置信区间的相对值
 - 平均值
 
-参数化的 DSL 与 `@Bench` 结合的示例如下，具体语法与规则详见[`@TestCase` 宏](#testcase-宏)章节：
+参数化的 DSL 与 `@Bench` 结合的示例如下，具体语法与规则详见 [`@TestCase` 宏](#testcase-宏)章节：
+
+<!-- compile -->
 
 ```cangjie
 func sortArray<T>(arr: Array<T>): Unit
@@ -116,7 +209,7 @@ TP: default, time elapsed: 68610430659 ns, Result:
 - `generationSteps`: 类型为 [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) ：参数化测试算法中的生成值的最大步数。
 - `reductionSteps` ：类型为 [Int64](../../core/core_package_api/core_package_intrinsics.md#int64): 参数化测试算法中的缩减值的最大步数。
 
-以下参数一般用于被 `@Bench` 修饰的 Benchmark 测试函数:
+以下参数一般用于被 `@Bench` 修饰的 Benchmark 测试函数：
 
 - `explicitGC` ：类型为 [ExplicitGcType](../../unittest/unittest_package_api/unittest_package_enums.md#enum-explicitgctype): Benchmark 函数测试期间如何调用 [GC](../../runtime/runtime_package_api/runtime_package_funcs.md#func-gcbool)。默认值为 [ExplicitGcType](../../unittest/unittest_package_api/unittest_package_enums.md#enum-explicitgctype).Light 。
 - `baseline` ：类型为 [String](../../core/core_package_api/core_package_structs.md#struct-string) : 参数值为 Benchmark 函数的名称，作为比较 Benchmark 函数执行结果的基线。该结果值将作为附加列添加到输出中，其中将包含比较结果。
@@ -125,22 +218,166 @@ TP: default, time elapsed: 68610430659 ns, Result:
 - `minDuration` ：类型为 [Duration](../../core/core_package_api/core_package_structs.md#struct-duration) : 配置重复执行 Benchmark 函数以获得更好结果的时间。默认值为 [Duration](../../core/core_package_api/core_package_structs.md#struct-duration).second * 5 。
 - `warmup` ：类型为 [Duration](../../core/core_package_api/core_package_structs.md#struct-duration) 或者 [Int64](../../core/core_package_api/core_package_intrinsics.md#int64) : 配置在收集结果之前重复执行 Benchmark 函数的时间或次数。默认值为 [Duration](../../core/core_package_api/core_package_structs.md#struct-duration).second 。当值为 0 时，表示没有 warmup ， 此时执行次数按用户输入的 `batchSize` 乘 `minBatches` 计算得到，当 `batchSize` 未指定时将抛出异常。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+@Bench
+@Configure[warmup: Duration.millisecond, minBatches: 1]
+func bench() {}
+```
+
+可能的运行结果：
+
+```text
+Starting the benchmark `TestCase_bench.bench()`.
+    Warming up for 1.000 ms.
+    Starting measurements of 200 batches. Measuring Duration.
+    Max batch size: 12395653, estimated execution time: 5.000 s.
+  percentiles:    [   10%        50%        90%        95%        99%        ]  
+  time:           [   0.990 ns   1.001 ns   1.029 ns   1.048 ns   1.146 ns   ]  
+  mean:           0.976 ns .. 1.022 ns  Err ±2.3%
+  median:         0.981 ns .. 1.146 ns
+  R²:             0.957 .. 0.994
+  stddev:         0.0101 ns
+
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 5452471582 ns, RESULT:
+    TCS: TestCase_bench, time elapsed: 5452469102 ns, RESULT:
+    | Case   |   Median |        Err |   Err% |     Mean |
+    |:-------|---------:|-----------:|-------:|---------:|
+    | bench  | 1.001 ns | ±0.0231 ns |  ±2.3% | 1.009 ns |
+Summary: TOTAL: 1
+    PASSED: 1, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
+
 用户可以在 `@Configure` 宏中指定其他配置参数，这些参数将来可能会用到。
 如果测试类使用 `@Configure` 宏指定配置，则该类中的所有测试函数都会继承此配置参数。
 如果此类中的测试函数也标有 `@Configure` 宏，则配置参数将从类和函数合并，其中函数级宏优先。
 
+示例：
+
+<!-- run -->
+
+```cangjie
+import std.unittest.*
+
+@Test
+@Configure[warmup: Duration.millisecond * 100, minDuration: Duration.second * 10]
+class DatabaseBenchmark {
+    @Bench
+    func queryPerformance(): Unit {
+        let result = simulateDatabaseQuery()
+        @Assert(!result.isEmpty())
+    }
+    
+    private func simulateDatabaseQuery(): String {
+        sleep(Duration.microsecond * 500)
+        "data_result"
+    }
+}
+```
+
 ## `@CustomAssertion` 宏
 
-功能：`@CustomAssertions` 将函数指定为用户自定义断言。
+功能： `@CustomAssertion` 宏允许您创建可复用、领域特定的断言，这些断言能与测试框架无缝集成。自定义断言必须满足以下条件：
 
-该宏修饰的函数应满足两个要求：
+1. 必须是顶层函数
+2. 首个参数必须是 [`AssertionCtx`](../../unittest/unittest_package_api/unittest_package_classes.md#class-assertionctx) 类型。
+3. 提供有意义的错误信息
+4. 返回可用于链式调用的有效值
 
-1. 顶层函数
-2. 首个入参为 [`AssertionCtx`](../../unittest/unittest_package_api/unittest_package_classes.md#class-assertionctx) 类型。
+示例：
+
+<!-- run -->
+```cangjie
+import std.collection.*
+
+@CustomAssertion
+public func checkNotNone<T>(
+    ctx: AssertionCtx,
+    value: ?T,
+    errorMessage!: String = "Expected ${ctx.arg("value")} to be Some(_) but got None."
+): T {
+    if (let Some(res) <- value) {
+        return res
+    }
+    ctx.fail(errorMessage)
+}
+
+@Test
+func testSuccess() {
+    let maybeValue = Option<Int64>.Some(42)
+    let unwrapped = @Assert[checkNotNone](maybeValue)
+}
+
+@Test
+func testFail() {
+    let maybeValue = Option<Int64>.None
+    let unwrapped = @Assert[checkNotNone](maybeValue)
+}
+
+@CustomAssertion
+public func iterableWithoutNone<T>(ctx: AssertionCtx, iter: Iterable<?T>): Array<T> {
+    iter |> enumerate |> map { pair: (Int64, ?T) =>
+        let (index, elem) = pair
+        return @Assert[checkNotNone](
+            elem,
+            errorMessage: "Element at index ${index} is None. Expected all elements to be Some(_)"
+        )
+    } |> collectArray
+}
+
+@Test
+func testIterableFail() {
+    let iter = [Option<Int64>.Some(1), Option<Int64>.Some(2), Option<Int64>.None]
+    let result = @Assert[iterableWithoutNone](iter)
+}
+```
+
+可能的运行结果：
+
+```text
+
+TP: default, time elapsed: 1943510 ns, RESULT:
+    TCS: TestCase_testSuccess, time elapsed: 853058 ns, RESULT:
+    [ PASSED ] CASE: testSuccess (432856 ns)
+    TCS: TestCase_testFail, time elapsed: 426161 ns, RESULT:
+    [ FAILED ] CASE: testFail (270125 ns)
+    Assert Failed: @Assert[checkNotNone](maybeValue):
+    └── Assert Failed: `(Expected <value not found> to be Some(_) but got None.)`
+
+    TCS: TestCase_testIterableFail, time elapsed: 626869 ns, RESULT:
+    [ FAILED ] CASE: testIterableFail (513480 ns)
+    Assert Failed: @Assert[iterableWithoutNone](iter):
+    └── @Assert[checkNotNone](elem, Element at index 2 is None. Expected all elements to be Some(_)):
+          └── Assert Failed: `(Element at index 2 is None. Expected all elements to be Some(_))`
+
+Summary: TOTAL: 3
+    PASSED: 1, SKIPPED: 0, ERROR: 0
+    FAILED: 2, listed below:
+            TCS: TestCase_testFail, CASE: testFail
+            TCS: TestCase_testIterableFail, CASE: testIterableFail
+```
+
+`@CustomAssertion` 的输出为树状结构，以提高 [嵌套断言](#嵌套断言) 的可读性。
+
+### 返回值
+
+`@CustomAssertion` 修饰的函数存在返回值时，它将被 `@Assert` 宏返回。
 
 示例如下：
 
+<!-- compile -->
 ```cangjie
+public class A {}
+
 @CustomAssertion
 public func checkNotNone<T>(ctx: AssertionCtx, value: ?T): T {
     if (let Some(res) <- value) {
@@ -148,66 +385,58 @@ public func checkNotNone<T>(ctx: AssertionCtx, value: ?T): T {
     }
     ctx.fail("Expected ${ctx.arg("value")} to be Some(_) but got None")
 }
-```
 
-`@CustomAssertion` 的输出为树状结构，以提高 [嵌套断言](#嵌套断言) 的可读性。
-
-例如：
-
-```cangjie
-@Test
-func customTest() {
-    @Assert[checkNotNone](Option<Bool>.None)
+@CustomAssertion
+public func checkA(ctx: AssertionCtx, value: A): Unit {
+    /* ... */
 }
-```
+func maybeReturnsSomeObject() { Option<A>.None }
 
-```text
-[ FAILED ] CASE: customTest (120812 ns)
-Assert Failed: @Assert[checkNotNone](Option < Bool >.None)
-└── Assert Failed: `('Option < Bool >.None' was expected to be Some(_) but got None)`
-```
-
-### 返回值
-
-`@CustomAssertion` 修饰的函数存在返回值时，它将被 `@Assert` 宏返回。
-
-示例如下:
-
-```cangjie
 @Test
 func testfunc() {
-    let maybeValue: Option<SomeObject> = maybeReturnsSomeObject()
+    let maybeValue: Option<A> = maybeReturnsSomeObject()
     let value = @Assert[checkNotNone](maybeValue)
 
-    @Assert[otherAssertion](value)
+    @Assert[checkA](value)
 }
 ```
 
-> 注意: 自定义 `@Expect` 将总是返回 `Unit` ，不论 `@CustomAssertion` 修饰的函数返回值为什么类型。
+> **注意：**
+>
+> 自定义 `@Expect` 将总是返回 `Unit` ，不论 `@CustomAssertion` 修饰的函数返回值为什么类型。
 
 ### 嵌套断言
 
-在 `@CustomAssertion` 定义中， [`@Assert`](#assert-宏)/[`@Expect`](#expect-宏) (包括自定义断言), [`@AssertThrows`](#assertthrows-宏)/[`@ExpectThrows`](#expectthrows-宏), [`@Fail`](#fail-宏)/[`@FailExpect`](#failexpect-宏)宏均可被调用，形成嵌套。
+在 `@CustomAssertion` 定义中， [`@Assert`](#assert-宏)/[`@Expect`](#expect-宏) （包括自定义断言）, [`@AssertThrows`](#assertthrows-宏)/[`@ExpectThrows`](#expectthrows-宏), [`@Fail`](#fail-宏)/[`@FailExpect`](#failexpect-宏)宏均可被调用，形成嵌套。
 
-例如:
+例如：
 
+<!-- compile -->
 ```cangjie
+import std.collection.*
+
 @CustomAssertion
-func iterableWithoutNone<T>(ctx: AssertionCtx, iter: Interable<?T>): Array<T> {
+public func checkNotNone<T>(ctx: AssertionCtx, value: ?T): T {
+    if (let Some(res) <- value) {
+        return res
+    }
+    ctx.fail("Expected ${ctx.arg("value")} to be Some(_) but got None")
+}
+
+@CustomAssertion
+func iterableWithoutNone<T>(ctx: AssertionCtx, iter: Iterable<?T>): Array<T> {
     iter |> map { it: ?T => @Assert[checkNotNone](it)} |> collectArray
 }
-```
 
-```cangjie
 @Test
 func customTest() {
-    @Assert[iterWithoutNone]([true, false, Option<Bool>.None])
+    @Assert[iterableWithoutNone]([true, false, Option<Bool>.None])
 }
 ```
 
 ```text
 [ FAILED ] CASE: customTest
-Assert Failed: @Assert[iterWithoutNone]([true, false, Option < Bool >.None])
+Assert Failed: @Assert[iterableWithoutNone]([true, false, Option < Bool >.None])
 └── @Assert[checkNotNone](it):
     └── Assert Failed: `('it' was expected to be Some(_) but got None)`
 ```
@@ -219,12 +448,14 @@ Assert Failed: @Assert[iterWithoutNone]([true, false, Option < Bool >.None])
 
 当指定泛型类型参数时，可使用与常规语法来完成。
 
-例如:
+例如：
 
+<!-- compile -->
 ```cangjie
 @CustomAssertion
-public func doesThrow<E>(ctx: AssertionCtx, codeblock: () -> Any): E where E <: Excepiton {
-    ...
+public func doesThrow<E>(ctx: AssertionCtx, codeblock: () -> Any): E where E <: Exception {
+    /*...*/
+    throw Exception()
 }
 
 @Test
@@ -240,18 +471,91 @@ func customTest() {
 1. `@Expect(leftExpr, rightExpr)` ，比较 `leftExpr` 和 `rightExpr` 是否相同。
 2. `@Expect(condition: Bool)` ，比较 `condition` 是否为 `true` ，即 `@Expect(condition: Bool)` 等同于 `@Expect(condition: Bool, true)` 。
 3. `@Expect[customAssertion](arguments...)`, 使用指定的参数 `arguments` 调用 `customAssertion` 函数。详见 [`@CustomAssertion`](#customassertion-宏)。
+4. `@Expect(leftExpr, rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
+5. `@Expect(leftExpr <comparison_operator> rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
+
+参考示例：[断言](../../unittest/unittest_samples/unittest_basics.md#断言)
 
 ## `@ExpectThrows` 宏
 
 功能：声明[预期异常的断言](../../unittest/unittest_samples/unittest_basics.md#预期异常的断言)，测试函数内部使用，断言失败继续执行用例。
 
+参考示例：[断言](../../unittest/unittest_samples/unittest_basics.md#预期异常的断言)
+
 ## `@Fail` 宏
 
 功能：声明[预期失败的断言](../../unittest/unittest_samples/unittest_basics.md#失败断言)，测试函数内部使用，断言失败停止用例。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+func fail(): Unit {
+    let condition = true
+    if (condition) {
+        @Fail("condition should not be true")
+        println("Unreachable")
+    }
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 237539 ns, RESULT:
+    TCS: TestCase_fail, time elapsed: 235710 ns, RESULT:
+    [ FAILED ] CASE: fail (22210 ns)
+    Assert Failed: `(condition should not be true)`
+
+Summary: TOTAL: 1
+    PASSED: 0, SKIPPED: 0, ERROR: 0
+    FAILED: 1, listed below:
+            TCS: TestCase_fail, CASE: fail
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@FailExpect` 宏
 
 功能：声明[预期失败的断言](../../unittest/unittest_samples/unittest_basics.md#失败断言)，测试函数内部使用，断言失败继续执行用例。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+func fail(): Unit {
+    let condition = true
+    if (condition) {
+        @FailExpect("condition should not be true")
+        println("Running after @FailExpect!")
+    }
+}
+```
+
+可能的运行结果：
+
+```text
+Running after @FailExpect!
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 308612 ns, RESULT:
+    TCS: TestCase_fail, time elapsed: 304655 ns, RESULT:
+    [ FAILED ] CASE: fail (21974 ns)
+    Expect Failed: `(condition should not be true)`
+
+Summary: TOTAL: 1
+    PASSED: 0, SKIPPED: 0, ERROR: 0
+    FAILED: 1, listed below:
+            TCS: TestCase_fail, CASE: fail
+--------------------------------------------------------------------------------------------------
+```
 
 ## `@Measure` 宏
 
@@ -261,6 +565,7 @@ func customTest() {
 
 例如：
 
+<!-- run -->
 ```cangjie
 @Test
 @Measure[TimeNow(), TimeNow(Nanos)]
@@ -301,25 +606,96 @@ Case,Args,Median,Err,Err%,Mean,Unit,Measurement
 3. 需要并行化的测试用例本身应耗时较长。否则并行化引入的多次 `beforeAll()` 和 `afterAll()` 可能会超过并行化的收益。
 4. 不允许与 `@Bench` 同时使用。由于性能用例对底层资源敏感，用例是否并行执行，将影响性能用例的结果，因此禁止与 `@Bench` 同时使用。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+@Parallel
+class MyTestSuite {
+    @TestCase
+    func testCase1() {
+        sleep(Duration.second)
+    }
+
+    @TestCase
+    func testCase2() {
+        sleep(Duration.second * 2)
+    }
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 2004554058 ns, RESULT:
+    TCS: MyTestSuite, time elapsed: 2004554058 ns, RESULT:
+    [ PASSED ] CASE: testCase1 (1001098368 ns)
+    [ PASSED ] CASE: testCase2 (2003288189 ns)
+Summary: TOTAL: 2
+    PASSED: 2, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@PowerAssert` 宏
 
 1. `@PowerAssert(leftExpr, rightExpr)` ，比较 `leftExpr` 和 `rightExpr` 值是否相同。
 2. `@PowerAssert(condition: Bool)` ，比较 `condition` 是否为 `true` ，即 `@PowerAssert(condition: Bool)` 等同于 `@PowerAssert(condition: Bool, true)` 。
+3. `@PowerAssert(leftExpr, rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
+4. `@PowerAssert(leftExpr <comparison_operator> rightExpr, delta: deltaExpr)` 使用 delta 参数使能近似相等功能。
 
 `@PowerAssert` 宏对比 `@Assert` ，可显示表达式各个可被计算的子表达式的值的详细图表，包括步骤中的异常。
 
-其打印的详细信息如下：
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+func foo(x: Int64, y!: String) {
+    y.size
+}
+
+func bar(x: Int64) {
+    x + 32
+}
+
+@Test
+func test() {
+    let a = 1
+    let s = "123"
+    @PowerAssert(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))
+}
+```
+
+可能的运行结果：
 
 ```text
-Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
-                |          |        |_||  |   |_|    |   |_|| |   |_||
-                |          |       "123"  |  "123"   |  "123" |    1 |
-                |          |__________||  |   |______|      | |______|
-                |            "test123" |  |       3         |    33  |
-                |______________________|  |_________________|        |
-                            0             |        1                 |
-                                          |__________________________|
-                                                        34
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 452039 ns, RESULT:
+    TCS: TestCase_test, time elapsed: 449379 ns, RESULT:
+    [ FAILED ] CASE: test (184699 ns)
+    Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
+                    |          |        |_||  |   |_|    |   |_|| |   |_||
+                    |          |       "123"  |  "123"   |  "123" |    1 |
+                    |          |__________||  |   |______|      | |______|
+                    |            "test123" |  |       3         |    33  |
+                    |______________________|  |_________________|        |
+                                7             |        3                 |
+                                              |__________________________|
+                                                           36
+
+
+Summary: TOTAL: 1
+    PASSED: 0, SKIPPED: 0, ERROR: 0
+    FAILED: 1, listed below:
+            TCS: TestCase_test, CASE: test
 --------------------------------------------------------------------------------------------------
 ```
 
@@ -334,9 +710,40 @@ Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
 1. `expr` 暂只支持 `true` ，表达式为 `true` 时，跳过该测试，其他均为 `false` 。
 2. 默认 `expr` 为 `true` 即 `@Skip[true]` == `@Skip` 。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+class MyTestSuite {
+    @TestCase
+    func runningCase() {}
+
+    @TestCase
+    @Skip
+    func skippedCase() {}
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 300419 ns, RESULT:
+    TCS: MyTestSuite, time elapsed: 298158 ns, RESULT:
+    [ PASSED ] CASE: runningCase (109542 ns)
+Summary: TOTAL: 2
+    PASSED: 1, SKIPPED: 1, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@Strategy` 宏
 
-功能：在函数上使用 `@Strategy` 可从该函数创建新的 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategy) 。它是一个用于组合、映射和重用策略的便捷 API。
+功能：在函数上使用 `@Strategy` 可从该函数创建新的 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt) 。它是一个用于组合、映射和重用策略的便捷 API。
 
 标记为 `@Strategy` 的函数必须满足以下条件：
 
@@ -344,16 +751,37 @@ Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
 2. 参数必须与宏参数中指定的 DSL 相对应。
 3. 可以在 `@Test` 标记的类的外部和内部使用。
 
-> 实现说明：宏展开的结果是一个具有函数名称和 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessor) 类型的变量。 该变量可以在任何可以使用  [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategy) 的地方使用。
+> 实现说明：宏展开的结果是一个具有函数名称和 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessort) 类型的变量。 该变量可以在任何可以使用  [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt) 的地方使用。
+
+有关 `@Strategy` 宏的应用示例及其在参数化基准测试中的使用，请参阅[参数化基准测试](../../unittest/unittest_samples/unittest_benchmarks.md#参数化基准测试)章节。
 
 ## `@Tag` 宏
 
 `@Tag` 宏可以应用于 `@Test` 类和 `@Test` 或 `@TestCase` 或 `@Bench` 函数，提供测试实体的元信息。后续可以通过 [`--include-tags`](../../unittest/unittest_samples/unittest_basics.md#--include-tags) 和 [`--exclude-tags`](../../unittest/unittest_samples/unittest_basics.md#--exclude-tags) 运行选项过滤带有这些标签的测试实体。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+class MyTestSuite {
+    @TestCase
+    func testCase1() {}
+
+    @TestCase
+    @Tag[slow, featureX]
+    func testCase2() {}
+}
+```
+
 ### 支持的语法
 
 1. 单个 `@Tag` 在测试函数上。
 
+    <!-- code_no_check -->
     ```cangjie
     @Tag[Unittest]
     func test() {}
@@ -361,6 +789,7 @@ Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
 
 2. 单个 `@Tag` 包含多个标签名，用逗号分隔。
 
+    <!-- code_no_check -->
     ```cangjie
     @Tag[Unittest, TestAuthor]
     func test() {}
@@ -368,6 +797,7 @@ Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
 
 3. 多个 `@Tag` 在测试函数上。
 
+    <!-- code_no_check -->
     ```cangjie
     @Tag[Smoke]
     @Tag[Backend, JiraTask3271]
@@ -382,6 +812,7 @@ Assert Failed: `(foo(10, y: "test" + s) == foo(s.size, y: s) + bar(a))`
 
 例如：
 
+<!-- compile -->
 ```cangjie
 @Test
 @Tag[Unittest]
@@ -397,6 +828,7 @@ public class UnittestClass {
 
 等同于：
 
+<!-- compile -->
 ```cangjie
 @Test
 @Tag[Unittest]
@@ -429,9 +861,75 @@ public class UnittestClass {
     2. 包含类的名称的 `name` 。
 单元测试框架的用户不应修改这些字段，因为这可能会导致不可预期的错误。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+func standaloneTest() {}
+
+@Test
+class MyTestSuite {
+    @TestCase
+    func testCase() {}
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 685219 ns, RESULT:
+    TCS: TestCase_standaloneTest, time elapsed: 541497 ns, RESULT:
+    [ PASSED ] CASE: standaloneTest (90613 ns)
+    TCS: MyTestSuite, time elapsed: 609977 ns, RESULT:
+    [ PASSED ] CASE: testCase (101517 ns)
+Summary: TOTAL: 2
+    PASSED: 2, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@TestBuilder` 宏
 
-功能：声明一个[动态测试](../../unittest/unittest_samples/unittest_dynamic_tests.md#动态测试)套。
+功能：声明一个[动态测试](../../unittest/unittest_samples/unittest_dynamic_tests.md)套。
+
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@TestBuilder
+func testBuilder(): TestSuite {
+    let builder = TestSuite.builder("MyTestSuite")
+    for (i in 1..5) {
+        let testCase = UnitTestCase.create("testCase${i}", body: {=> @Assert(i, i)})
+        builder.add(testCase)
+    }
+    builder.build()
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 425299 ns, RESULT:
+    TCS: MyTestSuite, time elapsed: 423045 ns, RESULT:
+    [ PASSED ] CASE: testCase1 (166142 ns)
+    [ PASSED ] CASE: testCase2 (9799 ns)
+    [ PASSED ] CASE: testCase3 (10501 ns)
+    [ PASSED ] CASE: testCase4 (9511 ns)
+Summary: TOTAL: 4
+    PASSED: 4, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
+```
 
 ## `@TestCase` 宏
 
@@ -442,36 +940,47 @@ public class UnittestClass {
 1. 该类必须用 `@Test` 标记。
 2. 该函数返回类型必须是 [Unit](../../core/core_package_api/core_package_intrinsics.md#unit) 。
 
+<!-- run -->
 ```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
 @Test
-class Tests {
+class MyTestSuite {
     @TestCase
-    func fooTest(): Unit {...}
+    func testCase(): Unit {}
 }
 ```
 
 测试用例可能有参数，在这种情况下，开发人员必须使用参数化测试 DSL 指定这些参数的值：
 
+<!-- run -->
 ```cangjie
-@Test[x in source1, y in source2, z in source3]
-func test(x: Int64, y: String, z: Float64): Unit {}
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+class MyTestSuite {
+    @TestCase[x in 1..3, y in random(), z in [1.1, 2.2]]
+    func testCase(x: Int64, y: String, z: Float64): Unit {}
+}
 ```
 
 此 DSL 可用于 `@Test`、`@Strategy`、`@Bench` 和 `@TestCase` 宏，其中 `@Test` 仅在顶级函数上时才可用。如果测试函数中同时存在 `@Bench` 和 `@TestCase` ，则只有 `@Bench` 可以包含 DSL 。
-在 DSL 语法中，`in` 之前的标识符（在上面的示例中为 `x` 、`y` 和 `z` ）必须直接对应于函数的参数，参数源（在上面的示例中为`source1` 、`source2` 和 `source3`）是任何有效的仓颉表达式（该表达式类型必须实现接口 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategy)\<T> 或 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessor)\<T>，详见下文）。
-参数源的元素类型（此类型作为泛型参数 `T` 提供给接口 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategy)\<T> ）必须与相应函数参数的类型严格相同。
+在 DSL 语法中，`in` 之前的标识符（在上面的示例中为 `x` 、`y` 和 `z` ）必须直接对应于函数的参数，参数源（在上面的示例中为`source1` 、`source2` 和 `source3`）是任何有效的仓颉表达式（该表达式类型必须实现接口 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt)\<T> 或 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessort)\<T>，详见下文）。
+参数源的元素类型（此类型作为泛型参数 `T` 提供给接口 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt)\<T> ）必须与相应函数参数的类型严格相同。
 
 支持的参数源类型如下：
 
 - Arrays: `x in [1,2,3,4]` 。
 - Ranges: `x in 0..14` 。
-- 随机生成的值: `x in random()` 。
-- 从 json 文件中读取到的值: `x in json("filename.json")` 。
-- 从 csv 文件中读取到的值: `x in csv("filename.csv")` 。
-- `@Strategy` 修饰的函数: `x in nameOfStrategyAnnotatedFunction` 。
-- 使用 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessor) 组合数据策略的结果。
+- 随机生成的值：`x in random()` 。
+- 从 json 文件中读取到的值：`x in json("filename.json")` 。
+- 从 csv 文件中读取到的值：`x in csv("filename.csv")` 。
+- `@Strategy` 修饰的函数：`x in nameOfStrategyAnnotatedFunction` 。
+- 使用 [DataStrategyProcessor](../../unittest/unittest_package_api/unittest_package_classes.md#class-datastrategyprocessort) 组合数据策略的结果。
 
-> 高级用户可以通过定义自己的类型并且实现 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategy)\<T> 接口来引入自己的参数源类型。
+> 高级用户可以通过定义自己的类型并且实现 [DataStrategy](../../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt)\<T> 接口来引入自己的参数源类型。
 
 使用 `random()` 的随机生成函数默认支持以下类型：
 
@@ -483,8 +992,12 @@ func test(x: Int64, y: String, z: Float64): Unit {}
 - 所有已支持类型的数组类型
 - 所有已支持类型的 [Option](../../core/core_package_api/core_package_enums.md#enum-optiont) 类型
 
-> 若需要新增其他的类型支持 `random()` ，可以让该类型扩展 [Arbitrary](../../unittest_prop_test/unittest_prop_test_package_api/unittest_prop_test_package_interfaces.md#interface-arbitrary) 。
-> 在参数有多个值时，`beforeEach` / `afterEach` 不会在不同值下重复执行而仅会执行一次。若确实需要在每个值下做初始化和去初始化，需要在测试主体中写。对于性能测试方案， `@Strategy` 应该用于需要从基准中排除的设置代码。没有为这种情况提供特殊的API，因为在大多数情况下，这样的代码依赖于特定的参数值。
+> 若需要新增其他的类型支持 `random()` ，可以让该类型扩展 [Arbitrary](../../unittest_prop_test/unittest_prop_test_package_api/unittest_prop_test_package_interfaces.md#interface-arbitraryt) 。
+> 在参数有多个值时，`beforeEach` / `afterEach` 不会在不同值下重复执行而仅会执行一次。若确实需要在每个值下做初始化和去初始化，需要在测试主体中写。对于性能测试方案， `@Strategy` 应该用于需要从基准中排除的设置代码。没有为这种情况提供特殊的 API，因为在大多数情况下，这样的代码依赖于特定的参数值。
+
+## `@TestTemplate` 宏
+
+功能：`@TestTemplate` 宏可修饰抽象类，使得它成为一个 [测试模板](../../unittest/unittest_samples/unittest_test_templates.md)。
 
 ## `@Timeout` 宏
 
@@ -495,28 +1008,87 @@ func test(x: Int64, y: String, z: Float64): Unit {}
  `expr` 的类型应为 std.time.[Duration](../../core/core_package_api/core_package_structs.md#struct-duration) 。
 其修饰测试类时为每个相应的测试用例提供超时时间。
 
+示例：
+
+<!-- run -->
+```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+
+@Test
+class MyTestSuite {
+    @TestCase
+    @Timeout[Duration.second]
+    func fastEnough() {}
+
+    @TestCase
+    @Timeout[Duration.second]
+    func tooSlow() {
+        sleep(Duration.second * 2)
+    }
+}
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 1003195433 ns, RESULT:
+    TCS: MyTestSuite, time elapsed: 1003195433 ns, RESULT:
+    [ PASSED ] CASE: fastEnough (147326 ns)
+    [ FAILED ] CASE: tooSlow (1002326118 ns)
+    Test case ended with timeout.
+Summary: TOTAL: 2
+    PASSED: 1, SKIPPED: 0, ERROR: 0
+    FAILED: 1, listed below:
+            TCS: MyTestSuite, CASE: tooSlow
+--------------------------------------------------------------------------------------------------
+```
+
 ## `@Types` 宏
 
 功能：`@Types` 宏为测试类或测试函数提供类型参数。它可以放置在测试类或测试函数上。
 
 语法规则为 `@Types[Id1 in <Type1, Type2, Type3>, Id2 in <Type4, Type5> ...]`
-其中 `Id1`、`Id2`... 是有效类型参数标识符，`Type1`、`Type2`、`Type3`...是有效的仓颉类型。
+其中 `Id1`、`Id2`... 是有效类型参数标识符，`Type1`、`Type2`、`Type3`... 是有效的仓颉类型。
 
-`@Types` 宏有以下限制:
+`@Types` 宏有以下限制：
 
 - 必须与 `@Test`， `@TestCase` 或 `@Bench` 宏共同使用。
 - 一个声明只能有一个 `@Types` 宏修饰。
 - 该声明必须是具有与 `@Types` 宏中列出的相同类型参数的泛型类或函数。
 - 类型列表中列出的类型不能相互依赖，例如 `@Types[A in <Int64, String>, B in <List<A>>]` 将无法正确编译。但是，在为该类内的测试函数提供类型时，可以使用为测试类提供的类型。例如：
 
+<!-- run -->
 ```cangjie
+import std.unittest.*
+import std.unittest.testmacro.*
+import std.collection.*
+
 @Test
-@Types[T in <...>]
-class TestClass<T> {
+@Types[T in <Int64, Float64>]
+class MyTestSuite<T> {
     @TestCase
-    @Types[U in <Array<T>>]
-    func testfunc<U>() {}
+    @Types[U in <Array<T>, ArrayList<T>>]
+    func testCase<U>() {}
 }
+```
+
+可能的运行结果：
+
+```text
+--------------------------------------------------------------------------------------------------
+TP: default, time elapsed: 267789 ns, RESULT:
+    TCS: MyTestSuite<Int64>, time elapsed: 221802 ns, RESULT:
+    [ PASSED ] CASE: testCase<Array<T>> (66966 ns)
+    [ PASSED ] CASE: testCase<ArrayList<T>> (7340 ns)
+    TCS: MyTestSuite<Float64>, time elapsed: 40802 ns, RESULT:
+    [ PASSED ] CASE: testCase<Array<T>> (5709 ns)
+    [ PASSED ] CASE: testCase<ArrayList<T>> (7296 ns)
+Summary: TOTAL: 4
+    PASSED: 4, SKIPPED: 0, ERROR: 0
+    FAILED: 0
+--------------------------------------------------------------------------------------------------
 ```
 
 该机制可以与其他测试框架功能一起使用，例如 `@Configure` 等。
@@ -528,6 +1100,7 @@ class TestClass<T> {
 
 示例：
 
+<!-- code_no_check -->
 ```cangjie
 @UnittestOption[String, Int](optionName)
 @UnittestOption[String](opt, /*validator*/ { str: String => str.size < 5 })
@@ -545,10 +1118,11 @@ class TestClass<T> {
 - `true` 表示选项有效，`false` 表示选项值无效。
 - ·`Some<String>` 包含选项无效原因的描述，`None<String>` 表示选项值有效。
 
-与 `@Configuration` 配合使用的示例如下：
+与 `Configuration` 配合使用的示例如下：
 
 配置项的键名称是通过首字母大写并以 `Key` 字符串开头构建的成员。例如，对于名为 `zxc` 的配置项，有效键名称将为 `KeyZxc.zxc`
 
+<!-- compile -->
 ```cangjie
 @UnittestOption[String](opt)
 
@@ -562,9 +1136,9 @@ func test_that_derived_type_overwrite_parent_type_value_in_configuration() {
 }
 ```
 
-[Configuration](../../unittest_common/unittest_common_package_api/unittest_common_package_classes.md#class-configuration)
-类正确处理继承的情况。示例如下：
+[Configuration](../../unittest_common/unittest_common_package_api/unittest_common_package_classes.md#class-configuration) 类正确处理继承的情况。示例如下：
 
+<!-- compile -->
 ```cangjie
 open class Base {
     public open func str() {

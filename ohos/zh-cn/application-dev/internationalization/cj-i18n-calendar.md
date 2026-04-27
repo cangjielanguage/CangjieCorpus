@@ -1,5 +1,11 @@
 # 设置日历和历法
 
+<!--Del-->
+> **说明：**
+>
+> 当前为Beta阶段。
+<!--DelEnd-->
+
 ## 使用场景
 
 不同地区的用户使用不同的日历，大多数地区使用公历，也有些地区的用户使用其他日历，例如农历、伊斯兰历或希伯来历。此外，日历上的时间和日期也会随着时区和夏令时的不同而改变。因此，用户应设置符合本地习惯的日历。国际化提供了[Calendar](../reference/LocalizationKit/cj-apis-i18n.md#class-calendar)类，可以设置日历类型、日期、年月日、时区、一周的起始日期、一年中第一周的最小天数、判断具体某一天在日历中是否为周末、计算相差天数等。在应用开发过程中，开发者可以根据业务需求选择使用不同功能。
@@ -63,11 +69,9 @@
    <!-- compile -->
 
     ```cangjie
-    import std.time.DateTime as d
-
     let calendar: Calendar = getCalendar('zh-Hans', calendarType: CalendarType.Chinese)
     //将公历信息设置到calendar对象，时间日期为2023.07.25 08:00:00
-    calendar.set(2023, 7,  25, hour:8, minute:0)
+    calendar.set(2023, 7, 25, hour:8, minute:0)
     //获取农历年月日
     let year: Int32 = calendar.get('year') // year = 40，指干支纪年40，范围1-60
     let month: Int32 = calendar.get('month') // month = 5，指6月
@@ -90,3 +94,8 @@
 | islamic_umalqura | 伊斯兰历（乌姆库拉） |
 | japanese | 日本历 |
 | persian | 波斯历 |
+<!--Del-->
+## 示例代码
+
+[日历转换](https://gitcode.com/openharmony/applications_app_samples_cangjie/tree/master/code/BasicFeature/International/CalendarConversion)
+<!--DelEnd-->
