@@ -290,7 +290,7 @@ try {
 public func getDefaultHttpProxy(): HttpProxy
 ```
 
-**功能：** 获取网络默认的代理配置信息。如果设置了全局代理，则会返回全局代理配置信息。如果进程使用[setAppNet](#func-setappnetnethandle)绑定到指定[NetHandle](#class-nethandle)对应的网络，则返回[NetHandle](#class-nethandle)对应网络的代理配置信息。在其它情况下，将返回默认网络的代理配置信息。
+**功能：** 获取网络默认的代理配置信息。如果设置了全局代理，则会返回全局代理配置信息。如果进程使用[setAppNet](#func-setappnetnethandle)绑定到指定[NetHandle](#class-nethandle)对应的网络，则返回[NetHandle](#class-nethandle)对应网络的代理配置信息。在其他情况下，将返回默认网络的代理配置信息。
 
 **系统能力：** SystemCapability.Communication.NetManager.Core
 

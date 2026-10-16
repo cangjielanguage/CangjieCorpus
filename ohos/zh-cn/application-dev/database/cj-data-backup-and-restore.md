@@ -233,7 +233,7 @@ try {
         if (resultSet.rowCount == -1) {
             resultSet.isColumnNull(0)
         }
-        // resultSet.goToFirstRow(), resultSet.count等其它接口也会抛异常
+        // resultSet.goToFirstRow(), resultSet.count等其他接口也会抛异常
         while (resultSet.goToNextRow()) {
             Hilog.info(0, "info", "${resultSet.getRow().size}")
         }

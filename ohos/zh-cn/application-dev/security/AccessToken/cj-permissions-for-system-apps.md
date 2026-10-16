@@ -2664,7 +2664,7 @@
 
 ## ohos.permission.MANAGE_APP_UNINSTALL
 
-允许系统应用卸载其它应用。
+允许系统应用卸载其他应用。
 
 **权限级别：** system_basic
 
@@ -4739,7 +4739,7 @@
 
 ## ohos.permission.SANDBOX_ACCESS_MANAGER
 
-允许应用访问其它应用的沙箱目录。
+允许应用访问其他应用的沙箱目录。
 
 **权限级别：** system_core
 
