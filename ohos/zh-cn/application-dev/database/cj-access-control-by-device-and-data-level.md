@@ -129,7 +129,7 @@
     } catch (e: BusinessException) {
         Hilog.error(0, "ErrorCode: ${e.code}", e.message)
     }
-    // 进行其它数据库相关的操作
+    // 进行其他数据库相关的操作
     // ...
     ```
 
@@ -198,6 +198,6 @@
     } catch (e: BusinessException) {
         Hilog.error(0, "ErrorCode: ${e.code}", e.message)
     }
-    // 进行其它数据库相关的操作
+    // 进行其他数据库相关的操作
     // ...
     ```

@@ -385,10 +385,10 @@ java -jar app_unpacking_tool.jar --mode appqf --appqf-path <path> --out-path <pa
 | label           | String                   | 标识extensionAbility对用户显示的名称。                  | stage模型支持。                      |
 | description     | String                   | 标识extensionAbility的描述。                            | stage模型支持。                      |
 | type            | String                   | 标识extensionAbility的类型：form、workScheduler、inputMethod、service、accessibility、dataShare、fileShare、wallpaper、backup。 | stage模型支持，目前仅解析了form、staticSubscriber的信息、其他类型（如：workScheduler、inputMethod、service、accessibility、dataShare、fileShare、wallpaper、backup）暂未解析。        |
-| permissions     | List\<String>            | 标识被其它应用的ability调用时需要申请的权限的集合。       | stage模型支持。                      |
+| permissions     | List\<String>            | 标识被其他应用的ability调用时需要申请的权限的集合。       | stage模型支持。                      |
 | readPermission  | String                   | 标识读取ability的数据所需的权限。                         | stage模型支持。                    |
 | writePermission | String                   | 标识向ability写数据所需的权限。                           | stage模型支持。                   |
-| visible         | boolean                  | 标识extensionAbility是否可以被其它应用调用。              | stage模型支持。                   |
+| visible         | boolean                  | 标识extensionAbility是否可以被其他应用调用。              | stage模型支持。                   |
 | skills          | List\<SkillInfo>         | 标识extensionAbility能够接收的意图的特征集。              | stage模型支持。                    |
 | metadataInfos   | List\<ModuleMetadataInfo>| 标识extensionAbility能够接收的元数据信息。                | stage模型支持。                    |
 | metadata        | MetaData结构体           | 标识extensionAbility的元信息。                            | 将metadata中的信息赋值到CustomizeData中。 |

@@ -4376,7 +4376,7 @@ public var characteristics: Array<BleCharacteristic>
 public var includeServices: Array<GattService>
 ```
 
-**功能：** 当前服务依赖的其它服务。
+**功能：** 当前服务依赖的其他服务。
 
 **类型：** Array\<[GattService](#class-gattservice)>
 
@@ -4442,7 +4442,7 @@ public init(
 |serviceUUID|String|是|-|服务UUID，标识一个GATT服务。例如：00001888-0000-1000-8000-00805f9b34fb。|
 |isPrimary|Bool|是|-|是否是主服务。true表示是主服务，false表示是次要服务。|
 |characteristics|Array\<[BleCharacteristic](#class-blecharacteristic)>|是|-|当前服务包含的特征值列表。|
-|includeServices|Array\<[GattService](#class-gattservice)>|否|[]|当前服务依赖的其它服务。|
+|includeServices|Array\<[GattService](#class-gattservice)>|否|[]|当前服务依赖的其他服务。|
 
 ## class ManufactureData
 

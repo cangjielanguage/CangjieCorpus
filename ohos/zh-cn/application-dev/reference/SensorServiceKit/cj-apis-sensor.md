@@ -1820,7 +1820,7 @@ public var deviceId: Int32
 public var sensorIndex: Int32
 ```
 
-**功能：** 传感器索引：默认值为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
+**功能：** 传感器索引：默认值为0，为设备上的默认传感器，其他传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。
 
 **类型：** Int32
 
@@ -1847,7 +1847,7 @@ public init(deviceId!: Int32 = -1, sensorIndex!: Int32 = 0)
 | 参数名         | 类型    | 必填  | 默认值 | 说明     |
 |:----------- |:----- |:--- |:--- |:------ |
 | deviceId    | Int32 | 否   | - 1 | 设备ID：默认值为-1，表示本地设备，设备ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。  |
-| sensorIndex | Int32 | 否   | 0   | 传感器索引：默认值为0，为设备上的默认传感器，其它传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。 |
+| sensorIndex | Int32 | 否   | 0   | 传感器索引：默认值为0，为设备上的默认传感器，其他传感器ID需通过[getSensorList](#func-getsensorlist)查询或者监听设备上下线接口[on](#func-ontsensorid-callback1argumentt-options-where-t--response)获取。 |
 
 ## class SignificantMotionResponse
 

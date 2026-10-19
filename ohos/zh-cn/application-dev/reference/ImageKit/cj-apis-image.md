@@ -60,7 +60,7 @@ try {
 public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32): ImageReceiver
 ```
 
-**功能：** 通过图片大小、图片格式、容量创建ImageReceiver实例。ImageReceiver做为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
+**功能：** 通过图片大小、图片格式、容量创建ImageReceiver实例。ImageReceiver作为图片的接收方、消费者，它的参数属性实际上不会对接收到的图片产生影响。图片属性的配置应在发送方、生产者进行，如相机预览流[createPreviewOutput](../CameraKit/cj-apis-multimedia-camera.md#func-createpreviewoutputprofile-string)。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageReceiver
 

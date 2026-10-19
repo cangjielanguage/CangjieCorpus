@@ -1,6 +1,6 @@
 # 文本输入（TextInput/TextArea）
 
-TextInput、TextArea是输入框组件，通常用于响应用户的输入操作，比如评论区的输入、聊天框的输入、表格的输入等，也可以结合其它组件构建功能页面，例如登录注册页面。具体用法请参见[TextInput](../reference/arkui-cj/cj-text-input-textinput.md)、[TextArea](../reference/arkui-cj/cj-text-input-textarea.md)。
+TextInput、TextArea是输入框组件，通常用于响应用户的输入操作，比如评论区的输入、聊天框的输入、表格的输入等，也可以结合其他组件构建功能页面，例如登录注册页面。具体用法请参见[TextInput](../reference/arkui-cj/cj-text-input-textinput.md)、[TextArea](../reference/arkui-cj/cj-text-input-textarea.md)。
 
 ## 创建输入框
 
