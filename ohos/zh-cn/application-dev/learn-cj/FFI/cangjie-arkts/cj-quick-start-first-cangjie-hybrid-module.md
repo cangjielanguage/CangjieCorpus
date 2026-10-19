@@ -16,7 +16,7 @@
 
    ![HybridExample2_ArkTSCallCangjieFunctionDemo](../../figures/HybridExample2_ArkTSCallCangjieFunctionDemo.gif)
 
-2. 在ArkTS页面中，嵌入一个仓颉组件。并在在仓颉组件中提供一个Button按钮，单击时会更新Text文本，如下图所示。
+2. 在ArkTS页面中，嵌入一个仓颉组件。并在仓颉组件中提供一个Button按钮，单击时会更新Text文本，如下图所示。
 
    ![HybridExample2_ArkTSCallCangjieUIDemo](../../figures/HybridExample2_ArkTSCallCangjieUIDemo.gif)
 

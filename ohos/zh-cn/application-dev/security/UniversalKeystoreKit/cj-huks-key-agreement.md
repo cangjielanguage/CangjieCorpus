@@ -547,7 +547,7 @@
         generateKeyItem(aliasAlice, dhGenOptions)
         generateKeyItem(aliasBob, dhGenOptions)
 
-        /* 导出非对称密钥alice与bob的的公钥 */
+        /* 导出非对称密钥alice与bob的公钥 */
         let pubKeyAlice = exportKeyItem(aliasAlice, emptyOptions)
         let pubKeyBob = exportKeyItem(aliasBob, emptyOptions)
 
