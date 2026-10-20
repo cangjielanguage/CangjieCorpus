@@ -13,7 +13,7 @@
 | [libs/std](libs/std) | 标准库 API 与示例 | 本地 `cangjie_runtime` 的 `stdlib/doc/libs/std`，提交 `a1db6277`（提交说明对应 `release/1.2`） | 已按源码 Markdown 完整同步 |
 | [libs/stdx](libs/stdx) | 扩展库 API 与示例 | 本地 `cangjie_stdx` 的 `doc/libs_stdx`，提交 `243a4b6`（提交说明对应 `release/1.2`） | 已按源码 Markdown 完整同步 |
 | [ohos/zh-cn](ohos/zh-cn) | 鸿蒙仓颉开发指南、API 参考与配套资源 | 本地 `docs_cangjie` 的 `zh-cn`，提交 `641feb3b` | 已按源码 Markdown 完整同步 |
-| [extra](extra) | 项目自编的语言与集合操作速查说明 | 对照本次同步的开发指南和标准库文档核对 | 已修订，具体示例已通过 1.2.0 分类验证，见 [验证报告](EXTRA_VALIDATION.md) |
+| [extra](extra) | 项目自编的语言与集合操作速查说明 | 对照本次同步的开发指南和标准库文档核对 | 已修订，具体示例已通过 1.2.0 分类验证 |
 
 官方项目入口：[仓颉文档](https://gitcode.com/Cangjie/cangjie_docs)、[标准库与运行时](https://gitcode.com/Cangjie/cangjie_runtime)、[扩展库](https://gitcode.com/Cangjie/cangjie_stdx)、[OpenHarmony 仓颉文档](https://gitcode.com/openharmony/docs_cangjie)。上表记录实际导入来源及提交，各目录的适用版本以对应来源文档为准。
 

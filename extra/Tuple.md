@@ -1,6 +1,6 @@
 ## Tuple
 
-> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../manual/source_zh_cn/basic_data_type/tuple.md).
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0. See the [reference documentation](../manual/source_zh_cn/basic_data_type/tuple.md).
 
 ### Access the elements of a tuple
 

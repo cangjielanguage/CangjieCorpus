@@ -1,6 +1,6 @@
 ## struct Array
 
-> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/core/core_package_api/core_package_structs.md#struct-arrayt).
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0. See the [reference documentation](../libs/std/core/core_package_api/core_package_structs.md#struct-arrayt).
 
 Arrays have fixed length and can contain elements of any particular type `T`. Arrays with
 element type `T` has type `Array<T>`. If arrays with dynamic length are needed, use `ArrayList`

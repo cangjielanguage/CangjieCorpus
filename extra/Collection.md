@@ -1,6 +1,6 @@
 ## Expressing quantifiers
 
-> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/collection/collection_package_api/collection_package_function.md).
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0. See the [reference documentation](../libs/std/collection/collection_package_api/collection_package_function.md).
 
 The logical quantifiers `forall` and `exists` are expressed in Cangjie using functions
 `all` and `any`. The syntax is as follows:

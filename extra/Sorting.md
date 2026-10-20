@@ -1,6 +1,6 @@
 ## Sorting
 
-> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/sort/sort_package_api/sort_package_funcs.md).
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0. See the [reference documentation](../libs/std/sort/sort_package_api/sort_package_funcs.md).
 
 Sorting is available for `Array`, `ArrayList`, and `List` after importing `std.sort.*`. Use `stable: true` when equal elements must retain their original order.
 The basic signature of the `sort` function is

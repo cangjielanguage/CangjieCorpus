@@ -1,6 +1,6 @@
 ## Rune (characters)
 
-> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../manual/source_zh_cn/basic_data_type/characters.md).
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0. See the [reference documentation](../manual/source_zh_cn/basic_data_type/characters.md).
 
 The representation of character type literals is as follows:
 A `Rune` literal starts with the character `r`, followed by a character enclosed in a pair of single or double quotes. For example:
