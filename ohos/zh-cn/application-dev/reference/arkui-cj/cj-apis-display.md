@@ -34,7 +34,7 @@ public func getAllDisplays(): Array<Display>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -46,7 +46,7 @@ public func getAllDisplays(): Array<Display>
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{Display,getAllDisplays}
 import kit.PerformanceAnalysisKit.Hilog
 
 func getAllDisplaysExample() {
@@ -81,7 +81,7 @@ public func getCurrentFoldCreaseRegion(): FoldCreaseRegion
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -92,7 +92,7 @@ public func getCurrentFoldCreaseRegion(): FoldCreaseRegion
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{Display,getCurrentFoldCreaseRegion}
 import kit.PerformanceAnalysisKit.Hilog
 
 func getCurrentFoldCreaseRegionExample() {
@@ -125,7 +125,7 @@ public func getDefaultDisplaySync(): Display
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -137,7 +137,7 @@ public func getDefaultDisplaySync(): Display
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{Display,getDefaultDisplaySync}
 import kit.PerformanceAnalysisKit.Hilog
 
 func getDefaultDisplaySyncExample() {
@@ -243,7 +243,7 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldDisp
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -255,7 +255,7 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldDisp
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{FoldDisplayMode,off,ListenerType}
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.Callback1Argument
 import ohos.business_exception.BusinessException
@@ -305,7 +305,7 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldStat
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -317,7 +317,7 @@ public func off(listenerType: ListenerType, callback: Callback1Argument<FoldStat
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{FoldStatus,off,ListenerType}
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.Callback1Argument
 import ohos.business_exception.BusinessException
@@ -366,7 +366,7 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldDispl
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -378,7 +378,7 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldDispl
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{FoldDisplayMode,on,ListenerType}
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.Callback1Argument
 import ohos.business_exception.BusinessException
@@ -428,7 +428,7 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldStatu
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -440,7 +440,7 @@ public func on(listenerType: ListenerType, callback: Callback1Argument<FoldStatu
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{FoldStatus,on,ListenerType}
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.callback_invoke.Callback1Argument
 import ohos.business_exception.BusinessException
@@ -544,8 +544,7 @@ public init(
 ## class Display
 
 ```cangjie
-public class Display {
-}
+public class Display {}
 ```
 
 **功能：** 定义显示屏的属性。它们不会自动更新。
@@ -802,7 +801,7 @@ public func getCutoutInfo(): CutoutInfo
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[窗口错误码](./cj-errorcode-window.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -814,14 +813,14 @@ public func getCutoutInfo(): CutoutInfo
 <!-- code_check_manual -->
 
 ```cangjie
-import kit.ArkUI.*
+import kit.ArkUI.{Display,getDefaultDisplaySync}
 import kit.PerformanceAnalysisKit.Hilog
 
 func getCutoutInfoExample() {
     try {
         let displayClass = getDefaultDisplaySync()
         let cutout = displayClass.getCutoutInfo()
-        Hilog.info(0, "CangjieTest", cutout.boundingRects.size)
+        Hilog.info(0, "CangjieTest", "${cutout.boundingRects.size}")
     } catch (exception: Exception) {
         Hilog.error(0, "CangjieTest", exception.toString())
     }

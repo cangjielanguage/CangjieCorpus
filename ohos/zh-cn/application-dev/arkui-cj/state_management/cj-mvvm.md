@@ -24,7 +24,7 @@ ArkUI的UI开发模式就属于MVVM模式，通过对MVVM概念的基本介绍�
 
 ## ArkUI开发模式图
 
-ArkUI的UI开发开发模式即是MVVM模式，而状态变量在MVVM模式中扮演着ViewModel的角色，向上刷新UI，向下更新数据，整体框架如下图：
+ArkUI的UI开发模式即是MVVM模式，而状态变量在MVVM模式中扮演着ViewModel的角色，向上刷新UI，向下更新数据，整体框架如下图：
 
 ![arkui开发模式图](./figures/arkui-development-mode-diagram.png)
 
@@ -95,42 +95,45 @@ import ohos.resource.__GenerateResource__
 class EntryView {
     @State
     var isFinished: Bool = false
-    func build(){
-        Column{
-            Row(){
+    func build() {
+        Column {
+            Row() {
                 Text("全部待办")
-                .fontSize(30)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(30)
+                    .fontWeight(FontWeight.Bold)
             }
-            .width(100.percent)
-            .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
+                .width(100.percent)
+                .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
 
             // 待办事项
-            Row(space: 15){
-                if(this.isFinished){
+            Row(space: 15) {
+                if (this.isFinished) {
                     // 此处'app.media.ic_public_todo_filled'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                     Image(@r(app.media.ic_public_todo_filled))
-                    .width(28)
-                    .height(28)
-                }
-                else{
+                        .width(28)
+                        .height(28)
+                } else {
                     // 此处'app.media.ic_public_todo'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                     Image(@r(app.media.ic_public_todo))
-                    .width(28)
-                    .height(28)
+                        .width(28)
+                        .height(28)
                 }
                 Text('学习高数')
-                .fontSize(24)
-                .fontWeight(FontWeight.Bold)
-                .decoration(decorationType: if(this.isFinished){TextDecorationType.LineThrough} else {TextDecorationType.None}, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
+                    .fontSize(24)
+                    .fontWeight(FontWeight.Bold)
+                    .decoration(decorationType: if (this.isFinished) {
+                        TextDecorationType.LineThrough
+                    } else {
+                        TextDecorationType.None
+                    }, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
             }
-            .width(100.percent)
-            .margin(left: 60, top: 15)
-            .onClick({event => this.isFinished = !this.isFinished})
+                .width(100.percent)
+                .margin(left: 60, top: 15)
+                .onClick({event => this.isFinished = !this.isFinished})
         }
-        .height(100.percent)
-        .width(100.percent)
-        .backgroundColor(0x90f1f3f5)
+            .height(100.percent)
+            .width(100.percent)
+            .backgroundColor(0x90f1f3f5)
     }
 }
 ```
@@ -157,89 +160,98 @@ import ohos.resource.__GenerateResource__
 
 @Component
 class TodoComponent {
-    func build(){
-        Row(){
+    func build() {
+        Row() {
             Text('全部待办')
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
         }
-        .width(100.percent)
-        .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
+            .width(100.percent)
+            .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
     }
 }
 
 @Component
 class AllChooseComponent {
-    @Link var isFinished: Bool;
+    @Link
+    var isFinished: Bool
 
-    func build(){
-        Row(){
+    func build() {
+        Row() {
             Button("全选", ButtonOptions(shape: ButtonType.Capsule))
-            .onClick({event => this.isFinished = !this.isFinished})
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
-            .backgroundColor(0xf7f6cc74)
+                .onClick({event => this.isFinished = !this.isFinished})
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
+                .backgroundColor(0xf7f6cc74)
         }
-        .width(100.percent)
-        .margin(top: 10.vp, left: 60.vp)
+            .width(100.percent)
+            .margin(top: 10.vp, left: 60.vp)
     }
 }
 
 @Component
 class ThingsComponent1 {
-    @Prop var isFinished: Bool;
+    @Prop
+    var isFinished: Bool
 
-    func build(){
+    func build() {
         Row(space: 15) {
-            if(this.isFinished){
+            if (this.isFinished) {
                 // 此处'app.media.ic_public_todo_filled'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo_filled))
-                .width(28)
-                .height(28)
-            }
-            else{
+                    .width(28)
+                    .height(28)
+            } else {
                 // 此处'app.media.ic_public_todo'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo))
-                .width(28)
-                .height(28)
+                    .width(28)
+                    .height(28)
             }
             Text("学习语文")
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .decoration(decorationType: if(this.isFinished){TextDecorationType.LineThrough}else {TextDecorationType.None}, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .decoration(decorationType: if (this.isFinished) {
+                    TextDecorationType.LineThrough
+                } else {
+                    TextDecorationType.None
+                }, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
         }
-        .width(100.percent)
-        .margin(left: 60, top: 15)
-        .onClick({event => this.isFinished = !this.isFinished})
+            .width(100.percent)
+            .margin(left: 60, top: 15)
+            .onClick({event => this.isFinished = !this.isFinished})
     }
 }
 
 @Component
 class ThingsComponent2 {
-    @Prop var isFinished: Bool;
+    @Prop
+    var isFinished: Bool
 
-    func build(){
-        Row(space: 15){
-            if(this.isFinished) {
+    func build() {
+        Row(space: 15) {
+            if (this.isFinished) {
                 // 此处'app.media.ic_public_todo_filled'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo_filled))
-                .width(28)
-                .height(28)
-            }
-            else{
+                    .width(28)
+                    .height(28)
+            } else {
                 // 此处'app.media.ic_public_todo'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo))
-                .width(28)
-                .height(28)
+                    .width(28)
+                    .height(28)
             }
             Text("学习高数")
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .decoration(decorationType: if(this.isFinished){TextDecorationType.LineThrough} else {TextDecorationType.None}, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .decoration(decorationType: if (this.isFinished) {
+                    TextDecorationType.LineThrough
+                } else {
+                    TextDecorationType.None
+                }, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
         }
-        .width(100.percent)
-        .margin(left: 60, top: 15)
-        .onClick({event => this.isFinished = !this.isFinished})
+            .width(100.percent)
+            .margin(left: 60, top: 15)
+            .onClick({event => this.isFinished = !this.isFinished})
     }
 }
 
@@ -250,7 +262,7 @@ class EntryView {
     var isFinished: Bool = false;
 
     func build() {
-        Column(){
+        Column() {
             // 全部待办
             TodoComponent()
             // 全选
@@ -260,10 +272,10 @@ class EntryView {
             // 待办事项2
             ThingsComponent2(isFinished: this.isFinished)
         }
-        .height(100.percent)
-        .width(100.percent)
-        .margin(top: 5, bottom: 5)
-        .backgroundColor(0x90f1f3f5)
+            .height(100.percent)
+            .width(100.percent)
+            .margin(top: 5, bottom: 5)
+            .backgroundColor(0x90f1f3f5)
     }
 }
 ```
@@ -288,74 +300,86 @@ import ohos.resource.__GenerateResource__
 
 @Component
 class TodoComponent {
-    func build(){
-        Row(){
+    func build() {
+        Row() {
             Text('全部待办')
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
         }
-        .width(100.percent)
-        .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
+            .width(100.percent)
+            .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
     }
 }
 
 @Component
 class AllChooseComponent {
-    @Link var isFinished: Bool;
+    @Link
+    var isFinished: Bool
 
-    func build(){
-        Row(){
+    func build() {
+        Row() {
             Button("全选", ButtonOptions(shape: ButtonType.Capsule))
-            .onClick({event => this.isFinished = !this.isFinished})
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
-            .backgroundColor(0xf7f6cc74)
+                .onClick({event => this.isFinished = !this.isFinished})
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
+                .backgroundColor(0xf7f6cc74)
         }
-        .width(100.percent)
-        .margin(top: 10.vp, left: 60.vp)
+            .width(100.percent)
+            .margin(top: 10.vp, left: 60.vp)
     }
 }
 
 @Component
 class ThingsComponent {
-    @Prop var isFinished: Bool;
-    @Prop var things: String;
-    func build(){
-        Row(space: 15){
-            if(this.isFinished){
+    @Prop
+    var isFinished: Bool
+    @Prop
+    var things: String
+    func build() {
+        Row(space: 15) {
+            if (this.isFinished) {
                 // 此处'app.media.ic_public_todo_filled'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo_filled))
-                .width(28)
-                .height(28)
-            }
-            else{
+                    .width(28)
+                    .height(28)
+            } else {
                 // 此处'app.media.ic_public_todo'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 Image(@r(app.media.ic_public_todo))
-                .width(28)
-                .height(28)
+                    .width(28)
+                    .height(28)
             }
             Text(this.things)
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .decoration(decorationType: if(this.isFinished){TextDecorationType.LineThrough}else {TextDecorationType.None}, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .decoration(decorationType: if (this.isFinished) {
+                    TextDecorationType.LineThrough
+                } else {
+                    TextDecorationType.None
+                }, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
         }
-        .height(8.percent)
-        .width(90.percent)
-        .border(width: 1)
-        .padding(left: 15)
-        .opacity(if(this.isFinished){0.3} else{1.0})
-        .borderColor(Color.White)
-        .borderRadius(25)
-        .backgroundColor(Color.White)
-        .onClick({event => this.isFinished = !this.isFinished})
+            .height(8.percent)
+            .width(90.percent)
+            .border(width: 1)
+            .padding(left: 15)
+            .opacity(if (this.isFinished) {
+                0.3
+            } else {
+                1.0
+            })
+            .borderColor(Color.White)
+            .borderRadius(25)
+            .backgroundColor(Color.White)
+            .onClick({event => this.isFinished = !this.isFinished})
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var isFinished: Bool = false;
-    @State var planList: Array<String> = [
+    @State
+    var isFinished: Bool = false;
+    @State
+    var planList: Array<String> = [
         '7.30 起床',
         '8.30 早餐',
         '11.30 中餐',
@@ -363,31 +387,33 @@ class EntryView {
         '21.30 夜宵',
         '22.30 洗澡',
         '1.30 起床'
-        ]
+    ]
 
     func build() {
-        Column(){
+        Column() {
             // 全部待办
             TodoComponent()
 
             // 全选
             AllChooseComponent(isFinished: this.isFinished)
 
-            List(){
+            List() {
                 ForEach(
-                    this.planList, itemGeneratorFunc: {item: String, _:Int64 =>
-                        ListItem(){
+                    this.planList,
+                    itemGeneratorFunc: {
+                        item: String, _: Int64 => ListItem() {
                             // 待办事项
                             ThingsComponent(isFinished: this.isFinished, things: item)
-                        }.margin(top: 10.vp).width(100.percent)
+                        }
+                            .margin(top: 10.vp)
+                            .width(100.percent)
                     }
                 )
             }.margin(left: 10.vp, right: 10.vp)
-
         }
-        .height(100.percent)
-        .width(100.percent)
-        .backgroundColor(0x90f1f3f5)
+            .height(100.percent)
+            .width(100.percent)
+            .backgroundColor(0x90f1f3f5)
     }
 }
 ```
@@ -411,7 +437,7 @@ import kit.LocalizationKit.*
 import ohos.resource.__GenerateResource__
 
 @Observed
-class TodoListData{
+class TodoListData {
     var planList: Array<String> = [
         '7.30 起床',
         '8.30 早餐',
@@ -420,87 +446,99 @@ class TodoListData{
         '21.30 夜宵',
         '22.30 洗澡',
         '1.30 起床'
-        ]
+    ]
 }
 
 @Component
-class TodoComponent{
+class TodoComponent {
     func build() {
         Row() {
             Text('全部待办')
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
         }
-        .width(100.percent)
-        .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
+            .width(100.percent)
+            .margin(top: 40.vp, bottom: 10.vp, left: 50.vp)
     }
 }
 
 @Component
 class AllChooseComponent {
-    @Link var isFinished: Bool;
+    @Link
+    var isFinished: Bool
 
     func build() {
-        Row(){
+        Row() {
             Button("全选", ButtonOptions(shape: ButtonType.Capsule))
-            .onClick({event => this.isFinished = !this.isFinished})
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
-            .backgroundColor(0xf7f6cc74)
+                .onClick({event => this.isFinished = !this.isFinished})
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
+                .backgroundColor(0xf7f6cc74)
         }
-        .width(100.percent)
-        .margin(top: 10.vp, left: 60.vp)
+            .width(100.percent)
+            .margin(top: 10.vp, left: 60.vp)
     }
 }
 
 @Component
-class ThingsComponent{
-    @Prop var isFinished: Bool
-    @Prop var things: String
+class ThingsComponent {
+    @Prop
+    var isFinished: Bool
+    @Prop
+    var things: String
 
     @Builder
-    func displayIcon(icon: AppResource){
+    func displayIcon(icon: AppResource) {
         Image(icon)
-        .width(28.vp)
-        .height(28.vp)
-        .onClick({event => this.isFinished = !this.isFinished})
+            .width(28.vp)
+            .height(28.vp)
+            .onClick({event => this.isFinished = !this.isFinished})
     }
 
-    func build(){
-        Row(space: 15){
-            if(this.isFinished){
+    func build() {
+        Row(space: 15) {
+            if (this.isFinished) {
                 // 此处'app.media.ic_public_todo_filled'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 this.displayIcon(@r(app.media.ic_public_todo_filled))
-            }
-            else{
+            } else {
                 // 此处'app.media.ic_public_todo'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
                 this.displayIcon(@r(app.media.ic_public_todo))
             }
             Text(this.things)
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .decoration(decorationType: if(this.isFinished){TextDecorationType.LineThrough}else {TextDecorationType.None}, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
-            .onClick({event => this.things += '啦'})
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .decoration(decorationType: if (this.isFinished) {
+                    TextDecorationType.LineThrough
+                } else {
+                    TextDecorationType.None
+                }, color: Color.Black, decorationStyle: TextDecorationStyle.Solid)
+                .onClick({event => this.things += '啦'})
         }
-        .height(8.percent)
-        .width(90.percent)
-        .padding(left: 15.vp)
-        .opacity(if(this.isFinished){0.3} else{1.0})
-        .border(width: 1)
-        .borderColor(Color.White)
-        .borderRadius(25)
-        .backgroundColor(Color.White)
+            .height(8.percent)
+            .width(90.percent)
+            .padding(left: 15.vp)
+            .opacity(if (this.isFinished) {
+                0.3
+            } else {
+                1.0
+            })
+            .border(width: 1)
+            .borderColor(Color.White)
+            .borderRadius(25)
+            .backgroundColor(Color.White)
     }
 }
 
 @Entry
 @Component
-class EntryView{
-    @State var isFinished = false
-    @State var data: TodoListData = TodoListData()
+class EntryView {
+    @State
+    var isFinished = false
+    @State
+    var data: TodoListData = TodoListData()
 
-    func build(){
-        Column(){
+    func build() {
+        Column() {
             TodoComponent()
             AllChooseComponent(isFinished: this.isFinished)
             List() {
@@ -508,15 +546,16 @@ class EntryView{
                     this.data.planList, itemGeneratorFunc: {item: String, _:Int64 =>
                         ListItem(){
                             ThingsComponent(isFinished: this.isFinished, things: item)
-                        }.margin(top: 10.vp).width(100.percent)
+                        }
+                            .margin(top: 10.vp)
+                            .width(100.percent)
                     }
                 )
             }.margin(left: 10.vp, right: 10.vp)
-
         }
-        .height(100.percent)
-        .width(100.percent)
-        .backgroundColor(0x90f1f3f5)
+            .height(100.percent)
+            .width(100.percent)
+            .backgroundColor(0x90f1f3f5)
     }
 }
 ```
@@ -604,7 +643,8 @@ View层根据需要来组织，但View层需要区分以下三种组件：
     @Entry
     @Component
     class EntryView {
-        @State var thingsTodo: TodoListViewModel = TodoListViewModel()
+        @State
+        var thingsTodo: TodoListViewModel = TodoListViewModel()
 
         public func aboutToAppear() {
             this.thingsTodo.loadTasks()
@@ -620,9 +660,9 @@ View层根据需要来组织，但View层需要区分以下三种组件：
                     TodoListComponent(thingViewModelArray: this.thingsTodo.thingViewModelArray)
                 }
             }
-            .height(100.percent)
-            .width(100.percent)
-            .backgroundColor(0x90f1f3f5)
+                .height(100.percent)
+                .width(100.percent)
+                .backgroundColor(0x90f1f3f5)
         }
     }
     ```
@@ -639,8 +679,10 @@ View层根据需要来组织，但View层需要区分以下三种组件：
 
     @Observed
     public class ThingModel {
-        @Publish public var thingName: String = "Todo"
-        @Publish public var isFinish: Bool = false
+        @Publish
+        public var thingName: String = "Todo"
+        @Publish
+        public var isFinish: Bool = false
     }
     ```
 
@@ -667,7 +709,7 @@ View层根据需要来组织，但View层需要区分以下三种组件：
                 ThingModel(thingName: "21.30夜宵", isFinish: false),
                 ThingModel(thingName: "22.30洗澡", isFinish: false),
                 ThingModel(thingName: "1.30睡觉", isFinish: false)
-                ]
+            ]
         }
     }
     ```
@@ -685,8 +727,11 @@ View层根据需要来组织，但View层需要区分以下三种组件：
 
     @Component
     public class AllChooseComponent {
-        @State var titleName: String = "全选"
-        @Link var thingsViewModel: TodoListViewModel = TodoListViewModel(isChoosen: false, thingViewModelArray: ObservedArrayList<ThingViewModel>())
+        @State
+        var titleName: String = "全选"
+        @Link
+        var thingsViewModel: TodoListViewModel = TodoListViewModel(isChoosen: false,
+            thingViewModelArray: ObservedArrayList<ThingViewModel>())
 
         func build() {
             Row() {
@@ -699,8 +744,8 @@ View层根据需要来组织，但View层需要区分以下三种组件：
                 .fontWeight(FontWeight.Bold)
                 .backgroundColor(0xf7f6cc74)
             }
-            .width(40.percent)
-            .margin(top: 40.vp, bottom: 10.vp, left: 30.vp)
+                .width(40.percent)
+                .margin(top: 40.vp, bottom: 10.vp, left: 30.vp)
         }
     }
     ```
@@ -718,8 +763,9 @@ View层根据需要来组织，但View层需要区分以下三种组件：
     import ohos_app_cangjie_entry.view_model.*
 
     @Component
-    public class ThingComponent  {
-        @Link var thingViewModel: ThingViewModel
+    public class ThingComponent {
+        @Link
+        var thingViewModel: ThingViewModel
 
         @Builder
         func displayIcon(icon: AppResource) {
@@ -775,11 +821,11 @@ View层根据需要来组织，但View层需要区分以下三种组件：
         func build() {
             Row() {
                 Text('全部待办')
-                .fontSize(30)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(30)
+                    .fontWeight(FontWeight.Bold)
             }
-            .width(40.percent)
-            .margin(top: 40.vp, bottom: 10.vp, left: 30.vp)
+                .width(40.percent)
+                .margin(top: 40.vp, bottom: 10.vp, left: 30.vp)
         }
     }
     ```
@@ -797,21 +843,22 @@ View层根据需要来组织，但View层需要区分以下三种组件：
 
     @Component
     public class TodoListComponent {
-        @Link var thingViewModelArray: ObservedArrayList<ThingViewModel>
+        @Link
+        var thingViewModelArray: ObservedArrayList<ThingViewModel>
 
         func build() {
             Column() {
                 List() {
                     ForEach(
-                        this.thingViewModelArray, itemGeneratorFunc: {item: ThingViewModel, _:Int64 =>
-                            ListItem() {
+                        this.thingViewModelArray,
+                        itemGeneratorFunc: {
+                            item: ThingViewModel, _: Int64 => ListItem() {
                                 ThingComponent(thingViewModel: item)
                             }
                         }
                     )
                 }
-            }
-            .width(100.percent)
+            }.width(100.percent)
         }
     }
     ```
@@ -829,8 +876,10 @@ View层根据需要来组织，但View层需要区分以下三种组件：
 
     @Observed
     public class ThingViewModel {
-        @Publish public var thingName: String = "Todo"
-        @Publish public var isFinish: Bool = false
+        @Publish
+        public var thingName: String = "Todo"
+        @Publish
+        public var isFinish: Bool = false
 
         public func updateTask(thing: ThingModel) {
             this.thingName = thing.thingName
@@ -860,8 +909,10 @@ View层根据需要来组织，但View层需要区分以下三种组件：
 
     @Observed
     public class TodoListViewModel {
-        @Publish public var isChoosen: Bool = false
-        @Publish public var thingViewModelArray: ObservedArrayList<ThingViewModel> = ObservedArrayList<ThingViewModel>()
+        @Publish
+        public var isChoosen: Bool = false
+        @Publish
+        public var thingViewModelArray: ObservedArrayList<ThingViewModel> = ObservedArrayList<ThingViewModel>()
 
         public func loadTasks() {
             let todoList = TodoListModel([])

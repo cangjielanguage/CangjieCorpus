@@ -101,7 +101,7 @@ public func getConnectedDevices(): Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -159,7 +159,7 @@ public func getConnectionState(deviceId: String): ProfileConnectionState
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -217,7 +217,7 @@ public func getPlayingState(deviceId: String): PlayingState
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -270,7 +270,7 @@ public func off(eventType: ProfileCallbackType, callback: CallbackObject): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -329,7 +329,7 @@ public func off(eventType: ProfileCallbackType): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -349,7 +349,7 @@ import ohos.callback_invoke.*
 import ohos.business_exception.*
 
 // 此处定义所需要的依赖项等
-class StateChangeCallback1 <: Callback1Argument<StateChangeParam> {
+class StateChangeCallback <: Callback1Argument<StateChangeParam> {
     public func invoke(err: ?BusinessException, arg: StateChangeParam): Unit {
         let connectionState = arg.state.toString()
         Hilog.info(0, "Bluetooth", "profile connection state has change to ${connectionState}")
@@ -357,7 +357,7 @@ class StateChangeCallback1 <: Callback1Argument<StateChangeParam> {
 }
 
 let a2dp = createA2dpSrcProfile()
-let changeCallBack = StateChangeCallback1()
+let changeCallBack = StateChangeCallback()
 try {
     a2dp.on(ProfileCallbackType.ConnectionStateChange, changeCallBack)
     a2dp.off(ProfileCallbackType.ConnectionStateChange)
@@ -389,7 +389,7 @@ public func on(eventType: ProfileCallbackType, callback: Callback1Argument<State
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -409,7 +409,7 @@ import ohos.callback_invoke.*
 import ohos.business_exception.*
 
 // 此处定义所需要的依赖项等
-class StateChangeCallback2 <: Callback1Argument<StateChangeParam> {
+class StateChangeCallback <: Callback1Argument<StateChangeParam> {
     public func invoke(err: ?BusinessException, arg: StateChangeParam): Unit {
         let connectionState = arg.state.toString()
         Hilog.info(0, "Bluetooth", "profile connection state has change to ${connectionState}")
@@ -417,7 +417,7 @@ class StateChangeCallback2 <: Callback1Argument<StateChangeParam> {
 }
 
 let a2dp = createA2dpSrcProfile()
-let changeCallBack = StateChangeCallback2()
+let changeCallBack = StateChangeCallback()
 try {
     a2dp.on(ProfileCallbackType.ConnectionStateChange, changeCallBack)
     a2dp.off(ProfileCallbackType.ConnectionStateChange)
@@ -527,7 +527,7 @@ public enum CodecBitsPerSample <: Equatable<CodecBitsPerSample> & ToString {
 
 **父类型：**
 
-- Equatable\<CodecBitsPerSample>
+- Equatable\<[CodecBitsPerSample](#enum-codecbitspersample)>
 - ToString
 
 ### CodecBitsPerSample16
@@ -663,7 +663,7 @@ public enum CodecChannelMode <: Equatable<CodecChannelMode> & ToString {
 
 **父类型：**
 
-- Equatable\<CodecChannelMode>
+- Equatable\<[CodecChannelMode](#enum-codecchannelmode)>
 - ToString
 
 ### CodecChannelModeMono
@@ -791,7 +791,7 @@ public enum CodecSampleRate <: Equatable<CodecSampleRate> & ToString {
 
 **父类型：**
 
-- Equatable\<CodecSampleRate>
+- Equatable\<[CodecSampleRate](#enum-codecsamplerate)>
 - ToString
 
 ### CodecSampleRate176400
@@ -800,7 +800,7 @@ public enum CodecSampleRate <: Equatable<CodecSampleRate> & ToString {
 CodecSampleRate176400
 ```
 
-**功能：** 176.4k位采样率
+**功能：** 176.4k采样率
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -812,7 +812,7 @@ CodecSampleRate176400
 CodecSampleRate192000
 ```
 
-**功能：** 192k位采样率。
+**功能：** 192k采样率。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -860,7 +860,7 @@ CodecSampleRate88200
 CodecSampleRate96000
 ```
 
-**功能：** 96k位采样率。
+**功能：** 96k采样率。
 
 **系统能力：** SystemCapability.Communication.Bluetooth.Core
 
@@ -964,7 +964,7 @@ public enum CodecType <: Equatable<CodecType> & ToString {
 
 **父类型：**
 
-- Equatable\<CodecType>
+- Equatable\<[CodecType](#enum-codectype)>
 - ToString
 
 ### CodecTypeAac
@@ -1099,7 +1099,7 @@ public enum PlayingState <: Equatable<PlayingState> & ToString {
 
 **父类型：**
 
-- Equatable\<PlayingState>
+- Equatable\<[PlayingState](#enum-playingstate)>
 - ToString
 
 ### StateNotPlaying

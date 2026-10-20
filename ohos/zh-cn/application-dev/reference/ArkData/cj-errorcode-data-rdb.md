@@ -22,7 +22,7 @@ Inner error.
 
 **可能原因**
 
-优先查看错误日志，主要有以下几种：
+优先查看错误日志，通过日志可以详细了解错误原因，主要有以下几种：
 
 1. sql执行异常。
 2. 内部状态异常。
@@ -36,15 +36,33 @@ Inner error.
 3. 开发者排查是否按接口文档正确使用接口。
 4. 尝试重试，如果依然无法解决，可以提示用户重启应用、升级应用或升级设备版本。
 
+## 14800001 无效的参数
+
+**错误信息**
+
+Invalid arguments. Possible causes: 1. Parameter is out of valid range; 2. Missing GROUP BY clause.
+
+**错误描述**
+
+无效的参数。
+
+**可能原因**
+
+入参不符合接口要求，如取值范围、长度、格式等。
+
+**处理步骤**
+
+参考接口参数说明修改参数符合要求。
+
 ## 14800010 数据库路径不合法
 
 **错误信息**
 
-Invalid database path.
+Failed to open or delete the database by an invalid database path.
 
 **错误描述**
 
-数据库路径不合法。
+数据库路径不合法，打开或删除数据库失败。
 
 **可能原因**
 
@@ -54,30 +72,29 @@ Invalid database path.
 
 检查传入数据库路径。
 
-## 14800011 数据库文件损坏
+## 14800011 数据库文件异常
 
 **错误信息**
 
-Database corrupted.
+The current operation failed because the database is corrupted.
 
 **错误描述**
 
-该错误码表示在调用数据库增、删、查、数据同步等接口时，数据库已损坏。
+数据库异常，当前操作失败。
 
 **可能原因**
 
-调用数据库增、删、查、数据同步等接口时，数据库文件已损坏。
+数据库文件不完整、数据库fd被误操作、数据库内存被踩等。
 
 **处理步骤**
 
-1. 如果之前备份过数据库，可尝试使用已备份的数据库文件恢复数据库。
-2. 如果之前没有备份过数据库，可尝试删除数据库后重新创建。
+如果可以接受数据库数据丢失，则可尝试删除数据库后重新创建。否则，需要备份数据库以便恢复。具体操作可参考[数据库备份与恢复](../../database/cj-data-backup-and-restore.md)。
 
 ## 14800012 结果集为空或指定位置不合法
 
 **错误信息**
 
-Row out of bounds.
+ResultSet is empty or pointer index is out of bounds.
 
 **错误描述**
 
@@ -85,7 +102,7 @@ Row out of bounds.
 
 **可能原因**
 
-结果集为空或结果集指定行号超出位置范围[0, m - 1]，m = resultsetV9.rowCount。
+结果集为空或结果集指定行号超出位置范围[0, m - 1]，m = ResultSet.rowCount。
 
 **处理步骤**
 
@@ -95,7 +112,7 @@ Row out of bounds.
 
 **错误信息**
 
-Column out of bounds.
+Column index is out of bounds.
 
 **错误描述**
 
@@ -103,30 +120,27 @@ Column out of bounds.
 
 **可能原因**
 
-1. 结果集为空。
-2. 结果集当前行号超出范围[0, m - 1]，m = resultsetV9.rowCount。
-3. 当前列号超出范围[0, n - 1]，n = resultsetV9.columnCount。
-4. 当前列数据类型接口不支持。
+1. 当前列号超出范围[0, n - 1]，n = ResultSet.columnCount。
+2. 当前列数据类型接口不支持。
 
 **处理步骤**
 
-1. 检查结果集是否为空。
-2. 检查结果集当前行号、列号是否超出范围。
-3. 检查当前列数据类型是否支持。
+1. 检查结果集当前列号是否超出范围。
+2. 检查当前列数据类型是否支持。
 
-## 14800014 数据库或结果集关闭
+## 14800014 目标实例已关闭
 
 **错误信息**
 
-Already closed.
+The target instance is already closed.
 
 **错误描述**
 
-数据库或结果集关闭。
+目标实例已关闭。
 
 **可能原因**
 
-RdbStore或者ResultSet等带有close接口的对象，已调用过close或者没有打开成功。
+实例未成功打开，或者所属实例已关闭（如RdbStore、ResultSet对象已调用close方法，Transaction对象已调用commit或rollback方法）。
 
 **处理步骤**
 
@@ -144,17 +158,17 @@ The database does not respond.
 
 **可能原因**
 
-有读、写、attach、detach等操作正在执行，无法在指定的时间（默认2s）内执行当前操作。
+有读、写等操作正在执行，无法在指定的时间（默认2s）内执行当前操作。
 
 **处理步骤**
 
-重新尝试执行该操作。
+重新尝试。
 
 ## 14800016 数据库别名已被使用
 
 **错误信息**
 
-The database is already attached.
+The database alias already exists.
 
 **错误描述**
 
@@ -162,7 +176,7 @@ The database is already attached.
 
 **可能原因**
 
-附加后的数据库别名已被使用。
+附加后的数据库的别名已被使用。
 
 **处理步骤**
 
@@ -172,7 +186,7 @@ The database is already attached.
 
 **错误信息**
 
-Config changed.
+StoreConfig is changed.
 
 **错误描述**
 
@@ -180,11 +194,13 @@ Config changed.
 
 **可能原因**
 
-数据库的area（区域）, isEncrypt（加密）, securityLevel（安全级别）等关键配置发生变化。
+数据库的area（区域），securityLevel（安全级别），数据库读写权限等关键配置发生变化。
 
 **处理步骤**
 
 保持原配置不变或者用原配置导出数据，删除旧库，用新配置创建新库，数据存入新库。
+
+检查是否使用chmod修改了数据库文件的读写权限，确保当前用户有足够的权限来读写数据库文件。
 
 ## 14800018 查询结果没有数据符合条件
 
@@ -222,11 +238,30 @@ SQL语句不符合规定，导致查询失败。
 
 SQL语句不符合规定导致执行失败时，编写满足规约的SQL语句。
 
-## 14800021 SQLite:通用错误
+## 14800020 密钥损坏或丢失
 
 **错误信息**
 
-SQLite: Generic error.
+The secret key is corrupted or lost.
+
+**错误描述**
+
+获取密钥失败。
+
+**可能原因**
+
+根密钥丢失、无权限读取密钥文件、密钥文件损坏等。
+
+**处理步骤**
+
+1. 检查密钥文件权限、内容是否正常。
+2. 重建或restore恢复数据库。
+
+## 14800021 SQLite：通用错误
+
+**错误信息**
+
+SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist.
 
 **错误描述**
 
@@ -244,7 +279,7 @@ SQLite：通用错误。
 
 开发者分析错误的SQL语句，找出错误点。
 
-## 14800022 SQLite:异步回调请求被中止
+## 14800022 SQLite：异步回调请求被中止
 
 **错误信息**
 
@@ -252,7 +287,7 @@ SQLite: Callback routine requested an abort.
 
 **错误描述**
 
-SQLite:异步回调请求被中止。
+SQLite：异步回调请求被中止。
 
 **可能原因**
 
@@ -263,7 +298,7 @@ SQLite:异步回调请求被中止。
 
 检查SQLite的钩子函数（callback）的实现，确保其正确性。
 
-## 14800023 SQLite:访问权限被拒绝
+## 14800023 SQLite：访问权限被拒绝
 
 **错误信息**
 
@@ -286,7 +321,7 @@ SQLite访问权限被拒绝。
 4. 确认没有其他进程锁定数据库文件，如果有，关闭占用文件的进程。
 5. 在处理权限问题时，确保有足够的权限去更改相关的文件或文件夹权限。
 
-## 14800024 SQLite:数据库文件已锁定
+## 14800024 SQLite：数据库文件已锁定
 
 **错误信息**
 
@@ -298,7 +333,7 @@ SQLite数据库文件已锁定。
 
 **可能原因**
 
-1. 同一应用两个进程，例如UIability和datashareability同时打开了同一个数据库，进行增删改操作，或者不同应用的同一个group组内的进程通过group组打开同一个数据库，进行增删改操作。
+1. 同一应用两个进程，例如UIAbility和DataShareExtensionAbility同时打开了同一个数据库，进行增删改操作，或者不同应用的同一个group组内的进程通过group组打开同一个数据库，进行增删改操作。
 2. 参见SQLITE_BUSY的相关错误场景。
 
 **处理步骤**
@@ -306,7 +341,7 @@ SQLite数据库文件已锁定。
 1. 避免进程并发操作数据库。
 2. 等待一段时间重试。
 
-## 14800025 SQLite:数据库中的表被锁定
+## 14800025 SQLite：数据库中的表被锁定
 
 **错误信息**
 
@@ -329,7 +364,7 @@ SQLite：数据库中的表被锁定。
 4. 如果数据库连接对象没有正确关闭，确保在完成数据库操作后关闭连接。
 5. 如果在多线程环境中，确保对数据库操作加锁，防止竞争条件。
 
-## 14800026 SQLite:数据库内存不足
+## 14800026 SQLite：数据库内存不足
 
 **错误信息**
 
@@ -337,7 +372,7 @@ SQLite: The database is out of memory.
 
 **错误描述**
 
-SQLite:数据库内存不足。
+SQLite：数据库内存不足。
 
 **可能原因**
 
@@ -347,7 +382,7 @@ SQLite:数据库内存不足。
 
 减小数据量或增加内存分配。
 
-## 14800027 SQLite:尝试写入只读数据库
+## 14800027 SQLite：尝试写入只读数据库
 
 **错误信息**
 
@@ -368,7 +403,7 @@ SQLite：尝试写入只读数据库。
 2. 如果文件系统是只读的，需要将其改为读写模式。
 3. 确认在打开数据库时没有使用只读模式参数。
 
-## 14800028 SQLite:发生了某种磁盘I/O错误
+## 14800028 SQLite：发生了某种磁盘I/O错误
 
 **错误信息**
 
@@ -395,7 +430,7 @@ SQLite发生了某种磁盘I/O错误。
 3. 检查磁盘空间是否足够，并清理不必要的文件释放空间。
 4. 检查文件的权限，确保应用程序有足够的权限去读写文件。
 
-## 14800029 SQLite:数据库已满
+## 14800029 SQLite：数据库已满
 
 **错误信息**
 
@@ -413,7 +448,7 @@ SQLite数据库已满。
 
 减小数据量或增加磁盘空间。
 
-## 14800030 SQLite:无法打开数据库文件
+## 14800030 SQLite：无法打开数据库文件
 
 **错误信息**
 
@@ -421,7 +456,7 @@ SQLite: Unable to open the database file.
 
 **错误描述**
 
-SQLite:无法打开数据库文件。
+SQLite：无法打开数据库文件。
 
 **可能原因**
 
@@ -455,7 +490,7 @@ SQLite：TEXT或BLOB超出大小限制。
 
 将大查询分解为多个小查询，每次处理一部分数据。
 
-## 14800032 SQLite:由于违反约束而中止
+## 14800032 SQLite：由于违反约束而中止
 
 **错误信息**
 
@@ -463,7 +498,7 @@ SQLite: Abort due to constraint violation.
 
 **错误描述**
 
-SQLite:由于违反约束而中止。
+SQLite：由于违反约束而中止。
 
 **可能原因**
 
@@ -474,7 +509,7 @@ SQLite:由于违反约束而中止。
 
 检查试图插入或更新的数据是否违反了上述约束。
 
-## 14800033 SQLite:数据类型不匹配
+## 14800033 SQLite：数据类型不匹配
 
 **错误信息**
 
@@ -482,7 +517,7 @@ SQLite: Data type mismatch.
 
 **错误描述**
 
-SQLite:数据类型不匹配。
+SQLite：数据类型不匹配。
 
 **可能原因**
 
@@ -493,7 +528,7 @@ SQLite:数据类型不匹配。
 
 检查SQL语句中涉及的列的数据类型，确保插入、更新或查询的数据类型与列的数据类型相匹配。
 
-## 14800034 SQLite:库使用不正确
+## 14800034 SQLite：库使用不正确
 
 **错误信息**
 
@@ -501,7 +536,7 @@ SQLite: Library used incorrectly.
 
 **错误描述**
 
-SQLite:库使用不正确。
+SQLite：库使用不正确。
 
 **可能原因**
 
@@ -517,6 +552,24 @@ SQLite:库使用不正确。
 2. 确保数据库连接在使用前是打开的，在结束操作后是关闭的。
 3. 确保所有数据库对象在使用完毕后都已正确释放。
 
+## 14800041 类型转换失败
+
+**错误信息**
+
+Type conversion failed.
+
+**错误描述**
+
+类型转换失败。
+
+**可能原因**
+
+通过resultSet的获取数据时，传入字段的数据类型不匹配。
+
+**处理步骤**
+
+确保传入字段的数据类型与使用的接口匹配。
+
 ## 14800047 WAL文件大小超过默认上限
 
 **错误信息**
@@ -525,7 +578,7 @@ The WAL file size exceeds the default limit.
 
 **错误描述**
 
-WAL文件大小超过默认上限（200M）。
+WAL文件大小超过默认上限（512MB）。
 
 **可能原因**
 
@@ -541,7 +594,7 @@ WAL文件大小超过默认上限（200M）。
 
 **错误信息**
 
-Failed to obtain subscription service.
+Failed to obtain the subscription service.
 
 **错误描述**
 
@@ -555,11 +608,29 @@ Failed to obtain subscription service.
 
 需要在当前平台部署订阅服务。
 
+## 14800051 分布式表类型不匹配
+
+**错误信息**
+
+The type of the distributed table does not match.
+
+**错误描述**
+
+对同一数据库表设置的分布式表类型前后不一致。
+
+**可能原因**
+
+对同一数据库表设置的分布式表类型前后不一致，分布式表类型可见[DistributedType](./cj-apis-relational_store.md#enum-distributedtype)。
+
+**处理步骤**
+
+对同一数据库表设置的分布式表类型保持一致，属于端端同步的分布式表不可再设置为用于端云的同步表。
+
 ## 14801001 上下文环境非Stage模型
 
 **错误信息**
 
- Only supported in stage mode.
+The operation is supported in the stage model only.
 
 **错误描述**
 
@@ -577,7 +648,7 @@ Failed to obtain subscription service.
 
 **错误信息**
 
-The data group id is not valid.
+Invalid data group ID.
 
 **错误描述**
 
@@ -590,21 +661,3 @@ The data group id is not valid.
 **处理步骤**
 
 从应用市场申请dataGroupId，并正确传入该参数。
-
-## 14800051 分布式表类型不匹配
-
-**错误信息**
-
-The type of the distributed table does not match.
-
-**错误描述**
-
-对同一数据库表设置的分布式表类型前后不一致。
-
-**可能原因**
-
-对同一数据库表设置的分布式表类型前后不一致，分布式表类型可见[DistributedType](../ArkData/cj-apis-relational_store.md#enum-distributedtype)。
-
-**处理步骤**
-
-对同一数据库表设置的分布式表类型保持一致，属于端端同步的分布式表不可再设置为用于端云的同步表。

@@ -1,6 +1,6 @@
 # 动态特性
 
-本章介绍 Cangjie 的动态特性，应用动态特性开发者能够更为优雅的实现一些功能。仓颉的动态特性主要包含反射。
+本章介绍仓颉编程语言的动态特性，应用动态特性开发者能够更为优雅的实现一些功能。仓颉的动态特性主要包含反射。
 
 ## 仓颉反射基本介绍
 
@@ -22,7 +22,8 @@
 
 可以使用三种静态的 `of` 方法来生成 TypeInfo 信息类。
 
-<!-- code_no_check -->
+<!-- code_check_manual -->
+
 ```cangjie
 public class TypeInfo {
     public static func of(a: Any): TypeInfo
@@ -31,7 +32,7 @@ public class TypeInfo {
 }
 ```
 
-当采用入参为 `Any` 和 `Object` 类型的 `of` 函数，输出为该实例的运行时类型信息，采用泛型参数的 `of` 函数则会返回传入参数的静态类型信息。两种方法产生的信息完全相同，但不保证一定对应同一对象。
+当采用入参为 `Any` 和 `Object` 类型的 `of` 函数，输出为该实例的运行时类型信息；采用泛型参数的 `of` 函数则会返回传入参数的静态类型信息。两种方法产生的信息完全相同，但无法保证对应同一对象。
 
 例如可以用反射来获取一个自定义类型的类型信息。
 
@@ -60,7 +61,8 @@ default.Foo
 
 此外 TypeInfo 还提供了静态函数 `get`，该接口可通过传入的类型名称获取 TypeInfo。
 
-<!-- code_no_check -->
+<!-- code_check_manual -->
+
 ```cangjie
 public class TypeInfo {
     public static func get(qualifiedName: String): TypeInfo
@@ -70,7 +72,6 @@ public class TypeInfo {
 请注意，传入参数需要符合 `module.package.type` 的完全限定模式规则。对于编译器预导入的类型，包含 core 包中的类型和编译器内置类型，例如 `primitive type`、`Option`、`Iterable` 等，查找的字符串需要直接使用其类型名，不能带包名和模块名前缀。当运行时无法查询到对应类型的实例，则会抛出 `InfoNotFoundException`。
 
 示例：（会运行报错）
-
 <!-- run.error -->
 
 ```cangjie
@@ -139,12 +140,18 @@ import std.reflect.*
 public class Foo {
     public let _p1: Int64 = 1
     public prop p1: Int64 {
-        get() { _p1 }
+        get() {
+            _p1
+        }
     }
     public var _p2: Int64 = 2
     public mut prop p2: Int64 {
-        get() { _p2 }
-        set(v) { _p2 = v }
+        get() {
+            _p2
+        }
+        set(v) {
+            _p2 = v
+        }
     }
 }
 

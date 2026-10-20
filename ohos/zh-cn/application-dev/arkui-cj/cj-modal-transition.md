@@ -129,17 +129,19 @@ class EntryView {
                             Column {
                                 if (index % 2 == 0) {
                                     Column {
+
                                     }
-                                    .width(20.vp)
-                                    .height(20.vp)
-                                    .border(width: 1.vp, color: 0x007dfe)
-                                    .backgroundColor(0x007dfe)
+                                        .width(20.vp)
+                                        .height(20.vp)
+                                        .border(width: 1.vp, color: 0x007dfe)
+                                        .backgroundColor(0x007dfe)
                                 } else {
                                     Column {
+
                                     }
-                                    .width(20.vp)
-                                    .height(20.vp)
-                                    .border(width: 1.vp, color: 0x007dfe)
+                                        .width(20.vp)
+                                        .height(20.vp)
+                                        .border(width: 1.vp, color: 0x007dfe)
                                 }
                             }.width(20.percent)
 
@@ -160,10 +162,10 @@ class EntryView {
                                     .fontSize(16.vp)
                             }.width(20.percent)
                         }
-                        .padding(top: 10.vp, bottom: 10.vp)
-                        .border(width: 1.vp, color: 0xf1f1f1)
-                        .width(92.percent)
-                        .backgroundColor(Color.White)
+                            .padding(top: 10.vp, bottom: 10.vp)
+                            .border(width: 1.vp, color: 0xf1f1f1)
+                            .width(92.percent)
+                            .backgroundColor(Color.White)
                     }
                 )
             }.padding(top: 20.vp, bottom: 20.vp)
@@ -179,12 +181,12 @@ class EntryView {
                     evt => this.isPresent = !this.isPresent
                 })
         }
-        .size(width: 100.percent, height: 100.percent)
-        .backgroundColor(0xf5f5f5)
-        .transition(
-            TransitionEffect
-                .translate(TranslateOptions(y: 1000))
-                .animation(AnimateParam(curve: Curve.Smooth)))
+            .size(width: 100.percent, height: 100.percent)
+            .backgroundColor(0xf5f5f5)
+            .transition(
+                TransitionEffect
+                    .translate(TranslateOptions(y: 1000))
+                    .animation(AnimateParam(curve: Curve.Smooth)))
     }
 
     func build() {
@@ -216,12 +218,12 @@ class EntryView {
                     }.width(30.percent)
                 }
             }
-            .width(92.percent)
-            .padding(15.percent)
-            .margin(top: -30)
-            .backgroundColor(Color.White)
-            .shadow(radius: 30.0, color: 0xaaaaaa)
-            .borderRadius(10.vp)
+                .width(92.percent)
+                .padding(15.percent)
+                .margin(top: -30)
+                .backgroundColor(Color.White)
+                .shadow(radius: 30.0, color: 0xaaaaaa)
+                .borderRadius(10.vp)
 
             Column {
                 Text("+ 选择乘车人")
@@ -295,9 +297,9 @@ class EntryView {
                 )
             }.padding(top: 18.vp)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(Color.White)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 
     func build() {
@@ -308,12 +310,13 @@ class EntryView {
             Column {
                 Row {
                     Row {
+
                     }
-                    .width(10.vp)
-                    .height(10.vp)
-                    .backgroundColor(0xa8a8a8)
-                    .margin(right: 12.vp)
-                    .borderRadius(20.vp)
+                        .width(10.vp)
+                        .height(10.vp)
+                        .backgroundColor(0xa8a8a8)
+                        .margin(right: 12.vp)
+                        .borderRadius(20.vp)
                     Column {
                         Text("选择点餐口味和餐具")
                             .fontSize(16.vp)
@@ -323,36 +326,37 @@ class EntryView {
                     Blank()
 
                     Row {
+
                     }
-                    .width(12.vp)
-                    .height(12.vp)
-                    .margin(right: 15.vp)
-                    .border(width: 2.vp, color: 0xcccccc)
-                    .rotate(angle: 45.0)
+                        .width(12.vp)
+                        .height(12.vp)
+                        .margin(right: 15.vp)
+                        .border(width: 2.vp, color: 0xcccccc)
+                        .rotate(angle: 45.0)
                 }
-                .borderRadius(15.vp)
-                .shadow(radius: 100.0, color: 0xededed)
-                .width(90.percent)
-                .alignItems(VerticalAlign.Center)
-                .padding(left: 15.vp, top: 15.vp, bottom: 15.vp)
-                .backgroundColor(Color.White)
-                .bindSheet(
-                    this.isShowSheet,
-                    this.mySheet,
-                    options: SheetOptions(
-                        height: SheetSize.FitContent,
-                        dragBar: false,
-                        onDisappear: {
-                            => this.isShowSheet = !this.isShowSheet
-                        }
+                    .borderRadius(15.vp)
+                    .shadow(radius: 100.0, color: 0xededed)
+                    .width(90.percent)
+                    .alignItems(VerticalAlign.Center)
+                    .padding(left: 15.vp, top: 15.vp, bottom: 15.vp)
+                    .backgroundColor(Color.White)
+                    .bindSheet(
+                        this.isShowSheet,
+                        this.mySheet,
+                        options: SheetOptions(
+                            height: SheetSize.FitContent,
+                            dragBar: false,
+                            onDisappear: {
+                                => this.isShowSheet = !this.isShowSheet
+                            }
+                        )
                     )
-                )
-                .onClick({evt => this.isShowSheet = !this.isShowSheet})
+                    .onClick({evt => this.isShowSheet = !this.isShowSheet})
             }.width(100.percent)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(0xf1f1f1)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(0xf1f1f1)
     }
 }
 ```
@@ -388,9 +392,9 @@ class EntryView {
                 .borderRadius(5.vp)
                 .bindMenu(this.items)
         }
-        .justifyContent(FlexAlign.Center)
-        .width(100.percent)
-        .height(437.vp)
+            .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(437.vp)
     }
 }
 ```
@@ -407,6 +411,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource.*
@@ -429,15 +434,15 @@ class EntryView {
                             .width(100.percent)
                             .textAlign(TextAlign.Center)
                     }
-                    .padding(15.vp)
-                    .border(width: 1.vp, color: 0xcccccc)
+                        .padding(15.vp)
+                        .border(width: 1.vp, color: 0xcccccc)
                 }
             )
         }
-        .width(140.vp)
-        .borderRadius(15.vp)
-        .shadow(radius: 15.0, color: 0xf1f1f1)
-        .backgroundColor(0xf1f1f1)
+            .width(140.vp)
+            .borderRadius(15.vp)
+            .shadow(radius: 15.0, color: 0xf1f1f1)
+            .backgroundColor(0xf1f1f1)
     }
 
     func build() {
@@ -459,14 +464,13 @@ class EntryView {
                             Image(item)
                                 .width(100.percent)
                                 .bindContextMenu(builder: this.myMenu, responseType: ResponseType.LongPress)
-                        }
-                        .padding(top: 20.vp, bottom: 20.vp, left: 10.vp, right: 10.vp)
+                        }.padding(top: 20.vp, bottom: 20.vp, left: 10.vp, right: 10.vp)
                     }
                 )
             }
         }
-        .width(100.percent)
-        .alignItems(HorizontalAlign.Center)
+            .width(100.percent)
+            .alignItems(HorizontalAlign.Center)
     }
 }
 ```
@@ -497,19 +501,20 @@ class EntryView {
     func popupBuilder() {
         Column(space: 2.vp) {
             Row {
+
             }
-            .width(64.vp)
-            .height(64.vp)
-            .backgroundColor(0x409eff)
+                .width(64.vp)
+                .height(64.vp)
+                .backgroundColor(0x409eff)
             Text("Popup")
                 .fontSize(10.vp)
                 .fontColor(Color.White)
         }
-        .justifyContent(FlexAlign.SpaceAround)
-        .width(100.vp)
-        .height(100.vp)
-        .padding(5.vp)
-        .backgroundColor(Color.Red)
+            .justifyContent(FlexAlign.SpaceAround)
+            .width(100.vp)
+            .height(100.vp)
+            .padding(5.vp)
+            .backgroundColor(Color.Red)
     }
 
     func build() {
@@ -522,7 +527,7 @@ class EntryView {
                 .bindPopup(
                     this.customPopup,
                     CustomPopupOptions(
-                        builder: bind(popupBuilder, this),
+                        builder: popupBuilder,
                         placement: Placement.Top,
                         popupColor: Color(0xf56c6c),
                         enableArrow: true,
@@ -536,9 +541,9 @@ class EntryView {
                     )
                 )
         }
-        .justifyContent(FlexAlign.Center)
-        .width(100.percent)
-        .height(437.vp)
+            .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(437.vp)
     }
 }
 ```
@@ -581,23 +586,23 @@ class EntryView {
             Column {
                 Column {
                     Text("设置")
-                    .fontSize(28.vp)
-                    .fontColor(0x333333)
+                        .fontSize(28.vp)
+                        .fontColor(0x333333)
                 }
-                .width(90.percent)
-                .padding(top: 40.vp, bottom: 15.vp)
-                .alignItems(HorizontalAlign.Start)
+                    .width(90.percent)
+                    .padding(top: 40.vp, bottom: 15.vp)
+                    .alignItems(HorizontalAlign.Start)
 
                 Search(placeholder: "输入关键字搜索")
-                .width(90.percent)
-                .height(40.vp)
-                .margin(bottom: 20.vp)
+                    .width(90.percent)
+                    .height(40.vp)
+                    .margin(bottom: 20.vp)
 
                 List(initialIndex: 0) {
                     ForEach(
                         this.listArr,
-                        itemGeneratorFunc: {item: String, index: Int64 =>
-                            ListItem {
+                        itemGeneratorFunc: {
+                            item: String, index: Int64 => ListItem {
                                 Row {
                                     Row {
                                         Text((item
@@ -607,12 +612,12 @@ class EntryView {
                                             .fontSize(14.vp)
                                             .fontWeight(FontWeight.Bold)
                                     }
-                                    .width(30.vp)
-                                    .height(30.vp)
-                                    .backgroundColor(0xa8a8a8)
-                                    .margin(right: 12.vp)
-                                    .borderRadius(20.vp)
-                                    .justifyContent(FlexAlign.Center)
+                                        .width(30.vp)
+                                        .height(30.vp)
+                                        .backgroundColor(0xa8a8a8)
+                                        .margin(right: 12.vp)
+                                        .borderRadius(20.vp)
+                                        .justifyContent(FlexAlign.Center)
 
                                     Column {
                                         Text(item)
@@ -623,36 +628,39 @@ class EntryView {
                                     Blank()
 
                                     Row {
+
                                     }
-                                    .width(12.vp)
-                                    .height(12.vp)
-                                    .margin(right: 15.vp)
-                                    .border(width: 2.vp, color: 0xcccccc)
-                                    .borderWidth(EdgeWidths(top: 2.vp, right: 2.vp))
-                                    .rotate(angle: 45.0)
+                                        .width(12.vp)
+                                        .height(12.vp)
+                                        .margin(right: 15.vp)
+                                        .border(width: 2.vp, color: 0xcccccc)
+                                        .borderWidth(EdgeWidths(top: 2.vp, right: 2.vp))
+                                        .rotate(angle: 45.0)
                                 }
-                                .borderRadius(15.vp)
-                                .shadow(radius: 100.0, color: 0xededed)
-                                .width(90.percent)
-                                .alignItems(VerticalAlign.Center)
-                                .padding(top: 15.vp, bottom: 15.vp, left: 15.vp)
-                                .backgroundColor(Color.White)
+                                    .borderRadius(15.vp)
+                                    .shadow(radius: 100.0, color: 0xededed)
+                                    .width(90.percent)
+                                    .alignItems(VerticalAlign.Center)
+                                    .padding(top: 15.vp, bottom: 15.vp, left: 15.vp)
+                                    .backgroundColor(Color.White)
                             }
-                            .width(100.percent)
-                            .margin(top: 12.vp)
-                            .onClick({
-                                evt => if (item.endsWith("共享")) {
-                                    this.shareFunc()
-                                }
-                            })
+                                .width(100.percent)
+                                .margin(top: 12.vp)
+                                .onClick({
+                                    evt => if (item.endsWith("共享")) {
+                                        this.shareFunc()
+                                    }
+                                })
                         },
                         keyGeneratorFunc: {item: String, index: Int64 => item.toString()}
                     )
-                }.width(100.percent).height(80.percent)
+                }
+                    .width(100.percent)
+                    .height(80.percent)
             }
-            .width(100.percent)
-            .height(100.percent)
-            .backgroundColor(0xfefefe)
+                .width(100.percent)
+                .height(100.percent)
+                .backgroundColor(0xfefefe)
 
             if (this.isShowShare) {
                 Column {
@@ -660,31 +668,32 @@ class EntryView {
                         Row {
                             Row {
                                 Row {
+
                                 }
-                                .width(16.vp)
-                                .height(16.vp)
-                                .border(width: 2.vp, color: 0x333333)
-                                .borderWidth(EdgeWidths(top: 2.vp, left: 2.vp))
-                                .rotate(angle: -45.0)
+                                    .width(16.vp)
+                                    .height(16.vp)
+                                    .border(width: 2.vp, color: 0x333333)
+                                    .borderWidth(EdgeWidths(top: 2.vp, left: 2.vp))
+                                    .rotate(angle: -45.0)
                             }
-                            .padding(left: 15.vp, right: 10.vp)
-                            .onClick({
-                                evt => this.shareFunc()
-                            })
+                                .padding(left: 15.vp, right: 10.vp)
+                                .onClick({
+                                    evt => this.shareFunc()
+                                })
                             Text("连接与共享")
                                 .fontSize(28.vp)
                                 .fontColor(0x333333)
                         }.padding(top: 30.vp)
                     }
-                    .width(90.percent)
-                    .padding(bottom: 15.vp, top: 40.vp)
-                    .alignItems(HorizontalAlign.Start)
+                        .width(90.percent)
+                        .padding(bottom: 15.vp, top: 40.vp)
+                        .alignItems(HorizontalAlign.Start)
 
                     List(initialIndex: 0) {
                         ForEach(
                             this.shareArr,
-                            itemGeneratorFunc: {item: String, Index: Int64 =>
-                                ListItem {
+                            itemGeneratorFunc: {
+                                item: String, Index: Int64 => ListItem {
                                     Row {
                                         Row {
                                             Text((item
@@ -694,12 +703,12 @@ class EntryView {
                                                 .fontSize(14.vp)
                                                 .fontWeight(FontWeight.Bold)
                                         }
-                                        .width(30.vp)
-                                        .height(30.vp)
-                                        .backgroundColor(0xa8a8a8)
-                                        .margin(right: 12.vp)
-                                        .borderRadius(20.vp)
-                                        .justifyContent(FlexAlign.Center)
+                                            .width(30.vp)
+                                            .height(30.vp)
+                                            .backgroundColor(0xa8a8a8)
+                                            .margin(right: 12.vp)
+                                            .borderRadius(20.vp)
+                                            .justifyContent(FlexAlign.Center)
 
                                         Column {
                                             Text(item)
@@ -710,34 +719,39 @@ class EntryView {
                                         Blank()
 
                                         Row {
+
                                         }
-                                        .width(12.vp)
-                                        .height(12.vp)
-                                        .margin(right: 15.vp)
-                                        .border(width: 2.vp, color: 0xcccccc)
-                                        .borderWidth(EdgeWidths(top: 2.vp, right: 2.vp))
-                                        .rotate(angle: 45.0)
+                                            .width(12.vp)
+                                            .height(12.vp)
+                                            .margin(right: 15.vp)
+                                            .border(width: 2.vp, color: 0xcccccc)
+                                            .borderWidth(EdgeWidths(top: 2.vp, right: 2.vp))
+                                            .rotate(angle: 45.0)
                                     }
-                                    .borderRadius(15.vp)
-                                    .shadow(radius: 100.0, color: 0xededed)
-                                    .width(90.percent)
-                                    .alignItems(VerticalAlign.Center)
-                                    .padding(left: 15.vp, top: 15.vp, bottom: 15.vp)
-                                    .backgroundColor(Color.White)
-                                }.width(100.percent).margin(top: 12.vp)
+                                        .borderRadius(15.vp)
+                                        .shadow(radius: 100.0, color: 0xededed)
+                                        .width(90.percent)
+                                        .alignItems(VerticalAlign.Center)
+                                        .padding(left: 15.vp, top: 15.vp, bottom: 15.vp)
+                                        .backgroundColor(Color.White)
+                                }
+                                    .width(100.percent)
+                                    .margin(top: 12.vp)
                             },
                             keyGeneratorFunc: {item: String, index: Int64 => item.toString()}
                         )
-                    }.width(100.percent).height(80.percent)
+                    }
+                        .width(100.percent)
+                        .height(80.percent)
                 }
-                .width(100.percent)
-                .height(100.percent)
-                .backgroundColor(0xffffff)
-                .transition(
-                    TransitionEffect
-                        .OPACITY
-                        .combine(TransitionEffect.translate(TranslateOptions(x: 100.percent)))
-                        .combine(TransitionEffect.scale(ScaleOptions(x: 0.95, y: 0.95))))
+                    .width(100.percent)
+                    .height(100.percent)
+                    .backgroundColor(0xffffff)
+                    .transition(
+                        TransitionEffect
+                            .OPACITY
+                            .combine(TransitionEffect.translate(TranslateOptions(x: 100.percent)))
+                            .combine(TransitionEffect.scale(ScaleOptions(x: 0.95, y: 0.95))))
             }
         }
     }

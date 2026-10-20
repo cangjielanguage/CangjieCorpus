@@ -89,6 +89,7 @@ public func justifyContent(value: ?FlexAlign): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -104,17 +105,17 @@ class EntryView {
                 .width(90.percent)
             Column(space: 5) {
                 Column()
-                .width(100.percent)
-                .height(30)
-                .backgroundColor(0xAFEEEE)
+                    .width(100.percent)
+                    .height(30)
+                    .backgroundColor(0xAFEEEE)
                 Column()
-                .width(100.percent)
-                .height(30)
-                .backgroundColor(0x00FFFF)
+                    .width(100.percent)
+                    .height(30)
+                    .backgroundColor(0x00FFFF)
             }
-            .width(90.percent)
-            .height(100)
-            .border(width: 1.vp)
+                .width(90.percent)
+                .height(100)
+                .border(width: 1.vp)
 
             Text("alignItems(Start)")
                 .fontSize(9)
@@ -130,9 +131,9 @@ class EntryView {
                     .height(30)
                     .backgroundColor(0x00FFFF)
             }
-            .alignItems(HorizontalAlign.Start)
-            .width(90.percent)
-            .border(width: 1.vp)
+                .alignItems(HorizontalAlign.Start)
+                .width(90.percent)
+                .border(width: 1.vp)
 
             Text("alignItems(End)")
                 .fontSize(9)
@@ -166,9 +167,9 @@ class EntryView {
                     .height(30)
                     .backgroundColor(0x00FFFF)
             }
-            .height(15.percent)
-            .border(width: 1.vp)
-            .justifyContent(FlexAlign.Center)
+                .height(15.percent)
+                .border(width: 1.vp)
+                .justifyContent(FlexAlign.Center)
 
             Text("justifyContent(End)")
                 .fontSize(9)
@@ -176,22 +177,22 @@ class EntryView {
                 .width(90.percent)
             Column {
                 Column()
-                .width(30.percent)
-                .height(30)
-                .backgroundColor(0xAFEEEE)
+                    .width(30.percent)
+                    .height(30)
+                    .backgroundColor(0xAFEEEE)
                 Column()
-                .width(30.percent)
-                .height(30)
-                .backgroundColor(0x00FFFF)
+                    .width(30.percent)
+                    .height(30)
+                    .backgroundColor(0x00FFFF)
             }
-            .height(15.percent)
-            .border(width: 1.vp)
-            .justifyContent(FlexAlign.End)
+                .height(15.percent)
+                .border(width: 1.vp)
+                .justifyContent(FlexAlign.End)
         }
-        .width(100.percent)
-        .padding(top: 5)
+            .width(100.percent)
+            .padding(top: 5)
     }
-    }
+}
 ```
 
 ![column](figures/column.png)

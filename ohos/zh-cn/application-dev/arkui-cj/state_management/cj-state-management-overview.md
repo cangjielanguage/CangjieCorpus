@@ -38,22 +38,25 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class MyComponent {
-    @State var count: Int32 = 0
+    @State
+    var count: Int32 = 0
     private var increaseBy: Int32 = 1
     func build() {}
 }
+
 @Entry
 @Component
 class Parent {
     func build() {
         Column() {
             // 从父组件初始化，覆盖本地定义的默认值
-            MyComponent(count: 1, increaseBy: 2 )
+            MyComponent(count: 1, increaseBy: 2)
         }
     }
 }

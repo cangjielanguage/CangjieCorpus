@@ -98,6 +98,7 @@ func radialGradient(center: ?(Length, Length), radius: ?Length, colors: ?Array<(
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -146,6 +147,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -199,6 +201,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 

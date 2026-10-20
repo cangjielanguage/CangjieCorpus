@@ -84,26 +84,32 @@ viewPort(x!: Length, y!: Length, width!: Length, height!: Length)
                       // 绘制结束，viewport会根据组件宽高放大两倍
                       Text('shape内放大的Circle组件')
                       Shape() {
-                          Rect().width(100.percent).height(100.percent).fill(0X0097D4)
+                          Rect()
+                              .width(100.percent)
+                              .height(100.percent)
+                              .fill(0X0097D4)
                           Circle(width: 75, height: 75).fill(0XE87361)
                       }
-                      .viewPort(x: 0, y: 0, width: 75, height: 75)
-                      .width(150)
-                      .height(150)
-                      .backgroundColor(0XF5DC62)
+                          .viewPort(x: 0, y: 0, width: 75, height: 75)
+                          .width(150)
+                          .height(150)
+                          .backgroundColor(0XF5DC62)
                   }
                   Column {
                       // 创建一个宽高都为150的shape组件，背景色为黄色，一个宽高都为300的viewport。用一个绿色的矩形来填充viewport，在viewport中绘制一个直径为75的圆。
                       // 绘制结束，viewport会根据组件宽高缩小两倍。
                       Text('Shape内缩小的Circle组件')
                       Shape() {
-                          Rect().width(100.percent).height(100.percent).fill(0XBDDB69)
+                          Rect()
+                              .width(100.percent)
+                              .height(100.percent)
+                              .fill(0XBDDB69)
                           Circle(width: 75, height: 75).fill(0XE87361)
                       }
-                      .viewPort(x: 0, y: 0, width: 300, height: 300)
-                      .width(150)
-                      .height(150)
-                      .backgroundColor(0XF5DC62)
+                          .viewPort(x: 0, y: 0, width: 300, height: 300)
+                          .width(150)
+                          .height(150)
+                          .backgroundColor(0XF5DC62)
                   }
               }
           }.width(100.percent)
@@ -131,13 +137,16 @@ viewPort(x!: Length, y!: Length, width!: Length, height!: Length)
       func build() {
           Column() {
               Shape() {
-                  Rect().width(100.percent).height(100.percent).fill(0X0097D4)
-                  Circle( width: 150, height: 150 ).fill(0XE87361)
+                  Rect()
+                      .width(100.percent)
+                      .height(100.percent)
+                      .fill(0X0097D4)
+                  Circle(width: 150, height: 150).fill(0XE87361)
               }
-              .viewPort(x: 0, y: 0, width: 300, height: 300)
-              .width(300)
-              .height(300)
-              .backgroundColor(0XF5DC62)
+                  .viewPort(x: 0, y: 0, width: 300, height: 300)
+                  .width(300)
+                  .height(300)
+                  .backgroundColor(0XF5DC62)
           }.width(100.percent)
       }
   }
@@ -163,13 +172,16 @@ viewPort(x!: Length, y!: Length, width!: Length, height!: Length)
       func build() {
           Column() {
               Shape() {
-                  Rect().width(100.percent).height(100.percent).fill(0X0097D4)
-                  Circle( width: 150, height: 150 ).fill(0XE87361)
+                  Rect()
+                      .width(100.percent)
+                      .height(100.percent)
+                      .fill(0X0097D4)
+                  Circle(width: 150, height: 150).fill(0XE87361)
               }
-              .viewPort(x: -150, y: -150, width: 300, height: 300)
-              .width(300)
-              .height(300)
-              .backgroundColor(0XF5DC62)
+                  .viewPort(x: -150, y: -150, width: 300, height: 300)
+                  .width(300)
+                  .height(300)
+                  .backgroundColor(0XF5DC62)
           }.width(100.percent)
       }
   }
@@ -279,15 +291,20 @@ class EntryView {
     func build() {
         Column(space: 10) {
             Shape() {
-                Path().width(200).height(60).commands('M0 0 L400 0 L400 150 Z')
+                Path()
+                    .width(200)
+                    .height(60)
+                    .commands('M0 0 L400 0 L400 150 Z')
             }
-            .viewPort( x: -80, y: -5, width: 500, height: 300 )
-            .fill(0x317AF7)
-            .stroke(Color.Red)
-            .strokeWidth(3)
-            .strokeLineJoin(LineJoinStyle.Miter)
-            .strokeMiterLimit(5.0)
-        }.width(100.percent).margin( top: 15 )
+                .viewPort(x: -80, y: -5, width: 500, height: 300)
+                .fill(0x317AF7)
+                .stroke(Color.Red)
+                .strokeWidth(3)
+                .strokeLineJoin(LineJoinStyle.Miter)
+                .strokeMiterLimit(5.0)
+        }
+            .width(100.percent)
+            .margin(top: 15)
     }
 }
 ```
@@ -312,7 +329,7 @@ class EntryView {
     func build() {
         Column(space: 10) {
             //绘制一个直径为150的圆
-            Circle( width: 150, height: 150 )
+            Circle(width: 150, height: 150)
             //绘制一个直径为150、线条为红色虚线的圆环
             Circle()
                 .width(150)
@@ -321,7 +338,9 @@ class EntryView {
                 .strokeWidth(3)
                 .stroke(Color.Red)
                 .strokeDashArray([1, 2])
-        }.width(100.percent).margin( top: 15 )
+        }
+            .width(100.percent)
+            .margin(top: 15)
     }
 }
 ```

@@ -44,6 +44,7 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -52,10 +53,22 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     func build() {
         Column(space: 20) {
-            Text('space: 20').fontSize(15).fontColor(Color.Gray).width(90.percent)
-            Row().width(90.percent).height(50).backgroundColor(0xF5DEB3)
-            Row().width(90.percent).height(50).backgroundColor(0xD2B48C)
-            Row().width(90.percent).height(50).backgroundColor(0xF5DEB3)
+            Text('space: 20')
+                .fontSize(15)
+                .fontColor(Color.Gray)
+                .width(90.percent)
+            Row()
+                .width(90.percent)
+                .height(50)
+                .backgroundColor(0xF5DEB3)
+            Row()
+                .width(90.percent)
+                .height(50)
+                .backgroundColor(0xD2B48C)
+            Row()
+                .width(90.percent)
+                .height(50)
+                .backgroundColor(0xF5DEB3)
         }.width(100.percent)
     }
 }
@@ -73,6 +86,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -81,10 +95,21 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     func build() {
         Row(space: 35) {
-            Text('space: 35').fontSize(15).fontColor(Color.Gray)
-            Row().width(10.percent).height(150).backgroundColor(0xF5DEB3)
-            Row().width(10.percent).height(150).backgroundColor(0xD2B48C)
-            Row().width(10.percent).height(150).backgroundColor(0xF5DEB3)
+            Text('space: 35')
+                .fontSize(15)
+                .fontColor(Color.Gray)
+            Row()
+                .width(10.percent)
+                .height(150)
+                .backgroundColor(0xF5DEB3)
+            Row()
+                .width(10.percent)
+                .height(150)
+                .backgroundColor(0xD2B48C)
+            Row()
+                .width(10.percent)
+                .height(150)
+                .backgroundColor(0xF5DEB3)
         }.width(90.percent)
     }
 }
@@ -110,6 +135,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -118,13 +144,22 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).alignItems(HorizontalAlign.Start).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .alignItems(HorizontalAlign.Start)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -137,6 +172,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -145,13 +181,22 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).alignItems(HorizontalAlign.Center).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .alignItems(HorizontalAlign.Center)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -164,6 +209,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -172,13 +218,22 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).alignItems(HorizontalAlign.End).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .alignItems(HorizontalAlign.End)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -197,6 +252,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -205,13 +261,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).alignItems(VerticalAlign.Top).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .alignItems(VerticalAlign.Top)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -224,6 +290,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -232,13 +299,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).alignItems(VerticalAlign.Center).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .alignItems(VerticalAlign.Center)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -251,6 +328,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -259,13 +337,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).alignItems(VerticalAlign.Bottom).backgroundColor(0xF2F2F2)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .alignItems(VerticalAlign.Bottom)
+              .backgroundColor(0xF2F2F2)
       }
   }
   ```
@@ -288,6 +376,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -296,13 +385,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.Start)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.Start)
       }
   }
   ```
@@ -315,6 +414,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -323,13 +423,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.Center)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.Center)
       }
   }
   ```
@@ -342,6 +452,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -350,13 +461,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.End)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.End)
       }
   }
   ```
@@ -369,6 +490,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -377,13 +499,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceBetween)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceBetween)
       }
   }
   ```
@@ -396,6 +528,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -404,13 +537,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceAround)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceAround)
       }
   }
   ```
@@ -423,6 +566,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -431,13 +575,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Column() {
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(80.percent).height(50).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(300).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceEvenly)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(80.percent)
+                  .height(50)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(300)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceEvenly)
       }
   }
   ```
@@ -456,6 +610,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -464,13 +619,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.Start)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.Start)
       }
   }
   ```
@@ -483,6 +648,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -491,13 +657,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.Center)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.Center)
       }
   }
   ```
@@ -510,6 +686,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -518,13 +695,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.End)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.End)
       }
   }
   ```
@@ -537,6 +724,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -545,13 +733,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceBetween)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceBetween)
       }
   }
   ```
@@ -564,6 +762,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -572,13 +771,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceAround)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceAround)
       }
   }
   ```
@@ -591,6 +800,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -599,13 +809,23 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
   class EntryView {
       func build() {
           Row() {
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xD2B48C)
-              Column() {
-              }.width(20.percent).height(30).backgroundColor(0xF5DEB3)
-          }.width(100.percent).height(200).backgroundColor(0xF2F2F2).justifyContent(FlexAlign.SpaceEvenly)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xD2B48C)
+              Column() {}
+                  .width(20.percent)
+                  .height(30)
+                  .backgroundColor(0xF5DEB3)
+          }
+              .width(100.percent)
+              .height(200)
+              .backgroundColor(0xF2F2F2)
+              .justifyContent(FlexAlign.SpaceEvenly)
       }
   }
   ```
@@ -620,6 +840,7 @@ alignSelf属性用于控制单个子元素在容器交叉轴上的对齐方式�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -627,13 +848,20 @@ import ohos.arkui.state_macro_manage.*
 @Component
 class EntryView {
     func build() {
-        Column(){
+        Column() {
             Row() {
                 Text('Bluetooth').fontSize(18)
                 Blank()
-                Toggle(ToggleType.Switch,isOn: true)
-            }.backgroundColor(0xFFFFFF).borderRadius(15).padding(left:12).width(100.percent)
-        }.backgroundColor(0xEFEFEF).padding(20).width(100.percent)
+                Toggle(ToggleType.Switch, isOn: true)
+            }
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .padding(left: 12)
+                .width(100.percent)
+        }
+            .backgroundColor(0xEFEFEF)
+            .padding(20)
+            .width(100.percent)
     }
 }
 ```
@@ -656,6 +884,7 @@ class EntryView {
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -669,47 +898,47 @@ class EntryView {
                   Column() {
                       Text('layoutWeight(1)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(1)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .layoutWeight(1)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
                   Column() {
                       Text('layoutWeight(2)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(2)
-                  .backgroundColor(0xD2B48C)
-                  .height(100.percent)
+                      .layoutWeight(2)
+                      .backgroundColor(0xD2B48C)
+                      .height(100.percent)
                   Column() {
                       Text('layoutWeight(3)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(3)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .layoutWeight(3)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
               }
-              .backgroundColor(0xffd306)
-              .height(30.percent)
+                  .backgroundColor(0xffd306)
+                  .height(30.percent)
               Text('2:5:3').width(100.percent)
               Row() {
                   Column() {
                       Text('layoutWeight(2)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(2)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .layoutWeight(2)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
                   Column() {
                       Text('layoutWeight(5)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(5)
-                  .backgroundColor(0xD2B48C)
-                  .height(100.percent)
+                      .layoutWeight(5)
+                      .backgroundColor(0xD2B48C)
+                      .height(100.percent)
                   Column() {
                       Text('layoutWeight(3)').textAlign(TextAlign.Center)
                   }
-                  .layoutWeight(3)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .layoutWeight(3)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
               }
-              .backgroundColor(0xffd306)
-              .height(30.percent)
+                  .backgroundColor(0xffd306)
+                  .height(30.percent)
           }
       }
   }
@@ -729,6 +958,7 @@ class EntryView {
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -741,24 +971,24 @@ class EntryView {
                   Column() {
                       Text('left width 20%').textAlign(TextAlign.Center)
                   }
-                  .width(20.percent)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .width(20.percent)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
                   Column() {
                       Text('center width 50%').textAlign(TextAlign.Center)
                   }
-                  .width(50.percent)
-                  .backgroundColor(0xD2B48C)
-                  .height(100.percent)
+                      .width(50.percent)
+                      .backgroundColor(0xD2B48C)
+                      .height(100.percent)
                   Column() {
                       Text('right width 30%').textAlign(TextAlign.Center)
                   }
-                  .width(30.percent)
-                  .backgroundColor(0xF5DEB3)
-                  .height(100.percent)
+                      .width(30.percent)
+                      .backgroundColor(0xF5DEB3)
+                      .height(100.percent)
               }
-              .backgroundColor(0xffd306)
-              .height(30.percent)
+                  .backgroundColor(0xffd306)
+                  .height(30.percent)
           }
       }
   }
@@ -786,6 +1016,7 @@ class EntryView {
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -797,25 +1028,27 @@ class EntryView {
       func build() {
           Scroll(this.scroller) {
               Column() {
-                  ForEach(this.arr,itemGeneratorFunc: {
-                      item: Int64, idx: Int64 => Text(item.toString())
-                          .width(90.percent)
-                          .height(150)
-                          .backgroundColor(0xFFFFFF)
-                          .borderRadius(15)
-                          .fontSize(16)
-                          .textAlign(TextAlign.Center)
-                          .margin(top: 10)
+                  ForEach(
+                      this.arr,
+                      itemGeneratorFunc: {
+                          item: Int64, idx: Int64 => Text(item.toString())
+                              .width(90.percent)
+                              .height(150)
+                              .backgroundColor(0xFFFFFF)
+                              .borderRadius(15)
+                              .fontSize(16)
+                              .textAlign(TextAlign.Center)
+                              .margin(top: 10)
                       },
                       keyGeneratorFunc: {item: Int64, idx: Int64 => idx.toString()}
                   )
               }.width(100.percent)
           }
-          .backgroundColor(0xDCDCDC)
-          .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
-          .scrollBar(BarState.On) // 滚动条常驻显示
-          .scrollBarColor(Color.Gray) // 滚动条颜色
-          .scrollBarWidth(8.vp) // 滚动条宽度
+              .backgroundColor(0xDCDCDC)
+              .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
+              .scrollBar(BarState.On) // 滚动条常驻显示
+              .scrollBarColor(Color.Gray) // 滚动条颜色
+              .scrollBarWidth(8.vp) // 滚动条宽度
       }
   }
   ```
@@ -828,6 +1061,7 @@ class EntryView {
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -839,25 +1073,26 @@ class EntryView {
       func build() {
           Scroll(this.scroller) {
               Row() {
-                  ForEach(this.arr,itemGeneratorFunc: {
-                      item: Int64, idx: Int64 =>
-                      Text(item.toString())
-                          .width(150)
-                          .height(90.percent)
-                          .backgroundColor(0xFFFFFF)
-                          .borderRadius(15)
-                          .fontSize(16)
-                          .textAlign(TextAlign.Center)
-                          .margin(left: 10)
+                  ForEach(
+                      this.arr,
+                      itemGeneratorFunc: {
+                          item: Int64, idx: Int64 => Text(item.toString())
+                              .width(150)
+                              .height(90.percent)
+                              .backgroundColor(0xFFFFFF)
+                              .borderRadius(15)
+                              .fontSize(16)
+                              .textAlign(TextAlign.Center)
+                              .margin(left: 10)
                       }
                   )
               }.height(100.percent)
           }
-          .backgroundColor(0xDCDCDC)
-          .scrollable(ScrollDirection.Horizontal) // 滚动方向为水平方向
-          .scrollBar(BarState.On) // 滚动条常驻显示
-          .scrollBarColor(Color.Gray) // 滚动条颜色
-          .scrollBarWidth(8.vp) // 滚动条宽度
+              .backgroundColor(0xDCDCDC)
+              .scrollable(ScrollDirection.Horizontal) // 滚动方向为水平方向
+              .scrollBar(BarState.On) // 滚动条常驻显示
+              .scrollBarColor(Color.Gray) // 滚动条颜色
+              .scrollBarWidth(8.vp) // 滚动条宽度
       }
   }
   ```

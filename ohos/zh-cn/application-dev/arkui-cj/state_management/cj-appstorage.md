@@ -42,6 +42,7 @@ AppStorage中的属性可以被双向同步，数据可以是存在于本地或�
 |:---|:---|
 |宏参数|key：常量字符串，必填（字符串需要有引号）。|
 |允许装饰的变量类型|class、String、整数、浮点、Bool、enum类型，以及这些类型的数组。<br>支持Datetime，Map，Set类型。嵌套类型的场景请参见[观察变化和行为表现](#观察变化和行为表现)。<br>类型必须被指定，建议和LocalStorage中对应属性类型相同，否则会发生类型隐式转换，从而导致应用行为异常。<br>不支持Any。|
+| 不推荐装饰的变量类型 | 不推荐装饰函数类型。 |
 |同步类型|单向同步：从AppStorage的对应属性到组件的状态变量。AppStorage中给定的属性一旦发生变化，将覆盖本地的修改。|
 |被装饰变量的初始值|必须指定，如果AppStorage实例中不存在属性，则用该初始值初始化该属性，并存入AppStorage中。|
 
@@ -87,6 +88,7 @@ AppStorage中的属性可以被双向同步，数据可以是存在于本地或�
 |:---|:---|
 |宏参数|key：常量字符串，必填（字符串需要有引号）。|
 |允许装饰的变量类型|class、String、整数、浮点、Bool、enum类型，以及这些类型的数组。<br>支持Datetime，Map，Set类型。嵌套类型的场景请参见[观察变化和行为表现](#观察变化和行为表现)。<br>类型必须被指定，建议和LocalStorage中对应属性类型相同，否则会发生类型隐式转换，从而导致应用行为异常。<br>不支持Any。|
+| 不推荐装饰的变量类型 | 不推荐装饰函数类型。 |
 |同步类型|双向同步：从AppStorage的对应属性到自定义组件，从自定义组件到AppStorage对应属性。|
 |被装饰变量的初始值|必须指定，如果AppStorage实例中不存在属性，则用该初始值初始化该属性，并存入AppStorage中。|
 
@@ -128,12 +130,18 @@ AppStorage中的属性可以被双向同步，数据可以是存在于本地或�
     let temp = AppStorage.get<Int64>("PropA").getOrThrow() // 47
 
     // 错误写法，编译报错
-    @StorageProp[] let storageProp: Int64 = 1
-    @StorageLink[] var storageLink: Int64 = 2
+    @StorageProp[]
+    let storageProp: Int64 = 1
+
+    @StorageLink[]
+    var storageLink: Int64 = 2
 
     // 正确写法
-    @StorageProp["PropA"] let storageProp: Int64 = 1
-    @StorageLink["PropA"] var storageLink: Int64 = 2
+    @StorageProp["PropA"]
+    let storageProp: Int64 = 1
+
+    @StorageLink["PropA"]
+    var storageLink: Int64 = 2
     ```
 
 2. @StorageProp与@StorageLink不支持装饰Func类型的变量，框架会抛出运行时错误。
@@ -156,8 +164,7 @@ AppStorage是单例，它的所有API都是静态的，使用方法类似于Loca
 
 ```cangjie
 let temp1 = AppStorage.setOrCreate<Int64>("PropA", 47)
-
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp2 = storage.setOrCreate("PropA", 17)
 let propA = AppStorage.get<Int64>("PropA")                  // propA in AppStorage == 47, propA in LocalStorage == 17
 let link1 = AppStorage.link<Int64>("PropA").getOrThrow()    // link1.get() == 47
@@ -183,48 +190,55 @@ let value8 = link2.get() // == 49
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-class Data{
-    var code : Int64
-    init(code: Int64){
+class Data {
+    var code: Int64
+    init(code: Int64) {
         this.code = code
     }
 }
+
 let temp1 = AppStorage.setOrCreate("PropA", 47)
 let temp2 = AppStorage.setOrCreate("PropB", Data(50))
-
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let res1 = storage.setOrCreate("LinkA", 47)
 let res2 = storage.setOrCreate("LinkB", Data(50))
 
 @Entry[storage]
 @Component
-class EntryView{
-    @StorageLink["PropA"] var storageLink : Int64 = 1
-    @LocalStorageLink["LinkA"] var localStorageLink : Int64 = 1
-    @StorageLink["PropB"] var storageLinkObject : Data = Data(1)
-    @LocalStorageLink["LinkB"] var localStorageLinkObject : Data = Data(1)
+class EntryView {
+    @StorageLink["PropA"]
+    var storageLink: Int64 = 1
+    @LocalStorageLink["LinkA"]
+    var localStorageLink: Int64 = 1
+    @StorageLink["PropB"]
+    var storageLinkObject: Data = Data(1)
+    @LocalStorageLink["LinkB"]
+    var localStorageLinkObject: Data = Data(1)
 
     func build() {
-        Column(){
-            Text("From AppStorage ${this.storageLink}")
-                .onClick({evt => this.storageLink += 1;})
-            Text("From LocalStorage ${this.localStorageLink}")
-                .onClick({evt => this.localStorageLink += 1;})
-            Text("From AppStorage ${this.storageLinkObject.code}")
-                .onClick({evt =>
-                    var temp = this.storageLinkObject
-                    temp.code += 1
-                    this.storageLinkObject = temp;
-                    })
-            Text("From LocalStorage ${this.localStorageLinkObject.code}")
-                .onClick({evt =>
-                    var temp = this.localStorageLinkObject
-                    temp.code += 1
-                    this.localStorageLinkObject = temp;
-                    })
+        Column() {
+            Text("From AppStorage ${this.storageLink}").onClick({evt => this.storageLink += 1})
+            Text("From LocalStorage ${this.localStorageLink}").onClick({evt => this.localStorageLink += 1})
+            Text("From AppStorage ${this.storageLinkObject.code}").onClick(
+                {
+                    evt =>
+                        var temp = this.storageLinkObject
+                        temp.code += 1
+                        this.storageLinkObject = temp
+                }
+            )
+            Text("From LocalStorage ${this.localStorageLinkObject.code}").onClick(
+                {
+                    evt =>
+                        var temp = this.localStorageLinkObject
+                        temp.code += 1
+                        this.localStorageLinkObject = temp
+                }
+            )
         }
     }
 }
@@ -242,6 +256,7 @@ class EntryView{
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.AppResource
@@ -250,31 +265,30 @@ import ohos.resource.__GenerateResource__
 
 class ViewData {
     var title: String
-    var uri  : AppResource
-    var color : Color = Color.Black
+    var uri: AppResource
+    var color: Color = Color.Black
 
-    init(title: String,uri  : AppResource){
+    init(title: String, uri: AppResource) {
         this.title = title
-        this.uri   = uri
+        this.uri = uri
     }
 }
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     // 此处"app.media.startIcon"仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
-    let dataList : Array<ViewData> = [ViewData("flower",@r(app.media.startIcon)),ViewData("OMG",@r(app.media.image))]
+    let dataList: Array<ViewData> = [ViewData("flower", @r(app.media.startIcon)), ViewData("OMG", @r(app.media.image))]
     var gridScroller: Scroller = Scroller()
 
     func build() {
-        Column(){
-            Grid(scroller: this.gridScroller){
-                ForEach(this.dataList, itemGeneratorFunc: {item : ViewData , idx : Int64 =>
-                        GridItem(){
-                            TapImage(index: idx,uri: item.uri)
-                        }
-                            .aspectRatio(1.0)
-                        })
+        Column() {
+            Grid(scroller: this.gridScroller) {
+                ForEach(this.dataList, itemGeneratorFunc: {
+                    item: ViewData, idx: Int64 => GridItem() {
+                        TapImage(index: idx, uri: item.uri)
+                    }.aspectRatio(1.0)
+                })
             }
         }
     }
@@ -282,25 +296,28 @@ class EntryView{
 
 @Component
 class TapImage {
-    @StorageLink["PropA"] @Watch[onTapIndexChange] var tapIndex : Int64 = -1
-    @State var tapColor : Color = Color.Black
+    @StorageLink["PropA"]
+    @Watch[onTapIndexChange]
+    var tapIndex: Int64 = -1
+    @State
+    var tapColor: Color = Color.Black
     var index: Int64
     var uri: AppResource
 
-    func onTapIndexChange(){
-        if(this.tapIndex >= 0 && this.index == this.tapIndex){
+    func onTapIndexChange() {
+        if (this.tapIndex >= 0 && this.index == this.tapIndex) {
             Hilog.info(0, "tapindex", "${this.tapIndex}, index: ${this.index},red")
             this.tapColor = Color.Red
-        }else{
+        } else {
             Hilog.info(0, "tapindex", "${this.tapIndex}, index: ${this.index},black")
             this.tapColor = Color.Black
         }
     }
     func build() {
-        Column(){
+        Column() {
             Image(this.uri)
                 .objectFit(ImageFit.Cover)
-                .onClick({evt =>this.tapIndex = this.index;})
+                .onClick({evt => this.tapIndex = this.index})
                 .border(width: 5, color: this.tapColor)
         }
     }
@@ -315,6 +332,7 @@ class TapImage {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.time.*
@@ -322,13 +340,17 @@ import std.time.*
 @Entry
 @Component
 class EntryView {
-    @StorageLink["date"] var selectedDate: DateTime = DateTime.of(year: 2003, month: Month.of(6), dayOfMonth: 24)
+    @StorageLink["date"]
+    var selectedDate: DateTime = DateTime.of(year: 2003, month: Month.of(6), dayOfMonth: 24)
     func build() {
-        Column(){
+        Column() {
             Button("set selectedDate to 2025-04-21")
                 .margin(10)
-                .onClick({evt => AppStorage.setOrCreate<DateTime>("date",DateTime.of(year: 2025, month: Month.of(4), dayOfMonth: 21));})
-             Button("increase the year by 1")
+                .onClick({
+                    evt => AppStorage.setOrCreate<DateTime>("date",
+                        DateTime.of(year: 2025, month: Month.of(4), dayOfMonth: 21));
+                })
+            Button("increase the year by 1")
                 .margin(10)
                 .onClick({evt => this.selectedDate = this.selectedDate.addYears(1);})
             Button("increase the month by 1")
@@ -354,6 +376,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.Map
@@ -362,7 +385,8 @@ import std.collection.HashMap
 @Entry
 @Component
 class EntryView {
-    @StorageLink["map"] var message: Map<Int64, String> = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
+    @StorageLink["map"]
+    var message: Map<Int64, String> = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
     func build() {
         Row() {
             Column() {
@@ -375,30 +399,40 @@ class EntryView {
                 Button("init map").onClick({evt =>
                     this.message = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
                 })
-                Button("add new one").onClick({evt =>
-                        var temp = this.message
-                        temp.add(4, "d")
-                        this.message = temp
-                    })
-                Button("clear").onClick({evt =>
-                        var temp = this.message
-                        temp.clear()
-                        this.message = temp
-                    })
-                Button("replace the first one").onClick({evt =>
-                        var temp =this.message
-                        temp.replace(0,"aa")
-                        this.message=temp
-                    })
-                Button("remove the first one").onClick({evt =>
-                        var temp = this.message
-                        temp.remove(0)
-                        this.message = temp
-                })
-            }
-                .width(100.percent)
-        }
-        .height(100.percent)
+                Button("add new one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.add(4, "d")
+                            this.message = temp
+                    }
+                )
+                Button("clear").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.clear()
+                            this.message = temp
+                    }
+                )
+                Button("replace the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.replace(0, "aa")
+                            this.message = temp
+                    }
+                )
+                Button("remove the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.remove(0)
+                            this.message = temp
+                    }
+                )
+            }.width(100.percent)
+        }.height(100.percent)
     }
 }
 ```
@@ -411,6 +445,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.HashSet
@@ -419,41 +454,51 @@ import std.collection.Set
 @Entry
 @Component
 class EntryView {
-    @StorageLink["set"] var message: Set<Int64> = HashSet<Int64>([0, 1, 2, 3, 4])
+    @StorageLink["set"]
+    var message: Set<Int64> = HashSet<Int64>([0, 1, 2, 3, 4])
     func build() {
         Row() {
             Column() {
                 ForEach(
                     this.message.toArray(),
                     itemGeneratorFunc: {
-                        item: Int64, _: Int64 => Text("${item}")
-                            .fontSize(30)
+                        item: Int64, _: Int64 => Text("${item}").fontSize(30)
                     }
                 )
-                Button("init set").onClick({evt =>
-                        var temp = this.message
-                        temp = HashSet<Int64>([0, 1, 2, 3, 4])
-                        this.message = temp
-                    })
-                Button("add new one").onClick({evt =>
-                        var temp = this.message
-                        temp.add(5)
-                        this.message = temp
-                    })
-                Button("clear").onClick({evt =>
-                        var temp = this.message
-                        temp.clear()
-                        this.message = temp
-                    })
-                Button("remove the first one").onClick({evt =>
-                        var temp = this.message
-                        temp.remove(0)
-                        this.message = temp
-                    })
-            }
-                .width(100.percent)
-        }
-        .height(100.percent)
+                Button("init set").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp = HashSet<Int64>([0, 1, 2, 3, 4])
+                            this.message = temp
+                    }
+                )
+                Button("add new one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.add(5)
+                            this.message = temp
+                    }
+                )
+                Button("clear").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.clear()
+                            this.message = temp
+                    }
+                )
+                Button("remove the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.remove(0)
+                            this.message = temp
+                    }
+                )
+            }.width(100.percent)
+        }.height(100.percent)
     }
 }
 ```

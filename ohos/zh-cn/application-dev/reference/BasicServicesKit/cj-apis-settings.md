@@ -53,11 +53,11 @@ public func getValue<T>(context: UIAbilityContext, name: T, defValue: String): S
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[设置数据项错误码](./cj-errorcode-settings.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[设置数据项错误码](./cj-errorcode-settings.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Parameter error. |
+  | 14800000 | Parameter error. Possible causes: 1. Parameter verification failed. |
 
 **示例：**
 
@@ -108,11 +108,11 @@ public func getValue<T, P>(context: UIAbilityContext, name: T, defValue: String,
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[设置数据项错误码](./cj-errorcode-settings.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[设置数据项错误码](./cj-errorcode-settings.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Parameter error. |
+  | 14800000 | Parameter error. Possible causes: 1. Parameter verification failed. |
 
 **示例：**
 

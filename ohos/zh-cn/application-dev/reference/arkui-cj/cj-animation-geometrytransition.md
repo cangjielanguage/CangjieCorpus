@@ -49,6 +49,7 @@ func geometryTransition(id: ?String, follow!: ?Bool): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource.*
@@ -56,9 +57,10 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var isShow: Bool = false
+    @State
+    var isShow: Bool = false
     func build() {
-        Stack(alignContent:Alignment.Center) {
+        Stack(alignContent: Alignment.Center) {
             if (this.isShow) {
                 Image(@r(app.media.startIcon))
                     .autoResize(false)

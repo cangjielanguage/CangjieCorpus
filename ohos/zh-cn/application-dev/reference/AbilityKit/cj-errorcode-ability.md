@@ -18,7 +18,7 @@ The specified ability does not exist.
 
 **错误描述**
 
-当指定的Ability名称不存在时，该错误码将被返回。
+当指定的Ability名称不存在时，方法将返回该错误码。
 
 **可能原因**
 
@@ -26,16 +26,13 @@ The specified ability does not exist.
 
 **处理步骤**
 
-1. 检查want中的bundleName、moduleName和abilityName是否正确。
-2. 检查传入want中bundleName对应的应用是否安装。可使用如下命令查询已安装的应用列表，若bundleName不在查询结果中，说明应用未安装成功。
-
-    ``` text
+1. 检查Want中的bundleName、moduleName和abilityName是否正确。
+2. 检查传入Want中bundleName对应的应用是否安装。可使用如下命令查询已安装的应用列表，若bundleName不在查询结果中，说明应用未安装成功。
+    ```bash
     hdc shell bm dump -a
     ```
-
 3. 多hap应用需确认ability所属的hap是否已被安装。可使用如下命令查询应用的包信息，若安装的应用中没有对应的hap和ability，说明ability所属的hap未被安装。
-
-    ``` text
+    ```bash
     hdc shell bm dump -n 包名
     ```
 
@@ -47,16 +44,17 @@ Incorrect ability type.
 
 **错误描述**
 
-当接口调用Ability类型错误时，该错误码将被返回。
+当调用Ability相关接口时，被调用方的Ability类型与接口期望的类型不匹配。
 
 **可能原因**
 
-接口调用所在的Ability类型不支持该接口调用。
+1. 被调用方（服务端）的Ability类型与调用方（客户端）接口期望的类型不匹配。
+2. 当目标服务端为AppServiceExtensionAbility类型时，未在module.json5配置文件中配置ACL权限（ohos.permission.SUPPORT_APP_SERVICE_EXTENSION）。
 
 **处理步骤**
 
-1. 检查want中的bundleName、moduleName和abilityName是否正确。
-2. 根据Ability类型调用不同接口。
+1. 检查Want中的bundleName、moduleName和abilityName是否正确。
+2. 确认被调用方（服务端）的Ability类型与调用接口是否匹配。
 
 ## 16000003 指定的ID不存在
 
@@ -66,7 +64,7 @@ The specified ID does not exist.
 
 **错误描述**
 
-当指定的ID不存在时，该错误码将被返回。
+当指定的ID不存在时，方法将返回该错误码。
 
 **可能原因**
 
@@ -80,11 +78,11 @@ The specified ID does not exist.
 
 **错误信息**
 
-Failed to start the invisible ability.
+Cannot start an invisible component.
 
 **错误描述**
 
-当可见性校验失败时，该错误码将被返回。
+当可见性校验失败时，方法将返回该错误码。
 
 **可能原因**
 
@@ -103,7 +101,7 @@ The specified process does not have the permission.
 
 **错误描述**
 
-当指定的进程权限校验失败时，该错误码将被返回。
+当指定的进程权限校验失败时，方法将返回该错误码。
 
 **可能原因**
 
@@ -111,7 +109,7 @@ The specified process does not have the permission.
 
 **处理步骤**
 
-确认指定进程的权限是否正确。
+确认调用方是否有目标组件要求的权限。
 
 ## 16000006 不允许跨用户操作
 
@@ -121,7 +119,7 @@ Cross-user operations are not allowed.
 
 **错误描述**
 
-当应用跨用户操作时，该错误码将被返回。
+当应用跨用户操作时，方法将返回该错误码。
 
 **可能原因**
 
@@ -129,9 +127,9 @@ Cross-user operations are not allowed.
 
 **处理步骤**
 
-确认是否进行了跨用户操作。
+确认是否进行了跨用户操作，检查接口调用时传入的userID是否与当前userID一致。
 
-## 16000007 服务繁忙
+## 16000007 服务未响应
 
 **错误信息**
 
@@ -139,15 +137,15 @@ Service busy. There are concurrent tasks. Try again later.
 
 **错误描述**
 
-当服务繁忙时，该错误码将被返回。
+当系统服务未响应时，方法将返回该错误码。
 
 **可能原因**
 
-服务繁忙。
+应用在系统服务未启动时访问系统服务。
 
 **处理步骤**
 
-服务繁忙，请稍后重试。
+请等待系统服务启动后重试原操作。
 
 ## 16000008 众测应用到期
 
@@ -157,7 +155,7 @@ The crowdtesting application expires.
 
 **错误描述**
 
-当众测应用到期时，该错误码将被返回。
+当众测应用到期时，方法将返回该错误码。
 
 **可能原因**
 
@@ -175,7 +173,7 @@ An ability cannot be started or stopped in Wukong mode.
 
 **错误描述**
 
-在wukong模式下，启动/停止ability时，该错误码将被返回。
+当wukong模式下，启动/停止ability时，方法将返回该错误码。
 
 **可能原因**
 
@@ -189,11 +187,11 @@ wukong模式，不允许启动/停止ability。
 
 **错误信息**
 
-The call with the continuation flag is forbidden.
+The call with the continuation and prepare continuation flag is forbidden.
 
 **错误描述**
 
-当调用携带迁移flag时，该错误码将被返回。
+当调用携带迁移flag时，方法将返回该错误码。
 
 **可能原因**
 
@@ -211,7 +209,7 @@ The context does not exist.
 
 **错误描述**
 
-当上下文对象不存在时，该错误码将被返回。
+当上下文对象不存在时，方法将返回该错误码。
 
 **可能原因**
 
@@ -229,15 +227,15 @@ The application is controlled.
 
 **错误描述**
 
-当应用受到应用市场管控时，该错误码将被返回。
+当应用受到管控时，将返回该错误码。
 
 **可能原因**
 
-应用疑似存在恶意行为，受到应用市场管控不允许启动。
+应用被系统管控模块管控，不允许启动。
 
 **处理步骤**
 
-建议卸载该应用。
+目标应用被系统管控禁止拉起，请稍后再尝试调用。
 
 ## 16000013 应用被EDM管控
 
@@ -247,7 +245,7 @@ The application is controlled by EDM.
 
 **错误描述**
 
-当应用受到企业设备管理Enterprise Device Manager管控时，该错误码将被返回。
+当应用受到企业设备管理Enterprise Device Manager管控时，方法将返回该错误码。
 
 **可能原因**
 
@@ -265,7 +263,7 @@ Service timeout.
 
 **错误描述**
 
-服务超时的情况下，该错误码将被返回。
+当服务超时时，方法将返回该错误码。
 
 **可能原因**
 
@@ -297,11 +295,15 @@ Another ability is being started. Wait until it finishes starting.
 
 **错误信息**
 
-Redirection to a third-party application is not allowed in API version 11 or later.
+Redirection to a third-party application is not allowed in API version greater than 11.
 
 **错误描述**
 
-当API版本大于11时，应用不允许显式跳转到其他三方应用。
+当应用API版本大于11的时候，不允许显式跳转到其他三方应用。
+
+**可能原因**
+
+应用使用的API版本大于11并且显式跳转到其他三方应用。
 
 **处理步骤**
 
@@ -317,9 +319,15 @@ No matching ability is found.
 
 隐式启动无法查找到匹配的Ability。
 
+**可能原因**
+
+1. 隐式启动的参数配置有误。
+2. 指定的HAP包未安装。
+
 **处理步骤**
 
-修改隐式启动的匹配项。
+1. 确保隐式启动的参数配置正确，匹配规则详见[显式Want与隐式Want匹配规则](../../application-models/cj-explicit-implicit-want-mappings.md)。
+2. 确保对应的HAP包已安装。
 
 ## 16000050 内部错误
 
@@ -329,17 +337,21 @@ Internal error.
 
 **错误描述**
 
-当内存申请、多线程处理异常等内部处理错误时，该错误码将被返回。
+当出现了开发者无法解决的内部异常错误（如内存申请失败、多线程处理异常、跨进程通信失败等）时，方法将返回该错误码。
 
 **可能原因**
 
-内存申请、多线程处理等内核通用错误。具体原因可能包括：内部对象为空、处理超时、包管理获取应用信息失败、系统服务获取失败、启动的ability实例已达到上限等等。
+1. 启动Ability时传入的Want数据过大。
+2. 设备解锁前拉起非系统应用。
+3. 隐式拉起时未安装应用市场App。
+4. 开发者无法处理的系统内部错误。包括但不限于：内部对象为空指针、处理超时、IPC跨进程通信失败、包管理获取应用信息失败、系统服务获取失败、启动的Ability实例已达到上限等。
 
 **处理步骤**
 
-1. 确认系统内存是否足够，设备使用的系统版本是否存在异常。
-2. 检查是否启动了过多的ability。
-3. 尝试重启设备。
+1. 对于启动Ability失败时，可以检查传入的Want数据是否过大。
+2. 确保在设备解锁前只拉起系统应用，或者延迟拉起非系统应用直到设备解锁。
+3. 确保设备上已安装应用市场App，或者在拉起应用前检查应用市场App是否已安装。
+4. 对于开发者无法处理的系统内部错误，请尝试重新调用该接口，或者重启设备。
 
 ## 16000051 网络异常
 
@@ -385,15 +397,17 @@ The ability is not on the top of the UI.
 
 **错误描述**
 
-当前应用未显示在界面顶层时，该错误码将被返回。
+当前应用未显示在界面顶层时，方法将返回该错误码。
 
 **可能原因**
 
-用户执行免安装启动时需要确保应用显示在界面顶层，但当前应用未显示在界面顶层。
+用户执行免安装启动时需要确保应用在前台，但应用未显示在界面顶层。
 
 **处理步骤**
 
-请检查当前应用是否显示在界面顶层。
+1. 请确保当前应用已启动并处于前台运行状态。
+2. 请核实应用界面是否完全显示，且未被其他应用窗口遮挡或最小化。
+3. 如设备启用了分屏或多窗口模式，请确保当前应用为焦点窗口。
 
 ## 16000054 免安装服务繁忙
 
@@ -421,7 +435,7 @@ Installation-free timed out.
 
 **错误描述**
 
-当免安装超时时，该错误码将被返回。
+当免安装超时时，方法将返回该错误码。
 
 **可能原因**
 
@@ -430,96 +444,6 @@ Installation-free timed out.
 **处理步骤**
 
 免安装超时，请稍后重试。
-
-## 16000056 不允许免安装其他应用
-
-**错误信息**
-
-Installation-free is not allowed for other applications.
-
-**错误描述**
-
-当免安装其他应用时，该错误码将被返回。
-
-**可能原因**
-
-不允许免安装其他应用。
-
-**处理步骤**
-
-确认免安装的是正确的应用。
-
-## 16000057 不支持跨设备免安装
-
-**错误信息**
-
-Cross-device installation-free is not supported.
-
-**错误描述**
-
-当不支持跨设备免安装时，该错误码将被返回。
-
-**可能原因**
-
-不支持跨设备免安装。
-
-**处理步骤**
-
-确认为非跨设备免安装应用。
-
-## 16000058 指定的URI flag无效
-
-**错误信息**
-
-Invalid URI flag.
-
-**错误描述**
-
-指定的URI flag无效。
-
-**可能原因**
-
-传入的参数有误。
-
-**处理步骤**
-
-确认传入的参数属于Uri flag。
-
-## 16000059 指定的URI类型无效
-
-**错误信息**
-
-Invalid URI type.
-
-**错误描述**
-
-指定的URI类型无效。
-
-**可能原因**
-
-传入的参数有误，目前URI授权管理仅支持file类型URI。
-
-**处理步骤**
-
-确认传入的参数属于支持的URI类型。
-
-## 16000060 不支持沙箱应用授权URI
-
-**错误信息**
-
-A sandbox application cannot grant URI permission.
-
-**错误描述**
-
-当沙箱应用授权URI时，该错误码将被返回。
-
-**可能原因**
-
-不支持沙箱应用授权URI
-
-**处理步骤**
-
-确认为非沙箱应用。
 
 ## 16000061 不支持的操作
 
@@ -537,7 +461,7 @@ Operation not supported.
 
 **处理步骤**
 
-确认操作在当前系统上是否支持。
+确认操作在当前系统版本上是否支持。
 
 ## 16000062 子进程数量超出上限
 
@@ -579,11 +503,11 @@ The target to restart does not belong to the current application or is not a UIA
 
 **错误信息**
 
-Restart too frequently. Try again at least 10s later.
+Restart too frequently. Try again at least 3s later.
 
 **错误描述**
 
-当重启应用拉起指定组件时，10s内再次调用会返回该错误码。
+当重启应用拉起指定组件时，3s内再次调用，返回该错误码。
 
 **可能原因**
 
@@ -591,7 +515,7 @@ Restart too frequently. Try again at least 10s later.
 
 **处理步骤**
 
-间隔10s后再次调用。
+请等待至少3s后再次尝试重启操作。
 
 ## 16000065 接口只支持Ability在前台时调用
 
@@ -601,7 +525,7 @@ The API can be called only when the ability is running in the foreground.
 
 **错误描述**
 
-当Ability不在前台时，该错误码将被返回。
+当Ability不在前台时，方法将返回该错误码。
 
 **可能原因**
 
@@ -609,7 +533,7 @@ The API can be called only when the ability is running in the foreground.
 
 **处理步骤**
 
-将Ability切换到前台后，再调用接口。
+在调用接口前，请确保当前Ability已处于前台运行且界面可见状态。
 
 ## 16000066  wukong模式，不允许移动Ability到前台/后台
 
@@ -619,11 +543,11 @@ An ability cannot switch to the foreground or background in Wukong mode.
 
 **错误描述**
 
-当wukong模式下，移动Ability到前台/后台时，该错误码将被返回。
+当wukong模式下，移动Ability到前台/后台时，方法将返回该错误码。
 
 **可能原因**
 
-wukong模式下，不允许移动Ability到前台/后台。
+wukong模式，不允许移动Ability到前台/后台。
 
 **处理步骤**
 
@@ -660,7 +584,7 @@ The ability is already running.
 
 **可能原因**
 
-调用startAbility时，指定了processMode和startupVisibility，目标Ability的launchType是singleton或specified，并且目标Ability正在运行中，则返回该错误码。
+调用startAbility时，指定了processMode和startupVisibility，目标Ability的launchType是singleton或者specified，并且目标Ability正在运行中，则返回该错误码。
 
 **处理步骤**
 
@@ -716,11 +640,11 @@ App clone is not supported.
 
 **可能原因**
 
-在不支持应用分身的应用中调用getCurrentAppCloneIndex时，则返回该错误码。
+该应用没有在app.json5配置文件[multiAppMode](../../cj-start/basic-knowledge//cj-app-configuration-file.md#multiappmode标签)标签中配置应用分身字段，导致该应用不支持分身模式，调用getCurrentAppCloneIndex接口时返回该错误码。
 
 **处理步骤**
 
-在不支持应用分身的应用中，避免调用getCurrentAppCloneIndex。
+在app.json5配置文件中配置multiAppMode标签，开启应用分身功能后，再调用getCurrentAppCloneIndex口。
 
 ## 16000072 不支持应用多开
 
@@ -734,11 +658,11 @@ App clone or multi-instance is not supported.
 
 **可能原因**
 
-调用getRunningMultiAppInfo查询不支持应用多开的应用多开信息，则返回该错误码。
+调用[startAbility](./cj-apis-app-ability-ui_ability.md#func-startabilitywant-startoptions)、[startAbilityForResult](./cj-apis-app-ability-ui_ability.md#func-startabilityforresultwant-asynccallbackabilityresult)等启动Ability接口时，如果目标应用不支持应用多开，则返回该错误码。
 
 **处理步骤**
 
-调用getCurrentAppCloneIndex时确保查询的应用支持应用多开。
+调用[startAbility](./cj-apis-app-ability-ui_ability.md#func-startabilitywant-startoptions)、[startAbilityForResult](./cj-apis-app-ability-ui_ability.md#func-startabilityforresultwant-asynccallbackabilityresult)等启动Ability接口时，确保目标应用支持应用多开，并在app.json5配置文件中配置multiAppMode标签开启应用分身功能。
 
 ## 16000073 传入的appCloneIndex是一个无效值
 
@@ -748,12 +672,15 @@ The app clone index is invalid.
 
 **错误描述**
 
-传入一个无效的appCloneIndex时，返回该错误码。
+传入一个无效的appCloneIndex，返回该错误码。
 
 **可能原因**
 
-1.调用startAbility时，使用ohos.extra.param.key.appCloneIndex携带的appCloneIndex是一个无效值，则返回该错误码。
-2.调用isAppRunning时，入参appCloneIndex是一个无效值，则返回该错误码。
+1. 调用startAbility时，使用ohos.extra.param.key.appCloneIndex携带的appCloneIndex是一个无效值，则返回该错误码。
+
+2. 调用isAppRunning时，入参appCloneIndex是一个无效值，则返回该错误码。
+
+3. 尝试连接不支持应用分身的ExtensionAbility时，返回该错误码。
 
 **处理步骤**
 
@@ -767,17 +694,17 @@ The caller does not exist.
 
 **错误描述**
 
-通过backTocallerAbilityResult接口向调用方返回结果时，如果根据传入的requestCode无法找到调用方，返回该错误码。
+通过backToCallerAbilityWithResult接口向调用方返回结果时，如果根据传入的requestCode无法找到调用方，返回该错误码。
 
 **可能原因**
 
-1. requestCode不是通过want中的CALLER_REQUEST_CODE字段获取的。
+1. requestCode不是通过Want中的CALLER_REQUEST_CODE字段获取的。
 
 2. requestCode对应的调用方已经被销毁或结果已经返回。
 
 **处理步骤**
 
-1. 确认requestCode是否是通过want中的CALLER_REQUEST_CODE获取的。
+1. 确认requestCode是否是通过Want中的CALLER_REQUEST_CODE获取的。
 
 2. 确认调用方是否被销毁或结果已经返回。
 
@@ -785,7 +712,7 @@ The caller does not exist.
 
 **错误信息**
 
-Not support back to caller.
+BackToCaller is not supported.
 
 **错误描述**
 
@@ -804,7 +731,7 @@ Not support back to caller.
 
 **错误信息**
 
-The APP_INSTANCE_KEY is invalid.
+The app instance key is invalid.
 
 **错误描述**
 
@@ -834,7 +761,7 @@ The number of app instances reaches the limit.
 
 **处理步骤**
 
-调整设置的应用实例上限，或者删除已有应用实例后，才能继续创建新的应用实例。
+应用实例已达上限，如果必须要创建新的实例，可弹框提示用户删除已有实例。
 
 ## 16000078 不支持应用多实例
 
@@ -853,7 +780,8 @@ The multi-instance is not supported.
 
 **处理步骤**
 
-对目标应用配置多实例。
+1. 对目标应用配置多实例。
+2. 在2in1设备上调用该方法。
 
 ## 16000079 不支持指定APP_INSTANCE_KEY
 
@@ -863,7 +791,7 @@ The APP_INSTANCE_KEY cannot be specified.
 
 **错误描述**
 
-APP_INSTANCE_KEY和CREATE_APP_INSTANCE_KEY不支持同时指定。当同时指定两者时，返回该错误码。
+APP_INSTANCE_KEY和CREATE_APP_INSTANCE_KEY不支持同时指定。当指定CREATE_APP_INSTANCE_KEY的同时指定APP_INSTANCE_KEY，返回该错误码。
 
 **可能原因**
 
@@ -877,7 +805,7 @@ APP_INSTANCE_KEY和CREATE_APP_INSTANCE_KEY不支持同时指定。当同时指�
 
 **错误信息**
 
-Creating an instance is not supported.
+Creating a new instance is not supported.
 
 **错误描述**
 
@@ -909,9 +837,103 @@ The UIAbility is being started.
 
 确保该UIAbility启动完成，再执行新的启动任务。
 
+## 16000083 不允许该类型ExtensionAbility启动指定Ability
+
+**错误信息**
+
+The ExtensionAbility cannot start the ability due to system control.
+
+**错误描述**
+
+不同类型ExtensionAbility所需要的能力不同。系统不允许该类型ExtensionAbility启动指定Ability。
+
+**可能原因**
+
+当前类型ExtensionAbility受系统管控，不允许该类型ExtensionAbility启动指定Ability。
+
+**处理步骤**
+
+查看对应类型ExtensionAbility的使用约束限制，确保接口使用符合约束限制。
+
+## 16000084 只允许DelegatorAbility单次调用
+
+**错误信息**
+
+Only DelegatorAbility is allowed to call this API, and only once.
+
+**错误描述**
+
+系统只允许DelegatorAbility调用该接口一次。
+
+**可能原因**
+
+1. 调用方不是DelegatorAbility。
+2. 调用方是DelegatorAbility，但是重复调用接口。
+
+**处理步骤**
+
+1. 检查调用方是否DelegatorAbility。
+2. 检查是否重复调用。
+
+## 16000085 元能力与窗口的交互流程发生错误
+
+**错误信息**
+
+An error occurred during the interaction between the ability and window.
+
+**错误描述**
+
+元能力与窗口的交互流程发生错误。
+
+**可能原因**
+
+窗口业务流程出现异常。
+
+**处理步骤**
+
+系统错误，尝试重新调用。
+
+## 16000086 传入的context不是UIAbilityContext
+
+**错误信息**
+
+The context is not UIAbilityContext.
+
+**错误描述**
+
+传入的context不是UIAbilityContext。
+
+**可能原因**
+
+传入的Context对象既不是UIAbilityContext、也没有继承自UIAbilityContext。
+
+**处理步骤**
+
+请确保传入的参数为UIAbilityContext对象或其子类对象。
+
+## 16000090 调用方不是原子化服务
+
+**错误信息**
+
+The caller is not an atomic service.
+
+**错误描述**
+
+调用方不是原子化服务。
+
+**可能原因**
+
+接口调用方不是原子化服务。
+
+**处理步骤**
+
+确认调用方是否为原子化服务。
+
 ## 16000100 监听Ability生命周期变化的AbilityMonitor方法执行失败
 
 **错误信息**
+
+Possible causes:
 
 - Calling AddAbilityMonitor failed.
 
@@ -971,6 +993,151 @@ Failed to run the shell command.
 
 检查命令是否为有效的shell命令。
 
+## 16000110 当前应用不在Kiosk模式的列表内
+
+**错误信息**
+
+The current application is not in Kiosk app list and cannot enter Kiosk mode.
+
+**错误描述**
+
+当前应用不在Kiosk名单列表内，无法进入Kiosk模式。
+
+**可能原因**
+
+当前应用不在Kiosk名单列表，不支持该应用进入Kiosk模式。
+
+**处理步骤**
+
+需要EDM管控模块将当前应用添加到Kiosk应用列表内。
+
+## 16000111 已经有应用进入了Kiosk模式
+
+**错误信息**
+
+The system is already in Kiosk mode and cannot enter Kiosk mode again.
+
+**错误描述**
+
+当前系统已处于Kiosk模式，无法再次进入。
+
+**可能原因**
+
+同一时间只允许一个应用进入Kiosk模式。
+
+**处理步骤**
+
+将已进入Kiosk模式的应用退出Kiosk模式。
+
+## 16000112 当前系统没有应用进入Kiosk模式
+
+**错误信息**
+
+The current application is not in Kiosk mode and cannot exit Kiosk mode.
+
+**错误描述**
+
+当前应用未进入Kiosk模式，不能退出Kiosk模式。
+
+**可能原因**
+
+该应用进程之前未进入Kiosk模式，无法主动退出Kiosk模式。
+
+**处理步骤**
+
+检查当前系统是否有应用进入Kiosk模式。
+
+## 16000113 当前Ability不在前台
+
+**错误信息**
+
+Current ability is not in foreground.
+
+**错误描述**
+
+当Ability未处于前台状态时，尝试执行需在前台进行的操作将返回错误码。
+
+**可能原因**
+
+当前Ability没有处于前台。
+
+**处理步骤**
+
+检查当前Ability是否处于前台状态。
+
+## 16000130 UIAbility不属于调用方
+
+**错误信息**
+
+The UIAbility not belong to caller.
+
+**错误描述**
+
+目标UIAbility不属于调用方。
+
+**可能原因**
+
+启动了一个非自身应用的UIAbility。
+
+**处理步骤**
+
+检查目标UIAbility信息是否属于自身应用。
+
+## 16000131 UIAbility已启动
+
+**错误信息**
+
+The UIAbility is already exist, can not start again.
+
+**错误描述**
+
+UIAbility已启动，无法重新启动。
+
+**可能原因**
+
+startSelfUIAbilityInCurrentProcess用于冷启动一个新的UIAbility实例，如果拉起一个已经启动过的UIAbility实例，报该异常。
+
+**处理步骤**
+
+检查UIAbility是否已启动过。
+
+## 16000135 UIAbility的主窗不存在
+
+**错误信息**
+
+The main window of this ability of this context does not exits.
+
+**错误描述**
+
+该UIAbility的主窗不存在。
+
+**可能原因**
+
+Window还未创建或已销毁的时候调用该接口。
+
+**处理步骤**
+
+在windowStage创建前和销毁后不要调用该接口。
+
+## 16000136 不允许通过App Linking方式拉起应用自身UIAbility
+
+**错误信息**
+
+The UIAbility is prohibited from launching itself via App Linking.
+
+**错误描述**
+
+应用配置了不允许使用App Linking拉起当前UIAbility。
+
+**可能原因**
+
+在[module.json5配置文件](../../cj-start/basic-knowledge/cj-module-configuration-file.md)的[abilities标签](../../cj-start/basic-knowledge/cj-module-configuration-file.md#abilities标签)中，当前UIAbility的allowSelfRedirect字段取值为“false”。
+
+**处理步骤**
+
+- 如果允许使用App Linking拉起当前UIAbility，开发者需要在[module.json5配置文件](../../cj-start/basic-knowledge/cj-module-configuration-file.md)将[abilities标签](../../cj-start/basic-knowledge/cj-module-configuration-file.md#abilities标签)的allowSelfRedirect字段设置为true。
+- 如果不允许使用App Linking拉起当前UIAbility，开发者需要通过catch捕获该错误码并进行处理。
+
 ## 16000151 无效wantAgent对象
 
 **错误信息**
@@ -979,51 +1146,169 @@ Invalid wantAgent object.
 
 **错误描述**
 
-当传入接口的wantAgent对象无效时，该错误码将被返回。
+当传入接口的wantAgent对象无效时，方法将返回该错误码。
 
 **可能原因**
 
-传入接口的wantAgent对象无效。
+1. 传入接口的wantAgent对象无效。
+2. 三方应用设置其他应用的Ability。
+3. 其它内部通信错误。
 
 **处理步骤**
 
-检查传入接口的wantAgent对象。
+1. 检查传入接口的wantAgent对象是否存在。
+2. 检查调用方是否为三方应用。不支持三方应用设置其他应用的Ability。
 
-## 16000152 未找到wantAgent对象
+## 16000200 不允许该调用方启动应用后台服务
 
 **错误信息**
 
-The wantAgent object does not exist.
+The caller is not in the appIdentifierAllowList of the target application.
 
 **错误描述**
 
-当传入接口的wantAgent对象不存在时，该错误码将被返回。
+调用方不在目标应用的[appIdentifierAllowList](../../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中时，返回该错误码。
 
 **可能原因**
 
-传入接口的wantAgent对象不存在。
+startAppServiceExtensionAbility、stopAppServiceExtensionAbility接口调用方的app-identifier不在目标AppServiceExtensionAbility的[appIdentifierAllowList](../../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中。
 
 **处理步骤**
 
-检查传入接口的wantAgent对象是否合法。
+将接口调用方的app-identifier配置在目标AppServiceExtensionAbility的[appIdentifierAllowList](../../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中。
 
-## 16000153 wantAgent对象已取消
+## 16000201 目标服务还未启动
 
 **错误信息**
 
-The wantAgent object has been canceled.
+The target service has not been started yet.
 
 **错误描述**
 
-当传入接口的wantAgent对象已取消时，该错误码将被返回。
+目标服务还未启动时，返回该错误码。
 
 **可能原因**
 
-传入接口触发的wantAgent已取消。
+使用connectAppServiceExtensionAbility接口时服务端还未启动且当前应用无权限拉起目标服务。
 
 **处理步骤**
 
-检查触发的wantAgent对象是否已取消。
+1. 等待服务端启动后重新连接。
+2. 由当前应用拉起目标服务时，需要将接口调用方的app-identifier配置在目标AppServiceExtensionAbility的[appIdentifierAllowList](../../cj-start/basic-knowledge/cj-module-configuration-file.md#extensionabilities标签)中。
+
+## 16000115 当前进程不支持设置为备选主控进程
+
+**错误信息**
+
+The current process cannot be set as a candidate master process.
+
+**错误描述**
+
+当前进程不支持设置为备选主控进程。
+
+**可能原因**
+
+当前进程不满足以下任一条件：
+
+1. 运行了isolationProcess字段设为true的组件。
+2. 曾经成为过主控进程。
+
+**处理步骤**
+
+不支持处理。当前进程只有运行了isolationProcess字段设为true的组件，或曾为主控进程，才可设置为备选主控进程。
+
+## 16000116 当前进程已经是主控进程
+
+**错误信息**
+
+The current process is already a master process and does not support cancellation.
+
+**错误描述**
+
+当前进程已经是主控进程，不支持取消备选主控进程。
+
+**可能原因**
+
+当前进程已经是主控进程，不支持取消备选主控进程。
+
+**处理步骤**
+
+不支持处理，当前进程已经是主控进程的情况下，不支持取消。
+
+## 16000117 当前进程非备选主控进程
+
+**错误信息**
+
+The current process is not a candidate master process and does not support cancellation.
+
+**错误描述**
+
+当前进程不是备选主控进程，不支持取消。
+
+**可能原因**
+
+当前进程不是备选主控进程，不支持取消。
+
+**处理步骤**
+
+不支持处理，当前进程不是备选主控进程，不支持取消。
+
+## 16000118 当前进程非主控进程
+
+**错误信息**
+
+Not a master process.
+
+**错误描述**
+
+当前进程不是主控进程。
+
+**可能原因**
+
+当前进程不是主控进程，无法放弃当前进程的主控进程身份。
+
+**处理步骤**
+
+不支持处理，当前进程不是主控进程，无法放弃其主控进程身份。
+
+## 16000119 存在未完成的请求
+
+**错误信息**
+
+Cannot exit because there is an unfinished request.
+
+**错误描述**
+
+因为存在未完成的请求，放弃当前进程的主控进程身份失败。
+
+**可能原因**
+
+当前进程存在未完成的请求：
+
+1. 进程中存在未完成的onNewProcessRequest请求。
+2. 当启动模式为specified的UIAbility运行在独立进程时，当前进程中存在未完成的onAcceptWant请求。
+
+**处理步骤**
+
+等待当前进程中的请求完成，然后再放弃当前进程的主控进程身份。
+
+## 16000205 当前接口未在主线程中调用
+
+**错误信息**
+
+The API is not called in the main thread.
+
+**错误描述**
+
+当前接口未在主线程调用。
+
+**可能原因**
+
+当前接口在worker或taskpool中调用，不支持该操作。
+
+**处理步骤**
+
+请将接口调用逻辑迁移到主线程中执行。
 
 ## 16100001 指定Uri的Ability不存在
 
@@ -1070,17 +1355,17 @@ The caller has been released.
 
 **错误描述**
 
-当通用组件客户端（Caller）已回收时，该错误码将被返回。
+当通用组件客户端(Caller)已回收时，方法将返回该错误码。
 
 **可能原因**
 
-通用组件客户端（Caller）已回收。
+通用组件客户端(Caller)已回收。
 
 **处理步骤**
 
-1. 请重新注册有效通用组件客户端调用接口。
+1. 重新创建有效的通用组件客户端(Caller)实例。
 2. 检查调用context.startAbility时，context对应的ability是否还在运行。若该ability已被析构，会抛出该错误码。
-3. 若存在连续调用startAbility和terminateSelf的情况，请确认收到startAbility成功或失败的回调后，再调用terminateSelf。
+3. 若存在连续调用startAbility和terminateSelf的情况，请确保在收到startAbility成功或失败的回调后，再调用terminateSelf。
 
 ## 16200002 通用组件服务端(Callee)无效
 
@@ -1090,7 +1375,7 @@ The callee does not exist.
 
 **错误描述**
 
-当通用组件服务端(Callee)无效时，该错误码将被返回。
+当通用组件服务端(Callee)无效时，方法将返回该错误码。
 
 **可能原因**
 
@@ -1098,7 +1383,7 @@ The callee does not exist.
 
 **处理步骤**
 
-请检查通用组件服务端是否存在。
+请检查通用组件服务端(Callee)是否存在。
 
 ## 16200003 回收失败
 
@@ -1126,15 +1411,15 @@ The method has been registered.
 
 **错误描述**
 
-当方法已注册时，该错误码将被返回。
+当方法已注册时，方法将返回该错误码。
 
 **可能原因**
 
-方法已在通用组件服务端注册过。
+方法已在通用组件服务端(Callee)注册过。
 
 **处理步骤**
 
-请检查是否已注册该方法。
+请确认该方法是否已完成注册，避免重复进行注册操作。
 
 ## 16200005 方法未注册
 
@@ -1144,69 +1429,15 @@ The method has not been registered.
 
 **错误描述**
 
-当方法未注册时，该错误码将被返回。
+当方法未注册时，方法将返回该错误码。
 
 **可能原因**
 
-方法未在通用组件服务端注册。
+方法未在通用组件服务端(Callee)注册。
 
 **处理步骤**
 
-请检查是否未注册该方法。
-
-## 16200006 没有权限设置常驻进程使能状态
-
-**错误信息**
-
-The caller application can only set the resident status of the configured process.
-
-**错误描述**
-
-当调用者没有权限设置常驻进程使能状态时返回。
-
-**可能原因**
-
-调用者没有常驻进程使能配置权限。
-
-**处理步骤**
-
-接口调用时从数据库查询调用者的常驻进程使能配置权限。
-
-## 16300001 指定的任务不存在
-
-**错误信息**
-
-Mission not found.
-
-**错误描述**
-
-当指定的任务不存在时，该错误码将被返回。
-
-**可能原因**
-
-操作的目标任务不存在。
-
-**处理步骤**
-
-确认操作的任务是否存在。
-
-## 16300002 指定的任务监听器不存在
-
-**错误信息**
-
-The specified mission listener does not exist.
-
-**错误描述**
-
-当指定的任务监听器不存在时，该错误码将被返回。
-
-**可能原因**
-
-操作的目标任务监听器不存在。
-
-**处理步骤**
-
-确认操作的任务监听器是否存在。
+请先在通用组件服务端(Callee)完成该方法的注册，再进行调用。
 
 ## 16300003 目标应用程序不是自身应用程序
 
@@ -1216,7 +1447,7 @@ The target application is not the current application.
 
 **错误描述**
 
-当被拉起的应用程序不是自身应用程序时，该错误码将被返回。
+当被拉起的应用程序不是自身应用程序时，方法将返回该错误码。
 
 **可能原因**
 
@@ -1226,210 +1457,113 @@ The target application is not the current application.
 
 确认被拉起的应用程序是否为自身应用程序。
 
-## 18500001 指定的包名无效
+## 16300008 指定的包不存在主UIAbility
 
 **错误信息**
 
-The bundle does not exist or no patch has been applied.
+The target bundle has no MainAbility.
 
 **错误描述**
 
-当指定的包名无效时，该错误码将被返回。
+应用不存在主UIAbility。
 
 **可能原因**
 
-待查询的bundle不存在或未安装。
+应用的mainElement不是UIAbility。
 
 **处理步骤**
 
-确认查询的应用是否已安装。
+检查应用module.json中的mainElement对应的ability是否是UIAbility。
 
-## 18500002 指定的补丁包无效
+## 16300009 指定的包不存在状态栏
 
 **错误信息**
 
-Invalid patch package.
+The target bundle has no status-bar ability.
 
 **错误描述**
 
-当指定的补丁包无效，补丁包不存在或不可访问时，该错误码将被返回。
+应用不存在状态栏。
 
 **可能原因**
 
-待安装的补丁包文件不存在或不可以访问。
+应用不存在状态栏。
 
 **处理步骤**
 
-1. 请检查传递的补丁包文件路径是否有效。
-2. 请检查是否有权限访问此补丁包文件。
+检查应用是否有状态栏。
 
-## 18500003 补丁包部署失败
+## 16300010 指定的应用在运行中但没有绑定状态栏
 
 **错误信息**
 
-Failed to deploy the patch.
+The target application is not attached to the status bar.
 
 **错误描述**
 
-当补丁包部署失败时，该错误码将被返回。
+应用运行后没有绑定状态栏。
 
 **可能原因**
 
-1. patch.json中type只能为patch或者hotreload，否则部署失败。
-2. 若对应bundleName的hap包未安装，部署失败。
-3. bundleName、versionCode必须和已安装的hap应用相同，如果为patch类型，还需确保versionName相同，否则部署失败。
-4. 如果已经部署过补丁包，新部署的补丁包的versionCode必须大于之前补丁包的versionCode，否则部署失败。
-5. 对于patch类型的补丁会校验签名信息，使用的签名证书需要和应用相同，签名不一致，部署失败。
-6. 在部署patch类型的补丁包时，如果是debug版本，先判断是否有在使用的补丁包，如果在使用的补丁包为hotreload类型，则部署失败。
-7. 在部署hotreload类型的补丁包时，如果是debug版本，先判断是否有在使用的补丁包，如果在使用的补丁包为patch类型，则部署失败；如果是release版本，则部署失败。
+应用有状态栏，但在运行过程中没有绑定状态栏。
 
 **处理步骤**
 
-请检查补丁包是否符合规则。
+检查应用是否绑定状态栏。
 
-## 18500004 补丁包使能失败
+## 28800001 启动任务或其依赖项不存在
 
 **错误信息**
 
-Failed to enable the patch package.
+Startup task or its dependency not found.
 
 **错误描述**
 
-当补丁包使能失败时，该错误码将被返回。
+执行启动任务时，如果找不到该启动任务或其依赖的任务，方法将返回该错误码。
 
 **可能原因**
 
-使能补丁时补丁包状态不正确。
+未正确配置启动任务或其依赖的任务。
 
 **处理步骤**
 
-请检查补丁包状态。
+检查启动框架配置文件是否正确编写，并确保所有配置的启动任务均已实现。
 
-## 18500005 补丁包删除失败
+## 28800002 启动任务之间存在循环依赖关系
 
 **错误信息**
 
-Failed to remove the patch package.
+The startup tasks have circular dependencies.
 
 **错误描述**
 
-当补丁包删除失败时，该错误码将被返回。
+在加载启动任务时，如果检测到启动任务之间存在循环依赖，方法将返回该错误码。
 
 **可能原因**
 
-删除旧补丁时补丁包状态不正确。
+配置的启动任务之间存在循环依赖关系。
 
 **处理步骤**
 
-请检查补丁包状态。
+检查启动框架配置文件，确保所有启动任务之间没有循环依赖。
 
-## 18500006 加载补丁失败
+## 28800003 运行启动任务时发生错误
 
 **错误信息**
 
-Failed to load the patch.
+An error occurred while running the startup tasks.
 
 **错误描述**
 
-当加载补丁失败时，该错误码将被返回。
+运行启动任务时发生错误，方法将返回该错误码。
 
 **可能原因**
 
-方舟引擎加载补丁失败。
+启动任务的代码逻辑存在错误，或者缺少异常处理。
 
 **处理步骤**
 
-请检查补丁包是否正确。
-
-## 18500007 卸载旧补丁失败
-
-**错误信息**
-
-Failed to unload the patch.
-
-**错误描述**
-
-当方舟引擎卸载旧补丁失败时，该错误码将被返回。
-
-**可能原因**
-
-方舟引擎卸载补丁失败。
-
-**处理步骤**
-
-请检查补丁包是否正确。
-
-## 18500008 快速修复内部错误
-
-**错误信息**
-
-Internal error.
-
-**错误描述**
-
-当内存申请、多线程处理异常等内部处理错误时，该错误码将被返回。
-
-**可能原因**
-
-内存申请、多线程处理等内核通用错误。
-
-**处理步骤**
-
-确认系统内存是否足够。
-
-## 18500009 该应用当前有正在处理的快速修复任务
-
-**错误信息**
-
-The application has an ongoing quick fix task.
-
-**错误描述**
-
-该应用当前有正在处理的快速修复任务时，该错误码将被返回。
-
-**可能原因**
-
-指定要撤销快速修复的应用，有正在处理的快速修复任务。
-
-**处理步骤**
-
-等待快速修复任务处理完成。
-
-## 16300004 指定的observer不存在
-
-**错误信息**
-
-observer not found.
-
-**错误描述**
-
-当监听器不存在时，该错误码将被返回。
-
-**可能原因**
-
-当前监听器不存在或者已注销。
-
-**处理步骤**
-
-请检查是否有重复注销监听器。
-
-## 16300005 指定的包信息不存在
-
-**错误信息**
-
-The target bundle does not exist.
-
-**错误描述**
-
-预加载应用的包信息不存在时，该错误码将被返回。
-
-**可能原因**
-
-预加载的bundleName、userId或appIndex错误，导致查询不到相关包信息。
-
-**处理步骤**
-
-检查传入的bundleName、userId和appIndex参数是否正确。
+检查实现的启动任务是否存在逻辑错误，并确保每个启动任务中包含异常处理逻辑。
 
 ## 29600001 图片编辑内部错误
 
@@ -1439,11 +1573,11 @@ Internal error.
 
 **错误描述**
 
-当图片保存时发生内存申请、多线程处理异常等内部错误时，该错误码将被返回。
+当图片保存时发生内存申请、多线程处理异常等内部错误时，方法将返回该错误码。
 
 **可能原因**
 
-内存申请、多线程处理等内核通用错误。具体原因可能包括：内部对象为空、处理超时等。
+内存申请、多线程处理等内核通用错误。具体原因可能包括：内部对象为空、处理超时等等。
 
 **处理步骤**
 
@@ -1458,7 +1592,7 @@ Image input error.
 
 **错误描述**
 
-当图片uri不存在或无法解析图片时，该错误码将被返回。
+当图片uri不存在或无法解析图片时，方法将返回该错误码。
 
 **可能原因**
 
@@ -1468,7 +1602,7 @@ uri不存在或uri非图片类型文件。
 
 检查文件是否存在以及文件类型是否为图片。
 
-## 29600002 图片大小过大
+## 29600003 图片大小过大
 
 **错误信息**
 
@@ -1480,27 +1614,65 @@ Image too big.
 
 **可能原因**
 
-当入参图片大小超过50M时，该错误码将被返回。
+当入参图片大小超过50M时，方法将返回该错误码。
 
 **处理步骤**
 
 1. 尝试将图片编辑后大小控制在50M以内。
 2. 对图片大小进行校验。
 
-## 16300007 指定的原子化服务的下载安装任务信息不存在
+## 35600001 指定的agentId不存在
 
 **错误信息**
 
-The target free install task does not exist.
+The specified agentId does not exist.
 
 **错误描述**
 
-为原子化服务窗口打开窗口时，指定的原子化服务的下载安装任务不存在时，该错误码将被返回。
+指定的agentId不存在。
 
 **可能原因**
 
-传入的bundleName、moduleName、abilityName或startTime错误，导致查询不到相关原子化服务的下载安装任务信息。
+目标应用中不存在指定agentId对应的AgentCard。
 
 **处理步骤**
 
-检查传入的bundleName、moduleName、abilityName或startTime参数是否正确。
+检查一下目标应用的静态配置信息，重新传入正确的agentId。
+
+## 35600002 IPC消息发送失败
+
+**错误信息**
+
+Failed to send the IPC message.
+
+**错误描述**
+
+IPC消息发送失败。
+
+**可能原因**
+
+1. 传入的数据量超过了IPC的限制(200KB)。
+2. 服务端进程已经退出。
+
+**处理步骤**
+
+1. 检查发送的数据是否超过了规格限制，如果超过了，调整到规格限制内。
+2. 查看服务端进程是否已经退出，如果已经退出，需要重新获取代理对象。
+
+## 35600003 调用方已达到最大连接数
+
+**错误信息**
+
+Maximum connections from the same caller have been reached.
+
+**错误描述**
+
+调用方已达到最大连接数。
+
+**可能原因**
+
+调用方同时连接的AgentExtension数量已经达到5次，不允许再发起新的连接请求。
+
+**处理步骤**
+
+调用方断开一些连接后重新发起连接。

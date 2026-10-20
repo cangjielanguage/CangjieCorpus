@@ -68,8 +68,10 @@ import kit.PerformanceAnalysisKit.Hilog
 @Entry
 @Component
 class EntryView {
-    @State var showChild: Bool = true
-    @State var btnColor: Color = Color(0xFF007DFF)
+    @State
+    var showChild: Bool = true
+    @State
+    var btnColor: Color = Color(0xFF007DFF)
 
     // 只有被@Entry修饰的组件才可以调用页面的生命周期
     protected override func onPageShow() {
@@ -112,13 +114,13 @@ class EntryView {
             }
 
             Button("delete Child")
-            .margin(20)
-            .backgroundColor(this.btnColor)
-            .onClick({
-                _ =>
-                // this.showChild为false，删除Child子组件，执行Child aboutToDisappear
-                this.showChild = false
-            })
+                .margin(20)
+                .backgroundColor(this.btnColor)
+                .onClick({
+                    _ =>
+                    // this.showChild为false，删除Child子组件，执行Child aboutToDisappear
+                    this.showChild = false
+                })
 
             // Push到Page页面，执行onPageHide
             Button("push to next page")
@@ -132,7 +134,8 @@ class EntryView {
 
 @Component
 class Child {
-    @State var title: String = "Hello World"
+    @State
+    var title: String = "Hello World"
 
     // 组件生命周期
     protected override func aboutToAppear() {
@@ -151,12 +154,11 @@ class Child {
 
     func build() {
         Text(this.title)
-        .fontSize(50)
-        .margin(20)
-        .onClick({
-            _ =>
-            this.title = "Hello ArkUI"
-        })
+            .fontSize(50)
+            .margin(20)
+            .onClick({
+                _ => this.title = "Hello ArkUI"
+            })
     }
 }
 ```
@@ -173,8 +175,10 @@ import kit.PerformanceAnalysisKit.Hilog
 @Entry
 @Component
 class Page {
-    @State var textColor: Color = Color.Black
-    @State var num: Int64 = 0
+    @State
+    var textColor: Color = Color.Black
+    @State
+    var num: Int64 = 0
 
     // 只有被@Entry修饰的组件才可以调用页面的生命周期
     protected override func onPageShow() {
@@ -200,17 +204,17 @@ class Page {
 
     func build() {
         Column {
-            Text("num 的值为：" + this.num.toString())
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
-            .fontColor(this.textColor)
-            .margin(20)
-            .onClick({
-                _ =>
-                this.num += 5
-            })
-        }
-        .width(100.percent)
+            Text("num 的值为：" + this
+                .num
+                .toString())
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
+                .fontColor(this.textColor)
+                .margin(20)
+                .onClick({
+                    _ => this.num += 5
+                })
+        }.width(100.percent)
     }
 }
 ```

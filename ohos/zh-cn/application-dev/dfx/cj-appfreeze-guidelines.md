@@ -341,7 +341,7 @@ MSG = App main thread is not response!EventHandler dump begin curTime:2017-08-08
   Total size of Idle events 0
   Total event size 3
 
-Timestamp:2017-08-0817:0k:27,4142447784
+Timestamp:2017-08-0817:06:24.4142447784
 Pid:1561
 Uid:20010039
 Process name:com.example.myapplication
@@ -734,7 +734,7 @@ binder信息抓取时机：存在半周期检测的故障类型是在warning事�
     排查方向：
 
     - 单次请求是否在预期时长内（例如：规格在20ms的请求接口异常情形下达到1s），排查接口性能不达预期的原因。
-    - 应用测频繁调用场景是否合理。
+    - 应用侧频繁调用场景是否合理。
 
 4. 无调用关系，栈为ipc栈。
 

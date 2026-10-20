@@ -36,8 +36,7 @@
     }
     // 必须注册该函数到JSModule中
     let EXPORT_MODULE = JSModule.registerModule {
-        runtime, exports =>
-            exports["addNumber"] = runtime.function(addNumber).toJSValue()
+        runtime, exports => exports["addNumber"] = runtime.function(addNumber).toJSValue()
     }
     ```
 

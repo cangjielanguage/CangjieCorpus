@@ -6,7 +6,7 @@
 > 当前为Beta阶段。
 <!--DelEnd-->
 
-Canvas提供画布组件，用于自定义绘制图形，开发者使用CanvasRenderingContext2D对象和OffscreenCanvasRenderingContext2D对象在Canvas组件上进行绘制，绘制对象可以是基础形状、文本、图片等。
+Canvas提供画布组件，用于自定义绘制图形，开发者使用CanvasRenderingContext2D对象在Canvas组件上进行绘制，绘制对象可以是基础形状、文本、图片等。
 
 ## 使用画布组件绘制自定义图形
 
@@ -42,7 +42,9 @@ Canvas提供画布组件，用于自定义绘制图形，开发者使用CanvasRe
                           this.context.strokeRect(50.0, 50.0, 200.0, 150.0);
                       }
                   )
-          }.width(100.percent).height(100.percent)
+          }
+              .width(100.percent)
+              .height(100.percent)
       }
   }
   ```
@@ -51,7 +53,7 @@ Canvas提供画布组件，用于自定义绘制图形，开发者使用CanvasRe
 
 ## 初始化画布组件
 
-onReady(() -> Unit)是Canvas组件初始化完成时或者Canvas组件发生大小变化时的事件回调。调用该事件后，可获取Canvas组件的确定宽高，进一步使用CanvasRenderingContext2D对象和OffscreenCanvasRenderingContext2D对象调用相关API进行图形绘制。
+onReady(() -> Unit)是Canvas组件初始化完成时或者Canvas组件发生大小变化时的事件回调。调用该事件后，可获取Canvas组件的确定宽高，进一步使用CanvasRenderingContext2D对象调用相关API进行图形绘制。
 
  <!-- run -->
 
@@ -88,7 +90,7 @@ class EntryView {
 
 调用Canvas组件生命周期接口onReady()之后，开发者可以直接使用Canvas组件进行绘制。或者可以脱离Canvas组件和onReady()生命周期，单独定义Path2d对象构造理想的路径，并在onReady()调用之后使用Canvas组件进行绘制。
 
-- 通过CanvasRenderingContext2D对象和OffscreenCanvasRenderingContext2D对象直接调用相关API进行绘制。
+- 通过CanvasRenderingContext2D对象直接调用相关API进行绘制。
 
      <!-- run -->
 
@@ -126,7 +128,7 @@ class EntryView {
 
   ![Canvas2](figures/Canvas2.jpg)
 
-- 先单独定义path2d对象构造理想的路径，再通过调用CanvasRenderingContext2D对象和OffscreenCanvasRenderingContext2D对象的stroke接口或者fill接口进行绘制，具体使用可以参考[path2d](../reference/arkui-cj/cj-canvas-drawing-path2d.md#class-path2d)。
+- 先单独定义path2d对象构造理想的路径，再通过调用CanvasRenderingContext2D对象的stroke接口或者fill接口进行绘制，具体使用可以参考[path2d](../reference/arkui-cj/cj-canvas-drawing-path2d.md#class-path2d)。
 
      <!-- run -->
 
@@ -165,7 +167,7 @@ class EntryView {
 
 ## 画布组件常用方法
 
-OffscreenCanvasRenderingContext2D对象和CanvasRenderingContext2D对象提供了大量的属性和方法，可以用来绘制文本、图形，处理像素等，是Canvas组件的核心。常用接口有[fill](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-fillcanvasfillrule)（对封闭路径进行填充）、[clip](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-clipcanvasfillrule)（设置当前路径为剪切路径）、[stroke](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroke)（进行边框绘制操作）等等，同时提供了[fillStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#interface-fillstyle)（指定绘制的填充色）、[globalAlpha](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-globalalpha)（设置透明度）与[strokeStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-strokestyle)（设置描边的颜色）等属性修改绘制内容的样式。将通过以下几个方面简单介绍画布组件常见使用方法：
+CanvasRenderingContext2D对象提供了大量的属性和方法，可以用来绘制文本、图形，处理像素等，是Canvas组件的核心。常用接口有[fill](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-fillcanvasfillrule)（对封闭路径进行填充）、[clip](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-clipcanvasfillrule)（设置当前路径为剪切路径）、[stroke](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#func-stroke)（进行边框绘制操作）等等，同时提供了[fillStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#interface-fillstyle)（指定绘制的填充色）、[globalAlpha](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-globalalpha)（设置透明度）与[strokeStyle](../reference/arkui-cj/cj-canvas-drawing-canvasrenderingcontext2d.md#prop-strokestyle)（设置描边的颜色）等属性修改绘制内容的样式。将通过以下几个方面简单介绍画布组件常见使用方法：
 
 - 基础形状绘制。
 
@@ -268,7 +270,7 @@ OffscreenCanvasRenderingContext2D对象和CanvasRenderingContext2D对象提供�
 
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
-  
+
   @Entry
   @Component
   class EntryView {

@@ -12,7 +12,9 @@
   // Scenario 1
 
   func f(a: Int64): Unit {}
+
   func f(a: Float64): Unit {}
+
   func f(a: Int64, b: Float64): Unit {}
   ```
 
@@ -23,13 +25,16 @@
   ```cangjie
   // Scenario 2
 
-  interface I1{}
-  interface I2{}
+  interface I1 {}
+
+  interface I2 {}
 
   func f1<X, Y>(a: X, b: Y) {}
+
   func f1<Y, X>(a: X, b: Y) {} // OK: after rename generic type parameter, it will be 'func f1<X, Y>(a: Y, b: X)'
 
   func f2<T>(a: T) where T <: I1 {} // Error, not overloading
+
   func f2<T>(a: T) where T <: I2 {} // Error, not overloading
   ```
 
@@ -110,7 +115,7 @@
 - class、interface、struct 类型的静态成员函数和实例成员函数之间不能重载
 - enum 类型的 constructor、静态成员函数和实例成员函数之间不能重载
 
-如下示例，两个变量均为函数类型且函数参数类型不同，但由于它们不是函数声明所以不能重载，如下示例将编译报错（重定义错）：
+下述示例中，两个变量均为函数类型且函数参数类型不同，但由于它们不是函数声明所以不能重载，编译会抛出重定义错误：
 
 <!-- compile.error -->
 
@@ -121,7 +126,7 @@ main() {
 }
 ```
 
-如下示例，虽然变量 `f` 为函数类型，但由于变量和函数之间不能同名，如下示例将编译报错（重定义错）：
+下述示例中，变量 `f` 为函数类型，但变量与函数不允许重名，代码编译会触发重定义错误：
 
 <!-- compile.error -->
 
@@ -132,7 +137,7 @@ main() {
 }
 ```
 
-如下示例，静态成员函数 `f` 与实例成员函数 `f` 的参数类型不同，但由于类内静态成员函数和实例成员函数之间不能重载，如下示例将编译报错：
+下述示例中，静态成员函数 `f` 与实例成员函数 `f` 参数类型不同，但类内静态成员函数与实例成员函数不支持重载，代码编译会报错：
 
 <!-- compile.error -->
 
@@ -155,6 +160,7 @@ class C {
 
     ```cangjie
     open class Base {}
+
     class Sub <: Base {}
 
     func outer() {
@@ -167,7 +173,7 @@ class C {
                 print("2")
             }
 
-            g(Sub())   // Output: 2
+            g(Sub()) // Output: 2
         }
     }
     ```
@@ -180,6 +186,7 @@ class C {
 
     ```cangjie
     open class Base {}
+
     class Sub <: Base {}
 
     func outer() {
@@ -190,7 +197,7 @@ class C {
             print("2")
         }
 
-        g(Sub())   // Output: 1
+        g(Sub()) // Output: 1
 
     }
     ```

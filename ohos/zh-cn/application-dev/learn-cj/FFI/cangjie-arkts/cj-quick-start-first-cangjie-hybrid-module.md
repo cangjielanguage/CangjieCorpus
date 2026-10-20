@@ -16,7 +16,7 @@
 
    ![HybridExample2_ArkTSCallCangjieFunctionDemo](../../figures/HybridExample2_ArkTSCallCangjieFunctionDemo.gif)
 
-2. 在ArkTS页面中，嵌入一个仓颉组件。并在在仓颉组件中提供一个Button按钮，单击时会更新Text文本，如下图所示。
+2. 在ArkTS页面中，嵌入一个仓颉组件。并在仓颉组件中提供一个Button按钮，单击时会更新Text文本，如下图所示。
 
    ![HybridExample2_ArkTSCallCangjieUIDemo](../../figures/HybridExample2_ArkTSCallCangjieUIDemo.gif)
 
@@ -263,7 +263,7 @@ Project_name
     └── oh-package-lock.json5
 ```
 
-可以看出，**my_module** 变成了一个仓颉-ArkTS混合模块。
+可以看出，**my_module**变成了一个仓颉-ArkTS混合模块。
 
 ### 在同一个工程内，纯ArkTS工程跨模块调用仓颉函数
 
@@ -469,12 +469,12 @@ Project_name
                    .width(80.percent)
                    .height(40)
                    .margin(20)
-                   .onClick ({ _ =>
-                       msg = "Okay, Cangjie clicked"
+                   .onClick({
+                       _ => msg = "Okay, Cangjie clicked"
                    })
            }
-           .width(100.percent)
-           .height(100.percent)
+               .width(100.percent)
+               .height(100.percent)
        }
    }
    ```

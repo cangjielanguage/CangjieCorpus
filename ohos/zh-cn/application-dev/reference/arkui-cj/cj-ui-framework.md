@@ -178,8 +178,7 @@ public func build(): Unit
 ## class CustomView
 
 ```cangjie
-public abstract class CustomView <: RemoteView {
-}
+public abstract class CustomView <: RemoteView {}
 ```
 
 **功能：** UI框架使用的组件基础类。

@@ -326,7 +326,7 @@ This window type is invalid.
 
 **可能原因**
 
-使用了无效的窗口类型，有效的窗口类型见[WindowType](../arkui-cj/cj-apis-window.md#enum-windowtype)。
+使用了无效的窗口类型，有效的窗口类型见[WindowType](./cj-apis-window.md#enum-windowtype)。
 
 **处理步骤**
 

@@ -32,34 +32,37 @@ ArkUI框架对于ForEach的键值生成有一套特定的判断规则，这主�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(50)
+        Text(this.item).fontSize(50)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: Array<String> = ['one', 'two','three']
+    @State
+    var simpleList: Array<String> = ['one', 'two', 'three']
     func build() {
         Row() {
             Column() {
-                ForEach(this.simpleList,itemGeneratorFunc: {item: String,idx:Int64 =>
-            ChildItem(item: item)}, keyGeneratorFunc: {item: String, idx: Int64 => return item})
+                ForEach(this.simpleList, itemGeneratorFunc: {
+                    item: String, idx: Int64 => ChildItem(item: item)
+                }, keyGeneratorFunc: {item: String, idx: Int64 => return item})
             }
-            .justifyContent(FlexAlign.Center)
-            .width(100.percent)
-            .height(100.percent)
+                .justifyContent(FlexAlign.Center)
+                .width(100.percent)
+                .height(100.percent)
         }
-        .height(100.percent)
-        .backgroundColor(Color.White)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```
@@ -78,34 +81,37 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(50)
+        Text(this.item).fontSize(50)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: Array<String> = ['one', 'two','two','three']
+    @State
+    var simpleList: Array<String> = ['one', 'two', 'two', 'three']
     func build() {
         Row() {
             Column() {
-                ForEach(this.simpleList,itemGeneratorFunc: {item: String,idx:Int64 =>
-                    ChildItem(item: item)}, keyGeneratorFunc: {item: String, idx: Int64 => return item})
+                ForEach(this.simpleList, itemGeneratorFunc: {
+                    item: String, idx: Int64 => ChildItem(item: item)
+                }, keyGeneratorFunc: {item: String, idx: Int64 => return item})
             }
-            .justifyContent(FlexAlign.Center)
-            .width(100.percent)
-            .height(100.percent)
+                .justifyContent(FlexAlign.Center)
+                .width(100.percent)
+                .height(100.percent)
         }
-        .height(100.percent)
-        .backgroundColor(Color.White)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```
@@ -124,40 +130,43 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(50)
+        Text(this.item).fontSize(50)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: ObservedArrayList<String> = ObservedArrayList<String>(['one', 'two','three'])
+    @State
+    var simpleList: ObservedArrayList<String> = ObservedArrayList<String>(['one', 'two', 'three'])
     func build() {
         Row() {
             Column() {
                 Text("点击修改第3个数组项的值")
-                .fontSize(24)
-                .fontColor(Color.Red)
-                .onClick({evt=>
-                this.simpleList[2] = 'new three'
-                })
-                ForEach(this.simpleList,itemGeneratorFunc: {item: String,idx:Int64 =>
-                ChildItem(item: item)}, keyGeneratorFunc: {item: String, idx: Int64 => return item})
+                    .fontSize(24)
+                    .fontColor(Color.Red)
+                    .onClick({
+                        evt => this.simpleList[2] = 'new three'
+                    })
+                ForEach(this.simpleList, itemGeneratorFunc: {
+                    item: String, idx: Int64 => ChildItem(item: item)
+                }, keyGeneratorFunc: {item: String, idx: Int64 => return item})
             }
-            .justifyContent(FlexAlign.Center)
-            .width(100.percent)
-            .height(100.percent)
+                .justifyContent(FlexAlign.Center)
+                .width(100.percent)
+                .height(100.percent)
         }
-        .height(100.percent)
-        .backgroundColor(Color.White)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```
@@ -186,15 +195,16 @@ ForEach组件在开发过程中的主要应用场景包括：[数据源不变](#
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Builder
-func textArea(width: Int64, height:Int64) {
+func textArea(width: Int64, height: Int64) {
     Row()
-    .width(width)
-    .height(height)
-    .backgroundColor(Color.White)
+        .width(width)
+        .height(height)
+        .backgroundColor(Color.White)
 }
 
 @Component
@@ -203,38 +213,40 @@ class ArticleSkeletonView {
         Row() {
             Column() {
                 textArea(80, 80)
-            }
-            .margin(right: 20 )
+            }.margin(right: 20)
             Column() {
                 textArea(60, 20)
                 textArea(50, 20)
             }
-            .alignItems(HorizontalAlign.Start)
-            .justifyContent(FlexAlign.SpaceAround)
-            .height(100)
+                .alignItems(HorizontalAlign.Start)
+                .justifyContent(FlexAlign.SpaceAround)
+                .height(100)
         }
-        .padding(20)
-        .borderRadius(12)
-        .backgroundColor(Color.Gray)
-        .height(120)
-        .width(100.percent)
-        .justifyContent(FlexAlign.SpaceBetween)
-        .margin(top: 20)
+            .padding(20)
+            .borderRadius(12)
+            .backgroundColor(Color.Gray)
+            .height(120)
+            .width(100.percent)
+            .justifyContent(FlexAlign.SpaceBetween)
+            .margin(top: 20)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: Array<Int64> = [1, 2, 3, 4, 5]
+    @State
+    var simpleList: Array<Int64> = [1, 2, 3, 4, 5]
     func build() {
         Column() {
-            ForEach(this.simpleList, itemGenerator: {item: Int64,idx:Int64 =>ArticleSkeletonView()}
+            ForEach(
+                this.simpleList,
+                itemGenerator: {item: Int64, idx: Int64 => ArticleSkeletonView()}
             )
         }
-        .padding(20)
-        .width(100.percent)
-        .height(100.percent)
+            .padding(20)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```
@@ -253,6 +265,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -272,80 +285,91 @@ class Article {
 }
 
 @Builder
-func textArea(width: Int64, height:Int64) {
+func textArea(width: Int64, height: Int64) {
     Row()
-    .width(width)
-    .height(height)
-    .backgroundColor(Color.White)
+        .width(width)
+        .height(height)
+        .backgroundColor(Color.White)
 }
 
 @Component
 class ArticleCard {
-    @Prop var article: Article
+    @Prop
+    var article: Article
     func build() {
-        Row(){
-        // 此处'app.media.icon'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
-        Image(@r(app.media.startIcon))
-        .width(80)
-        .height(80)
-        .margin(right:20)
-        Column() {
-            Text(this.article.title)
-            .fontSize(20)
-            .margin(bottom:8)
-            Text(this.article.brief)
-            .fontSize(16)
-            .fontColor(Color.Gray)
-            .margin(bottom: 8)
+        Row() {
+            // 此处'app.media.icon'仅作示例，请开发者自行替换，否则imageSource创建失败会导致后续无法正常执行。
+            Image(@r(app.media.startIcon))
+                .width(80)
+                .height(80)
+                .margin(right: 20)
+            Column() {
+                Text(this
+                    .article
+                    .title)
+                    .fontSize(20)
+                    .margin(bottom: 8)
+                Text(this
+                    .article
+                    .brief)
+                    .fontSize(16)
+                    .fontColor(Color.Gray)
+                    .margin(bottom: 8)
+            }
+                .alignItems(HorizontalAlign.Start)
+                .width(80.percent)
+                .height(100.percent)
         }
-        .alignItems(HorizontalAlign.Start)
-        .width(80.percent)
-        .height(100.percent)
-        }
-        .padding(20)
-        .borderRadius(12)
-        .backgroundColor(Color.White)
-        .height(120)
-        .width(100.percent)
-        .justifyContent(FlexAlign.SpaceBetween)
-        .margin(top: 20)
+            .padding(20)
+            .borderRadius(12)
+            .backgroundColor(Color.White)
+            .height(120)
+            .width(100.percent)
+            .justifyContent(FlexAlign.SpaceBetween)
+            .margin(top: 20)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var isListReachEnd: Bool = false
-    @State var articleList: ObservedArrayList<Article> = ObservedArrayList<Article>([
-        Article('001', '第1篇文章', '文章简介内容'),
-        Article('002', '第2篇文章', '文章简介内容'),
-        Article('003', '第3篇文章', '文章简介内容'),
-        Article('004', '第4篇文章', '文章简介内容'),
-        Article('005', '第5篇文章', '文章简介内容'),
-        Article('006', '第6篇文章', '文章简介内容')
-    ])
+    @State
+    var isListReachEnd: Bool = false
+    @State
+    var articleList: ObservedArrayList<Article> = ObservedArrayList<Article>(
+        [
+            Article('001', '第1篇文章', '文章简介内容'),
+            Article('002', '第2篇文章', '文章简介内容'),
+            Article('003', '第3篇文章', '文章简介内容'),
+            Article('004', '第4篇文章', '文章简介内容'),
+            Article('005', '第5篇文章', '文章简介内容'),
+            Article('006', '第6篇文章', '文章简介内容')
+        ]
+    )
     func loadMoreArticles() {
-        this.articleList.append(Article('007', '加载的新文章', '文章简介内容'))
-            Hilog.info(0,"here","here")
+        this
+            .articleList
+            .append(Article('007', '加载的新文章', '文章简介内容'))
+        Hilog.info(0, "here", "here")
     }
     func build() {
         Column(space: 5) {
             List() {
-                ForEach(this.articleList, itemGeneratorFunc: {item: Article,idx:Int64  =>
-                    ListItem() {
+                ForEach(this.articleList, itemGeneratorFunc: {
+                    item: Article, idx: Int64 => ListItem() {
                         ArticleCard(article: item)
                     }
-                    }, keyGeneratorFunc: {item: Article, idx: Int64 => return item.id})
+                }, keyGeneratorFunc: {item: Article, idx: Int64 => return item.id})
             }
-            .onReachEnd( {=>
-                this.isListReachEnd = true
-            })
-        .padding(20)
-        .scrollBar(BarState.Off)
+                .onReachEnd({
+                    => this.isListReachEnd = true
+                })
+                .padding(20)
+                .scrollBar(BarState.Off)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(Color.Gray)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(Color.Gray)
     }
 }
 ```
@@ -382,6 +406,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -390,17 +415,18 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(30)
+        Text(this.item).fontSize(30)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: ObservedArrayList<String> =ObservedArrayList(['one', 'two', 'three'])
+    @State
+    var simpleList: ObservedArrayList<String> = ObservedArrayList(['one', 'two', 'three'])
     func build() {
         Column() {
             Button() {
@@ -413,10 +439,10 @@ class EntryView {
             },keyGeneratorFunc: {item: String, index: Int64 => index.toString()}
             )
         }
-    .justifyContent(FlexAlign.Center)
-    .width(100.percent)
-    .height(100.percent)
-    .backgroundColor(Color.White)
+            .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```
@@ -443,6 +469,7 @@ ForEach依次遍历新数据源，遍历数据项"one"时生成键值"0"，存�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -451,20 +478,21 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     protected override func aboutToAppear() {
-    Hilog.info(0,"0","[aboutToAppear]: item is ${this.item}")
+        Hilog.info(0, "0", "[aboutToAppear]: item is ${this.item}")
     }
     func build() {
-        Text(this.item)
-        .fontSize(30)
+        Text(this.item).fontSize(30)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var simpleList: ObservedArrayList<String> =ObservedArrayList(['one', 'two', 'three'])
+    @State
+    var simpleList: ObservedArrayList<String> = ObservedArrayList(['one', 'two', 'three'])
     func build() {
         Column() {
             Button() {
@@ -477,10 +505,10 @@ class EntryView {
             ChildItem(item: item)}
             )
         }
-    .justifyContent(FlexAlign.Center)
-    .width(100.percent)
-    .height(100.percent)
-    .backgroundColor(Color.White)
+            .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```

@@ -349,6 +349,7 @@ public init(offsetRemain!: ?Float64)
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hi_trace_meter.*
@@ -362,39 +363,48 @@ func loggerInfo(str: String) {
 @Entry
 @Component
 class EntryView {
-    let arr =[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     func build() {
-        Stack(alignContent: Alignment.TopStart){
+        Stack(alignContent: Alignment.TopStart) {
             Column() {
-                List( space: 20, initialIndex: 0 ) {
-                    ForEach(this.arr, itemGeneratorFunc: {item:Int64,_:Int64 =>
-                            ListItem() {
-                                Text("${item}")
-                                .width(100.percent).height(100).fontSize(16)
-                                .textAlign(TextAlign.Center).borderRadius(10).backgroundColor(0xFFFFFF)
-                            }
-                            })
-                }.id("list")
-                .listDirection(Axis.Vertical) // 排列方向
-                .scrollBar(BarState.Off)
-                //.friction(0.6)
-                .divider(ListDividerOptions(strokeWidth: 2.px, color: Color(0xFFFFFF), startMargin: 20.px, endMargin: 20.px)) // 每行之间的分界线
-                .edgeEffect(EdgeEffect.Spring) // 边缘效果设置为Spring
-                .onScrollIndex({firstIndex: Int32, lastIndex: Int32, middleIndex: Int32 =>
-                        loggerInfo("first" + firstIndex.toString())
-                        loggerInfo("last" + lastIndex.toString())
-                        loggerInfo("middle" + middleIndex.toString())
-                      })
-                .width(90.percent)
+                List(space: 20, initialIndex: 0) {
+                    ForEach(this.arr, itemGeneratorFunc: {
+                        item: Int64, _: Int64 => ListItem() {
+                            Text("${item}")
+                                .width(100.percent)
+                                .height(100)
+                                .fontSize(16)
+                                .textAlign(TextAlign.Center)
+                                .borderRadius(10)
+                                .backgroundColor(0xFFFFFF)
+                        }
+                    })
                 }
-            .width(100.percent)
-            .height(100.percent)
-            .backgroundColor(0xDCDCDC)
-            .padding(top: 5.px )
+                    .id("list")
+                    .listDirection(Axis.Vertical) // 排列方向
+                    .scrollBar(BarState.Off)
+                    //.friction(0.6)
+                    .divider(
+                        ListDividerOptions(strokeWidth: 2.px, color: Color(0xFFFFFF), startMargin: 20.px,
+                            endMargin: 20.px)) // 每行之间的分界线
+                    .edgeEffect(EdgeEffect.Spring) // 边缘效果设置为Spring
+                    .onScrollIndex(
+                        {
+                            firstIndex: Int32, lastIndex: Int32, middleIndex: Int32 =>
+                                loggerInfo("first" + firstIndex.toString())
+                                loggerInfo("last" + lastIndex.toString())
+                                loggerInfo("middle" + middleIndex.toString())
+                        }
+                    )
+                    .width(90.percent)
+            }
+                .width(100.percent)
+                .height(100.percent)
+                .backgroundColor(0xDCDCDC)
+                .padding(top: 5.px)
         }
     }
 }
-
 ```
 
 ![list1](figures/list1.gif)
@@ -407,15 +417,17 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    let arr: Array<String> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-        "16", "17", "18", "19"]
-    @State var alignListItem: ListItemAlign = ListItemAlign.Start
+    let arr: Array<String> = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16",
+        "17", "18", "19"]
+    @State
+    var alignListItem: ListItemAlign = ListItemAlign.Start
 
     func build() {
         Column() {
@@ -468,14 +480,17 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-  @State var arr:ObservedArrayList<Int64> = ObservedArrayList<Int64>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-  @State var editFlag: Bool = false
+    @State
+    var arr: ObservedArrayList<Int64> = ObservedArrayList<Int64>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    @State
+    var editFlag: Bool = false
 
   func build() {
     Stack(alignContent: Alignment.TopStart ) {
@@ -531,6 +546,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -538,38 +554,41 @@ import std.collection.ArrayList
 @Entry
 @Component
 class EntryView {
-   let arr: ArrayList<Int64> =  ArrayList<Int64>([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19])
-   let scrollerForList = Scroller()
+    let arr: ArrayList<Int64> = ArrayList<Int64>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+    let scrollerForList = Scroller()
 
-  func build() {
-    Column() {
-      Row() {
-        List(space: 20, initialIndex: 3, scroller: this.scrollerForList ) {
-          ForEach(this.arr, itemGeneratorFunc:{item:Int64,_:Int64=>
-            ListItem() {
-              Text("${item}")
-                .width(100.percent).height(100).fontSize(16)
-                .textAlign(TextAlign.Center)
+    func build() {
+        Column() {
+            Row() {
+                List(space: 20, initialIndex: 3, scroller: this.scrollerForList) {
+                    ForEach(this.arr, itemGeneratorFunc: {
+                        item: Int64, _: Int64 => ListItem() {
+                            Text("${item}")
+                                .width(100.percent)
+                                .height(100)
+                                .fontSize(16)
+                                .textAlign(TextAlign.Center)
+                        }
+                            .borderRadius(10)
+                            .backgroundColor(0xFFFFFF)
+                            .width(60.percent)
+                            .height(80.percent)
+                    })
+                }
+                    .chainAnimation(true)
+                    .edgeEffect(EdgeEffect.Spring)
+                    .listDirection(Axis.Horizontal)
+                    .height(100.percent)
+                    .width(100.percent)
+                    .borderRadius(10.px)
+                    .backgroundColor(0xDCDCDC)
             }
-            .borderRadius(10).backgroundColor(0xFFFFFF)
-            .width(60.percent)
-            .height(80.percent)
-          } )
+                .width(100.percent)
+                .height(100.percent)
+                .backgroundColor(0xDCDCDC)
+                .padding(top: 10.px)
         }
-        .chainAnimation(true)
-        .edgeEffect(EdgeEffect.Spring)
-        .listDirection(Axis.Horizontal)
-        .height(100.percent)
-        .width(100.percent)
-        .borderRadius(10.px)
-        .backgroundColor(0xDCDCDC)
-      }
-      .width(100.percent)
-      .height(100.percent)
-      .backgroundColor(0xDCDCDC)
-      .padding(top: 10.px )
     }
-  }
 }
 ```
 

@@ -137,7 +137,7 @@ func unmarshalling(dataIn: MessageSequence): Bool
 import kit.IPCKit.*
 
 // 此处代码可添加在依赖项定义中
-class MyParcelable1 <: Parcelable {
+class MyParcelable <: Parcelable {
     var num: Int32 = 0
     var str: String = ''
 
@@ -159,12 +159,12 @@ class MyParcelable1 <: Parcelable {
     }
 }
 
-let parcelable = MyParcelable1(1, "aaa")
-let parcelable2 = MyParcelable1(2, "bbb")
-let parcelable3 = MyParcelable1(3, "ccc")
+let parcelable = MyParcelable(1, "aaa")
+let parcelable2 = MyParcelable(2, "bbb")
+let parcelable3 = MyParcelable(3, "ccc")
 let data = MessageSequence.create()
 data.writeParcelableArray(parcelable,parcelable2,parcelable3)
-let ret: Array<Parcelable> = [MyParcelable1(0, ""), MyParcelable1(0, ""), MyParcelable1(0, "")]
+let ret: Array<Parcelable> = [MyParcelable(0, ""), MyParcelable(0, ""), MyParcelable(0, "")]
 data.readParcelableArray(ret)
 ```
 
@@ -181,7 +181,7 @@ public class Ashmem {
 
 **功能：** 提供与匿名共享内存对象相关的方法，包括创建、关闭、映射和取消映射Ashmem、从Ashmem读取数据和写入数据、获取Ashmem大小、设置Ashmem保护。
 
-共享内存只适用与本设备内跨进程通信。
+共享内存只适用于本设备内跨进程通信。
 
 **系统能力：** SystemCapability.Communication.IPC.Core
 
@@ -415,7 +415,7 @@ public func mapReadWriteAshmem(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -454,7 +454,7 @@ public func mapReadonlyAshmem(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -499,7 +499,7 @@ public func mapTypedAshmem(mapType: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -551,7 +551,7 @@ public func readDataFromAshmem(size: Int64, offset: Int64): Array<Byte>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -596,7 +596,7 @@ public func setProtectionType(protectionType: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -678,7 +678,7 @@ public func writeDataToAshmem(buf: Array<Byte>, size: Int64, offset: Int64): Uni
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -818,7 +818,7 @@ public static func dupFileDescriptor(fd: Int32): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1161,7 +1161,7 @@ public func readAshmem(): Ashmem
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1206,7 +1206,7 @@ public func readBoolean(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1251,7 +1251,7 @@ public func readBooleanArray(): Array<Bool>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1296,7 +1296,7 @@ public func readByte(): Int8
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1341,7 +1341,7 @@ public func readByteArray(): Array<Int8>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1386,7 +1386,7 @@ public func readChar(): UInt8
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1431,7 +1431,7 @@ public func readCharArray(): Array<UInt8>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1476,7 +1476,7 @@ public func readDouble(): Float64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1521,7 +1521,7 @@ public func readDoubleArray(): Array<Float64>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1561,7 +1561,7 @@ public func readException(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1606,7 +1606,7 @@ public func readFileDescriptor(): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1651,7 +1651,7 @@ public func readFloat(): Float32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1696,7 +1696,7 @@ public func readFloatArray(): Array<Float32>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1741,7 +1741,7 @@ public func readInt(): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1786,7 +1786,7 @@ public func readIntArray(): Array<Int32>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1831,7 +1831,7 @@ public func readInterfaceToken(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1876,7 +1876,7 @@ public func readLong(): Int64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1921,7 +1921,7 @@ public func readLongArray(): Array<Int64>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1966,7 +1966,7 @@ public func readParcelable<T>(dataIn: T): Unit where T <: Parcelable
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1985,7 +1985,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyParcelable2 <: Parcelable {
+class MyParcelable <: Parcelable {
     var num: Int32 = 0
     var str: String = ''
 
@@ -2008,10 +2008,10 @@ class MyParcelable2 <: Parcelable {
 }
 
 try {
-    let parcelable = MyParcelable2(1, "aaa")
+    let parcelable = MyParcelable(1, "aaa")
     let data = MessageSequence.create()
     data.writeParcelable(parcelable)
-    let ret = MyParcelable2()
+    let ret = MyParcelable()
     data.readParcelable(ret)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -2038,7 +2038,7 @@ public func readParcelableArray<T>(parcelableArray: Array<T>): Unit where T <: P
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2057,7 +2057,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyParcelable3 <: Parcelable {
+class MyParcelable <: Parcelable {
     var num: Int32 = 0
     var str: String = ''
 
@@ -2080,12 +2080,12 @@ class MyParcelable3 <: Parcelable {
 }
 
 try {
-    let parcelable = MyParcelable3(1, "aaa")
-    let parcelable2 = MyParcelable3(2, "bbb")
-    let parcelable3 = MyParcelable3(3, "ccc")
+    let parcelable = MyParcelable(1, "aaa")
+    let parcelable2 = MyParcelable(2, "bbb")
+    let parcelable3 = MyParcelable(3, "ccc")
     let data = MessageSequence.create()
     data.writeParcelableArray(parcelable,parcelable2,parcelable3)
-    let ret: Array<Parcelable> = [MyParcelable3(0, ""), MyParcelable3(0, ""), MyParcelable3(0, "")]
+    let ret: Array<Parcelable> = [MyParcelable(0, ""), MyParcelable(0, ""), MyParcelable(0, "")]
     data.readParcelableArray(ret)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -2118,7 +2118,7 @@ public func readRawDataBuffer(size: Int64): Array<Byte>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2163,7 +2163,7 @@ public func readShort(): Int16
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2208,7 +2208,7 @@ public func readShortArray(): Array<Int16>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2253,7 +2253,7 @@ public func readString(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2298,7 +2298,7 @@ public func readStringArray(): Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2343,7 +2343,7 @@ public func readUInt16Array(): Array<UInt16>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2388,7 +2388,7 @@ public func readUInt32Array(): Array<UInt32>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2433,7 +2433,7 @@ public func readUInt64Array(): Array<UInt64>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2478,7 +2478,7 @@ public func readUInt8Array(): Array<UInt8>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2554,7 +2554,7 @@ public func rewindRead(pos: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2599,7 +2599,7 @@ public func rewindWrite(pos: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2644,7 +2644,7 @@ public func setCapacity(size: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2690,7 +2690,7 @@ public func setSize(size: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2735,7 +2735,7 @@ public func writeAshmem(ashmem: Ashmem): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2781,7 +2781,7 @@ public func writeBoolean(val: Bool): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2826,7 +2826,7 @@ public func writeBooleanArray(booleanArray: Array<Bool>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2871,7 +2871,7 @@ public func writeByte(val: Int8): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2916,7 +2916,7 @@ public func writeByteArray(byteArray: Array<Int8>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2961,7 +2961,7 @@ public func writeChar(val: UInt8): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3006,7 +3006,7 @@ public func writeCharArray(charArray: Array<UInt8>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3051,7 +3051,7 @@ public func writeDouble(val: Float64): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3096,7 +3096,7 @@ public func writeDoubleArray(doubleArray: Array<Float64>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3141,7 +3141,7 @@ public func writeFileDescriptor(fd: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3189,7 +3189,7 @@ public func writeFloat(val: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3234,7 +3234,7 @@ public func writeFloatArray(floatArray: Array<Float32>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3279,7 +3279,7 @@ public func writeInt(val: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3324,7 +3324,7 @@ public func writeIntArray(intArray: Array<Int32>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3369,7 +3369,7 @@ public func writeInterfaceToken(token: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3414,7 +3414,7 @@ public func writeLong(val: Int64): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3459,7 +3459,7 @@ public func writeLongArray(longArray: Array<Int64>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3498,7 +3498,7 @@ public func writeNoException(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3543,7 +3543,7 @@ public func writeParcelable<T>(val: T): Unit where T <: Parcelable
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3561,7 +3561,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyParcelable4 <: Parcelable {
+class MyParcelable <: Parcelable {
     var num: Int32 = 0
     var str: String = ''
 
@@ -3584,10 +3584,10 @@ class MyParcelable4 <: Parcelable {
 }
 
 try {
-    let parcelable = MyParcelable4(1, "aaa")
+    let parcelable = MyParcelable(1, "aaa")
     let data = MessageSequence.create()
     data.writeParcelable(parcelable)
-    let ret = MyParcelable4()
+    let ret = MyParcelable()
     data.readParcelable(ret)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -3614,7 +3614,7 @@ public func writeParcelableArray<T>(parcelableArray: Array<T>): Unit where T <: 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3632,7 +3632,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyParcelable5 <: Parcelable {
+class MyParcelable <: Parcelable {
     var num: Int32 = 0
     var str: String = ''
 
@@ -3655,12 +3655,12 @@ class MyParcelable5 <: Parcelable {
 }
 
 try {
-    let parcelable = MyParcelable5(1, "aaa")
-    let parcelable2 = MyParcelable5(2, "bbb")
-    let parcelable3 = MyParcelable5(3, "ccc")
+    let parcelable = MyParcelable(1, "aaa")
+    let parcelable2 = MyParcelable(2, "bbb")
+    let parcelable3 = MyParcelable(3, "ccc")
     let data = MessageSequence.create()
     data.writeParcelableArray(parcelable,parcelable2,parcelable3)
-    let ret: Array<Parcelable> = [MyParcelable5(0, ""), MyParcelable5(0, ""), MyParcelable5(0, "")]
+    let ret: Array<Parcelable> = [MyParcelable(0, ""), MyParcelable(0, ""), MyParcelable(0, "")]
     data.readParcelableArray(ret)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -3693,7 +3693,7 @@ public func writeRawDataBuffer(rawData: Array<Byte>, size: Int64): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3738,7 +3738,7 @@ public func writeShort(val: Int16): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3783,7 +3783,7 @@ public func writeShortArray(shortArray: Array<Int16>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3828,7 +3828,7 @@ public func writeString(val: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3873,7 +3873,7 @@ public func writeStringArray(stringArray: Array<String>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3918,7 +3918,7 @@ public func writeUInt16Array(buf: Array<UInt16>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3963,7 +3963,7 @@ public func writeUInt32Array(buf: Array<UInt32>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4008,7 +4008,7 @@ public func writeUInt64Array(buf: Array<UInt64>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4053,7 +4053,7 @@ public func writeUInt8Array(buf: Array<UInt8>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[RPC错误码](./cj-errorcode-rpc.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |

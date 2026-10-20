@@ -93,8 +93,14 @@ class EntryView {
                 Text("Bluetooth").fontSize(18)
                 Blank()
                 Toggle(ToggleType.Switch).margin(top: 14, bottom: 14, left: 6, right: 6)
-            }.width(100.percent).backgroundColor(0xFFFFFF).borderRadius(15).padding( left: 12 )
-        }.backgroundColor(0xEFEFEF).padding(20)
+            }
+                .width(100.percent)
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .padding(left: 12)
+        }
+            .backgroundColor(0xEFEFEF)
+            .padding(20)
     }
 }
 ```
@@ -122,14 +128,23 @@ class EntryView {
                 Text("Bluetooth").fontSize(18)
                 Blank().color(0xFFFF00)
                 Toggle(ToggleType.Switch).margin(top: 14, bottom: 14, left: 6, right: 6)
-            }.backgroundColor(0xFFFFFF).borderRadius(15).padding(left: 12)
+            }
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .padding(left: 12)
 
             Row() {
                 Text("Bluetooth").fontSize(18)
                 Blank(min: 160.vp).color(0xFFFF00)
                 Toggle(ToggleType.Switch).margin(top: 14, bottom: 14, left: 6, right: 6)
-            }.backgroundColor(0xFFFFFF).borderRadius(15).padding(left: 12)
-        }.backgroundColor(0xEFEFEF).padding(20).width(100.percent)
+            }
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .padding(left: 12)
+        }
+            .backgroundColor(0xEFEFEF)
+            .padding(20)
+            .width(100.percent)
     }
 }
 ```

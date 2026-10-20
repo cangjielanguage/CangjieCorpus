@@ -658,6 +658,7 @@ public func stop(): Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -679,7 +680,9 @@ class EntryView {
     ]
     public func build() {
         Column {
-            TextClock().fontSize(50).textShadow(shadowoptions)
+            TextClock()
+                .fontSize(50)
+                .textShadow(shadowoptions)
         }
     }
 }
@@ -699,6 +702,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -710,7 +714,9 @@ class EntryView {
     let controller = TextClockController()
     public func build() {
         Column {
-            Text('Current milliseconds is ${this.accumulateTime}').fontSize(20).margin(10)
+            Text('Current milliseconds is ${this.accumulateTime}')
+                .fontSize(20)
+                .margin(10)
             // 以12小时制显示东八区的系统时间，精确到秒。
             TextClock(timeZoneOffset: -8.0, controller: this.controller)
                 .format('aa hh:mm:ss')

@@ -16,10 +16,6 @@
 
 Invalid DataType.
 
-**错误描述**
-
-调用锁屏下应用敏感数据访问权限的申请或取消接口时，参数错误。
-
 **可能原因**
 
 该错误码表示参数校验出现错误，传入的dataType不为MEDIA_DATA或ALL_DATA。
@@ -32,13 +28,11 @@ Invalid DataType.
 
 **错误信息**
 
-The system ability work abnormally.
-
-**错误描述**
-
-该错误码表示系统服务工作异常。
+The system ability works abnormally.
 
 **可能原因**
+
+该错误码表示系统服务工作异常。
 
 1. 锁屏敏感数据管理服务无法正常启动。
 2. IPC数据读取写入失败。
@@ -51,30 +45,22 @@ The system ability work abnormally.
 
 **错误信息**
 
-The application is not enabled the data protection under lock screen.
-
-**错误描述**
-
-应用未开启锁屏敏感数据保护功能。
+The application has not enabled the data protection function under lock screen.
 
 **可能原因**
 
-1. 应用未在requestpermissions配置权限ohos.permission.PROTECT_SCREEN_LOCK_DATA开启应用锁屏敏感数据保护功能。
+1. 应用未在[requestpermissions](../../security/AccessToken/cj-declare-permissions.md#在配置文件中声明权限)配置权限ohos.permission.PROTECT_SCREEN_LOCK_DATA开启应用锁屏敏感数据保护功能。
 2. 当前硬件不支持锁屏敏感数据保护功能。
 
 **处理步骤**
 
-在requestpermissions中配置权限ohos.permission.PROTECT_SCREEN_LOCK_DATA开启应用锁屏敏感数据保护功能。
+在[requestpermissions](../../security/AccessToken/cj-declare-permissions.md#在配置文件中声明权限)中配置权限ohos.permission.PROTECT_SCREEN_LOCK_DATA开启应用锁屏敏感数据保护功能。
 
 ## 29300004 锁屏敏感数据访问权限已释放
 
 **错误信息**
 
-File access is denied.
-
-**错误描述**
-
-锁屏敏感数据访问权限已释放。
+The file access is denied due to security strategy.
 
 **可能原因**
 
@@ -82,21 +68,17 @@ File access is denied.
 
 **处理步骤**
 
-锁屏下无法访问敏感数据，如有需要，请提示用户重新解锁屏幕，解锁后敏感数据恢复方可使用。
+锁屏下无法访问敏感数据。如需继续使用，请引导用户重新解锁屏幕，待解锁完成后可恢复正常访问。
 
 ## 29300005 未申请锁屏敏感数据访问权限
 
 **错误信息**
 
-File access was not acquired.
-
-**错误描述**
-
-调用锁屏下应用敏感数据访问权限的取消接口前，未申请锁屏敏感数据访问权限。
+File access is not acquired.
 
 **可能原因**
 
-在释放锁屏敏感数据访问权限前，未申请该权限。
+该错误码表示释放前，未申请锁屏敏感数据访问权限。
 
 **处理步骤**
 

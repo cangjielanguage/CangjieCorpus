@@ -70,7 +70,7 @@ import kit.ArkUI.WindowStage
 
 class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-          let isStageMode = this.context.stageModel
+        let isStageMode = this.context.stageModel
     }
 }
 ```

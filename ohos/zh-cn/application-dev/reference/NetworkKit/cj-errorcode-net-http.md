@@ -32,7 +32,7 @@ Unsupported protocol.
 
 **错误信息**
 
-URL using bad/illegal format or missing URL.
+Invalid URL format or missing URL.
 
 **错误描述**
 
@@ -50,7 +50,7 @@ URL格式错误。
 
 **错误信息**
 
-Couldn't resolve proxy name.
+Failed to resolve the proxy name.
 
 **错误描述**
 
@@ -68,7 +68,7 @@ Couldn't resolve proxy name.
 
 **错误信息**
 
-Couldn't resolve host name.
+Failed to resolve the host name.
 
 **错误描述**
 
@@ -76,19 +76,21 @@ Couldn't resolve host name.
 
 **可能原因**
 
-1. 传入的服务器的URL不正确。
-2. 网络不通畅。
+1.传入的服务器的URL不正确。
+
+2.网络不通畅。
 
 **处理步骤**
 
-1. 请检查输入的服务器的URL是否合理。
-2. 请检查网络连接情况。
+1.请检查输入的服务器的URL是否合理。
+
+2.请检查网络连接情况。
 
 ## 2300007 无法连接到服务器
 
 **错误信息**
 
-Couldn't connect to server.
+Failed to connect to the server.
 
 **错误描述**
 
@@ -96,7 +98,7 @@ Couldn't connect to server.
 
 **可能原因**
 
-传入的URL格式不正确。
+可能传入的url格式不正确。
 
 **处理步骤**
 
@@ -106,7 +108,7 @@ Couldn't connect to server.
 
 **错误信息**
 
-Weird server reply.
+Invalid server response.
 
 **错误描述**
 
@@ -124,7 +126,7 @@ Weird server reply.
 
 **错误信息**
 
-Access denied to remote resource.
+Access to the remote resource denied.
 
 **错误描述**
 
@@ -178,7 +180,7 @@ Transferred a partial file.
 
 **错误信息**
 
-Failed writing received data to disk/application.
+Failed to write the received data to the disk or application.
 
 **错误描述**
 
@@ -186,7 +188,9 @@ Failed writing received data to disk/application.
 
 **可能原因**
 
-应用没有写文件权限或待下载的文件超过5M。
+1.应用没有写文件权限或待下载的文件超过5M。
+
+2.上一次请求数据未接收完毕便调用destroy销毁导致接收数据不完整。
 
 **处理步骤**
 
@@ -204,7 +208,7 @@ Upload failed.
 
 **可能原因**
 
-文件过大或者网络问题。对于FTP，服务器通常会拒绝STOR命令。错误缓冲区通常包含服务器的解释。
+文件过大或者网络问题，对于FTP，服务器通常会拒绝STOR命令，错误缓冲区通常包含服务器的解释。
 
 **处理步骤**
 
@@ -214,7 +218,7 @@ Upload failed.
 
 **错误信息**
 
-Failed to open/read local data from file/application.
+Failed to open or read local data from the file or application.
 
 **错误描述**
 
@@ -250,7 +254,7 @@ Out of memory.
 
 **错误信息**
 
-Timeout was reached.
+Operation timeout.
 
 **错误描述**
 
@@ -262,13 +266,13 @@ TCP连接超时或读写超时。
 
 **处理步骤**
 
-排查网络问题。
+排查网络或服务器问题，例如网络是否稳定、信号强度是否较弱、服务器负载是否过高、处理速度是否正常等。
 
 ## 2300047 重定向次数达到最大值
 
 **错误信息**
 
-Number of redirects hit maximum amount.
+The number of redirections reaches the maximum allowed.
 
 **错误描述**
 
@@ -286,7 +290,7 @@ Number of redirects hit maximum amount.
 
 **错误信息**
 
-Server returned nothing (no headers, no data).
+The server returned nothing (no header or data).
 
 **错误描述**
 
@@ -304,7 +308,7 @@ Server returned nothing (no headers, no data).
 
 **错误信息**
 
-Failed sending data to the peer.
+Failed to send data to the peer.
 
 **错误描述**
 
@@ -322,7 +326,7 @@ Failed sending data to the peer.
 
 **错误信息**
 
-Failure when receiving data from the peer.
+Failed to receive data from the peer.
 
 **错误描述**
 
@@ -340,7 +344,7 @@ Failure when receiving data from the peer.
 
 **错误信息**
 
-Problem with the local SSL certificate.
+Local SSL certificate error.
 
 **错误描述**
 
@@ -358,7 +362,7 @@ SSL证书格式有错误。
 
 **错误信息**
 
-Couldn't use specified SSL cipher.
+The specified SSL cipher cannot be used.
 
 **错误描述**
 
@@ -372,11 +376,11 @@ client和server协商的加密算法系统不支持。
 
 抓包分析协商的算法。
 
-## 2300060 远程服务器SSL证书或SSH秘钥不正确
+## 2300060 远程服务器SSL证书或SSH密钥不正确
 
 **错误信息**
 
-SSL peer certificate or SSH remote key was not OK.
+Invalid SSL peer certificate or SSH remote key.
 
 **错误描述**
 
@@ -384,17 +388,17 @@ SSL peer certificate or SSH remote key was not OK.
 
 **可能原因**
 
-无法校验服务器身份，有可能是证书过期了。
+无法校验服务器身份，例如证书过期。
 
 **处理步骤**
 
-检查证书有效性。
+建议参考tls客户端证书验证流程自排查问题原因。
 
 ## 2300061 无法识别或错误的HTTP编码格式
 
 **错误信息**
 
-Unrecognized or bad HTTP Content or Transfer-Encoding.
+Invalid HTTP encoding format.
 
 **错误描述**
 
@@ -406,7 +410,7 @@ HTTP编码格式不正确。
 
 **处理步骤**
 
-排查服务器实现，目前仅支持gzip编码。
+排查服务器实现。目前仅支持gzip编码。
 
 ## 2300063 超出最大文件大小
 
@@ -430,7 +434,7 @@ Maximum file size exceeded.
 
 **错误信息**
 
-Remote disk full or allocation exceeded.
+Remote disk full.
 
 **错误描述**
 
@@ -466,7 +470,7 @@ Remote file already exists.
 
 **错误信息**
 
-Problem with the SSL CA cert (path? access rights?).
+The SSL CA certificate does not exist or is inaccessible.
 
 **错误描述**
 
@@ -502,7 +506,7 @@ URL请求的文件不存在。
 
 **错误信息**
 
-An authentication function returned an error.
+Authentication error.
 
 **错误描述**
 
@@ -552,15 +556,15 @@ It is not allowed to access this domain.
 
 可参考配置服务器域名文档完成服务器域名相关配置。
 
-## 2300999 未知错误
+## 2300999 内部错误
 
 **错误信息**
 
-Unknown Other Error.
+Internal error.
 
 **错误描述**
 
-未知错误。
+内部错误。
 
 **可能原因**
 

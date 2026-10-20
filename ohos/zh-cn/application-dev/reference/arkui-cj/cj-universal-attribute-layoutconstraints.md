@@ -99,6 +99,7 @@ func direction(value: ?Direction): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -118,24 +119,24 @@ class EntryView {
                     children,
                     itemGeneratorFunc: {
                         item: String, _: Int64 =>
-                        // 组件宽度 = 组件高度*1.5 = 90
-                        Text(item)
-                            .backgroundColor(0xbbb2cb)
-                            .fontSize(20)
-                            .aspectRatio(1.5)
-                            .height(60)
-                        // 组件高度 = 组件宽度/1.5 = 60/1.5 = 40
-                        Text(item)
-                            .backgroundColor(0xbbb2cb)
-                            .fontSize(20)
-                            .aspectRatio(1.5)
-                            .width(60)
+                            // 组件宽度 = 组件高度*1.5 = 90
+                            Text(item)
+                                .backgroundColor(0xbbb2cb)
+                                .fontSize(20)
+                                .aspectRatio(1.5)
+                                .height(60)
+                            // 组件高度 = 组件宽度/1.5 = 60/1.5 = 40
+                            Text(item)
+                                .backgroundColor(0xbbb2cb)
+                                .fontSize(20)
+                                .aspectRatio(1.5)
+                                .width(60)
                     }
                 )
             }
-            .size(width: 100.percent, height: 100.vp)
-            .backgroundColor(0xd2cab3)
-            .clip(true)
+                .size(width: 100.percent, height: 100.vp)
+                .backgroundColor(0xd2cab3)
+                .clip(true)
 
             // grid子元素width/height=3/2
             Text("using container: grid")
@@ -156,13 +157,12 @@ class EntryView {
                     }
                 )
             }
-            .columnsTemplate("1fr 1fr 1fr")
-            .columnsGap(10)
-            .rowsGap(10)
-            .size(width: 100.percent, height: 165.vp)
-            .backgroundColor(0xd2cab3)
-        }
-        .padding(10)
+                .columnsTemplate("1fr 1fr 1fr")
+                .columnsGap(10)
+                .rowsGap(10)
+                .size(width: 100.percent, height: 165.vp)
+                .backgroundColor(0xd2cab3)
+        }.padding(10)
     }
 }
 ```
@@ -177,6 +177,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -202,50 +203,57 @@ class ChildInfo {
 @Component
 class EntryView {
     private let container: Array<ContainerInfo> = [
-        ContainerInfo( label: 'Big container', size: 100.percent ),
-        ContainerInfo( label: 'Middle container', size: 60.percent ),
-        ContainerInfo( label: 'Small container', size: 30.percent )
+        ContainerInfo(label: 'Big container', size: 100.percent),
+        ContainerInfo(label: 'Middle container', size: 60.percent),
+        ContainerInfo(label: 'Small container', size: 30.percent)
     ]
     private let children: Array<ChildInfo> = [
-        ChildInfo( text: '1\n(priority:2)', priority: 2 ),
-        ChildInfo( text: '2\n(priority:1)', priority: 1 ),
-        ChildInfo( text: '3\n(priority:3)', priority: 3 ),
-        ChildInfo( text: '4\n(priority:1)', priority: 1 ),
-        ChildInfo( text: '5\n(priority:2)', priority: 2 )
+        ChildInfo(text: '1\n(priority:2)', priority: 2),
+        ChildInfo(text: '2\n(priority:1)', priority: 1),
+        ChildInfo(text: '3\n(priority:3)', priority: 3),
+        ChildInfo(text: '4\n(priority:1)', priority: 1),
+        ChildInfo(text: '5\n(priority:2)', priority: 2)
     ]
 
-    @State var currentIndex: Int64 = 0;
+    @State
+    var currentIndex: Int64 = 0;
 
     func build(): Unit {
         Column(space: 10) {
             // 切换父级容器大小
-            Button(this.container[this.currentIndex].label)
+            Button(this
+                .container[this.currentIndex]
+                .label)
                 .backgroundColor(0x317aff)
-                .onClick({e =>
-                    this.currentIndex = (this.currentIndex + 1) % this.container.size
+                .onClick({
+                    e => this.currentIndex = (this.currentIndex + 1) % this
+                        .container
+                        .size
                 })
             // 通过变量设置Flex父容器宽度
             Flex(justifyContent: FlexAlign.SpaceBetween) {
                 ForEach(
-                    this.children, itemGeneratorFunc:
-                    {
+                    this.children,
+                    itemGeneratorFunc: {
                         item: ChildInfo, idx: Int64 =>
-                            // 使用displayPriority给子组件绑定显示优先级
-                            Text(item.text)
-                                .width(50)
-                                .height(60)
-                                .fontSize(10)
-                                .textAlign(TextAlign.Center)
-                                .backgroundColor(0xbbb2cb)
-                                .displayPriority(item.priority)
+                        // 使用displayPriority给子组件绑定显示优先级
+                        Text(item.text)
+                            .width(50)
+                            .height(60)
+                            .fontSize(10)
+                            .textAlign(TextAlign.Center)
+                            .backgroundColor(0xbbb2cb)
+                            .displayPriority(item.priority)
                     }
-                 )
-             }
-            .width(this.container[this.currentIndex].size)
-            .backgroundColor(0xd2cab3)
+                )
+            }
+                .width(this
+                    .container[this.currentIndex]
+                    .size)
+                .backgroundColor(0xd2cab3)
         }
-        .width(100.percent)
-        .margin( top: 50 )
+            .width(100.percent)
+            .margin(top: 50)
     }
 }
 ```

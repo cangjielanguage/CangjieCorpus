@@ -59,7 +59,7 @@ public init(startIcon!: ?ResourceStr, content!: ?ResourceStr, endIcon!: ?Resourc
 |content|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** item的内容信息。初始值：""。|
 |endIcon|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-| **命名参数。** item中显示在右侧的图标信息路径。初始值：""。|
 |labelInfo|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** 定义结束标签信息，如快捷方式Ctrl+C等。初始值：""。|
-|builder|Option\<() -> Unit>|否|None|**命名参数。** 自定义UI描述。使用时结合[@Builder](../../arkui-cj/paradigm/cj-macro-builder.md)和[bind](cj-ui-framework.md#func-bindcustomview---viewbuilder-customview)方法使用。|
+|builder|Option\<() -> Unit>|否|None|**命名参数。** 自定义UI描述。使用时结合[@Builder](../../arkui-cj/paradigm/cj-macro-builder.md)。|
 
 ## 通用属性/通用事件
 

@@ -10,23 +10,25 @@
 
 ## 继承 class 带来的子类型关系
 
-继承 class 后，子类即为父类的子类型。如下代码中， `Sub` 即为 `Super` 的子类型。
+继承 class 后，子类即为父类的子类型。如下代码中，`Sub` 即为 `Super` 的子类型。
 
 <!-- compile -->
 
 ```cangjie
 open class Super {}
+
 class Sub <: Super {}
 ```
 
 ## 实现接口带来的子类型关系
 
-实现接口（含扩展实现）后，实现接口的类型即为接口的子类型。如下代码中，`I3` 是 `I1` 和 `I2` 的子类型， `C` 是 `I1` 的子类型， `Int64` 是 `I2` 的子类型：
+实现接口（含扩展实现）后，实现接口的类型即为接口的子类型。如下代码中，`I3` 是 `I1` 和 `I2` 的子类型，`C` 是 `I1` 的子类型，`Int64` 是 `I2` 的子类型：
 
 <!-- compile -->
 
 ```cangjie
 interface I1 {}
+
 interface I2 {}
 
 interface I3 <: I1 & I2 {}
@@ -44,9 +46,11 @@ extend Int64 <: I2 {}
 
 ```cangjie
 open class C1 {}
+
 class C2 <: C1 {}
 
 open class C3 {}
+
 class C4 <: C3 {}
 
 let t1: (C1, C3) = (C2(), C4()) // OK
@@ -61,13 +65,20 @@ let t2: (C3, C1) = (C4(), C2()) // OK
 
 ```cangjie
 open class U1 {}
+
 class U2 <: U1 {}
 
 open class S1 {}
+
 class S2 <: S1 {}
 
-func f(a: U1): S2 { S2() }
-func g(a: U2): S1 { S1() }
+func f(a: U1): S2 {
+    S2()
+}
+
+func g(a: U2): S1 {
+    S1()
+}
 
 func call1() {
     g(U2()) // OK
@@ -105,6 +116,7 @@ func call2() {
 
 ```cangjie
 interface I1 {}
+
 interface I2 <: I1 {}
 
 class C <: I2 {}

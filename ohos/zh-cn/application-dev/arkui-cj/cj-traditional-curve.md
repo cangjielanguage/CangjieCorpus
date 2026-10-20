@@ -44,33 +44,33 @@ let myCurves: Array<MyCurve> = [
 @Entry
 @Component
 class EntryView {
-    @State var dRotate: Float32 = 0.0
+    @State
+    var dRotate: Float32 = 0.0
 
     func build() {
         Column() {
             Grid() {
-                ForEach(myCurves,itemGeneratorFunc: {
-                        item: MyCurve, _: Int64 =>
-                        GridItem() {
-                            Column() {
-                                Row()
-                                    .width(30)
-                                    .height(30)
-                                    .borderRadius(15)
-                                    .backgroundColor(item.color)
-                                Text(item.title)
-                                    .fontSize(15)
-                                    .fontColor(0x909399)
-                            }.width(100.percent)
-                        }
-                    })
+                ForEach(myCurves, itemGeneratorFunc: {
+                    item: MyCurve, _: Int64 => GridItem() {
+                        Column() {
+                            Row()
+                                .width(30)
+                                .height(30)
+                                .borderRadius(15)
+                                .backgroundColor(item.color)
+                            Text(item.title)
+                                .fontSize(15)
+                                .fontColor(0x909399)
+                        }.width(100.percent)
+                    }
+                })
             }
-            .columnsTemplate('1fr 1fr 1fr')
-            .rowsTemplate('1fr 1fr 1fr 1fr 1fr')
-            .padding(10)
-            .width(100.percent)
-            .height(300)
-            .margin(top: 50)
+                .columnsTemplate('1fr 1fr 1fr')
+                .rowsTemplate('1fr 1fr 1fr 1fr 1fr')
+                .padding(10)
+                .width(100.percent)
+                .height(300)
+                .margin(top: 50)
 
             Stack() {
                 Row()
@@ -78,26 +78,27 @@ class EntryView {
                     .height(290)
                     .border(width: 15, color: 0xE6E8EB, radius: 145)
 
-                ForEach(myCurves, itemGeneratorFunc: { item: MyCurve, idx: Int64 =>
-                        Column() {
+                ForEach(
+                    myCurves,
+                    itemGeneratorFunc: {
+                        item: MyCurve, idx: Int64 => Column() {
                             Row()
                                 .width(30)
                                 .height(30)
                                 .borderRadius(15)
                                 .backgroundColor(item.color)
                         }
-                        .width(20)
-                        .height(300)
-                        .rotate(angle: this.dRotate)
-                        .animation(AnimateParam(duration: 2000, curve: item.curve, delay: 100, iterations: -1))
+                            .width(20)
+                            .height(300)
+                            .rotate(angle: this.dRotate)
+                            .animation(AnimateParam(duration: 2000, curve: item.curve, delay: 100, iterations: -1))
                     }
                 )
             }
-            .width(100.percent)
-            .height(200)
-            .onClick({evt => this.dRotate = 360.0})
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .height(200)
+                .onClick({evt => this.dRotate = 360.0})
+        }.width(100.percent)
     }
 }
 ```

@@ -101,7 +101,7 @@ public func getConnectedDevices(): Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -159,7 +159,7 @@ public func getConnectionState(deviceId: String): ProfileConnectionState
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -212,7 +212,7 @@ public func off(eventType: ProfileCallbackType, callback: CallbackObject): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -271,7 +271,7 @@ public func off(eventType: ProfileCallbackType): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -291,14 +291,14 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处定义所需要的依赖项等
-class StateChangeCallback1 <: Callback1Argument<StateChangeParam> {
+class StateChangeCallback <: Callback1Argument<StateChangeParam> {
     public func invoke(err: ?BusinessException, arg: StateChangeParam): Unit {
         let connectionState = arg.state.toString()
         Hilog.info(0, "Bluetooth", "profile connection state has change to ${connectionState}")
     }
 }
 
-let changeCallBack = StateChangeCallback1()
+let changeCallBack = StateChangeCallback()
 let hdfProfile = createHfpAgProfile()
 try {
     hdfProfile.on(ProfileCallbackType.ConnectionStateChange, changeCallBack)
@@ -331,7 +331,7 @@ public func on(eventType: ProfileCallbackType, callback: Callback1Argument<State
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -351,14 +351,14 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处定义所需要的依赖项等
-class StateChangeCallback2 <: Callback1Argument<StateChangeParam> {
+class StateChangeCallback <: Callback1Argument<StateChangeParam> {
     public func invoke(err: ?BusinessException, arg: StateChangeParam): Unit {
         let connectionState = arg.state.toString()
         Hilog.info(0, "Bluetooth", "profile connection state has change to ${connectionState}")
     }
 }
 
-let changeCallBack = StateChangeCallback2()
+let changeCallBack = StateChangeCallback()
 let hdfProfile = createHfpAgProfile()
 try {
     hdfProfile.on(ProfileCallbackType.ConnectionStateChange, changeCallBack)

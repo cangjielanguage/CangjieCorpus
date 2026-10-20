@@ -380,14 +380,20 @@ class EntryView {
     let ringStyle = RingStyleOptions(strokeWidth: 20.vp)
     func build() {
         Column(space: 15) {
-            Text("Linear Progress").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Linear Progress")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Progress(value: 10.0, progressType: ProgressType.Linear).width(200)
             Progress(value: 20.0, total: 150.0, progressType: ProgressType.Linear)
                 .color(Color.Gray)
                 .value(50.0)
                 .width(200)
 
-            Text("Eclipse Progress").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Eclipse Progress")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
                 Progress(value: 10.0, progressType: ProgressType.Eclipse).width(100)
                 Progress(value: 20.0, total: 150.0, progressType: ProgressType.Eclipse)
@@ -396,7 +402,10 @@ class EntryView {
                     .value(50.0)
             }
 
-            Text("ScaleRing Progress").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("ScaleRing Progress")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
                 Progress(value: 10.0, progressType: ProgressType.ScaleRing).width(100)
                 Progress(value: 20.0, total: 150.0, progressType: ProgressType.ScaleRing)
@@ -419,7 +428,10 @@ class EntryView {
                     .style(scaleStyle2)
             }
 
-            Text("Ring Progress").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Ring Progress")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
                 Progress(value: 10.0, progressType: ProgressType.Ring).width(100)
                 Progress(value: 20.0, total: 150.0, progressType: ProgressType.Ring)
@@ -429,9 +441,14 @@ class EntryView {
                     .style(ringStyle)
             }
 
-            Text("Capsule Progress").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Capsule Progress")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
-                Progress(value: 10.0, progressType: ProgressType.Capsule).width(100).height(50)
+                Progress(value: 10.0, progressType: ProgressType.Capsule)
+                    .width(100)
+                    .height(50)
                 Progress(value: 20.0, total: 150.0, progressType: ProgressType.Capsule)
                     .color(Color.Gray)
                     .value(50.0)
@@ -464,16 +481,25 @@ class EntryView {
     let ringStyle1 = RingStyleOptions(strokeWidth: 20.vp, shadow: true)
     func build() {
         Column(space: 15) {
-            Text("Gradient Color").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Gradient Color")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
                 Progress(value: 70.0, progressType: ProgressType.Ring)
                     .width(100)
                     .style(ringStyle0)
                     .color(0X02fd03)
             }
-            Text("Shadow").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Shadow")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
-                Progress(value: 70.0, progressType: ProgressType.Ring).width(120).color(Color.Blue).style(ringStyle1)
+                Progress(value: 70.0, progressType: ProgressType.Ring)
+                    .width(120)
+                    .color(Color.Blue)
+                    .style(ringStyle1)
             }
         }
     }
@@ -504,13 +530,25 @@ class EntryView {
     let ringStyle1 = RingStyleOptions(strokeWidth: 20.vp, enableScanEffect: true)
     func build() {
         Column(space: 15) {
-            Text("Loading Effect").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Loading Effect")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
-                Progress(value: 0.0, progressType: ProgressType.Ring).width(100).style(ringStyle0).color(Color.Blue)
+                Progress(value: 0.0, progressType: ProgressType.Ring)
+                    .width(100)
+                    .style(ringStyle0)
+                    .color(Color.Blue)
             }
-            Text("Shadow").fontSize(20).fontColor(0xCCCCCC).width(90.percent)
+            Text("Shadow")
+                .fontSize(20)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
             Row(space: 40) {
-                Progress(value: 30.0, progressType: ProgressType.Ring).width(100).color(0X02fd03).style(ringStyle1)
+                Progress(value: 30.0, progressType: ProgressType.Ring)
+                    .width(100)
+                    .color(0X02fd03)
+                    .style(ringStyle1)
             }
         }
     }
@@ -539,15 +577,32 @@ class EntryView {
 
     func build() {
         Column(space: 10) {
-            Text('enableSmoothEffect: true').fontSize(9).fontColor(0xCCCCCC).width(90.percent).margin(5).margin( top: 20 )
-            Progress( value: this.value, total: 100.0, progressType: ProgressType.Linear ).style(RingStyleOptions(strokeWidth: 10, enableSmoothEffect: true ))
-            Text('enableSmoothEffect: false').fontSize(9).fontColor(0xCCCCCC).width(90.percent).margin(5)
-            Progress( value: this.value, total: 100.0, progressType: ProgressType.Linear ).style(RingStyleOptions(strokeWidth: 10, enableSmoothEffect: false ))
+            Text('enableSmoothEffect: true')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
+                .margin(5)
+                .margin(top: 20)
+            Progress(value: this.value, total: 100.0, progressType: ProgressType.Linear).style(
+                RingStyleOptions(strokeWidth: 10, enableSmoothEffect: true))
+            Text('enableSmoothEffect: false')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
+                .margin(5)
+            Progress(value: this.value, total: 100.0, progressType: ProgressType.Linear).style(
+                RingStyleOptions(strokeWidth: 10, enableSmoothEffect: false))
             Button('value +10')
-                .onClick({ evt =>
-                    this.value += 10.0
-            }).width(75).height(15).fontSize(9)
-        }.width(50.percent).height(100.percent).margin( left: 20 )
+                .onClick({
+                    evt => this.value += 10.0
+                })
+                .width(75)
+                .height(15)
+                .fontSize(9)
+        }
+            .width(50.percent)
+            .height(100.percent)
+            .margin(left: 20)
     }
 }
 ```

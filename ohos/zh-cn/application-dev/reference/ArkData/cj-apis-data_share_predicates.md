@@ -82,11 +82,11 @@ public func inValues(field: String, value: Array<VBValueType>): DataSharePredica
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 
@@ -127,11 +127,11 @@ public func and(): DataSharePredicates
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 
@@ -181,11 +181,11 @@ public func equalTo(field: String, value: VBValueType): DataSharePredicates
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 
@@ -233,11 +233,11 @@ public func limit(total: Int32, offset: Int32): DataSharePredicates
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 
@@ -284,11 +284,11 @@ public func orderByAsc(field: String): DataSharePredicates
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 
@@ -335,11 +335,11 @@ public func orderByDesc(field: String): DataSharePredicates
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14800000 | Internal error. |
+  | 14800000 | Inner error. |
 
 **示例：**
 

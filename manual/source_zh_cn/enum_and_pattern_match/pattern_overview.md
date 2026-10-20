@@ -8,7 +8,7 @@
 
 在包含匹配值的 `match` 表达式（参见[match 表达式](./match.md)）中使用常量模式时，要求常量模式表示的值的类型与待匹配值的类型相同，匹配成功的条件是待匹配的值与常量模式表示的值相等。
 
-下面的例子中，根据 `score` 的值（假设 `score` 只能取 `0` 到 `100` 间被 `10` 整除的值），输出考试成绩的等级：
+如下示例会根据 `score` 的数值判定成绩等级，`score` 仅可取 `0` 至 `100` 中能被 `10` 整除的数值。
 
 <!-- verify -->
 
@@ -111,7 +111,7 @@ main() {
 x is not zero and x = -10
 ```
 
-使用 `|` 连接多个模式时不能使用绑定模式，也不可嵌套出现在其他模式中，否则会报错：
+使用 `|` 连接多个模式时不能使用绑定模式，也不可嵌套出现在其他模式中，否则会编译报错：
 
 <!-- compile.error -->
 
@@ -135,8 +135,9 @@ main() {
     let x = -10
     let y = match (x) {
         case 0 => "zero"
-        case n => n = n + 0 // Error, 'n' cannot be modified.
-                  "x is not zero"
+        case n =>
+            n = n + 0 // Error, 'n' cannot be modified.
+            "x is not zero"
     }
     println(y)
 }
@@ -151,9 +152,10 @@ main() {
     let x = -10
     let y = match (x) {
         case 0 => "zero"
-        case n => let n = 0 // Error, redefinition
-                  println(n)
-                  "x is not zero"
+        case n =>
+            let n = 0 // Error, redefinition
+            println(n)
+            "x is not zero"
     }
     println(y)
 }
@@ -282,8 +284,8 @@ func test1() {
 func test2() {
     var b = Base()
     var r = match (b) {
-        case d: Derived => d.a  // Type pattern match failed.
-        case _ => 0             // Matched.
+        case d: Derived => d.a // Type pattern match failed.
+        case _ => 0 // Matched.
     }
     println("r = ${r}")
 }

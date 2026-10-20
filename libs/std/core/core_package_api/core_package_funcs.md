@@ -268,7 +268,7 @@ public func exclusiveScope<T>(fn: () -> T): T
 
 > **注意：**
 >
-> 不支持平台：Windows、macOS、OpenHarmony、HarmonyOS、iOS。
+> 不支持平台：Windows、macOS、OpenHarmony。
 
 参数：
 
@@ -293,7 +293,7 @@ main() {
         return 42
     }
     println("结果: ${result}")
-    
+
     // 也可以执行无返回值的操作
     exclusiveScope<Unit> {
         println("在独占作用域中执行")
@@ -307,8 +307,8 @@ main() {
 结果: 42
 在独占作用域中执行
 ```
-<!--DelEnd-->
 
+<!--DelEnd-->
 ## func ifNone\<T>(Option\<T>, () -> Unit)
 
 ```cangjie

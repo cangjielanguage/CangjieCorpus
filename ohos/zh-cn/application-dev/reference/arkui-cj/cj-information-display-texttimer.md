@@ -291,6 +291,7 @@ public func start(): Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.hilog.*
 import ohos.arkui.state_macro_manage.*
@@ -299,15 +300,16 @@ import ohos.arkui.state_macro_manage.*
 @Component
 class EntryView {
     var textTimerController: TextTimerController = TextTimerController()
-    @State var format: String = 'mm:ss.SS'
+    @State
+    var format: String = 'mm:ss.SS'
     func build() {
         Column {
             TextTimer(isCountDown: true, count: 30000, controller: this.textTimerController)
                 .format(this.format)
                 .fontColor(Color.Black)
                 .fontSize(50)
-                .onTimer({utc, elapsedTime =>
-                    Hilog.info(0, "AppLogCj", "time has been changed")
+                .onTimer({
+                    utc, elapsedTime => Hilog.info(0, "AppLogCj", "time has been changed")
                 })
             Row() {
                 Button("start").onClick({ evt =>
@@ -323,7 +325,6 @@ class EntryView {
         }
     }
 }
-
 ```
 
 ![texttimer](figures/texttimer.gif)
@@ -343,7 +344,8 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var textShadows: Array<ShadowOptions> = [
+    @State
+    var textShadows: Array<ShadowOptions> = [
         ShadowOptions(
             radius: 10.0,
             color: Color.Red,
@@ -363,20 +365,23 @@ class EntryView {
             offsetY: 0.0
         ),
         ShadowOptions(
-        radius: 10.0,
-        color: Color.Green,
-        offsetX: 40.0,
-        offsetY: 0.0
+            radius: 10.0,
+            color: Color.Green,
+            offsetX: 40.0,
+            offsetY: 0.0
         ),
         ShadowOptions(
-        radius: 10.0,
-        color: Color.Blue,
-        offsetX: 100.0,
-        offsetY: 0.0
-        )]
+            radius: 10.0,
+            color: Color.Blue,
+            offsetX: 100.0,
+            offsetY: 0.0
+        )
+    ]
     func build() {
         Column(space: 8) {
-            TextTimer().fontSize(50).textShadow(this.textShadows)
+            TextTimer()
+                .fontSize(50)
+                .textShadow(this.textShadows)
         }
     }
 }
@@ -401,16 +406,16 @@ import ohos.arkui.state_macro_manage.*
 @Component
 class EntryView {
     var textTimerController: TextTimerController = TextTimerController()
-    @State var format: String = 'mm:ss.SS'
+    @State
+    var format: String = 'mm:ss.SS'
 
     func build() {
         Column(space: 8) {
             Scroll().height(20.percent)
             Button("openTextTimer").onClick({
                 evt =>
-
             })
-            TextTimer( isCountDown: true, count: 30000, controller: this.textTimerController )
+            TextTimer(isCountDown: true, count: 30000, controller: this.textTimerController)
                 .format(this.format)
                 .fontColor(Color.Black)
                 .fontSize(50)

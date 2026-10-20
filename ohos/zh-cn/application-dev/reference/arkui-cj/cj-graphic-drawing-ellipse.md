@@ -51,6 +51,7 @@ public init(width!: ?Length = None, height!: ?Length = None)
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 

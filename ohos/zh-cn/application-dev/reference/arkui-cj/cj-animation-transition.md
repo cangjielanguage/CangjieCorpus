@@ -13,7 +13,7 @@
 > 当前有两种方式触发组件的transition：
 >
 > - 当组件插入或删除时（如if条件改变、ForEach新增删除组件），会递归的触发所有新插入/删除的组件的transition效果。
-> - 当组件[Visibility](./cj-universal-attribute-visibility.md)属性在可见和不可见（[Visibility.Hidden](./cj-common-types.md#enum-visibility)或[Visibility.None](./cj-common-types.md#enum-visibility)）之间改变时，只触发该组件的transition效果。在[Visibility.Visible](./cj-common-types.md#enum-visibility)与[Visibility.None](./cj-common-types.md#enum-visibility)之间切换时，若直接设置为Visibility.None，会导致组件布局大小为0，此时无法观察到transition效果。而当在动画中修改visiblity属性为[Visibility.None](./cj-common-types.md#enum-visibility)时，组件布局为0是带动画的，将呈现transition与布局动画的叠加效果，形成双动画的复合表现。
+> - 当组件[Visibility](./cj-universal-attribute-visibility.md)属性在可见和不可见（[Visibility.Hidden](./cj-common-types.md#enum-visibility)或[Visibility.None](./cj-common-types.md#enum-visibility)）之间改变时，只触发该组件的transition效果。在[Visibility.Visible](./cj-common-types.md#enum-visibility)与[Visibility.None](./cj-common-types.md#enum-visibility)之间切换时，若直接设置为Visibility.None，会导致组件布局大小为0，此时无法观察到transition效果。而当在动画中修改visibility属性为[Visibility.None](./cj-common-types.md#enum-visibility)时，组件布局为0是带动画的，将呈现transition与布局动画的叠加效果，形成双动画的复合表现。
 
 ## 导入模块
 
@@ -893,6 +893,7 @@ public operator func ==(other: TransitionEdge): Bool
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -900,21 +901,25 @@ import ohos.hilog.*
 @Entry
 @Component
 class EntryView {
-    @State var flag = true
-    @State var show = "show"
+    @State
+    var flag = true
+    @State
+    var show = "show"
     func build() {
         Column {
             Button(this.show)
-                .onClick({
-                    evt =>
-                    Hilog.info(0, "cangjie", "Hello Cangjie")
-                    if (this.flag) {
-                        this.show = "hide"
-                    } else {
-                        this.show = "show"
+                .onClick(
+                    {
+                        evt =>
+                            Hilog.info(0, "cangjie", "Hello Cangjie")
+                            if (this.flag) {
+                                this.show = "hide"
+                            } else {
+                                this.show = "show"
+                            }
+                            this.flag = !this.flag
                     }
-                    this.flag = !this.flag
-                })
+                )
                 .width(800.px)
                 .height(400.px)
 
@@ -943,6 +948,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -950,21 +956,25 @@ import ohos.hilog.*
 @Entry
 @Component
 class EntryView {
-    @State var flag = true
-    @State var show = "show"
+    @State
+    var flag = true
+    @State
+    var show = "show"
     func build() {
         Column {
             Button(this.show)
-                .onClick({
-                    evt =>
-                    Hilog.info(0, "cangjie", "Hello Cangjie")
-                    if (this.flag) {
-                        this.show = "hide"
-                    } else {
-                        this.show = "show"
+                .onClick(
+                    {
+                        evt =>
+                            Hilog.info(0, "cangjie", "Hello Cangjie")
+                            if (this.flag) {
+                                this.show = "hide"
+                            } else {
+                                this.show = "show"
+                            }
+                            this.flag = !this.flag
                     }
-                    this.flag = !this.flag
-                })
+                )
                 .width(800.px)
                 .height(400.px)
                 .margin(left: 200.px, top: 100.px)
@@ -984,13 +994,12 @@ class EntryView {
                     .width(800.px)
                     .height(400.px)
                     .margin(left: 200.px)
-                    .transition(
-                        TransitionEffect
-                            .asymmetric(
-                                TransitionEffect.scale(ScaleOptions()),
-                                TransitionEffect.IDENTITY
-                            )
-                            .animation(AnimateParam(duration: 2000, curve: Curve.Ease)))
+                    .transition(TransitionEffect
+                        .asymmetric(
+                            TransitionEffect.scale(ScaleOptions()),
+                            TransitionEffect.IDENTITY
+                        )
+                        .animation(AnimateParam(duration: 2000, curve: Curve.Ease)))
             }
         }
     }
@@ -1007,6 +1016,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -1015,24 +1025,28 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var flag = true
-    @State var show = "show"
+    @State
+    var flag = true
+    @State
+    var show = "show"
     func build() {
         Column {
             Button(this.show)
-                .onClick({
-                    evt =>
-                    Hilog.info(0, "cangjie", "Hello Cangjie")
-                    if (this.flag) {
-                        this.show = "hide"
-                    } else {
-                        this.show = "show"
+                .onClick(
+                    {
+                        evt =>
+                            Hilog.info(0, "cangjie", "Hello Cangjie")
+                            if (this.flag) {
+                                this.show = "hide"
+                            } else {
+                                this.show = "show"
+                            }
+                            this.flag = !this.flag
                     }
-                    this.flag = !this.flag
-                })
+                )
                 .width(800.px)
                 .height(400.px)
-                .margin(left:50, top: 50)
+                .margin(left: 50, top: 50)
 
             if (this.flag) {
                 Column() {
@@ -1052,10 +1066,11 @@ class EntryView {
                         .transition(TransitionEffect
                             .OPACITY
                             .animation(AnimateParam(duration: 1000)))
-                }.transition(TransitionEffect
-                    .OPACITY
-                    .animation(AnimateParam(duration: 1000)))
-                    .margin(left:50)
+                }
+                    .transition(TransitionEffect
+                        .OPACITY
+                        .animation(AnimateParam(duration: 1000)))
+                    .margin(left: 50)
             }
         }
     }

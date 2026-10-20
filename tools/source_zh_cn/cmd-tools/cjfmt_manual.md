@@ -38,6 +38,18 @@ Options:
                      eg: cjfmt -f a.cj -o ./fmta.cj -l 1:25
 ```
 
+`cjfmt` 选项列表如下：
+
+|选项名|选项描述|
+|---|---|
+|`-h`|打印命令说明|
+|`-v`|打印版本信息|
+|`-f`|指定目标文件|
+|`-d`|指定目标目录|
+|`-o <value>`|指定产物文件或目录|
+|`-c <value>`|指定格式化配置文件|
+|`-l <region>`|指定格式化片段|
+
 ### 文件格式化
 
 `cjfmt -f`
@@ -153,7 +165,7 @@ cjfmt -f a.cj -o b.cj -l 10:25 // 仅格式化第10行至第25行
 package com.myproduct.mymodule
 
 // 第三部分，import 声明
-import std.collection.HashMap   // 标准库
+import std.collection.HashMap // 标准库
 
 // 第四部分，public 元素定义
 public class ListItem <: Component {
@@ -215,8 +227,8 @@ func fn(a: Int64): Unit { // 符合：跟随声明放行末，前置 1 空格
 // lambda 函数
 let add = {
     base: Int64, bonus: Int64 => // 符合: lambda 表达式中非空块遵循 K&R 风格
-    print("符合 news")
-    base + bonus
+        print("符合 news")
+        base + bonus
 }
 
 ```
@@ -267,13 +279,12 @@ class MyApp <: App {
     // 空行
     // 空行
     // 空行
-    init() {           // 不符合：类型定义内部使用连续空行
+    init() { // 不符合：类型定义内部使用连续空行
         this.page = Router("album", album)
     }
 
     override func onCreate(): Unit {
-
-        println( "album Init." )  // 不符合：大括号内部首尾存在空行
+        println("album Init.") // 不符合：大括号内部首尾存在空行
 
     }
 }
@@ -315,14 +326,18 @@ func fn(a: Int64): Unit {
 
 以下是推荐的顶层元素的修饰符排列优先级：
 
-```text
+<!-- code_no_check -->
+
+```cangjie
 public
 open/abstract
 ```
 
 以下是推荐的实例成员函数或实例成员属性的修饰符排序优先级：
 
-```text
+<!-- code_no_check -->
+
+```cangjie
 public/protected/private
 open
 override
@@ -330,7 +345,9 @@ override
 
 以下是推荐的静态成员函数的修饰符排序优先级：
 
-```text
+<!-- code_no_check -->
+
+```cangjie
 public/protected/private
 static
 redef
@@ -338,7 +355,9 @@ redef
 
 以下是推荐的成员变量的修饰符排序优先级：
 
-```text
+<!-- code_no_check -->
+
+```cangjie
 public/protected/private
 static
 ```

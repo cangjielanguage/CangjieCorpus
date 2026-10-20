@@ -124,13 +124,16 @@ class VideoPlayer {
     func build() {
         Column() {
             Video(src: this.innerResource, previewUri: this.previewUris, controller: this.controller)
-                .onUpdate({ value => // 更新事件回调
+                .onUpdate({
+                    value => // 更新事件回调
                     Hilog.info(0, "cangjie", "video update.")
                 })
-                .onPrepared({ value => // 准备事件回调
+                .onPrepared({
+                    value => // 准备事件回调
                     Hilog.info(0, "cangjie", "video prepared.")
                 })
-                .onError({ => // 失败事件回调
+                .onError({
+                    => // 失败事件回调
                     Hilog.info(0, "cangjie", "video error.")
                 })
         }
@@ -158,18 +161,19 @@ Video控制器主要用于控制视频的状态，包括播放、暂停、停止
   @Entry
   @Component
   class EntryView {
-      @State var videoSrc: AppResource = @r(app.media.startIcon) // 需要传入正确的视频数据源
-      @State var previewUri: AppResource = @r(app.media.startIcon)
-      @State var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
+      @State
+      var videoSrc: AppResource = @r(app.media.startIcon) // 需要传入正确的视频数据源
+      @State
+      var previewUri: AppResource = @r(app.media.startIcon)
+      @State
+      var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
 
       func build() {
           Row() {
               Column() {
                   Video(src: this.videoSrc, previewUri: this.previewUri, currentProgressRate: this.curRate)
-              }
-              .width(100.percent)
-          }
-          .height(100.percent)
+              }.width(100.percent)
+          }.height(100.percent)
       }
   }
   ```
@@ -190,14 +194,22 @@ Video控制器主要用于控制视频的状态，包括播放、暂停、停止
   @Entry
   @Component
   class EntryView {
-      @State var videoSrc: AppResource = @r(app.media.startIcon) // 需要传入正确的视频数据源
-      @State var previewUri: AppResource = @r(app.media.startIcon)
-      @State var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
-      @State var isAutoPlay: Bool = false
-      @State var showControls: Bool = true
-      @State var sliderStartTime: String = ""
-      @State var currentTime: Int32 = 0
-      @State var durationTime: Int32 = 0
+      @State
+      var videoSrc: AppResource = @r(app.media.startIcon) // 需要传入正确的视频数据源
+      @State
+      var previewUri: AppResource = @r(app.media.startIcon)
+      @State
+      var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
+      @State
+      var isAutoPlay: Bool = false
+      @State
+      var showControls: Bool = true
+      @State
+      var sliderStartTime: String = ""
+      @State
+      var currentTime: Int32 = 0
+      @State
+      var durationTime: Int32 = 0
       var controller: VideoController = VideoController()
       func build() {
           Row() {
@@ -207,22 +219,28 @@ Video控制器主要用于控制视频的状态，包括播放、暂停、停止
                       .controls(false)
                       .autoPlay(true)
                       .onPrepared({
-                              value => this.durationTime = value.duration.getOrThrow()
-                          })
+                          value => this.durationTime = value
+                              .duration
+                              .getOrThrow()
+                      })
                       .onUpdate({
-                              value => this.currentTime = value.time.getOrThrow()
-                          })
+                          value => this.currentTime = value
+                              .time
+                              .getOrThrow()
+                      })
                   Row() {
                       Text("${this.currentTime}s")
-                      Slider(value: Float64(this.currentTime),  min: 0.0, max: Float64(this.durationTime))
-                          .onChange({ value: Float64, mode: SliderChangeMode =>
-                                  this.controller.setCurrentTime(Int32(value), SeekMode.Accurate)
-                              })
+                      Slider(value: Float64(this.currentTime), min: 0.0, max: Float64(this.durationTime))
+                          .onChange({
+                              value: Float64, mode: SliderChangeMode => this
+                                  .controller
+                                  .setCurrentTime(Int32(value), SeekMode.Accurate)
+                          })
                           .width(85.percent)
                       Text("${this.durationTime}s")
                   }
-                  .opacity(0.8)
-                  .width(100.percent)
+                      .opacity(0.8)
+                      .width(100.percent)
               }.width(100.percent)
           }.height(100.percent)
       }

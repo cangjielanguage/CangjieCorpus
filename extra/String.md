@@ -1,12 +1,14 @@
 ## String
 
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/core/core_package_api/core_package_structs.md#struct-string).
+
 ### Visit characters in String as Rune values:
 
 Use the `runes()` method to iterate characters in the String as Rune values.
 For example, to determine whether a string consists entirely of lower-case letters,
 we can write:
 
-```
+```cangjie
 func isLowerWord(s: String): Bool {
     for (ch in s.runes()) {
         if (ch < r'a' || ch > r'z') {
@@ -26,7 +28,7 @@ main() {
 
 Ways to initialize an `String` include:
 
-```
+```cangjie
 // Single and double quotes, use of escape characters
 let s1: String = ""
 let s2 = 'Hello Cangjie Lang'
@@ -52,14 +54,15 @@ let s9 = ###"
 
 ### Size
 
-To obtain the length of a `String`, use `str.size`. Note `size` is a property, so
-no parenthesis should be added.
+`str.size` returns the number of UTF-8 bytes, not the number of Unicode scalar values or user-perceived characters. To count Rune values, use `str.toRuneArray().size` or `str.runes() |> count` after importing `std.collection.*`. Neither count is a grapheme-cluster count.
+
+For example, `"你好".size` is 6, while `"你好".toRuneArray().size` is 2.
 
 ### Join
 
 To join a list of  strings, use `String.join` function. For example:
 
-```
+```cangjie
 let s = String.join(["a", "b", "c"], delimiter: ",")
 println(s)  // a,b,c
 ```
@@ -68,7 +71,7 @@ println(s)  // a,b,c
 
 The string type supports comparison using relational operators and concatenation using the + operator.
 
-```
+```cangjie
 main() {
     let s1 = "abc"
     var s2 = "abd"
@@ -84,7 +87,7 @@ main() {
 User-defined types can implement the `ToString` interface, so it has a `toString` method and can
 be used in print statement. For example, the following defines class `Point` that implements `ToString`:
 
-```
+```cangjie
 class Point <: ToString {
     let x: Int64
     let y: Int64
@@ -103,15 +106,14 @@ main() {
 }
 ```
 
-Note however, that existing classes (that does not already implement ToString) and tuple types
-cannot implement ToString. Printing these must print their components separately.
+For types without a `ToString` implementation, print their components explicitly. Tuple printing is described in [Tuple](Tuple.md).
 
 ### Converting integers to String
 
 Integers and other primitive types can be converted into `String` using the `toString` method,
 since they implement the `ToString` interface. For example:
 
-```
+```cangjie
 let N = 123
 let strN = N.toString()
 println("strN = ${strN}, second Rune is ${Rune(strN[1])}")  // strN = 123, second Rune is 2
@@ -122,7 +124,7 @@ println("strN = ${strN}, second Rune is ${Rune(strN[1])}")  // strN = 123, secon
 Any expressions that can be printed (implemented `ToString` interface) can be interpolated inside
 a string using the `${...}` syntax. For example:
 
-```
+```cangjie
 main() {
     let fruit = "apples"
     let count = 10
@@ -140,7 +142,7 @@ main() {
 To parse a string into integers or other primitive types, import the `std.convert.*` package,
 then use `parse` function. For example:
 
-```
+```cangjie
 import std.convert.*
 
 main() {
@@ -150,14 +152,20 @@ main() {
 }
 ```
 
-There are no library function in Cangjie for parsing an integer as binary numbers.
-these need to be implemented manually.
+Integer parsing supports an explicit radix through `std.convert.*`:
+
+```cangjie
+let binary = Int64.parse("1010", radix: 2)  // 10
+let optional = Int64.tryParse("102", radix: 2)  // None: invalid binary digit
+```
+
+`parse` throws for invalid input; use `tryParse` when a failed conversion should return `None`.
 
 ### Slice of a String
 
-To obtain a slice (substring) of a string, use range indexing. For example:
+To obtain a slice (substring) of a string, use range indexing. Indices are UTF-8 byte offsets and slice boundaries must lie on valid character boundaries. The ASCII examples below therefore also match character positions:
 
-```
+```cangjie
 main() {
     let words = "Hello, World"
     println(words[2..])  // llo, World
@@ -175,18 +183,18 @@ use either `runes` or `toRuneArray`.
 The function `toRuneArray` converts string to `Array<Rune>`, so it is possible to
 directly access the `Rune` value at particular index. For example:
 
-```
+```cangjie
 let s = "hello"
 let arr = s.toRuneArray()
 println(arr)  // [h, e, l, l, o]
 println(arr[1])  // e
 ```
 
-The function `runes` converts string to `Iterable<Rune>`, and is more well-suited
+The function `runes` returns an `Iterator<Rune>`, and is more well-suited
 for further stream-based processing, for example in for loops and as inputs to
 functions like `all` and `filter`. For example:
 
-```
+```cangjie
 import std.collection.*
 
 main() {

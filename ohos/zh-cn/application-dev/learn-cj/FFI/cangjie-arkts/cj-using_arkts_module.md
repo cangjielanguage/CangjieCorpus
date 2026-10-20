@@ -5,6 +5,7 @@
 ```cangjie
 // 导入互操作库
 import ohos.ark_interop.*
+
 func tryLoadArkTSSo() {
     // 创建新的 ArkTS 运行时
     let runtime = JSRuntime()

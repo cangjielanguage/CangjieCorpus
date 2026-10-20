@@ -1270,7 +1270,7 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|decorationType|[TextDecorationType](./cj-common-types.md#enum-textdecorationstyle)|是|-|装饰类型。|
+|decorationType|[TextDecorationType](./cj-common-types.md#enum-textdecorationtype)|是|-|装饰类型。|
 |color|[ResourceColor](./cj-common-types.md#interface-resourcecolor)|是|-|颜色。|
 
 ### class SelectionMenuOptions
@@ -1983,7 +1983,7 @@ public init(decorationType!: ?TextDecorationType, color!: ?ResourceColor = None)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|decorationType|?[TextDecorationType](./cj-common-types.md#enum-textdecorationstyle)|是|-|**命名参数。** 装饰类型。初始值：TextDecorationType.None。|
+|decorationType|?[TextDecorationType](./cj-common-types.md#enum-textdecorationtype)|是|-|**命名参数。** 装饰类型。初始值：TextDecorationType.None。|
 |color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 颜色。初始值：Color.Black。|
 
 ### class LeadingMarginPlaceholder
@@ -2056,9 +2056,7 @@ public init(pixelMap!: PixelMap, size!: ?(Length, Length))
 ### class RichEditorBaseController
 
 ```cangjie
-public open class RichEditorBaseController {
-    protected init(id: Int64)
-}
+public open class RichEditorBaseController {}
 ```
 
 **功能：** 提供RichEditor的基础控制器。
@@ -2066,24 +2064,6 @@ public open class RichEditorBaseController {
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
-
-#### init(Int64)
-
-```cangjie
-protected init(id: Int64)
-```
-
-**功能：** 创建实例。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-**参数：**
-
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-|id|Int64|是|-|标识号|
 
 #### func getCaretOffset()
 
@@ -2406,6 +2386,7 @@ public type OnDidChangeCallback = (rangeBefore: TextRange, rangeAfter: TextRange
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -2418,10 +2399,11 @@ import ohos.resource.*
 class EntryView {
     let controller = RichEditorController()
 
-    @State var position: Int32 = 0
+    @State
+    var position: Int32 = 0
 
     @Builder
-    func builder(){
+    func builder() {
         Column {
             ForEach(["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"], itemGeneratorFunc: {item: String, idx: Int64 =>
                 Button(item)
@@ -2511,10 +2493,10 @@ class EntryView {
             }
 
             RichEditor(controller)
-            .customKeyboard(value: bind(builder, this))
+            .customKeyboard(value: builder)
             .bindSelectionMenu(
                 spanType: RichEditorSpanType.Text,
-                content: bind(builder, this),
+                content: builder,
                 responseType: ResponseType.LongPress,
                 options: SelectionMenuOptions(onAppear: { => Hilog.info(0, "AppLogCj", "SelectionMenuOptions onAppear")}, onDisappear: { => Hilog.info(0, "AppLogCj", "SelectionMenuOptions onDisappear")})
             )

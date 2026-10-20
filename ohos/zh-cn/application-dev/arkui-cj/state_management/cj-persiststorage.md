@@ -55,7 +55,8 @@ AppStorage.get<Int64>("aProp")
 &nbsp;&nbsp;或在组件内部定义
 
 ```cangjie
-@StorageLink["aProp"] var aProp : Int64 = 48
+@StorageLink["aProp"]
+var aProp: Int64 = 48
 ```
 
 完整代码如下：
@@ -64,22 +65,24 @@ AppStorage.get<Int64>("aProp")
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    let temp = PersistentStorage.persistProp("aProp",47)
-    @State var message : String = "Hello World"
-    @StorageLink["aProp"] var aProp : Int64 = 48
+    let temp = PersistentStorage.persistProp("aProp", 47)
+    @State
+    var message: String = "Hello World"
+    @StorageLink["aProp"]
+    var aProp: Int64 = 48
     func build() {
-        Row(){
-            Column(){
-                Text("${this.aProp}")
-                    .onClick({
-                        etv=> this.aProp += 1
-                    })
+        Row() {
+            Column() {
+                Text("${this.aProp}").onClick({
+                    etv => this.aProp += 1
+                })
             }
         }
     }

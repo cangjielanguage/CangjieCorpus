@@ -110,7 +110,7 @@ public func checkAccessToken(tokenID: UInt32, permissionName: Permissions): Gran
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[访问控制错误码](./cj-errorcode-access-token.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[访问控制错误码](./cj-errorcode-access-token.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -161,11 +161,11 @@ public func requestPermissionsFromUser(context: UIAbilityContext, permissionList
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[访问控制错误码](./cj-errorcode-access-token.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[访问控制错误码](./cj-errorcode-access-token.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 12100001 | Invalid parameter. The context is invalid when it does not belong to the application itself. |
+  | 12100009 | Common inner error. An error occurs when creating the pop-up window or obtaining user operation results. |
 
 **示例：**
 
@@ -222,7 +222,7 @@ public enum GrantStatus <: Equatable<GrantStatus> & ToString {
 
 **父类型：**
 
-- Equatable\<GrantStatus>
+- Equatable\<[GrantStatus](#enum-grantstatus)>
 - ToString
 
 ### PermissionDenied

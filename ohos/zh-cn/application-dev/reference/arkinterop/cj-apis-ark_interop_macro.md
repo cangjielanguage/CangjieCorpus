@@ -30,6 +30,9 @@ public macro Interop(attrTokens: Tokens, input: Tokens): Tokens
 
 <!--compile-->
 ```cangjie
+import ohos.ark_interop_macro.*
+import ohos.ark_interop.*
+
 @Interop[ArkTS]
 public class MyCustomClass {
     public let name: String   // String 实现了 JSInteropType<String>，可以用在这里。

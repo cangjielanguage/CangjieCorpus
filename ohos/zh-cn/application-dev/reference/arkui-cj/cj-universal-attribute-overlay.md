@@ -55,6 +55,7 @@ func overlay(value!: ?String, align!: ?Alignment,
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -69,27 +70,27 @@ class EntryView {
                 .backgroundColor(0xf48899)
                 .align(Alignment.Top)
                 .overlay(value: "Overlay Text")
-            
+
             Text("左上角浮层")
                 .width(200)
                 .height(100)
                 .backgroundColor(0xf7b0bb)
                 .overlay(value: "Top Left", align: Alignment.TopStart)
-            
+
             Text("带偏移的浮层")
                 .width(200)
                 .height(100)
                 .backgroundColor(0xfbd7dd)
                 .overlay(
-                    value: "Offset Text", 
+                    value: "Offset Text",
                     align: Alignment.BottomEnd,
                     offset: OverlayOffset(x: -20.0, y: -20.0)
                 )
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
-        .alignItems(HorizontalAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
+            .alignItems(HorizontalAlign.Center)
     }
 }
 ```

@@ -114,6 +114,7 @@ Grid() {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -121,19 +122,23 @@ import ohos.resource_manager.*
 @Entry
 @Component
 class EntryView {
-    @State var services: Array<String> = ["会议", "投票", "签到", "打印"]
+    @State
+    var services: Array<String> = ["会议", "投票", "签到", "打印"]
     func build() {
-            Column() {
-                Grid() {
-                    ForEach(this.services, itemGeneratorFunc: {service: String, _: Int64 =>
-                        GridItem() {
+        Column() {
+            Grid() {
+                ForEach(
+                    this.services,
+                    itemGeneratorFunc: {
+                        service: String, _: Int64 => GridItem() {
                             Text(service)
-                        }}
-                    )
-                }
+                        }
+                    }
+                )
+            }
                 .rowsTemplate("1fr 1fr")
                 .columnsTemplate("1fr 1fr")
-            }
+        }
     }
 }
 ```
@@ -174,6 +179,7 @@ Grid() {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -181,18 +187,20 @@ import ohos.resource_manager.*
 @Entry
 @Component
 class EntryView {
-    @State var services: Array<String> = ["直播", "进口"]
+    @State
+    var services: Array<String> = ["直播", "进口"]
     func build() {
-            Column(space: 5) {
-                Grid() {
-                    ForEach(this.services, itemGeneratorFunc: {service: String, _: Int64 =>
-                        GridItem() {
-                            // 添加内容
-                        }
-                        .width(25.percent)
-                        }
-                    )
-                }
+        Column(space: 5) {
+            Grid() {
+                ForEach(
+                    this.services,
+                    itemGeneratorFunc: {
+                        service: String, _: Int64 => GridItem() {
+                        // 添加内容
+                        }.width(25.percent)
+                    }
+                )
+            }
                 .rowsTemplate("1fr 1fr")
                 .rowsGap(15)
         }
@@ -220,6 +228,7 @@ var scroller: Scroller = Scroller()
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -231,29 +240,36 @@ class EntryView {
     func build() {
         Column() {
             Grid(scroller: this.scroller) {
-              // 添加内容
+                // 添加内容
             }
-            .columnsTemplate("1fr 1fr 1fr 1fr 1fr 1fr 1fr")
-            .height(85.percent)
+                .columnsTemplate("1fr 1fr 1fr 1fr 1fr 1fr 1fr")
+                .height(85.percent)
 
             Row() {
-              Row() {
-                  Button("上一页")
-                  .onClick({ evt =>
-                      this.scroller.scrollPage(false, animation: false)
-                  }).width(100)
-              }.width(50.percent)
-              .justifyContent(FlexAlign.Center)
+                Row() {
+                    Button("上一页")
+                        .onClick({
+                            evt => this
+                                .scroller
+                                .scrollPage(false, animation: false)
+                        })
+                        .width(100)
+                }
+                    .width(50.percent)
+                    .justifyContent(FlexAlign.Center)
 
-              Row() {
-                  Button("下一页")
-                  .onClick({ evt =>
-                      this.scroller.scrollPage(true, animation: false)
-                  }).width(100)
-              }.width(50.percent)
-              .justifyContent(FlexAlign.Center)
-            }
-            .height(15.percent)
+                Row() {
+                    Button("下一页")
+                        .onClick({
+                            evt => this
+                                .scroller
+                                .scrollPage(true, animation: false)
+                        })
+                        .width(100)
+                }
+                    .width(50.percent)
+                    .justifyContent(FlexAlign.Center)
+            }.height(15.percent)
         }.height(100.percent)
     }
 }

@@ -89,7 +89,7 @@
 3. ArkTS 调用仓颉函数：
 
     ```typescript
-    // 导入仓颉动态库，该动态库名称为仓颉包名的名称，该名称需要和互操作接口所在的包名一致
+    // 导入仓颉动态库，该动态库名称需与仓颉包名保持一致，且需和互操作接口所属包名一致
     import cjLib from "libohos_app_cangjie_entry.so";
 
     // 创建共享对象
@@ -101,7 +101,7 @@
     console.log("id is " + id);
     ```
 
-JSExternal 对象在 ArkTS 里的类型会被识别为 undefined，直接使用 undefined 来作为参数很容易被传递错误的参数会在运行时出错，如下示例：
+JSExternal对象在ArkTS里的类型会被识别为undefined。若直接将undefined作为参数传入，极易出现参数传递错误，导致运行时报错，示例如下：
 
 ```typescript
 // ...
@@ -115,9 +115,9 @@ let id = cjLib.getDataId(data);
 
 ## JSExternal
 
-在实际开发接口时，可以把 JSExternal 对象绑定到一个 JSObject 对象上，把 JSExternal 的数据隐藏起来，以此来提高接口的安全性。
+在实际开发接口时，可以把JSExternal对象绑定到一个JSObject对象上，把JSExternal的数据隐藏起来，以此来提高接口的安全性。
 
-下面通过一个例子来展示：
+以下示例展示了这一用法：
 
 ### 定义仓颉函数
 
@@ -222,7 +222,7 @@ console.log("id is " + id);
 
 ## JSClass
 
-把所有的对象操作方法直接挂在对象上，一方面占用内存比较大，另一方面创建对象的开销比较大。对于追求性能的场景，可以定义一个 JSClass 来加速对象创建和减小内存占用。示例如下：
+将所有对象操作方法直接挂载到对象上，不仅内存占用较高，也会增加对象创建开销。对性能要求较高的场景，可通过定义JSClass，提升对象创建效率并降低内存占用，示例如下：
 
 1. 定义仓颉函数：
 
@@ -241,14 +241,15 @@ console.log("id is " + id);
 
         static init() {
             // 注册导出到ark的类
-            JSModule.registerClass("Data") { context =>
-                // 创建JSClass
-                let clazz = context.clazz(jsConstructor)
-                // 增加方法
-                clazz.addMethod(context.string("setId"), context.function(setDataId))
-                clazz.addMethod(context.string("getId"), context.function(getDataId))
+            JSModule.registerClass("Data") {
+                context =>
+                    // 创建JSClass
+                    let clazz = context.clazz(jsConstructor)
+                    // 增加方法
+                    clazz.addMethod(context.string("setId"), context.function(setDataId))
+                    clazz.addMethod(context.string("getId"), context.function(getDataId))
 
-                return clazz
+                    return clazz
             }
         }
 
@@ -258,7 +259,7 @@ console.log("id is " + id);
             let thisArg = callInfo.thisArg
             // 转换为JSObject
             let thisObject = thisArg.asObject()
-            // 创建创建对象
+            // 创建对象
             let data = Data(1, "abc")
             // 创建js对仓颉对象的引用
             let jsExternal = context.external(data)

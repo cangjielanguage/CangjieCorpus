@@ -737,8 +737,8 @@ public operator func ==(other: ButtonType): Bool
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -752,48 +752,107 @@ func loggerInfo(str: String) {
 class EntryView {
     func build() {
         Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Start, justifyContent: FlexAlign.SpaceBetween) {
-            Text("Common button").fontSize(9).fontColor(0xCCCCCC)
+            Text("Common button")
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
 
             Flex(alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween) {
-                Button("Ok").shape(ButtonType.Normal).stateEffect(true).borderRadius(8)
+                Button("Ok")
+                    .shape(ButtonType.Normal)
+                    .stateEffect(true)
+                    .borderRadius(8)
                     .width(90)
                 Button(ButtonOptions()) {
                     Row() {
-                        LoadingProgress().width(20).height(20).color(Color.White)
-                        Text("loading").fontSize(12).fontColor(0xffffff).margin(left: 5, right: 12)
-                    }.alignItems(VerticalAlign.Center).width(90).height(40)
-                }.shape(ButtonType.Normal).stateEffect(true).borderRadius(8).width(90)
-                Button("Disable").shape(ButtonType.Normal).stateEffect(true).opacity(0.5)
-                    .borderRadius(8).width(90).backgroundColor(0xF55A42)
+                        LoadingProgress()
+                            .width(20)
+                            .height(20)
+                            .color(Color.White)
+                        Text("loading")
+                            .fontSize(12)
+                            .fontColor(0xffffff)
+                            .margin(left: 5, right: 12)
+                    }
+                        .alignItems(VerticalAlign.Center)
+                        .width(90)
+                        .height(40)
                 }
-
-            Text("Capsule button").fontSize(9).fontColor(0xCCCCCC)
-
-            Flex(alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween) {
-                Button("Ok").shape(ButtonType.Capsule).stateEffect(true).borderRadius(8)
+                    .shape(ButtonType.Normal)
+                    .stateEffect(true)
+                    .borderRadius(8)
                     .width(90)
-                Button(ButtonOptions()) {
-                    Row() {
-                        LoadingProgress().width(20).height(20).color(Color.White)
-                        Text("loading").fontSize(12).fontColor(0xffffff).margin(left: 5, right: 12)
-                    }.alignItems(VerticalAlign.Center).width(90).height(40)
-                }.shape(ButtonType.Capsule).stateEffect(true).borderRadius(8).width(90)
-                .onClick({ evt =>
-                    loggerInfo("The login is successful")
-                })
-                Button("Disable").shape(ButtonType.Capsule).stateEffect(true).opacity(0.5)
-                    .borderRadius(8).width(90).backgroundColor(0xF55A42)
+                Button("Disable")
+                    .shape(ButtonType.Normal)
+                    .stateEffect(true)
+                    .opacity(0.5)
+                    .borderRadius(8)
+                    .width(90)
+                    .backgroundColor(0xF55A42)
             }
 
-            Text("Circle button").fontSize(9).fontColor(0xCCCCCC)
+            Text("Capsule button")
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+
+            Flex(alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween) {
+                Button("Ok")
+                    .shape(ButtonType.Capsule)
+                    .stateEffect(true)
+                    .borderRadius(8)
+                    .width(90)
+                Button(ButtonOptions()) {
+                    Row() {
+                        LoadingProgress()
+                            .width(20)
+                            .height(20)
+                            .color(Color.White)
+                        Text("loading")
+                            .fontSize(12)
+                            .fontColor(0xffffff)
+                            .margin(left: 5, right: 12)
+                    }
+                        .alignItems(VerticalAlign.Center)
+                        .width(90)
+                        .height(40)
+                }
+                    .shape(ButtonType.Capsule)
+                    .stateEffect(true)
+                    .borderRadius(8)
+                    .width(90)
+                    .onClick({
+                        evt => loggerInfo("The login is successful")
+                    })
+                Button("Disable")
+                    .shape(ButtonType.Capsule)
+                    .stateEffect(true)
+                    .opacity(0.5)
+                    .borderRadius(8)
+                    .width(90)
+                    .backgroundColor(0xF55A42)
+            }
+
+            Text("Circle button")
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
 
             Flex(alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap) {
-                Button("YES").shape(ButtonType.Circle).stateEffect(true).width(55)
+                Button("YES")
+                    .shape(ButtonType.Circle)
+                    .stateEffect(true)
+                    .width(55)
                     .height(55)
-                Button("NO").shape(ButtonType.Capsule).stateEffect(true).width(55)
-                    .height(55).margin(left: 20).fontSize(15).backgroundColor(0xF55A42)
-                }
-        }.height(400).padding(left: 35, right: 35, top: 35)
+                Button("NO")
+                    .shape(ButtonType.Capsule)
+                    .stateEffect(true)
+                    .width(55)
+                    .height(55)
+                    .margin(left: 20)
+                    .fontSize(15)
+                    .backgroundColor(0xF55A42)
+            }
+        }
+            .height(400)
+            .padding(left: 35, right: 35, top: 35)
     }
 }
 ```
@@ -807,30 +866,40 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var count: UInt32 = 0
+    @State
+    var count: UInt32 = 0
     func build() {
         Column() {
             Text('${this.count}')
                 .fontSize(30)
-                .onClick({ evt =>
-                    this.count ++
+                .onClick({
+                    evt => this.count++
                 })
-          if (this.count <= 0) {
-            Button('count is negative').fontSize(30).height(50)
-          } else if (this.count % 2 == 0) {
-            Button('count is even').fontSize(30).height(50)
-          } else {
-            Button('count is odd').fontSize(30).height(50)
-          }
-        }.height(100.percent).width(100.percent).justifyContent(FlexAlign.Center)
+            if (this.count <= 0) {
+                Button('count is negative')
+                    .fontSize(30)
+                    .height(50)
+            } else if (this.count % 2 == 0) {
+                Button('count is even')
+                    .fontSize(30)
+                    .height(50)
+            } else {
+                Button('count is odd')
+                    .fontSize(30)
+                    .height(50)
+            }
+        }
+            .height(100.percent)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```
@@ -844,31 +913,39 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var txt: String = 'overflowTextOverlengthTextOverflow.Clip'
+    @State
+    var txt: String = 'overflowTextOverlengthTextOverflow.Clip'
     func build() {
         Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Start, justifyContent: FlexAlign.SpaceBetween) {
-            Text('Normal size button').fontSize(9).fontColor(0xCCCCCC)
+            Text('Normal size button')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
             Flex(alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap) {
                 Button('Emphasized').buttonStyle(ButtonStyleMode.Emphasized)
                 Button('Normal').buttonStyle(ButtonStyleMode.Normal)
                 Button('Textual').buttonStyle(ButtonStyleMode.Textual)
             }
 
-            Text('Small size button').fontSize(9).fontColor(0xCCCCCC)
+            Text('Small size button')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
             Flex(alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap) {
-                Button('Emphasized', ButtonOptions(controlSize: ControlSize.Small)).buttonStyle(ButtonStyleMode.Emphasized)
+                Button('Emphasized', ButtonOptions(controlSize: ControlSize.Small)).buttonStyle(
+                    ButtonStyleMode.Emphasized)
                 Button('Normal', ButtonOptions(controlSize: ControlSize.Small)).buttonStyle(ButtonStyleMode.Normal)
                 Button('Textual', ButtonOptions(controlSize: ControlSize.Small)).buttonStyle(ButtonStyleMode.Textual)
             }
-        }.height(400).padding(left: 35, right: 35, top: 35)
+        }
+            .height(400)
+            .padding(left: 35, right: 35, top: 35)
     }
 }
 ```
@@ -882,31 +959,38 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var txt: String = 'overflowTextOverlengthTextOverflow.Clip'
+    @State
+    var txt: String = 'overflowTextOverlengthTextOverflow.Clip'
     func build() {
         Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Start, justifyContent: FlexAlign.SpaceBetween) {
-            Text('Role is Normal button').fontSize(9).fontColor(0xCCCCCC)
+            Text('Role is Normal button')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
             Flex(alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap) {
                 Button('Emphasized', ButtonOptions(role: ButtonRole.Normal)).buttonStyle(ButtonStyleMode.Emphasized)
                 Button('Normal', ButtonOptions(role: ButtonRole.Normal)).buttonStyle(ButtonStyleMode.Normal)
                 Button('Textual', ButtonOptions(role: ButtonRole.Normal)).buttonStyle(ButtonStyleMode.Textual);
             }
 
-            Text('Role is Error button').fontSize(9).fontColor(0xCCCCCC)
+            Text('Role is Error button')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
             Flex(alignItems: ItemAlign.Center, wrap: FlexWrap.Wrap) {
                 Button('Emphasized', ButtonOptions(role: ButtonRole.Error)).buttonStyle(ButtonStyleMode.Emphasized)
                 Button('Normal', ButtonOptions(role: ButtonRole.Error)).buttonStyle(ButtonStyleMode.Normal)
                 Button('Textual', ButtonOptions(role: ButtonRole.Error)).buttonStyle(ButtonStyleMode.Textual);
             }
-        }.height(400).padding(left: 35, right: 35, top: 35)
+        }
+            .height(400)
+            .padding(left: 35, right: 35, top: 35)
     }
 }
 ```

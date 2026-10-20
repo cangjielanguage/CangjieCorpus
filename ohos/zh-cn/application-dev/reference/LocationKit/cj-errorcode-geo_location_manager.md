@@ -30,7 +30,7 @@ The location service is unavailable.
 
 **处理步骤**
 
-请停止调用该接口。
+建议增加重试机制。
 
 ## 3301100 位置功能的开关未开启导致功能失败
 
@@ -52,6 +52,62 @@ The location switch is off.
 
 ## 3301200 定位失败，未获取到定位结果
 
+### 1. 网络不可用导致定位失败
+
+**错误信息**
+
+The network locating is failed because the network cannot be accessed.
+
+**错误描述**
+
+无法访问网络导致网络定位失败。
+
+**可能原因**
+
+当前设备无法访问网络。
+
+**处理步骤**
+
+请检查设备是否能联网，设备是否插入SIM卡，Wi-Fi开关是否开启等。
+
+### 2. 定位结果不满足精度要求导致定位超时
+
+**错误信息**
+
+The positioning result does not meet the precision requirement (maxAccuracy) in the positioning request parameters.
+
+**错误描述**
+
+定位结果不满足定位请求参数中的精度要求(maxAccuracy)，导致定位超时。
+
+**可能原因**
+
+定位请求参数[CurrentLocationRequest](./cj-apis-geo_location_manager.md#class-currentlocationrequest)中的精度要求(maxAccuracy)值设定过小。
+
+**处理步骤**
+
+请将定位请求参数[CurrentLocationRequest](./cj-apis-geo_location_manager.md#class-currentlocationrequest)中的精度要求(maxAccuracy)适当放宽。
+
+### 3. 获取缓存位置失败
+
+**错误信息**
+
+The system does not have a cache location.
+
+**错误描述**
+
+系统无缓存位置，导致获取上一次位置失败。
+
+**可能原因**
+
+系统无缓存位置情况下，尝试获取缓存位置。
+
+**处理步骤**
+
+系统未提前将位置信息进行缓存的情况下，需使用[getCurrentLocation](./cj-apis-geo_location_manager.md#static-func-getcurrentlocation)接口获取实时位置信息。
+
+### 4. 其他原因导致定位失败
+
 **错误信息**
 
 Failed to obtain the geographical location.
@@ -62,27 +118,57 @@ Failed to obtain the geographical location.
 
 **可能原因**
 
-1.GNSS信号弱，导致定位超时。
+- GNSS信号弱，导致定位超时。
 
-2.网络定位异常，导致定位超时。
-
-3.定位结果不满足定位请求参数中的精度要求(maxAccuracy)，导致定位超时。
-
-4.系统无缓存位置，导致获取上一次位置失败。
-
-5.系统时间设置错误，导致获取位置失败。
+- 系统时间设置错误，导致获取位置失败。
 
 **处理步骤**
 
-1.请移动至开阔地带再发起定位。
+- 请移动至开阔地带再发起定位。
 
-2.请检查设备是否能联网，设备是否插入SIM卡，WiFi开关是否开启等。
+- 请在“日期和时间”页面勾选自动设置。
 
-3.请检查定位请求中的maxAccuracy字段是否合理。
+## 3301300 逆地理编码查询失败
 
-4.系统无缓存位置的情况下，请使用getCurrentLocation接口获取实时位置信息。
+**错误信息**
 
-5.请在“日期和时间”页面勾选自动设置。
+Reverse geocoding query failed.
+
+**错误描述**
+
+逆地理编码查询失败。
+
+**可能原因**
+
+1.数据网络比较卡顿，导致端侧的请求发送失败或者云端的结果未返回到端侧。
+
+2.由于X86模拟器不支持逆地理编码功能，导致使用X86模拟器调试时逆地理编码查询失败。
+
+**处理步骤**
+
+1.网络原因请尝试重试逆地理编码查询功能。
+
+2.X86模拟器原因建议在真机进行验证。
+
+## 3301400 地理编码查询失败
+
+**错误信息**
+
+Geocoding query failed.
+
+**错误描述**
+
+地理编码查询失败。
+
+**可能原因**
+
+1.请求参数有误，或根据参数无法查到结果。
+
+2.数据网络比较卡顿，导致端侧的请求发送失败或者云端的结果未返回到端侧。
+
+**处理步骤**
+
+请检查请求参数或检查网络状态后重试。
 
 ## 3301500 区域信息（包含国家码）查询失败
 
@@ -100,7 +186,7 @@ Failed to query the area information.
 
 **处理步骤**
 
-请停止调用查询区域码的接口。
+建议增加重试机制。
 
 ## 3301600 地理围栏操作失败
 
@@ -120,7 +206,9 @@ Failed to operate the geofence.
 
 **处理步骤**
 
-请停止调用地理围栏操作接口。
+1.增加SysCap校验。
+
+2.建议增加重试机制。
 
 ## 3301601 地理围栏个数超过最大值限制导致添加围栏失败
 
@@ -134,7 +222,7 @@ The number of geofences exceeds the maximum.
 
 **可能原因**
 
-1.系统中存在的地理围栏个数超过最大值限制。
+系统中存在的地理围栏个数超过最大值(1000)限制。
 
 **处理步骤**
 
@@ -152,7 +240,7 @@ Failed to delete a geofence due to an incorrect ID.
 
 **可能原因**
 
-1.APP调用删除地理围栏接口时传入的围栏ID错误。
+APP调用删除地理围栏接口时传入的围栏ID错误。
 
 **处理步骤**
 
@@ -178,26 +266,138 @@ No response to the request.
 
 **处理步骤**
 
-请停止调用相关接口。
+建议增加重试机制。
 
-## 3301800 启动WiFi或蓝牙扫描失败
+## 3301800 启动Wi-Fi或蓝牙扫描失败
 
 **错误信息**
 
-Failed to start WiFi or Bluetooth scanning.
+Failed to start Wi-Fi or Bluetooth scanning.
 
 **错误描述**
 
-在订阅WiFi蓝牙扫描信息时，可能会先启动WiFi蓝牙扫描，如果启动扫描失败则会返回错误码给APP。
+在订阅Wi-Fi蓝牙扫描信息时，可能会先启动Wi-Fi蓝牙扫描，如果启动扫描失败则会返回错误码给APP。
 
 **可能原因**
 
-1.WiFi或蓝牙服务内部错误导致启动扫描失败。
+1.Wi-Fi或蓝牙服务内部错误导致启动扫描失败。
 
 2.低电量场景下，受功耗管控，导致无法发起扫描。
 
-3.WiFi或蓝牙开关未开启。
+3.Wi-Fi或蓝牙开关未开启。
 
 **处理步骤**
 
-重新关闭开启WiFi或蓝牙开关。
+重新关闭开启Wi-Fi或蓝牙开关。
+
+## 3301900 由于Wi-Fi未连接导致获取Wi-Fi热点的MAC地址失败
+
+**错误信息**
+
+Failed to obtain the hotspot MAC address because the Wi-Fi is not connected.
+
+**错误描述**
+
+设备未连接Wi-Fi热点或路由器，导致获取Wi-Fi热点或路由器的MAC地址失败。
+
+**可能原因**
+
+1.Wi-Fi开关未开启。
+
+2.开启Wi-Fi开关但未连接热点或路由器。
+
+**处理步骤**
+
+1.请打开Wi-Fi开关。
+
+2.请连接路由器或者热点。
+
+## 3501100 由于位置功能开关未打开导致添加beacon围栏失败
+
+**错误信息**
+
+Failed to add a beacon fence because the location switch is off.
+
+**错误描述**
+
+设备未打开位置功能开关，导致添加beacon围栏失败。
+
+**可能原因**
+
+位置功能开关未开启。
+
+**处理步骤**
+
+请提示用户开启位置功能的开关。
+
+## 3501101 由于蓝牙功能开关未打开导致添加beacon围栏失败
+
+**错误信息**
+
+Failed to add a beacon fence because the bluetooth switch is off.
+
+**错误描述**
+
+设备未打开蓝牙功能开关，导致添加beacon围栏失败。
+
+**可能原因**
+
+蓝牙功能开关未开启。
+
+**处理步骤**
+
+请提示用户开启蓝牙功能开关。
+
+## 3501601 由于beacon围栏个数超过最大值限制导致添加围栏失败
+
+**错误信息**
+
+The number of beacon fence exceeds the maximum.
+
+**错误描述**
+
+beacon围栏个数超过最大值限制导致添加围栏失败。
+
+**可能原因**
+
+系统中存在的beacon围栏个数超过最大值(16)限制。
+
+**处理步骤**
+
+请在删除多余围栏之后再添加新的围栏。
+
+## 3501602 由于beacon围栏信息不正确导致删除围栏失败
+
+**错误信息**
+
+Failed to delete the fence due to incorrect beacon fence information.
+
+**错误描述**
+
+beacon围栏信息不正确导致删除围栏失败。
+
+**可能原因**
+
+待删除围栏信息不正确。
+
+**处理步骤**
+
+请在调用删除beacon围栏接口时传入正确的围栏信息。
+
+## 3501603 由于存在重复的beacon围栏导致添加围栏失败
+
+**错误信息**
+
+Duplicate beacon fence information.
+
+**错误描述**
+
+存在重复的beacon围栏导致添加围栏失败。
+
+**可能原因**
+
+系统中已存在相同的beacon围栏请求。
+
+**处理步骤**
+
+请在删除之前围栏之后再添加新的围栏。

@@ -68,6 +68,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -75,7 +76,8 @@
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow(
                 columns: 12,
@@ -96,7 +98,7 @@
                             .width(100.percent)
                             .height(50.vp)
                             .backgroundColor(color)
-                            .span(GridColOptions(xs: 2, sm: 3, md: 4, lg: 6, xl:   8, xxl: 12))
+                            .span(GridColOptions(xs: 2, sm: 3, md: 4, lg: 6, xl: 8, xxl: 12))
                     }
                 )
             }
@@ -116,6 +118,7 @@ GridRow中通过columns设置栅格布局的总列数。
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -123,9 +126,11 @@ GridRow中通过columns设置栅格布局的总列数。
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0),Color(170,10,33),Color(213,213,213),Color(150,150,150), Color(0,74,175), Color(39,135,217)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33), Color(213, 213, 213),
+            Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217)];
         func build() {
-            GridRow(columns: GridRowOptions(xs: 12, sm: 12, md: 12, lg: 12, xl:    12, xxl: 12)) {
+            GridRow(columns: GridRowOptions(xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12)) {
                 ForEach(
                     bgColors,
                     itemGeneratorFunc: {
@@ -133,8 +138,8 @@ GridRow中通过columns设置栅格布局的总列数。
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50)
+                                .width(100.percent)
+                                .height(50)
                         }.backgroundColor(color)
                     }
                 )
@@ -151,13 +156,15 @@ GridRow中通过columns设置栅格布局的总列数。
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
     @Entry
     @Component
     class EntryView {
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         @State
         var currentBp: String = "";
         func build() {
@@ -181,13 +188,13 @@ GridRow中通过columns设置栅格布局的总列数。
                             }
                         )
                     }
-                    .width(100.percent)
-                    .height(100.percent)
-                    .onBreakpointChange({bp => currentBp = bp})
+                        .width(100.percent)
+                        .height(100.percent)
+                        .onBreakpointChange({bp => currentBp = bp})
                 }
-                .height(160)
-                .border(color: Color.Blue, width: 2)
-                .width(90.percent)
+                    .height(160)
+                    .border(color: Color.Blue, width: 2)
+                    .width(90.percent)
                 Text("columns: 8")
                     .fontSize(20)
                     .fontColor(Color.Black)
@@ -207,13 +214,13 @@ GridRow中通过columns设置栅格布局的总列数。
                             }
                         )
                     }
-                    .width(100.percent)
-                    .height(100.percent)
-                    .onBreakpointChange({bp => currentBp = bp})
+                        .width(100.percent)
+                        .height(100.percent)
+                        .onBreakpointChange({bp => currentBp = bp})
                 }
-                .height(160)
-                .border(color: Color.Blue, width: 2)
-                .width(90.percent)
+                    .height(160)
+                    .border(color: Color.Blue, width: 2)
+                    .width(90.percent)
             }
         }
     }
@@ -227,6 +234,7 @@ GridRow中通过columns设置栅格布局的总列数。
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -234,10 +242,11 @@ GridRow中通过columns设置栅格布局的总列数。
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow(
-                columns: GridRowOptions(xs: 12, sm: 4, md: 8, lg: 12, xl: 12,  xxl: 12),
+                columns: GridRowOptions(xs: 12, sm: 4, md: 8, lg: 12, xl: 12, xxl: 12),
                 breakpoints: BreakPoints(
                     value: [200.vp, 300.vp, 400.vp, 500.vp, 600.vp], //设置断点位置的单 调递增数组。
                     reference: BreakpointsReference.WindowSize
@@ -250,8 +259,8 @@ GridRow中通过columns设置栅格布局的总列数。
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50.vp)
+                                .width(100.percent)
+                                .height(50.vp)
                         }.backgroundColor(color)
                     }
                 )
@@ -341,6 +350,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -348,7 +358,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0),Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow(columns: 8) {
                 ForEach(
@@ -358,8 +369,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50.vp)
+                                .width(100.percent)
+                                .height(50.vp)
                         }.backgroundColor(color)
                     }
                 )
@@ -376,6 +387,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -383,7 +395,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow(columns: 8) {
                 ForEach(
@@ -393,11 +406,11 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50.vp)
+                                .width(100.percent)
+                                .height(50.vp)
                         }
-                        .backgroundColor(color)
-                        .span(GridColOptions(xs: 1, sm: 2, md: 3, lg: 4, xl: 12,   xxl: 12))
+                            .backgroundColor(color)
+                            .span(GridColOptions(xs: 1, sm: 2, md: 3, lg: 4, xl: 12, xxl: 12))
                     }
                 )
             }
@@ -417,6 +430,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -424,7 +438,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow() {
                 ForEach(
@@ -434,8 +449,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50.vp)
+                                .width(100.percent)
+                                .height(50.vp)
                         }.backgroundColor(color)
                     }
                 )
@@ -454,6 +469,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -461,7 +477,8 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
     @Component
     class EntryView {
         @State
-        var bgColors: Array<Color> = [Color(213,213,213), Color(150,150,150), Color(0,74,175), Color(39,135,217), Color(61,157,180), Color(23,169,141), Color(255,192,0), Color(170,10,33)];
+        var bgColors: Array<Color> = [Color(213, 213, 213), Color(150, 150, 150), Color(0, 74, 175), Color(39, 135, 217),
+            Color(61, 157, 180), Color(23, 169, 141), Color(255, 192, 0), Color(170, 10, 33)];
         func build() {
             GridRow() {
                 ForEach(
@@ -471,11 +488,11 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                             Row() {
                                 Text(index.toString())
                             }
-                            .width(100.percent)
-                            .height(50.vp)
+                                .width(100.percent)
+                                .height(50.vp)
                         }
-                        .backgroundColor(color)
-                        .gridColOffset(GridColOptions(xs: 1, sm: 2, md: 3, lg: 4, xl: 12, xxl: 12))
+                            .backgroundColor(color)
+                            .gridColOffset(GridColOptions(xs: 1, sm: 2, md: 3, lg: 4, xl: 12, xxl: 12))
                     }
                 )
             }
@@ -497,6 +514,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -509,30 +527,30 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                     Row() {
                         Text('1')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
-                }.backgroundColor(Color(213,213,213))
+                        .width(100.percent)
+                        .height(50.vp)
+                }.backgroundColor(Color(213, 213, 213))
                 GridCol(order: 3) {
                     Row() {
                         Text('2')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
-                }.backgroundColor(Color(150,150,150))
+                        .width(100.percent)
+                        .height(50.vp)
+                }.backgroundColor(Color(150, 150, 150))
                 GridCol(order: 2) {
                     Row() {
                         Text('3')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
-                }.backgroundColor(Color(0,74,175))
+                        .width(100.percent)
+                        .height(50.vp)
+                }.backgroundColor(Color(0, 74, 175))
                 GridCol(order: 1) {
                     Row() {
                         Text('4')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
-                }.backgroundColor(Color(39,135,217))
+                        .width(100.percent)
+                        .height(50.vp)
+                }.backgroundColor(Color(39, 135, 217))
             }
         }
     }
@@ -546,6 +564,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -558,38 +577,38 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
                     Row() {
                         Text('1')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
+                        .width(100.percent)
+                        .height(50.vp)
                 }
-                .backgroundColor(Color.Red)
-                .order(GridColOptions(xs: 1, sm: 5, md: 3, lg: 7, xl: 12, xxl:     12))
+                    .backgroundColor(Color.Red)
+                    .order(GridColOptions(xs: 1, sm: 5, md: 3, lg: 7, xl: 12, xxl: 12))
                 GridCol() {
                     Row() {
                         Text('2')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
+                        .width(100.percent)
+                        .height(50.vp)
                 }
-                .backgroundColor(Color(0xFFA500))
-                .order(GridColOptions(xs: 2, sm: 2, md: 6, lg: 1, xl: 12, xxl:     12))
+                    .backgroundColor(Color(0xFFA500))
+                    .order(GridColOptions(xs: 2, sm: 2, md: 6, lg: 1, xl: 12, xxl: 12))
                 GridCol() {
                     Row() {
                         Text('3')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
+                        .width(100.percent)
+                        .height(50.vp)
                 }
-                .backgroundColor(Color(0xFFFF00))
-                .order(GridColOptions(xs: 3, sm: 3, md: 1, lg: 6, xl: 12, xxl:     12))
+                    .backgroundColor(Color(0xFFFF00))
+                    .order(GridColOptions(xs: 3, sm: 3, md: 1, lg: 6, xl: 12, xxl: 12))
                 GridCol() {
                     Row() {
                         Text('4')
                     }
-                    .width(100.percent)
-                    .height(50.vp)
+                        .width(100.percent)
+                        .height(50.vp)
                 }
-                .backgroundColor(Color.Green)
-                .order(GridColOptions(xs: 4, sm: 4, md: 2, lg: 5, xl: 12, xxl:     12))
+                    .backgroundColor(Color.Green)
+                    .order(GridColOptions(xs: 4, sm: 4, md: 2, lg: 5, xl: 12, xxl: 12))
             }
         }
     }
@@ -606,6 +625,7 @@ GridCol组件作为GridRow组件的子组件，通过给GridCol传参或者设�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -620,20 +640,20 @@ class EntryView {
                         Row() {
                             Text('left').fontSize(24)
                         }
-                        .justifyContent(FlexAlign.Center)
-                        .height(90.percent)
+                            .justifyContent(FlexAlign.Center)
+                            .height(90.percent)
                     }
-                    .backgroundColor(0xff41dbaa)
-                    .span(GridColOptions(xs: 12, sm: 2, md: 12, lg: 12, xl: 12, xxl: 12))
+                        .backgroundColor(0xff41dbaa)
+                        .span(GridColOptions(xs: 12, sm: 2, md: 12, lg: 12, xl: 12, xxl: 12))
                     GridCol() {
                         Row() {
                             Text('right').fontSize(24)
                         }
-                        .justifyContent(FlexAlign.Center)
-                        .height(90.percent)
+                            .justifyContent(FlexAlign.Center)
+                            .height(90.percent)
                     }
-                    .backgroundColor(0xff4168db)
-                    .span(GridColOptions(xs: 12, sm: 10, md: 12, lg: 12, xl: 12, xxl: 12))
+                        .backgroundColor(0xff4168db)
+                        .span(GridColOptions(xs: 12, sm: 10, md: 12, lg: 12, xl: 12, xxl: 12))
                 }.backgroundColor(0x19000000)
             }.span(GridColOptions(xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12))
 
@@ -643,13 +663,13 @@ class EntryView {
                         .width(100.percent)
                         .textAlign(TextAlign.Center)
                 }
-                .width(100.percent)
-                .height(10.percent)
-                .backgroundColor(0xFEC0CD)
+                    .width(100.percent)
+                    .height(10.percent)
+                    .backgroundColor(0xFEC0CD)
             }.span(GridColOptions(xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12))
         }
-        .width(100.percent)
-        .height(300)
+            .width(100.percent)
+            .height(300)
     }
 }
 ```

@@ -98,7 +98,6 @@ class EntryView {
             .margin(top: 5)
     }
 }
-
 ```
 
 ![stack](figures/stack.png)

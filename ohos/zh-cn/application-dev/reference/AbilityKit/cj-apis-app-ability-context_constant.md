@@ -52,7 +52,7 @@ public enum AreaMode <: Equatable<AreaMode> & ToString {
 
 **父类型：**
 
-- [Equatable\<AreaMode>](#enum-areamode)
+- Equatable\<[AreaMode](#enum-areamode)>
 - ToString
 
 ### El1

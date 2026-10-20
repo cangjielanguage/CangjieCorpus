@@ -50,7 +50,7 @@ public func createAVImageGenerator(): AVImageGenerator
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -205,7 +205,7 @@ public mut prop fdSrc: AVFileDescriptor
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -240,7 +240,7 @@ public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param:
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -256,7 +256,7 @@ public func fetchFrameByTime(timeUs: Int64, options: AVImageQueryOptions, param:
 // index.cj
 
 import kit.MediaKit.*
-import kit.LocalizationKit.*
+import kit.LocalizationKit.AppResource
 import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
@@ -289,7 +289,7 @@ public func release(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Media错误码](./cj-errorcode-multimedia-media.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -303,7 +303,7 @@ public func release(): Unit
 // index.cj
 
 import kit.MediaKit.*
-import kit.LocalizationKit.*
+import kit.LocalizationKit.AppResource
 import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 
@@ -411,7 +411,7 @@ public enum AVImageQueryOptions <: Equatable<AVImageQueryOptions> & ToString {
 
 **父类型：**
 
-- Equatable\<AVImageQueryOptions>
+- Equatable\<[AVImageQueryOptions](#enum-avimagequeryoptions)>
 - ToString
 
 ### AvImageQueryClosest

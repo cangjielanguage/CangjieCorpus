@@ -1,10 +1,10 @@
 # 条件编译
 
-开发者可以通过预定义或自定义的条件完成条件编译；仓颉目前支持导入和声明的条件编译。
+开发者可以通过预定义或自定义的条件完成条件编译，仓颉目前支持导入和声明的条件编译。
 
 ## 导入和声明的条件编译
 
-仓颉支持使用内置编译标记 `@When` 来完成条件编译，编译条件使用 `[]` 括起来，`[]` 内支持输入一组或多组编译条件。`@When` 可以作用于导入节点和除 `package` 外的声明节点。
+仓颉内置编译标记 `@When` 用于实现条件编译，该编译标记参数为编译条件。`@When` 仅允许修饰 import 节点和除 package 声明外的其他所有声明类节点。
 
 ### 使用方法
 
@@ -14,15 +14,15 @@
 
 ```cangjie
 @When[os == "Linux"]
-class mc{}
+class MyClass {}
 
 main(): Int64 {
-    var a = mc()
+    var a = MyClass()
     return 0
 }
 ```
 
-在上面代码中，开发者在 `Linux` 系统中可以正确编译执行；在`非 Linux` 系统中，则会遇到找不到 `mc` 类定义的编译错误。
+在上面代码中，开发者在 Linux 系统中可以正确编译执行；在非 Linux 系统中，则会遇到找不到 `MyClass` 类定义的编译错误。
 
 值得注意的是：
 
@@ -45,7 +45,7 @@ main(): Int64 {
 
     ```cangjie
     @Derive[ToString]
-    @When[os == "Linux"]    // Error, unexpected when conditional compilation directive
+    @When[os == "Linux"] // Error, unexpected when conditional compilation directive
     class A {}
     ```
 
@@ -66,31 +66,35 @@ os 表示目标平台的操作系统。`os` 支持 `==` 和 `!=` 两种操作符
 func foo() {
     print("Linux, ")
 }
+
 @When[os == "Windows"]
 func foo() {
     print("Windows, ")
 }
+
 @When[os != "Windows"]
 func fee() {
     println("NOT Windows")
 }
+
 @When[os != "Linux"]
 func fee() {
     println("NOT Linux")
 }
+
 main() {
     foo()
     fee()
 }
 ```
 
-如果在 `Windows` 环境下编译执行，会得到 `Windows, NOT Linux` 的信息；如果是在 `Linux` 环境下，则会得到 `Linux, NOT Windows` 的信息。
+如果 cjc 编译目标平台为 Windows，实际运行时将打印 `Windows, NOT Linux`；如果 cjc 编译目标平台为 Linux，则实际运行时将打印 `Linux, NOT Windows`。
 
 ### arch
 
 `arch` 表示目标平台的处理器架构。`arch` 条件支持 `==` 和 `!=` 两种操作符。
 
-支持的处理器架构有：`x86_64`、`aarch64`。
+支持的处理器架构有：`x86_64`、`aarch64`、`arm`。
 
 使用方式如下：
 
@@ -99,16 +103,17 @@ main() {
 ```cangjie
 @When[arch == "aarch64"]
 var arch = "aarch64"
-
 @When[arch == "x86_64"]
 var arch = "x86_64"
+@When[arch == "arm"]
+var arch = "arm"
 
 main() {
     println(arch)
 }
 ```
 
-在 `x86_64` 架构的目标平台编译执行，会得到 `x86_64` 的信息；在 `aarch64` 架构的目标平台编译执行，会得到 `aarch64` 的信息。
+如果 cjc 编译目标平台为 x86_64 架构，实际运行时将会打印 `x86_64`；如果 cjc 编译目标平台为 aarch64 架构，则实际运行时将会打印 `aarch64`；如果 cjc 编译目标平台为 arm 架构，则实际运行时将会打印 `arm`。
 
 ### env
 
@@ -123,7 +128,6 @@ main() {
 ```cangjie
 @When[env == "ohos"]
 var env = "ohos"
-
 @When[env != "ohos"]
 var env = "other"
 
@@ -132,7 +136,7 @@ main() {
 }
 ```
 
-在 OpenHarmony 目标平台上编译执行，会得到 `ohos` 的信息；在其他目标平台编译执行，会得到 `other` 的信息。
+如果 cjc 编译目标平台为 OpenHarmony，实际运行时将会打印 `ohos`；如果 cjc 编译目标平台为其他目标平台，则实际运行时将会打印 `other`。
 
 ### backend
 
@@ -149,10 +153,12 @@ main() {
 func foo() {
     print("cjnative backend")
 }
+
 @When[backend != "cjnative"]
 func foo() {
     print("not cjnative backend")
 }
+
 main() {
     foo()
 }
@@ -173,26 +179,32 @@ main() {
 func foo() {
     println("cjc_version equals 0.18.6")
 }
+
 @When[cjc_version != "0.18.6"]
 func foo() {
     println("cjc_version is NOT equal to 0.18.6")
 }
+
 @When[cjc_version > "0.18.6"]
 func fnn() {
     println("cjc_version is greater than 0.18.6")
 }
+
 @When[cjc_version <= "0.18.6"]
 func fnn() {
     println("cjc_version is less than or equal to 0.18.6")
 }
+
 @When[cjc_version < "0.18.6"]
 func fee() {
     println("cjc_version is less than 0.18.6")
 }
+
 @When[cjc_version >= "0.18.6"]
 func fee() {
     println("cjc_version is greater than or equal to 0.18.6")
 }
+
 main() {
     foo()
     fnn()
@@ -215,10 +227,12 @@ main() {
 func foo() {
     println("debug")
 }
+
 @When[!debug]
 func foo() {
     println("NOT debug")
 }
+
 main() {
     foo()
 }
@@ -248,7 +262,7 @@ func foo() {
 }
 
 @When[!test]
-main () {
+main() {
     println(foo())
 }
 ```
@@ -327,6 +341,7 @@ main () {
 func fee() {
     println("feature lion")
 }
+
 main() {
     fee()
 }
@@ -348,6 +363,8 @@ feature lion
 
 仓颉交叉编译至目标平台 `aarch64-linux-android31`，条件变量设置如下面代码所示，若需交叉编译至其他平台，请参考 [目标平台和条件编译映射表](#目标平台和条件编译映射表) 配置相应的条件编译选项。
 
+<!-- compile.error -->
+
 ```cangjie
 @When[os == "Linux" && arch == "aarch64" && env == "android"]
 func foo() {
@@ -365,20 +382,20 @@ main() {
 
 仓颉交叉编译支持的目标平台由内置条件变量 `os`、 `arch`、 `env` 共同确定，三者与目标平台的对应关系如下表所示：
 
-| 目标平台                      | arch      | os        | env         |
-| ----------------------------- | --------- | --------- | ----------- |
-| x86_64-windows-gnu            | "x86_64"  | "Windows" | "gnu"       |
-| x86_64-linux-gnu              | "x86_64"  | "Linux"   | "gnu"       |
-| x86_64-apple-darwin           | "x86_64"  | "macOS"   | ""            |
-| x86_64-linux-ohos             | "x86_64"  | "Linux"   | "ohos"      |
-| x86_64-w64-mingw32            | "x86_64"  | "Windows" | "gnu"       |
-| x86_64-linux-android[26+]<sup>[android target]</sup>     | "x86_64"  | "Linux"   | "android"   |
-| aarch64-linux-gnu             | "aarch64" | "Linux"   | "gnu"       |
-| aarch64-linux-android[26+]<sup>[android target]</sup>    | "aarch64" | "Linux"   | "android"   |
-| aarch64-apple-darwin          | "aarch64" | "macOS"   | ""            |
-| aarch64-linux-ohos            | "aarch64" | "Linux"   | "ohos"      |
-| arm64-apple-ios[11+]<sup>[ios target]</sup>           | "aarch64" | "iOS"     |    ""         |
+| 目标平台                      | arch      | os        | env       |
+| ----------------------------- | ----------- | --------- | --------- |
+| x86_64-windows-gnu            | "x86_64"  | "Windows" | "gnu"     |
+| x86_64-linux-gnu              | "x86_64"  | "Linux"   | "gnu"     |
+| x86_64-apple-darwin           | "x86_64"  | "macOS"   | ""          |
+| x86_64-linux-ohos             | "x86_64"  | "Linux"   | "ohos"    |
+| x86_64-w64-mingw32            | "x86_64"  | "Windows" | "gnu"     |
+| aarch64-linux-gnu             | "aarch64" | "Linux"   | "gnu"     |
+| aarch64-linux-android[23+]<sup>[android target]</sup>    | "aarch64" | "Linux"   | "android" |
+| aarch64-apple-darwin          | "aarch64" | "macOS"   | ""          |
+| aarch64-linux-ohos            | "aarch64" | "Linux"   | "ohos"    |
+| arm64-apple-ios[11+]<sup>[ios target]</sup>           | "aarch64" | "iOS"     |    ""       |
 | arm64-apple-ios[11+]-simulator<sup>[ios target]</sup> | "aarch64" | "iOS"     | "simulator" |
+| arm-linux-android23 | "arm"     | "Linux"     | "android" |
 
-<sup>[android target]</sup> x86_64-linux-android[26+] 中 android 后缀的数字用于指定 Android API Level。未指定数字时，默认 API Level 为 26；指定数字（如 x86_64-linux-android33）表示 Android API Level 为 33，指定的数字应大于等于 26。
-<sup>[ios target]</sup> arm64-apple-ios[11+] 中 ios 后缀的数字用于指定 ios 版本信息。未指定数字时，默认为 11；指定数字（如 arm64-apple-ios26）表示 ios 版本为 26，指定的数字应大于等于 11。
+<sup>[android target]</sup> aarch64-linux-android[23+] 中 android 后缀的数字用于指定 Android API Level。未指定数字时，默认 API Level 为 23；指定数字（如 aarch64-linux-android33）表示 Android API Level 为该数字，指定的数字应大于等于 23。
+<sup>[ios target]</sup> arm64-apple-ios[11+] 中 iOS 后缀的数字用于指定 iOS 版本信息。未指定数字时，默认为 11；指定数字（如 arm64-apple-ios26）表示 iOS 版本为 26，指定的数字应大于等于 11。

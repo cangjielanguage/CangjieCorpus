@@ -29,6 +29,7 @@
 |非属性宏|无。|
 |同步类型|不与父组件中任何类型的变量同步。|
 |允许装饰的变量类型|支持基础数据类型，对于String，Int64，Float64和Bool类型的变量，可以缺省类型。其他类型的变量不可缺省类型，必须被指定。<br/>支持Enum、Option类型、struct类型，struct类型内部无法修改。<br/>支持class类型，如果要感知内部的变化，在定义的时候需要被[\@Observed](./cj-macro-observed-and-publish.md)修饰，对类内属性和嵌套属性使用[\@Publish](./cj-macro-observed-and-publish.md)装饰后，才能观察到其变化。<br/>支持数组类型，如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylistt)。数组项为自定义类型时，使用[\@Observed](./cj-macro-observed-and-publish.md)和[\@Publish](./cj-macro-observed-and-publish.md)装饰时能观察到数组项中属性赋值。其他数组类型和Collection类型，如Array、Varray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。<br/>支持[Color](../../reference/arkui-cj/cj-common-types.md#class-color)类型。<br/>支持类型的场景请参见[观察变化](#观察变化)。<br/>不支持Any。|
+|不推荐装饰的变量类型|不推荐装饰函数类型。|
 |被装饰变量的初始值|必须本地初始化。|
 
 ## 变量的传递/访问规则说明
@@ -73,7 +74,8 @@
 
     ```cangjie
     // struct类型
-    @State var person: Person = Person(1, "Kim")
+    @State
+    var person: Person = Person(1, "Kim")
     ```
 
     对\@State装饰变量的整体赋值可行。
@@ -97,20 +99,24 @@
     ```cangjie
     @Observed
     class Person {
-        @Publish var value: String
+        @Publish
+        var value: String
     }
 
     @Observed
     class Model {
-        @Publish var value: String = ""
-        @Publish var name: Person = Person(value: " ")
+        @Publish
+        var value: String = ""
+        @Publish
+        var name: Person = Person(value: " ")
     }
     ```
 
     \@State装饰的类型是Model。
 
     ```cangjie
-    @State var title: Model = Model(value: 'Hello', name: Person(value: "World"))
+    @State
+    var title: Model = Model(value: 'Hello', name: Person(value: "World"))
     ```
 
     对\@State装饰变量的赋值。
@@ -134,7 +140,8 @@
     \@State装饰的对象为ArrayList类型数组时。
 
     ```cangjie
-    @State var arrlist: ArrayList<Int16> = ArrayList<Int16>([1, 2, 3])
+    @State
+    var arrlist: ArrayList<Int16> = ArrayList<Int16>([1, 2, 3])
     ```
 
     数组整体的变化可以感知。
@@ -154,7 +161,8 @@
     ```cangjie
     @Observed
     class Model {
-        @Publish public var value: Int
+        @Publish
+        public var value: Int
     }
     ```
 
@@ -162,7 +170,8 @@
 
     ```cangjie
     // ObservedArray数组类型
-    @State var title: ObservedArrayList<Model> = ObservedArrayList<Model>(ArrayList<Model>([Model(value: 11), Model(value: 1)]))
+    @State
+    var title: ObservedArrayList<Model> = ObservedArrayList<Model>(ArrayList<Model>([Model(value: 11), Model(value: 1)]))
     ```
 
     数组自身的赋值可以感知。
@@ -208,7 +217,8 @@
 
     ```cangjie
     //@State装饰的对象为HashSet时
-    @State var message: HashSet<Int64> = HashSet<Int64>()
+    @State
+    var message: HashSet<Int64> = HashSet<Int64>()
     ```
 
     HashSet整体的变化可以感知。
@@ -259,12 +269,15 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
+
 @Entry
 @Component
 class EntryView {
-    @State var count: Int = 0
+    @State
+    var count: Int = 0
     func build() {
         Button("click times: ${count}").onClick({evt => this.count += 1})
     }
@@ -283,12 +296,14 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Model {
-    @Publish public var value: String
+    @Publish
+    public var value: String
 }
 
 @Entry
@@ -305,8 +320,10 @@ class EntryView {
 
 @Component
 class MyComponent {
-    @State var title: Model = Model(value: 'Hello World')
-    @State var count: Int64 = 0
+    @State
+    var title: Model = Model(value: 'Hello World')
+    @State
+    var count: Int64 = 0
     private var increaseBy: Int64 = 1
     func build() {
         Column {
@@ -361,19 +378,22 @@ class MyComponent {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class PlayDetailViewModel {
-    @Publish var coverUrl: UInt32
+    @Publish
+    var coverUrl: UInt32
     var changeCoverUrl: (PlayDetailViewModel) -> Unit
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var vm: PlayDetailViewModel = PlayDetailViewModel(coverUrl: 0x00ff00,
+    @State
+    var vm: PlayDetailViewModel = PlayDetailViewModel(coverUrl: 0x00ff00,
         changeCoverUrl: {model: PlayDetailViewModel => model.coverUrl = 0x00F5FF})
     func build() {
         Column() {
@@ -403,19 +423,23 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Info {
-    @Publish var address: String = '杭州'
+    @Publish
+    var address: String = '杭州'
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var message: String = '上海'
-    @State var info: Info = Info()
+    @State
+    var message: String = '上海'
+    @State
+    var info: Info = Info()
     public func aboutToAppear() {
         this.info.address = this.message
     }
@@ -441,24 +465,29 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Info {
-    @Publish var address: String = '杭州'
+    @Publish
+    var address: String = '杭州'
 }
 
 @Observed
 class User {
-    @Publish var infomation: Info
+    @Publish
+    var infomation: Info
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var info: Info = Info(address: '上海')
-    @State var user: User = User(infomation: Info(address: '天津'))
+    @State
+    var info: Info = Info(address: '上海')
+    @State
+    var user: User = User(infomation: Info(address: '天津'))
     public func aboutToAppear() {
         this.user.infomation = this.info
     }
@@ -506,7 +535,8 @@ class EntryView {
 @Entry
 @Component
 class EntryView {
-    @State var count :Int64 = 1
+    @State
+    var count: Int64 = 1
     func build() {
         Column() {
             // 应避免直接在Text组件内改变count的值
@@ -528,14 +558,15 @@ class EntryView {
 @Entry
 @Component
 class EntryView {
-    @State var message: Int = 20;
+    @State
+    var message: Int = 20;
     func build() {
         Column() {
             Text("${this.message++}")
             Text("${this.message++}")
         }
-        .width(50)
-        .height(100)
+            .width(50)
+            .height(100)
     }
 }
 ```
@@ -562,12 +593,14 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Model {
-    @Publish var callback: () -> Unit
+    @Publish
+    var callback: () -> Unit
     func add(callback: () -> Unit) {
         this.callback = callback
     }
@@ -586,7 +619,8 @@ let model = Model(callback: {=>})
 @Entry
 @Component
 class EntryView {
-    @State var count: Int64 = 10
+    @State
+    var count: Int64 = 10
 
     public override func onPageShow() {
         model.add({=> this.count++})
@@ -599,7 +633,7 @@ class EntryView {
             })
         }
     }
-    public func aboutToDisappear(){
+    public func aboutToDisappear() {
         model.delete()
     }
 }

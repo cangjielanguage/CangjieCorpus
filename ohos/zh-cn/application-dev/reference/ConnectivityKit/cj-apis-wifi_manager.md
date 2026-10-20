@@ -27,7 +27,7 @@ API示例代码使用说明：
 - 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
 - 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
-上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md)。
+上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
 ## func getScanInfoList()
 
@@ -51,7 +51,7 @@ public func getScanInfoList(): Array<WifiScanInfo>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -97,7 +97,7 @@ public func isWifiActive(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -145,7 +145,7 @@ public func off(eventType: WifiCallbackType, callback!: ?CallbackObject = None):
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -206,7 +206,7 @@ public func on(eventType: WifiCallbackType, callback: Callback1Argument<Int32>):
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -227,14 +227,14 @@ import ohos.business_exception.BusinessException
 import ohos.callback_invoke.*
 import kit.PerformanceAnalysisKit.Hilog
 
-class WifiCallback1 <: Callback1Argument<Int32> {
+class WifiCallback <: Callback1Argument<Int32> {
     public func invoke(err: ?BusinessException, arg: Int32) {
         Hilog.info(0, "test", "invoke success", "")
     }
 }
 
 try {
-    let callback = WifiCallback1()
+    let callback = WifiCallback()
     // Register event
     on(WifiScanStateChange, callback)
     // Unregister event
@@ -260,14 +260,14 @@ public func p2pCancelConnect(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 801 | Capability not supported. |
   | 2801000 | Operation failed. |
-  | 2801001 | Wi-Fi STA disabled. |
+  | 2501001 | Wi-Fi STA disabled. |
 
 **示例：**
 
@@ -309,14 +309,14 @@ public func p2pConnect(config: WifiP2pConfig): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 801 | Capability not supported. |
   | 2801000 | Operation failed. |
-  | 2801001 | Wi-Fi STA disabled. |
+  | 2501001 | Wi-Fi STA disabled. |
 
 **示例：**
 
@@ -353,14 +353,14 @@ public func startDiscoverDevices(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 801 | Capability not supported. |
   | 2801000 | Operation failed. |
-  | 2801001 | Wi-Fi STA disabled. |
+  | 2501001 | Wi-Fi STA disabled. |
 
 **示例：**
 
@@ -396,14 +396,14 @@ public func stopDiscoverDevices(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[WIFI错误码](./cj-errorcode-wifi-manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 801 | Capability not supported. |
   | 2801000 | Operation failed. |
-  | 2801001 | Wi-Fi STA disabled. |
+  | 2501001 | Wi-Fi STA disabled. |
 
 **示例：**
 
@@ -863,7 +863,7 @@ public enum DeviceAddressType <: Equatable<DeviceAddressType> & ToString {
 
 **父类型：**
 
-- Equatable\<DeviceAddressType>
+- Equatable\<[DeviceAddressType](#enum-deviceaddresstype)>
 - ToString
 
 ### RandomDeviceAddress
@@ -975,7 +975,7 @@ public enum GroupOwnerBand <: Equatable<GroupOwnerBand> & ToString {
 
 **父类型：**
 
-- Equatable\<GroupOwnerBand>
+- Equatable\<[GroupOwnerBand](#enum-groupownerband)>
 - ToString
 
 ### GoBand2GHz
@@ -1097,7 +1097,7 @@ public enum WifiCallbackType <: Equatable<WifiCallbackType> & Hashable & ToStrin
 
 **父类型：**
 
-- Equatable\<WifiCallbackType>
+- Equatable\<[WifiCallbackType](#enum-wificallbacktype)>
 - Hashable
 - ToString
 
@@ -1216,7 +1216,7 @@ public enum WifiCategory <: Equatable<WifiCategory> & ToString {
 
 **父类型：**
 
-- Equatable\<WifiCategory>
+- Equatable\<[WifiCategory](#enum-wificategory)>
 - ToString
 
 ### Default
@@ -1347,7 +1347,7 @@ public enum WifiSecurityType <: Equatable<WifiSecurityType> & ToString {
 
 **父类型：**
 
-- Equatable\<WifiSecurityType>
+- Equatable\<[WifiSecurityType](#enum-wifisecuritytype)>
 - ToString
 
 ### WifiSecTypeEap

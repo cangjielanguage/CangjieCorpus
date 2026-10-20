@@ -20,7 +20,7 @@ import kit.ArkUI.*
 
 RowSplit通过分割线限制子组件的宽度。初始化时，分割线位置根据子组件的宽度来计算。初始化后，后续动态修改子组件的宽度则不生效，分割线位置保持不变，子组件宽度可以通过拖动相邻分割线进行改变。
 
-初始化后，动态修改[margin](../arkui-cj/cj-universal-attribute-size.md#func-marginlength)、[border](../arkui-cj/cj-universal-attribute-border.md#func-borderlength-resourcecolor-length-borderstyle)、[padding](../arkui-cj/cj-universal-attribute-size.md#func-paddinglength)通用属性导致子组件宽度大于相邻分割线间距的异常情况下，不支持拖动分割线改变子组件的宽度。
+初始化后，动态修改[margin](./cj-universal-attribute-size.md#func-marginlength)、[border](./cj-universal-attribute-border.md#func-borderlength-resourcecolor-length-borderstyle)、[padding](./cj-universal-attribute-size.md#func-paddinglength)通用属性导致子组件宽度大于相邻分割线间距的异常情况下，不支持拖动分割线改变子组件的宽度。
 
 ## 创建组件
 
@@ -61,7 +61,7 @@ public func resizeable(value: ?Bool): This
 > **说明：**
 >
 > - RowSplit的分割线可以改变左右两边子组件的宽度，子组件可改变宽度的范围取决于子组件的最大最小宽度。
-> - 支持[clip](../arkui-cj/cj-universal-attribute-shapclip.md#func-clipbool)、[margin](../arkui-cj/cj-universal-attribute-size.md#func-marginlength)等通用属性，clip不设置的时候默认值为true。
+> - 支持[clip](./cj-universal-attribute-shapclip.md#func-clipbool)、[margin](./cj-universal-attribute-size.md#func-marginlength)等通用属性，clip不设置的时候默认值为true。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -81,6 +81,7 @@ RowSplit的基本用法。设置可拖动的、横向布局的子组件。
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -120,11 +121,12 @@ class EntryView {
                     .backgroundColor(0xF5DEB3)
                     .textAlign(TextAlign.Center)
             }
-            .resizeable(true) // 可拖动
-            .width(90.percent).height(100)
+                .resizeable(true) // 可拖动
+                .width(90.percent)
+                .height(100)
         }
-        .width(100.percent)
-        .padding(top: 5)
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```

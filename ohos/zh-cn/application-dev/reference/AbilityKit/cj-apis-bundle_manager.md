@@ -19,7 +19,7 @@ import kit.AbilityKit.*
 API示例代码使用说明：
 
 - 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
-- 若示例需获取[Context](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
+- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -291,7 +291,7 @@ public let metadata: Array<Metadata>
 
 **功能：** Ability的元信息。可以配置成系统定义的参数，使用系统提供的能力，例如快捷方式、窗口元数据配置等。也可以自定义配置参数，通过调用[getBundleInfoForSelf](#static-func-getbundleinfoforselfint32)接口，bundleFlags参数传入GET_BUNDLE_INFO_WITH_HAP_MODULE、GET_BUNDLE_INFO_WITH_ABILITY和GET_BUNDLE_INFO_WITH_METADATA获取。
 
-**类型：** Array\<[Metadata](./cj-apis-metadata.md#class-metadata)>
+**类型：** Array\<[Metadata](cj-apis-metadata.md#class-metadata)>
 
 **读写能力：** 只读
 
@@ -337,7 +337,7 @@ public let name: String
 public let orientation: DisplayOrientation
 ```
 
-**功能：** Ability的显示模式。来源于module.json5中abilies标签下配置的orientation字段，如果module.json5配置文件中orientation配置枚举，orientation属性有值且非0，取值详情参考[显示模式枚举](#enum-displayorientation)；如果配置文件中配置的是资源索引，orientation属性值为0。
+**功能：** Ability的显示模式。来源于module.json5中abilities标签下配置的orientation字段，如果module.json5配置文件中orientation配置枚举，orientation属性有值且非0，取值详情参考[显示模式枚举](#enum-displayorientation)；如果配置文件中配置的是资源索引，orientation属性值为0。
 
 **类型：** [DisplayOrientation](#enum-displayorientation)
 
@@ -1473,7 +1473,7 @@ public static func canOpenLink(link: String): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[包管理子系统通用错误码](./cj-errorcode-bundle.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[包管理子系统通用错误码](./cj-errorcode-bundle.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1572,13 +1572,13 @@ public static func getProfileByAbility(moduleName: String, abilityName: String, 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[包管理子系统通用错误码](./cj-errorcode-bundle.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[包管理子系统通用错误码](./cj-errorcode-bundle.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 17700002 | The specified moduleName is not existed. |
-  | 17700003 | The specified abilityName is not existed. |
-  | 17700024 | Failed to get the profile because there is no profile in the HAP. |
+  | 17700002 | The specified module name is not found. |
+  | 17700003 | The specified ability name is not found. |
+  | 17700024 | Failed to get the profile because the specified profile is not found in the HAP. |
   | 17700029 | The specified ability is disabled. |
 
 **示例：**
@@ -1676,7 +1676,7 @@ public static func isDefaultApplication(appType: ApplicationType): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|appType|ApplicationType|是|-|要查询的应用类型，取[ApplicationType](#enum-applicationtype)类型中的值。|
+|appType|[ApplicationType](#enum-applicationtype)|是|-|要查询的应用类型，取[ApplicationType](#enum-applicationtype)类型中的值。ApplicationType|是|-|要查询的应用类型，取[ApplicationType](#enum-applicationtype)类型中的值。|
 
 **返回值：**
 
@@ -1686,7 +1686,7 @@ public static func isDefaultApplication(appType: ApplicationType): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2292,7 +2292,7 @@ public let iconId: Int32
 public let installationFree: Bool
 ```
 
-**功能：** 模块是否支免安装（无需用户通过应用市场显式安装），取值为true表示支持免安装，取值为false表示不支持免安装。
+**功能：** 模块是否支持免安装（无需用户通过应用市场显式安装），取值为true表示支持免安装，取值为false表示不支持免安装。
 
 **类型：** Bool
 
@@ -3213,7 +3213,7 @@ AutoRotationLandscape
 AutoRotationLandscapeRestricted
 ```
 
-**功能：** 表述受开关控制的自动横向旋转模式。
+**功能：** 表示受开关控制的自动横向旋转模式。
 
 **系统能力：** SystemCapability.BundleManager.BundleFramework.Core
 

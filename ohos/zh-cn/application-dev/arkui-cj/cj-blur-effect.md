@@ -45,9 +45,9 @@ class EntryView {
                 .backgroundImage(@r(app.media.image1))
                 .backgroundImageSize(width: 400, height: 300)
         }
-        .width(100.percent)
-        .height(50.percent)
-        .margin(top: 30)
+            .width(100.percent)
+            .height(50.percent)
+            .margin(top: 30)
     }
 }
 ```
@@ -68,9 +68,12 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var radius: Float64 = 0.0
-    @State var text: String = ''
-    @State var y: String = '手指不在屏幕上'
+    @State
+    var radius: Float64 = 0.0
+    @State
+    var text: String = ''
+    @State
+    var y: String = '手指不在屏幕上'
 
     protected override func aboutToAppear() {
         this.text = "按住屏幕上下滑动\n" + "当前手指所在y轴位置 ： " + this.y +
@@ -78,7 +81,7 @@ class EntryView {
     }
 
     func build() {
-        Flex(direction: FlexDirection.Column, justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center){
+        Flex(direction: FlexDirection.Column, justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center) {
             Text(this.text)
                 .height(200)
                 .fontSize(20)

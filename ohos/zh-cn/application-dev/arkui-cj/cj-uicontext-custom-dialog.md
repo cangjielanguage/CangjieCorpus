@@ -69,7 +69,6 @@
     @Entry
     @Component
     class EntryView {
-
         @Builder
         func CustomDialog() {
             Column() {
@@ -80,12 +79,12 @@
             }.margin(10.vp)
         }
 
-        func build(){
+        func build() {
             Button("open dialog and options")
                 .margin(top: 50)
                 .onClick({
                     evt => getUIContext().getPromptAction().openCustomDialog(
-                        CustomDialogOptions(builder: bind(this.CustomDialog, this)),
+                        CustomDialogOptions(builder: this.CustomDialog),
                         {
                             id => customdialogId = id
                         }
@@ -131,12 +130,12 @@
                     .onClick(
                         {
                             evt => getUIContext().getPromptAction().openCustomDialog(
-                                CustomDialogOptions(builder: bind(this.CustomDialog, this)),
+                                CustomDialogOptions(builder: this.CustomDialog),
                                 {
                                     id => customdialogId = id
                                 }
                             )
-                        })
+                    })
             }
         }
     }
@@ -185,7 +184,7 @@ public class EntryView {
                 .margin(top: 50)
                 .onClick({
                         evt => getUIContext().getPromptAction().openCustomDialog(
-                            CustomDialogOptions(builder: bind(this.CustomDialog, this)),
+                            CustomDialogOptions(builder: this.CustomDialog),
                             {
                                 id => customdialogId = id
                             }
@@ -195,7 +194,7 @@ public class EntryView {
                 .margin(top: 50)
                 .onClick({
                         evt => getUIContext().getPromptAction().openCustomDialog(
-                            CustomDialogOptions(builder: bind(this.CustomDialog1, this)),
+                            CustomDialogOptions(builder: this.CustomDialog1),
                             {
                                 id => customdialogId = id
                             }

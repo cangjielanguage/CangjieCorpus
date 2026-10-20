@@ -105,7 +105,7 @@
 
 投影走焦算法基于当前获焦组件在走焦方向上的投影，结合子组件与投影的重叠面积和中心点距离进行胜出判定。该算法特别适用于子组件大小不一的容器，目前仅有配置了wrap属性的Flex组件。运行规则如下：
 
-- 规则1：方向键走焦时，判断投影与子组件区域的重叠面积，在所有面积不为0的子组件中，计算它们与当前获焦组件的中心点直线距离，距离最短的胜出。若存在多个备选，则节点树上更靠前的胜出。若无任何子组件与投影由重叠，说明该容器已经无法处理该方向键的走焦请求。
+- 规则1：方向键走焦时，判断投影与子组件区域的重叠面积，在所有面积不为0的子组件中，计算它们与当前获焦组件的中心点直线距离，距离最短的胜出。若存在多个备选，则节点树上更靠前的胜出。若无任何子组件与投影有重叠，说明该容器已经无法处理该方向键的走焦请求。
 - 规则2：TAB键走焦时，先根据规则1，按照方向键右进行判定，若找到则成功退出。若无法找到，则将当前获焦子组件的位置模拟往下移动该获焦子组件的高度，然后再按照方向键左进行投影判定，有投影重叠且中心点直线距离最远的子组件胜出，若无投影重叠的子组件，则表示该容器无法处理本次TAB键走焦请求。
 - 规则3：Shift+TAB键走焦时，先根据规则1，按照方向键左进行判定，找到则成功退出。若无法找到，则将当前获焦子组件的位置模拟向上移动该获焦子组件的高度，然后再按照方向键右进行投影判定，有投影重叠且中心点直线距离最远的子组件胜出，若无投影重叠的子组件，则表示该容器无法处理本次的Shift+TAB键走焦请求。
 
@@ -133,58 +133,64 @@ onFocus和onBlur两个接口通常成对使用，来监听组件的焦点变化�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var oneButtonColor: Color = Color.Gray
-    @State var twoButtonColor: Color = Color.Gray
-    @State var threeButtonColor: Color = Color.Gray
+    @State
+    var oneButtonColor: Color = Color.Gray
+    @State
+    var twoButtonColor: Color = Color.Gray
+    @State
+    var threeButtonColor: Color = Color.Gray
     func build() {
         Column(space: 20) {
-        // 通过外接键盘的上下键可以让焦点在三个按钮间移动，按钮获焦时颜色变化，失焦时变回原背景色
-        Button("First Button")
-            .backgroundColor(oneButtonColor)
-            .width(260)
-            .height(70)
-            .fontColor(Color.Black)
-            // 监听第一个组件的获焦事件，获焦后改变颜色
-            .onFocus({ =>
-                oneButtonColor = Color(0x64BB5C)
-            })
-            // 监听第一个组件的失焦事件，失焦后改变颜色
-            .onBlur({=>
-                oneButtonColor = Color.Gray
-            })
-        Button("Second Button")
-            .backgroundColor(twoButtonColor)
-            .width(260)
-            .height(70)
-            .fontColor(Color.Black)
-            // 监听第二个组件的获焦事件，获焦后改变颜色
-            .onFocus({=>
-                twoButtonColor = Color(0x64BB5C)
-            })
-            // 监听第二个组件的失焦事件，失焦后改变颜色
-            .onBlur({=>
-                twoButtonColor = Color.Gray
-            })
-        Button("Third Button")
-            .backgroundColor(threeButtonColor)
-            .width(260)
-            .height(70)
-            .fontColor(Color.Black)
-            // 监听第三个组件的获焦事件，获焦后改变颜色
-            .onFocus({=>
-                threeButtonColor = Color(0x64BB5C)
-            })
-            // 监听第三个组件的失焦事件，失焦后改变颜色
-            .onBlur({=>
-                threeButtonColor = Color.Gray
-            })
-        }.width(100.percent).margin(top: 20)
+            // 通过外接键盘的上下键可以让焦点在三个按钮间移动，按钮获焦时颜色变化，失焦时变回原背景色
+            Button("First Button")
+                .backgroundColor(oneButtonColor)
+                .width(260)
+                .height(70)
+                .fontColor(Color.Black)
+                // 监听第一个组件的获焦事件，获焦后改变颜色
+                .onFocus({
+                    => oneButtonColor = Color(0x64BB5C)
+                })
+                // 监听第一个组件的失焦事件，失焦后改变颜色
+                .onBlur({
+                    => oneButtonColor = Color.Gray
+                })
+            Button("Second Button")
+                .backgroundColor(twoButtonColor)
+                .width(260)
+                .height(70)
+                .fontColor(Color.Black)
+                // 监听第二个组件的获焦事件，获焦后改变颜色
+                .onFocus({
+                    => twoButtonColor = Color(0x64BB5C)
+                })
+                // 监听第二个组件的失焦事件，失焦后改变颜色
+                .onBlur({
+                    => twoButtonColor = Color.Gray
+                })
+            Button("Third Button")
+                .backgroundColor(threeButtonColor)
+                .width(260)
+                .height(70)
+                .fontColor(Color.Black)
+                // 监听第三个组件的获焦事件，获焦后改变颜色
+                .onFocus({
+                    => threeButtonColor = Color(0x64BB5C)
+                })
+                // 监听第三个组件的失焦事件，失焦后改变颜色
+                .onBlur({
+                    => threeButtonColor = Color.Gray
+                })
+        }
+            .width(100.percent)
+            .margin(top: 20)
     }
 }
 ```
@@ -239,17 +245,23 @@ public func focusOnTouch(value: ?Bool): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var textFocusable: Bool = true
-    @State var textEnabled: Bool = true
-    @State var color1: Color = Color(0xFFFF00)
-    @State var color2: Color = Color(0xFFFF00)
-    @State var color3: Color = Color(0xFFFF00)
+    @State
+    var textFocusable: Bool = true
+    @State
+    var textEnabled: Bool = true
+    @State
+    var color1: Color = Color(0xFFFF00)
+    @State
+    var color2: Color = Color(0xFFFF00)
+    @State
+    var color3: Color = Color(0xFFFF00)
 
     func build() {
         Column(space: 5) {
@@ -259,11 +271,11 @@ class EntryView {
                 .borderWidth(2)
                 .width(300)
                 .height(70)
-                .onFocus({ =>
-                    color1 = Color.Blue
+                .onFocus({
+                    => color1 = Color.Blue
                 })
-                .onBlur({ =>
-                    color1 = Color(0xFFFF00)
+                .onBlur({
+                    => color1 = Color(0xFFFF00)
                 })
 
             Divider()
@@ -276,11 +288,11 @@ class EntryView {
                 .height(70)
                 .focusable(textFocusable)
                 .focusOnTouch(true)
-                .onFocus({ =>
-                    color2 = Color.Blue
+                .onFocus({
+                    => color2 = Color.Blue
                 })
-                .onBlur({ =>
-                    color2 = Color(0xFFFF00)
+                .onBlur({
+                    => color2 = Color(0xFFFF00)
                 })
 
             // 第三个Text设置了focusable为true，enabled初始为true
@@ -292,40 +304,47 @@ class EntryView {
                 .focusable(true)
                 .enabled(textEnabled)
                 .focusOnTouch(true)
-                .onFocus({ =>
-                    color3 = Color.Blue
+                .onFocus({
+                    => color3 = Color.Blue
                 })
-                .onBlur({ =>
-                    color3 = Color(0xFFFF00)
+                .onBlur({
+                    => color3 = Color(0xFFFF00)
                 })
 
             Divider()
 
             Row() {
                 Button("Button1")
-                    .width(140).height(70).margin(right: 20)
+                    .width(140)
+                    .height(70)
+                    .margin(right: 20)
                 Button("Button2")
-                    .width(140).height(70)
+                    .width(140)
+                    .height(70)
             }
 
             Divider()
             Button("Button3")
-                .width(300).height(70)
+                .width(300)
+                .height(70)
 
             Divider()
         }
-        .width(100.percent)
-        .justifyContent(FlexAlign.Center)
-        .onKeyEvent({ e =>
-            // 绑定onKeyEvent，在该Column组件获焦时，按下'F'键，可将第二个Text的focusable置反
-            if (e.keyCode == 2022 && e.keyType == KeyType.Down) {
-                textFocusable = !textFocusable
-            }
-            // 绑定onKeyEvent，在该Column组件获焦时，按下'G'键，可将第三个Text的enabled置反
-            if (e.keyCode == 2023 && e.keyType == KeyType.Down) {
-                textEnabled = !textEnabled
-            }
-        })
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
+            .onKeyEvent(
+                {
+                    e =>
+                        // 绑定onKeyEvent，在该Column组件获焦时，按下'F'键，可将第二个Text的focusable置反
+                        if (e.keyCode == 2022 && e.keyType == KeyType.Down) {
+                            textFocusable = !textFocusable
+                        }
+                        // 绑定onKeyEvent，在该Column组件获焦时，按下'G'键，可将第三个Text的enabled置反
+                        if (e.keyCode == 2023 && e.keyType == KeyType.Down) {
+                            textEnabled = !textEnabled
+                        }
+                }
+            )
     }
 }
 ```
@@ -354,15 +373,19 @@ public func defaultFocus(value: ?Bool): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var oneButtonColor: Color = Color.Gray
-    @State var twoButtonColor: Color = Color.Gray
-    @State var threeButtonColor: Color = Color.Gray
+    @State
+    var oneButtonColor: Color = Color.Gray
+    @State
+    var twoButtonColor: Color = Color.Gray
+    @State
+    var threeButtonColor: Color = Color.Gray
 
     func build() {
         Column(space: 20) {
@@ -373,12 +396,12 @@ class EntryView {
                 .backgroundColor(oneButtonColor)
                 .fontColor(Color.Black)
                 // 监听第一个组件的获焦事件，获焦后改变颜色
-                .onFocus({ =>
-                    oneButtonColor = Color(0x64BB5C)
+                .onFocus({
+                    => oneButtonColor = Color(0x64BB5C)
                 })
                 // 监听第一个组件的失焦事件，失焦后改变颜色
-                .onBlur({ =>
-                    oneButtonColor = Color.Gray
+                .onBlur({
+                    => oneButtonColor = Color.Gray
                 })
 
             Button("Second Button")
@@ -387,12 +410,12 @@ class EntryView {
                 .backgroundColor(twoButtonColor)
                 .fontColor(Color.Black)
                 // 监听第二个组件的获焦事件，获焦后改变颜色
-                .onFocus({ =>
-                    twoButtonColor = Color(0x64BB5C)
+                .onFocus({
+                    => twoButtonColor = Color(0x64BB5C)
                 })
                 // 监听第二个组件的失焦事件，失焦后改变颜色
-                .onBlur({ =>
-                    twoButtonColor = Color.Gray
+                .onBlur({
+                    => twoButtonColor = Color.Gray
                 })
 
             Button("Third Button")
@@ -403,16 +426,16 @@ class EntryView {
                 // 设置默认焦点
                 .defaultFocus(true)
                 // 监听第三个组件的获焦事件，获焦后改变颜色
-                .onFocus({ =>
-                    threeButtonColor = Color(0x64BB5C)
+                .onFocus({
+                    => threeButtonColor = Color(0x64BB5C)
                 })
                 // 监听第三个组件的失焦事件，失焦后改变颜色
-                .onBlur({ =>
-                    threeButtonColor = Color.Gray
+                .onBlur({
+                    => threeButtonColor = Color.Gray
                 })
         }
-        .width(100.percent)
-        .margin(top: 20)
+            .width(100.percent)
+            .margin(top: 20)
     }
 }
 ```
@@ -460,14 +483,17 @@ public static func requestFocus(value: ?String): Bool
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var btColor: UInt32 = 0x2787d9
-    @State var btColor2: UInt32 = 0x2787d9
+    @State
+    var btColor: UInt32 = 0x2787d9
+    @State
+    var btColor2: UInt32 = 0x2787d9
 
     func build() {
         Column(space: 20) {
@@ -478,11 +504,11 @@ class EntryView {
                     .fontColor(Color.White)
                     .focusOnTouch(true)
                     .backgroundColor(0x2787d9)
-                    .onFocus({ =>
-                        btColor = 0xd5d5d5
+                    .onFocus({
+                        => btColor = 0xd5d5d5
                     })
-                    .onBlur({ =>
-                        btColor = 0x2787d9
+                    .onBlur({
+                        => btColor = 0x2787d9
                     })
                     .id("testButton")
 
@@ -492,11 +518,11 @@ class EntryView {
                     .fontColor(Color.White)
                     .focusOnTouch(true)
                     .backgroundColor(btColor2)
-                    .onFocus({ =>
-                        btColor2 = 0xd5d5d5
+                    .onFocus({
+                        => btColor2 = 0xd5d5d5
                     })
-                    .onBlur({ =>
-                        btColor2 = 0x2787d9
+                    .onBlur({
+                        => btColor2 = 0x2787d9
                     })
                     .id("testButton2")
 
@@ -510,14 +536,14 @@ class EntryView {
                     .width(200)
                     .height(70)
                     .fontColor(Color.White)
-                    .onClick({ evt =>
-                        FocusControl.requestFocus("testButton2")
+                    .onClick({
+                        evt => FocusControl.requestFocus("testButton2")
                     })
                     .backgroundColor(0xff2787d9)
             }
         }
-        .width(100.percent)
-        .height(100.percent)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```
@@ -539,32 +565,40 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var count: Int = 0
-    @State var name: String = "Button"
+    @State
+    var count: Int = 0
+    @State
+    var name: String = "Button"
 
     func build() {
         Column {
             Button(name)
                 .fontSize(30)
-                .onClick({ evt =>
-                    count++
-                    if (count <= 0) {
-                        name = "count is negative number"
-                    } else if (count % 2 == 0) {
-                        name = "count is even number"
-                    } else {
-                        name = "count is odd number"
+                .onClick(
+                    {
+                        evt =>
+                            count++
+                            if (count <= 0) {
+                                name = "count is negative number"
+                            } else if (count % 2 == 0) {
+                                name = "count is even number"
+                            } else {
+                                name = "count is odd number"
+                            }
                     }
-                })
+                )
                 .height(60)
         }
-        .height(100.percent).width(100.percent).justifyContent(FlexAlign.Center)
+            .height(100.percent)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

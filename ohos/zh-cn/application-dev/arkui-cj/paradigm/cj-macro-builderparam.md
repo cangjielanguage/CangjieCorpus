@@ -22,17 +22,20 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-@Builder func overBuilder() {}
+@Builder
+func overBuilder() {}
 
 @Component
 class Child {
     // 使用全局自定义构建函数初始化@BuilderParam
-    @BuilderParam var customOverBuilderParam: () -> Unit = overBuilder
+    @BuilderParam
+    var customOverBuilderParam: () -> Unit = overBuilder
 
-    func build(){}
+    func build() {}
 }
 ```
 
@@ -62,17 +65,19 @@ class Child {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-class Tmp{
+class Tmp {
     var label: String = ''
     init(label: String) {
         this.label = label
     }
 }
 
-@Builder func overBuilder(tmp: Tmp) {
+@Builder
+func overBuilder(tmp: Tmp) {
     Text(tmp.label)
         .width(400)
         .height(50)
@@ -83,9 +88,11 @@ class Tmp{
 class Child {
     var label: String = 'Child'
     // 无参数类型，指向的customBuilder也是无参数类型
-    @BuilderParam var customBuilderParam: () -> Unit
+    @BuilderParam
+    var customBuilderParam: () -> Unit
     // 有参数类型，指向的overBuilder也是有参数类型的方法
-    @BuilderParam var customOverBuilderParam: (Tmp) -> Unit = overBuilder
+    @BuilderParam
+    var customOverBuilderParam: (Tmp) -> Unit = overBuilder
 
     func build() {
         Column() {
@@ -100,7 +107,8 @@ class Child {
 class EntryView {
     var label: String = 'Parent'
 
-    @Builder func componentBuilder() {
+    @Builder
+    func componentBuilder() {
         Text(this.label)
     }
 
@@ -125,16 +133,19 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-@Builder func customBuilder() {}
+@Builder
+func customBuilder() {}
 
 @Component
 class ChildPage {
     var label: String = 'Child Page'
 
-    @BuilderParam var customBuilderParam: () -> Unit = customBuilder
+    @BuilderParam
+    var customBuilderParam: () -> Unit = customBuilder
 
     func build() {
         Column() {
@@ -145,7 +156,8 @@ class ChildPage {
 
 let builder_value: String = 'Hello World'
 
-@Builder func overBuilder() {
+@Builder
+func overBuilder() {
     Row() {
         Text('全局 Builder: ${builder_value}')
             .fontSize(20)
@@ -155,11 +167,12 @@ let builder_value: String = 'Hello World'
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     var label: String = 'Parent Page'
 
-    @Builder func componentBuilder() {
-        Row(){
+    @Builder
+    func componentBuilder() {
+        Row() {
             Text('局部 Builder :${this.label}')
                 .fontSize(20)
                 .fontWeight(FontWeight.Bold)
@@ -172,20 +185,19 @@ class EntryView{
             this.componentBuilder()
             ChildPage(
                 // 把this.componentBuilder传给子组件ChildPage的@BuilderParam customBuilderParam。
-                customBuilderParam: this.componentBuilder
-                )
-        Line()
-            .width(1000)
-            .height(10)
-            .backgroundColor(0x000000).margin(10)
-        // 调用全局overBuilder()时，所以展示的内容为"Hello World"。
-        overBuilder()
-        ChildPage(
-            // 把全局overBuilder传给子组件ChildPage的@BuilderParam customBuilderParam，所以展示的内容为"Hello World"。
-            customBuilderParam: overBuilder
-        )
+                customBuilderParam: this.componentBuilder)
+            Line()
+                .width(1000)
+                .height(10)
+                .backgroundColor(0x000000)
+                .margin(10)
+            // 调用全局overBuilder()时，所以展示的内容为"Hello World"。
+            overBuilder()
+            ChildPage(
+                // 把全局overBuilder传给子组件ChildPage的@BuilderParam customBuilderParam，所以展示的内容为"Hello World"。
+                customBuilderParam: overBuilder)
+        }
     }
-  }
 }
 ```
 
@@ -205,30 +217,35 @@ class EntryView{
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-@Builder func globalBuilder() {
+@Builder
+func globalBuilder() {
     Text('Hello World')
 }
+
 @Entry
 @Component
 class EntryView {
-    @State var message: String = "";
+    @State
+    var message: String = "";
     func build() {
         Column() {
-        // 子组件ChildBuilder接收@State修饰的变量，会出现编译和编辑报错
-        ChildPage(ChildBuilder: this.message)
+            // 子组件ChildBuilder接收@State修饰的变量，会出现编译和编辑报错
+            ChildPage(ChildBuilder: this.message)
         }
     }
 }
 
 @Component
 class ChildPage {
-    @BuilderParam var ChildBuilder: () -> Unit = globalBuilder;
+    @BuilderParam
+    var ChildBuilder: () -> Unit = globalBuilder;
     func build() {
         Column() {
-        this.ChildBuilder()
+            this.ChildBuilder()
         }
     }
 }
@@ -242,12 +259,15 @@ class ChildPage {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-@Builder func globalBuilder() {
+@Builder
+func globalBuilder() {
     Text('Hello World')
 }
+
 @Entry
 @Component
 class EntryView {
@@ -260,10 +280,11 @@ class EntryView {
 
 @Component
 class ChildPage {
-    @BuilderParam var ChildBuilder: () -> Unit = globalBuilder;
+    @BuilderParam
+    var ChildBuilder: () -> Unit = globalBuilder;
     func build() {
         Column() {
-        this.ChildBuilder()
+            this.ChildBuilder()
         }
     }
 }

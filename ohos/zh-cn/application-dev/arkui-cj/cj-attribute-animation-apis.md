@@ -25,6 +25,7 @@ public func animateTo(value: AnimateParam, event: VoidCallback): Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.ui_context.*
 import ohos.arkui.state_macro_manage.*
@@ -32,65 +33,74 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var animate: Bool = false
+    @State
+    var animate: Bool = false
     //第一步：声明相关状态变量
-    @State var rotateValue: Float32 = 0.0
-    @State var translateX: Float32 = 0.0
-    @State var opacityValue: Float32 = 1.0
+    @State
+    var rotateValue: Float32 = 0.0
+    @State
+    var translateX: Float32 = 0.0
+    @State
+    var opacityValue: Float32 = 1.0
 
     //第二步：将状态变量设置到相关可动画属性接口
     func build() {
         Row {
             //组件一
             Column {
+
             }
-            .rotate(angle:this.rotateValue)
-            .backgroundColor(0x317AF7)
-            .justifyContent(FlexAlign.Center)
-            .width(100.vp)
-            .height(100.vp)
-            .borderRadius(30.vp)
-            .onClick({ evt =>
-                    getUIContext().animateTo(AnimateParam(curve: Curve.Smooth),
-                    { =>
-                        this.animate = !this.animate
-                        //第三步：闭包内通过状态变量改变UI界面
-                        //这里可以写任何能改变UI的逻辑比如数组添加，显隐控制，系统会检测改变后的UI界面与之前的UI界面的差异，对有差异的部分添加动画
-                        //组件一的rotate属性发生变化，所以会给组件一添加rotate旋转动画
-                        if (this.animate) {
-                            this.rotateValue = 90.0
-                        } else {
-                            this.rotateValue = 0.0
+                .rotate(angle: this.rotateValue)
+                .backgroundColor(0x317AF7)
+                .justifyContent(FlexAlign.Center)
+                .width(100.vp)
+                .height(100.vp)
+                .borderRadius(30.vp)
+                .onClick({
+                    evt => getUIContext().animateTo(
+                        AnimateParam(curve: Curve.Smooth),
+                        {
+                            =>
+                                this.animate = !this.animate
+                                //第三步：闭包内通过状态变量改变UI界面
+                                //这里可以写任何能改变UI的逻辑比如数组添加，显隐控制，系统会检测改变后的UI界面与之前的UI界面的差异，对有差异的部分添加动画
+                                //组件一的rotate属性发生变化，所以会给组件一添加rotate旋转动画
+                                if (this.animate) {
+                                    this.rotateValue = 90.0
+                                } else {
+                                    this.rotateValue = 0.0
+                                }
+                                //组件二的透明度发生变化，所以会给组件二添加透明度的动画
+                                if (this.animate) {
+                                    this.opacityValue = 0.6
+                                } else {
+                                    this.opacityValue = 1.0
+                                }
+                                //组件二的translate属性发生变化，所以会给组件二添加translate偏移动画
+                                if (this.animate) {
+                                    this.translateX = 50.0
+                                } else {
+                                    this.translateX = 0.0
+                                }
                         }
-                        //组件二的透明度发生变化，所以会给组件二添加透明度的动画
-                        if (this.animate) {
-                            this.opacityValue = 0.6
-                        } else {
-                            this.opacityValue = 1.0
-                        }
-                        //组件二的translate属性发生变化，所以会给组件二添加translate偏移动画
-                        if (this.animate) {
-                            this.translateX = 50.0
-                        } else {
-                            this.translateX = 0.0
-                        }
-                    })
-            })
+                    )
+                })
 
             //组件二
             Column {
+
             }
-            .justifyContent(FlexAlign.Center)
-            .width(100.vp)
-            .height(100.vp)
-            .backgroundColor(0xD94838)
-            .borderRadius(30.vp)
-            .opacity(Float64(this.opacityValue))
-            .translate(x: Float64(this.translateX))
+                .justifyContent(FlexAlign.Center)
+                .width(100.vp)
+                .height(100.vp)
+                .backgroundColor(0xD94838)
+                .borderRadius(30.vp)
+                .opacity(Float64(this.opacityValue))
+                .translate(x: Float64(this.translateX))
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```
@@ -105,63 +115,76 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var animate: Bool = false
+    @State
+    var animate: Bool = false
     //第一步：声明相关状态变量
-    @State var rotateValue: Float32 = 0.0
-    @State var translateX: Float32 = 0.0
-    @State var opacityValue: Float32 = 1.0
+    @State
+    var rotateValue: Float32 = 0.0
+    @State
+    var translateX: Float32 = 0.0
+    @State
+    var opacityValue: Float32 = 1.0
 
     //第二步：将状态变量设置到相关可动画属性接口
     func build() {
         Row {
             //组件一
             Column {
+
             }
-            .opacity(Float64(this.opacityValue))
-            .rotate(angle:this.rotateValue)
-            .backgroundColor(0x317AF7)
-            .justifyContent(FlexAlign.Center)
-            .width(100.vp)
-            .height(100.vp)
-            .borderRadius(30.vp)
-            .onClick({ evt=>
-                    this.animate = !this.animate
-                    if (this.animate) {
-                        this.rotateValue = 90.0
-                    } else {
-                        this.rotateValue = 0.0
+                .opacity(Float64(this.opacityValue))
+                .rotate(angle: this.rotateValue)
+                .backgroundColor(0x317AF7)
+                .justifyContent(FlexAlign.Center)
+                .width(100.vp)
+                .height(100.vp)
+                .borderRadius(30.vp)
+                .onClick(
+                    {
+                        evt =>
+                            this.animate = !this.animate
+                            if (this.animate) {
+                                this.rotateValue = 90.0
+                            } else {
+                                this.rotateValue = 0.0
+                            }
+                            if (this.animate) {
+                                this.opacityValue = 0.6
+                            } else {
+                                this.opacityValue = 1.0
+                            }
+                            if (this.animate) {
+                                this.translateX = 50.0
+                            } else {
+                                this.translateX = 0.0
+                            }
                     }
-                    if (this.animate) {
-                        this.opacityValue = 0.6
-                    } else {
-                        this.opacityValue = 1.0
-                    }
-                    if (this.animate) {
-                        this.translateX = 50.0
-                    } else {
-                        this.translateX = 0.0
-                    }
-            })
-            .animation(AnimateParam(curve: Curve.Smooth))
+                )
+                .animation(AnimateParam(curve: Curve.Smooth))
 
             //组件二
             Column {
+
             }
+                .justifyContent(FlexAlign.Center)
+                .width(100.vp)
+                .height(100.vp)
+                .backgroundColor(0xD94838)
+                .borderRadius(30.vp)
+                .opacity(Float64(this.opacityValue))
+                .translate(x: Float64(this.translateX))
+                .animation(AnimateParam(curve: Curve.Smooth))
+        }
+            .width(100.percent)
+            .height(100.percent)
             .justifyContent(FlexAlign.Center)
-            .width(100.vp)
-            .height(100.vp)
-            .backgroundColor(0xD94838)
-            .borderRadius(30.vp)
-            .opacity(Float64(this.opacityValue))
-            .translate(x: Float64(this.translateX))
-            .animation(AnimateParam(curve: Curve.Smooth))
-        }.width(100.percent).height(100.percent).justifyContent(FlexAlign.Center)
     }
 }
 ```

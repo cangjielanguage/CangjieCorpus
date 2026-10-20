@@ -15,7 +15,7 @@
 
    > **注意：**
    >
-   > 若开发者需要进行纯仓颉工程开发，请选择 **[Cangjie] Empty Ability**模块。
+   > 若开发者需要进行纯仓颉工程开发，请选择 **[Cangjie] Empty Ability**模板。
 
    ![buildChooseCangjieHybridTemplate](../../figures/buildChooseCangjieHybridTemplate.png)
 
@@ -230,7 +230,8 @@ Project_name
        @HybridComponentEntry
        @Component
        class Second {
-           @State var msg: String = "Hello Cangjie"
+           @State
+           var msg: String = "Hello Cangjie"
 
            public func build() {
                Row() {
@@ -244,15 +245,13 @@ Project_name
                                .fontSize(30)
                                .fontWeight(FontWeight.Bold)
                        }
-                       .shape(ButtonType.Capsule)
-                       .margin(top: 20)
-                       .backgroundColor(Color(0x0D9FFB))
-                       .width(40.percent)
-                       .height(5.percent)
-                   }
-                   .width(100.percent)
-               }
-               .height(100.percent)
+                           .shape(ButtonType.Capsule)
+                           .margin(top: 20)
+                           .backgroundColor(Color(0x0D9FFB))
+                           .width(40.percent)
+                           .height(5.percent)
+                   }.width(100.percent)
+               }.height(100.percent)
            }
        }
        ```
@@ -304,9 +303,9 @@ Project_name
 
 页面间的导航可以通过页面路由router来实现。页面路由router根据页面url找到目标页面，从而实现跳转。使用页面路由请导入router模块。
 
-1. 第一个Arkts页面跳转到第二个ArkTS与仓颉混合页面。
+1. 第一个ArkTS页面跳转到第二个ArkTS与仓颉混合页面。
 
-   在第一个Arkts页面中，跳转按钮绑定onClick事件，单击按钮时跳转到第二页。**Index.ets**文件的示例如下：
+   在第一个ArkTS页面中，跳转按钮绑定onClick事件，单击按钮时跳转到第二页。**Index.ets**文件的示例如下：
 
    ```typescript
    // Index.ets
@@ -384,10 +383,10 @@ Project_name
 
    // 定义一个全局 HashMap，用于保存ArkTS注册的函数
    // 作为简单演示，此处默认所有ArkTS的回调函数均为无参、无返回值
-   public let globalJSFunction = HashMap<String, ()->Unit>()
+   public let globalJSFunction = HashMap<String, () -> Unit>()
 
    @Interop[ArkTS]
-   public func registerJSFunc(name: String, fn: ()->Unit): Unit {
+   public func registerJSFunc(name: String, fn: () -> Unit): Unit {
        // 如果已经注册过，则打印错误信息，并直接返回
        if (globalJSFunction.contains(name)) {
            Hilog.error(1, "info", "registerJSFunc failed(err: func ${name} already exists)")
@@ -521,7 +520,8 @@ Project_name
    @HybridComponentEntry
    @Component
    class Second {
-       @State var msg: String = "Hello Cangjie"
+       @State
+       var msg: String = "Hello Cangjie"
 
        public func build() {
            Row() {
@@ -535,25 +535,26 @@ Project_name
                            .fontSize(30)
                            .fontWeight(FontWeight.Bold)
                    }
-                   .shape(ButtonType.Capsule)
-                   .margin(top: 20)
-                   .backgroundColor(Color(0x0D9FFB))
-                   .width(40.percent)
-                   .height(5.percent)
-                   // 返回按钮绑定onClick事件，单击按钮时返回到第一页
-                   .onClick ({ _ =>
-                       Hilog.info(1, "info", "Succeeded in clicking the 'Back' button.")
-                       let optFn = globalJSFunction.get("SecondPageRouterBack")
-                       if (let Some(fn) <- optFn) {
-                           fn() //调用 ArkTS 回调函数
-                       } else {
-                           Hilog.error(1, "info", "Failed to return to the first page. callback not exists")
-                       }
-                   })
-               }
-               .width(100.percent)
-           }
-           .height(100.percent)
+                       .shape(ButtonType.Capsule)
+                       .margin(top: 20)
+                       .backgroundColor(Color(0x0D9FFB))
+                       .width(40.percent)
+                       .height(5.percent)
+                       // 返回按钮绑定onClick事件，单击按钮时返回到第一页
+                       .onClick(
+                           {
+                               _ =>
+                                   Hilog.info(1, "info", "Succeeded in clicking the 'Back' button.")
+                                   let optFn = globalJSFunction.get("SecondPageRouterBack")
+                                   if (let Some(fn) <- optFn) {
+                                       fn() //调用 ArkTS 回调函数
+                                   } else {
+                                       Hilog.error(1, "info", "Failed to return to the first page. callback not exists")
+                                   }
+                           }
+                       )
+               }.width(100.percent)
+           }.height(100.percent)
        }
    }
    ```

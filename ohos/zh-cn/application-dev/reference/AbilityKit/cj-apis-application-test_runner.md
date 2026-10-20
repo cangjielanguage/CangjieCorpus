@@ -63,9 +63,9 @@ public open func onPrepare(): Unit
 ```cangjie
 import kit.TestKit.*
 
-let TESTRUNNER_REGISTER_RESULT2 = TestRunner.registerCreator("test", { => MyTestRunner2()})
+let TESTRUNNER_REGISTER_RESULT = TestRunner.registerCreator("test", {=> MyTestRunner()})
 
-class MyTestRunner2 <: TestRunner {
+class MyTestRunner <: TestRunner {
     public override func onPrepare(): Unit {
     }
 }
@@ -89,9 +89,9 @@ public open func onRun(): Unit
 ```cangjie
 import kit.TestKit.*
 
-let TESTRUNNER_REGISTER_RESULT3 = TestRunner.registerCreator("test", { => MyTestRunner3()})
+let TESTRUNNER_REGISTER_RESULT = TestRunner.registerCreator("test", {=> MyTestRunner()})
 
-class MyTestRunner3 <: TestRunner {
+class MyTestRunner <: TestRunner {
     public override func onRun(): Unit {
     }
 }

@@ -126,24 +126,30 @@ public func onInc(event: ?VoidCallback): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var value: Int64 = 0
+    @State
+    var value: Int64 = 0
     func build() {
         Column {
-            Counter() {Text(this.value.toString())}
+            Counter() {
+                Text(this
+                    .value
+                    .toString())
+            }
                 .margin(100.0)
                 .height(10.percent)
-                .onInc({ =>
-                this.value++
-            })
-                .onDec({ =>
-                this.value--
-            })
+                .onInc({
+                    => this.value++
+                })
+                .onDec({
+                    => this.value--
+                })
         }
     }
 }

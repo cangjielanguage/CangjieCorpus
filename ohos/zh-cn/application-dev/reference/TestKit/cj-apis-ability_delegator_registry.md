@@ -1315,7 +1315,7 @@ public enum AbilityLifecycleState <: Equatable<AbilityLifecycleState> & ToString
 
 **父类型：**
 
-- Equatable\<AbilityLifecycleState>
+- Equatable\<[AbilityLifecycleState](#enum-abilitylifecyclestate)>
 - ToString
 
 ### Background

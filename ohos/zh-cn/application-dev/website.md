@@ -137,6 +137,7 @@
             - [`cjc` 使用](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/cjc_usage.md)
             - [`cjpm` 介绍](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/cjpm_usage.md)
             - [条件编译](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/conditional_compilation.md)
+            - [交叉编译](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/compile_and_build/cross_compilation.md)
         - 附录<!--cj-learn-appendix-->
             - [`cjc` 编译选项](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/Appendix/compile_options.md)
             - [关键字](https://gitcode.com/Cangjie/cangjie_docs/blob/main/docs/dev-guide/source_zh_cn/Appendix/keyword.md)
@@ -263,6 +264,7 @@
                         - [不依赖UI组件的全局自定义弹出框（openCustomDialog）](arkui-cj/cj-uicontext-custom-dialog.md)
                         - [基础自定义弹出框（CustomDialog）（不推荐）](arkui-cj/cj-common-components-custom-dialog.md)
                         - [固定样式弹出框](arkui-cj/cj-fixes-style-dialog.md)
+                        - [页面级弹出框](arkui-cj/cj-page-level-dialog.md)
                     - 菜单
                         - [菜单控制（Menu）](arkui-cj/cj-popup-and-menu-components-menu.md)
                     - 气泡提示
@@ -361,6 +363,7 @@
                     - [ArkTS 访问仓颉数据](learn-cj/FFI/cangjie-arkts/operating_cangjie_objects.md)
                     - [仓颉多线程中使用互操作库](learn-cj/FFI/cangjie-arkts/cj-using_interoperability_lib_multithread.md)
                     - [仓颉调用ArkTS三方模块](learn-cj/FFI/cangjie-arkts/cj-quick-start-dts2cj-plugin-usage.md)
+                    - [互操作对象生命周期管理](learn-cj/FFI/cangjie-arkts/cj-arkts_interop_new_scope.md)
                 - [仓颉-ArkTS 互操作辅助库](learn-cj/FFI/cangjie-arkts/cj-arkts_auxiliary_lib.md)
                 - [仓颉-ArkTS 互操作开发规范](learn-cj/FFI/cangjie-arkts/cj-arkts_interop_guidelines.md)
         - Core File Kit（文件基础服务）

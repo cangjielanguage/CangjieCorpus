@@ -34,7 +34,7 @@ public enum ProfileConnectionState <: Equatable<ProfileConnectionState> & ToStri
 
 **父类型：**
 
-- Equatable\<ProfileConnectionState>
+- Equatable\<[ProfileConnectionState](#enum-profileconnectionstate)>
 - ToString
 
 ### StateConnected

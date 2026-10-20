@@ -51,11 +51,11 @@ public func getSensorList(): Array<Sensor>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14500101 | Service exception. Possible causes: 1. Sensor hdf service exception; 2. Sensor service ipc exception; 3. Sensor data channel exception. |
+  | 14500101 | Service exception.Possible causes:1. Sensor hdf service exception;2. Sensor service ipc exception;3. Sensor data channel exception. |
 
 **示例：**
 
@@ -104,11 +104,11 @@ public func getSingleSensor(sensorType: SensorId): Sensor
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14500101 | Service exception. Possible causes: 1. Sensor hdf service exception; 2. Sensor service ipc exception; 3. Sensor data channel exception. |
+  | 14500101 | Service exception.Possible causes:1. Sensor hdf service exception;2. Sensor service ipc exception;3. Sensor data channel exception. |
   | 14500102 | The sensor is not supported by the device. |
 
 **示例：**
@@ -151,7 +151,7 @@ public func off(sensorType: SensorId, callback!: ?CallbackObject = None): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -212,12 +212,12 @@ public func on<T>(sensorType: SensorId, callback: Callback1Argument<T>, option!:
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission verification failed. The application does not have permission to call the API. |
-  | 14500101 | Service exception. Possible causes: 1. Sensor hdf service exception; 2. Sensor service ipc exception;3. Sensor data channel exception. |
+  | 14500101 | Service exception.Possible causes:1. Sensor hdf service exception;2. Sensor service ipc exception;3. Sensor data channel exception. |
 
 **示例：**
 
@@ -268,12 +268,12 @@ public func once<T>(sensorType: SensorId, callback: Callback1Argument<T>): Unit 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[传感器错误码](./cj-errorcode-sensor.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission verification failed. The application does not have permission to call the API. |
-  | 14500101 | Service exception. |
+  | 14500101 | Service exception.Possible causes:1. Sensor hdf service exception;2. Sensor service ipc exception;3. Sensor data channel exception. |
 
 **示例：**
 
@@ -919,8 +919,8 @@ public var humidity: Float32
 ```cangjie
 public class LightResponse <: Response {
     public var intensity: Float32
-    public var colorTemperature:?Float32
-    public var infraredLuminance:?Float32
+    public var colorTemperature: ?Float32
+    public var infraredLuminance: ?Float32
 }
 ```
 
@@ -2064,7 +2064,7 @@ public func toString(): String
 ## enum SensorAccuracy
 
 ```cangjie
-public enum SensorAccuracy  <: Equatable<SensorAccuracy> & ToString {
+public enum SensorAccuracy <: Equatable<SensorAccuracy> & ToString {
     | AccuracyUnreliable
     | AccuracyLow
     | AccuracyMedium
@@ -2262,14 +2262,14 @@ import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.*
 
-class AccelerometerCallback1 <: Callback1Argument<AccelerometerResponse> {
+class AccelerometerCallback <: Callback1Argument<AccelerometerResponse> {
     init() {}
     public func invoke(err: ?BusinessException, arg: AccelerometerResponse): Unit {
         Hilog.info(0, "test", "Accelerometer data: timestamp: ${arg.timestamp}, x: ${arg.x}, y: ${arg.y}, z: ${arg.z}", "")
     }
 }
 
-let callback = AccelerometerCallback1()
+let callback = AccelerometerCallback()
 let options = Options(interval: IntervalOption.SensorNumber(100000000))
 try {
     // 订阅传感器数据
@@ -2544,14 +2544,14 @@ import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.*
 
-class GyroscopeCallback1 <: Callback1Argument<GyroscopeResponse> {
+class GyroscopeCallback <: Callback1Argument<GyroscopeResponse> {
     init() {}
     public func invoke(err: ?BusinessException, arg: GyroscopeResponse): Unit {
         Hilog.info(0, "test", "Gyroscope data: timestamp: ${arg.timestamp}, x: ${arg.x}, y: ${arg.y}, z: ${arg.z}", "")
     }
 }
 
-let callback = GyroscopeCallback1()
+let callback = GyroscopeCallback()
 let options = Options(interval: IntervalOption.SensorNumber(100000000))
 try {
     // 订阅传感器数据

@@ -349,7 +349,7 @@ public func showAlertDialog(options: AlertDialogParamWithOptions): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|options|[AlertDialogParamWithOptions](./cj-dialog-alertdialog.md#class-alertdialogparamwithbuttons)|是|-|警告对话框参数。|
+|options|[AlertDialogParamWithOptions](./cj-dialog-alertdialog.md#class-alertdialogparamwithoptions)|是|-|警告对话框参数。|
 
 ### func vp2px(Length)
 

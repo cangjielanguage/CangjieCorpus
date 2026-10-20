@@ -59,52 +59,58 @@ import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
-class EntryView{
-    func build(){
-        Column(){
+class EntryView {
+    func build() {
+        Column() {
             Blank().height(10.percent)
-            Button(){
+            Button() {
                 Text("Default类型Toast")
-                .fontSize(20)
-                .fontWeight(FontWeight.Bold)
-                .fontColor(Color.White)
-            }.onClick({
-                evt =>
-                getUIContext().getPromptAction().showToast(
-                        ShowToastOptions(
-                            message: "ok，我是Default toast",
-                            duration: 2000,
-                            bottom: 72.percent,
-                            showMode: ToastShowMode.Default
+                    .fontSize(20)
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor(Color.White)
+            }
+                .onClick({
+                    evt => getUIContext()
+                        .getPromptAction()
+                        .showToast(
+                            ShowToastOptions(
+                                message: "ok，我是Default toast",
+                                duration: 2000,
+                                bottom: 72.percent,
+                                showMode: ToastShowMode.Default
+                            )
                         )
-                    )
-            })
-            .align(Alignment.Center)
-            .backgroundColor(0x0a59f7)
-            .width(80.percent)
-            .height(30.vp)
+                })
+                .align(Alignment.Center)
+                .backgroundColor(0x0a59f7)
+                .width(80.percent)
+                .height(30.vp)
 
             Blank().height(2.percent)
-            Button(){
+            Button() {
                 Text("TopMost类型Toast")
-                .fontSize(20)
-                .fontWeight(FontWeight.Bold)
-                .fontColor(Color.White)
-            }.onClick({
-                evt =>
-                getUIContext().getPromptAction().showToast(
-                        ShowToastOptions(
-                            message: "ok，我是TopMost toast",
-                            duration: 2000,
-                            bottom: 70.percent,
-                            showMode: ToastShowMode.TopMost
+                    .fontSize(20)
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor(Color.White)
+            }
+                .onClick({
+                    evt => getUIContext()
+                        .getPromptAction()
+                        .showToast(
+                            ShowToastOptions(
+                                message: "ok，我是TopMost toast",
+                                duration: 2000,
+                                bottom: 70.percent,
+                                showMode: ToastShowMode.TopMost
+                            )
                         )
-                    )
-            })
-            .backgroundColor(0x0a59f7)
-            .width(80.percent)
-            .height(30.vp)
-        }.size(width: 100.percent,height: 100.percent).alignItems(HorizontalAlign.Center)
+                })
+                .backgroundColor(0x0a59f7)
+                .width(80.percent)
+                .height(30.vp)
+        }
+            .size(width: 100.percent, height: 100.percent)
+            .alignItems(HorizontalAlign.Center)
     }
 }
 ```
@@ -126,22 +132,25 @@ import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
-class EntryView{
-
-    func build(){
-        Column(){
-            Button("Show toast").fontSize(20)
-            .onClick({
-                    evt=>
-                    getUIContext().getPromptAction().showToast(
-                        ShowToastOptions(
-                            message: "Hello World",
-                            bottom: 35.percent,
-                            duration: 2000
+class EntryView {
+    func build() {
+        Column() {
+            Button("Show toast")
+                .fontSize(20)
+                .onClick({
+                    evt => getUIContext()
+                        .getPromptAction()
+                        .showToast(
+                            ShowToastOptions(
+                                message: "Hello World",
+                                bottom: 35.percent,
+                                duration: 2000
+                            )
                         )
-                    )
-            })
-        }.size(width: 100.percent,height: 100.percent).justifyContent(FlexAlign.Center)
+                })
+        }
+            .size(width: 100.percent, height: 100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

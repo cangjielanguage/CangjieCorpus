@@ -47,13 +47,13 @@ import ohos.resource.__GenerateResource__
 
 let storage: LocalStorage = LocalStorage()
 
-class PostData{
+class PostData {
     public var avatar: AppResource = @r(app.media.foreground)
     public var name: String = ""
     public var message: String = ""
     public var images: Array<AppResource> = []
 
-    public init(avatar: AppResource,name:String,message: String,images: Array<AppResource>) {
+    public init(avatar: AppResource, name: String, message: String, images: Array<AppResource>) {
         this.avatar = avatar
         this.name = name
         this.message = message
@@ -64,23 +64,27 @@ class PostData{
 @Entry
 @Component
 class EntryView {
-    @State var isExpand: Bool = false
-    @State @Watch[onItemClicked] var selectedIndex: Int64 = -1
+    @State
+    var isExpand: Bool = false
+    @State
+    @Watch[onItemClicked]
+    var selectedIndex: Int64 = -1
 
     // The photos in the array all use AppResource resources, which need to be defined by developers as needed.
     private var allPostData: Array<PostData> = [
-        PostData(@r(app.media.startIcon),"Alice","天气晴朗",[@r(app.media.startIcon), @r(app.media.startIcon)] ),
-        PostData(@r(app.media.startIcon),"Bob","你好世界",[@r(app.media.startIcon)]),
-        PostData(@r(app.media.startIcon),"Carl","万物生长",[@r(app.media.startIcon), @r(app.media.startIcon),@r(app.media.startIcon)])
-        ]
+        PostData(@r(app.media.startIcon), "Alice", "天气晴朗", [@r(app.media.startIcon), @r(app.media.startIcon)]),
+        PostData(@r(app.media.startIcon), "Bob", "你好世界", [@r(app.media.startIcon)]),
+        PostData(@r(app.media.startIcon), "Carl", "万物生长",
+            [@r(app.media.startIcon), @r(app.media.startIcon), @r(app.media.startIcon)])
+    ]
 
-    private func onItemClicked():Unit {
-        if(this.selectedIndex<0){
+    private func onItemClicked(): Unit {
+        if (this.selectedIndex < 0) {
             return
         }
-        spawn(UIThread) {
+        spawn (UIThread) {
             getUIContext().animateTo(
-                AnimateParam(duration: 350,curve: Curve.Friction),
+                AnimateParam(duration: 350, curve: Curve.Friction),
                 {
                     => this.isExpand = !this.isExpand
                 }
@@ -89,39 +93,50 @@ class EntryView {
     }
 
     func build() {
-        Column(){
-            ForEach(this.allPostData,itemGeneratorFunc:{postData: PostData,index: Int64
-                    =>
+        Column() {
+            ForEach(
+                this.allPostData,
+                itemGeneratorFunc: {
+                    postData: PostData, index: Int64 =>
                     // 当点击了某个post后，会使其余的post消失下树
-                    if(!this.isExpand || this.selectedIndex==index){
-                        Column(){
-                           Post(data:postData,selecteIndex: this.selectedIndex,index: index)
+                    if (!this.isExpand || this.selectedIndex == index) {
+                        Column() {
+                            Post(data: postData, selecteIndex: this.selectedIndex, index: index)
                         }
-                        .width(100.percent)
-                        // 对出现消失的post添加透明度转场和位移转场效果
-                        .transition(TransitionEffect.OPACITY
-                                    .combine(TransitionEffect.translate(TranslateOptions(x:250.0,y:250.0,z:250.0)))
-                                    .animation(AnimateParam(duration: 350,curve: Curve.Friction)))
+                            .width(100.percent)
+                            // 对出现消失的post添加透明度转场和位移转场效果
+                            .transition(
+                                TransitionEffect
+                                    .OPACITY
+                                    .combine(TransitionEffect.translate(TranslateOptions(x: 250.0, y: 250.0, z: 250.0)))
+                                    .animation(AnimateParam(duration: 350, curve: Curve.Friction)))
                     }
                 }
-             )
+            )
         }
-        .size(width: 100.percent, height: 100.percent)
-        .backgroundColor(Color.Gray)
+            .size(width: 100.percent, height: 100.percent)
+            .backgroundColor(Color.Gray)
     }
 }
 
 @Component
-class Post{
-    @Link var selecteIndex:Int64
+class Post {
+    @Link
+    var selecteIndex: Int64
 
-    @Prop var data:PostData
-    @Prop var index:Int64
+    @Prop
+    var data: PostData
+    @Prop
+    var index: Int64
 
-    @State var itemHeight: Int64 = 250
-    @State var isExpand: Bool = false
-    @State var expandImageSize: Int64 = 100
-    @State var avatarSize: Int64 = 50
+    @State
+    var itemHeight: Int64 = 250
+    @State
+    var isExpand: Bool = false
+    @State
+    var expandImageSize: Int64 = 100
+    @State
+    var avatarSize: Int64 = 50
 
     public func build(){
         Column(){
@@ -210,7 +225,8 @@ import kit.LocalizationKit.*
 @Entry
 @Component
 class EntryView {
-    @State var isShow: Bool = false
+    @State
+    var isShow: Bool = false
     func build() {
         Stack(alignContent: Alignment.Center) {
             if (this.isShow) {
@@ -227,26 +243,30 @@ class EntryView {
                 Column() {
                     Column() {
                         Image(@r(app.media.startIcon))
-                            .width(100.percent).height(100.percent)
-                    }.width(100.percent).height(100.percent)
+                            .width(100.percent)
+                            .height(100.percent)
+                    }
+                        .width(100.percent)
+                        .height(100.percent)
                 }
-                .width(100)
-                .height(100)
-                // geometryTransition会同步圆角，但仅限于geometryTransition绑定处，此处绑定的是容器
-                // 则对容器本身有圆角同步而不会操作容器内部子组件的borderRadius
-                .borderRadius(20)
-                .clip(true)
-                .position(x:40,y:40)
-                .geometryTransition("picture")
-                // transition保证节点离场不被立即析构，设置通用转场效果
-                .transition(TransitionEffect.OPACITY)
-                .id("item2")
+                    .width(100)
+                    .height(100)
+                    // geometryTransition会同步圆角，但仅限于geometryTransition绑定处，此处绑定的是容器
+                    // 则对容器本身有圆角同步而不会操作容器内部子组件的borderRadius
+                    .borderRadius(20)
+                    .clip(true)
+                    .position(x: 40, y: 40)
+                    .geometryTransition("picture")
+                    // transition保证节点离场不被立即析构，设置通用转场效果
+                    .transition(TransitionEffect.OPACITY)
+                    .id("item2")
             }
         }
-        .onClick({
-            event => getUIContext().animateTo(AnimateParam(duration:1000,curve:Curve.Linear), ({=>this.isShow = !this.isShow}))
-        })
-        .size(width:100.percent,height:100.percent)
+            .onClick({
+                event => getUIContext().animateTo(AnimateParam(duration: 1000, curve: Curve.Linear),
+                    ({=> this.isShow = !this.isShow}))
+            })
+            .size(width: 100.percent, height: 100.percent)
     }
 }
 ```
@@ -271,13 +291,13 @@ import kit.PerformanceAnalysisKit.Hilog
 
 let storage: LocalStorage = LocalStorage()
 
-class PostData{
+class PostData {
     public var avatar: AppResource = @r(app.media.foreground)
     public var name: String = ""
     public var message: String = ""
     public var images: Array<AppResource> = []
 
-    public init(avatar: AppResource,name:String,message: String,images: Array<AppResource>) {
+    public init(avatar: AppResource, name: String, message: String, images: Array<AppResource>) {
         this.avatar = avatar
         this.name = name
         this.message = message
@@ -288,15 +308,19 @@ class PostData{
 @Entry
 @Component
 class EntryView {
-    @State var isPersonalPageShow: Bool = false;
-    @State var selectedIndex: Int = 0
-    @State var alphaValue: Float64 = 1.0
+    @State
+    var isPersonalPageShow: Bool = false;
+    @State
+    var selectedIndex: Int = 0
+    @State
+    var alphaValue: Float64 = 1.0
 
     private var allPostData: Array<PostData> = [
-        PostData(@r(app.media.startIcon),"Alice","天气晴朗",[@r(app.media.startIcon), @r(app.media.startIcon)] ),
-        PostData(@r(app.media.startIcon),"Bob","你好世界",[@r(app.media.startIcon)]),
-        PostData(@r(app.media.startIcon),"Carl","万物生长",[@r(app.media.startIcon),@r(app.media.startIcon),@r(app.media.startIcon)])
-        ]
+        PostData(@r(app.media.startIcon), "Alice", "天气晴朗", [@r(app.media.startIcon), @r(app.media.startIcon)]),
+        PostData(@r(app.media.startIcon), "Bob", "你好世界", [@r(app.media.startIcon)]),
+        PostData(@r(app.media.startIcon), "Carl", "万物生长",
+            [@r(app.media.startIcon), @r(app.media.startIcon), @r(app.media.startIcon)])
+    ]
 
     public func onAppear() {
         Hilog.info(0, "cangjie", "BindContentCover onAppear.")

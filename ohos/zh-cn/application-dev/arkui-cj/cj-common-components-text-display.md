@@ -62,6 +62,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
   import ohos.resource_manager.*
@@ -74,8 +75,8 @@ Text可通过以下两种方式来创建：
               Text() {
                   Span("我是Span")
               }
-              .padding(10)
-              .borderWidth(1)
+                  .padding(10)
+                  .borderWidth(1)
           }
       }
   }
@@ -91,6 +92,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -101,19 +103,25 @@ Text可通过以下两种方式来创建：
           Scroll {
               Column {
                   Text() {
-                      Span('我是Span1，').fontSize(16).fontColor(Color.Gray)
-                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
-                      Span('我是Span2').fontColor(Color.Blue).fontSize(16)
-                        .fontStyle(FontStyle.Italic)
-                        .decoration(decorationType: TextDecorationType.Underline, color: Color.Black)
-                      Span('，我是Span3').fontSize(16). fontColor(Color.Gray)
-                        .decoration(decorationType: TextDecorationType.Overline, color: Color.Green)
+                      Span('我是Span1，')
+                          .fontSize(16)
+                          .fontColor(Color.Gray)
+                          .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
+                      Span('我是Span2')
+                          .fontColor(Color.Blue)
+                          .fontSize(16)
+                          .fontStyle(FontStyle.Italic)
+                          .decoration(decorationType: TextDecorationType.Underline, color: Color.Black)
+                      Span('，我是Span3')
+                          .fontSize(16)
+                          .fontColor(Color.Gray)
+                          .decoration(decorationType: TextDecorationType.Overline, color: Color.Green)
                   }
-                  .borderWidth(1)
-                  .padding(10)
+                      .borderWidth(1)
+                      .padding(10)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -127,6 +135,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -137,14 +146,15 @@ Text可通过以下两种方式来创建：
           Scroll {
               Column {
                   Text() {
-                    Span('I am Upper-span').fontSize(12)
-                      .textCase(TextCase.UpperCase)
+                      Span('I am Upper-span')
+                          .fontSize(12)
+                          .textCase(TextCase.UpperCase)
                   }
-                  .borderWidth(1)
-                  .padding(10)
+                      .borderWidth(1)
+                      .padding(10)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -160,6 +170,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
   import ohos.resource_manager.*
@@ -171,15 +182,18 @@ Text可通过以下两种方式来创建：
       func build() {
           Scroll() {
               Column() {
-                    Text() {
-                        Span('I am Upper-span').fontSize(12)
-                            .textCase(TextCase.UpperCase)
-                            .onClick({evt =>
-                                Hilog.info(1, '1', 'test', 'Span——onClick')
-                            })
-                    }
+                  Text() {
+                      Span('I am Upper-span')
+                          .fontSize(12)
+                          .textCase(TextCase.UpperCase)
+                          .onClick({
+                              evt => Hilog.info(1, '1', 'test', 'Span——onClick')
+                          })
+                  }
               }
-          }.height(100.percent).width(100.percent)
+          }
+              .height(100.percent)
+              .width(100.percent)
       }
   }
   ```
@@ -192,6 +206,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -217,8 +232,8 @@ Text可通过以下两种方式来创建：
                       .border(width: 1)
                       .padding(10)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -232,6 +247,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -241,14 +257,16 @@ Text可通过以下两种方式来创建：
       func build() {
           Scroll {
               Column {
-                  Text('This is the setting of textOverflow to Clip text content This is the setting of textOverflow to None text content. This is the setting of textOverflow to Clip text content This is the setting of textOverflow to None text content.')
+                  Text(
+                      'This is the setting of textOverflow to Clip text content This is the setting of textOverflow to None text content. This is the setting of textOverflow to Clip text content This is the setting of textOverflow to None text content.')
                       .width(250)
                       .textOverflow(TextOverflow.None)
                       .maxLines(1)
                       .fontSize(12)
                       .border(width: 1)
                       .padding(10)
-                  Text('我是超长文本，超出的部分显示省略号。I am an extra long text, with ellipses displayed for any excess。')
+                  Text(
+                      '我是超长文本，超出的部分显示省略号。I am an extra long text, with ellipses displayed for any excess。')
                       .width(250)
                       .textOverflow(TextOverflow.Ellipsis)
                       .maxLines(1)
@@ -256,8 +274,8 @@ Text可通过以下两种方式来创建：
                       .border(width: 1)
                       .padding(10)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -271,6 +289,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -281,13 +300,19 @@ Text可通过以下两种方式来创建：
           Scroll {
               Column {
                   Text('This is the text with the line height set. This is the text with the line height set.')
-                      .width(300).fontSize(12).border(width: 1).padding(10)
+                      .width(300)
+                      .fontSize(12)
+                      .border(width: 1)
+                      .padding(10)
                   Text('This is the text with the line height set. This is the text with the line height set.')
-                      .width(300).fontSize(12).border(width: 1).padding(10)
+                      .width(300)
+                      .fontSize(12)
+                      .border(width: 1)
+                      .padding(10)
                       .lineHeight(20)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -301,6 +326,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -315,22 +341,28 @@ Text可通过以下两种方式来创建：
                           decorationType: TextDecorationType.LineThrough,
                           color: Color.Red
                       )
-                      .borderWidth(1).padding(10).margin(5)
+                      .borderWidth(1)
+                      .padding(10)
+                      .margin(5)
                   Text('This is the text')
                       .decoration(
                           decorationType: TextDecorationType.Overline,
                           color: Color.Red
                       )
-                      .borderWidth(1).padding(10).margin(5)
+                      .borderWidth(1)
+                      .padding(10)
+                      .margin(5)
                   Text('This is the text')
                       .decoration(
                           decorationType: TextDecorationType.Underline,
                           color: Color.Red
                       )
-                      .borderWidth(1).padding(10).margin(5)
+                      .borderWidth(1)
+                      .padding(10)
+                      .margin(5)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -344,6 +376,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -375,8 +408,8 @@ Text可通过以下两种方式来创建：
                       .width(100.percent)
                       .margin(5)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -392,6 +425,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -434,8 +468,8 @@ Text可通过以下两种方式来创建：
                       .padding(10)
                       .margin(5)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -449,6 +483,7 @@ Text可通过以下两种方式来创建：
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -464,21 +499,21 @@ Text可通过以下两种方式来创建：
                       .border(width: 1)
                       .padding(10)
                       .margin(5)
-                    // 文本全小写展示
+                  // 文本全小写展示
                   Text('This is the text content with textCase set to LowerCase.')
                       .textCase(TextCase.LowerCase)
                       .border(width: 1)
                       .padding(10)
                       .margin(5)
-                    // 文本全大写展示
+                  // 文本全大写展示
                   Text('This is the text content with textCase set to UpperCase.')
                       .textCase(TextCase.UpperCase)
                       .border(width: 1)
                       .padding(10)
                       .margin(5)
               }
-              .height(100.percent)
-              .width(100.percent)
+                  .height(100.percent)
+                  .width(100.percent)
           }
       }
   }
@@ -494,6 +529,7 @@ Text组件可以添加通用事件，可以绑定[onClick](../reference/arkui-cj
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -504,13 +540,12 @@ class EntryView {
     func build() {
         Scroll {
             Column {
-                Text('点我')
-                    .onClick({ evt =>
-                        Hilog.info(1, '1', 'test', 'Text的点击响应事件')
-                    })
+                Text('点我').onClick({
+                    evt => Hilog.info(1, '1', 'test', 'Text的点击响应事件')
+                })
             }
-            .height(100.percent)
-            .width(100.percent)
+                .height(100.percent)
+                .width(100.percent)
         }
     }
 }
@@ -524,6 +559,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -533,7 +569,10 @@ class EntryView {
     func build() {
         Column() {
             Row() {
-                Text("1").fontSize(14).fontColor(Color.Red).margin(left: 10, right: 10)
+                Text("1")
+                    .fontSize(14)
+                    .fontColor(Color.Red)
+                    .margin(left: 10, right: 10)
                 Text("我是热搜词条1")
                     .fontSize(12)
                     .fontColor(Color.Blue)
@@ -550,10 +589,15 @@ class EntryView {
                     .borderRadius(5)
                     .width(15)
                     .height(14)
-                }.width(100.percent).margin(5)
+            }
+                .width(100.percent)
+                .margin(5)
 
             Row() {
-                Text("2").fontSize(14).fontColor(Color.Red).margin(left: 10, right: 10)
+                Text("2")
+                    .fontSize(14)
+                    .fontColor(Color.Red)
+                    .margin(left: 10, right: 10)
                 Text("我是热搜词条2 我是热搜词条2 我是热搜词条2 我是热搜词条2 我是热搜词条2")
                     .fontSize(12)
                     .fontColor(Color.Blue)
@@ -571,10 +615,15 @@ class EntryView {
                     .borderRadius(5)
                     .width(15)
                     .height(14)
-                }.width(100.percent).margin(5)
+            }
+                .width(100.percent)
+                .margin(5)
 
             Row() {
-                Text("3").fontSize(14).fontColor(Color(0xFFA500)).margin(left: 10, right: 10)
+                Text("3")
+                    .fontSize(14)
+                    .fontColor(Color(0xFFA500))
+                    .margin(left: 10, right: 10)
                 Text("我是热搜词条3")
                     .fontSize(12)
                     .fontColor(Color.Blue)
@@ -592,10 +641,15 @@ class EntryView {
                     .borderRadius(5)
                     .width(15)
                     .height(14)
-                }.width(100.percent).margin(5)
+            }
+                .width(100.percent)
+                .margin(5)
 
             Row() {
-                Text("4").fontSize(14).fontColor(Color.Gray).margin(left: 10, right: 10)
+                Text("4")
+                    .fontSize(14)
+                    .fontColor(Color.Gray)
+                    .margin(left: 10, right: 10)
                 Text("我是热搜词条4 我是热搜词条4 我是热搜词条4 我是热搜词条4 我是热搜词条4")
                     .fontSize(12)
                     .fontColor(Color.Blue)
@@ -603,7 +657,9 @@ class EntryView {
                     .constraintSize(maxWidth: 200)
                     .maxLines(1)
                     .textOverflow(TextOverflow.Ellipsis)
-                }.width(100.percent).margin(5)
+            }
+                .width(100.percent)
+                .margin(5)
         }.width(100.percent)
     }
 }

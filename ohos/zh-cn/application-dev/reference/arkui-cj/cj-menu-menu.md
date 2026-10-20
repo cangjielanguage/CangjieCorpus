@@ -146,6 +146,7 @@ public func radius(value: ?Length): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -180,35 +181,36 @@ class EntryView {
                 content: @r(app.string.contentName),
                 endIcon: this.iconStr,
                 labelInfo: @r(app.string.emptyName),
-                builder: {=> bind(this.SubMenu, this)()}
+                builder: this.SubMenu
             )
             MenuItemGroup(header: "小标题", footer: "") {
                 =>
-                MenuItem(
-                    startIcon: this.iconStr,
-                    content: @r(app.string.contentName),
-                    endIcon: @r(app.string.emptyName),
-                    labelInfo: @r(app.string.emptyName),
-                    builder: {=> bind(this.SubMenu, this)()}
+                    MenuItem(
+                        startIcon: this.iconStr,
+                        content: @r(app.string.contentName),
+                        endIcon: @r(app.string.emptyName),
+                        labelInfo: @r(app.string.emptyName),
+                        builder: this.SubMenu
                     )
-                MenuItem(
-                    startIcon: @r(app.media.startIcon),
-                    content: @r(app.string.contentName),
-                    endIcon: @r(app.media.right),
-                    labelInfo: @r(app.string.emptyName),
-                    builder: {=> bind(this.SubMenu, this)()}
-                )
-                MenuItem(
-                startIcon: "",
-                content: "菜单选项",
-                endIcon: "",
-                labelInfo: "",
-                ).selectIcon(true).selected(
-                    select).onChange({
-                    selected => iconStr2 = @r(app.media.foreground)
-                })
+                    MenuItem(
+                        startIcon: @r(app.media.startIcon),
+                        content: @r(app.string.contentName),
+                        endIcon: @r(app.media.right),
+                        labelInfo: @r(app.string.emptyName),
+                        builder: this.SubMenu
+                    )
+                    MenuItem(
+                        startIcon: "",
+                        content: "菜单选项",
+                        endIcon: "",
+                        labelInfo: "",
+                    )
+                        .selectIcon(true)
+                        .selected(select)
+                        .onChange({
+                            selected => iconStr2 = @r(app.media.foreground)
+                        })
             }
-
         }
     }
 
@@ -218,7 +220,9 @@ class EntryView {
                 Text("click to show menu")
                     .fontSize(50)
                     .fontWeight(FontWeight.Bold)
-            }.bindMenu(builder: this.MyMenu).width(50.percent)
+            }
+                .bindMenu(builder: this.MyMenu)
+                .width(50.percent)
         }.height(100.percent)
     }
 }

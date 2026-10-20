@@ -246,7 +246,7 @@ public enum MemoryLevel <: Equatable<MemoryLevel> & ToString {
 
 **父类型：**
 
-- [Equatable\<MemoryLevel>](#enum-memorylevel)
+- Equatable\<[MemoryLevel](#enum-memorylevel)>
 - ToString
 
 ### MemoryLevelCritical

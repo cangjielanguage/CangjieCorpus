@@ -527,6 +527,7 @@ public func stop(): Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.i18n.*
 import ohos.resource.*
@@ -538,9 +539,12 @@ class EntryView {
     var videoSrc: AppResource = @rawfile("video.mp4")
     var previewUri: AppResource = @r(app.media.preview)
     var controller: VideoController = VideoController()
-    @State var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
-    @State var isAutoPlay: Bool = false
-    @State var showControls: Bool = true
+    @State
+    var curRate: PlaybackSpeed = PlaybackSpeed.SpeedForward100X
+    @State
+    var isAutoPlay: Bool = false
+    @State
+    var showControls: Bool = true
 
     func build() {
         Column() {
@@ -605,22 +609,22 @@ class EntryView {
             }
             Row() {
                 Button("rate 0.75")
-                    .onClick({ evt
-                        => this.curRate = PlaybackSpeed.SpeedForward075X
+                    .onClick({
+                        evt => this.curRate = PlaybackSpeed.SpeedForward075X
                     })
                     .margin(5)
                     .width(100)
                     .id("rate 0.75")
                 Button("rate 1")
-                    .onClick({ evt
-                        => this.curRate = PlaybackSpeed.SpeedForward100X
+                    .onClick({
+                        evt => this.curRate = PlaybackSpeed.SpeedForward100X
                     })
                     .margin(5)
                     .width(100)
                     .id("rate 1")
                 Button("rate 2")
-                    .onClick({ evt
-                        => this.curRate = PlaybackSpeed.SpeedForward200X
+                    .onClick({
+                        evt => this.curRate = PlaybackSpeed.SpeedForward200X
                     })
                     .margin(5)
                     .width(100)

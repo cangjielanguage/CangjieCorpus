@@ -99,11 +99,11 @@ unittest 包用于编写仓颉项目单元测试代码，提供包括代码编�
 | [CsvReporter](./unittest_package_api/unittest_package_classes.md#class-csvreporter) | 打印性能测试用例结果数据到 CSV 文件上。 |
 | [CsvRawReporter](./unittest_package_api/unittest_package_classes.md#class-csvrawreporter) | 打印性能测试用例结果数据，该数据只有批次的原始测量值，到 CSV 文件上。 |
 |[DataStrategyProcessor\<T>](./unittest_package_api/unittest_package_classes.md#class-datastrategyprocessort)| 所有 [DataStrategy](../unittest_common/unittest_common_package_api/unittest_common_package_interfaces.md#interface-datastrategyt) 组件的基类。该类的实例由 [@Strategy](../unittest_testmacro/unittest_testmacro_package_api/unittest_testmacro_package_macros.md#strategy-宏) 宏或成员函数创建。|
-|[FlatMapProcessor\<T,R>](./unittest_package_api/unittest_package_classes.md#class-flatmapprocessortr)| 对参数数据进行 [FlatMap](../collection/collection_package_api/collection_package_function.md#func-flatmapt-rt---iterabler) 的处理器。 |
-|[FlatMapStrategyProcessor\<T,R>](./unittest_package_api/unittest_package_classes.md#class-flatmapstrategyprocessortr)| 对参数数据进行 [FlatMap](../collection/collection_package_api/collection_package_function.md#func-flatmapt-rt---iterabler) 的处理器。 |
+|[FlatMapProcessor\<T, R>](./unittest_package_api/unittest_package_classes.md#class-flatmapprocessort-r)| 对参数数据进行 [FlatMap](../collection/collection_package_api/collection_package_function.md#func-flatmapt-rt---iterabler) 的处理器。 |
+|[FlatMapStrategyProcessor\<T, R>](./unittest_package_api/unittest_package_classes.md#class-flatmapstrategyprocessort-r)| 对参数数据进行 [FlatMap](../collection/collection_package_api/collection_package_function.md#func-flatmapt-rt---iterabler) 的处理器。 |
 | [InputParameter](./unittest_package_api/unittest_package_classes.md#class-inputparameter) | 入参对象类型。 |
 | [LazyCyclicNode](./unittest_package_api/unittest_package_classes.md#class-lazycyclicnode) | 用于在一个循环中一个接一个地推进类型擦除的内部惰性迭代器。 |
-| [MapProcessor\<T,R>](./unittest_package_api/unittest_package_classes.md#class-mapprocessortr) | 对参数数据进行 [Map](../collection/collection_package_api/collection_package_function.md#func-mapt-rt---r) 的处理器。 |
+| [MapProcessor\<T, R>](./unittest_package_api/unittest_package_classes.md#class-mapprocessort-r) | 对参数数据进行 [Map](../collection/collection_package_api/collection_package_function.md#func-mapt-rt---r) 的处理器。 |
 | [PowerAssertDiagramBuilder](./unittest_package_api/unittest_package_classes.md#class-powerassertdiagrambuilder) | [PowerAssert](../unittest_testmacro/unittest_testmacro_package_api/unittest_testmacro_package_macros.md#powerassert-宏) 输出结果构造器。 |
 | [RawStatsReporter](./unittest_package_api/unittest_package_classes.md#class-rawstatsreporter) | 未处理的性能测试数据报告器。仅给框架内部使用。 |
 | [Report](./unittest_package_api/unittest_package_classes.md#class-report) | 打印测试用例结果报告的基类。 |
@@ -163,6 +163,7 @@ unittest 包用于编写仓颉项目单元测试代码，提供包括代码编�
 | [KeyMinDuration](./unittest_package_api/unittest_package_structs.md#struct-keyminduration) | 作为在配置信息中配置值的键值。 |
 | [KeyNoCaptureOutput](./unittest_package_api/unittest_package_structs.md#struct-keynocaptureoutput) | 作为在配置信息中配置值的键值。 |
 | [KeyNoColor](./unittest_package_api/unittest_package_structs.md#struct-keynocolor) | 作为在配置信息中配置值的键值。 |
+| [KeyOptimizeMocksForBench](./unittest_package_api/unittest_package_structs.md#struct-keyoptimizemocksforbench) | 作为在配置信息中配置值的键值。 |
 | [KeyParallel](./unittest_package_api/unittest_package_structs.md#struct-keyparallel) | 作为在配置信息中配置值的键值。 |
 | [KeyRandomSeed](./unittest_package_api/unittest_package_structs.md#struct-keyrandomseed) | 作为在配置信息中配置值的键值。 |
 | [KeyReductionSteps](./unittest_package_api/unittest_package_structs.md#struct-keyrandomseed) | 作为在配置信息中配置值的键值。 |

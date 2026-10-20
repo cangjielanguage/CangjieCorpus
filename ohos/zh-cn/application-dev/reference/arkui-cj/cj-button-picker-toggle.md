@@ -132,8 +132,8 @@ public func onChange(callback: ?(Bool) -> Unit): This
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -148,67 +148,65 @@ class EntryView {
     func build() {
         Column(space: 15) {
             Text("type: Switch")
-            .fontSize(12)
-            .fontColor(0xcccccc)
-            .width(90.percent)
+                .fontSize(12)
+                .fontColor(0xcccccc)
+                .width(90.percent)
             Flex(justifyContent: FlexAlign.SpaceEvenly, alignItems: ItemAlign.Center) {
                 Toggle(ToggleType.Switch, isOn: false)
-                .selectedColor(0xed6f21)
-                .switchPointColor(0xe5ffffff)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .selectedColor(0xed6f21)
+                    .switchPointColor(0xe5ffffff)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
 
                 Toggle(ToggleType.Switch, isOn: true)
-                .selectedColor(0x39a2db)
-                .switchPointColor(0xe5ffffff)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .selectedColor(0x39a2db)
+                    .switchPointColor(0xe5ffffff)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
             }
 
             Text("type: Checkbox")
-            .fontSize(12)
-            .fontColor(0xcccccc)
-            .width(90.percent)
+                .fontSize(12)
+                .fontColor(0xcccccc)
+                .width(90.percent)
             Flex(justifyContent: FlexAlign.SpaceEvenly, alignItems: ItemAlign.Center) {
                 Toggle(ToggleType.Checkbox, isOn: false)
-                .size(width: 28, height: 28)
-                .selectedColor(0xed6f21)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .size(width: 28, height: 28)
+                    .selectedColor(0xed6f21)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
 
                 Toggle(ToggleType.Checkbox, isOn: true)
-                .size(width: 28, height: 28)
-                .selectedColor(0x39a2db)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .size(width: 28, height: 28)
+                    .selectedColor(0x39a2db)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
             }
 
             Text("type: Button")
-            .fontSize(12)
-            .fontColor(0xcccccc)
-            .width(90.percent)
+                .fontSize(12)
+                .fontColor(0xcccccc)
+                .width(90.percent)
             Flex(justifyContent: FlexAlign.SpaceEvenly, alignItems: ItemAlign.Center) {
                 Toggle(ToggleType.Button, false) {
-                    Text("status")
-                    .padding(left:12, right: 12)
+                    Text("status").padding(left: 12, right: 12)
                 }
-                .selectedColor(0xed6f21)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .selectedColor(0xed6f21)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
 
                 Toggle(ToggleType.Button, true) {
-                    Text("status")
-                    .padding(left:12, right: 12)
+                    Text("status").padding(left: 12, right: 12)
                 }
-                .selectedColor(0x39a2db)
-                .onChange({isOn: Bool =>
-                    loggerInfo("Component status: ${isOn}")
-                })
+                    .selectedColor(0x39a2db)
+                    .onChange({
+                        isOn: Bool => loggerInfo("Component status: ${isOn}")
+                    })
             }
         }
     }

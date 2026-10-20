@@ -129,5 +129,5 @@ OpenHarmony设备的识别主要通过User-Agent中的系统、系统版本和�
 
 ### 如何模拟OpenHarmony操作系统的User-Agent进行前端调试
 
-在Windows/Mac/Linux等操作系统中，可以通过Chrome/Edge/Firefox等浏览器DevTools提供的User-Agent复写能力，模拟OpenHarmony User-Agent。
+在Windows/Mac/Linux等操作系统中，可以通过Chrome/Edge/Firefox等浏览器DevTools提供的User-Agent覆写能力，模拟OpenHarmony User-Agent。
 <!--RP1End-->

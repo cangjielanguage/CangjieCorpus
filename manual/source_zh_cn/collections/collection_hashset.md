@@ -8,22 +8,22 @@
 import std.collection.*
 ```
 
-可以使用 HashSet 类型来构造只拥有不重复元素的 Collection。
+可以使用 `HashSet` 类型来构造只拥有不重复元素的集合。
 
 仓颉使用 `HashSet<T>` 表示 HashSet 类型，T 表示 HashSet 的元素类型，T 必须是实现了 Hashable 和 `Equatable<T>` 接口的类型，例如数值或 String。
 
-<!-- code_no_check -->
+<!-- compile.error -hashset1 -->
 
 ```cangjie
-var a: HashSet<Int64> = ... // HashSet whose element type is Int64
-var b: HashSet<String> = ... // HashSet whose element type is String
+var a: HashSet<Int64> = HashSet<Int64>() // HashSet whose element type is Int64
+var b: HashSet<String> = HashSet<Int64>() // HashSet whose element type is String
 ```
 
 元素类型不相同的 HashSet 是不相同的类型，所以它们之间不可以互相赋值。
 
 因此以下例子是不合法的。
 
-<!-- code_no_check -->
+<!-- compile.error -hashset1 -->
 
 ```cangjie
 b = a // Type mismatch
@@ -103,7 +103,7 @@ let b = mySet.contains(-1) // b == false
 
 ## 修改 HashSet
 
-HashSet 是一种可变的引用类型，HashSet 类型提供了添加元素、删除元素的功能。
+HashSet 是一种可变的引用类型，支持元素的添加与删除操作。
 
 HashSet 的可变性是一个非常有用的特征，可以让同一个 HashSet 实例的所有引用都共享同样的元素，并且对它们统一进行修改。
 

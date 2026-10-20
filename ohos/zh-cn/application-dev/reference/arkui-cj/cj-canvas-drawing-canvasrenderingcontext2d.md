@@ -769,7 +769,7 @@ public func createPattern(image: ?ImageBitmap, repetition: Option<Repetition>): 
 
 |类型|说明|
 |:---|:---|
-|Option\<[CanvasPattern](#canvaspattern)>|通过指定图像和重复方式创建图片填充的模板对象。|
+|Option\<[CanvasPattern](cj-canvas-drawing-canvaspattern.md#class-canvaspattern)>|通过指定图像和重复方式创建图片填充的模板对象。|
 
 ### func bezierCurveTo(Float64, Float64, Float64, Float64, Float64, Float64)
 
@@ -1046,7 +1046,7 @@ public func transform(
 ): Unit
 ```
 
-**功能：** transform方法对应一个变换矩阵。在对一个图形进行变化时，只要设置此变换矩阵相应的参数，对图形的各个定点的坐标分别乘以这个矩阵，就能得到新的定点的坐标。矩阵变换效果可叠加。
+**功能：** transform方法对应一个变换矩阵。在对一个图形进行变换时，只要设置此变换矩阵相应的参数，对图形的各个定点的坐标分别乘以这个矩阵，就能得到新的定点的坐标。矩阵变换效果可叠加。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -1076,7 +1076,7 @@ public func setTransform(
 ): Unit
 ```
 
-**功能：** 对应一个变换矩阵，想对一个图形进行变化的时候，只要设置此变换矩阵相应的参数，对图形的各个定点的坐标分别乘以这个矩阵，就能得到新的定点的坐标。setTransform()方法会重置现有的变换矩阵并创建新的变换矩阵。
+**功能：** 对应一个变换矩阵，想对一个图形进行变换的时候，只要设置此变换矩阵相应的参数，对图形的各个定点的坐标分别乘以这个矩阵，就能得到新的定点的坐标。setTransform()方法会重置现有的变换矩阵并创建新的变换矩阵。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -1483,7 +1483,7 @@ public func getTransform(): Matrix2D
 
 |类型|说明|
 |:---|:---|
-|Matrix2D|矩阵对象。|
+|[Matrix2D](cj-canvas-drawing-matrix2d.md#class-matrix2d)|矩阵对象。|
 
 ### func transferFromImageBitmap(?ImageBitmap)
 
@@ -1587,7 +1587,7 @@ public func createImageData(sw: ?Float64, sh: ?Float64): ImageData
 
 |类型|说明|
 |:---|:---|
-|ImageData|ImageData对象。|
+|[ImageData](cj-canvas-drawing-imagedata.md#class-imagedata)|ImageData对象。|
 
 ### func createImageData(?ImageData)
 
@@ -1605,13 +1605,13 @@ public func createImageData(imageData: ?ImageData): ImageData
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|imageData|?ImageData|是|-|现有的ImageData对象。|
+|imageData|?[ImageData](./cj-canvas-drawing-imagedata.md#class-imagedata)|是|-|现有的ImageData对象。?ImageData|是|-|现有的ImageData对象。|
 
 **返回值：**
 
 |类型|说明|
 |:---|:---|
-|ImageData|新的ImageData对象。|
+|[ImageData](cj-canvas-drawing-imagedata.md#class-imagedata)|新的ImageData对象。|
 
 ### func getImageData(?Float64, ?Float64, ?Float64, ?Float64)
 
@@ -1637,7 +1637,7 @@ public func getImageData(sx: ?Float64, sy: ?Float64, sw: ?Float64, sh: ?Float64)
 
 |类型|说明|
 |:---|:---|
-|ImageData|新的ImageData对象。|
+|[ImageData](cj-canvas-drawing-imagedata.md#class-imagedata)|新的ImageData对象。|
 
 ### func putImageData(ImageData, Length, Length)
 
@@ -1696,8 +1696,8 @@ public func putImageData(
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -1706,7 +1706,8 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     private let settings: RenderingContextSettings = RenderingContextSettings(antialias: true)
     private let context: CanvasRenderingContext2D = CanvasRenderingContext2D(this.settings)
-    @State var message: String = ""
+    @State
+    var message: String = ""
     func build() {
             Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center)  {
                 Canvas(this.context)
@@ -1721,7 +1722,6 @@ class EntryView {
             }.width(100.percent).height(100.percent)
     }
 }
-
 ```
 
 ![canvasRenderingContext2D](./figures/canvasRenderingContext2D.PNG)

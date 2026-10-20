@@ -111,6 +111,7 @@ SVG路径描述规范支持的命令如下：
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 

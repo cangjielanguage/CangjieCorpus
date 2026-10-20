@@ -8,7 +8,7 @@
 
 ## 概述
 
-通常，开发者需要对一些 API 进行标签化，使得这些 API 能够根据标签被限定在源码的不同位置使用。全局标签会从 Deveco Studio 创建的仓颉工程中获取，例如：创建的工程为 6.0.2，那么它的全局 API level 为 22。 标签化的 API 需要满足全局的标签配置才能够被合法使用。
+通常，开发者需要对一些 API 进行标签化，使得这些 API 能够根据标签被限定在源码的不同位置使用。全局标签会从 DevEco Studio 创建的仓颉工程中获取，例如：创建的工程为 6.0.2，那么它的全局 API level 为 22。 标签化的 API 需要满足全局的标签配置才能够被合法使用。
 
 为了做到 API 标签化管控，仓颉语言引入了 `@IfAvailable` 宏表达式。它可以基于全局的标签设置，提供更精细的标签化 API 的使用管控。`@IfAvailable` 需要与自定义注解 `APILevel` 配合使用，本章将介绍 `@IfAvailable` 的功能及使用方法。
 
@@ -31,7 +31,7 @@
 
 若 `@IfAvailable` 的条件在运行态是成立的，则 `<lambda1>` 的函数体会被执行，否则 `<lambda2>` 的函数体会被执行。`<lambda1>` 中所有调用的符号将被标记为弱符号，不要求编译链接时一定能够找到。
 
-在一个仓颉工程中，使用 `@IfAvailable` 表达式时会默认隐式导入依赖包 `ohos.device_info` 和 `ohos.base`，不需要手动导入。
+在一个仓颉工程中，使用 `@IfAvailable` 表达式时需要根据检查类型手动导入依赖包：`level` 检查依赖 `ohos.device_info`，`syscap` 检查依赖 `ohos.base`。
 
 ### `level` 检查
 
@@ -70,11 +70,6 @@ package ohos.sample
 import kit.PerformanceAnalysisKit.Hilog
 import ohos.labels.APILevel
 
-@!APILevel[since: "22"]
-public func f22() {
-    Hilog.info(0, "", "level-22")
-}
-
 @!APILevel[since: "23"]
 public func f23() {
     Hilog.info(0, "", "level-23")
@@ -84,32 +79,62 @@ public func f23() {
 public func f24() {
     Hilog.info(0, "", "level-24")
 }
+
+@!APILevel[since: "26.0.0"]
+public func f26() {
+    Hilog.info(0, "", "level-26")
+}
 ```
 
-假设 `ohos.sample` 为 sdk 提供的包，用户使用 Deveco Studio 仓颉项目工程时可以选择所需的 APILevel 等级：
+假设 `ohos.sample` 为 sdk 提供的包，用户使用 DevEco Studio 仓颉项目工程时可以选择所需的 APILevel 等级，以 compatibleSDKVersion 为 23 的工程为例：
 
 ![image-Create-Project-With-Level](./figures/image-Create-Project-With-Level.png)
 
-使用 `@IfAvailable` 时，`<label>: <value>` 为 `level: xx`，`xx` 为数值字面量。
+使用 `@IfAvailable` 时，`<label>: <value>` 为 `level: xx`，`xx` 可以是整数字面量（如 `24`）或三段字符串字面量（如 `"26.0.0"`）。
 
 <!-- compile -pkg0 -->
 
 ```cangjie
 import ohos.sample.*
+import ohos.device_info.*
 
 func demo() {
     @IfAvailable(level: 24, { =>
-        // 编译期：此作用域允许调用 level 为 24 或 24 以下的 API。即该分支能够使用 f22, f23, f24，调用更高等级接口会编译报错。
+        // 编译期：此作用域允许调用 level 为 24 或 24 以下的 API。即该分支能够使用 f23, f24，调用更高等级接口（如 f26）会编译报错。
         // 运行期：当执行设备支持 level 24，那么执行该分支。
-        f22()
         f23()
         f24()
+        f26() // compile error
     }, { =>
-        // 编译期：此作用域使用工程提供的能力，允许调用 level 为 23 或 23 以下的 API。即该分支能够使用 f22, f23，调用更高等级接口会编译报错（如 f24）。
+        // 编译期：此作用域使用工程提供的能力，允许调用 level 为 23 或 23 以下的 API。即该分支能够使用 f23，调用更高等级接口会编译报错。
         // 运行期：当执行设备支持 level 23，那么执行该分支。
-        f22()
         f23()
         f24() // compile error
+        f26() // compile error
+    })
+}
+```
+
+也可以使用三段字符串形式指定版本：
+
+<!-- compile -pkg0 -->
+
+```cangjie
+import ohos.sample.*
+import ohos.device_info.*
+
+func demo() {
+    @IfAvailable(level: "26.0.0", { =>
+        // 编译期：此作用域允许调用 since 为 "26.0.0" 或更低版本的 API。
+        // 运行期：当执行设备支持版本 "26.0.0"，那么执行该分支。
+        f23()
+        f24()
+        f26()
+    }, { =>
+        // 编译期：此作用域使用工程提供的能力，允许调用 level 为 23 或 23 以下的 API。
+        f23()
+        f24() // compile error
+        f26() // compile error
     })
 }
 ```
@@ -147,7 +172,7 @@ public func f4() {
 }
 ```
 
-Deveco Studio 默认读取所有设备支持的 SystemCapability，用于检查作用域中是否允许使用带有标签的 API。
+DevEco Studio 默认读取所有设备支持的 SystemCapability，用于检查作用域中是否允许使用带有标签的 API。
 
 假设 `ohos.sample` 为 sdk，此时设备1的 syscap 为 `["SystemCapability.A", "SystemCapability.B"]`，设备2的 syscap 为 `["SystemCapability.B", "SystemCapability.C"]`
 
@@ -157,6 +182,7 @@ Deveco Studio 默认读取所有设备支持的 SystemCapability，用于检查�
 
 ```cangjie
 import ohos.sample.*
+import ohos.base.*
 
 func demo() {
     @IfAvailable(syscap: "SystemCapability.D", { =>
@@ -164,19 +190,19 @@ func demo() {
         // ["SystemCapability.B", "SystemCapability.D"] 不告警；
         // ["SystemCapability.A", "SystemCapability.C"] 告警；
         // 非 ["SystemCapability.A", "SystemCapability.B", "SystemCapability.C", "SystemCapability.D"] 报错
-        f1()  // warning
-        f2()  // ok
-        f3()  // warning
-        f4()  // ok
+        f1() // warning
+        f2() // ok
+        f3() // warning
+        f4() // ok
     }, { =>
         // 此作用域最高允许使用 ["A", "B", "C"]，其中：
         // ["B"] 不告警；
         // ["A", "C"] 告警；
         // 非 ["A", "B", "C"] 报错
-        f1()  // warning
-        f2()  // ok
-        f3()  // warning
-        f4()  // error
+        f1() // warning
+        f2() // ok
+        f3() // warning
+        f4() // error
     })
 }
 ```

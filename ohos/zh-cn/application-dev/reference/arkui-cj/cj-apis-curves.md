@@ -276,6 +276,7 @@ public func interpolate(fraction: Float32): Float32
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -287,8 +288,10 @@ let animateOpt1 = AnimateParam(
 @Entry
 @Component
 class EntryView {
-    @State var widthSize: Float64 = 200.0
-    @State var heightSize: Float64 = 200.0
+    @State
+    var widthSize: Float64 = 200.0
+    @State
+    var heightSize: Float64 = 200.0
     func build() {
         Column {
             Column()
@@ -299,9 +302,9 @@ class EntryView {
                 .onClick(
                     {
                         evt =>
-                        let curve = Curves.cubicBezierCurve(0.25, 0.1, 0.25, 1.0)
-                        this.widthSize = Float64(curve.interpolate(0.5)) * this.widthSize
-                        this.heightSize = Float64(curve.interpolate(0.5)) * this.heightSize
+                            let curve = Curves.cubicBezierCurve(0.25, 0.1, 0.25, 1.0)
+                            this.widthSize = Float64(curve.interpolate(0.5)) * this.widthSize
+                            this.heightSize = Float64(curve.interpolate(0.5)) * this.heightSize
                     }
                 )
                 .animation(animateOpt1)

@@ -29,7 +29,7 @@ No memory.
 
 销毁当前实例，并重新创建，如果重新创建失败，则停止相关操作。
 
-## 5400102 当前状态机不支持此操作
+## 5400102 当前状态不支持此操作
 
 **错误信息**
 
@@ -41,7 +41,7 @@ Operation not allowed.
 
 **可能原因**
 
-当前状态机不支持此操作。
+当前状态不支持此操作。
 
 **处理步骤**
 
@@ -59,7 +59,7 @@ I/O error.
 
 **可能原因**
 
-媒体与其他模块的数据交互发生问题(图形、音频、网络、HDI、相机)。
+媒体与其他模块的数据交互发生问题（图形、音频、网络、HDI、相机）。
 
 **处理步骤**
 
@@ -139,6 +139,60 @@ Audio interrupted.
 
 销毁当前实例，并确认当前是否有其他进程在进行录制。如果可以停止其他进程的占用，则可以重新创建。
 
+## 5400108 参数超过取值范围
+
+**错误信息**
+
+The parameter check failed, parameter value out of range.
+
+**错误描述**
+
+参数检查失败，参数值超出范围。
+
+**可能原因**
+
+参数值超出取值范围。
+
+**处理步骤**
+
+调整参数值，使其在取值范围内。
+
+## 5410002 不支持SEEK_CONTINUOUS模式的Seek
+
+**错误信息**
+
+Seek continuous is unsupported.
+
+**错误描述**
+
+该媒体源或者当前设备不支持以SEEK_CONTINUOUS模式进行seek。
+
+**可能原因**
+
+该媒体源或者当前设备不支持以SEEK_CONTINUOUS模式进行seek。
+
+**处理步骤**
+
+1. 提示性错误码，用于客户端感知不支持SEEK_CONTINUOUS模式进行seek时的表现，客户端无需处理。
+
+## 5410003 不支持超分
+
+**错误信息**
+
+Super resolution not supported.
+
+**错误描述**
+
+提示性错误码，该媒体源或者当前设备不支持超分。
+
+**可能原因**
+
+超分仅支持非hdr、非drm且分辨率在1080P及以下的视频。若媒体源不满足超分条件，或者当前设备不支持超分，则调用超分相关接口时会上报此错误。
+
+**处理步骤**
+
+用于客户端感知不支持超分时的表现，客户端后续不应再调用超分相关接口。
+
 ## 5411001 解析或链接服务端地址错误
 
 **错误信息**
@@ -162,7 +216,7 @@ Can not find host.
 
 **错误信息**
 
-Connection time out.
+Connection timeout.
 
 **错误描述**
 
@@ -181,7 +235,7 @@ Connection time out.
 
 **错误信息**
 
-NetWork abnormal.
+Network abnormal.
 
 **错误描述**
 
@@ -199,7 +253,7 @@ NetWork abnormal.
 
 **错误信息**
 
-NetWork unavailable.
+Network unavailable.
 
 **错误描述**
 
@@ -298,22 +352,22 @@ SSL connection failed.
 
 **错误描述**
 
-SSL连接失败。
+SSL链接失败。
 
 **可能原因**
 
-SSL连接失败。
+SSL链接失败。
 
 **处理步骤**
 
-1. 确认SSL连接是否已失效。
+1. 确认SSL链接是否已失效。
 2. 销毁当前实例，并重新创建，如果重新创建失败，则停止相关操作。
 
 ## 5411010 客户端校验服务端证书失败
 
 **错误信息**
 
-SSL server cert needed.
+SSL server cert untrusted.
 
 **错误描述**
 
@@ -346,3 +400,22 @@ Unsupported request.
 
 1. 确认客户端请求参数是否正常。
 2. 销毁当前实例，并重新创建，如果重新创建失败，则停止相关操作。
+
+## 5411012 HTTP明文拦截导致请求不受支持
+
+**错误信息**
+
+Http cleartext traffic is not permitted.
+
+**错误描述**
+
+不允许HTTP明文访问。
+
+**可能原因**
+
+客户端在network_config.json中对相关域名配置`禁止HTTP明文访问`。
+
+**处理步骤**
+
+1. 确认network_config.json配置文件中是否对相关域名进行HTTP明文访问拦截。
+2. 如果不需要拦截，则参考明文HTTP访问权限配置说明对域名权限进行配置。

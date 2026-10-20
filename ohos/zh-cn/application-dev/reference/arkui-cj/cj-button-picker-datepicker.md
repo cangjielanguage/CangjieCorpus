@@ -246,8 +246,8 @@ public init(
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.hilog.*
 import ohos.arkui.state_macro_manage.*
@@ -258,9 +258,12 @@ import ohos.arkui.component.common.Font as CommonFont
 @Entry
 @Component
 class EntryView {
-    @State var isLunar: Bool = false
-    @State var selectedDate: DateTime = DateTime.of(year: 2024, month: Month.of(4), dayOfMonth: 28)
-    @State var resultedDate: DateTime = DateTime.of(year: 2024, month: Month.of(4), dayOfMonth: 28)
+    @State
+    var isLunar: Bool = false
+    @State
+    var selectedDate: DateTime = DateTime.of(year: 2024, month: Month.of(4), dayOfMonth: 28)
+    @State
+    var resultedDate: DateTime = DateTime.of(year: 2024, month: Month.of(4), dayOfMonth: 28)
 
     func build() {
         Column() {
@@ -276,9 +279,11 @@ class EntryView {
                 end: DateTime.of(year: 2045, month: Month.of(8), dayOfMonth: 8),
                 selected: this.selectedDate
             )
-                .disappearTextStyle(PickerTextStyle(color: Color.Gray, font: CommonFont(size: 16.fp, weight: FontWeight.Bold)))
+                .disappearTextStyle(
+                    PickerTextStyle(color: Color.Gray, font: CommonFont(size: 16.fp, weight: FontWeight.Bold)))
                 .textStyle(PickerTextStyle(color: 0xff182431, font: CommonFont(size: 18.fp, weight: FontWeight.Normal)))
-                .selectedTextStyle(PickerTextStyle(color: 0xff0000FF, font: CommonFont(size: 26.fp, weight: FontWeight.Regular)))
+                .selectedTextStyle(
+                    PickerTextStyle(color: 0xff0000FF, font: CommonFont(size: 26.fp, weight: FontWeight.Regular)))
                 .lunar(this.isLunar)
                 .onDateChange(
                     { res =>

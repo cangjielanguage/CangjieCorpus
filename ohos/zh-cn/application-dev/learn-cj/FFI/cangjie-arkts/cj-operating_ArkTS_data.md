@@ -71,8 +71,7 @@
 
     // 必须注册该函数到JSModule中
     let EXPORT_MODULE = JSModule.registerModule {
-        runtime, exports =>
-            exports["addByObject"] = runtime.function(addByObject).toJSValue()
+        runtime, exports => exports["addByObject"] = runtime.function(addByObject).toJSValue()
     }
     ```
 
@@ -178,8 +177,7 @@ func readNumber(context: JSContext, callInfo: JSCallInfo): JSValue {
 
 // 必须注册该函数到JSModule中
 let EXPORT_MODULE = JSModule.registerModule {
-    runtime, exports =>
-        exports["readNumber"] = runtime.function(readNumber).toJSValue()
+    runtime, exports => exports["readNumber"] = runtime.function(readNumber).toJSValue()
 }
 ```
 
@@ -207,7 +205,7 @@ console.log("result = " + result);
 
 ### ArkTS 异步锁
 
-为了解决多并发实例间的数据竞争问题， ArkTS 语言基础库引入了异步锁能力。为了开发者的开发效率， AsyncLock 对象支持跨并发实例引用传递，具体可参考[异步锁](https://docs.openharmony.cn/pages/v6.0/zh-cn/application-dev/arkts-utils/arkts-async-lock-introduction.md)。本节重点介绍异步锁结合 sendable 对象的场景。
+为了解决多并发实例间的数据竞争问题， ArkTS 语言基础库引入了异步锁能力。为了开发者的开发效率， AsyncLock 对象支持跨并发实例引用传递，具体可参考<!--RP1-->[异步锁](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/arkts-utils/arkts-async-lock-introduction.md)<!--RP1End-->。本节重点介绍异步锁结合 sendable 对象的场景。
 
 仓颉侧实现：
 
@@ -238,9 +236,11 @@ func testAsync(context: JSContext, callInfo: JSCallInfo): JSValue {
 
 func readName(context: JSContext, callInfo: JSCallInfo): JSValue {
     let some = callInfo[0].asObject()
-    some["lock"].asObject().callMethod("lockAsync", context.function { context, callInfo =>
-        return some["name"]
-    }.toJSValue())
+    some["lock"]
+        .asObject()
+        .callMethod("lockAsync", context.function {
+            context, callInfo => return some["name"]
+        }.toJSValue())
 }
 
 let EXPORT_MODULE = JSModule.registerModule {
@@ -427,8 +427,7 @@ startTestWorker();
     }
 
     let EXPORT_MODULE = JSModule.registerModule {
-        runtime, exports =>
-            exports["addByCallback"] = runtime.function(addByCallback).toJSValue()
+        runtime, exports => exports["addByCallback"] = runtime.function(addByCallback).toJSValue()
     }
     ```
 

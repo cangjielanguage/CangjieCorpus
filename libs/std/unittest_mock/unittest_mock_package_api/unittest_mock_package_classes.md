@@ -144,7 +144,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -165,7 +167,6 @@ func test() {
     Verify.that(@Called(printer.print("xyz")).atLeastTimes(0))
     Verify.that(@Called(printer.print("xyz")).never())
 }
-
 ```
 
 ### func anyTimes()
@@ -372,7 +373,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -558,7 +561,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -1045,7 +1050,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 func printMessage(printer: Printer) {
@@ -1187,10 +1194,14 @@ import std.unittest.mock.mockmacro.*
 
 class Printer {
     mut prop name: String {
-        get() { "nop" }
+        get() {
+            "nop"
+        }
         set(x) {}
     }
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -1290,7 +1301,7 @@ public func value(): T
 ## class UnorderedVerifier
 
 ```cangjie
-public class UnorderedVerifier{}
+public class UnorderedVerifier {}
 ```
 
 功能：此类型用于收集 “验证语句”， 可在 [unordered](#static-func-unorderedarrayverifystatement) 函数中动态传入验证行为。
@@ -1303,7 +1314,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 func printMessage(printer: Printer) {
@@ -1394,7 +1407,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -1473,6 +1488,7 @@ public static func ordered(statements: Array<VerifyStatement>): Unit
 
 举例来说:
 
+<!-- code_no_check -->
 ```cangjie
 for (i in 0..4) {
     foo.bar(i % 2)
@@ -1653,7 +1669,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -1775,7 +1793,7 @@ public static func fromStub<R>(
     objName: Option<String>,
     declarationName: String,
     callDescription: String,
-    lineNumber: Int64
+    _: Int64
 ): VerifyStatement
 ```
 
@@ -1788,7 +1806,7 @@ public static func fromStub<R>(
 - objName: [Option](../../core/core_package_api/core_package_enums.md#enum-optiont)\<[String](../../core/core_package_api/core_package_structs.md#struct-string)> - 被插桩的对象的名称。
 - declarationName: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 声明的名称。
 - callDescription: [String](../../core/core_package_api/core_package_structs.md#struct-string) - 桩签名对应的调用表达式的字符串表达。
-- lineNumber: Int64 - 行号。
+- _: Int64 - 行号。
 
 返回值：
 

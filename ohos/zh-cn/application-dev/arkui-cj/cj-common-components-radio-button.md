@@ -62,6 +62,7 @@ Radio(value: 'Radio2', group: 'radioGroup')
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.arkui.ui_context.*
@@ -76,10 +77,12 @@ class EntryView {
                     .checked(true)
                     .height(50)
                     .width(50)
-                    .onChange ({
+                    .onChange({
                         isChecked => if (isChecked) {
                             // 切换为响铃模式
-                            getUIContext().getPromptAction().showToast(ShowToastOptions(message: 'Ringing mode.'))
+                            getUIContext()
+                                .getPromptAction()
+                                .showToast(ShowToastOptions(message: 'Ringing mode.'))
                         }
                     })
                 Text('Ringing')
@@ -88,10 +91,12 @@ class EntryView {
                 Radio(value: 'Radio2', group: 'radioGroup')
                     .height(50)
                     .width(50)
-                    .onChange ({
+                    .onChange({
                         isChecked => if (isChecked) {
                             // 切换为振动模式
-                            getUIContext().getPromptAction().showToast(ShowToastOptions(message: 'Vibration mode.'))
+                            getUIContext()
+                                .getPromptAction()
+                                .showToast(ShowToastOptions(message: 'Vibration mode.'))
                         }
                     })
                 Text('Vibration')
@@ -100,21 +105,22 @@ class EntryView {
                 Radio(value: 'Radio3', group: 'radioGroup')
                     .height(50)
                     .width(50)
-                    .onChange ({
+                    .onChange({
                         isChecked => if (isChecked) {
                             // 切换为静音模式
-                            getUIContext().getPromptAction().showToast(ShowToastOptions(message: 'Silent mode.'))
+                            getUIContext()
+                                .getPromptAction()
+                                .showToast(ShowToastOptions(message: 'Silent mode.'))
                         }
                     })
                 Text('Silent')
             }
         }
-        .height(100.percent)
-        .width(100.percent)
-        .justifyContent(FlexAlign.Center)
+            .height(100.percent)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
-
 ```
 
 ![Radio1](figures/Radio1.gif)

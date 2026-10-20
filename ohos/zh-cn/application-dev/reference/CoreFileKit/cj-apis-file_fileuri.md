@@ -6,7 +6,7 @@
 > 当前为Beta阶段。
 <!--DelEnd-->
 
-fileuri模块提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file_fs（文件管理）](cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
+fileuri模块提供通过PATH获取文件统一资源标识符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file_fs（文件管理）](cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
 
 ## 导入模块
 
@@ -29,7 +29,7 @@ API示例代码使用说明：
 public func getUriFromPath(path: String): String
 ```
 
-**功能：** 通过传入的路径path生成应用自己的URI；将path转URI时，路径中的中文及非数字字母的特殊字符将会被编译成对应的ASCII码，拼接在URI中。
+**功能：** 通过传入的路径path生成应用自己的URI；将path转URI时，路径中的中文及非数字字母的特殊字符将会被编码成对应的ASCII码，拼接在URI中。
 
 **系统能力：** SystemCapability.FileManagement.AppFileService
 
@@ -49,7 +49,7 @@ public func getUriFromPath(path: String): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -81,7 +81,7 @@ public class FileUri {
 }
 ```
 
-**功能：** 提供通过PATH获取文件统一资源标志符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file.fs](./cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
+**功能：** 提供通过PATH获取文件统一资源标识符（Uniform Resource Identifier，URI）的能力，后续可通过使用[ohos.file.fs](./cj-apis-file_fs.md)进行相关操作，如open、read、write等，以实现文件分享。
 
 **系统能力：** SystemCapability.FileManagement.AppFileService
 
@@ -105,7 +105,7 @@ public prop name: String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -118,7 +118,7 @@ public prop name: String
 public override prop path: String
 ```
 
-**功能：** 将uri转换成对应的沙箱路径path。 1、uri转path过程中会将uri中存在的ASCII码进行解码后拼接在原处，非系统接口生成的uri中可能存在ASCII码解析范围之外的字符，导致字符串无法正常拼接；2、转换处理为系统约定的字符串替换规则（规则随系统演进可能会发生变化），转换过程中不进行路径校验操作，无法保证转换结果的一定可以访问。
+**功能：** 将uri转换成对应的沙箱路径path。 1、uri转path过程中会将uri中存在的ASCII码进行解码后拼接在原处，非仓颉API接口生成的uri中可能存在ASCII码解析范围之外的字符，导致字符串无法正常拼接；2、转换处理为系统约定的字符串替换规则（规则随系统演进可能会发生变化），转换过程中不进行路径校验操作，无法保证转换结果的一定可以访问。
 
 **类型：** String
 
@@ -148,7 +148,7 @@ public init(uriOrPath: String)
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](./cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -156,7 +156,7 @@ public init(uriOrPath: String)
   | 13900011 | Out of memory. |
   | 13900020 | Invalid argument. |
   | 13900042 | Unknown error. |
-  | 14300002 | Invalid uri. |
+  | 14300002 | Invalid URI. |
 
 ### func toString()
 
@@ -175,4 +175,3 @@ public override func toString(): String
 |类型|说明|
 |:----|:----|
 |String|返回字符串类型URI。|
-

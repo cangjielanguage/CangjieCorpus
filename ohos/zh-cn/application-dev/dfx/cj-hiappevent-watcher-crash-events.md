@@ -62,5 +62,5 @@ HiAppEvent提供接口用于订阅系统崩溃事件。
 | ------- | ------ | ------------------------- |
 | file | String | 文件名。 |
 | symbol | String | 函数名称。 |
-| column | Int32 | 异常所在行。 |
-| line | Int32 | 异常所在列。 |
+| column | Int32 | 异常所在列。 |
+| line | Int32 | 异常所在行。 |

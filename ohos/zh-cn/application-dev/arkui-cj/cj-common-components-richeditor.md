@@ -16,6 +16,7 @@ RichEditor是支持图文混排和文本交互式编辑的组件，通常用于�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -29,10 +30,11 @@ class EntryView {
     func build() {
         Column() {
             Column() {
-                RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"创建不使用属性字符串构建的RichEditor组件")
-                    })
+                RichEditor(this.controller).onReady({
+                    => this
+                        .controller
+                        .addTextSpan(content: "创建不使用属性字符串构建的RichEditor组件")
+                })
             }.width(200)
         }.height(200)
     }
@@ -55,6 +57,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -71,10 +74,14 @@ class EntryView {
     @Builder
     func RightClickTextCustomMenu() {
         Menu() {
-            MenuItemGroup() {=>
-                MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "剪切", labelInfo: "Ctrl+X" )
-                MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "复制", labelInfo: "Ctrl+C" )
-                MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "粘贴", labelInfo: "Ctrl+V" )
+            MenuItemGroup() {
+                =>
+                    MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "剪切",
+                        labelInfo: "Ctrl+X")
+                    MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "复制",
+                        labelInfo: "Ctrl+C")
+                    MenuItem(startIcon: @r(app.media.startIcon), endIcon: @r(app.media.startIcon), content: "粘贴",
+                        labelInfo: "Ctrl+V")
             }
         }.backgroundColor(0XF0F0F0)
     }
@@ -82,21 +89,22 @@ class EntryView {
         Scroll() {
             Column {
                 RichEditor(this.controller)
-                .bindSelectionMenu(
-                    spanType: RichEditorSpanType.Text,
-                    content: bind(this.RightClickTextCustomMenu, this),
-                    responseType: ResponseType.LongPress,
-                    options: SelectionMenuOptions( onDisappear: {
-                            => Hilog.info(0, " ", "自定义选择菜单关闭时  触发该回调")
-                        },
-                        onAppear: {
-                            => Hilog.info(0, " ", "自定义选择菜单弹出时回调")
-                        }
+                    .bindSelectionMenu(
+                        spanType: RichEditorSpanType.Text,
+                        content: this.RightClickTextCustomMenu,
+                        responseType: ResponseType.LongPress,
+                        options: SelectionMenuOptions(
+                            onDisappear: {
+                                => Hilog.info(0, " ", "自定义选择菜单关闭时  触发该回调")
+                            },
+                            onAppear: {
+                                => Hilog.info(0, " ", "自定义选择菜单弹出时回调")
+                            }
+                        )
                     )
-                )
-                .onReady({ =>
-                    controller.addTextSpan(content: "这是一段文本，用来展示选中菜单")
-                })
+                    .onReady({
+                        => controller.addTextSpan(content: "这是一段文本，用来展示选中菜单")
+                    })
             }
         }
     }
@@ -117,6 +125,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -130,9 +139,10 @@ class EntryView {
     func build() {
         Column() {
             Column() {
-                RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"onReady回调内容是组件内预置文本")
+                RichEditor(this.controller).onReady({
+                    => this
+                        .controller
+                        .addTextSpan(content: "onReady回调内容是组件内预置文本")
                 })
             }.width(200)
         }.height(200)
@@ -154,6 +164,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -169,13 +180,22 @@ class EntryView {
         Column() {
             Column() {
                 RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"选中此处文本，触发onselect回调。")
+                    .onReady({
+                        => this
+                            .controller
+                            .addTextSpan(content: "选中此处文本，触发onselect回调。")
                     })
-                    .onSelect({value1: RichEditorSelection=>
-                        this.controller.addTextSpan(content:"1234")
-                    }).width(200).height(200)
-                Text("查看回调内容：").fontSize(10).fontColor(Color.Gray).width(200)
+                    .onSelect({
+                        value1: RichEditorSelection => this
+                            .controller
+                            .addTextSpan(content: "1234")
+                    })
+                    .width(200)
+                    .height(200)
+                Text("查看回调内容：")
+                    .fontSize(10)
+                    .fontColor(Color.Gray)
+                    .width(200)
                 RichEditor(this.controller1)
                     .width(200)
                     .height(200)
@@ -195,6 +215,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -204,23 +225,35 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     var controller: RichEditorController = RichEditorController()
     var controller1: RichEditorController = RichEditorController()
-    var rangeBefore: TextRange = TextRange(10,13)
-    var rangeAfter: TextRange = TextRange(15,18)
+    var rangeBefore: TextRange = TextRange(10, 13)
+    var rangeAfter: TextRange = TextRange(15, 18)
 
     func build() {
         Column() {
             Column() {
                 RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"组件内图文变化前，触发回调。\n图文变化后，触发回调。")
+                    .onReady({
+                        => this
+                            .controller
+                            .addTextSpan(content: "组件内图文变化前，触发回调。\n图文变化后，触发回调。")
                     })
-                    .onDidChange({ rangeBefore: TextRange, rangeAfter: TextRange=>
-                        this.controller1.addTextSpan(content:"\n图文变化后，触发回调：\nrangeBefore:" + "1234" +
-                            "\nrangeAfter：" + "2345")
-                        }).width(180)
-                Text("查看回调内容：").fontSize(10).fontColor(Color.Gray).width(70)
-                RichEditor(this.controller1).width(200).height(500)
-            }.width(200).height(200)
+                    .onDidChange({
+                        rangeBefore: TextRange, rangeAfter: TextRange => this
+                            .controller1
+                            .addTextSpan(
+                                content: "\n图文变化后，触发回调：\nrangeBefore:" + "1234" + "\nrangeAfter：" + "2345")
+                    })
+                    .width(180)
+                Text("查看回调内容：")
+                    .fontSize(10)
+                    .fontColor(Color.Gray)
+                    .width(70)
+                RichEditor(this.controller1)
+                    .width(200)
+                    .height(500)
+            }
+                .width(200)
+                .height(200)
         }
     }
 }
@@ -238,6 +271,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -252,20 +286,38 @@ class EntryView {
         Column() {
             Column() {
                 RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"输入法输入内容前，触发回调。\n输入法完成输入后，触发回调。")
+                    .onReady({
+                        => this
+                            .controller
+                            .addTextSpan(content: "输入法输入内容前，触发回调。\n输入法完成输入后，触发回调。")
                     })
-                    .aboutToImeInput({value:   RichEditorInsertValue=>
-                        this.controller1.addTextSpan(content:"输入法输入内容前，触发回调：\n123")
-                        return true;
+                    .aboutToImeInput(
+                        {
+                            value: RichEditorInsertValue =>
+                                this
+                                    .controller1
+                                    .addTextSpan(content: "输入法输入内容前，触发回调：\n123")
+                                return true;
+                        }
+                    )
+                    .onImeInputComplete({
+                        value: RichEditorTextSpanResult => this
+                            .controller1
+                            .addTextSpan(content: "输入法完成输入后，触发回调：\n456")
                     })
-                    .onImeInputComplete({value: RichEditorTextSpanResult=>
-                        this.controller1.addTextSpan(content:"输入法完成输入后，触发回调：\n456")
-                    }).width(200).height(200)
+                    .width(200)
+                    .height(200)
 
-                Text("查看回调内容：").fontSize(10).fontColor(Color.Gray).width(200)
-                RichEditor(this.controller1).width(200).height(200)
-            }.width(200).height(200)
+                Text("查看回调内容：")
+                    .fontSize(10)
+                    .fontColor(Color.Gray)
+                    .width(200)
+                RichEditor(this.controller1)
+                    .width(200)
+                    .height(200)
+            }
+                .width(200)
+                .height(200)
         }
     }
 }
@@ -285,6 +337,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -298,15 +351,26 @@ class EntryView {
         Column() {
             Column() {
                 RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"对此处文本进行复制粘贴操作可触发对应回调。")
+                    .onReady({
+                        => this
+                            .controller
+                            .addTextSpan(content: "对此处文本进行复制粘贴操作可触发对应回调。")
                     })
-                    .onPaste({value1:PasteEvent=>
-                        this.controller1.addTextSpan(content:"触发onPaste回调\n")
-                    }).width(300).height(70)
-                Text("查看回调内容：").fontSize(10).fontColor(Color.Gray).width(300)
+                    .onPaste({
+                        value1: PasteEvent => this
+                            .controller1
+                            .addTextSpan(content: "触发onPaste回调\n")
+                    })
+                    .width(300)
+                    .height(70)
+                Text("查看回调内容：")
+                    .fontSize(10)
+                    .fontColor(Color.Gray)
+                    .width(300)
                 RichEditor(this.controller1)
-                    .width(300).height(70).width(200)
+                    .width(300)
+                    .height(70)
+                    .width(200)
             }.height(200)
         }
     }
@@ -343,8 +407,10 @@ class EntryView {
                 .width(200)
                 .height(300)
                 .fontSize(13)
-                .onClick({ evt =>
-                    this.controller.addTextSpan(content:"新添加一段文字。")
+                .onClick({
+                    evt => this
+                        .controller
+                        .addTextSpan(content: "新添加一段文字。")
                 })
             RichEditor(this.controller)
                 .width(200)
@@ -368,6 +434,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import kit.LocalizationKit.*
 import ohos.arkui.state_macro_manage.*
@@ -385,18 +452,24 @@ class EntryView {
                     .width(200)
                     .height(300)
                     .fontSize(13)
-                    .onClick({ evt =>
-                        this.controller.addImageSpan(value: @r(app.media.startIcon),
-                        options: RichEditorImageSpanOptions(
-                            imageStyle: RichEditorImageSpanStyle(
-                                size: (24.vp, 24.vp)
-                            )
-                        ))
+                    .onClick({
+                        evt => this
+                            .controller
+                            .addImageSpan(value: @r(app.media.startIcon),
+                                options: RichEditorImageSpanOptions(
+                                    imageStyle: RichEditorImageSpanStyle(size: (24.vp, 24.vp))))
                     })
                 RichEditor(this.controller)
-                    .onReady({=>
-                        this.controller.addTextSpan(content:"对此处文本进行复制粘贴操作可触发对应回调。")}).width(200).height(200)
-            }.width(200).height(300)
+                    .onReady({
+                        => this
+                            .controller
+                            .addTextSpan(content: "对此处文本进行复制粘贴操作可触发对应回调。")
+                    })
+                    .width(200)
+                    .height(200)
+            }
+                .width(200)
+                .height(300)
         }
     }
 }

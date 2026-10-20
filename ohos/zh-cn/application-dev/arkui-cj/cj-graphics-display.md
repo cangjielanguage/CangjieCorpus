@@ -106,6 +106,7 @@ Svg图源通过`<image>`标签的`xmlns:xlink`属性指定本地位图路径，�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource.*
@@ -202,14 +203,23 @@ class EntryView {
                     .width(40.percent)
                     .interpolation(ImageInterpolation.None)
                     .borderWidth(1)
-                    .overlay(value: "Interpolation.None", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0
-                    ))
+                    .overlay(
+                        value: "Interpolation.None",
+                        align: Alignment.Bottom,
+                        offset: OverlayOffset(
+                            x: 0.0,
+                            y: 20.0
+                        )
+                    )
                     .margin(10)
                 Image(@r(app.media.grass))
                     .width(40.percent)
                     .interpolation(ImageInterpolation.Low)
                     .borderWidth(1)
-                    .overlay(value: "Interpolation.Low", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0)
+                    .overlay(
+                        value: "Interpolation.Low",
+                        align: Alignment.Bottom,
+                        offset: OverlayOffset(x: 0.0, y: 20.0)
                     )
                     .margin(10)
             }
@@ -228,8 +238,14 @@ class EntryView {
                     .width(40.percent)
                     .interpolation(ImageInterpolation.High)
                     .borderWidth(1)
-                    .overlay(value: "Interpolation.High", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0
-                    ))
+                    .overlay(
+                        value: "Interpolation.High",
+                        align: Alignment.Bottom,
+                        offset: OverlayOffset(
+                            x: 0.0,
+                            y: 20.0
+                        )
+                    )
                     .margin(10)
             }
                 .width(100.percent)
@@ -286,9 +302,9 @@ class EntryView {
                     .overlay(value: 'ImageRepeat.X', align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
             }
         }
-        .height(150)
-        .width(100.percent)
-        .padding(8)
+            .height(150)
+            .width(100.percent)
+            .padding(8)
     }
 }
 ```
@@ -331,9 +347,9 @@ class EntryView {
                     .overlay(value: 'Template', align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
             }
         }
-        .height(150)
-        .width(100.percent)
-        .padding(top: 20, right: 10)
+            .height(150)
+            .width(100.percent)
+            .padding(top: 20, right: 10)
     }
 }
 ```
@@ -376,9 +392,9 @@ class EntryView {
                     .border(width: 1)
                     .overlay(value: 'width:90 height:90', align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 40.0))
             }
-            .height(150)
-            .width(100.percent)
-            .padding(20)
+                .height(150)
+                .width(100.percent)
+                .padding(20)
         }
     }
 }
@@ -412,10 +428,14 @@ import kit.PerformanceAnalysisKit.Hilog
 @Entry
 @Component
 class EntryView {
-    @State var widthValue: Float64 = 0.0
-    @State var heightValue: Float64 = 0.0
-    @State var componentWidth: Float64 = 0.0
-    @State var componentHeight: Float64 = 0.0
+    @State
+    var widthValue: Float64 = 0.0
+    @State
+    var heightValue: Float64 = 0.0
+    @State
+    var componentWidth: Float64 = 0.0
+    @State
+    var componentHeight: Float64 = 0.0
     func build() {
         Column() {
             Row() {
@@ -423,19 +443,22 @@ class EntryView {
                     .width(200)
                     .height(150)
                     .margin(15)
-                    .onComplete({msg: ImageLoadResult =>
-                        this.widthValue = msg.width
-                        this.heightValue = msg.height
-                        this.componentWidth = msg.componentWidth
-                        this.componentHeight = msg.componentHeight
-                    })
-                    .onError({evt =>
-                        Hilog.info(0, "cangjie", "load image fail")
+                    .onComplete(
+                        {
+                            msg: ImageLoadResult =>
+                                this.widthValue = msg.width
+                                this.heightValue = msg.height
+                                this.componentWidth = msg.componentWidth
+                                this.componentHeight = msg.componentHeight
+                        }
+                    )
+                    .onError({
+                        evt => Hilog.info(0, "cangjie", "load image fail")
                     })
                     .overlay(
                         value: '\nwidth: ${this.widthValue}, height: ${this.heightValue}\ncomponentWidth: ${this.componentWidth}\ncomponentHeight: ${this.componentHeight}',
                         align: Alignment.Bottom,
-                        offset: OverlayOffset( x: 0.0, y: 60.0 )
+                        offset: OverlayOffset(x: 0.0, y: 60.0)
                     )
             }
         }

@@ -83,7 +83,7 @@
 
 系统对无图标应用实施严格管控，防止一些恶意应用故意配置无桌面应用图标，导致用户找不到软件所在的位置，无法操作卸载应用，在一定程度上保证用户终端设备的安全。
 
-如果预置应用确需隐藏桌面应用图标，需要配置AllowAppDesktopIconHide应用特权<!--Del-->，具体配置方式参考[应用特权配置指南](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)<!--DelEnd-->。申请该特权后，应用不会在桌面上显示。除预置应用外，其他应用不支持隐藏桌面图标。
+如果预置应用确需隐藏桌面应用图标，需要配置AllowAppDesktopIconHide应用特权<!--Del-->，具体配置方式参考[应用特权配置指南](https://gitcode.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)<!--DelEnd-->。申请该特权后，应用不会在桌面上显示。除预置应用外，其他应用不支持隐藏桌面图标。
 
 ## 应用版本声明配置
 

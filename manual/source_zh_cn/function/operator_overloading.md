@@ -1,8 +1,8 @@
 # 操作符重载
 
-如果希望在某个类型上支持此类型默认不支持的操作符，可以使用操作符重载实现。
+若希望为某个类型实现其默认不支持的运算符操作，可通过运算符重载完成。
 
-如果需要在某个类型上重载某个操作符，可以通过为类型定义一个函数名为此操作符的函数的方式实现，这样，在该类型的实例使用该操作符时，就会自动调用此操作符函数。
+如果需要为某个类型重载某个运算符，可定义名称为该运算符的函数。当该类型的实例使用此运算符时，便会自动调用对应的运算符函数。
 
 操作符函数定义与普通函数定义相似，区别如下：
 
@@ -37,7 +37,7 @@
     open class Point {
         var x: Int64 = 0
         var y: Int64 = 0
-        public init (a: Int64, b: Int64) {
+        public init(a: Int64, b: Int64) {
             x = a
             y = b
         }
@@ -58,8 +58,8 @@
     ```cangjie
     main() {
         let p1 = Point(8, 24)
-        let p2 = -p1      // p2 = Point(-8, -24)
-        let p3 = p1 + p2  // p3 = Point(0, 0)
+        let p2 = -p1 // p2 = Point(-8, -24)
+        let p3 = p1 + p2 // p3 = Point(0, 0)
     }
     ```
 
@@ -117,7 +117,7 @@
 
     func test1() {
         let a = A() // OK, A() is call the constructor of A
-        a()         // OK, a() is to call the operator () overloading function
+        a() // OK, a() is to call the operator () overloading function
     }
     ```
 
@@ -135,7 +135,7 @@
         public operator func ()(): Unit {}
 
         public func foo() {
-            this()  // Error, this() calls the constructor of A.
+            this() // Error, this() calls the constructor of A
             super() // Error
         }
     }
@@ -164,11 +164,11 @@
     }
 
     main() {
-        let e = X(1)    // OK, X(1) is to call the constructor X(Int64)
-        X(1.0)          // OK, X(1.0) is to call the operator () overloading function
+        let e = X(1) // OK, X(1) is to call the constructor X(Int64)
+        X(1.0) // OK, X(1.0) is to call the operator () overloading function
         let e1 = X
-        e1(1)           // OK, e1(1) is to call the operator () overloading function
-        Y(1)            // OK, Y(1) is to call the operator () overloading function
+        e1(1) // OK, e1(1) is to call the operator () overloading function
+        Y(1) // OK, Y(1) is to call the operator () overloading function
     }
     ```
 
@@ -209,7 +209,7 @@
 ```cangjie
 open class MyClass {
     var x: Int64 = 0
-    public init (a: Int64) {
+    public init(a: Int64) {
         x = a
     }
 
@@ -221,7 +221,7 @@ open class MyClass {
 main() {
     var a = MyClass(5)
     var b = MyClass(3)
-    a += b; // Error, type incompatible in this compound assignment expression
+    a += b // Error, type incompatible in this compound assignment expression
 }
 ```
 

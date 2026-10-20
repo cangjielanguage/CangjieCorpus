@@ -225,71 +225,72 @@ class EntryView {
     func build() {
         Column() {
             Text(status)
-                    .size(width: 50.percent, height: 50.vp)
-                    .borderWidth(1)
-                    .borderColor(Color.Black)
-                    .backgroundColor(0xFFFFFF)
-                    .borderRadius(15)
-                    .textAlign(TextAlign.Center)
-                    .fontSize(30)
-                    .margin(top: 20.vp)
-                    .id("StatusText")
+                .size(width: 50.percent, height: 50.vp)
+                .borderWidth(1)
+                .borderColor(Color.Black)
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .textAlign(TextAlign.Center)
+                .fontSize(30)
+                .margin(top: 20.vp)
+                .id("StatusText")
             Text(onRefreshStatus)
-                    .size(width: 50.percent, height: 50.vp)
-                    .borderWidth(1)
-                    .borderColor(Color.Black)
-                    .backgroundColor(0xFFFFFF)
-                    .borderRadius(15)
-                    .textAlign(TextAlign.Center)
-                    .fontSize(30)
-                    .margin(top: 20.vp)
-                    .id("OnRefreshText")
+                .size(width: 50.percent, height: 50.vp)
+                .borderWidth(1)
+                .borderColor(Color.Black)
+                .backgroundColor(0xFFFFFF)
+                .borderRadius(15)
+                .textAlign(TextAlign.Center)
+                .fontSize(30)
+                .margin(top: 20.vp)
+                .id("OnRefreshText")
 
             Refresh(RefreshOptions(refreshing: @Binder(isRefreshing))) {
                 Column {
                     LazyForEach(
-                            myDataSource,
-                            itemGeneratorFunc: {
-                                element: Int64, index: Int64 => Text(element.toString())
-                            .size(width: 50.percent, height: 50.vp)
-                            .borderWidth(1)
-                            .borderColor(Color.Black)
-                            .backgroundColor(0xFFFFFF)
-                            .borderRadius(15)
-                            .textAlign(TextAlign.Center)
-                            .fontSize(30)
-                            .margin(top: 20.vp)
-                            }
+                        myDataSource,
+                        itemGeneratorFunc: {
+                            element: Int64, index: Int64 => Text(element.toString())
+                                .size(width: 50.percent, height: 50.vp)
+                                .borderWidth(1)
+                                .borderColor(Color.Black)
+                                .backgroundColor(0xFFFFFF)
+                                .borderRadius(15)
+                                .textAlign(TextAlign.Center)
+                                .fontSize(30)
+                                .margin(top: 20.vp)
+                        }
                     )
-                }.width(100.percent).backgroundColor(0x89CFF0)
-            }
+                }
                     .width(100.percent)
-                    .height(100.percent)
-                    .id("refresh")
-                    .onRefreshing(
-                            {
-                                =>
-                                onRefreshStatus = "Refresh"
-                                Timer.once(2000 * Duration.millisecond) {
-                                    => launch {
+                    .backgroundColor(0x89CFF0)
+            }
+                .width(100.percent)
+                .height(100.percent)
+                .id("refresh")
+                .onRefreshing(
+                    {
+                        =>
+                            onRefreshStatus = "Refresh"
+                            Timer.once(2000 * Duration.millisecond) {
+                                => launch {
                                     this.isRefreshing = false
                                     onRefreshStatus = "NoRefresh"
                                 }
-                                }
                             }
-                    )
-                    .onStateChange({
-                        refreshStatus: RefreshStatus =>
-                        this.status = match (refreshStatus) {
-                            case Inactive => "Inactive"
-                            case Drag => "Drag"
-                            case OverDrag => "OverDrag"
-                            case Refresh => "Refresh"
-                            case Done => "Done"
-                            case _ => ""
-                        }
-                    })
-                    .backgroundColor(0x89CFF0)
+                    }
+                )
+                .onStateChange({
+                    refreshStatus: RefreshStatus => this.status = match (refreshStatus) {
+                        case Inactive => "Inactive"
+                        case Drag => "Drag"
+                        case OverDrag => "OverDrag"
+                        case Refresh => "Refresh"
+                        case Done => "Done"
+                        case _ => ""
+                    }
+                })
+                .backgroundColor(0x89CFF0)
         }
     }
 }

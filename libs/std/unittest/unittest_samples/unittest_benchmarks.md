@@ -91,7 +91,6 @@ class ArrayBenchmarks {
         Array(10, repeat: 0)
     }
 }
-
 ```
 
 当对 `createArray` 进行基准测试时，每次触发 GC 都会涉及到遍历 `data_1` 和 `data_2` 元素，即便它们与除 `hashCode` 基准测试外的其他测试都无关。特别是在处理大量对象时，可能会导致基准测试不稳定，从而影响最终结果的准确性。
@@ -272,7 +271,7 @@ class Bench {
 
 框架提供的开箱即用的测试工具包括：
 
-- `TimeNow`：使用 `DateTime.now` 测试实时时间。可以配置特定的时间单位，以便所有结果都使用相同的时间单位打印。
+- `TimeNow`：使用 `MonoTime.now` 测试实时时间。可以配置特定的时间单位，以便所有结果都使用相同的时间单位打印。
 - `CpuCycles`：用于测试裸机 CPU 指令的 CPU 使用周期数。仅在有此类指令的平台上可用，并且可以在用户空间中执行。
 - `Perf`：使用 Linux 的 `perf_event_open` 系统调用，测试各种软硬件的 CPU 计数器。
 

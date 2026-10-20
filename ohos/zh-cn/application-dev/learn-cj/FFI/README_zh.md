@@ -5,6 +5,7 @@
     - 入门
         - [构建第一个仓颉与ArkTS混合应用](cangjie-arkts/cj-quick-start-first-cangjie-hybrid-app.md)
         - [在已有ArkTS工程中增量使用仓颉](cangjie-arkts/cj-quick-start-first-cangjie-hybrid-module.md)
+        - [在仓颉代码里导入ArkTS模块](cangjie-arkts/cangjie-load-arkts.md)
     - [仓颉-ArkTS 互操作概述](cangjie-arkts/cangjie_arkts_overview.md)
     - [仓颉-ArkTS 互操作场景](cangjie-arkts/cj-arkts_interoperability_senario.md)
         - [ArkTS 应用中使用仓颉](cangjie-arkts/using_cangjie.md)
@@ -25,5 +26,6 @@
         - [ArkTS 访问仓颉数据](cangjie-arkts/operating_cangjie_objects.md)
         - [仓颉多线程中使用互操作库](cangjie-arkts/cj-using_interoperability_lib_multithread.md)
         - [仓颉调用ArkTS三方模块](cangjie-arkts/cj-quick-start-dts2cj-plugin-usage.md)
+        - [互操作对象生命周期管理](cangjie-arkts/cj-arkts_interop_new_scope.md)
     - [仓颉-ArkTS 互操作辅助库](cangjie-arkts/cj-arkts_auxiliary_lib.md)
     - [仓颉-ArkTS 互操作开发规范](cangjie-arkts/cj-arkts_interop_guidelines.md)

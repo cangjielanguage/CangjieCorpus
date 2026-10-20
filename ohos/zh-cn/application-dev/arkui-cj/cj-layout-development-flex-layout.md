@@ -36,6 +36,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -57,10 +58,10 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .height(70)
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .height(70)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -73,6 +74,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -94,10 +96,10 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .height(70)
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .height(70)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -110,6 +112,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -131,10 +134,10 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .height(70)
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .height(70)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -147,6 +150,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -168,10 +172,10 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .height(70)
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .height(70)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -188,6 +192,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -209,9 +214,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -224,6 +229,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -245,9 +251,9 @@
                     .height(50)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -260,6 +266,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -272,7 +279,7 @@
                     .width(50.percent)
                     .height(50)
                     .backgroundColor(0xF5DEB3)
-            Text('2')
+                Text('2')
                     .width(50.percent)
                     .height(50)
                     .backgroundColor(0xD2B48C)
@@ -281,9 +288,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -302,6 +309,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -323,9 +331,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -338,6 +346,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -359,9 +368,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -374,6 +383,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -395,9 +405,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -410,6 +420,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -431,9 +442,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -446,6 +457,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -467,9 +479,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -482,6 +494,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -503,9 +516,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(90.percent)
-            .padding(top: 10, bottom: 10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .padding(top: 10, bottom: 10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -526,6 +539,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -547,9 +561,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -562,6 +576,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -583,9 +598,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -598,6 +613,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -619,9 +635,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -634,6 +650,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -655,9 +672,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -670,6 +687,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -688,9 +706,9 @@
                     .width(33.percent)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -703,6 +721,7 @@
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -724,9 +743,9 @@
                     .height(50)
                     .backgroundColor(0xF5DEB3)
             }
-            .size(width: 90.percent, height: 80)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .size(width: 90.percent, height: 80)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -741,6 +760,7 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -773,9 +793,9 @@ class EntryView {
                 .height(100)
                 .backgroundColor(0xF5DEB3)
         }
-        .width(90.percent)
-        .height(220)
-        .backgroundColor(0xAFEEEE)
+            .width(90.percent)
+            .height(220)
+            .backgroundColor(0xAFEEEE)
     }
 }
 ```
@@ -794,6 +814,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -823,9 +844,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -838,6 +859,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -867,9 +889,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -882,6 +904,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -911,9 +934,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -926,6 +949,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -955,9 +979,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -970,6 +994,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -999,9 +1024,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -1014,6 +1039,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -1043,9 +1069,9 @@ class EntryView {
                     .height(20)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(100)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(100)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -1062,6 +1088,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -1071,12 +1098,12 @@ class EntryView {
         func build() {
             Flex() {
                 Text('flexBasis("auto")')
-                    .flexBasis(0) // 未设置width以及flexBasis值为0，内容自身宽度
+                    .flexBasis(LengthMetrics.AUTO) // 未设置width以及flexBasis值为LengthMetrics.AUTO，内容自身宽度
                     .height(100)
                     .backgroundColor(0xF5DEB3)
                 Text('flexBasis("auto")' + ' width("40%")')
                     .width(40.percent)
-                    .flexBasis(0) //设置width以及flexBasis值为0，使用width的值
+                    .flexBasis(LengthMetrics.AUTO) //设置width以及flexBasis值为LengthMetrics.AUTO，使用width的值
                     .height(100)
                     .backgroundColor(0xD2B48C)
 
@@ -1091,10 +1118,10 @@ class EntryView {
                     .height(100)
                     .backgroundColor(0xD2B48C)
             }
-            .width(90.percent)
-            .height(120)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(90.percent)
+                .height(120)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -1107,6 +1134,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -1131,10 +1159,10 @@ class EntryView {
                     .height(100)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(380)
-            .height(120)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(380)
+                .height(120)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -1151,6 +1179,7 @@ class EntryView {
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -1176,10 +1205,10 @@ class EntryView {
                     .height(100)
                     .backgroundColor(0xF5DEB3)
             }
-            .width(380)
-            .height(120)
-            .padding(10)
-            .backgroundColor(0xAFEEEE)
+                .width(380)
+                .height(120)
+                .padding(10)
+                .backgroundColor(0xAFEEEE)
         }
     }
     ```
@@ -1194,6 +1223,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -1203,9 +1233,8 @@ class EntryView {
     func build() {
         Column() {
             Column(space: 5) {
-                Flex(
-                    direction: FlexDirection.Row, wrap: FlexWrap.NoWrap,
-                        justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center) {
+                Flex(direction: FlexDirection.Row, wrap: FlexWrap.NoWrap, justifyContent: FlexAlign.SpaceBetween,
+                    alignItems: ItemAlign.Center) {
                     Text('1')
                         .width(30.percent)
                         .height(50)
@@ -1219,12 +1248,12 @@ class EntryView {
                         .height(50)
                         .backgroundColor(0xF5DEB3)
                 }
-                .height(70)
-                .width(90.percent)
-                .backgroundColor(0xAFEEEE)
+                    .height(70)
+                    .width(90.percent)
+                    .backgroundColor(0xAFEEEE)
             }
-            .width(100.percent)
-            .margin(top: 5)
+                .width(100.percent)
+                .margin(top: 5)
         }.width(100.percent)
     }
 }

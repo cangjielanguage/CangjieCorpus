@@ -123,6 +123,11 @@ protected open func aboutToReuse(_: ReuseParams): Unit
 
 **功能：** 当一个可复用的自定义组件从复用缓存中重新加入到节点树时，触发aboutToReuse生命周期回调，并将组件的构造参数传递给aboutToReuse。
 
+> **说明：**
+>
+> - 避免对[\@Link](../../arkui-cj/state_management/cj-macro-link.md)/[\@Prop](../../arkui-cj/state_management/cj-macro-prop.md)等自动更新的状态变量，在aboutToReuse中重复赋值。
+> - 在滑动场景中，使用组件复用通常需要用该回调函数去更新组件的状态变量，因此在该回调函数中应避免耗时操作，否则会导致丢帧卡顿。
+
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
@@ -132,6 +137,53 @@ protected open func aboutToReuse(_: ReuseParams): Unit
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |_|[ReuseParams](./cj-common-types.md#class-reuseparams)|是|-|自定义组件的构造参数。|
+
+```cangjie
+package ohos_app_cangjie_entry
+
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
+import kit.PerformanceAnalysisKit.Hilog
+
+@Entry
+@Component
+public class EntryView {
+    @State
+    var switch: Bool = true
+    public func build(): Unit {
+        Column() {
+            Button("Switch")
+            .fontSize(50)
+            .onClick({e=>
+                this.switch = !this.switch
+            })
+            if (this.switch) {
+                Child(message: "Child")
+            }
+        }
+    }
+}
+
+@Reusable
+@Component
+class Child {
+    @State
+    var message: String = ""
+
+    protected override func aboutToReuse(params: ReuseParams) {
+        Hilog.info(0, "TEST", "Child 复用")
+        if (let Some(value) <- params.get<String>("message")) {
+            message = value
+        }
+    }
+
+    func build() {
+        Column(space: 20) {
+            Text(this.message).fontSize(20)
+        }
+    }
+}
+```
 
 ## func aboutToRecycle()
 
@@ -144,6 +196,57 @@ protected open func aboutToRecycle(): Unit
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
+
+```cangjie
+package ohos_app_cangjie_entry
+
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
+import kit.PerformanceAnalysisKit.Hilog
+
+@Entry
+@Component
+public class EntryView {
+    @State
+    var switch: Bool = true
+    public func build(): Unit {
+        Column() {
+            Button("Switch")
+            .fontSize(50)
+            .onClick({e=>
+                this.switch = !this.switch
+            })
+            if (this.switch) {
+                Child(message: "Child")
+            }
+        }
+    }
+}
+
+@Reusable
+@Component
+class Child {
+    @State
+    var message: String = ""
+
+    protected override func aboutToRecycle(): Unit {
+        // 这里可以释放比较占内存的内容或其他非必要资源引用，避免一直占用内存，引发内存泄漏
+        Hilog.info(0, "TEST", "Child 进入复用池")
+    }
+    
+    protected override func aboutToReuse(params: ReuseParams) {
+        if (let Some(value) <- params.get<String>("message")) {
+            message = value
+        }
+    }
+
+    func build() {
+        Column(space: 20) {
+            Text(this.message).fontSize(20)
+        }
+    }
+}
+```
 
 ## func pageTransition()
 

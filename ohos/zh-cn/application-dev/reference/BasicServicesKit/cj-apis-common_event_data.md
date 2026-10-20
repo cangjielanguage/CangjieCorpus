@@ -113,7 +113,7 @@ public var parameters: HashMap<String, CommonEventValueType>
 
 **功能：** 表示订阅者接收到的公共事件的附加信息。该字段取值与发布者使用[commonEventManager.publish](./cj-apis-common_event_manager.md#static-func-publishstring-commoneventpublishdata)发布公共事件时，通过[CommonEventPublishData](./cj-apis-common_event_publish_data.md#class-commoneventpublishdata)中的`parameters`字段传递的数据一致。
 
-**类型：** HashMap\<String, CommonEventValueType>
+**类型：** HashMap\<String,[CommonEventValueType](cj-apis-value_type.md#enum-commoneventvaluetype)>
 
 **读写能力：** 可读写
 

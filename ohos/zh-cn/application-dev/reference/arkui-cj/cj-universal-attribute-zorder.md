@@ -48,6 +48,7 @@ func zIndex(value: ?Int32): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -61,14 +62,14 @@ class EntryView {
                 .height(100)
                 .backgroundColor(Color.Red)
                 .zIndex(0)
-            
+
             Text("绿色 zIndex:2")
                 .width(100)
                 .height(100)
                 .backgroundColor(Color.Green)
                 .zIndex(2)
                 .offset(x: 20.vp, y: 20.vp)
-            
+
             Text("蓝色 zIndex:1")
                 .width(100)
                 .height(100)
@@ -76,8 +77,8 @@ class EntryView {
                 .zIndex(1)
                 .offset(x: 40.vp, y: 40.vp)
         }
-        .width(100.percent)
-        .height(100.percent)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```

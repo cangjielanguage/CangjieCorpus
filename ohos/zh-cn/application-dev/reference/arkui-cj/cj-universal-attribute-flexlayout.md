@@ -8,7 +8,7 @@
 
 > **说明：**
 >
-> 仅当父组件是 [Flex](./cj-row-column-stack-flex.md)、[Column](./cj-row-column-stack-column.md)、[Row](./cj-row-column-stack-row.md)、[GridRow](./cj-grid-layout-gridrow.md)（仅针对[alignSelf](./cj-universal-attribute-flexlayout.md#func-alignselfitemalign)）时生效。
+> 仅当父组件是 [Flex](./cj-row-column-stack-flex.md)、[Column](./cj-row-column-stack-column.md)、[Row](./cj-row-column-stack-row.md)、[GridRow](./cj-grid-layout-gridrow.md)（仅针对[alignSelf](#func-alignselfitemalign)）时生效。
 
 ## 导入模块
 
@@ -56,7 +56,7 @@ func flexBasis(value: ?Length): T
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[Length](./cj-common-types.md#interface-length)|是|-|组件在父容器主轴方向上的基准尺寸。<br>初始值：'auto'（表示组件在主轴方向上的基准尺寸为组件原本的大小）。<br>不支持设置percent。<br>取值范围(0,+∞)，默认单位为vp。<br>异常值：实际布局效果均与'auto'一致。|
+|value|?[Length](./cj-common-types.md#interface-length)|是|-|组件在父容器主轴方向上的基准尺寸。<br>初始值：[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)（表示组件在主轴方向上的基准尺寸为组件原本的大小）。<br>不支持设置percent。<br>取值范围(0,+∞)，默认单位为vp。<br>异常值：实际布局效果均与LengthMetrics.AUTO一致。|
 
 **返回值：**
 

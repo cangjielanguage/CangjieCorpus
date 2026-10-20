@@ -127,34 +127,87 @@ class EntryView {
     func build() {
         Scroll() {
             Column(space: 5) {
-                Text("normal").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140)
+                Text("normal")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
 
                 // 设置二维码颜色
-                Text("color").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).color(0xF7CE00).width(140).height(140)
+                Text("color")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .color(0xF7CE00)
+                    .width(140)
+                    .height(140)
 
                 // 设置二维码背景色
-                Text("backgroundColor").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140).backgroundColor(Color.Red)
+                Text("backgroundColor")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
+                    .backgroundColor(Color.Red)
 
                 // 设置二维码不透明度
-                Text("contentOpacity").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(0.1)
+                Text("contentOpacity")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
+                    .color(Color.Black)
+                    .contentOpacity(0.1)
 
                 // 设置二维码不透明度
-                Text("contentOpacity").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(0.1)
+                Text("contentOpacity")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
+                    .color(Color.Black)
+                    .contentOpacity(0.1)
 
                 // 设置二维码不透明度
-                Text("contentOpacity int").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(0.0)
+                Text("contentOpacity int")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
+                    .color(Color.Black)
+                    .contentOpacity(0.0)
 
                 // 设置二维码不透明度
-                Text("contentOpacity resource").fontSize(9).width(90.percent).fontColor(0xCCCCCC).fontSize(30)
-                QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(
-                    @r(sys.float.alpha_40))
-            }.width(100.percent).margin(top: 5)
+                Text("contentOpacity resource")
+                    .fontSize(9)
+                    .width(90.percent)
+                    .fontColor(0xCCCCCC)
+                    .fontSize(30)
+                QRCode(this.value)
+                    .width(140)
+                    .height(140)
+                    .color(Color.Black)
+                    .contentOpacity(@r(sys.float.alpha_40))
+            }
+                .width(100.percent)
+                .margin(top: 5)
         }
     }
 }

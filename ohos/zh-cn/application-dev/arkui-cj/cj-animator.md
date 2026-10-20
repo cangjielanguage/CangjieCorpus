@@ -162,6 +162,7 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import ohos.arkui.ui_context.*
 import kit.ArkUI.*
 import std.math.*
@@ -182,30 +183,35 @@ class EntryView {
     @State
     var translateY: Int64 = 0
     protected override func onPageShow() {
-        this.backAnimator = this.getUIContext().createAnimator(AnimatorOptions(
-          duration: 4000,
-          easing: "ease",
-          delay: 0,
-          fill: AnimatorFill.Forwards,
-          direction: AnimatorDirection.Normal,
-          iterations: 1,
-          begin: 0.0,
-          end: 200.0
-        ))
-        this.backAnimator?.onFrame =  {  progress: Float64 =>
-          this.translateX = Int64(progress)
-          if (progress > this.topWidth && this.translateY < this.bottomHeight) {
-            this.translateY = Int64(pow(Float64(progress - this.topWidth), 2) * this.g)
-          }
+        this.backAnimator = this
+            .getUIContext()
+            .createAnimator(
+                AnimatorOptions(
+                    duration: 4000,
+                    easing: "ease",
+                    delay: 0,
+                    fill: AnimatorFill.Forwards,
+                    direction: AnimatorDirection.Normal,
+                    iterations: 1,
+                    begin: 0.0,
+                    end: 200.0
+                )
+            )
+        this.backAnimator?.onFrame = {
+            progress: Float64 =>
+                this.translateX = Int64(progress)
+                if (progress > this.topWidth && this.translateY < this.bottomHeight) {
+                    this.translateY = Int64(pow(Float64(progress - this.topWidth), 2) * this.g)
+                }
         }
-        this.backAnimator?.onCancel = { =>
-          this.animatorStatus = '取消'
+        this.backAnimator?.onCancel = {
+            => this.animatorStatus = '取消'
         }
-        this.backAnimator?.onFinish = { =>
-          this.animatorStatus = '完成'
+        this.backAnimator?.onFinish = {
+            => this.animatorStatus = '完成'
         }
-        this.backAnimator?.onRepeat = { =>
-            Hilog.info(0,"","动画重复播放")
+        this.backAnimator?.onRepeat = {
+            => Hilog.info(0, "", "动画重复播放")
         }
     }
     protected override func onPageHide() {
@@ -213,34 +219,58 @@ class EntryView {
     }
     func build() {
         Column() {
-          Column(space:30) {
-            Button('播放').onClick({ evt=>
-              this.backAnimator?.play()
-              this.animatorStatus = '播放中'
-            }).width(80).height(35).margin(top: 20)
-            Button("重置").onClick({ evt=>
-              this.translateX = 0
-              this.translateY = 0
-            }).width(80).height(35)
-            Button("暂停").onClick({ evt=>
-              this.backAnimator?.pause()
-              this.animatorStatus = '暂停'
-            }).width(80).height(35)
-          }.width(100.percent).height(25.percent)
+            Column(space: 30) {
+                Button('播放')
+                    .onClick(
+                        {
+                            evt =>
+                                this.backAnimator?.play()
+                                this.animatorStatus = '播放中'
+                        }
+                    )
+                    .width(80)
+                    .height(35)
+                    .margin(top: 20)
+                Button("重置")
+                    .onClick(
+                        {
+                            evt =>
+                                this.translateX = 0
+                                this.translateY = 0
+                        }
+                    )
+                    .width(80)
+                    .height(35)
+                Button("暂停")
+                    .onClick(
+                        {
+                            evt =>
+                                this.backAnimator?.pause()
+                                this.animatorStatus = '暂停'
+                        }
+                    )
+                    .width(80)
+                    .height(35)
+            }
+                .width(100.percent)
+                .height(25.percent)
 
-          Stack() {
-            Button()
-              .borderRadius(45.vp)
-              .width(60)
-              .height(60)
-              .translate( x: this.translateX, y: this.translateY ).margin(left: 20)
-          }
-          .width(100.percent)
-          .height(45.percent)
-          .align(Alignment.Start)
+            Stack() {
+                Button()
+                    .borderRadius(45.vp)
+                    .width(60)
+                    .height(60)
+                    .translate(x: this.translateX, y: this.translateY)
+                    .margin(left: 20)
+            }
+                .width(100.percent)
+                .height(45.percent)
+                .align(Alignment.Start)
 
-          Text("当前动画状态为:" + this.animatorStatus)
-        }.width(100.percent).height(100.percent)
+            Text("当前动画状态为:" + this.animatorStatus)
+        }
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```

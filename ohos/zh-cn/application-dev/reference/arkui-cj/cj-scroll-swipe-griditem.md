@@ -170,7 +170,9 @@ class EntryView {
                         .height(100.percent)
                         .textAlign(TextAlign.Center)
                         .id("gridItem1")
-                }.rowStart(1).rowEnd(4)
+                }
+                    .rowStart(1)
+                    .rowEnd(4)
 
                 //循环渲染Griditem，标记为0-15
                 ForEach(
@@ -195,14 +197,18 @@ class EntryView {
                         .height(100.percent)
                         .textAlign(TextAlign.Center)
                         .id("gridItem2")
-                }.columnStart(1).columnEnd(5)
+                }
+                    .columnStart(1)
+                    .columnEnd(5)
             }
                 .columnsTemplate("1fr 1fr 1fr 1fr 1fr")
                 .rowsTemplate("1fr 1fr 1fr 1fr 1fr")
                 .width(90.percent)
                 .backgroundColor(0xFAEEE0)
                 .height(300)
-        }.width(100.percent).margin(top: 5)
+        }
+            .width(100.percent)
+            .margin(top: 5)
     }
 }
 ```

@@ -27,7 +27,7 @@ ohos.permission.PRIVACY_WINDOW
 API示例代码使用说明：
 
 - 若示例代码首行有“// index.cj”注释，表示该示例可在仓颉模板工程的“index.cj”文件中编译运行。
-- 若示例需获取[Context](./cj-apis-app-ability-ui_ability.md#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
+- 若示例需获取[Context](#class-context)应用上下文，需在仓颉模板工程中的“main_ability.cj”文件中进行配置。
 
 上述示例工程及配置模板详见[仓颉示例代码说明](../cj-development-intro.md#仓颉示例代码说明)。
 
@@ -63,9 +63,10 @@ public func createAbilityStageContextFromJSValue(context: JSContext, input: JSVa
 import ohos.ark_interop.*
 import kit.AbilityKit.*
 
-class MyAbilityStage1 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
-        let jsContext = jsRuntime.getOrThrow().mainContext
+        let jsRuntime = JSRuntime()
+        let jsContext = jsRuntime.mainContext
         let input = this.context.toJSValue(jsContext)
         let ctx = createAbilityStageContextFromJSValue(jsContext, input)
     }
@@ -105,9 +106,10 @@ import ohos.ark_interop.*
 import kit.AbilityKit.*
 import kit.TestKit.*
 
-class MyAbilityStage2 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
-        let jsContext = jsRuntime.getOrThrow().mainContext
+        let jsRuntime = JSRuntime()
+        let jsContext = jsRuntime.mainContext
         let input = AbilityDelegatorRegistry.getAbilityDelegator().getAppContext().toJSValue(jsContext)
         let ctx = createApplicationContextFromJSValue(jsContext, input)
     }
@@ -120,7 +122,7 @@ class MyAbilityStage2 <: AbilityStage {
 public func createContextFromJSValue(context: JSContext, input: JSValue): Context
 ```
 
-**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)转换为[Context](./cj-apis-app-ability-ui_ability.md#class-context)类型。该转换仅可在函数传递中使用。
+**功能：** 从[JSValue](../arkinterop/cj-apis-ark_interop.md#class-jsvalue)转换为[Context](#class-context)类型。该转换仅可在函数传递中使用。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 
@@ -137,7 +139,7 @@ public func createContextFromJSValue(context: JSContext, input: JSValue): Contex
 
 |类型|说明|
 |:----|:----|
-|[Context](./cj-apis-app-ability-ui_ability.md#class-context)|返回Context类型实例。|
+|[Context](#class-context)|返回Context类型实例。|
 
 **示例：**
 
@@ -146,9 +148,10 @@ public func createContextFromJSValue(context: JSContext, input: JSValue): Contex
 import ohos.ark_interop.*
 import kit.AbilityKit.*
 
-class MyAbilityStage3 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
-        let jsContext = jsRuntime.getOrThrow().mainContext
+        let jsRuntime = JSRuntime()
+        let jsContext = jsRuntime.mainContext
         let input = this.context.toJSValue(jsContext)
         let ctx = createContextFromJSValue(jsContext, input)
     }
@@ -187,9 +190,10 @@ public func createUIAbilityContextFromJSValue(context: JSContext, input: JSValue
 import ohos.ark_interop.*
 import kit.AbilityKit.*
 
-class MyUIAbility1 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
-        let jsContext = jsRuntime.getOrThrow().mainContext
+        let jsRuntime = JSRuntime()
+        let jsContext = jsRuntime.mainContext
         let input = this.context.toJSValue(jsContext)
         let ctx = createContextFromJSValue(jsContext, input)
     }
@@ -241,9 +245,10 @@ func toJSValue(context: JSContext): JSValue
 import ohos.ark_interop.*
 import kit.AbilityKit.*
 
-class MyAbilityStage4 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
-        let jsContext = jsRuntime.getOrThrow().mainContext
+        let jsRuntime = JSRuntime()
+        let jsContext = jsRuntime.mainContext
         let input = this.context.toJSValue(jsContext)
         let ctx = createContextFromJSValue(jsContext, input)
     }
@@ -280,7 +285,7 @@ AbilityStageContext提供允许访问特定于abilityStage的资源的能力，�
 
 **父类型：**
 
-- [Context](./cj-apis-app-ability-ui_ability.md#class-context)
+- [Context](#class-context)
 
 ### var currentHapModuleInfo
 
@@ -304,7 +309,7 @@ public var currentHapModuleInfo: HapModuleInfo
 ```cangjie
 import kit.AbilityKit.*
 
-class MyAbilityStage5 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
         let info = this.context.currentHapModuleInfo
     }
@@ -325,7 +330,7 @@ public class ApplicationContext <: Context {}
 
 **父类型：**
 
-- [Context](./cj-apis-app-ability-ui_ability.md#class-context)
+- [Context](#class-context)
 
 ## class Context
 
@@ -365,7 +370,7 @@ public prop applicationInfo: ApplicationInfo
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility3 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let info = this.context.applicationInfo
     }
@@ -394,7 +399,7 @@ public mut prop area: AreaMode
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility4 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let area = this.context.area
     }
@@ -423,7 +428,7 @@ public prop filesDir: String
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility5 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let filesDir = this.context.filesDir
     }
@@ -452,7 +457,7 @@ public prop resourceManager: ResourceManager
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility6 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let resourceManager = this.context.resourceManager
     }
@@ -525,7 +530,7 @@ public mut prop context: UIAbilityContext
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility7 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let context = this.context
     }
@@ -558,7 +563,7 @@ public mut prop lastRequestWant: Want
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility8 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let lastRequestWant = this.lastRequestWant
     }
@@ -587,7 +592,7 @@ public mut prop launchWant: Want
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility9 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let launchWant = this.launchWant
     }
@@ -612,7 +617,7 @@ public open func onBackground(): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility10 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onBackground() {
         let launchWant = this.launchWant
     }
@@ -644,7 +649,7 @@ public open func onCreate(want: Want, launchParam: LaunchParam): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility11 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onCreate(want: Want, launchParam: LaunchParam): Unit {
         let launchWant = this.launchWant
     }
@@ -673,7 +678,7 @@ public open func onDestroy(): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility12 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onDestroy(): Unit {}
 }
 ```
@@ -696,7 +701,7 @@ public open func onForeground(): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility13 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onForeground(): Unit {}
 }
 ```
@@ -726,7 +731,7 @@ public open func onNewWant(want: Want, launchParam: LaunchParam): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility14 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onNewWant(want: Want, launchParam: LaunchParam): Unit {}
 }
 ```
@@ -737,7 +742,7 @@ class MyUIAbility14 <: UIAbility {
 public open func onWindowStageCreate(windowStage: WindowStage): Unit
 ```
 
-**功能：** 当[WindowStage](../arkui-cj/cj-apis-window.md)实例创建完成后，系统会触发该回调。开发者可以在该回调中通过WindowStage加载页面。
+**功能：** 当[WindowStage](../arkui-cj/cj-apis-window.md#class-windowstage)实例创建完成后，系统会触发该回调。开发者可以在该回调中通过WindowStage加载页面。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.AbilityCore
 
@@ -747,7 +752,7 @@ public open func onWindowStageCreate(windowStage: WindowStage): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|windowStage|WindowStage|是|-|WindowStage实例对象。|
+|windowStage|[WindowStage](../arkui-cj/cj-apis-window.md#class-windowstage)|是|-|WindowStage实例对象。WindowStage|是|-|WindowStage实例对象。|
 
 **示例：**
 
@@ -756,7 +761,7 @@ public open func onWindowStageCreate(windowStage: WindowStage): Unit
 import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 
-class MyUIAbility15 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {}
 }
 ```
@@ -779,7 +784,7 @@ public open func onWindowStageDestroy(): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyUIAbility16 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageDestroy(): Unit {}
 }
 ```
@@ -800,7 +805,7 @@ public open class UIAbilityContext <: Context {}
 
 **父类型：**
 
-- [Context](./cj-apis-app-ability-ui_ability.md#class-context)
+- [Context](#class-context)
 
 ### func isTerminating()
 
@@ -822,7 +827,7 @@ public func isTerminating(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -835,7 +840,7 @@ public func isTerminating(): Bool
 import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 
-class MyUIAbility17 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
         let isTerminating = this.context.isTerminating()
     }
@@ -863,7 +868,7 @@ public func requestDialogService(want: Want, result: AsyncCallback<RequestResult
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -892,9 +897,9 @@ import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 import ohos.business_exception.BusinessException
 
-class MyUIAbility18 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-        this.context.requestDialogService(Want(), {err: ?BusinessException, data: ?RequestResult => })
+        this.context.requestDialogService(Want(), {err: ?BusinessException, data: ?RequestResult =>})
     }
 }
 ```
@@ -920,7 +925,7 @@ public func startAbility(want: Want, options!: ?StartOptions = None): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -962,9 +967,9 @@ public func startAbility(want: Want, options!: ?StartOptions = None): Unit
 import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 
-class MyUIAbility19 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            this.context.startAbility(Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"))
+        this.context.startAbility(Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"))
     }
 }
 ```
@@ -996,7 +1001,7 @@ UIAbility被启动后，有如下情况：
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1035,11 +1040,12 @@ import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 import ohos.business_exception.BusinessException
 
-class MyUIAbility20 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            this.context.startAbilityForResult(
-                Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"),
-                {err: ?BusinessException, data: ?AbilityResult => })
+        this
+            .context
+            .startAbilityForResult(Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"),
+                {err: ?BusinessException, data: ?AbilityResult =>})
     }
 }
 ```
@@ -1067,12 +1073,12 @@ UIAbility被启动后，有如下情况：
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |want|[Want](./cj-apis-app-ability-want.md#class-want)|是|-|启动Ability的必要信息。|
-|options|StartOptions|是|-|启动Ability所携带的参数。|
+|options|[StartOptions](cj-apis-app-ability-start_options.md#class-startoptions)|是|-|启动Ability所携带的参数。StartOptions|是|-|启动Ability所携带的参数。|
 |callback|[AsyncCallback](../arkinterop/cj-api-business_exception.md#type-asynccallbackt)\<AbilityResult>|是|-|执行结果回调函数。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码说明文档](../cj-errorcode-universal.md)和[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1109,11 +1115,12 @@ import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 import ohos.business_exception.BusinessException
 
-class MyUIAbility21 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            this.context.startAbilityForResult(
-                Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"), StartOptions(),
-                {err: ?BusinessException, data: ?AbilityResult => })
+        this
+            .context
+            .startAbilityForResult(Want(bundleName: "com.example.cangjieinsight", abilityName: "testAbility"),
+                StartOptions(), {err: ?BusinessException, data: ?AbilityResult =>})
     }
 }
 ```
@@ -1136,7 +1143,7 @@ public func terminateSelf(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1151,9 +1158,9 @@ public func terminateSelf(): Unit
 import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 
-class MyUIAbility22 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            this.context.terminateSelf()
+        this.context.terminateSelf()
     }
 }
 ```
@@ -1184,7 +1191,7 @@ public func terminateSelfWithResult(parameter: AbilityResult): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[元能力子系统错误码](./cj-errorcode-ability.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1199,9 +1206,9 @@ public func terminateSelfWithResult(parameter: AbilityResult): Unit
 import kit.AbilityKit.*
 import kit.ArkUI.WindowStage
 
-class MyUIAbility23 <: UIAbility {
+class MyUIAbility <: UIAbility {
     public override func onWindowStageCreate(windowStage: WindowStage): Unit {
-            this.context.terminateSelfWithResult(AbilityResult(0))
+        this.context.terminateSelfWithResult(AbilityResult(0))
     }
 }
 ```

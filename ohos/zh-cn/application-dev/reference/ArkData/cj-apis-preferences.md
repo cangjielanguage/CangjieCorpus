@@ -180,7 +180,7 @@ public static func deletePreferences(context: UIAbilityContext, name: String): U
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -233,7 +233,7 @@ public static func deletePreferences(context: UIAbilityContext, options: Prefere
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -291,7 +291,7 @@ public static func getPreferences(context: UIAbilityContext, name: String): Pref
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -345,7 +345,7 @@ public static func getPreferences(context: UIAbilityContext, options: Preference
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -402,7 +402,7 @@ public static func removePreferencesFromCache(context: UIAbilityContext, name: S
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -437,7 +437,7 @@ public static func removePreferencesFromCache(context: UIAbilityContext, options
 
 **功能：** 从缓存中移除指定的Preferences实例。
 
-应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)接口获取某个Preferences实例后，该实例会被缓存起来，后续再次[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。调用此接口移出缓存中的实例之后，再次getPreferences将会重新读取持久化文件，生成新的Preferences实例。
+应用首次调用[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)接口获取某个Preferences实例后，该实例会被缓存起来，后续再次[getPreferences](#static-func-getpreferencesuiabilitycontext-preferencesoptions)时不会再次从持久化文件中读取，直接从缓存中获取Preferences实例。调用此接口移除缓存中的实例之后，再次getPreferences将会重新读取持久化文件，生成新的Preferences实例。
 
 调用该接口后，不建议再使用旧的Preferences实例进行数据操作，否则会出现数据一致性问题。
 
@@ -454,7 +454,7 @@ public static func removePreferencesFromCache(context: UIAbilityContext, options
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[事件错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[事件错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -498,7 +498,7 @@ public func clear(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -545,7 +545,7 @@ public func delete(key: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -591,7 +591,7 @@ public func flush(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -645,7 +645,7 @@ public func get(key: String, defValue: PreferencesValueType): PreferencesValueTy
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -695,7 +695,7 @@ public func getAll(): HashMap<String, PreferencesValueType>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -755,7 +755,7 @@ public func has(key: String): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -779,7 +779,7 @@ try {
     if (hasKey) {
         Hilog.info(0, "AppLogCj", "The key 'startup' is contained.")
     } else {
-        Hilog.info(0, "AppLogCj", "The key 'startup' dose not contain.")
+        Hilog.info(0, "AppLogCj", "The key 'startup' does not contain.")
     }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -807,7 +807,7 @@ public func off(event: PreferencesEvent, callback!: ?Callback1Argument<String> =
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -868,7 +868,7 @@ public func on(event: PreferencesEvent, callback: Callback1Argument<String>): Un
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -889,7 +889,7 @@ import kit.PerformanceAnalysisKit.Hilog
 import ohos.business_exception.BusinessException
 
 // 回调函数
-class Callback1 <: Callback1Argument<String> {
+class Callback <: Callback1Argument<String> {
     public func invoke(err: ?BusinessException, arg: String): Unit {
         Hilog.info(0, "AppLogCj", "=========callback========= ${arg.toString()}======================")
     }
@@ -898,7 +898,7 @@ class Callback1 <: Callback1Argument<String> {
 try {
     var str = "container"
     var a = Preferences.getPreferences(Global.abilityContext, str) // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    var c = Callback1()
+    var c = Callback()
     a.on(PreferencesEvent.PreferencesChange, c)
     a.put("kkk1", PreferencesValueType.StringData("vvv1"))
     a.flush()
@@ -928,7 +928,7 @@ public func put(key: String, value: PreferencesValueType): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[用户首选项错误码](./cj-errorcode-preferences.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1123,7 +1123,7 @@ DoubleArray(Array<Float64>)
 Integer(Int64)
 ```
 
-**功能：** 表示值类型为64位有符号整型类型。
+**功能：** 表示值类型为64位有符号整数类型。
 
 **系统能力：** SystemCapability.DistributedDataManager.Preferences.Core
 

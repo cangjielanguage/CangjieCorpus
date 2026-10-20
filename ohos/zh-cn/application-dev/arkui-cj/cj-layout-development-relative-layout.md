@@ -57,6 +57,7 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -68,37 +69,37 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
                 Row() {
                     Text('row1')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0xa3cf62)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xa3cf62)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row1")
+                    .id("row1")
 
                 Row() {
                     Text('row2')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0x00ae9d)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        right: HorizontalAlignParam("__container__", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0x00ae9d)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End)
+                        )
                     )
-                )
-                .id("row2")
+                    .id("row2")
             }
-            .width(300)
-            .height(300)
-            .margin(left: 20)
-            .border(width: 2, color: 0x6699FF)
+                .width(300)
+                .height(300)
+                .margin(left: 20)
+                .border(width: 2, color: 0x6699FF)
         }
     }
     ```
@@ -111,6 +112,7 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -122,37 +124,37 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
                 Row() {
                     Text('row1')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0x00ae9d)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0x00ae9d)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row1")
+                    .id("row1")
 
                 Row() {
                     Text('row2')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0xa3cf62)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xa3cf62)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row2")
+                    .id("row2")
             }
-            .width(300)
-            .height(300)
-            .margin(left: 20)
-            .border(width: 2, color: 0x6699FF)
+                .width(300)
+                .height(300)
+                .margin(left: 20)
+                .border(width: 2, color: 0x6699FF)
         }
     }
     ```
@@ -165,6 +167,7 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
 
     ```cangjie
     package ohos_app_cangjie_entry
+
     import kit.ArkUI.*
     import ohos.arkui.state_macro_manage.*
 
@@ -175,57 +178,57 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
             Row() {
                 RelativeContainer() {
                     Row() {Text('row1')}
-                    .justifyContent(FlexAlign.Center)
-                    .width(100)
-                    .height(100)
-                    .backgroundColor(0xa3cf62)
-                    .alignRules(
-                        AlignRuleOption(
-                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                            left: HorizontalAlignParam("__container__",HorizontalAlign.Start)
+                        .justifyContent(FlexAlign.Center)
+                        .width(100)
+                        .height(100)
+                        .backgroundColor(0xa3cf62)
+                        .alignRules(
+                            AlignRuleOption(
+                                top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                                left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                            )
                         )
-                    )
-                    .id("row1")
+                        .id("row1")
                     Row() {Text('row2')}
-                    .justifyContent(FlexAlign.Center)
-                    .width(100)
-                    .backgroundColor(0x00ae9d)
-                    .alignRules(
-                        AlignRuleOption(
-                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                            right: HorizontalAlignParam("__container__",HorizontalAlign.End),
-                            bottom: VerticalAlignParam("row1", VerticalAlign.Center),
+                        .justifyContent(FlexAlign.Center)
+                        .width(100)
+                        .backgroundColor(0x00ae9d)
+                        .alignRules(
+                            AlignRuleOption(
+                                top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                                right: HorizontalAlignParam("__container__", HorizontalAlign.End),
+                                bottom: VerticalAlignParam("row1", VerticalAlign.Center),
+                            )
                         )
-                    )
-                    .id("row2")
+                        .id("row2")
                     Row() {Text('row3')}
-                    .justifyContent(FlexAlign.Center)
-                    .height(100)
-                    .backgroundColor(0x0a59f7)
-                    .alignRules(
-                        AlignRuleOption(
-                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                            left: HorizontalAlignParam("row1", HorizontalAlign.Start),
-                            right: HorizontalAlignParam("row2", HorizontalAlign.Start)
+                        .justifyContent(FlexAlign.Center)
+                        .height(100)
+                        .backgroundColor(0x0a59f7)
+                        .alignRules(
+                            AlignRuleOption(
+                                top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                                left: HorizontalAlignParam("row1", HorizontalAlign.Start),
+                                right: HorizontalAlignParam("row2", HorizontalAlign.Start)
+                            )
                         )
-                    )
-                    .id("row3")
+                        .id("row3")
                     Row() {Text('row4')}
-                    .justifyContent(FlexAlign.Center)
-                    .backgroundColor(0x2ca9e0)
-                    .alignRules(
-                        AlignRuleOption(
-                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                            left: HorizontalAlignParam("row1", HorizontalAlign.Center),
-                            right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                        .justifyContent(FlexAlign.Center)
+                        .backgroundColor(0x2ca9e0)
+                        .alignRules(
+                            AlignRuleOption(
+                                top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                                left: HorizontalAlignParam("row1", HorizontalAlign.Center),
+                                right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                            )
                         )
-                    )
-                    .id("row4")
+                        .id("row4")
                 }
-                .width(300)
-                .height(300)
-                .margin(left: 50)
-                .border(width: 2, color: 0x6699FF)
+                    .width(300)
+                    .height(300)
+                    .margin(left: 50)
+                    .border(width: 2, color: 0x6699FF)
             }.height(100.percent)
         }
     }
@@ -247,7 +250,7 @@ RelativeContainer是一种采用相对布局的容器，支持容器内部的子
 
 ### 子组件位置偏移
 
-子组件经过相对位置对齐后，位置可能还不是目标位置，开发者可根据需要进行额外偏移设置额外偏移（offset）。当使用offset调整位置的组件作为锚点时，对齐位置为设置offset之前的位置。建议使用[bias](../reference/arkui-cj/cj-common-types.md#class-bias)来设置额外偏移。
+子组件经过相对位置对齐后，位置可能还不是目标位置，开发者可根据需要设置额外偏移（offset）。当使用offset调整位置的组件作为锚点时，对齐位置为设置offset之前的位置。建议使用[bias](../reference/arkui-cj/cj-common-types.md#class-bias)来设置额外偏移。
 
  <!-- run -->
 
@@ -266,102 +269,102 @@ class EntryView {
                 Row() {
                     Text('row1')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0xa3cf62)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xa3cf62)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row1")
+                    .id("row1")
 
                 Row() {
                     Text('row2')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .backgroundColor(0x00ae9d)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        right: HorizontalAlignParam("__container__",HorizontalAlign.End),
-                        bottom: VerticalAlignParam("row1", VerticalAlign.Center)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .backgroundColor(0x00ae9d)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End),
+                            bottom: VerticalAlignParam("row1", VerticalAlign.Center)
+                        )
                     )
-                )
-                .offset(x: -40, y: -20)
-                .id("row2")
+                    .offset(x: -40, y: -20)
+                    .id("row2")
 
                 Row() {
                     Text('row3')
                 }
-                .justifyContent(FlexAlign.Center)
-                .height(100)
-                .backgroundColor(0x0a59f7)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.End),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .height(100)
+                    .backgroundColor(0x0a59f7)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.End),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .offset(x: -10, y: -20)
-                .id("row3")
+                    .offset(x: -10, y: -20)
+                    .id("row3")
 
                 Row() {
                     Text('row4')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0x2ca9e0)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row1", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0x2ca9e0)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row1", HorizontalAlign.End)
+                        )
                     )
-                )
-                .offset(x: -10, y: -30)
-                .id("row4")
+                    .offset(x: -10, y: -30)
+                    .id("row4")
                 Row() {
                     Text('row5')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0x30c9f7)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row2", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0x30c9f7)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row2", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                        )
                     )
-                )
-                .offset(x: 10, y: 20)
-                .id("row5")
+                    .offset(x: 10, y: 20)
+                    .id("row5")
                 Row() {
                     Text('row6')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0xff33ffb5)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("row4", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row3", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0xff33ffb5)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("row4", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row3", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                        )
                     )
-                )
-                .offset(x: -15, y: 10)
-                .backgroundImagePosition(Alignment.Bottom)
-                .backgroundImageSize(ImageSize.Cover)
-                .id("row6")
+                    .offset(x: -15, y: 10)
+                    .backgroundImagePosition(Alignment.Bottom)
+                    .backgroundImageSize(ImageSize.Cover)
+                    .id("row6")
             }
-            .width(300)
-            .height(300)
-            .margin(left: 50)
-            .border(width: 2, color: 0x6699FF)
+                .width(300)
+                .height(300)
+                .margin(left: 50)
+                .border(width: 2, color: 0x6699FF)
         }.height(100.percent)
     }
 }
@@ -377,6 +380,7 @@ Row、Column、Flex、Stack等多种布局组件，可按照RelativeContainer组
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -387,27 +391,27 @@ class EntryView {
         Row() {
             RelativeContainer() {
                 Row()
-                .width(100)
-                .height(100)
-                .backgroundColor(0xa3cf62)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xa3cf62)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row1")
+                    .id("row1")
                 Column()
-                .width(50.percent)
-                .height(30)
-                .backgroundColor(0x00ae9d)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Center)
+                    .width(50.percent)
+                    .height(30)
+                    .backgroundColor(0x00ae9d)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Center)
+                        )
                     )
-                )
-                .id("row2")
+                    .id("row2")
 
                 Flex(direction: FlexDirection.Row) {
                     Text('1')
@@ -427,17 +431,17 @@ class EntryView {
                         .height(50)
                         .backgroundColor(0x2ca9e0)
                 }
-                .padding(10)
-                .backgroundColor(0x30c9f7)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row2", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Center),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.Center)
+                    .padding(10)
+                    .backgroundColor(0x30c9f7)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row2", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Center),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.Center)
+                        )
                     )
-                )
-                .id("row3")
+                    .id("row3")
 
                 Stack(alignContent: Alignment.Bottom) {
                     Text('First child, show in bottom')
@@ -451,21 +455,21 @@ class EntryView {
                         .backgroundColor(0x00ae9d)
                         .align(Alignment.Top)
                 }
-                .margin(top: 5)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                    .margin(top: 5)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                        )
                     )
-                )
-                .id("row4")
+                    .id("row4")
             }
-            .width(300)
-            .height(300)
-            .margin(left: 50)
-            .border(width: 2, color: 0x6699FF)
+                .width(300)
+                .height(300)
+                .margin(left: 50)
+                .border(width: 2, color: 0x6699FF)
         }.height(100.percent)
     }
 }
@@ -486,6 +490,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -498,99 +503,99 @@ class EntryView {
                 Row() {
                     Text('row1')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .height(100)
-                .backgroundColor(0xa3cf62)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xa3cf62)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                )
-                .id("row1")
+                    .id("row1")
 
                 Row() {
                     Text('row2')
                 }
-                .justifyContent(FlexAlign.Center)
-                .width(100)
-                .backgroundColor(0x00ae9d)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        right: HorizontalAlignParam("__container__",HorizontalAlign.End),
-                        bottom: VerticalAlignParam("row1", VerticalAlign.Center)
+                    .justifyContent(FlexAlign.Center)
+                    .width(100)
+                    .backgroundColor(0x00ae9d)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End),
+                            bottom: VerticalAlignParam("row1", VerticalAlign.Center)
+                        )
                     )
-                )
-                .id("row2")
+                    .id("row2")
 
                 Row() {
                     Text('row3')
                 }
-                .justifyContent(FlexAlign.Center)
-                .height(100)
-                .backgroundColor(0x0a59f7)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.End),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.Start),
+                    .justifyContent(FlexAlign.Center)
+                    .height(100)
+                    .backgroundColor(0x0a59f7)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.End),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.Start),
+                        )
                     )
-                )
-                .id("row3")
+                    .id("row3")
 
                 Row() {
                     Text('row4')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0x2ca9e0)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__",HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row1", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0x2ca9e0)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row1", HorizontalAlign.End)
+                        )
                     )
-                )
-                .id("row4")
+                    .id("row4")
 
                 Row() {
                     Text('row5')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0x30c9f7)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row2", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0x30c9f7)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row2", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.End)
+                        )
                     )
-                )
-                .id("row5")
+                    .id("row5")
 
                 Row() {
                     Text('row6')
                 }
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor(0xff33ffb5)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("row4", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row3", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                    .justifyContent(FlexAlign.Center)
+                    .backgroundColor(0xff33ffb5)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("row4", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row3", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row3", HorizontalAlign.End)
+                        )
                     )
-                )
-                .id("row6")
-                .backgroundImagePosition(Alignment.Bottom)
-                .backgroundImageSize(ImageSize.Cover)
+                    .id("row6")
+                    .backgroundImagePosition(Alignment.Bottom)
+                    .backgroundImageSize(ImageSize.Cover)
             }
-            .width(300)
-            .height(300)
-            .margin(left: 50)
-            .border(width: 2, color: 0x6699FF)
+                .width(300)
+                .height(300)
+                .margin(left: 50)
+                .border(width: 2, color: 0x6699FF)
         }.height(100.percent)
     }
 }

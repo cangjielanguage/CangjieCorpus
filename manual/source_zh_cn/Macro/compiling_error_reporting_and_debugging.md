@@ -27,6 +27,7 @@ root_path
 // macros/m.cj
 // In this file, we define the macro Inner, Outer.
 macro package define
+
 import std.ast.*
 
 public macro Inner(input: Tokens) {
@@ -36,7 +37,6 @@ public macro Inner(input: Tokens) {
 public macro Outer(input: Tokens) {
     return input
 }
-
 ```
 
 宏调用放在 _src_ 子目录下：
@@ -46,10 +46,13 @@ public macro Outer(input: Tokens) {
 ```cangjie
 // src/demo.cj
 import define.*
+
 @Outer
 class Demo {
-    @Inner var state = 1
-    @Inner var cnt = 42
+    @Inner
+    var state = 1
+    @Inner
+    var cnt = 42
 }
 
 main() {
@@ -103,6 +106,7 @@ cjc src/demo.cj -o demo.exe --import-path ./target --output-dir ./target
 
 ```cangjie
 macro package define
+
 import std.ast.*
 import std.collection.HashMap
 
@@ -168,9 +172,8 @@ import std.ast.*
 public macro testDef(input: Tokens): Tokens {
     for (i in 0..input.size) {
         if (input[i].kind == IDENTIFIER) {
-            diagReport(DiagReportLevel.ERROR, input[i..(i + 1)],
-                       "This expression is not allowed to contain identifier",
-                       "Here is the illegal identifier")
+            diagReport(DiagReportLevel.ERROR, input[i..(i + 1)], "This expression is not allowed to contain identifier",
+                "Here is the illegal identifier")
         }
     }
     return input
@@ -249,7 +252,6 @@ public macro Outer(input: Tokens): Tokens {
     let decl = (parseDecl(input) as ClassDecl).getOrThrow()
     decl.body.decls.add(funcDecl)
     return decl.toTokens()
-
 }
 
 public macro Inner(input: Tokens): Tokens {
@@ -270,8 +272,10 @@ import define.*
 
 @Outer
 class Demo {
-    @Inner var state = 1
-    @Inner var cnt = 42
+    @Inner
+    var state = 1
+    @Inner
+    var cnt = 42
 }
 
 main(): Int64 {
@@ -279,10 +283,9 @@ main(): Int64 {
     println("${d.getCnt()}")
     return 0
 }
-
 ```
 
-在编译使用宏的文件时，在选项中，增加 `--debug-macro`，即使用仓颉宏的 _debug_ 模式。
+编译包含宏调用的文件时，在编译选项中添加 `--debug-macro`，即可使用仓颉宏的 _debug_ 模式。
 
 ```shell
 cjc --debug-macro demo.cj --import-path ./target
@@ -298,20 +301,62 @@ cjc --debug-macro demo.cj --import-path ./target
 
 在 _debug_ 模式下，会生成临时文件 _demo.cj.macrocall_，对应宏展开的部分如下：
 
-<!-- code_no_check -->
+<!-- compile -->
 
 ```cangjie
 // demo.cj.macrocall
 /* ===== Emitted by MacroCall @Outer in demo.cj:3:1 ===== */
-/* 3.1 */class Demo {
-/* 3.2 */    var state = 1
-/* 3.3 */    var cnt = 42
-/* 3.4 */    public func getCnt() {
-/* 3.5 */        state + cnt + 0
-/* 3.6 */    }
-/* 3.7 */}
-/* 3.8 */
+class Demo {
+    var state = 1
+    var cnt = 42
+    public func getCnt() {
+        state + cnt + 0
+    }
+}
+
 /* ===== End of the Emit ===== */
 ```
 
-如果宏展开后的代码有语义错误，则编译器的错误信息会溯源到宏展开后代码的具体行列号。
+如果宏展开后的代码有语义错误，则编译器的错误信息会溯源到宏展开后代码的具体行列号。如果在编译时开启了 _debug_ 模式，那么编译器的错误信息中不会打印完整的宏展开代码，仅打印实际错误位置和临时文件路径，开发者可以通过临时文件路径跳转至对应的错误位置；非 _debug_ 模式下，报错信息中会给出 `--debug-macro` 提示，不会打印出完整的宏展开代码。仓颉宏的 _debug_ 模式有以下注意事项：
+
+- 宏的 _debug_ 模式会重排源码的行列号信息，不适用于某些特殊的换行场景。例如：
+
+  <!-- code_check_manual -->
+
+  ```cangjie
+  // before expansion
+  @M{} - 2 // macro M return 2
+
+  // after expansion
+  // ===== Emitted my Macro M at line 1 ===
+  2
+  // ===== End of the Emit =====
+  - 2
+  ```
+
+  这些因换行符导致语义改变的情形，不应使用 _debug_ 模式。
+
+- 不支持宏调用在宏定义内的调试，会编译报错。
+
+  <!-- code_check_manual -->
+
+  ```cangjie
+  public macro M(input: Tokens) {
+      let a = @M2(1+2) // M2 is in macro M, not suitable for debug mode.
+      return input + quote($a)
+  }
+  ```
+
+- 不支持带括号宏的调试。
+
+  <!-- code_check_manual -->
+
+  ```cangjie
+  // main.cj
+
+  main() {
+      // For macro with parenthesis, newline introduced by debug will change the semantics
+      // of the expression, so it is not suitable for debug mode.
+      let t = @M(1+2)
+  }
+  ```

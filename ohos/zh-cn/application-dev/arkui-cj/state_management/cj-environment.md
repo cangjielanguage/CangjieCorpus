@@ -39,7 +39,8 @@ Environment提供了读取系统某些环境变量的能力，具体见[Environm
 - 在自定义组件中通过@StorageProp获取languageCode的值。
 
     ```cangjie
-    @StorageProp["languageCode"] let languageCode: String = "en"
+    @StorageProp["languageCode"]
+    let languageCode: String = "en"
     ```
 
 设备环境到Component的更新链：Environment --> AppStorage --> Component。
@@ -52,6 +53,7 @@ Environment提供了读取系统某些环境变量的能力，具体见[Environm
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -78,6 +80,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import kit.PerformanceAnalysisKit.Hilog
@@ -92,15 +95,12 @@ class EntryView {
     func build() {
         Row() {
             Column() {
-                Button("lang")
-                .onClick({
-                    evt =>
-                        if (lang.get()=='zh') {
-                            Hilog.info(0, "Chinese", "你好")
-                        } else {
-                            Hilog.info(0, "En", "Hello")
-                        }
-
+                Button("lang").onClick({
+                    evt => if (lang.get() == 'zh') {
+                        Hilog.info(0, "Chinese", "你好")
+                    } else {
+                        Hilog.info(0, "En", "Hello")
+                    }
                 })
             }
         }

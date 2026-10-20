@@ -26,6 +26,10 @@ tls 包用于进行安全加密的网络通信，提供创建 TLS 服务器、�
     - 由于 `Android` 系统默认自带的 `OpenSSL` 是裁剪版本，部分接口可能找不到符号而抛出异常，因此需要用户自行编译安装完整的 `OpenSSL 3.x.x` 版本；
     - 可自行下载 `OpenSSL 3.x.x` 源码，使用 Android NDK 交叉编译生成对应架构（当前只支持 `arm64-v8a`）的动态库文件，确保编译产物中含有 `libssl.so`、`libssl.so.3`、`libcrypto.so` 和 `libcrypto.so.3` 这些动态库文件；
     - 将这些文件所在目录设置到环境变量 `LD_LIBRARY_PATH` 中。
+- 对于 `HarmonyOS` 操作系统，可参考以下方式：
+    - 由于 `HarmonyOS` 6.0 及以上版本系统限制，`stdx` 无法直接调用系统内置的 `OpenSSL`，需要用户自行编译 `HarmonyOS` 的 `OpenSSL` 动态库并打包到应用中；
+    - 编译 `HarmonyOS` 的 `OpenSSL` 可参考 [OHOS 仓颉 SDK 构建指导书](https://gitcode.com/Cangjie/cangjie_build/blob/main/docs/linux_ohos_toolchain.md)；
+    - 将编译好的动态库文件 `libcrypto_openssl.z.so` 和 `libssl_openssl.z.so` 打包到应用中，并确保应用运行时能够正确加载这些库文件。
 
 > **注意：**
 >
@@ -33,11 +37,19 @@ tls 包用于进行安全加密的网络通信，提供创建 TLS 服务器、�
 
 ## API 列表
 
+### 类型别名
+
+| 类型别名                                              | 功能                             |
+| ----------------------------------------------------- | -------------------------------- |
+| [KeylessDecryptFunc](./tls_package_api/tls_package_type.md#type-keylessdecryptfunc) | 供无私钥握手使用的解密回调函数类型。 |
+| [KeylessSignFunc](./tls_package_api/tls_package_type.md#type-keylesssignfunc) | 供无私钥握手使用的签名回调函数类型。 |
+
 ### 类
 
 | 类名                                                                                | 功能                                                                                                                                                       |
 | ----------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [DefaultTlsKit](./tls_package_api/tls_package_classes.md#class-defaulttlskit)       | [TlsKit](../tls/common/tls_common_package_api/tls_common_package_interfaces.md#interface-tlskit) 的默认实现。用于获取 TLS 服务端、客户端连接和服务端会话。 |
+| [KeylessTlsServerConfig](./tls_package_api/tls_package_classes.md#class-keylesstlsserverconfig) | 无私钥服务端配置。       |
 | [TlsClientSession](./tls_package_api/tls_package_classes.md#class-tlsclientsession) | 当客户端 TLS 握手成功后，将会生成一个会话，当连接因一些原因丢失后，客户端可以通过这个会话 id 复用此次会话，省略握手流程。                                  |
 | [TlsServerSession](./tls_package_api/tls_package_classes.md#class-tlsserversession) | 服务端启用 session 特性恢复会话，存储 session 用于对客户端进行验证类型。                                                                                   |
 | [TlsSocket](./tls_package_api/tls_package_classes.md#class-tlssocket)               | 用于在客户端及服务端间创建加密传输通道。                                                                                                                   |

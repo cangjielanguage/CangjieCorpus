@@ -40,13 +40,13 @@ public func getCalendar(locale: String, calendarType!: ?CalendarType = None): Ca
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |locale|String|是|-|表示区域信息的字符串，由语言、脚本、国家地区组成，例如zh-Hans-CN。|
-|calendarType|?CalendarType|否|None|**命名参数。** 表示历法，取值包括：buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。<br>默认值：区域默认的历法。|
+|calendarType|?[CalendarType](#enum-calendartype)|否|None|**命名参数。** 表示历法，取值包括：buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。<br>默认值：区域默认的历法。?CalendarType|否|None|**命名参数。** 表示历法，取值包括：buddhist,&nbsp;chinese,&nbsp;coptic,&nbsp;ethiopic,&nbsp;hebrew,&nbsp;gregory,&nbsp;indian,&nbsp;islamic_civil,&nbsp;islamic_tbla,&nbsp;islamic_umalqura,&nbsp;japanese,&nbsp;persian。<br>默认值：区域默认的历法。|
 
 **返回值：**
 
 |类型|说明|
 |:----|:----|
-|Calendar|日历对象。|
+|[Calendar](#class-calendar)|日历对象。|
 
 **示例：**
 
@@ -99,7 +99,7 @@ public func add(field: String, amount: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[i18n错误码](./cj-errorcode-i18n.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[i18n错误码](./cj-errorcode-i18n.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |

@@ -1,54 +1,26 @@
-# **CangjieCorpus**
+# CangjieCorpus
 
-本语料库聚焦 **仓颉编程语言** 核心知识体系，整合官方开发指南、API 文档、典型代码示例及语法规范等多维度资源，经结构化处理与专业标注，构建为支持 
-**RAG（检索增强生成）技术** 的高质量知识基座。涵盖 **分布式开发、多端协同、元编程** 等鸿蒙生态核心场景案例，适配智能编码助手、学习辅助工具等应用开发需求。
+本语料库聚焦仓颉编程语言，整合官方开发指南、API 文档、工具说明和补充示例，以 Markdown 格式保存，供学习、智能编码助手和 RAG（检索增强生成）应用使用。
 
-语料以 **Markdown** 标准化格式存储，保留完整层级结构与语义标签，便于快速接入向量数据库与知识图谱系统。
+当前按 **仓颉 1.2.0** 更新语言文档。各目录采用的文档来源与版本如下；鸿蒙文档按 `docs_cangjie` 的指定提交同步，其 SDK 适用范围以各篇文档说明为准。
 
-欢迎开发者基于本语料库构建仓颉语言智能应用，推动鸿蒙开发生态智能化升级！ 
+## 语料库结构与来源
 
-## 语料库结构
+| 目录 | 内容 | 本次同步来源 | 状态 |
+| --- | --- | --- | --- |
+| [manual/source_zh_cn](manual/source_zh_cn) | 语言开发指南 | 本地 `cangjie_docs` 的 `docs/dev-guide/source_zh_cn`，提交 `25eaa89`（提交说明对应 `release/1.2`） | 已同步 |
+| [tools/source_zh_cn](tools/source_zh_cn) | 包管理、调试、格式化、检查等工具指南 | 同一 `cangjie_docs` 提交的 `docs/tools/source_zh_cn` | 已同步 |
+| [libs/std](libs/std) | 标准库 API 与示例 | 本地 `cangjie_runtime` 的 `stdlib/doc/libs/std`，提交 `a1db6277`（提交说明对应 `release/1.2`） | 已按源码 Markdown 完整同步 |
+| [libs/stdx](libs/stdx) | 扩展库 API 与示例 | 本地 `cangjie_stdx` 的 `doc/libs_stdx`，提交 `243a4b6`（提交说明对应 `release/1.2`） | 已按源码 Markdown 完整同步 |
+| [ohos/zh-cn](ohos/zh-cn) | 鸿蒙仓颉开发指南、API 参考与配套资源 | 本地 `docs_cangjie` 的 `zh-cn`，提交 `641feb3b` | 已按源码 Markdown 完整同步 |
+| [extra](extra) | 项目自编的语言与集合操作速查说明 | 对照本次同步的开发指南和标准库文档核对 | 已修订，具体示例已通过 1.2.0 分类验证，见 [验证报告](EXTRA_VALIDATION.md) |
 
-当前语料库适配 **仓颉编程语言 v1.1.0**，在保持 v1.0.0 目录组织方式的基础上，同步更新 v1.1.0 官方文档内容，结构说明如下：    
+官方项目入口：[仓颉文档](https://gitcode.com/Cangjie/cangjie_docs)、[标准库与运行时](https://gitcode.com/Cangjie/cangjie_runtime)、[扩展库](https://gitcode.com/Cangjie/cangjie_stdx)、[OpenHarmony 仓颉文档](https://gitcode.com/openharmony/docs_cangjie)。上表记录实际导入来源及提交，各目录的适用版本以对应来源文档为准。
 
-###  `extra`
+## 补充说明
 
-- **功能定位**：存放项目团队基于仓颉语言特性自主设计的扩展功能库，贴合鸿蒙生态分布式开发、设备协同等典型场景。
-- **内容说明**： 包含自定义工具类、场景化代码模板及最佳实践示例，**仅供学习研究参考**，不代表官方标准实现。
+`extra` 包含 Array、ArrayList、集合操作、函数、HashMap、HashSet、数字、Option、Rune、排序、String 和 Tuple 的使用说明。这些内容由项目维护，仅供学习研究参考，不代表官方标准实现；各篇附有本地参考文档链接。代码块既有完整程序，也有需要补充导入或上下文的片段，以及明确标注的错误示例。
 
-### `libs`
+std、stdx 和鸿蒙文档均直接从上表所列源码目录同步原始 Markdown 与配套资源，保留上游目录结构和链接，替换此前的 HTML 转换版本。manual 和 tools 同样直接同步源码 Markdown。由于本仓库的目录映射与上游不同，跨目录链接需按本仓库路径检查和适配。
 
-- **对应范围**：完整映射 [仓颉标准库 std API 文档](https://gitcode.com/Cangjie/cangjie_runtime/tree/release/1.1/stdlib/doc) 和 [非核心标准库 stdx API 文档](https://gitcode.com/Cangjie/cangjie_stdx/tree/release/1.1/doc)，涵盖全量内置库与标准接口。
-- **核心内容**：
-  - 各模块 API 定义与参数说明
-  - 典型调用示例与异常处理指南
-
-### `manual`
-
-- **对应范围**：同步仓颉官方 [开发指南](https://gitcode.com/Cangjie/cangjie_docs/tree/release/1.1/docs/dev-guide)，聚焦开发者核心知识需求。
-- **核心内容**：
-  - 语言基础语法与编程范式详解
-  - 多端应用开发流程与工程化实践
-  - 性能优化、调试技巧与最佳实践总结
-
-### `ohos`
-
-- **对应范围**：同步 [OpenHarmony 仓颉开发者文档](https://gitcode.com/openharmony/docs_cangjie/tree/OpenHarmony-6.1-Release/zh-cn)，覆盖鸿蒙生态分布式开发、设备协同等典型场景。
-- **核心内容**：
-  - 分布式应用架构设计与实现指南
-  - ArkUI 声明式开发范式与 UI 组件详解
-  - 全栈 API 能力覆盖（应用框架、系统、媒体、图形、应用服务等）
-  - 仓颉与 ArkTS 互操作及跨语言开发实践
-
-### `tools`
-
-- **对应范围**：同步仓颉官方 [工具指南](https://gitcode.com/Cangjie/cangjie_docs/tree/release/1.1/docs/tools)，覆盖工具集官方标准用法。
-- **核心内容**：
-  - 系统化整合仓颉语言全生命周期开发工具链
-  - 命令行工具使用指南
-  - 语言服务、格式化、静态检查、调试、构建、覆盖率等配套工具说明
-
-
-### 版本一致性说明
-
-所有目录内容对齐仓颉官方文档结构，保留原文标题层级与技术术语定义，确保与 **v1.1.0** 编译器及工具链保持一致。开发者可通过目录结构快速定位官方文档对应章节，实现知识检索与应用开发的高效衔接。
+后续同步应比较新增、修改和删除的文件，检查跨目录链接与资源引用，并记录来源版本。若用于 RAG，更新语料后还需重建或增量更新切分、向量与检索索引，清除已删除文档对应的旧条目。

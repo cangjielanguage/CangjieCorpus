@@ -36,14 +36,6 @@ Extension
 
 功能：扩展声明。
 
-### Init
-
-```cangjie
-Init
-```
-
-功能：构造函数声明。
-
 ### GlobalFunction
 
 ```cangjie
@@ -59,6 +51,14 @@ GlobalVariable
 ```
 
 功能：全局变量声明。
+
+### Init
+
+```cangjie
+Init
+```
+
+功能：构造函数声明。
 
 ### MemberFunction
 
@@ -1103,7 +1103,7 @@ public enum ThreadState <: ToString {
     | Ready
     | Running
     | Pending
-    | Terminated 
+    | Terminated
     | ...
 }
 ```

@@ -143,6 +143,7 @@ Progress有5种可选类型，通过ProgressType可以设置进度条样式，Pr
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -161,20 +162,21 @@ class EntryView {
                 Row()
                     .width(100.percent)
                     .height(5)
-                Button("进度条+5").onClick ({
-                    evt =>
-                    this.progressValue += 5.0
-                    if (this.progressValue > 100.0) {
-                        this.progressValue = 0.0
+                Button("进度条+5").onClick(
+                    {
+                        evt =>
+                            this.progressValue += 5.0
+                            if (this.progressValue > 100.0) {
+                                this.progressValue = 0.0
+                            }
                     }
-                })
+                )
             }
         }
-        .width(100.percent)
-        .height(100.percent)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
-
 ```
 
 ![progress](figures/progress.gif)

@@ -34,15 +34,15 @@ class EntryView {
     @Builder
     func showTextBuilder() {
         Text("Hello World")
-        .fontSize(30)
-        .fontWeight(FontWeight.Bold)
+            .fontSize(30)
+            .fontWeight(FontWeight.Bold)
     }
 
     @Builder
     func showTextValueBuilder(param: String) {
         Text(param)
-        .fontSize(30)
-        .fontWeight(FontWeight.Bold)
+            .fontSize(30)
+            .fontWeight(FontWeight.Bold)
     }
 
     func build() {
@@ -90,7 +90,6 @@ func showTextBuilder() {
 @Entry
 @Component
 class EntryView {
-
     func build() {
         Column {
             showTextBuilder()
@@ -143,7 +142,8 @@ func overBuilder(paramA1: String) {
 @Entry
 @Component
 class EntryView {
-    @State var label: String = "Hello"
+    @State
+    var label: String = "Hello"
 
     func build() {
         Column {
@@ -167,7 +167,6 @@ import ohos.arkui.state_macro_manage.*
 class Tmp {
     @Publish
     var paramA1: String = ""
-
 }
 
 @Builder
@@ -180,15 +179,15 @@ func overBuilder(params: Tmp) {
 @Entry
 @Component
 class EntryView {
-    @State var tmp: Tmp = Tmp(paramA1: "Hello")
+    @State
+    var tmp: Tmp = Tmp(paramA1: "Hello")
 
     func build() {
         Column {
             // 在父组件中调用overBuilder组件时，
             // 把参数通过引用传递的方式传给overBuilder组件。
             overBuilder(tmp)
-            Button("Click me")
-            .onClick({
+            Button("Click me").onClick({
                 _ =>
                 // 单击Click me后，UI文本更改为ArkUI。
                 this.tmp.paramA1 = "ArkUI"
@@ -219,14 +218,15 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var builder_value: String = "Hello"
+    @State
+    var builder_value: String = "Hello"
 
     @Builder
     func builder() {
         Column {
             Text(this.builder_value)
-            .fontSize(30)
-            .fontWeight(FontWeight.Bold)
+                .fontSize(30)
+                .fontWeight(FontWeight.Bold)
         }
     }
 
@@ -238,14 +238,12 @@ class EntryView {
         Row {
             Column {
                 Text(this.builder_value)
-                .fontSize(30)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(30)
+                    .fontWeight(FontWeight.Bold)
 
                 this.builder()
-                Button("点击改变builder_value内容")
-                .onClick({
-                    e =>
-                    this.builder_value = "builder_value被点击了"
+                Button("点击改变builder_value内容").onClick({
+                    e => this.builder_value = "builder_value被点击了"
                 })
             }
         }
@@ -345,14 +343,17 @@ import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Tmp {
-    @Publish var str_value: String = "Hello"
+    @Publish
+    var str_value: String = "Hello"
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var objParam: Tmp = Tmp()
-    @State var label: String = "World"
+    @State
+    var objParam: Tmp = Tmp()
+    @State
+    var label: String = "World"
 
     @Builder
     func privateBuilder() {
@@ -364,14 +365,13 @@ class EntryView {
 
     func build() {
         Column {
-            Text("通过调用@Builder渲染UI界面")
-            .fontSize(20)
+            Text("通过调用@Builder渲染UI界面").fontSize(20)
             this.privateBuilder()
             Line()
-            .width(100.percent)
-            .height(10)
-            .backgroundColor(0x000000)
-            .margin(10)
+                .width(100.percent)
+                .height(10)
+                .backgroundColor(0x000000)
+                .margin(10)
 
             Button("点击改变参数值")
             .onClick({
@@ -380,19 +380,19 @@ class EntryView {
                 this.label = "label Hello World"
             })
         }
-
     }
 }
 ```
 
 ### 使用全局和局部的@Builder传入CustomBuilder类型
 
-当某个参数类型为CustomBuilder的时候，可以把定义的@Builder函数传入，因为CustomBuilder实际是一个Function(() -> Unit)类型，而@Builder实际也是一个Function类型。此场景中通过把@Builder传入已实现特定的效果
+当某个参数类型为CustomBuilder的时候，可以把定义的@Builder函数传入，因为CustomBuilder实际是一个Function(() -> Unit)类型，而@Builder实际也是一个Function类型。此场景中通过把@Builder传入以实现特定的效果
 
  <!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -401,49 +401,51 @@ func myBuilder2() {
     Column {
         Text("全局 Builder")
     }
-    .width(100.percent)
-    .height(100.percent)
-    .align(Alignment.Center)
+        .width(100.percent)
+        .height(100.percent)
+        .align(Alignment.Center)
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var isShow: Bool = false
-    @State var isShow2: Bool = false
+    @State
+    var isShow: Bool = false
+    @State
+    var isShow2: Bool = false
 
     @Builder
     func myBuilder() {
         Column {
             Text("局部 Builder")
         }
-        .width(100.percent)
-        .height(100.percent)
-        .align(Alignment.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .align(Alignment.Center)
     }
 
     func build() {
         Column {
             Button("局部 Builder")
-            .onClick({
-              e => this.isShow = true
-            })
-            .fontSize(20)
-            .margin(10)
-            .bindSheet(this.isShow, myBuilder, options: SheetOptions(onDisappear: {=> this.isShow = false}) )
+                .onClick({
+                    e => this.isShow = true
+                })
+                .fontSize(20)
+                .margin(10)
+                .bindSheet(this.isShow, myBuilder, options: SheetOptions(onDisappear: {=> this.isShow = false}))
 
             Button("全局 Builder")
-            .onClick({
-              e => this.isShow2 = true
-            })
-            .fontSize(20)
-            .margin(10)
-            .bindSheet(this.isShow2, myBuilder2, options: SheetOptions(onDisappear: {=> this.isShow2 = false}) )
+                .onClick({
+                    e => this.isShow2 = true
+                })
+                .fontSize(20)
+                .margin(10)
+                .bindSheet(this.isShow2, myBuilder2, options: SheetOptions(onDisappear: {=> this.isShow2 = false}))
         }
-        .justifyContent(FlexAlign.Center)
-        .backgroundColor(Color.White)
-        .width(100.percent)
-        .height(100.percent)
+            .justifyContent(FlexAlign.Center)
+            .backgroundColor(Color.White)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```
@@ -462,7 +464,8 @@ import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Tmp {
-    @Publish var paramA1: String = ""
+    @Publish
+    var paramA1: String = ""
 }
 
 @Builder
@@ -475,7 +478,6 @@ func parentBuilder(params: Tmp) {
 
 @Builder
 func childBuilder(params: Tmp) {
-
     Row {
         Text("childBuilder: ${params.paramA1}")
     }
@@ -484,7 +486,6 @@ func childBuilder(params: Tmp) {
 
 @Builder
 func grandsonBuilder(params: Tmp) {
-
     Row {
         Text("grandsonBuilder: ${params.paramA1}")
     }
@@ -493,7 +494,8 @@ func grandsonBuilder(params: Tmp) {
 @Entry
 @Component
 class EntryView {
-    @State var tmp: Tmp = Tmp(paramA1: "Hello")
+    @State
+    var tmp: Tmp = Tmp(paramA1: "Hello")
 
     func build() {
         Column {

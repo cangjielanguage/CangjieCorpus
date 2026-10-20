@@ -35,7 +35,7 @@
 
 ### WLAN简介
 
-无线局域网（Wireless Local Area Networks，WLAN），是通过无线电、红外光信号或者其他技术发送和接收数据的局域网，用户可以通过WLAN实现结点之间无物理连接的网络通讯。常用于用户携带可移动终端的办公、公众环境中。
+无线局域网（Wireless Local Area Networks，WLAN），是通过无线电、红外光信号或者其他技术发送和接收数据的局域网，用户可以通过WLAN实现节点之间无物理连接的网络通讯。常用于用户携带可移动终端的办公、公众环境中。
 
 WLAN系统为用户提供接入WLAN网络功能（STA模式）、点对点的数据传输功能（P2P模式）和热点分享功能（AP模式），让应用可以通过WLAN和其他设备互联互通。
 
@@ -45,7 +45,7 @@ WLAN系统为用户提供接入WLAN网络功能（STA模式）、点对点的数
   详情请参见[ohos.wifiManager API参考](../reference/ConnectivityKit/cj-apis-wifi_manager.md)。
 
 - **P2P模式**
-  P2P模式即为Wi-Fi Direct；Wi-Fi Direct 是一种点对点连接技术，它可以在两台 STA 之间直接建立 TCP/IP 链接，并不需要AP的参与；其中一台STA会起到传统意义上的AP的作用，称为Group Owner(GO)，另外一台station则称为Group Client(GC)，像连接AP一样连接到GO。
+  P2P模式即为Wi-Fi Direct；Wi-Fi Direct 是一种点对点连接技术，它可以在两台 STA 之间直接建立 TCP/IP 连接，并不需要AP的参与；其中一台STA会起到传统意义上的AP的作用，称为Group Owner(GO)，另外一台station则称为Group Client(GC)，像连接AP一样连接到GO。
 
   详情请参见[ohos.wifiManager API参考](../reference/ConnectivityKit/cj-apis-wifi_manager.md)。
 

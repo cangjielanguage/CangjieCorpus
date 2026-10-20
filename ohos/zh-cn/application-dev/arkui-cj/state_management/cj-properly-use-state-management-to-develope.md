@@ -41,7 +41,7 @@ import std.collection.ArrayList
 import kit.PerformanceAnalysisKit.Hilog
 
 @Observed
-class TextStyles{
+class TextStyles {
     @Publish
     var fontSize: Int64
 }
@@ -71,11 +71,9 @@ class EntryView {
                     })
             List() {
                 ForEach(this.styleList, itemGeneratorFunc: {
-                        item: TextStyles, _: Int64 =>
-                        ListItem(){
-                            Text("Hello World")
-                                .fontSize(item.fontSize)
-                        }
+                    item: TextStyles, _: Int64 => ListItem() {
+                        Text("Hello World").fontSize(item.fontSize)
+                    }
                 })
             }
         }
@@ -98,8 +96,9 @@ import std.collection.ArrayList
 import kit.PerformanceAnalysisKit.Hilog
 
 @Observed
-class TextStyles{
-    @Publish var fontSize: Int64
+class TextStyles {
+    @Publish
+    var fontSize: Int64
 }
 
 @Entry

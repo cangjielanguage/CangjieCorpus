@@ -118,6 +118,7 @@ public func onSelect(event: ?(Bool) -> Unit): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -128,25 +129,28 @@ class EntryView {
     func build() {
         Column() {
             List(space: 20, initialIndex: 0) {
-                ForEach(this.arr,itemGeneratorFunc: {item: Int64, _: Int64 => ListItem() {
+                ForEach(
+                    this.arr,
+                    itemGeneratorFunc: {
+                        item: Int64, _: Int64 => ListItem() {
                             Text("${item}")
-                            .width(100.percent)
-                            .height(100)
-                            .fontSize(16)
-                            .textAlign(TextAlign.Center)
-                            .borderRadius(10)
-                            .backgroundColor(0xFFFFFF)
+                                .width(100.percent)
+                                .height(100)
+                                .fontSize(16)
+                                .textAlign(TextAlign.Center)
+                                .borderRadius(10)
+                                .backgroundColor(0xFFFFFF)
                         }
                     }
                 )
             }
-            .scrollBar(BarState.Off)
-            .width(90.percent)
+                .scrollBar(BarState.Off)
+                .width(90.percent)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(0xDCDCDC)
-        .padding(top: 5.px)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(0xDCDCDC)
+            .padding(top: 5.px)
     }
 }
 ```

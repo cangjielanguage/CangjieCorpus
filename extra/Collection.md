@@ -1,9 +1,11 @@
 ## Expressing quantifiers
 
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/collection/collection_package_api/collection_package_function.md).
+
 The logical quantifiers `forall` and `exists` are expressed in Cangjie using functions
 `all` and `any`. The syntax is as follows:
 
-```
+```cangjie
 collection |> all {x => cond}
 collection |> any {x => cond}
 ```
@@ -14,7 +16,7 @@ bound variable as `x`, then access its elements using subscripts `x[0]` and `x[1
 
 For example,
 
-```
+```cangjie
 arr |> all {x => x > 0} // check whether all elements of `arr` are > 0
 arr |> any {x => x > 0} // check whether there exists any element of `arr` is > 0
 ```
@@ -24,7 +26,7 @@ the bound variable `x` in the lambda expression iterates over elements of `arr`.
 If you want to use traverse using index on `arr`, you must replace `(arr)` with
 `(0..arr.size)`. For example, the following expresses the same condition as above.
 
-```
+```cangjie
 0..arr.size |> all {i => arr[i] > 0}
 0..arr.size |> any {i => arr[i] > 0}
 ```
@@ -36,7 +38,7 @@ When using `all` and `any` functions, note the **distinction** between
 (if A then B), use `!A || B`. For example, to express the fact that `i < j`
 implies `result[i] < result[j]` (that is, the array result is strictly increasing), use:
 
-```
+```cangjie
 !(i < j) || result[i] < result[j]
 ```
 
@@ -45,17 +47,17 @@ implies `result[i] < result[j]` (that is, the array result is strictly increasin
 The count function returns the number of elements in a collection.
 For example, the following counts the number of Runes in a String:
 
-```
+```cangjie
 let s = "Hello"
 println(count(s.runes()))  // 5
 println(s.runes() |> count) // Equivalent to `count(s.runes())`, but using the pipe operator `|>`
 ```
 
 Combine `count` and `filter` to count the number of elements satisfying
-som property in a collection. For example, the following code counts
+some property in a collection. For example, the following code counts
 the number of r's in the word "strawberry":
 
-```
+```cangjie
 let s = "strawberry"
 println(s.runes() |> filter({c: Rune => c == r'r'}) |> count)  // 3
 ```
@@ -68,13 +70,13 @@ some condition. Directly calling `count` with a predicate is invalid.
 The `filter` function can be used to produce a new iterator from an old one
 by filtering according to a condition. The general syntax is:
 
-```
+```cangjie
 collection |> filter {x => cond}  // returns an iterator
 ```
 
 For example, to count the number of characters `r` in a string `s`, use:
 
-```
+```cangjie
 collectArray(s.runes() |> filter {c: Rune => c == r'r'}).size
 ```
 
@@ -84,7 +86,7 @@ Note the output of filter is first converted to `Array` using function
 Alternatively, combine `filter` with `count` function, with accepts an
 iterator and returns the size of the iterator:
 
-```
+```cangjie
 s.runes() |> filter({c: Rune => c == r'r'}) |> count
 ```
 
@@ -93,7 +95,7 @@ s.runes() |> filter({c: Rune => c == r'r'}) |> count
 The `fold` function can be used to conveniently compute sum, product
 and other similar functions over a collection. The general syntax is:
 
-```
+```cangjie
 fold(initValue, {old, curr => new})(collection)
 ```
 
@@ -104,14 +106,14 @@ and computes the new value.
 Using the pipe operator `|>` and the syntactic sugar of lambda function, one can equivalently write the above code
 as
 
-```
+```cangjie
 collection |> fold(init) {old, curr => new}
 ```
 
 For example, the following computes the sum and product
 of a list, respectively.
 
-```
+```cangjie
 let n = [1, 2, 3, 4]
 println(n |> fold(0) {old, curr => old + curr})  // 10
 println(n |> fold(1) {old, curr => old * curr})  // 24
@@ -128,7 +130,7 @@ and the resulting function takes the collection as argument. No other argument s
 The `reduce` function is similar to `fold`, except there is no need to provide
 an initial value. The general syntax is:
 
-```
+```cangjie
 reduce({old, curr => new})(collection)  // returns Option value
 ```
 
@@ -139,14 +141,14 @@ the result.
 Using the pipe operator `|>` and the syntactic sugar of lambda function, one can equivalently write the above code
 as
 
-```
+```cangjie
 collection |> reduce {old, curr => new}
 ```
 
 For example, the following illustrates how to use `reduce` to
-compute the sum or product iof a list if integers.
+compute the sum or product of a list of integers.
 
-```
+```cangjie
 let a = [1, 2, 3, 4]
 println((a |> reduce {x, y => x + y}).getOrThrow())  // prints 10
 println((a |> reduce {x, y => x * y}).getOrThrow())  // prints 24
@@ -169,7 +171,7 @@ Functions `min` and `max` can also be used on collections such as `Array` and
 is nonempty, you can use `getOrThrow()` to retrieve the result. For example,
 the following computes the minimum and maximum of an array.
 
-```
+```cangjie
 let a = [1, 2, 3, 4]
 println(min(a).getOrThrow())  // prints 1
 println(max(a).getOrThrow())  // prints 4
@@ -186,15 +188,14 @@ the returned iterator to an `Array` (similarly for other target collections).
 For example, the following illustrates how to use `map` to compute the square
 of each element of an `Array`, and collect the results in an `Array`.
 
-```
+```cangjie
 let a = [1, 2, 3, 4]
 let b = a |> map {x: Int64 => x ** 2} |> collectArray
 println(a)  // [1, 2, 3, 4]
 println(b)  // [1, 4, 9, 16]
 ```
 
-**Note:** the function `map` is used with collection as an argument at the end. Using
-syntax like `a.map(...)` is incorrect.
+**Note:** the free function `std.collection.map` returns an iterator and can be used in a pipeline. `Array` also provides the instance method `a.map(transform)`, which directly returns a new `Array`; both forms are valid.
 
 ## Using `flatMap` function
 
@@ -205,7 +206,7 @@ and flattens the resulting list of collections.
 The following example repeats each entry `i` of an array `i` times, collection
 the results in a single array.
 
-```
+```cangjie
 let a = [1, 2, 3, 4]
 let b = a |> flatMap {x: Int64 => Array(x, {_ => x})} |> collectArray
 println(a)  // [1, 2, 3, 4]

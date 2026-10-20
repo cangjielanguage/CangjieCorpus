@@ -45,7 +45,7 @@ public init(arrayValue!: Array<String>, selected!: ?UInt32)
 
 > **说明：**
 >
-> - [width](./cj-universal-attribute-size.md#func-widthoptionlength)属性设置"auto"时表示自适应宽度，宽度会随索引项最大宽度变化。
+> - [width](./cj-universal-attribute-size.md#func-widthoptionlength)属性设置[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)时表示自适应宽度，宽度会随索引项最大宽度变化。
 > - [padding](./cj-universal-attribute-size.md#func-paddinglength)属性默认为4.vp。
 
 通用事件：全部支持。
@@ -407,6 +407,7 @@ public type OnAlphabetIndexerPopupSelectCallback = (Int64) -> Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.hilog.*
 import ohos.arkui.state_macro_manage.*
@@ -419,8 +420,10 @@ class EntryView {
     var arrayC: Array<String> = ["曹", "成", "陈", "催"]
     var arrayJ: Array<String> = ["嘉", "贾"]
     var arrayNull: Array<String> = []
-    let value: Array<String> = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q","R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    @State var indexerHeight: Length = 75.percent;
+    let value: Array<String> = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
+        "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    @State
+    var indexerHeight: Length = 75.percent;
     func build() {
         Stack(alignContent: Alignment.Start) {
             Row() {
@@ -489,7 +492,7 @@ class EntryView {
                             .popupFont(size: 30.vp, weight: FontWeight.Bolder) // 弹出框内容的字体样式
                             .itemSize(28) // 每一项的尺寸大小
                             .alignStyle(IndexerAlign.Right) // 弹出框在索引条右侧弹出
-                            .popupBackground(0xCCCCCC) // 设置提示弹窗首个索引项背板颜色
+                            .popupBackground(0xCCCCCC) // 设置提示弹窗首个索引项背景颜色
                             .selectedColor(0x00FF00)
                             .onSelect({index: Int64 => Hilog.info(0, "AppLogCj", this.value[index] + " Selected!");})
                             .onRequestPopupData(

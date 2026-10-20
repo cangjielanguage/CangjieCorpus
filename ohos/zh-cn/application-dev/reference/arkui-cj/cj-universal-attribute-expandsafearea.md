@@ -6,7 +6,7 @@
 > 当前为Beta阶段。
 <!--DelEnd-->
 
-安全区域是指页面的显示区域，默认不与系统设置的非安全区域比如状态栏、导航栏区域重叠，默认情况下开发者开发的界面都被布局在安全区域内。提供属性方法允许开发者设置组件绘制内容突破安全区域的限制，通过[expandSafeArea](./cj-universal-attribute-expandsafearea.md#func-expandsafeareaarraysafeareatype-arraysafeareaedge)属性支持组件不改变布局情况下扩展其绘制区域至安全区外。页面中有标题栏等文字不希望和非安全区重叠时，建议对组件设置expandSafeArea属性达到沉浸式效果，也可以直接通过窗口接口[setWindowLayoutFullScreen](./cj-apis-window.md#)设置沉浸式。
+安全区域是指页面的显示区域，默认不与系统设置的非安全区域比如状态栏、导航栏区域重叠，默认情况下开发者开发的界面都被布局在安全区域内。提供属性方法允许开发者设置组件绘制内容突破安全区域的限制，通过[expandSafeArea](#func-expandsafeareaarraysafeareatype-arraysafeareaedge)属性支持组件不改变布局情况下扩展其绘制区域至安全区外。页面中有标题栏等文字不希望和非安全区重叠时，建议对组件设置expandSafeArea属性达到沉浸式效果，也可以直接通过窗口接口[setWindowLayoutFullScreen](./cj-apis-window.md#)设置沉浸式。
 
 ## 导入模块
 
@@ -24,7 +24,7 @@ func expandSafeArea(types!: ?Array<SafeAreaType>, edges!: ?Array<SafeAreaEdge>):
 
 > **说明：**
 >
-> - 设置expandSafeArea属性进行组件绘制扩展时，建议组件尺寸不要设置固定宽高（百分比除外），当设置固定宽高时，扩展安全区域的方向只支持[SafeAreaEdge.TOP, SafeAreaEdge.START]，扩展后的组件尺寸保持不变。
+> - 设置expandSafeArea属性进行组件绘制扩展时，建议组件尺寸不要设置固定宽高（百分比除外），当设置固定宽高（包括设置[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)）时，扩展安全区域的方向只支持[SafeAreaEdge.Top, SafeAreaEdge.Start]，扩展后的组件尺寸保持不变。
 > - 安全区域不会限制内部组件的布局和大小，不会裁剪内部组件。
 > - 当父容器是滚动容器时，设置expandSafeArea属性不生效。
 > - 设置expandSafeArea()时，不传参，按默认值处理；设置expandSafeArea([],[])时，相当于入参是空数组，此时设置expandSafeArea属性不生效。

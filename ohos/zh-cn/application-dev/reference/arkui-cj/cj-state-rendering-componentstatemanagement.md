@@ -353,7 +353,6 @@ public func removeIf(predicate: (T) -> Bool): Unit
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -362,7 +361,8 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var text: String = "begin"
+    @State
+    var text: String = "begin"
 
     func build() {
         Column(space: 30) {

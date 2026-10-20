@@ -73,7 +73,6 @@ func bindPopup(show: ?Bool, popup: ?CustomPopupOptions): T
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -92,11 +91,16 @@ func popupBuilder() {
 @Entry
 @Component
 class EntryView {
-    @State var msg: String = "State Change Wait"
-    @State var dismiss: String = "Dismiss Wait"
-    @State var custom: String = "Custom Wait"
-    @State var handlePopup: Bool = false
-    @State var customPopup: Bool = false
+    @State
+    var msg: String = "State Change Wait"
+    @State
+    var dismiss: String = "Dismiss Wait"
+    @State
+    var custom: String = "Custom Wait"
+    @State
+    var handlePopup: Bool = false
+    @State
+    var customPopup: Bool = false
 
     public func build() {
         Flex(direction: FlexDirection.Column) {
@@ -105,8 +109,8 @@ class EntryView {
             Text(custom).margin(left: 100)
             Button('PopupOptions')
                 .margin(left: 100, top: 200)
-                .onClick({ e =>
-                    this.handlePopup = !this.handlePopup
+                .onClick({
+                    e => this.handlePopup = !this.handlePopup
                 })
                 .bindPopup(
                     this.handlePopup,
@@ -126,11 +130,11 @@ class EntryView {
                         ),
                         onStateChange: {
                             e =>
-                            this.msg = "PopUp"
-                            if (!e.isVisible) {
-                                this.msg = "Wait"
-                                this.handlePopup = false
-                            }
+                                this.msg = "PopUp"
+                                if (!e.isVisible) {
+                                    this.msg = "Wait"
+                                    this.handlePopup = false
+                                }
                         },
                         showInSubWindow: false,
                         arrowOffset: 60.0.vp,
@@ -151,23 +155,23 @@ class EntryView {
                         transition: TransitionEffect.SLIDE_SWITCH,
                         onWillDismiss: {
                             dismissPopupAction: DismissPopupAction =>
-                            dismissPopupAction.dismiss()
-                            match (dismissPopupAction.reason) {
-                                case PRESS_BACK => this.dismiss = "dismissReason: PRESS_BACK"
-                                case TOUCH_OUTSIDE => this.dismiss = "dismissReason: TOUCH_OUTSIDE"
-                                case _ => this.dismiss = "dismissReason: unknown"
-                            }
+                                dismissPopupAction.dismiss()
+                                match (dismissPopupAction.reason) {
+                                    case PRESS_BACK => this.dismiss = "dismissReason: PRESS_BACK"
+                                    case TOUCH_OUTSIDE => this.dismiss = "dismissReason: TOUCH_OUTSIDE"
+                                    case _ => this.dismiss = "dismissReason: unknown"
+                                }
                         },
                         followTransformOfTarget: true
                     )
                 )
             Button("CustomPopupOptions")
                 .margin(left: 100, top: 10)
-                .onClick({ e => customPopup = !customPopup})
+                .onClick({e => customPopup = !customPopup})
                 .bindPopup(
                     customPopup,
                     CustomPopupOptions(
-                        builder: bind(popupBuilder, this),
+                        builder: popupBuilder,
                         enableArrow: true,
                         placement: Placement.BottomLeft,
                         popupColor: Color.Red,
@@ -184,17 +188,16 @@ class EntryView {
                         transition: TransitionEffect.SLIDE_SWITCH,
                         onStateChange: {
                             evt =>
-                            custom = "stateChange: ${evt.isVisible}"
-                            if (!evt.isVisible) {
-                                customPopup = true
-                            }
+                                custom = "stateChange: ${evt.isVisible}"
+                                if (!evt.isVisible) {
+                                    customPopup = true
+                                }
                         }
                     )
                 )
         }
     }
 }
-
 ```
 
 ![bindpopup](figures/bind_popup.gif)

@@ -785,6 +785,7 @@ public init(request: PermissionRequest)
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.web.webview.*
@@ -794,29 +795,37 @@ import ohos.hilog.Hilog
 @Component
 class EntryView {
     let webController = WebviewController()
-    @State var url: String = "www.example.com"
+    @State
+    var url: String = "www.example.com"
     func build() {
         Column(space: 10) {
             Button("reload")
-            .onClick({
-                evt =>
-                Hilog.info(0, "AppLogCj", "reload")
-                webController.reload()
-            }).width(400.px).height(150.px)
+                .onClick(
+                    {
+                        evt =>
+                            Hilog.info(0, "AppLogCj", "reload")
+                            webController.reload()
+                    }
+                )
+                .width(400.px)
+                .height(150.px)
             Button("loadUrl")
-            .onClick({
-                evt =>
-                Hilog.info(0, "AppLogCj", "loadUrl")
-                webController.loadUrl(this.url)
-
-            }).width(400.px).height(150.px)
+                .onClick(
+                    {
+                        evt =>
+                            Hilog.info(0, "AppLogCj", "loadUrl")
+                            webController.loadUrl(this.url)
+                    }
+                )
+                .width(400.px)
+                .height(150.px)
             Web(src: "www.example.com", controller: webController)
-            .onPageBegin({evt =>
-                Hilog.info(0, "AppLogCj", "page begin url: ${evt.url}")
-            })
-            .onPageEnd({evt =>
-                Hilog.info(0, "AppLogCj", "page end url: ${evt.url}")
-            })
+                .onPageBegin({
+                    evt => Hilog.info(0, "AppLogCj", "page begin url: ${evt.url}")
+                })
+                .onPageEnd({
+                    evt => Hilog.info(0, "AppLogCj", "page end url: ${evt.url}")
+                })
         }
     }
 }

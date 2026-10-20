@@ -47,6 +47,10 @@ public init(placeholder!: ?ResourceStr = None, text!: ?ResourceStr = None,
 
 通用事件：全部支持。
 
+> **说明：**
+>
+> 单行输入框可设置.[width](./cj-universal-attribute-size.md#func-widthoptionlength)([LengthMetrics.AUTO](./cj-common-types.md#static-let-auto))使组件宽度自适应文本宽度，自适应时组件宽度受[constraintSize](./cj-universal-attribute-layoutconstraints.md#func-constraintsizelength-length-length-length)属性以及父容器传递的最大最小宽度限制。
+
 ## 组件属性
 
 ### func caretColor(?ResourceColor)
@@ -440,13 +444,15 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var placeholder: String = "please input your name"
-    @State var name: String = "AAA"
+    @State
+    var placeholder: String = "please input your name"
+    @State
+    var name: String = "AAA"
     var controller: TextAreaController = TextAreaController()
     var scroller: Scroller = Scroller()
     func build() {
         Scroll(this.scroller) {
-            Column(space: 10.px){
+            Column(space: 10.px) {
                 Button("caretposition  3").onClick({
                     evt => controller.caretPosition(3)
                 })
@@ -455,58 +461,52 @@ class EntryView {
                 .textAlign(TextAlign.Center)
 
                 TextArea(text: "size")
-                .size(width: 100.vp, height: 50.vp).borderRadius(100.vp)
+                    .size(width: 100.vp, height: 50.vp)
+                    .borderRadius(100.vp)
 
                 TextArea(text: "border")
                 .border(width: 1.vp, color: Color(0XFFFF0011), radius: 5.vp, style: BorderStyle.Dashed )
 
-                TextArea(text: "padding")
-                .padding(40.vp)
+                TextArea(text: "padding").padding(40.vp)
 
-                TextArea(text: "font color")
-                .fontColor(0x8A2BE2)
+                TextArea(text: "font color").fontColor(0x8A2BE2)
 
-                TextArea(text: "font size 60")
-                .fontSize(60)
+                TextArea(text: "font size 60").fontSize(60)
 
-                TextArea(text: "font weight 900")
-                .fontWeight(FontWeight.W900)
+                TextArea(text: "font weight 900").fontWeight(FontWeight.W900)
 
-                TextArea(text: "font style Italic")
-                .fontStyle(FontStyle.Italic)
+                TextArea(text: "font style Italic").fontStyle(FontStyle.Italic)
 
                 TextArea(placeholder: "placeholder font")
-                .placeholderColor(Color(0x8A2BE2))
-                .placeholderFont(size:60.0, weight: FontWeight.W900, family:"Georgia", style:FontStyle.Italic)
+                    .placeholderColor(Color(0x8A2BE2))
+                    .placeholderFont(size: 60.0, weight: FontWeight.W900, family: "Georgia", style: FontStyle.Italic)
 
-                TextArea(placeholder: "textAlign")
-                .textAlign(TextAlign.Start)
+                TextArea(placeholder: "textAlign").textAlign(TextAlign.Start)
 
-                TextArea(placeholder: "caretColor")
-                .caretColor(Color.Red)
+                TextArea(placeholder: "caretColor").caretColor(Color.Red)
 
-                TextArea(placeholder: "inputfilter only a")
-                .inputFilter(value: "a" , error: { val => Hilog.info(0, "cangjie",  "TextArea OnError:" + val) })
+                TextArea(placeholder: "inputfilter only a").inputFilter(value: "a",
+                    error: {val => Hilog.info(0, "cangjie", "TextArea OnError:" + val)})
 
                 TextArea(placeholder: "TextArea callback")
-                .onChange ({ val =>
-                Hilog.info(0, "cangjie", "TextArea onChange:" + val)
-                })
-                .onPaste ({ val =>
-                    Hilog.info(0, "cangjie", "TextArea onPaste:" + val)
-                })
-                .onCut ({ val =>
-                    Hilog.info(0, "cangjie", "TextArea onCut:" + val)
-                })
-                .onCopy ({ val =>
-                    Hilog.info(0, "cangjie", "TextArea onCopy:" + val)
-                })
-                .onSubmit ({ val =>
-                    Hilog.info(0, "cangjie", "TextArea onSubmit")
-                })
+                    .onChange({
+                        val => Hilog.info(0, "cangjie", "TextArea onChange:" + val)
+                    })
+                    .onPaste({
+                        val => Hilog.info(0, "cangjie", "TextArea onPaste:" + val)
+                    })
+                    .onCut({
+                        val => Hilog.info(0, "cangjie", "TextArea onCut:" + val)
+                    })
+                    .onCopy({
+                        val => Hilog.info(0, "cangjie", "TextArea onCopy:" + val)
+                    })
+                    .onSubmit({
+                        val => Hilog.info(0, "cangjie", "TextArea onSubmit")
+                    })
             }
-            .height(100.percent)
-            .width(100.percent)
+                .height(100.percent)
+                .width(100.percent)
         }
     }
 }

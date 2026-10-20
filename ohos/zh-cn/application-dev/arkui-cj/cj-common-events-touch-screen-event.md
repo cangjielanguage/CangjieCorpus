@@ -28,6 +28,7 @@ event参数提供点击事件相对于窗口或组件的坐标位置，以及发
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -36,8 +37,10 @@ import ohos.resource.__GenerateResource__
 @Entry
 @Component
 class EntryView {
-    @State var flag = true
-    @State var btnMsg: String = 'show'
+    @State
+    var flag = true
+    @State
+    var btnMsg: String = 'show'
 
     func build() {
         Column {
@@ -45,23 +48,26 @@ class EntryView {
                 .width(80)
                 .height(30)
                 .margin(30)
-                .onClick({ event =>
-                    if (this.flag) {
-                        this.btnMsg = 'hide'
-                    } else {
-                        this.btnMsg = 'show'
+                .onClick(
+                    {
+                        event =>
+                            if (this.flag) {
+                                this.btnMsg = 'hide'
+                            } else {
+                                this.btnMsg = 'show'
+                            }
+                            // 点击Button控制Image的显示和消失
+                            this.flag = !this.flag
                     }
-                    // 点击Button控制Image的显示和消失
-                    this.flag = !this.flag
-                })
+                )
             if (this.flag) {
                 Image(@r(app.media.startIcon))
                     .width(200)
                     .height(200)
             }
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```
@@ -92,14 +98,17 @@ public func onTouch(callback: (TouchEvent)->Unit): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var text: String = ""
-    @State var eventType: String = ""
+    @State
+    var text: String = ""
+    @State
+    var eventType: String = ""
 
     func build() {
         Column {
@@ -142,8 +151,8 @@ class EntryView {
                 })
             Text(this.text)
         }
-        .width(100.percent)
-        .padding(30)
+            .width(100.percent)
+            .padding(30)
     }
 }
 ```

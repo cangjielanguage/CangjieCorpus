@@ -110,7 +110,7 @@ public func getAddressesByName(host: String): Array<NetAddress>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -160,7 +160,7 @@ public func getAllNets(): Array<NetHandle>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -207,7 +207,7 @@ public func getAppNet(): NetHandle
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -261,7 +261,7 @@ public func getConnectionProperties(netHandle: NetHandle): ConnectionProperties
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -310,7 +310,7 @@ public func getDefaultHttpProxy(): HttpProxy
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -359,7 +359,7 @@ public func getDefaultNet(): NetHandle
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -414,7 +414,7 @@ public func getNetCapabilities(netHandle: NetHandle): NetCapabilities
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -465,7 +465,7 @@ public func hasDefaultNet(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -514,7 +514,7 @@ public func isDefaultNetMetered(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -563,7 +563,7 @@ public func reportNetConnected(netHandle: NetHandle): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -614,7 +614,7 @@ public func reportNetDisconnected(netHandle: NetHandle): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -665,7 +665,7 @@ public func setAppNet(netHandle: NetHandle): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1324,7 +1324,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetHandle>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1383,7 +1383,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetBlockSt
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1446,7 +1446,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetCapabil
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1509,7 +1509,7 @@ public func on(event: NetConnectionEvent, callback: Callback1Argument<NetConnect
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1572,7 +1572,7 @@ public func on(event: NetConnectionEvent, callback: Callback0Argument): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1626,7 +1626,7 @@ public func register(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1670,7 +1670,7 @@ public func unregister(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1806,7 +1806,7 @@ public func getAddressByName(host: String): NetAddress
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1864,7 +1864,7 @@ public func getAddressesByName(host: String): Array<NetAddress>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)和[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2215,7 +2215,7 @@ public enum NetConnectionEvent <: Equatable<NetConnectionEvent> {
 
 **父类型：**
 
-- Equatable\<NetConnectionEvent>
+- Equatable\<[NetConnectionEvent](#enum-netconnectionevent)>
 
 ### NetAvailable
 

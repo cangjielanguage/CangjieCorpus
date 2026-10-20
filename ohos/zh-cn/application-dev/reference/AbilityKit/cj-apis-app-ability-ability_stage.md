@@ -65,7 +65,7 @@ public mut prop context: AbilityStageContext
 ```cangjie
 import kit.AbilityKit.*
 
-class MyAbilityStage1 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
         let context = this.context
     }
@@ -91,7 +91,7 @@ public open func onCreate(): Unit
 ```cangjie
 import kit.AbilityKit.*
 
-class MyAbilityStage2 <: AbilityStage {
+class MyAbilityStage <: AbilityStage {
     public override func onCreate(): Unit {
         let context = this.context
     }

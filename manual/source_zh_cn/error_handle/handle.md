@@ -2,15 +2,16 @@
 
 上文介绍了如何自定义异常，接下来学习如何抛出和处理异常。
 
-- 由于异常是 `class` 类型，只需要按 class 对象的构建方式去创建异常即可。如表达式 `FatherException()` 即创建了一个类型为 `FatherException` 的异常。<!--Del-->
-- 仓颉支持创建异常链（仅 `Exception`，不包含 `Error`），如表达式 `let fatherException = FatherException("this is message", causeException)`，`causeException` 也是一个异常，是 `fatherException` 的触发原因。在打印异常的调用栈时，会递归打印触发原因。<!--DelEnd-->
+- 由于异常是 `class` 类型，只需要按 class 对象的构建方式去创建异常即可。如表达式 `FatherException()` 即创建了一个类型为 `FatherException` 的异常。
+- 仓颉支持创建异常链（仅 `Exception`，不包含 `Error`），如表达式 `let fatherException = FatherException("this is message", causeException)`，`causeException` 也是一个异常，是 `fatherException` 的触发原因。在打印异常的调用栈时，会递归打印触发原因。
 - 仓颉语言提供 `throw` 关键字，用于抛出异常。用 `throw` 来抛出异常时，`throw` 之后的表达式必须是 `Exception` 的子类型（同为异常的 `Error` 不可以手动 `throw` ），如 `throw ArithmeticException("I am an Exception!")` （被执行到时）会抛出一个算术运算异常。
 - `throw` 关键字抛出的异常需要被捕获处理。若异常没有被捕获，则由系统调用默认的异常处理函数。
 
   > **注意：**
   >
-  > 开发者可以调用如下 `Thread` 类的静态函数，对未捕获的 `Exception` 注册自定义的异常处理函数：
+  > 开发者可以调用如下 `Thread` 类的静态函数，对未捕获的 `Error` 和 `Exception` 注册自定义的异常处理函数：
   >
+  > - `public static func handleUncaughtErrorBy(erHandler: (Error) -> Unit): Unit`
   > - `public static func handleUncaughtExceptionBy(exHandler: (Thread, Exception) -> Unit): Unit`
 
 异常处理由 `try` 表达式完成，可分为：
@@ -266,7 +267,7 @@ try-with-resources 表达式的类型是 `Unit`。
 
 大多数时候，只想捕获某一类型和其子类型的异常，这时候使用 CatchPattern 的**类型模式**来处理；但有时也需要所有异常做统一处理（如此处不该出现异常，出现了就统一报错），这时可以使用 CatchPattern 的**通配符模式**来处理。
 
-类型模式在语法上有两种格式：
+类型模式有两种格式：
 
 - `Identifier: ExceptionClass`。此格式可以捕获类型为 `ExceptionClass` 及其子类的异常，并将捕获到的异常实例转换成 `ExceptionClass`，然后与 `Identifier` 定义的变量进行绑定，接着就可以在 catch 块中通过 Identifier 定义的变量访问捕获到的异常实例。
 - `Identifier: ExceptionClass_1 | ExceptionClass_2 | ... | ExceptionClass_n`。此格式可以通过连接符 `|` 将多个异常类进行拼接，连接符 `|` 表示“或”的关系：可以捕获类型为 `ExceptionClass_1` 及其子类的异常，或者捕获类型为 `ExceptionClass_2` 及其子类的异常，依次类推，或捕获类型为 `ExceptionClass_n` 及其子类的异常（假设 n 大于 1）。当待捕获异常的类型属于上述“或”关系中的任一类型或其子类型时，此异常将被捕获。但是由于无法静态地确定被捕获异常的类型，所以被捕获异常的类型会被转换成由 `|` 连接的所有类型的最小公共父类，并将异常实例与 `Identifier` 定义的变量进行绑定。因此在此类模式下，catch 块内只能通过 `Identifier` 定义的变量访问 `ExceptionClass_i（1 <= i <= n）` 的最小公共父类中的成员变量和成员函数。当然，也可以使用通配符代替类型模式中的 `Identifier`，差别仅在于通配符不会进行绑定操作。

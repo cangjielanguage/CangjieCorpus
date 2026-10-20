@@ -47,7 +47,7 @@ public func restartApp(): Unit
 
 - 如果没有Ability处于前台，则不拉起。
 
-- 可以配合[ErrorManager](./cj-apis-app-ability-error_manager.md)相关接口使用。两次重启的间隔应大于一分钟，一分钟之内重复调用此接口只会退出应用不会重启应用。自动重启的行为与主动重启一致。
+- 可以配合[ErrorManager](./cj-apis-app-ability-error_manager.md#class-errormanager)相关接口使用。两次重启的间隔应大于一分钟，一分钟之内重复调用此接口只会退出应用不会重启应用。自动重启的行为与主动重启一致。
 
 **系统能力：** SystemCapability.Ability.AbilityRuntime.Core
 

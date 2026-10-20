@@ -18,7 +18,7 @@ Permission verification failed. The application does not have the permission req
 
 **可能原因**
 
-该错误码表示权限校验失败，通常是因为没有权限却调用了需要权限的API。
+该错误码表示权限校验失败，通常为没有权限，却调用了需要权限的API。
 
 **处理步骤**
 
@@ -36,11 +36,11 @@ Permission verification failed. A non-system application calls a system API.
 
 **可能原因**
 
-请确认非系统应用是否使用了系统API，并进行校验。
+非系统应用，使用了系统API，请校验是否使用了系统API。
 
 **处理步骤**
 
-请检查是否调用了系统API，如果调用了请移除。
+请检查是否调用了系统API，并且去掉。
 
 ## 401 参数检查失败
 
@@ -54,11 +54,11 @@ Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 
 
 2. 参数类型不正确。
 
-3. 参数校验失败。
+3. 参数校验失败。无论是同步还是异步接口，此类异常大部分都通过同步的方式抛出。
 
 **可能原因**
 
-1. 必填参数没有传入。
+1. 必选参数没有传入。
 
 2. 参数类型错误 (Type Error)。
 
@@ -72,7 +72,7 @@ Parameter error. Possible causes: 1. Mandatory parameters are left unspecified; 
 
 **处理步骤**
 
-请检查必填参数是否传入，或者传入的参数类型是否正确。对于参数校验失败的情况，阅读参数规格约束，按照可能原因进行排查。
+请检查必选参数是否传入，或者传入的参数类型是否错误。对于参数校验失败，阅读参数规格约束，按照可能原因进行排查。
 
 ## 801 该设备不支持此API
 
@@ -82,12 +82,12 @@ Capability not supported. Failed to call the API due to limited device capabilit
 
 **错误描述**
 
-当设备支持SysCap但不支持特定API时，会出现此错误，表明设备只能处理该SysCap的部分API。
+该设备不支持此API，因此无法正常调用。
 
 **可能原因**
 
-该设备不支持此API。
+可能出现该错误码的场景为：该设备已支持该API所属的Syscap，但是并不支持此API。
 
 **处理步骤**
 
-请检查设备是否支持使用的API。
+应避免在该设备上使用此API，或在代码中通过判断来规避异常场景下应用在不同设备上运行所产生的影响。

@@ -10,7 +10,7 @@ Ability assistant（Ability助手，简称为aa），是用于启动应用和启
 
 ## 环境要求
 
-在使用本工具前，开发者需要先获取<!--Del-->[<!--DelEnd-->hdc工具<!--Del-->](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-toolchain-hdc-guide.md)<!--DelEnd-->，执行hdc shell。
+在使用本工具前，开发者需要先获取<!--Del-->[<!--DelEnd-->hdc工具<!--Del-->](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md)<!--DelEnd-->，执行hdc shell。
 
 本文中命令介绍均基于交互式命令环境。如果直接执行hdc shell [aa命令]，则需要采用""来包裹aa命令，确保命令中的传参能被正确识别。示例如下：
 

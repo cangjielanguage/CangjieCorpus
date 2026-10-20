@@ -50,7 +50,7 @@ main() {
     let stdin = getStdIn()
 
     // 读取下一个字符
-    // 注意：在实际运行中，程序会等待用户输入一个字符，假设用户输入了一个H
+    // 注意：在实际运行中，程序会等待用户输入一个字符，假设用户输入了一个 H
     let r = stdin.read()
     println("用户输入了一个 ${r}")
 }
@@ -96,7 +96,7 @@ main() {
     let buffer: Array<Byte> = [0, 0, 0, 0, 0]
 
     // 从标准输入读取数据到数组中
-    // 注意：在实际运行中，程序会等待用户输入5个Byte，假设输入abcde
+    // 注意：在实际运行中，程序会等待用户输入 5 个 Byte，假设输入 abcde
     stdin.read(buffer)
     println("buffer 中的内容是 ${buffer}")
 }
@@ -154,7 +154,20 @@ public func readToEnd(): ?String
 
 功能：从标准输入中读取所有字符。
 
-直到读取到文件结束符`EOF`，或者在 Linux 上键入 `Ctrl+D` 或在 Windows 上键入 `Ctrl+Z` + 回车结束。读取到字符，返回 ?[String](../../core/core_package_api/core_package_structs.md#struct-string)，否则返回 `None`。读取失败时会返回 `None`，该接口不会抛出异常，即使输入不符合 `UTF-8` 编码的字符串，也会构造出一个 [String](../../core/core_package_api/core_package_structs.md#struct-string) 并返回，其行为等同于 [String](../../core/core_package_api/core_package_structs.md#struct-string).[fromUtf8Uncheck](../../core/core_package_api/core_package_structs.md#static-func-fromutf8uncheckedarrayuint8)([Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[Byte](../../core/core_package_api/core_package_types.md#type-byte)>)。
+该函数在终端规范模式下工作，读取过程如下：
+
+1. 读取输入直到遇到文件结束符 EOF
+2. 在 Linux 环境下，按 `Ctrl+D` 触发 EOF：
+   - 若输入缓冲区有内容但未按回车，需按两次 `Ctrl+D`（第一次返回缓冲区内容，第二次触发 EOF）
+   - 若输入缓冲区为空，按一次 `Ctrl+D` 即可触发 EOF
+   - 若已按回车，再按 `Ctrl+D` 即可触发 EOF
+3. 在 Windows 环境下，需按 `Ctrl+Z` 后加回车触发 EOF
+
+读取成功返回 ?[String](../../core/core_package_api/core_package_structs.md#struct-string)，无输入或到达 EOF 时返回 `None`。该接口不会抛出异常，即使输入不符合 `UTF-8` 编码的字符串，也会构造出一个 [String](../../core/core_package_api/core_package_structs.md#struct-string) 并返回，其行为等同于 [String](../../core/core_package_api/core_package_structs.md#struct-string).[fromUtf8Uncheck](../../core/core_package_api/core_package_structs.md#static-func-fromutf8uncheckedarrayuint8)([Array](../../core/core_package_api/core_package_structs.md#struct-arrayt)\<[Byte](../../core/core_package_api/core_package_types.md#type-byte)>)。
+
+> **注意：**
+>
+> 由于该函数使用终端规范模式（行缓冲），输入内容后需按回车或 `Ctrl+D` 才能被读取。若需按键即时响应（如游戏、TUI 应用），当前暂不支持。
 
 返回值：
 
@@ -164,29 +177,26 @@ public func readToEnd(): ?String
 
 <!-- compile -->
 ```cangjie
-import std.env.*
+import std.console.*
 
 main() {
-    // 获取标准输入实例
-    let stdin = getStdIn()
+    // 获取标准输入流
+    let stdin = Console.stdIn
 
-    // 读取所有输入直到EOF
-    let result = stdin.readToEnd()
-
-    // 检查是否有输入
-    match (result) {
-        case Some(input) => println("Read input: ${input}")
-        case None => println("No input or error occurred")
-    }
+    // 从标准输入读取所有字符直到遇到EOF
+    // 注意：在实际运行中，程序会等待用户输入，直到遇到EOF（Ctrl+D或Ctrl+Z）
+    // 当前示例假设输入abcde之后按Ctrl+D两次
+    // 若输入缓冲区不为空（比如你刚输入了 abcde 但没按回车）：Ctrl+D 仅将缓冲区的内容 “flush（刷新）” 给程序，不触发 EOF
+    // 若输入缓冲区为空（比如你刚按了回车，光标在新行开头，没有未提交的输入）：Ctrl+D 才会向程序发送 EOF 信号，告知 “没有更多输入了”。）
+    let str = stdin.readToEnd()
+    println("输入的是: ${str}")
 }
 ```
 
 运行结果：
 
 ```text
-// 用户需要输入一些文本并按Ctrl+D (Linux) 或 Ctrl+Z+Enter (Windows)来结束输入
-// 示例输出：
-// Read input: Hello, World!
+abcde输入的是: Some(abcde)
 ```
 
 ### func readUntil((Rune) -> Bool)
@@ -422,7 +432,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float16值
+    // 写入 Float16 值
     stdout.write(3.14f16)
 
     // 写入换行
@@ -458,7 +468,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float32值
+    // 写入 Float32 值
     stdout.write(3.14159f32)
 
     // 写入换行
@@ -494,7 +504,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float64值
+    // 写入 Float64 值
     stdout.write(3.141592653589793f64)
 
     // 写入换行
@@ -530,7 +540,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int16值
+    // 写入 Int16 值
     stdout.write(12345i16)
 
     // 写入换行
@@ -566,7 +576,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int32值
+    // 写入 Int32 值
     stdout.write(123456789i32)
 
     // 写入换行
@@ -602,7 +612,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int64值
+    // 写入 Int64 值
     stdout.write(123456789012345i64)
 
     // 写入换行
@@ -638,7 +648,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int8值
+    // 写入 Int8 值
     stdout.write(42i8)
 
     // 写入换行
@@ -658,11 +668,11 @@ main() {
 public func write(v: Rune): Unit
 ```
 
-功能：将指定的 [Rune](../../../std/core/core_package_api/core_package_intrinsics.md#rune) 的 Unicode 字符值写入标准输出或标准错误流中。
+功能：将指定的 [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) 的 Unicode 字符值写入标准输出或标准错误流中。
 
 参数：
 
-- v: [Rune](../../../std/core/core_package_api/core_package_intrinsics.md#rune) - 要写入的值。
+- v: [Rune](../../core/core_package_api/core_package_intrinsics.md#rune) - 要写入的值。
 
 示例：
 
@@ -674,7 +684,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Rune值
+    // 写入 Rune 值
     stdout.write(r'A')
 
     // 写入换行
@@ -746,7 +756,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt16值
+    // 写入 UInt16 值
     stdout.write(12345u16)
 
     // 写入换行
@@ -782,7 +792,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt32值
+    // 写入 UInt32 值
     stdout.write(123456789u32)
 
     // 写入换行
@@ -818,7 +828,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt64值
+    // 写入 UInt64 值
     stdout.write(123456789012345u64)
 
     // 写入换行
@@ -854,7 +864,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt8值
+    // 写入 UInt8 值
     stdout.write(42u8)
 
     // 写入换行
@@ -886,7 +896,7 @@ public func write<T>(v: T): Unit where T <: ToString
 ```cangjie
 import std.env.*
 
-// 定义一个实现了ToString接口的类
+// 定义一个实现了 ToString 接口的类
 class Person <: ToString {
     var name: String
     var age: Int64
@@ -905,10 +915,10 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 创建一个Person实例
+    // 创建一个 Person 实例
     let person = Person("Alice", 30)
 
-    // 使用泛型write方法写入Person实例
+    // 使用泛型 write 方法写入 Person 实例
     stdout.write(person)
 
     // 写入换行
@@ -1017,7 +1027,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float16值并换行
+    // 写入 Float16 值并换行
     stdout.writeln(3.14f16)
 }
 ```
@@ -1050,7 +1060,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float32值并换行
+    // 写入 Float32 值并换行
     stdout.writeln(3.14159f32)
 }
 ```
@@ -1083,7 +1093,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Float64值并换行
+    // 写入 Float64 值并换行
     stdout.writeln(3.141592653589793f64)
 }
 ```
@@ -1116,7 +1126,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int16值并换行
+    // 写入 Int16 值并换行
     stdout.writeln(12345i16)
 }
 ```
@@ -1149,7 +1159,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int32值并换行
+    // 写入 Int32 值并换行
     stdout.writeln(123456789i32)
 }
 ```
@@ -1182,7 +1192,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int64值并换行
+    // 写入 Int64 值并换行
     stdout.writeln(123456789012345i64)
 }
 ```
@@ -1215,7 +1225,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Int8值并换行
+    // 写入 Int8 值并换行
     stdout.writeln(42i8)
 }
 ```
@@ -1248,7 +1258,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入Rune值并换行
+    // 写入 Rune 值并换行
     stdout.writeln(r'A')
 }
 ```
@@ -1314,7 +1324,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt16值并换行
+    // 写入 UInt16 值并换行
     stdout.writeln(12345u16)
 }
 ```
@@ -1347,7 +1357,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt32值并换行
+    // 写入 UInt32 值并换行
     stdout.writeln(123456789u32)
 }
 ```
@@ -1380,7 +1390,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt64值并换行
+    // 写入 UInt64 值并换行
     stdout.writeln(123456789012345u64)
 }
 ```
@@ -1413,7 +1423,7 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 写入UInt8值并换行
+    // 写入 UInt8 值并换行
     stdout.writeln(42u8)
 }
 ```
@@ -1442,7 +1452,7 @@ public func writeln<T>(v: T): Unit where T <: ToString
 ```cangjie
 import std.env.*
 
-// 定义一个实现了ToString接口的类
+// 定义一个实现了 ToString 接口的类
 class Person <: ToString {
     var name: String
     var age: Int64
@@ -1461,10 +1471,10 @@ main() {
     // 获取标准输出实例
     let stdout = getStdOut()
 
-    // 创建一个Person实例
+    // 创建一个 Person 实例
     let person = Person("Alice", 30)
 
-    // 使用泛型writeln方法写入Person实例并换行
+    // 使用泛型 writeln 方法写入 Person 实例并换行
     stdout.writeln(person)
 }
 ```

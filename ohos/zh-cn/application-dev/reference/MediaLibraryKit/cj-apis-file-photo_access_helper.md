@@ -51,11 +51,11 @@ public func getPhotoAccessHelper(context: UIAbilityContext): PhotoAccessHelper
 
 |类型|说明|
 |:----|:----|
-|[PhotoAccessHelper](./cj-apis-file-photo_access_helper.md#class-photoaccesshelper)|相册管理模块的实例。|
+|[PhotoAccessHelper](#class-photoaccesshelper)|相册管理模块的实例。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -218,7 +218,7 @@ public func getAssets(options: FetchOptions): PhotoAssetResult
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|options|[FetchOptions](./cj-apis-file-photo_access_helper.md#class-fetchoptions)|是|-| 检索选项。|
+|options|[FetchOptions](#class-fetchoptions)|是|-| 检索选项。|
 
 **返回值：**
 
@@ -228,7 +228,7 @@ public func getAssets(options: FetchOptions): PhotoAssetResult
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -325,7 +325,7 @@ public func commitModify(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -397,7 +397,7 @@ public func getAllObjects(): Array<Album>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -411,7 +411,24 @@ public func getAllObjects(): Array<Album>
 ```cangjie
 // index.cj
 
-import kit.ArkUI.*
+import kit.ArkUI.LengthProp
+import kit.ArkUI.Column
+import kit.ArkUI.Row
+import kit.ArkUI.Text
+import kit.ArkUI.CustomView
+import kit.ArkUI.CJEntry
+import kit.ArkUI.loadNativeView
+import kit.ArkUI.FontWeight
+import kit.ArkUI.SubscriberManager
+import kit.ArkUI.ObservedProperty
+import kit.ArkUI.LocalStorage
+import kit.ArkUI.ForEach
+import kit.ArkUI.ReuseParams
+import kit.ArkUI.ViewBuilder
+import kit.ArkUI.ViewStackProcessor
+import kit.ArkUI.__Recycle__
+import kit.ArkUI.LegalCallCheck
+import kit.ArkUI.EmptyComponent
 import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.ArkData.*
@@ -420,10 +437,10 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(50)
+        Text(this.item).fontSize(50)
     }
 }
 
@@ -435,8 +452,7 @@ func getAlbumList(): Array<Album> {
         let predicates = DataSharePredicates()
         predicates.equalTo('album_name', StringValue('test1'))
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
-        let fetchResult = phAccessHelper.getAlbums(AlbumType.User,
-            AlbumSubtype.UserGeneric, options: fetchOptions)
+        let fetchResult = phAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric, options: fetchOptions)
         // 获取文件检索结果中的所有相册资产，后续可以遍历相册数组获取每一个相册的信息
         let albums = fetchResult.getAllObjects()
         return albums
@@ -455,8 +471,9 @@ class EntryView {
     func build() {
         Row {
             Column {
-                ForEach(this.albumList, itemGeneratorFunc: {item: Album,idx:Int64 =>
-            ChildItem(item: item.albumUri)}, keyGeneratorFunc: {item: Album, idx: Int64 => return item.albumUri})
+                ForEach(this.albumList, itemGeneratorFunc: {
+                    item: Album, idx: Int64 => ChildItem(item: item.albumUri)
+                }, keyGeneratorFunc: {item: Album, idx: Int64 => return item.albumUri})
             }.width(100.percent)
         }.height(100.percent)
     }
@@ -483,7 +500,7 @@ public func getFirstObject(): Album
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -536,7 +553,7 @@ public func getLastObject(): Album
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -590,7 +607,7 @@ public func getNextObject(): Album
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -649,7 +666,7 @@ public func getObjectByPosition(index: Int32): Album
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -915,7 +932,7 @@ public func close(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -966,7 +983,7 @@ public func getCount(): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1017,7 +1034,7 @@ public func isAfterLast(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1082,11 +1099,11 @@ public init(album: Album)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|album|[Album](./cj-apis-file-photo_access_helper.md#class-album)|是|-|需要变更的相册。|
+|album|[Album](#class-album)|是|-|需要变更的相册。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1134,11 +1151,11 @@ public func addAssets(assets: Array<PhotoAsset>): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|assets|Array\<[PhotoAsset](./cj-apis-file-photo_access_helper.md#class-photoasset)>|是|-|待添加到相册中的资产数组。|
+|assets|Array\<[PhotoAsset](#class-photoasset)>|是|-|待添加到相册中的资产数组。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1191,11 +1208,11 @@ public func getAlbum(): Album
 
 |类型|说明|
 |:----|:----|
-|[Album](./cj-apis-file-photo_access_helper.md#class-album)|返回当前相册变更请求中的相册。|
+|[Album](#class-album)|返回当前相册变更请求中的相册。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1208,7 +1225,24 @@ public func getAlbum(): Album
 ```cangjie
 // index.cj
 
-import kit.ArkUI.*
+import kit.ArkUI.LengthProp
+import kit.ArkUI.Column
+import kit.ArkUI.Row
+import kit.ArkUI.Text
+import kit.ArkUI.CustomView
+import kit.ArkUI.CJEntry
+import kit.ArkUI.loadNativeView
+import kit.ArkUI.FontWeight
+import kit.ArkUI.SubscriberManager
+import kit.ArkUI.ObservedProperty
+import kit.ArkUI.LocalStorage
+import kit.ArkUI.ForEach
+import kit.ArkUI.ReuseParams
+import kit.ArkUI.ViewBuilder
+import kit.ArkUI.ViewStackProcessor
+import kit.ArkUI.__Recycle__
+import kit.ArkUI.LegalCallCheck
+import kit.ArkUI.EmptyComponent
 import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.ArkData.*
@@ -1217,10 +1251,10 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Component
 class ChildItem {
-    @Prop var item: String
+    @Prop
+    var item: String
     func build() {
-        Text(this.item)
-        .fontSize(50)
+        Text(this.item).fontSize(50)
     }
 }
 
@@ -1231,8 +1265,7 @@ func getPhotoAssetList(): Array<PhotoAsset> {
         let phAccessHelper = getPhotoAccessHelper(ctx)
         let predicates = DataSharePredicates()
         let fetchOptions: FetchOptions = FetchOptions([], predicates)
-        let albumList = phAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric,
-            options: fetchOptions)
+        let albumList = phAccessHelper.getAlbums(AlbumType.User, AlbumSubtype.UserGeneric, options: fetchOptions)
         let album = albumList.getFirstObject()
         let albumChangeRequest = MediaAlbumChangeRequest(album)
         // 获取当前相册变更请求中的相册，后续可以调用接口获取相册相关信息
@@ -1254,8 +1287,9 @@ class EntryView {
     func build() {
         Row {
             Column {
-                ForEach(this.albumList, itemGeneratorFunc: {item: PhotoAsset,idx:Int64 =>
-            ChildItem(item: item.displayName)}, keyGeneratorFunc: {item: PhotoAsset, idx: Int64 => return item.displayName})
+                ForEach(this.albumList, itemGeneratorFunc: {
+                    item: PhotoAsset, idx: Int64 => ChildItem(item: item.displayName)
+                }, keyGeneratorFunc: {item: PhotoAsset, idx: Int64 => return item.displayName})
             }.width(100.percent)
         }.height(100.percent)
     }
@@ -1278,11 +1312,11 @@ public func removeAssets(assets: Array<PhotoAsset>): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|assets|Array\<[PhotoAsset](./cj-apis-file-photo_access_helper.md#class-photoasset)>|是|-|待从相册中移除的资产数组。|
+|assets|Array\<[PhotoAsset](#class-photoasset)>|是|-|待从相册中移除的资产数组。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1345,7 +1379,7 @@ public func setAlbumName(name: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1413,11 +1447,11 @@ public init(asset: PhotoAsset)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|asset|[PhotoAsset](./cj-apis-file-photo_access_helper.md#class-photoasset)|是|-|需要变更的资产。|
+|asset|[PhotoAsset](#class-photoasset)|是|-|需要变更的资产。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1466,7 +1500,7 @@ public static func createAssetRequest(context: UIAbilityContext, photoType: Phot
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[UIAbilityContext](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)|是|-|传入Ability实例的上下文。|
-|photoType|[PhotoType](./cj-apis-file-photo_access_helper.md#enum-phototype)|是|-|待创建的文件类型，IMAGE或者VIDEO类型。|
+|photoType|[PhotoType](#enum-phototype)|是|-|待创建的文件类型，IMAGE或者VIDEO类型。|
 |extension|String|是|-|文件扩展名，例如：'jpg'。|
 |options|[CreateOptions](#class-createoptions)|否|CreateOptions(title: "", subtype: Default)|**命名参数。** 创建选项，例如：{title: 'testPhoto'}。<br>文件名中不允许出现非法英文字符，包括： . .. \ / : * ? " ' ` < > \| { } [ ]|
 
@@ -1478,7 +1512,7 @@ public static func createAssetRequest(context: UIAbilityContext, photoType: Phot
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1515,7 +1549,7 @@ public static func createImageAssetRequest(context: UIAbilityContext, fileUri: S
 
 **功能：** 创建图片资产变更请求。
 
-指定待创建资产的数据来源，可参考[FileUri](../CoreFileKit/cj-apis-file_fileuri.md)。
+指定待创建资产的数据来源，可参考[FileUri](../CoreFileKit/cj-apis-file_fileuri.md#class-fileuri)。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -1536,7 +1570,7 @@ public static func createImageAssetRequest(context: UIAbilityContext, fileUri: S
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1574,7 +1608,7 @@ public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: S
 
 **功能：** 创建视频资产变更请求。
 
-通过fileUri指定待创建资产的数据来源，可参考[FileUri](../CoreFileKit/cj-apis-file_fileuri.md)。
+通过fileUri指定待创建资产的数据来源，可参考[FileUri](../CoreFileKit/cj-apis-file_fileuri.md#class-fileuri)。
 
 **系统能力：** SystemCapability.FileManagement.PhotoAccessHelper.Core
 
@@ -1595,7 +1629,7 @@ public static func createVideoAssetRequest(context: UIAbilityContext, fileUri: S
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1644,11 +1678,11 @@ public static func deleteAssets(context: UIAbilityContext, assets: Array<PhotoAs
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |context|[UIAbilityContext](../AbilityKit/cj-apis-app-ability-ui_ability.md#class-uiabilitycontext)|是|-|传入Ability实例的上下文。|
-|assets|Array\<[PhotoAsset](./cj-apis-file-photo_access_helper.md#class-photoasset)>|是|-|待删除的媒体文件数组，数组中元素个数不超过300个。|
+|assets|Array\<[PhotoAsset](#class-photoasset)>|是|-|待删除的媒体文件数组，数组中元素个数不超过300个。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1704,7 +1738,7 @@ public static func deleteAssets(context: UIAbilityContext, assets: Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1760,7 +1794,7 @@ public func addResource(resourceType: ResourceType, fileUri: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1816,7 +1850,7 @@ public func addResource(resourceType: ResourceType, data: Array<Byte>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1863,11 +1897,11 @@ public func discardCameraPhoto(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | Internal system error. |
+  | 14000011 | System inner fail. |
   | 14000016 | Operation Not Support. |
 
 **示例：**
@@ -1915,11 +1949,11 @@ public func getAsset(): PhotoAsset
 
 |类型|说明|
 |:----|:----|
-|[PhotoAsset](./cj-apis-file-photo_access_helper.md#class-photoasset)|返回当前资产变更请求中的资产。|
+|[PhotoAsset](#class-photoasset)|返回当前资产变更请求中的资产。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1975,7 +2009,7 @@ public func getWriteCacheHandler(): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1990,7 +2024,25 @@ public func getWriteCacheHandler(): Int32
 ```cangjie
 // index.cj
 
-import kit.ArkUI.*
+import kit.ArkUI.LengthProp
+import kit.ArkUI.Column
+import kit.ArkUI.Row
+import kit.ArkUI.Text
+import kit.ArkUI.CustomView
+import kit.ArkUI.CJEntry
+import kit.ArkUI.loadNativeView
+import kit.ArkUI.FontWeight
+import kit.ArkUI.SubscriberManager
+import kit.ArkUI.ObservedProperty
+import kit.ArkUI.LocalStorage
+import kit.ArkUI.ForEach
+import kit.ArkUI.ReuseParams
+import kit.ArkUI.ViewBuilder
+import kit.ArkUI.ViewStackProcessor
+import kit.ArkUI.__Recycle__
+import kit.ArkUI.LegalCallCheck
+import kit.ArkUI.EmptyComponent
+import kit.ArkUI.Image
 import ohos.arkui.state_macro_manage.*
 import kit.MediaLibraryKit.*
 import kit.CoreFileKit.*
@@ -2003,8 +2055,7 @@ func getPixelMap(): PixelMap {
         // Global 的实现请参见本文"使用说明"小节
         let ctx = Global.abilityContext
         let phAccessHelper = getPhotoAccessHelper(ctx)
-        let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(ctx,
-            PhotoType.Image, "jpg")
+        let assetChangeRequest = MediaAssetChangeRequest.createAssetRequest(ctx, PhotoType.Image, "jpg")
         // 获取临时文件写句柄，后续可以通过该句柄写入数据
         let fd = assetChangeRequest.getWriteCacheHandler()
         // write data into fd..
@@ -2023,7 +2074,6 @@ func getPixelMap(): PixelMap {
 @Entry
 @Component
 class EntryView {
-
     func build() {
         Row {
             Column {
@@ -2048,7 +2098,7 @@ public func saveCameraPhoto(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2108,7 +2158,7 @@ title参数规格为：
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2176,7 +2226,7 @@ public func applyChanges(mediaChangeRequest: MediaChangeRequest): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2239,11 +2289,11 @@ public func getAlbums(albumType: AlbumType, subtype: AlbumSubtype,
 
 |类型|说明|
 |:----|:----|
-|AlbumResult|返回获取相册的结果集。|
+|[AlbumResult](#class-albumresult)|返回获取相册的结果集。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2299,11 +2349,11 @@ public func getAssets(options: FetchOptions): PhotoAssetResult
 
 |类型|说明|
 |:----|:----|
-|PhotoAssetResult|返回图片和视频数据结果集。|
+|[PhotoAssetResult](#class-photoassetresult)|返回图片和视频数据结果集。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2359,16 +2409,16 @@ public func getBurstAssets(burstKey: String, options: FetchOptions): PhotoAssetR
 
 |类型|说明|
 |:----|:----|
-|PhotoAssetResult|返回获取连拍照片的结果集。|
+|[PhotoAssetResult](#class-photoassetresult)|返回获取连拍照片的结果集。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
-  | 14000011 | Internal system error. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2416,7 +2466,7 @@ public func registerChange(uri: String, forChildUris: Bool, callback: Callback1A
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2450,7 +2500,7 @@ class MyCallback<T> <: Callback1Argument<T> {
 try {
     let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     let phAccessHelper = getPhotoAccessHelper(ctx)
-    let callback1 = MyCallback<ChangeData>(
+    let callback = MyCallback<ChangeData>(
         {
             arg: ChangeData => Hilog.info(0, "AppLogCj",
                 "onCallback1. ChangeData: type = ${arg.notifyType.toString()}, uris.size: ${arg.uris.size}, extraUris.size = ${arg.extraUris.size}"
@@ -2460,7 +2510,7 @@ try {
     let fetchOptions: FetchOptions = FetchOptions(['title'], predicates)
     let fetchResult: PhotoAssetResult = phAccessHelper.getAssets(fetchOptions)
     let firstPhotoAsset = fetchResult.getFirstObject()
-    phAccessHelper.registerChange(firstPhotoAsset.uri, false, callback1)
+    phAccessHelper.registerChange(firstPhotoAsset.uri, false, callback)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -2481,7 +2531,7 @@ public func release(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2540,11 +2590,11 @@ public func showAssetsCreationDialog(srcFileUris: Array<String>, photoCreationCo
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 14000011 | Internal system error. |
+  | 14000011 | System inner fail. |
 
 **示例：**
 
@@ -2560,7 +2610,7 @@ import ohos.callback_invoke.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyCallback1<T> <: Callback1Argument<T> {
+class MyCallback<T> <: Callback1Argument<T> {
     public let callabck_: (T) -> Unit
     public init(callabck: (T) -> Unit) {
         callabck_ = callabck
@@ -2573,7 +2623,7 @@ class MyCallback1<T> <: Callback1Argument<T> {
 try {
     let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     let phAccessHelper = getPhotoAccessHelper(ctx)
-    let callback = MyCallback1<Array<String>>(
+    let callback = MyCallback<Array<String>>(
         {
             arg: Array<String> =>
             Hilog.info(0, "AppLogCj", "oncallback: Array.size: ${arg.size}")
@@ -2620,7 +2670,7 @@ public func unregisterChange(uri: String, callback!: ?Callback1Argument<ChangeDa
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2641,7 +2691,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class MyCallback2<T> <: Callback1Argument<T> {
+class MyCallback<T> <: Callback1Argument<T> {
     public let callabck_: (T) -> Unit
     public init(callabck: (T) -> Unit) {
         callabck_ = callabck
@@ -2654,7 +2704,7 @@ class MyCallback2<T> <: Callback1Argument<T> {
 try {
     let ctx = Global.abilityContext // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
     let phAccessHelper = getPhotoAccessHelper(ctx)
-    let callback = MyCallback2<ChangeData>(
+    let callback = MyCallback<ChangeData>(
         {
             arg: ChangeData => Hilog.info(0, "AppLogCj",
                 "onCallback. ChangeData: type = ${arg.notifyType.toString()}, uris.size: ${arg.uris.size}, extraUris.size = ${arg.extraUris.size}"
@@ -2750,7 +2800,7 @@ public func commitModify(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2814,7 +2864,7 @@ public func get(member: String): MemberType
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2875,7 +2925,7 @@ public func getThumbnail(size!: ?Size = Size(256, 256)): PixelMap
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2930,7 +2980,7 @@ public func set(member: String, value: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3000,7 +3050,7 @@ public func getAllObjects(): Array<PhotoAsset>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3051,7 +3101,7 @@ public func getFirstObject(): PhotoAsset
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3102,7 +3152,7 @@ public func getLastObject(): PhotoAsset
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3154,7 +3204,7 @@ public func getNextObject(): PhotoAsset
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3211,7 +3261,7 @@ public func getObjectByPosition(index: Int32): PhotoAsset
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[文件管理错误码](../CoreFileKit/cj-errorcode-filemanagement.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3512,7 +3562,7 @@ public enum AlbumSubtype <: Equatable<AlbumSubtype> & ToString {
 
 **父类型：**
 
-- Equatable\<AlbumSubtype>
+- Equatable\<[AlbumSubtype](#enum-albumsubtype)>
 - ToString
 
 ### AnyAlbum
@@ -3659,7 +3709,7 @@ public enum AlbumType <: Equatable<AlbumType> & ToString {
 
 **父类型：**
 
-- Equatable\<AlbumType>
+- Equatable\<[AlbumType](#enum-albumtype)>
 - ToString
 
 ### System
@@ -3881,7 +3931,7 @@ public enum DeliveryMode <: Equatable<DeliveryMode> & ToString {
 
 **父类型：**
 
-- Equatable\<DeliveryMode>
+- Equatable\<[DeliveryMode](#enum-deliverymode)>
 - ToString
 
 ### BalanceMode
@@ -4004,7 +4054,7 @@ public enum DynamicRangeType <: Equatable<DynamicRangeType> & ToString {
 
 **父类型：**
 
-- Equatable\<DynamicRangeType>
+- Equatable\<[DynamicRangeType](#enum-dynamicrangetype)>
 - ToString
 
 ### Hdr
@@ -4171,7 +4221,7 @@ public enum NotifyType <: Equatable<NotifyType> & ToString {
 
 **父类型：**
 
-- Equatable\<NotifyType>
+- Equatable\<[NotifyType](#enum-notifytype)>
 - ToString
 
 ### NotifyAdd
@@ -4688,7 +4738,7 @@ public enum PhotoSubtype <: Equatable<PhotoSubtype> & ToString {
 
 **父类型：**
 
-- Equatable\<PhotoSubtype>
+- Equatable\<[PhotoSubtype](#photosubtype)>
 - ToString
 
 ### Burst
@@ -4919,7 +4969,7 @@ public enum PhotoViewMimeTypes <: Equatable<PhotoViewMimeTypes> & ToString {
 
 **父类型：**
 
-- Equatable\<PhotoViewMimeTypes>
+- Equatable\<[PhotoViewMimeTypes](#enum-photoviewmimetypes)>
 - ToString
 
 ### ImageType
@@ -5062,7 +5112,7 @@ public enum RecommendationType <: Equatable<RecommendationType> & ToString {
 
 **父类型：**
 
-- Equatable\<RecommendationType>
+- Equatable\<[RecommendationType](#enum-recommendationtype)>
 - ToString
 
 ### BankCard
@@ -5269,7 +5319,7 @@ public enum ResourceType <: Equatable<ResourceType> & ToString {
 
 **父类型：**
 
-- Equatable\<ResourceType>
+- Equatable\<[ResourceType](#enum-resourcetype)>
 - ToString
 
 ### ImageResource

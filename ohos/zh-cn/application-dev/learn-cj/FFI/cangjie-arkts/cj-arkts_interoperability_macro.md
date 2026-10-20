@@ -1,6 +1,6 @@
 # 仓颉-ArkTS 声明式互操作宏
 
-仓颉- ArkTS 声明式互操作宏通过解析被注解修饰的仓颉代码，自动生成 ArkTS 声明文件及互操作层代码，为开发者提供近原生调用的开发体验。
+仓颉-ArkTS声明式互操作宏通过解析被注解修饰的仓颉代码，自动生成ArkTS声明文件及互操作层代码，为开发者提供近原生调用的开发体验。
 
 ## 使用方法
 
@@ -127,7 +127,7 @@ console.log("result " + addF64(1, 2))
 
 ## 场景详细说明
 
-声明式互操作宏可修饰范围包括函数（含异步函数）、接口、类和枚举，针对不同的场景使用建议如下表：
+声明式互操作宏可修饰范围包括函数（含异步函数）、接口、类、枚举和全局变量，针对不同的场景使用建议如下表：
 
 | 适用场景                          | 使用类型  | 修饰                                                                                       |
 | :-------------------------------- | :-------- | :----------------------------------------------------------------------------------------- |
@@ -136,6 +136,7 @@ console.log("result " + addF64(1, 2))
 | 用于传递 ArkTS 侧创建的对象给仓颉 | interface | @Interop[ArkTS]                                                                            |
 | 用于返回仓颉侧创建的对象给 ArkTS  | class     | @Interop[ArkTS] 修饰整个 class<br>@Interop[ArkTS, Invisible] 修饰 class 中不准备暴露的成员 |
 | 用于仓颉和 ArkTS 互相传递枚举数据 | enum      | @Interop[ArkTS]                                                                            |
+| 用于导出仓颉全局变量给 ArkTS      | 全局变量  | @Interop[ArkTS]                                                                            |
 
 ### 函数
 
@@ -220,7 +221,7 @@ public interface InterfaceDemo {
 }
 
 @Interop[ArkTS]
-public func doInterface(a: InterfaceDemo): Float64  {
+public func doInterface(a: InterfaceDemo): Float64 {
     return a.foo(a: a.id)
 }
 ```
@@ -334,7 +335,7 @@ public class ClassDemo {
 自动生成的 ArkTS 接口：
 
 ```typescript
-// Generate... > Cangjie-ArkTS Interop API 后在自动生成 .d.ts
+// Generate... > Cangjie-ArkTS Interop API 后再自动生成 .d.ts
 export declare class ClassDemo {
     value1: number
     value2: number
@@ -412,6 +413,62 @@ import { EnumDemo, getEnum } from "libohos_app_cangjie_entry.so";
 let e = EnumDemo.Green;
 console.log("result " + getEnum(e));
 ```
+
+### 全局变量
+
+对于声明式互操作宏修饰的全局变量，必须满足以下条件，不满足时将会编译报错：
+
+- 必须由 `public` 修饰
+- 变量类型标注不可省略
+- 支持 `const`、`let`、`var` 三种关键字
+
+全局变量互操作使用示例：
+
+<!--compile-->
+```cangjie
+// 仓颉侧创建互操作全局变量
+package ohos_app_cangjie_entry
+
+import ohos.ark_interop.*
+import ohos.ark_interop_macro.*
+
+@Interop[ArkTS]
+public const MAX_COUNT: Int64 = 100
+
+@Interop[ArkTS]
+public let DEFAULT_NAME: String = "Cangjie"
+
+@Interop[ArkTS]
+public var globalCounter: Int64 = 0
+```
+
+自动生成的 ArkTS 接口：
+
+```typescript
+// Generate... > Cangjie-ArkTS Interop API 后自动生成 .d.ts
+export declare const MAX_COUNT: 100
+export declare const DEFAULT_NAME: string
+export declare let globalCounter: number
+```
+
+ArkTS 侧对于仓颉模块的调用：
+
+```typescript
+// 导入仓颉动态库，该动态库名称为仓颉包名的名称，该名称需要和互操作接口所在的包名一致
+import { MAX_COUNT, DEFAULT_NAME, globalCounter } from "libohos_app_cangjie_entry.so";
+
+console.log("MAX_COUNT " + MAX_COUNT);
+console.log("DEFAULT_NAME " + DEFAULT_NAME);
+console.log("globalCounter " + globalCounter);
+```
+
+> **注意：**
+>
+> - `const` 变量如果初始化为基本类型字面量（如整数、浮点数、布尔值、字符串），则在 ArkTS 声明中直接使用字面量值；否则使用类型声明。
+>
+> - `var` 变量映射为 ArkTS 的 `let`，`let` 和 `const` 在 ArkTS 声明中保持对应关键字不变。
+>
+> - 由于 ArkTS 语法限制，通过 import 导入的变量在 ArkTS 侧不可直接赋值修改。如需修改仓颉侧的 `var` 变量，可通过调用仓颉函数间接实现。
 
 ## 类型映射
 

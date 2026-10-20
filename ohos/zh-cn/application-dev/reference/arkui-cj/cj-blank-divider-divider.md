@@ -146,8 +146,8 @@ class EntryView {
                                 .fontColor(0x182431)
                                 .textAlign(TextAlign.Start)
                         }
-                        .width(244)
-                        .height(48)
+                            .width(244)
+                            .height(48)
                     }
                 )
             }.padding(left: 24, bottom: 8)
@@ -166,8 +166,8 @@ class EntryView {
                                 .fontColor(0x182431)
                                 .textAlign(TextAlign.Start)
                         }
-                        .width(244)
-                        .height(48)
+                            .width(244)
+                            .height(48)
                     }
                 )
             }.padding(left: 24, top: 8)
@@ -206,20 +206,20 @@ class EntryView {
                             .backgroundColor(Color.Transparent)
                     }.margin(top: 17)
                 }
-                .width(336)
-                .height(152)
-                .backgroundColor(0xFFFFFF)
-                .borderRadius(24)
-                .padding(24)
+                    .width(336)
+                    .height(152)
+                    .backgroundColor(0xFFFFFF)
+                    .borderRadius(24)
+                    .padding(24)
             }
-            .width(100.percent)
-            .height(168)
-            .backgroundColor(0xF1F3F5)
-            .justifyContent(FlexAlign.Center)
-            .margin(top: 8)
+                .width(100.percent)
+                .height(168)
+                .backgroundColor(0xF1F3F5)
+                .justifyContent(FlexAlign.Center)
+                .margin(top: 8)
         }
-        .width(100.percent)
-        .padding(top: 24)
+            .width(100.percent)
+            .padding(top: 24)
     }
 }
 ```

@@ -230,36 +230,51 @@ Begin和End状态当手势点击时都会触发，Moving和Click状态当value�
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var outSetValueOne: Float64 = 40.00
-    @State var inSetValueOne: Float64 = 40.00
-    @State var noneValueOne: Float64 = 40.00
-    @State var outSetValueTwo: Float64 = 40.00
-    @State var inSetValueTwo: Float64 = 40.00
-    @State var vOutSetValueOne: Float64 = 40.00
-    @State var vInSetValueOne: Float64 = 40.00
-    @State var vOutSetValueTwo: Float64 = 40.00
-    @State var vInSetValueTwo: Float64 = 40.00
+    @State
+    var outSetValueOne: Float64 = 40.00
+    @State
+    var inSetValueOne: Float64 = 40.00
+    @State
+    var noneValueOne: Float64 = 40.00
+    @State
+    var outSetValueTwo: Float64 = 40.00
+    @State
+    var inSetValueTwo: Float64 = 40.00
+    @State
+    var vOutSetValueOne: Float64 = 40.00
+    @State
+    var vInSetValueOne: Float64 = 40.00
+    @State
+    var vOutSetValueTwo: Float64 = 40.00
+    @State
+    var vInSetValueTwo: Float64 = 40.00
 
     func build() {
         Column() {
-            Text('outset slider').fontSize(9).fontColor(0xCCCCCC).width(90.percent).margin(15)
+            Text('outset slider')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
+                .margin(15)
             Row() {
                 Slider(
                     value: this.outSetValueOne,
                     min: 0.0,
                     max: 100.0,
                     style: SliderStyle.OutSet
-                ).showTips(true).onChange({
-                    value: Float64, mode: SliderChangeMode => this.outSetValueOne = value
-                })
+                )
+                    .showTips(true)
+                    .onChange({
+                        value: Float64, mode: SliderChangeMode => this.outSetValueOne = value
+                    })
                 Text("${Int64(this.outSetValueOne)}").fontSize(12)
             }.width(80.percent)
             Row() {
@@ -267,13 +282,19 @@ class EntryView {
                     value: this.outSetValueTwo,
                     step: 10.0,
                     style: SliderStyle.OutSet
-                ).showSteps(true).onChange({
-                    value: Float64, mode: SliderChangeMode => this.outSetValueTwo = value
-                })
+                )
+                    .showSteps(true)
+                    .onChange({
+                        value: Float64, mode: SliderChangeMode => this.outSetValueTwo = value
+                    })
                 Text("${Int64(this.outSetValueTwo)}").fontSize(12)
             }.width(80.percent)
 
-            Text('inset slider').fontSize(9).fontColor(0xCCCCCC).width(90.percent).margin(15)
+            Text('inset slider')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
+                .margin(15)
             Row() {
                 Slider(
                     value: this.inSetValueOne,
@@ -306,7 +327,11 @@ class EntryView {
                 Text("${Int64(this.inSetValueTwo)}").fontSize(12)
             }.width(80.percent)
 
-            Text('none slider').fontSize(9).fontColor(0xCCCCCC).width(90.percent).margin(15)
+            Text('none slider')
+                .fontSize(9)
+                .fontColor(0xCCCCCC)
+                .width(90.percent)
+                .margin(15)
             Row() {
                 Slider(
                     value: this.noneValueOne,
@@ -326,7 +351,11 @@ class EntryView {
 
             Row() {
                 Column() {
-                    Text('vertical outset slider').fontSize(9).fontColor(0xCCCCCC).width(50.percent).margin(15)
+                    Text('vertical outset slider')
+                        .fontSize(9)
+                        .fontColor(0xCCCCCC)
+                        .width(50.percent)
+                        .margin(15)
                     Row() {
                         Text("").width(10.percent)
                         Slider(
@@ -355,10 +384,16 @@ class EntryView {
                                 value: Float64, mode: SliderChangeMode => this.vOutSetValueTwo = value
                             })
                     }
-                }.width(50.percent).height(300)
+                }
+                    .width(50.percent)
+                    .height(300)
 
                 Column() {
-                    Text('vertical inset slider').fontSize(9).fontColor(0xCCCCCC).width(50.percent).margin(15)
+                    Text('vertical inset slider')
+                        .fontSize(9)
+                        .fontColor(0xCCCCCC)
+                        .width(50.percent)
+                        .margin(15)
                     Row() {
                         Slider(
                             value: this.vInSetValueOne,
@@ -382,7 +417,9 @@ class EntryView {
                                 value: Float64, mode: SliderChangeMode => this.vInSetValueTwo = value
                             })
                     }
-                }.width(50.percent).height(300)
+                }
+                    .width(50.percent)
+                    .height(300)
             }
         }.width(100.percent)
     }

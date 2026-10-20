@@ -78,6 +78,7 @@
             - [不依赖UI组件的全局自定义弹出框（openCustomDialog）](cj-uicontext-custom-dialog.md)（Beta特性）
             - [基础自定义弹出框（CustomDialog）（不推荐）](cj-common-components-custom-dialog.md)（Beta特性）
             - [固定样式弹出框](cj-fixes-style-dialog.md)（Beta特性）
+            - [页面级弹出框](cj-page-level-dialog.md)（Beta特性）
         - 菜单
             - [菜单控制（Menu）](cj-popup-and-menu-components-menu.md)（Beta特性）
         - 气泡提示

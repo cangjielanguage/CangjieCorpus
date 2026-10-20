@@ -302,14 +302,15 @@ public operator func ==(other: ListItemGroupStyle): Bool
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 class TimeTable {
-  let title: String
-  let projects: Array<String>
+    let title: String
+    let projects: Array<String>
 
-    public init(title:String,projects: Array<String>){
+    public init(title: String, projects: Array<String>) {
         this.title = title
         this.projects = projects
     }
@@ -317,7 +318,6 @@ class TimeTable {
 
 @Entry
 @Component
-
 class EntryView {
      let timeTable = [
         TimeTable("Monday", ["Chinese", "Math", "English"]),
@@ -325,27 +325,29 @@ class EntryView {
         TimeTable("Wednesday", ["History", "Geography", "Politics"]),
         TimeTable("Thursday", ["Art", "Music", "PE"])]
 
-      @Builder func itemHead(text:String) {
+    @Builder
+    func itemHead(text: String) {
         Text(text)
-        .fontSize(20)
-        .backgroundColor(0xAABBCC)
-        .width(100.percent)
-        .padding(20)
+            .fontSize(20)
+            .backgroundColor(0xAABBCC)
+            .width(100.percent)
+            .padding(20)
     }
 
-    @Builder func itemFoot(num:Int64) {
+    @Builder
+    func itemFoot(num: Int64) {
         Text("Total ${num} classes")
-        .fontSize(16)
-        .backgroundColor(0xAABBCC)
-        .width(100.percent)
-        .padding(20)
-  }
+            .fontSize(16)
+            .backgroundColor(0xAABBCC)
+            .width(100.percent)
+            .padding(20)
+    }
 
     func build() {
         Column() {
             List(space: 20) {
                 ForEach(this.timeTable, itemGeneratorFunc: {item:TimeTable ,_:Int64 =>
-                        ListItemGroup(header:{=>bind(this.itemHead,this)(item.title)},footer:{=>bind(this.itemFoot,this)(item.projects.size)}){
+                        ListItemGroup(header: this.itemHead(item.title), footer: this.itemFoot(item.projects.size)){
                             ForEach(item.projects,itemGeneratorFunc: {project:String,_:Int64=>
                                     ListItem(){
                                         Text(project)
@@ -359,8 +361,8 @@ class EntryView {
                         })
              }
         }
-        .height(800.vp)
-        .backgroundColor(Color(0XD3D3D3))
+            .height(800.vp)
+            .backgroundColor(Color(0XD3D3D3))
     }
 }
 ```

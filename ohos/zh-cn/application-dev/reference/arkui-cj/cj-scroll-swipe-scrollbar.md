@@ -73,6 +73,7 @@ public init(
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -90,30 +91,29 @@ class EntryView {
                         ForEach(this.arr, itemGeneratorFunc: { item: Int64, idx: Int64 =>
                             Row() {
                                 Text(item.toString())
-                                .width(80.percent)
-                                .height(60)
-                                .backgroundColor(0x3366CC)
-                                .borderRadius(15)
-                                .fontSize(16)
-                                .textAlign(TextAlign.Center)
-                                .margin(top: 5)
+                                    .width(80.percent)
+                                    .height(60)
+                                    .backgroundColor(0x3366CC)
+                                    .borderRadius(15)
+                                    .fontSize(16)
+                                    .textAlign(TextAlign.Center)
+                                    .margin(top: 5)
                             }
                         })
-                    }
-                    .margin(right: 15)
+                    }.margin(right: 15)
                 }
-                .width(90.percent)
-                .scrollBar(BarState.Off)
-                .scrollable(ScrollDirection.Vertical)
+                    .width(90.percent)
+                    .scrollBar(BarState.Off)
+                    .scrollable(ScrollDirection.Vertical)
                 ScrollBar(scroller: this.scroller, direction: ScrollBarDirection.Vertical, state: BarState.Auto) {
                     Text("")
-                    .width(20)
-                    .height(100)
-                    .borderRadius(10)
-                    .backgroundColor(0xC0C0C0)
+                        .width(20)
+                        .height(100)
+                        .borderRadius(10)
+                        .backgroundColor(0xC0C0C0)
                 }
-                .width(20)
-                .backgroundColor(0xededed)
+                    .width(20)
+                    .backgroundColor(0xededed)
             }
         }
     }
@@ -130,6 +130,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -148,13 +149,22 @@ class EntryView {
                             this.arr,
                             itemGeneratorFunc: {
                                 item: Int64, idx: Int64 => Row() {
-                                    Text(item.toString()).width(80.percent).height(60).backgroundColor(0x3366CC).
-                                        borderRadius(15).fontSize(16).textAlign(TextAlign.Center).margin(top: 5)
+                                    Text(item.toString())
+                                        .width(80.percent)
+                                        .height(60)
+                                        .backgroundColor(0x3366CC)
+                                        .borderRadius(15)
+                                        .fontSize(16)
+                                        .textAlign(TextAlign.Center)
+                                        .margin(top: 5)
                                 }
                             }
                         )
                     }.margin(right: 15)
-                }.width(90.percent).scrollBar(BarState.Off).scrollable(ScrollDirection.Vertical)
+                }
+                    .width(90.percent)
+                    .scrollBar(BarState.Off)
+                    .scrollable(ScrollDirection.Vertical)
                 ScrollBar(scroller: this.scroller, direction: ScrollBarDirection.Vertical, state: BarState.Auto) {}
             }
         }

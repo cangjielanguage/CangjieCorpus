@@ -715,7 +715,7 @@ error: install parse profile prop check error.
 
 1. 根据命名规则调整app.json5配置文件中bundleName、module.json5文件中的name字段。<!--Del-->
 
-2. 若extensionAbilities中type字段配置为service或dataShare，应用需要配置[allowAppUsePrivilegeExtension特权](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)，配置方式如下。
+2. 若extensionAbilities中type字段配置为service或dataShare，应用需要配置[allowAppUsePrivilegeExtension特权](https://gitcode.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)，配置方式如下。
 
     1. 获取新的签名指纹。
 
@@ -956,10 +956,10 @@ error: signature verification failed due to not trusted app source.
 **处理步骤：**
 
 <!--RP5-->
-<!--RP5End-->
-<!--Del-->
-1. 使用[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section18815157237)。在连接设备后，重新为应用进行签名。
-2. 如果使用的是手动签名，对于OpenHarmony应用，请参考<!--RP2-->[OpenHarmony应用手动签名](https://docs.openharmony.cn/pages/v4.1/zh-cn/application-dev/security/hapsigntool-guidelines.md)<!--RP2End-->，在UnsgnedDebugProfileTemplate.json文件中添加该调试设备的**UDID**。
+
+1. 使用[自动签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section18815157237)。在连接设备后，重新为应用进行签名。<!--RP5End--><!--Del-->
+
+2. 如果使用的是手动签名，对于OpenHarmony应用，请参考[OpenHarmony应用手动签名](https://docs.openharmony.cn/pages/v4.1/zh-cn/application-dev/security/hapsigntool-guidelines.md)，在UnsgnedDebugProfileTemplate.json文件中添加该调试设备的**UDID**。
 
     a. 获取当前设备的UDID。
 
@@ -1173,7 +1173,7 @@ error: install sign info inconsistent.
 **处理步骤：**
 
 1. 请卸载设备上已安装的应用，或取消勾选“Keep Application Data”后，重新安装新的应用。
-2. 如果是因不同团队提供的HSP导致签名不一致问题，可以采用[集成态HSP](https://docs.openharmony.cn/pages/v5.1/zh-cn/application-dev/quick-start/integrated-hsp.md)的方式统一提供HSP；在多HAP包的情况下，必须确保所有HAP包的签名一致。
+2. 如果是因不同团队提供的HSP导致签名不一致问题，可以采用<!--RP7-->[集成态HSP](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/integrated-hsp.md)<!--RP7End-->的方式统一提供HSP；在多HAP包的情况下，必须确保所有HAP包的签名一致。
 3. 如果某个应用被卸载但是保留了数据，后面安装相同包名但签名信息不一致的应用时，安装失败。如果出现这种情况，则需要把之前已卸载掉的应用重新安装之后，执行不保留数据地卸载，这样相同包名但签名信息不一致的应用才能安装成功。
 
 ### 9568329 签名信息验证失败
@@ -1190,7 +1190,7 @@ error: verify signature failed.
 
 **可能原因：**
 
-- 场景一：用户导入了三方提供的HSP模块，且该HSP既非[集成态HSP](https://docs.openharmony.cn/pages/v5.1/zh-cn/application-dev/quick-start/integrated-hsp.md)，又非同包名的HSP，造成包名不一致。
+- 场景一：用户导入了三方提供的HSP模块，且该HSP既非<!--RP7-->[集成态HSP](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/quick-start/integrated-hsp.md)<!--RP7End-->，又非同包名的HSP，造成包名不一致。
 - 场景二：用户使用了错误的签名文件（后缀为.p7b）进行签名，造成包名不一致。
 
 **处理步骤：**
@@ -1464,7 +1464,7 @@ error: Failed to install the HSP due to the lack of required permission.
 
 **处理步骤**
 
-检查设备中install_list_capability.json中该应用是否拥有AllowAppShareLibrary权限，该权限配置可参考[应用特权配置指南](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)。
+检查设备中install_list_capability.json中该应用是否拥有AllowAppShareLibrary权限，该权限配置可参考[应用特权配置指南](https://gitcode.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-app-privilege-config-guide.md)。
 
 ### 9568311 卸载的应用间HSP不存在
 

@@ -132,16 +132,22 @@ LocalStorage根据与@Component装饰的组件的同步类型不同，提供了�
 1. @LocalStorageProp/@LocalStorageLink的参数必须为string类型，否则编译期会报错。
 
     ```cangjie
-    let storage =  LocalStorage()
+    let storage = LocalStorage()
     let temp = storage.setOrCreate("PropA", 48)
 
     //错误写法，编译报错
-    @LocalStorageProp[] let localStorageProp: Int64 = 1
-    @LocalStorageLink[] var localStorageLink: Int64 = 2
+    @LocalStorageProp[]
+    let localStorageProp: Int64 = 1
+
+    @LocalStorageLink[]
+    var localStorageLink: Int64 = 2
 
     //正确写法
-    @LocalStorageProp["PropA"] let localStorageProp: Int64 = 1
-    @LocalStorageLink["PropA"] var localStorageLink: Int64 = 2
+    @LocalStorageProp["PropA"]
+    let localStorageProp: Int64 = 1
+
+    @LocalStorageLink["PropA"]
+    var localStorageLink: Int64 = 2
     ```
 
 2. @LocalStorageProp与@LocalStorageLink不支持装饰func类型的变量，框架会抛出运行时错误。
@@ -177,36 +183,42 @@ let value2 = link1.set(49) // 双向同步: link1.get() == link2.get() == prop.g
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-class Data{
-    var code : Int64
-    init(code: Int64){
+class Data {
+    var code: Int64
+    init(code: Int64) {
         this.code = code
     }
 }
 // 创建新实例并使用给定对象初始化
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let res1 = storage.setOrCreate("PropA", 47)
 let res2 = storage.setOrCreate("PropB", Data(50))
 
 @Component
-class Child{
+class Child {
     // @LocalStorageLink变量宏与LocalStorage中的"PropA"属性建立双向绑定
-    @LocalStorageLink["PropA"] var childLinkNumber: Int64 = 1
+    @LocalStorageLink["PropA"]
+    var childLinkNumber: Int64 = 1
     // @LocalStorageLink变量宏与LocalStorage中的"PropB"属性建立双向绑定
-    @LocalStorageLink["PropB"] var childLinkObject: Data = Data(0)
+    @LocalStorageLink["PropB"]
+    var childLinkObject: Data = Data(0)
     func build() {
-        Column(){
+        Column() {
             Button("Child from LocalStorage ${this.childLinkNumber}") // 更改将同步至LocalStorage中的"PropA"以及Parent.parentLinkNumber
-                .onClick({evt => this.childLinkNumber += 1;})
+                .onClick({evt => this.childLinkNumber += 1})
             Button("Child from LocalStorage ${this.childLinkObject.code}") // 更改将同步至LocalStorage中的"PropB"以及Parent.childLinkObject
-                .onClick({evt =>
-                    var temp = this.childLinkObject
-                    temp.code += 1
-                    this.childLinkObject = temp;
-                    })
+                .onClick(
+                {
+                    evt =>
+                        var temp = this.childLinkObject
+                        temp.code += 1
+                        this.childLinkObject = temp
+                }
+            )
         }
     }
 }
@@ -215,19 +227,24 @@ class Child{
 @Component
 class EntryView {
     // @LocalStorageLink变量宏与LocalStorage中的"PropA"属性建立双向绑定
-    @LocalStorageLink["PropA"] var parentLinkNumber: Int64 = 1
+    @LocalStorageLink["PropA"]
+    var parentLinkNumber: Int64 = 1
     // @LocalStorageLink变量宏与LocalStorage中的"PropB"属性建立双向绑定
-    @LocalStorageLink["PropB"] var parentLinkObject: Data = Data(0)
+    @LocalStorageLink["PropB"]
+    var parentLinkObject: Data = Data(0)
     func build() {
-        Column(){
+        Column() {
             Button("Parent from LocalStorage ${this.parentLinkNumber}") // 由于LocalStorage中PropA已经被初始化，因此this.parentLinkNumber的值为47
-                .onClick({evt => this.parentLinkNumber += 1;})
+                .onClick({evt => this.parentLinkNumber += 1})
             Button("Parent from LocalStorage ${this.parentLinkObject.code}") // 由于LocalStorage中PropB已经被初始化，因此this.parentLinkObject.code的值为50
-                .onClick({evt =>
-                    var temp = this.parentLinkObject
-                    temp.code += 1
-                    this.parentLinkObject = temp;
-                    })
+                .onClick(
+                {
+                    evt =>
+                        var temp = this.parentLinkObject
+                        temp.code += 1
+                        this.parentLinkObject = temp
+                }
+            )
             // @Component子组件自动获得对Parent LocalStorage实例的访问权限。
             Child()
         }
@@ -243,23 +260,25 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 // 创建新实例并使用给定对象初始化
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp = storage.setOrCreate("PropA", 47)
 // 使LocalStorage可从@Component组件访问
 @Entry[storage]
 @Component
 class EntryView {
     // @LocalStorageProp变量宏与LocalStorage中的"PropA"属性建立单向绑定
-    @LocalStorageProp["PropA"] let storageProp1: Int64 = 1
+    @LocalStorageProp["PropA"]
+    let storageProp1: Int64 = 1
     func build() {
-        Column(){
-            Button("Parent from LocalStorage ${this.storageProp1}")
-                .onClick({evt => storage.set<Int64>("PropA", storageProp1+1)
-                    ;})
+        Column() {
+            Button("Parent from LocalStorage ${this.storageProp1}").onClick({
+                evt => storage.set<Int64>("PropA", storageProp1 + 1);
+            })
         }
     }
 }
@@ -273,11 +292,12 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 // 构造LocalStorage实例
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp = storage.setOrCreate("PropA", 47)
 // 调用link接口构造"PropA"的双向同步数据，linkToPropA 是全局变量
 let linkToPropA = storage.link<Int64>("PropA").getOrThrow()
@@ -287,12 +307,13 @@ let linkToPropA = storage.link<Int64>("PropA").getOrThrow()
 @Component
 class EntryView {
     // @LocalStorageLink("PropA")在Parent自定义组件中创建"PropA"的双向同步数据，初始值为47，因为在构造LocalStorage已经给“PropA”设置47
-    @LocalStorageLink["PropA"] var storageLink: Int64 = 1
+    @LocalStorageLink["PropA"]
+    var storageLink: Int64 = 1
     func build() {
-        Column(){
+        Column() {
             Text("incr @LocalStorageLink variable")
-            // 单击“incr @LocalStorageLink variable”，this.storageLink加1，改变同步回storage，全局变量linkToPropA也会同步改变
-                .onClick({evt => this.storageLink += 1;})
+                // 单击“incr @LocalStorageLink variable”，this.storageLink加1，改变同步回storage，全局变量linkToPropA也会同步改变
+                .onClick({evt => this.storageLink += 1})
             // 并不建议在组件内使用全局变量linkToPropA.get()，因为可能会有生命周期不同引起的错误。
             Text("@LocalStorageLink: ${this.storageLink} - linkToPropA: ${linkToPropA.get()}")
         }
@@ -317,53 +338,57 @@ playCountLink的刷新会同步回LocalStorage，并且引起兄弟组件和父�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp = storage.setOrCreate("countStorage", 1)
 
 @Component
 class Child {
     let label: String
-    @LocalStorageLink["countStorage"] var playCountLink: Int64 = 0
+    @LocalStorageLink["countStorage"]
+    var playCountLink: Int64 = 0
     func build() {
-        Row(){
+        Row() {
             Text(this.label)
                 .width(50)
                 .height(60)
                 .fontSize(12)
             Text("playCountLink ${this.playCountLink}: inc by 1")
-                .onClick({evt => this.playCountLink += 1;})
+                .onClick({evt => this.playCountLink += 1})
                 .width(200)
                 .height(60)
                 .fontSize(12)
         }
-        .width(300)
-        .height(60)
+            .width(300)
+            .height(60)
     }
 }
+
 @Entry[storage]
 @Component
 class EntryView {
-    @LocalStorageLink["countStorage"] var playCount: Int64 = 0
+    @LocalStorageLink["countStorage"]
+    var playCount: Int64 = 0
     func build() {
-        Column(){
-            Row(){
+        Column() {
+            Row() {
                 Text("Parent")
                     .width(50)
                     .height(60)
                     .fontSize(12)
                 Text("countStorage ${this.playCount} dec by 1")
-                    .onClick({evt => this.playCount -= 1;})
+                    .onClick({evt => this.playCount -= 1})
                     .width(250)
                     .height(60)
                     .fontSize(12)
             }
-            .width(300)
-            .height(60)
-            Child(label:"ChildA")
-            Child(label:"ChildB")
+                .width(300)
+                .height(60)
+            Child(label: "ChildA")
+            Child(label: "ChildB")
         }
     }
 }
@@ -377,6 +402,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import ohos.hilog.*
 import ohos.app.ability.ability_stage.AbilityStage
 import ohos.app.ability.ability_constant.LaunchReason
@@ -385,7 +411,7 @@ import ohos.app.ability.want.Want
 import ohos.app.ability.ability_constant.LaunchParam
 import kit.ArkUI.*
 
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp = storage.setOrCreate("PropA", 47)
 
 class MainAbility <: UIAbility {
@@ -421,6 +447,7 @@ class MainAbility <: UIAbility {
 // index.cj
 
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.arkui.ui_context.*
@@ -429,19 +456,21 @@ import ohos.arkui.ui_context.*
 @Entry[storage]
 @Component
 class EntryView {
-    @LocalStorageLink["PropA"] var propA: Int64 = 1
+    @LocalStorageLink["PropA"]
+    var propA: Int64 = 1
     func build() {
-        Row(){
-            Column(){
+        Row() {
+            Column() {
                 Text("${this.propA}")
                     .fontSize(50)
                     .fontWeight(FontWeight.Bold)
-                Button("To page")
-                    .onClick({evt => getUIContext().getRouter().pushUrl(url: "Page");})
-            }
-            .width(100.percent)
-        }
-        .height(100.percent)
+                Button("To page").onClick({
+                    evt => getUIContext()
+                        .getRouter()
+                        .pushUrl(url: "Page");
+                })
+            }.width(100.percent)
+        }.height(100.percent)
     }
 }
 ```
@@ -452,6 +481,7 @@ class EntryView {
 //page.cj
 
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.arkui.ui_context.*
@@ -460,17 +490,20 @@ import ohos.arkui.ui_context.*
 @Entry[storage]
 @Component
 class Page {
-    @LocalStorageLink["PropA"] var propA: Int64 = 2
+    @LocalStorageLink["PropA"]
+    var propA: Int64 = 2
     func build() {
-        Row(){
-            Column(){
+        Row() {
+            Column() {
                 Text("${this.propA}")
                     .fontSize(50)
                     .fontWeight(FontWeight.Bold)
-                Button("Change propA")
-                    .onClick({evt => this.propA = 100;})
-                Button("Back EntryView")
-                    .onClick({evt => getUIContext().getRouter().pushUrl(url: "EntryView");})
+                Button("Change propA").onClick({evt => this.propA = 100})
+                Button("Back EntryView").onClick({
+                    evt => getUIContext()
+                        .getRouter()
+                        .pushUrl(url: "EntryView");
+                })
             }
         }
     }
@@ -489,23 +522,26 @@ class Page {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.time.*
 
-let Storage =  LocalStorage()
+let Storage = LocalStorage()
 
 @Entry[Storage]
 @Component
 class EntryView {
-    @LocalStorageLink["date"] var selectedDate: DateTime = DateTime.of(year: 2003, month: Month.of(6), dayOfMonth: 24)
-    @State var count : Int64 = 0
+    @LocalStorageLink["date"]
+    var selectedDate: DateTime = DateTime.of(year: 2003, month: Month.of(6), dayOfMonth: 24)
+    @State
+    var count: Int64 = 0
     func build() {
-        Column(){
+        Column() {
             Button("set selectedDate to 2025-04-21")
                 .margin(10)
-                .onClick({evt => this.selectedDate = DateTime.of(year: 2025, month: Month.of(4), dayOfMonth: 21);})
-             Button("increase the year by 1")
+                .onClick({evt => this.selectedDate = DateTime.of(year: 2025, month: Month.of(4), dayOfMonth: 21)})
+            Button("increase the year by 1")
                 .margin(10)
                 .onClick({evt => this.selectedDate = this.selectedDate.addYears(1);})
             Button("increase the month by 1")
@@ -531,6 +567,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.Map
@@ -539,7 +576,8 @@ import std.collection.HashMap
 @Entry
 @Component
 class EntryView {
-    @LocalStorageLink["map"] var message: Map<Int64, String> = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
+    @LocalStorageLink["map"]
+    var message: Map<Int64, String> = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
     func build() {
         Row() {
             Column() {
@@ -552,30 +590,40 @@ class EntryView {
                 Button("init map").onClick({evt =>
                     this.message = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
                 })
-                Button("add new one").onClick({evt =>
-                        var temp = this.message
-                        temp.add(4, "d")
-                        this.message = temp
-                    })
-                Button("clear").onClick({evt =>
-                        var temp = this.message
-                        temp.clear()
-                        this.message = temp
-                    })
-                Button("replace the first one").onClick({evt =>
-                        var temp =this.message
-                        temp.replace(0,"aa")
-                        this.message=temp
-                    })
-                Button("remove the first one").onClick({evt =>
-                        var temp = this.message
-                        temp.remove(0)
-                        this.message = temp
-                })
-            }
-                .width(100.percent)
-        }
-        .height(100.percent)
+                Button("add new one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.add(4, "d")
+                            this.message = temp
+                    }
+                )
+                Button("clear").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.clear()
+                            this.message = temp
+                    }
+                )
+                Button("replace the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.replace(0, "aa")
+                            this.message = temp
+                    }
+                )
+                Button("remove the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.remove(0)
+                            this.message = temp
+                    }
+                )
+            }.width(100.percent)
+        }.height(100.percent)
     }
 }
 ```
@@ -588,6 +636,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.HashSet
@@ -596,41 +645,51 @@ import std.collection.Set
 @Entry
 @Component
 class EntryView {
-    @LocalStorageLink["set"] var message: Set<Int64> = HashSet<Int64>([0, 1, 2, 3, 4])
+    @LocalStorageLink["set"]
+    var message: Set<Int64> = HashSet<Int64>([0, 1, 2, 3, 4])
     func build() {
         Row() {
             Column() {
                 ForEach(
                     this.message.toArray(),
                     itemGeneratorFunc: {
-                        item: Int64, _: Int64 => Text("${item}")
-                            .fontSize(30)
+                        item: Int64, _: Int64 => Text("${item}").fontSize(30)
                     }
                 )
-                Button("init set").onClick({evt =>
-                        var temp = this.message
-                        temp = HashSet<Int64>([0, 1, 2, 3, 4])
-                        this.message = temp
-                    })
-                Button("add new one").onClick({evt =>
-                        var temp = this.message
-                        temp.add(5)
-                        this.message = temp
-                    })
-                Button("clear").onClick({evt =>
-                        var temp = this.message
-                        temp.clear()
-                        this.message = temp
-                    })
-                Button("remove the first one").onClick({evt =>
-                        var temp = this.message
-                        temp.remove(0)
-                        this.message = temp
-                    })
-            }
-                .width(100.percent)
-        }
-        .height(100.percent)
+                Button("init set").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp = HashSet<Int64>([0, 1, 2, 3, 4])
+                            this.message = temp
+                    }
+                )
+                Button("add new one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.add(5)
+                            this.message = temp
+                    }
+                )
+                Button("clear").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.clear()
+                            this.message = temp
+                    }
+                )
+                Button("remove the first one").onClick(
+                    {
+                        evt =>
+                            var temp = this.message
+                            temp.remove(0)
+                            this.message = temp
+                    }
+                )
+            }.width(100.percent)
+        }.height(100.percent)
     }
 }
 ```
@@ -641,10 +700,11 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-let storage =  LocalStorage()
+let storage = LocalStorage()
 let temp = storage.setOrCreate("count", 47)
 
 public class Model {
@@ -660,13 +720,13 @@ let model: Model = Model()
 @Entry[storage]
 @Component
 class EntryView {
-    @LocalStorageLink["count"] var count: Int64 = 0
+    @LocalStorageLink["count"]
+    var count: Int64 = 0
     func build() {
-        Column(){
+        Column() {
             Text("count值: ${this.count}")
-            Button("change")
-                .onClick({evt => model.change("count",this.count+1);})
-            }
+            Button("change").onClick({evt => model.change("count", this.count + 1);})
+        }
     }
 }
 ```

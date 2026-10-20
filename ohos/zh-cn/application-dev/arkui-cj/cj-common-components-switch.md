@@ -116,6 +116,7 @@ Toggle用于切换蓝牙开关状态。
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.ui_context.*
 import ohos.arkui.state_macro_manage.*
@@ -139,11 +140,15 @@ class EntryView {
                     .backgroundColor(0xFFFFFF)
                 Toggle(ToggleType.Switch)
                     .margin(left: 200, right: 10)
-                    .onChange ({
+                    .onChange({
                         isOn => if (isOn) {
-                            getUIContext().getPromptAction().showToast(ShowToastOptions(message: 'Bluetooth is on.'))
+                            getUIContext()
+                                .getPromptAction()
+                                .showToast(ShowToastOptions(message: 'Bluetooth is on.'))
                         } else {
-                            getUIContext().getPromptAction().showToast(ShowToastOptions(message: 'Bluetooth is off.'))
+                            getUIContext()
+                                .getPromptAction()
+                                .showToast(ShowToastOptions(message: 'Bluetooth is off.'))
                         }
                     })
             }.backgroundColor(0xFFFFFF)

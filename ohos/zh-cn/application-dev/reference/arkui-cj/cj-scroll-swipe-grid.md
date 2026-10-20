@@ -314,7 +314,9 @@ class EntryView {
                 .columnsGap(10)
                 .rowsGap(10)
                 .height(150)
-        }.width(100.percent).height(100.percent)
+        }
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```

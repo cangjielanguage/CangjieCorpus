@@ -145,6 +145,7 @@ public func onSkip(callback: ?() -> Unit): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -163,14 +164,18 @@ extend ItemState {
 @Entry
 @Component
 class EntryView {
-    @State var currentIndex: UInt32  = 0
-    @State var firstState: ItemState = ItemState.Normal
-    @State var secondState: ItemState = ItemState.Normal
-    @State var thirdState: ItemState = ItemState.Normal
+    @State
+    var currentIndex: UInt32 = 0
+    @State
+    var firstState: ItemState = ItemState.Normal
+    @State
+    var secondState: ItemState = ItemState.Normal
+    @State
+    var thirdState: ItemState = ItemState.Normal
 
     func build() {
         Column() {
-            Stepper(index:currentIndex) {
+            Stepper(index: currentIndex) {
                 StepperItem() {
                     Column() {
                       Text("Page One").fontSize(35).fontColor(0x182431)
@@ -185,8 +190,8 @@ class EntryView {
                         })
                     }
                 }
-                .nextLabel("Next Page")
-                .status(status:this.firstState)
+                    .nextLabel("Next Page")
+                    .status(status: this.firstState)
                 StepperItem() {
                     Column() {
                       Text("Page Two").fontSize(35).fontColor(0x182431)
@@ -201,9 +206,9 @@ class EntryView {
                         })
                     }
                 }
-                .nextLabel("Next Page")
-                .prevLabel("Previous Page")
-                .status(status:this.secondState)
+                    .nextLabel("Next Page")
+                    .prevLabel("Previous Page")
+                    .status(status: this.secondState)
                 StepperItem() {
                     Column() {
                       Text("Page Three").fontSize(35).fontColor(0x182431)
@@ -218,30 +223,32 @@ class EntryView {
                         })
                     }
                 }
-                .nextLabel("Next Page")
-                .prevLabel("Previous Page")
-                .status(status:this.thirdState)
+                    .nextLabel("Next Page")
+                    .prevLabel("Previous Page")
+                    .status(status: this.thirdState)
                 StepperItem() {
                     Column() {
-                        Text("Page Four").fontSize(35).fontColor(0x182431)
+                        Text("Page Four")
+                            .fontSize(35)
+                            .fontColor(0x182431)
                     }
                 }
             }
-            .backgroundColor(0xF1F3F5)
-            .onFinish({=>
-                Hilog.info(0, "AppLogCj", "onFinish")
-            })
-            .onSkip({=>
-                Hilog.info(0, "AppLogCj", "onSkip")
-            })
-            .onChange({prevIndex: UInt32, index: UInt32 =>
-                if(index != 0){
-                    currentIndex = index
-                }
-            })
+                .backgroundColor(0xF1F3F5)
+                .onFinish({
+                    => Hilog.info(0, "AppLogCj", "onFinish")
+                })
+                .onSkip({
+                    => Hilog.info(0, "AppLogCj", "onSkip")
+                })
+                .onChange({
+                    prevIndex: UInt32, index: UInt32 => if (index != 0) {
+                        currentIndex = index
+                    }
+                })
         }
-        .width(100.percent)
-        .padding(top: 5)
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```

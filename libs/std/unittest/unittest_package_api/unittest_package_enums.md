@@ -7,6 +7,7 @@ public enum ExplicitGcType <: ToString {
     | Disabled
     | Light
     | Heavy
+    | Auto
 }
 ```
 
@@ -38,7 +39,15 @@ Heavy
 Light
 ```
 
-功能：[std.runtime.GC](../../runtime/runtime_package_api/runtime_package_funcs.md#func-gcbool)(heavy: false) 将在 Benchmark 函数执行期间由框架显式调用。这是默认设置。
+功能：[std.runtime.GC](../../runtime/runtime_package_api/runtime_package_funcs.md#func-gcbool)(heavy: false) 将在 Benchmark 函数执行期间由框架显式调用。
+
+### Auto
+
+```cangjie
+Auto
+```
+
+功能：Benchmark 函数执行期间由框架自行决策 GC 调用策略。这是默认设置。
 
 ### func toString()
 
@@ -85,7 +94,7 @@ class BenchGCLight {
     @BeforeAll
     func before() {
         prevGC = getGCCount()
-    } 
+    }
 
     @Bench
     func foo() {
@@ -98,7 +107,7 @@ class BenchGCLight {
     @AfterAll
     func after() {
         let diff = getGCCount() - prevGC
-        @Assert(diff >= 35) 
+        @Assert(diff >= 35)
         @Assert(diff <= 60)
     }
 }
@@ -109,7 +118,7 @@ class BenchGCWait {
     @BeforeAll
     func before() {
         prevGC = getGCCount()
-    } 
+    }
 
     @Bench
     func foo() {
@@ -125,7 +134,6 @@ class BenchGCWait {
         @Assert(diff >= 45)
     }
 }
-
 ```
 
 ## enum TimeUnit
@@ -221,7 +229,6 @@ class Test_Configure_Running_Case_01 {
         count2.fetchAdd(1)
     }
 }
-
 ```
 
 ## enum PerfCounter
@@ -266,7 +273,6 @@ import std.unittest.testmacro.*
 import std.time.*
 
 var counter: Float64 = 0.0
-
 let perf0 = Perf(PerfCounter.HW_CPU_CYCLES)
 let perf1 = Perf(PerfCounter.HW_INSTRUCTIONS)
 let perf2 = Perf(PerfCounter.HW_CACHE_REFERENCES)
@@ -286,19 +292,19 @@ let perf16 = Perf(PerfCounter.SW_PAGE_FAULTS_MAJ)
 let perf17 = Perf(PerfCounter.SW_EMULATION_FAULTS)
 
 @Test
-@Measure[perf0, perf1, perf2, perf3, perf4, perf5, perf6, perf8, perf9, perf10, perf11, perf12, perf13, perf14, perf15, perf16, perf17]
+@Measure[perf0, perf1, perf2, perf3, perf4, perf5, perf6, perf8, perf9, perf10, perf11, perf12, perf13, perf14, perf15,
+    perf16, perf17]
 class Test_CPU_01 {
     @BeforeEach
     func beforeEach() {
         counter = 0.0
     }
-    
+
     @Bench
     func foo() {
         counter += 1.0
     }
 }
-
 ```
 
 ### HW_CPU_CYCLES
@@ -456,3 +462,39 @@ public func toString(): String
 返回值：
 
 - [String](../../core/core_package_api/core_package_structs.md#struct-string) - 处理器计数器的字符串表示。
+
+## enum RuntimeInfo
+
+```cangjie
+public enum RuntimeInfo {
+    | GCCount
+    | GCTime
+    | AllocatedMemory
+}
+```
+
+功能：提供统计的 Cangjie 运行时提供的信息类型。
+
+### GCCount
+
+```cangjie
+GCCount
+```
+
+功能：统计 GC 执行次数平均值。
+
+### GCTime
+
+```cangjie
+GCTime
+```
+
+功能：统计每次基准测试调用增加 GC 持续时间的程度。
+
+### AllocatedMemory
+
+```cangjie
+AllocatedMemory
+```
+
+功能：统计内存占用情况。

@@ -6,7 +6,7 @@
 > 当前为Beta阶段。
 <!--DelEnd-->
 
-UI界面除了运行动画之外，还承载着与用户进行实时交互的功能。当用户行为根据意图变化发生改变时，UI界面应做到即时响应。例如用户在应用启动过程中，上滑退出，那么启动动画应该立即过渡到退出动画，而不应该等启动动画完成后再退出，减少用户等待时间。对于桌面翻页类从跟手到离手触发动画的场景，离手后动画的初始速度应承继手势速度，避免由于速度不接续导致停顿感的产生。针对以上场景，系统已提供动画与动画、手势与动画之间的衔接能力，保证各类场景下动画平稳光滑地过渡的同时，尽可能降低开发难度。
+UI界面除了运行动画之外，还承载着与用户进行实时交互的功能。当用户行为根据意图变化发生改变时，UI界面应做到即时响应。例如用户在应用启动过程中，上滑退出，那么启动动画应该立即过渡到退出动画，而不应该等启动动画完成后再退出，减少用户等待时间。对于桌面翻页类从跟手到离手触发动画的场景，离手后动画的初始速度应承继手势速度，避免由于速度不接续导致停顿感的产生。针对以上场景，系统已提供动画与动画、手势与动画之间的衔接能力，保证各类场景下动画平稳平滑地过渡的同时，尽可能降低开发难度。
 
 假设对于某一可动画属性，存在正在运行的动画。当UI侧行为改变该属性终点值时，开发者仅需在[animateTo](../reference/arkui-cj/cj-apis-uicontext-uicontext.md#func-animatetoanimateparam-voidcallback)动画闭包中改变属性值或者改变[animation](../reference/arkui-cj/cj-animation-animation.md#func-animationanimateparam)接口作用的属性值，即可产生动画。系统会自动衔接之前的动画和当前的动画，开发者仅需要关注当前单次动画的实现。
 
@@ -22,13 +22,14 @@ import ohos.arkui.state_macro_manage.*
 
 @Observed
 class SetSlt {
-    @Publish var isAnimation: Bool = true
+    @Publish
+    var isAnimation: Bool = true
     public func set() {
         this.isAnimation = !this.isAnimation
     }
 
     public func getScale(): Float32 {
-        if (this.isAnimation){
+        if (this.isAnimation) {
             return 2.0
         }
         return 1.0
@@ -38,7 +39,8 @@ class SetSlt {
 @Entry
 @Component
 class EntryView {
-    @State var SetAnimation: SetSlt = SetSlt()
+    @State
+    var SetAnimation: SetSlt = SetSlt()
 
     func build() {
         Column() {
@@ -59,9 +61,9 @@ class EntryView {
                     this.SetAnimation.set()
                 })
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```
@@ -89,8 +91,10 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var positionX: Float64 = 100.0
-    @State var positionY: Float64 = 100.0
+    @State
+    var positionX: Float64 = 100.0
+    @State
+    var positionY: Float64 = 100.0
     var diameter: Float64 = 50.0
 
     func build() {
@@ -110,24 +114,23 @@ class EntryView {
                     }
                 })
             }
-            .width(100.percent)
-            .height(80.percent)
-            .clip(true) // 如果球超出父组件范围，使球不可见
-            .backgroundColor(0xFEA400)
+                .width(100.percent)
+                .height(80.percent)
+                .clip(true) // 如果球超出父组件范围，使球不可见
+                .backgroundColor(0xFEA400)
 
-            Flex(direction: FlexDirection.Row,justifyContent: FlexAlign.Center, alignItems: ItemAlign.Start) {
+            Flex(direction: FlexDirection.Row, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Start) {
                 Text("拖动小球").fontSize(16)
-            }
-            .width(100.percent)
+            }.width(100.percent)
 
             Row() {
                 Text('点击位置: [x: ${Int64(this.positionX)} y: ${Int64(this.positionY)}]').fontSize(16)
             }
-            .padding(10)
-            .width(100.percent)
+                .padding(10)
+                .width(100.percent)
         }
-        .width(100.percent)
-        .height(100.percent)
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```

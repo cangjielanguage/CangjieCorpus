@@ -21,8 +21,7 @@ import kit.ArkUI.*
 ## class AnimatorResult
 
 ```cangjie
-public class AnimatorResult {
-}
+public class AnimatorResult {}
 ```
 
 **功能：** 定义Animator结果类型。
@@ -49,7 +48,7 @@ public mut prop onFrame: (Float64) -> Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -73,7 +72,7 @@ public mut prop onFinish: () -> Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -97,7 +96,7 @@ public mut prop onCancel: () -> Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -121,7 +120,7 @@ public mut prop onRepeat: () -> Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -147,7 +146,7 @@ public func reset(options: AnimatorOptions): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -167,7 +166,7 @@ public func play(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -187,7 +186,7 @@ public func finish(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -207,7 +206,7 @@ public func pause(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -227,7 +226,7 @@ public func cancel(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -247,7 +246,7 @@ public func reverse(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|
@@ -273,7 +272,7 @@ public func setExpectedFrameRateRange(rateRange: ExpectedFrameRateRange): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码ID|错误信息|
   |:----|:---|

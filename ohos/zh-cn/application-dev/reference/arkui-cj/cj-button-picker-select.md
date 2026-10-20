@@ -509,8 +509,8 @@ public type OnSelectCallback = (Int32, String) -> Unit
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -522,37 +522,44 @@ import ohos.resource.__GenerateResource__
 @Entry
 @Component
 class EntryView {
-    @State var text: String = "TTTTT"
-    @State var index: Int32 = 2
-    @State var space: Int64 = 8
+    @State
+    var text: String = "TTTTT"
+    @State
+    var index: Int32 = 2
+    @State
+    var space: Int64 = 8
 
-    @State var values1: Array<SelectOption> = [
-            SelectOption(value: "aaa", icon: @r(app.media.startIcon)),
-            SelectOption(value: "bbb", icon: @r(app.media.startIcon)),
-            SelectOption(value: "ccc", icon: @r(app.media.startIcon)),
-            SelectOption(value: "ddd", icon: @r(app.media.startIcon))]
+    @State
+    var values1: Array<SelectOption> = [SelectOption(value: "aaa", icon: @r(app.media.startIcon)),
+        SelectOption(value: "bbb", icon: @r(app.media.startIcon)),
+        SelectOption(value: "ccc", icon: @r(app.media.startIcon)),
+        SelectOption(value: "ddd", icon: @r(app.media.startIcon))]
 
-    @State var arrow: ArrowPosition = ArrowPosition.End
+    @State
+    var arrow: ArrowPosition = ArrowPosition.End
 
     func build() {
         Column {
             Select(this.values1)
-            .selected(1)
-            .value(this.text)
-            .font(size: 16.vp, weight: FontWeight.W500)
-            .fontColor(0x182431)
-            .selectedOptionFont(size: 16.vp, weight: FontWeight.W400)
-            .space(this.space)
-            .arrowPosition(this.arrow)
-            .menuAlign(alignType: MenuAlignType.Start, offset: CommonOffset(0, 0))
-            .optionWidth(200)
-            .optionHeight(300)
-            .onSelect({ index: Int32, text: String =>
-                Hilog.info(0, "AppLogCj", " ==================  Select ====================: ${index}")
-                Hilog.info(0, "AppLogCj", " ==================  text ====================: ${text}")
-                this.index = index;
-                this.text = text;
-            })
+                .selected(1)
+                .value(this.text)
+                .font(size: 16.vp, weight: FontWeight.W500)
+                .fontColor(0x182431)
+                .selectedOptionFont(size: 16.vp, weight: FontWeight.W400)
+                .space(this.space)
+                .arrowPosition(this.arrow)
+                .menuAlign(alignType: MenuAlignType.Start, offset: CommonOffset(0, 0))
+                .optionWidth(200)
+                .optionHeight(300)
+                .onSelect(
+                    {
+                        index: Int32, text: String =>
+                            Hilog.info(0, "AppLogCj", " ==================  Select ====================: ${index}")
+                            Hilog.info(0, "AppLogCj", " ==================  text ====================: ${text}")
+                            this.index = index
+                            this.text = text
+                    }
+                )
         }.width(100.percent)
     }
 }

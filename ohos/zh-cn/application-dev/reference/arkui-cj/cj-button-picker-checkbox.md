@@ -143,8 +143,8 @@ public type OnCheckboxChangeCallback = (Bool) -> Unit
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import kit.PerformanceAnalysisKit.Hilog
@@ -156,27 +156,26 @@ func loggerInfo(str: String) {
 @Entry
 @Component
 class EntryView {
-    func build(){
-        Flex(justifyContent: FlexAlign.SpaceAround, alignItems: ItemAlign.Center){
+    func build() {
+        Flex(justifyContent: FlexAlign.SpaceAround, alignItems: ItemAlign.Center) {
             Checkbox(name: "checkbox1", group: "checkboxGroup")
-            .select(true)
-            .selectedColor(0xed6f21)
-            .shape(CheckBoxShape.Circle)
-            .onChange({value: Bool =>
-                loggerInfo("Checkbox1 change is" + value.toString())
-            })
-            .size(width: 50.vp, height: 50.vp)
+                .select(true)
+                .selectedColor(0xed6f21)
+                .shape(CheckBoxShape.Circle)
+                .onChange({
+                    value: Bool => loggerInfo("Checkbox1 change is" + value.toString())
+                })
+                .size(width: 50.vp, height: 50.vp)
             Checkbox(name: "checkbox2", group: "checkboxGroup")
-            .select(false)
-            .selectedColor(0x39a2db)
-            .shape(CheckBoxShape.RoundedSquare)
-            .onChange({value: Bool =>
-                loggerInfo("Checkbox2 change is" + value.toString())
-            })
-            .width(50.vp)
-            .height(50.vp)
-        }
-        .height(400.vp)
+                .select(false)
+                .selectedColor(0x39a2db)
+                .shape(CheckBoxShape.RoundedSquare)
+                .onChange({
+                    value: Bool => loggerInfo("Checkbox2 change is" + value.toString())
+                })
+                .width(50.vp)
+                .height(50.vp)
+        }.height(400.vp)
     }
 }
 ```
@@ -191,6 +190,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -232,6 +232,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -247,7 +248,7 @@ class EntryView {
     func build() {
         Column() {
             Row() {
-                Checkbox(name: "AAA", indicatorBuilder: bind(indicatorA, this))
+                Checkbox(name: "AAA", indicatorBuilder: indicatorA)
                 Text("AAA")
             }
             Row() {

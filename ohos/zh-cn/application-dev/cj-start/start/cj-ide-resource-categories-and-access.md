@@ -223,7 +223,7 @@ plural.json文件的内容如下：
 
 在resources目录右键菜单选择“New > Resource File”，可同时创建资源目录和资源文件，文件默认创建在base目录的对应资源组。如果选择了限定词，则会按照命名规范自动生成限定词和资源组目录，并将文件创建在限定词目录中。
 
-图中File name为需要创建的文件名。Resource type为资源组类型，默认是Element。Root element为资源类型。Avaliable qualifiers为供选择的限定词目录，通过右侧的小箭头可添加或者删除。
+图中File name为需要创建的文件名。Resource type为资源组类型，默认是Element。Root element为资源类型。Available qualifiers为供选择的限定词目录，通过右侧的小箭头可添加或者删除。
 
 创建的目录名自动生成，格式固定为“限定词.资源组”，例如：创建一个限定词为dark的element目录，自动生成的目录名称为“dark.element”。
 

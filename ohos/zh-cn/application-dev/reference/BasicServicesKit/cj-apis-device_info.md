@@ -533,6 +533,38 @@ public static prop sdkApiVersion: Int32
 
 **起始版本：** 22
 
+### static prop sdkMinorApiVersion
+
+```cangjie
+public static prop sdkMinorApiVersion: Int32
+```
+
+**功能：** SDK Minor API版本号。
+
+**类型：** Int32
+
+**读写能力：** 只读
+
+**系统能力：** SystemCapability.Startup.SystemInfo
+
+**起始版本：** 26.0.0
+
+### static prop sdkPatchApiVersion
+
+```cangjie
+public static prop sdkPatchApiVersion: Int32
+```
+
+**功能：** SDK Patch API版本号。
+
+**类型：** Int32
+
+**读写能力：** 只读
+
+**系统能力：** SystemCapability.Startup.SystemInfo
+
+**起始版本：** 26.0.0
+
 ### static prop securityPatchTag
 
 ```cangjie
@@ -716,7 +748,87 @@ try {
     Hilog.info(0, "deviceinfo", "the value of the distributionOSApiVersion is : :${distributionOSApiVersion}")
     let distributionOSReleaseType = DeviceInfo.distributionOSReleaseType
     Hilog.info(0, "deviceinfo", "the value of the distributionOSReleaseType is : :${distributionOSReleaseType}")
+let sdkMinorApiVersion = DeviceInfo.sdkMinorApiVersion
+    Hilog.info(0, "deviceinfo", "the value of the sdkMinorApiVersion is: :${sdkMinorApiVersion}")
+    let sdkPatchApiVersion = DeviceInfo.sdkPatchApiVersion
+    Hilog.info(0, "deviceinfo", "the value of the sdkPatchApiVersion is: :${sdkPatchApiVersion}")
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
+```
+
+## func apiAvailable(Int32)
+
+```cangjie
+public func apiAvailable(version: Int32): Bool
+```
+
+**功能：** 检查指定的API版本在当前设备上是否可用。该函数提供跨不同OpenHarmony/发行版系统版本的兼容性检查，根据输入格式和API版本范围自动选择合适的版本检查方式。
+
+**系统能力：** SystemCapability.Startup.SystemInfo
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|version|Int32|是|-|要检查的API版本。接受数字格式（例如13），表示OpenHarmony SDK API版本（仅API 26-）。|
+
+**返回值：**
+
+|类型|说明|
+|:----|:----|
+|Bool|如果指定的API版本在当前设备上可用，返回true，否则返回false。|
+
+**示例：**
+
+<!-- compile -->
+
+```cangjie
+// index.cj
+
+import kit.BasicServicesKit.*
+import kit.PerformanceAnalysisKit.Hilog
+
+let result = apiAvailable(13)
+Hilog.info(0, "deviceinfo", "apiAvailable(13) result: ${result}")
+```
+
+## func apiAvailable(String)
+
+```cangjie
+public func apiAvailable(version: String): Bool
+```
+
+**功能：** 检查指定的API版本在当前设备上是否可用。该函数提供跨不同OpenHarmony/发行版系统版本的兼容性检查，根据输入格式和API版本范围自动选择合适的版本检查方式。
+
+**系统能力：** SystemCapability.Startup.SystemInfo
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|version|String|是|-|要检查的API版本。接受字符串格式（例如"26.0.0"、"5.0.1"）：API 26+（version >= 26.0.0）表示OpenHarmony和发行版系统API版本；API 26-（version < 26.0.0）表示发行版系统API版本。|
+
+**返回值：**
+
+|类型|说明|
+|:----|:----|
+|Bool|如果指定的API版本在当前设备上可用，返回true，否则返回false。|
+
+**示例：**
+
+<!-- compile -->
+
+```cangjie
+// index.cj
+
+import kit.BasicServicesKit.*
+import kit.PerformanceAnalysisKit.Hilog
+
+let result = apiAvailable("26.0.0")
+Hilog.info(0, "deviceinfo", "apiAvailable(\"26.0.0\") result: ${result}")
 ```

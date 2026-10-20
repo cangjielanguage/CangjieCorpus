@@ -373,7 +373,7 @@ public func off(event: HttpRequestEvent, callback!: ?CallbackObject = None): Uni
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -434,7 +434,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<HashMap<Stri
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -454,7 +454,7 @@ import ohos.callback_invoke.*
 import std.collection.HashMap
 
 // 定义HeadersReceiveCb类
-class HeadersReceiveCb1 <: Callback1Argument<HashMap<String, String>> {
+class HeadersReceiveCb <: Callback1Argument<HashMap<String, String>> {
     let callback_: (HashMap<String, String>)->Unit
     public init(callback: (HashMap<String, String>)->Unit) {callback_ = callback}
     public func invoke(err: ?BusinessException, val: HashMap<String, String>): Unit {
@@ -465,7 +465,7 @@ class HeadersReceiveCb1 <: Callback1Argument<HashMap<String, String>> {
 try {
     let client = createHttp()
 
-    let headersReceiveCallBack = HeadersReceiveCb1({ map => Hilog.info(0, "test", "header info: ${map}") })
+    let headersReceiveCallBack = HeadersReceiveCb({ map => Hilog.info(0, "test", "header info: ${map}") })
     client.on(HttpRequestEvent.HeadersReceive, headersReceiveCallBack)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -493,7 +493,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<Array<Byte>>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -551,7 +551,7 @@ public func on(event: HttpRequestEvent, callback: Callback0Argument): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -609,7 +609,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<DataReceiveP
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -667,7 +667,7 @@ public func on(event: HttpRequestEvent, callback: Callback1Argument<DataSendProg
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -687,7 +687,7 @@ import std.collection.HashMap
 import ohos.callback_invoke.*
 
 // 定义HeadersReceiveCb类
-class HeadersReceiveCb2 <: Callback1Argument<HashMap<String, String>> {
+class HeadersReceiveCb <: Callback1Argument<HashMap<String, String>> {
     let callback_: (HashMap<String, String>)->Unit
     public init(callback: (HashMap<String, String>)->Unit) {callback_ = callback}
     public func invoke(err: ?BusinessException, val: HashMap<String, String>): Unit {
@@ -698,7 +698,7 @@ class HeadersReceiveCb2 <: Callback1Argument<HashMap<String, String>> {
 try {
     let client = createHttp()
 
-    let onceHeadersReceiveCallBack = HeadersReceiveCb2({ map => Hilog.info(0, "test", "header info once: ${map}") })
+    let onceHeadersReceiveCallBack = HeadersReceiveCb({ map => Hilog.info(0, "test", "header info once: ${map}") })
     client.once(HttpRequestEvent.HeadersReceive, onceHeadersReceiveCallBack)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -726,7 +726,7 @@ public func once(event: HttpRequestEvent, callback: Callback1Argument<HashMap<St
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[网络连接管理错误码](./cj-errorcode-net-connection.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -764,7 +764,7 @@ public func request(url: String, options: HttpRequestOptions, callback: AsyncCal
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -861,43 +861,43 @@ public func request(url: String, callback: AsyncCallback<HttpResponse>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，[HTTP错误码](./cj-errorcode-net-http.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，[HTTP错误码](./cj-errorcode-net-http.md)和[通用错误码](../cj-errorcode-universal.md)。
 - HTTP接口返回错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考：[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 2300001 | Unsupported protocol. |
-  | 2300003 | URL using bad/illegal format or missing URL. |
-  | 2300005 | Couldn't resolve proxy name. |
-  | 2300006 | Couldn't resolve host name. |
-  | 2300007 | Couldn't connect to server. |
-  | 2300008 | Weird server reply. |
-  | 2300009 | Access denied to remote resource. |
+  | 2300003 | Invalid URL format or missing URL. |
+  | 2300005 | Failed to resolve the proxy name. |
+  | 2300006 | Failed to resolve the host name. |
+  | 2300007 | Failed to connect to the server. |
+  | 2300008 | Invalid server response. |
+  | 2300009 | Access to the remote resource denied. |
   | 2300016 | Error in the HTTP2 framing layer. |
   | 2300018 | Transferred a partial file. |
-  | 2300023 | Failed writing received data to disk/application. |
+  | 2300023 | Failed to write the received data to the disk or application. |
   | 2300025 | Upload failed. |
-  | 2300026 | Failed to open/read local data from file/application. |
+  | 2300026 | Failed to open or read local data from the file or application. |
   | 2300027 | Out of memory. |
-  | 2300028 | Timeout was reached. |
-  | 2300047 | Number of redirects hit maximum amount. |
-  | 2300052 | Server returned nothing (no headers, no data). |
-  | 2300055 | Failed sending data to the peer. |
-  | 2300056 | Failure when receiving data from the peer. |
-  | 2300058 | Problem with the local SSL certificate. |
-  | 2300059 | Couldn't use specified SSL cipher. |
-  | 2300060 | SSL peer certificate or SSH remote key was not OK. |
-  | 2300061 | Unrecognized or bad HTTP Content or Transfer-Encoding. |
+  | 2300028 | Operation timeout. |
+  | 2300047 | The number of redirections reaches the maximum allowed. |
+  | 2300052 | The server returned nothing (no header or data). |
+  | 2300055 | Failed to send data to the peer. |
+  | 2300056 | Failed to receive data from the peer. |
+  | 2300058 | Local SSL certificate error. |
+  | 2300059 | The specified SSL cipher cannot be used. |
+  | 2300060 | Invalid SSL peer certificate or SSH remote key. |
+  | 2300061 | Invalid HTTP encoding format. |
   | 2300063 | Maximum file size exceeded. |
-  | 2300070 | Disk full or allocation exceeded. |
+  | 2300070 | Remote disk full. |
   | 2300073 | Remote file already exists. |
-  | 2300077 | Problem with the SSL CA cert (path? access rights?). |
+  | 2300077 | The SSL CA certificate does not exist or is inaccessible. |
   | 2300078 | Remote file not found. |
-  | 2300094 | An authentication function returned an error. |
+  | 2300094 | Authentication error. |
   | 2300997 | Cleartext traffic not permitted. |
   | 2300998 | It is not allowed to access this domain. |
-  | 2300999 | Unknown Other Error. |
+  | 2300999 | Internal error. |
 
 **示例：**
 
@@ -952,7 +952,7 @@ public func requestInStream(url: String, options: HttpRequestOptions, callback: 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[HTTP错误码](./cj-errorcode-net-http.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1041,43 +1041,43 @@ public func requestInStream(url: String, callback: AsyncCallback<UInt32>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，[HTTP错误码](./cj-errorcode-net-http.md)和[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，[HTTP错误码](./cj-errorcode-net-http.md)和[通用错误码](../cj-errorcode-universal.md)。
 - HTTP接口返回错误码映射关系：2300000 + curl错误码。更多常用错误码，可参考：[curl错误码](https://curl.se/libcurl/c/libcurl-errors.html)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 201 | Permission denied. |
   | 2300001 | Unsupported protocol. |
-  | 2300003 | URL using bad/illegal format or missing URL. |
-  | 2300005 | Couldn't resolve proxy name. |
-  | 2300006 | Couldn't resolve host name. |
-  | 2300007 | Couldn't connect to server. |
-  | 2300008 | Weird server reply. |
-  | 2300009 | Access denied to remote resource. |
+  | 2300003 | Invalid URL format or missing URL. |
+  | 2300005 | Failed to resolve the proxy name. |
+  | 2300006 | Failed to resolve the host name. |
+  | 2300007 | Failed to connect to the server. |
+  | 2300008 | Invalid server response. |
+  | 2300009 | Access to the remote resource denied. |
   | 2300016 | Error in the HTTP2 framing layer. |
   | 2300018 | Transferred a partial file. |
-  | 2300023 | Failed writing received data to disk/application. |
+  | 2300023 | Failed to write the received data to the disk or application. |
   | 2300025 | Upload failed. |
-  | 2300026 | Failed to open/read local data from file/application. |
+  | 2300026 | Failed to open or read local data from the file or application. |
   | 2300027 | Out of memory. |
-  | 2300028 | Timeout was reached. |
-  | 2300047 | Number of redirects hit maximum amount. |
-  | 2300052 | Server returned nothing (no headers, no data). |
-  | 2300055 | Failed sending data to the peer. |
-  | 2300056 | Failure when receiving data from the peer. |
-  | 2300058 | Problem with the local SSL certificate. |
-  | 2300059 | Couldn't use specified SSL cipher. |
-  | 2300060 | SSL peer certificate or SSH remote key was not OK. |
-  | 2300061 | Unrecognized or bad HTTP Content or Transfer-Encoding. |
+  | 2300028 | Operation timeout. |
+  | 2300047 | The number of redirections reaches the maximum allowed. |
+  | 2300052 | The server returned nothing (no header or data). |
+  | 2300055 | Failed to send data to the peer. |
+  | 2300056 | Failed to receive data from the peer. |
+  | 2300058 | Local SSL certificate error. |
+  | 2300059 | The specified SSL cipher cannot be used. |
+  | 2300060 | Invalid SSL peer certificate or SSH remote key. |
+  | 2300061 | Invalid HTTP encoding format. |
   | 2300063 | Maximum file size exceeded. |
-  | 2300070 | Disk full or allocation exceeded. |
+  | 2300070 | Remote disk full. |
   | 2300073 | Remote file already exists. |
-  | 2300077 | Problem with the SSL CA cert (path? access rights?). |
+  | 2300077 | The SSL CA certificate does not exist or is inaccessible. |
   | 2300078 | Remote file not found. |
-  | 2300094 | An authentication function returned an error. |
+  | 2300094 | Authentication error. |
   | 2300997 | Cleartext traffic not permitted. |
   | 2300998 | It is not allowed to access this domain. |
-  | 2300999 | Unknown Other Error. |
+  | 2300999 | Internal error. |
 
 **示例：**
 
@@ -2259,7 +2259,7 @@ public enum HttpRequestEvent <: Equatable<HttpRequestEvent> & Hashable {
 
 **父类型：**
 
-- Equatable\<HttpRequestEvent>
+- Equatable\<[HttpRequestEvent](#enum-httprequestevent)>
 - Hashable
 
 ### DataEnd

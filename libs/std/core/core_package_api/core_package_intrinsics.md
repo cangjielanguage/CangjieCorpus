@@ -1518,7 +1518,7 @@ extend Float16
 public static func fromBits(bits: UInt16): Float16
 ```
 
-功能：将指定的 [UInt16](core_package_intrinsics.md#uint16) 按照`IEEE 754`标准中 float16 的二进制位表示形式，直接转换为对应的 [Float16](core_package_intrinsics.md#float16) 浮点数。
+功能：将指定的 [UInt16](core_package_intrinsics.md#uint16) 按照 `IEEE 754` 标准中 float16 的二进制位表示形式，直接转换为对应的 [Float16](core_package_intrinsics.md#float16) 浮点数。
 
 参数：
 
@@ -2155,7 +2155,7 @@ extend Float32
 public static func fromBits(bits: UInt32): Float32
 ```
 
-功能：将指定的 [UInt32](core_package_intrinsics.md#uint32) 按照`IEEE 754`标准中 float32 的二进制位表示形式，直接转换为对应的 [Float32](core_package_intrinsics.md#float32) 浮点数。
+功能：将指定的 [UInt32](core_package_intrinsics.md#uint32)按照 `IEEE 754` 标准中 float32 的二进制位表示形式，直接转换为对应的[Float32](core_package_intrinsics.md#float32)浮点数。
 
 参数：
 
@@ -2792,7 +2792,7 @@ extend Float64
 public static func fromBits(bits: UInt64): Float64
 ```
 
-功能：将指定的 [UInt64](core_package_intrinsics.md#uint64) 按照 `IEEE 754` 标准中 float64 的二进制位表示形式，直接转换为对应的 [Float64](core_package_intrinsics.md#float32) 浮点数。
+功能：将指定的 [UInt64](core_package_intrinsics.md#uint64)按照 `IEEE 754` 标准中 float64 的二进制位表示形式，直接转换为对应的[Float64](core_package_intrinsics.md#float64)浮点数。
 
 参数：
 
@@ -4688,14 +4688,14 @@ A
 public static func getPreviousFromUtf8(arr: Array<UInt8>, index: Int64): (Rune, Int64)
 ```
 
-功能：获取字节数组中指定索引对应的字节所在的 UTF-8 编码字符，同时返回该字符字节的长度。
+功能：获取字节数组中索引 `index` 前一个字节（即 `arr[index - 1]`）所在的 UTF-8 编码字符，同时返回该字符字节的长度。
 
-当指定了一个索引，那么函数会找到数组对应索引位置并且根据 UTF-8 规则，查看该字节码是否是字符的首位字节码，如果不是就继续向前遍历，直到该字节码是首位字节码，然后利用字节码序列找到对应的字符。
+函数从 `arr[index - 1]` 开始，根据 UTF-8 规则判断该字节是否为字符的首字节码，如果不是则继续向前遍历，直到找到首字节码，然后利用字节码序列解码对应的字符。参数 `index` 的有效取值范围为 `[1, arr.size]`。
 
 参数：
 
 - arr: [Array](core_package_structs.md#struct-arrayt)\<[UInt8](core_package_intrinsics.md#uint8)> - 待从中获取字符的字节数组。
-- index: [Int64](core_package_intrinsics.md#int64) - 待查找字符字节在数组中的索引。
+- index: [Int64](core_package_intrinsics.md#int64) - 字节数组中的索引，函数将查找 `arr[index - 1]` 所在的字符，取值范围为 `[1, arr.size]`。
 
 返回值：
 
@@ -4703,7 +4703,8 @@ public static func getPreviousFromUtf8(arr: Array<UInt8>, index: Int64): (Rune, 
 
 异常：
 
-- [IllegalArgumentException](core_package_exceptions.md#class-illegalargumentexception) - 如果找不到对应首位字节码，即指定字节所在位置的字节不符合 UTF-8 编码，抛出异常。
+- [IllegalArgumentException](core_package_exceptions.md#class-illegalargumentexception) - 如果 `index` 小于等于 0，不存在前一个字节，抛出异常；如果找不到对应首字节码，即 `arr[index - 1]` 所在位置的字节不符合 UTF-8 编码，抛出异常。
+- [IndexOutOfBoundsException](core_package_exceptions.md#class-indexoutofboundsexception) - 如果 `index` 大于 `arr.size`，抛出异常。
 
 示例：
 

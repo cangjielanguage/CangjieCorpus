@@ -218,7 +218,7 @@ public enum BatteryCapacityLevel <: Equatable<BatteryCapacityLevel> & ToString {
 
 **父类型：**
 
-- Equatable\<BatteryCapacityLevel>
+- Equatable\<[BatteryCapacityLevel](#enum-batterycapacitylevel)>
 - ToString
 
 ### LevelCritical
@@ -391,7 +391,7 @@ public enum BatteryChargeState <: Equatable<BatteryChargeState> & ToString {
 
 **父类型：**
 
-- Equatable\<BatteryChargeState>
+- Equatable\<[BatteryChargeState](#enum-batterychargestate)>
 - ToString
 
 ### Disabled
@@ -530,7 +530,7 @@ public enum BatteryHealthState <: Equatable<BatteryHealthState> & ToString {
 
 **父类型：**
 
-- Equatable\<BatteryHealthState>
+- Equatable\<[BatteryHealthState](#enum-batteryhealthstate)>
 - ToString
 
 ### Cold
@@ -691,7 +691,7 @@ public enum BatteryPluggedType <: Equatable<BatteryPluggedType> & ToString {
 
 **父类型：**
 
-- Equatable\<BatteryPluggedType>
+- Equatable\<[BatteryPluggedType](#enum-batterypluggedtype)>
 - ToString
 
 ### Ac

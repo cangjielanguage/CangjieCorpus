@@ -98,12 +98,12 @@ public func createImageReceiver(size: Size, format: ImageFormat, capacity: Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
-  | 62980115 | Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
+  | 62980115 | Invalid image parameter. |
 
 **示例：**
 
@@ -154,11 +154,11 @@ public func createImageSource(uri: String): ImageSource
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -210,11 +210,11 @@ public func createImageSource(uri: String, options: SourceOptions): ImageSource
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -265,11 +265,11 @@ public func createImageSource(fd: Int32): ImageSource
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -320,11 +320,11 @@ public func createImageSource(fd: Int32, options: SourceOptions): ImageSource
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -375,11 +375,11 @@ public func createImageSource(buf: Array<UInt8>): ImageSource
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -431,11 +431,11 @@ public func createImageSource(buf: Array<UInt8>, options: SourceOptions): ImageS
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -488,11 +488,11 @@ public func createImageSource(rawfile: RawFileDescriptor, options!: SourceOption
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -546,12 +546,12 @@ public func createPixelMap(colors: Array<UInt8>, options: InitializationOptions)
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
-  | 62980115 | Parameter error. Possible causes: 1.Mandatory parameters are left unspecified. 2.Incorrect parameter types. 3.Parameter verification failed. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
+  | 62980115 | Invalid image parameter. |
 
 **示例：**
 
@@ -591,7 +591,6 @@ func getPixelMap(): PixelMap {
 @Entry
 @Component
 class EntryView {
-
     func build() {
         Row {
             Column {
@@ -892,7 +891,7 @@ public init(sampleSize!: UInt32 = 1, rotate!: UInt32 = 0, editable!: Bool = fals
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |sampleSize|UInt32|否|1|**命名参数。** 缩略图采样大小，默认值为1。当前只能取1。|
-|rotate|UInt32|否|0|**命名参数。** 旋转角度。默认值为0。|
+|rotate|UInt32|否|0|**命名参数。** 旋转角度。默认值为0。若设置浮点型旋转角度，推荐使用PixelMap类的[rotate](#func-rotatefloat32)接口。|
 |editable|Bool|否|false|**命名参数。** true表示可编辑，false表示不可编辑。默认值为false。当取值为false时，图片不可二次编辑，如writePixels操作将失败。|
 |desiredSize|[Size](#class-size)|否|Size(0, 0)|**命名参数。** 期望输出大小，必须为正整数，若与原尺寸比例不一致，则会进行拉伸/缩放到指定尺寸，默认为原始尺寸。|
 |desiredRegion|[Region](#class-region)|否|Region(Size(0, 0), 0, 0)|**命名参数。** 解码图像中由Region指定的矩形区域，当原始图像很大而只需要解码图像的一部分时，可以设置该参数，有助于提升性能，默认为原始大小。|
@@ -940,11 +939,11 @@ public prop clipRect: Region
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### prop format
 
@@ -964,11 +963,11 @@ public prop format: Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### prop size
 
@@ -988,11 +987,11 @@ public prop size: Size
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### func getComponent(ComponentType)
 
@@ -1020,11 +1019,11 @@ public func getComponent(componentType: ComponentType): Component
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -1262,12 +1261,12 @@ public prop supportedFormats: Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980098 | Failed to malloc memory. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980098 | Shared memory does not exist. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### func packToData(ImageSource, PackingOption)
 
@@ -1296,16 +1295,16 @@ public func packToData(source: ImageSource, options: PackingOption): Array<UInt8
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980101 | The image data is abnormal. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980106 | The image data is too large. This status code is thrown when an error occurs during the process of checking size. |
-  | 62980113 | Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted. |
-  | 62980115 | If the parameter is invalid. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
+  | 62980115 | Invalid image parameter. |
   | 62980119 | Failed to encode the image. |
   | 62980120 | Add pixelmap out of range. |
   | 62980172 | Failed to encode icc. |
@@ -1365,16 +1364,16 @@ public func packToData(source: PixelMap, options: PackingOption): Array<UInt8>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980096 | The operation failed. Possible cause: 1.Image upload exception.2. Decoding process exception. 3. Insufficient memory. |
+  | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980101 | The image data is abnormal. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980106 | The image data is too large. This status code is thrown when an error occurs during the process of checking size. |
-  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be occorrupted. |
-  | 62980115 | If the parameter is invalid. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
+  | 62980115 | Invalid image parameter. |
   | 62980119 | Failed to encode the image. |
   | 62980120 | Add pixelmap out of range. |
   | 62980172 | Failed to encode icc. |
@@ -1426,16 +1425,16 @@ public func packToFile(source: ImageSource, fd: Int32, options: PackingOption): 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980101 | The image data is abnormal. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980106 | The image data is too large. This status code is thrown when an error occurs during the process of checking size. |
-  | 62980113 | Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted. |
-  | 62980115 | Invalid input parameter. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
+  | 62980115 | Invalid image parameter. |
   | 62980119 | Failed to encode the image. |
   | 62980120 | Add pixelmap out of range. |
   | 62980172 | Failed to encode icc. |
@@ -1490,16 +1489,16 @@ public func packToFile(source: PixelMap, fd: Int32, options: PackingOption): Uni
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980096 | The operation failed. Possible cause: 1.Image upload exception.2. Decoding process exception. 3. Insufficient memory. |
+  | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980101 | The image data is abnormal. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980106 | The image data is too large. This status code is thrown when an error occurs during the process of checking size. |
-  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be occorrupted. |
-  | 62980115 | Invalid input parameter. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
+  | 62980115 | Invalid image parameter. |
   | 62980119 | Failed to encode the image. |
   | 62980120 | Add pixelmap out of range. |
   | 62980172 | Failed to encode icc. |
@@ -1675,11 +1674,11 @@ public prop capacity: Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### prop format
 
@@ -1699,11 +1698,11 @@ public prop format: ImageFormat
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### prop size
 
@@ -1723,11 +1722,11 @@ public prop size: Size
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### func getReceivingSurfaceId()
 
@@ -1749,11 +1748,11 @@ public func getReceivingSurfaceId(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -1835,11 +1834,11 @@ public func readLatestImage(): Image
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -1885,11 +1884,11 @@ public func readNextImage(): Image
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -1988,7 +1987,7 @@ import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 import ohos.callback_invoke.*
 
-class Callback1 <: Callback0Argument {
+class Callback <: Callback0Argument {
     public func invoke(res: ?BusinessException): Unit {
         Hilog.info(0, "test", "invoke success")
     }
@@ -1997,7 +1996,7 @@ class Callback1 <: Callback0Argument {
 try {
     let size = Size(8, 8192)
     let receiver = createImageReceiver(size, ImageFormat.Jpeg, 8)
-    let callback = Callback1()
+    let callback = Callback()
     receiver.on(ImageArrival, callback)
     receiver.off(ImageArrival)
 } catch (e: BusinessException) {
@@ -2043,12 +2042,12 @@ public prop supportedFormats: Array<String>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980102 | Failed to malloc memory. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980102 | Image malloc abnormal. This status code is thrown when an error occurs during the process of copying data. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### func createPixelMap(DecodingOptions)
 
@@ -2080,11 +2079,11 @@ public func createPixelMap(options!: DecodingOptions = DecodingOptions()): Pixel
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -2153,16 +2152,16 @@ public func createPixelMapList(options!: DecodingOptions = DecodingOptions()): A
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980099 | The shared memory data is abnormal. |
   | 62980101 | The image data is abnormal. |
-  | 62980102 | Failed to malloc memory. |
+  | 62980102 | Image malloc abnormal. This status code is thrown when an error occurs during the process of copying data. |
   | 62980103 | The image data is not supported. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980106 | The image data is too large. This status code is thrown when an error occurs during the process of checking size. |
   | 62980109 | Failed to crop the image. |
   | 62980111 | The image source data is incomplete. |
@@ -2224,13 +2223,13 @@ public func getDelayTimeList(): Array<Int32>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
-  | 62980102 | Failed to malloc memory. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980102 | Image malloc abnormal. This status code is thrown when an error occurs during the process of copying data. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980110 | The image source data is incorrect. |
   | 62980111 | The image source data is incomplete. |
   | 62980115 | Invalid image parameter. |
@@ -2280,15 +2279,15 @@ public func getFrameCount(): UInt32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980111 | The image source data is incomplete. |
   | 62980112 | The image format does not match. |
-  | 62980113 | Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
   | 62980115 | Invalid image parameter. |
   | 62980116 | Failed to decode the image. |
   | 62980118 | Failed to create the image plugin. |
@@ -2342,11 +2341,11 @@ public func getImageInfo(index!: UInt32 = 0): ImageInfo
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -2398,17 +2397,17 @@ public func getImageProperty(key: PropertyKey, options!: ImagePropertyOptions = 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 62980096 | The operation failed. Possible cause: 1.Image upload exception. 2. Decoding process exception. 3. Insufficient memory. |
   | 62980103 | The image data is not supported. |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980110 | The image source data is incorrect. |
   | 62980111 | The image source data is incomplete. |
   | 62980112 | The image format does not match. |
-  | 62980113 | Unknown image format. The image data provided is not in a recognized or supported format, or it may be occorrupted. |
+  | 62980113 | Unknown image format.The image data provided is not in a recognized or supported format, or it may be corrupted. |
   | 62980115 | Invalid image parameter. |
   | 62980118 | Failed to create the image plugin. |
   | 62980122 | Failed to decode the image header. |
@@ -2448,7 +2447,9 @@ public func modifyImageProperty(key: PropertyKey, value: String): Unit
 
 > **说明：**
 >
-> 调用modifyImageProperty修改属性会改变属性字节长度，使用buffer创建的ImageSource调用modifyImageProperty会导致buffer内容覆盖，目前buffer创建的ImageSource不支持调用此接口，请改用fd或path创建的ImageSource。
+> - 调用modifyImageProperty修改属性会改变属性字节长度，使用buffer创建的ImageSource调用modifyImageProperty会导致buffer内容覆盖，目前buffer创建的ImageSource不支持调用此接口，请改用fd或path创建的ImageSource。
+> 
+> - 调用modifyImageProperty接口修改Exif字段时，必须确保对应的图片文件有写权限，否则会导致字段修改不成功。
 
 **系统能力：** SystemCapability.Multimedia.Image.ImageSource
 
@@ -2463,13 +2464,13 @@ public func modifyImageProperty(key: PropertyKey, value: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980110 | The image source data is incorrect. |
-  | 62980115 | Parameter error.Possible causes: 1.Mandatory parameters are left unspecified; 2.Incorrect parameter types. |
+  | 62980115 | Invalid image parameter. |
   | 62980123 | The image does not support EXIF decoding. |
   | 62980133 | The EXIF data is out of range. |
   | 62980135 | The EXIF value is invalid. |
@@ -2514,11 +2515,11 @@ public func release(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -2564,11 +2565,11 @@ public func updateData(buf: Array<UInt8>, isFinished: Bool, offset: UInt32, leng
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -2912,11 +2913,11 @@ public prop isEditable: Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### prop isStrideAlignment
 
@@ -2936,11 +2937,11 @@ public prop isStrideAlignment: Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 ### func applyColorSpace(ColorSpaceManager)
 
@@ -2962,11 +2963,11 @@ public func applyColorSpace(targetColorSpace: ColorSpaceManager): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980108 | Failed to convert the color space. |
   | 62980115 | Invalid image parameter. |
 
@@ -3014,11 +3015,11 @@ public func createAlphaPixelMap(): PixelMap
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3062,11 +3063,11 @@ public func crop(region: Region): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3112,11 +3113,11 @@ public func flip(horizontal: Bool, vertical: Bool): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3162,11 +3163,11 @@ public func getBytesNumberPerRow(): UInt32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3210,14 +3211,14 @@ public func getColorSpace(): ColorSpaceManager
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980101 | If the image data abnormal. |
-  | 62980103 | If the image data unsupport. |
-  | 62980104 | Failed to initialize the internal object. |
-  | 62980115 | If the image parameter invalid. |
+  | 62980101 | The image data is abnormal. |
+  | 62980103 | The image data is not supported. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
+  | 62980115 | Invalid image parameter. |
 
 **示例：**
 
@@ -3262,11 +3263,11 @@ public func getDensity(): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3310,11 +3311,11 @@ public func getImageInfo(): ImageInfo
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3358,11 +3359,11 @@ public func getPixelBytesNumber(): UInt32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3406,11 +3407,11 @@ public func opacity(rate: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3455,11 +3456,11 @@ public func readPixels(area: PositionArea): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3509,11 +3510,11 @@ public func readPixelsToBuffer(dst: Array<UInt8>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3560,11 +3561,11 @@ public func release(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3613,11 +3614,11 @@ public func rotate(angle: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3668,11 +3669,11 @@ public func scale(x: Float32, y: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3716,13 +3717,13 @@ public func setColorSpace(colorSpace: ColorSpaceManager): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
   | 62980111 | The image source data is incomplete. |
-  | 62980115 | If the image parameter invalid. |
+  | 62980115 | Invalid image parameter. |
 
 **示例：**
 
@@ -3771,11 +3772,11 @@ translate后的图片尺寸改变为：width+X ，height+Y，建议translate后�
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3821,11 +3822,11 @@ public func writeBufferToPixels(src: Array<UInt8>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3856,7 +3857,7 @@ try {
 public func writePixels(area: PositionArea): Unit
 ```
 
-**功能：** 固定按照BGRA_8888格式，读取[PositionArea](#class-positionarea).pixels缓冲区中的图像像素数据，并写入PixelMap指定区域内，该区域由[PositionArea](#class-positionarea).region指定。
+**功能：** 固定按照Bgra8888格式，读取[PositionArea](#class-positionarea).pixels缓冲区中的图像像素数据，并写入PixelMap指定区域内，该区域由[PositionArea](#class-positionarea).region指定。
 
 可用公式计算PositionArea需要申请的内存大小。
 
@@ -3876,11 +3877,11 @@ RGBA的区域计算公式：读取区域（region.size{width * height}）* 4 （
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[Image错误码](./cj-errorcode-image.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 62980104 | Failed to initialize the internal object. |
+  | 62980104 | Image initialization abnormal. This status code is thrown when an error occurs during the process of creating empty pixelmap. |
 
 **示例：**
 
@@ -3950,7 +3951,7 @@ public var offset: UInt32
 public var pixels: Array<UInt8>
 ```
 
-**功能：** 像素。仅支持BGRA_8888格式的图像像素数据。
+**功能：** 像素。仅支持Bgra8888格式的图像像素数据。
 
 **类型：** Array\<UInt8>
 
@@ -4008,7 +4009,7 @@ public init(pixels: Array<UInt8>, offset: UInt32, stride: UInt32, region: Region
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|pixels|Array\<UInt8>|是|-|像素。仅支持BGRA_8888格式的图像像素数据。|
+|pixels|Array\<UInt8>|是|-|像素。仅支持Bgra8888格式的图像像素数据。|
 |offset|UInt32|是|-|偏移量。单位：字节。|
 |stride|UInt32|是|-|跨距，内存中每行像素所占的空间。stride >= region.size.width*4。|
 |region|[Region](#class-region)|是|-|区域，按照区域读写。写入的区域宽度加X坐标不能大于原图的宽度，写入的区域高度加Y坐标不能大于原图的高度。|
@@ -4274,7 +4275,7 @@ public enum AlphaType <: Equatable<AlphaType> & ToString {
 
 **父类型：**
 
-- Equatable\<AlphaType>
+- Equatable\<[AlphaType](#enum-alphatype)>
 - ToString
 
 ### Opaque
@@ -4411,7 +4412,7 @@ public enum ComponentType <: Equatable<ComponentType> & ToString {
 
 **父类型：**
 
-- Equatable\<ComponentType>
+- Equatable\<[ComponentType](#enum-componenttype)>
 - ToString
 
 ### Jpeg
@@ -4547,7 +4548,7 @@ public enum DecodingDynamicRange <: Equatable<DecodingDynamicRange> & ToString {
 
 **父类型：**
 
-- Equatable\<DecodingDynamicRange>
+- Equatable\<[DecodingDynamicRange](#enum-decodingdynamicrange)>
 - ToString
 
 ### Auto
@@ -4670,7 +4671,7 @@ public enum ImageFormat <: Equatable<ImageFormat> & ToString {
 
 **父类型：**
 
-- Equatable\<ImageFormat>
+- Equatable\<[ImageFormat](#enum-imageformat)>
 - ToString
 
 ### Jpeg
@@ -4781,7 +4782,7 @@ public enum PackingDynamicRange <: Equatable<PackingDynamicRange> & ToString {
 
 **父类型：**
 
-- Equatable\<PackingDynamicRange>
+- Equatable\<[PackingDynamicRange](#enum-packingdynamicrange)>
 - ToString
 
 ### Auto
@@ -4902,7 +4903,7 @@ public enum PixelMapFormat <: Equatable<PixelMapFormat> & ToString {
 
 **父类型：**
 
-- Equatable\<PixelMapFormat>
+- Equatable\<[PixelMapFormat](#enum-pixelmapformat)>
 - ToString
 
 ### Alpha8
@@ -6147,7 +6148,7 @@ public enum ScaleMode <: Equatable<ScaleMode> & ToString {
 
 **父类型：**
 
-- Equatable\<ScaleMode>
+- Equatable\<[ScaleMode](#enum-scalemode)>
 - ToString
 
 ### CenterCrop

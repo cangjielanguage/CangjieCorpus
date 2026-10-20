@@ -26,6 +26,7 @@ Stack组件为容器组件，容器内可包含各种子元素。其中子元素
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -49,9 +50,9 @@ class EntryView {
                     .backgroundColor(0x0A9F7)
                     .fontColor(0x000)
             }
-            .width(100.percent)
-            .height(150)
-            .margin(top: 50)
+                .width(100.percent)
+                .height(150)
+                .margin(top: 50)
         }
     }
 }
@@ -71,6 +72,7 @@ Stack组件通过[alignContent参数](../reference/arkui-cj/cj-row-column-stack-
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -95,9 +97,9 @@ class EntryView {
                 .backgroundColor(0xc1cbac)
                 .align(Alignment.BottomEnd)
         }
-        .width(100.percent)
-        .height(150)
-        .margin(top: 5)
+            .width(100.percent)
+            .height(150)
+            .margin(top: 5)
     }
 }
 ```
@@ -112,6 +114,7 @@ Stack容器中兄弟组件显示层级关系可以通过[Z序控制](../referenc
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -125,27 +128,27 @@ class EntryView {
                     .textAlign(TextAlign.End)
                     .fontSize(20)
             }
-            .width(100)
-            .height(100)
-            .backgroundColor(0xffd306)
+                .width(100)
+                .height(100)
+                .backgroundColor(0xffd306)
 
             Column() {
                 Text('Stack子元素2').fontSize(20)
             }
-            .width(150)
-            .height(150)
-            .backgroundColor(0xFEC0CD)
+                .width(150)
+                .height(150)
+                .backgroundColor(0xFEC0CD)
 
             Column() {
                 Text('Stack子元素3').fontSize(20)
             }
-            .width(200)
-            .height(200)
-            .backgroundColor(Color.Gray)
+                .width(200)
+                .height(200)
+                .backgroundColor(Color.Gray)
         }
-        .width(350)
-        .height(350)
-        .backgroundColor(0xe0e0e0)
+            .width(350)
+            .height(350)
+            .backgroundColor(0xe0e0e0)
     }
 }
 ```
@@ -158,6 +161,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -169,27 +173,27 @@ class EntryView {
             Column() {
                 Text('Stack子元素1').fontSize(20)
             }
-            .width(100)
-            .height(100)
-            .backgroundColor(0xffd306)
-            .zIndex(2)
+                .width(100)
+                .height(100)
+                .backgroundColor(0xffd306)
+                .zIndex(2)
             Column() {
                 Text('Stack子元素2').fontSize(20)
             }
-            .width(150)
-            .height(150)
-            .backgroundColor(0xFEC0CD)
-            .zIndex(1)
+                .width(150)
+                .height(150)
+                .backgroundColor(0xFEC0CD)
+                .zIndex(1)
             Column() {
                 Text('Stack子元素3').fontSize(20)
             }
-            .width(200)
-            .height(200)
-            .backgroundColor(Color.Gray)
+                .width(200)
+                .height(200)
+                .backgroundColor(Color.Gray)
         }
-        .width(350)
-        .height(350)
-        .backgroundColor(0xe0e0e0)
+            .width(350)
+            .height(350)
+            .backgroundColor(0xe0e0e0)
     }
 }
 ```
@@ -204,6 +208,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -214,35 +219,37 @@ class EntryView {
     func build() {
         Stack(alignContent: Alignment.Bottom) {
             Flex(wrap: FlexWrap.Wrap) {
-                ForEach(this.arr,itemGeneratorFunc: {
-                    item: String, idx: Int64 => Text(item)
-                        .width(100)
-                        .height(100)
-                        .fontSize(16)
-                        .margin(10)
-                        .textAlign(TextAlign.Center)
-                        .borderRadius(10)
-                        .backgroundColor(0xFFFFFF)
+                ForEach(
+                    this.arr,
+                    itemGeneratorFunc: {
+                        item: String, idx: Int64 => Text(item)
+                            .width(100)
+                            .height(100)
+                            .fontSize(16)
+                            .margin(10)
+                            .textAlign(TextAlign.Center)
+                            .borderRadius(10)
+                            .backgroundColor(0xFFFFFF)
                     },
                     keyGeneratorFunc: {item: String, idx: Int64 => idx.toString()}
                 )
             }
-            .width(100.percent)
-            .height(100.percent)
+                .width(100.percent)
+                .height(100.percent)
             Flex(justifyContent: FlexAlign.SpaceAround, alignItems: ItemAlign.Center) {
                 Text('联系人').fontSize(16)
                 Text('设置').fontSize(16)
                 Text('短信').fontSize(16)
             }
-            .width(50.percent)
-            .height(50)
-            .backgroundColor(0x16302e2e)
-            .margin(bottom: 15)
-            .borderRadius(15)
+                .width(50.percent)
+                .height(50)
+                .backgroundColor(0x16302e2e)
+                .margin(bottom: 15)
+                .borderRadius(15)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(0xCFD0CF)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(0xCFD0CF)
     }
 }
 ```

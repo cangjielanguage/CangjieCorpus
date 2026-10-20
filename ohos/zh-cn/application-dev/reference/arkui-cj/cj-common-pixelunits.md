@@ -24,7 +24,6 @@
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -33,7 +32,8 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var isShow: Bool = false
+    @State
+    var isShow: Bool = false
     func build() {
         Column() {
             Flex(wrap: FlexWrap.Wrap) {
@@ -98,7 +98,7 @@ class EntryView {
 
                 Column() {
                     Text("width(px2vp(180))")
-                        .width(getUIContext().px2vp(180.px) ?? 180.px )
+                        .width(getUIContext().px2vp(180.px) ?? 180.px)
                         .height(40)
                         .backgroundColor(0xF9CF93)
                         .textAlign(TextAlign.Center)
@@ -109,7 +109,6 @@ class EntryView {
         }
     }
 }
-
 ```
 
 ![pixelUnits](./figures/pixelUnits.png)

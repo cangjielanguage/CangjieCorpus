@@ -126,6 +126,10 @@ public func title(value: ?CustomBuilder, options!: ?NavigationTitleOptions = Non
 |value|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|是|-|页面标题。初始值：{ => }。|
 |options|?[NavigationTitleOptions](#class-navigationtitleoptions)|否|None|**命名参数。** 标题栏选项。|
 
+> **说明：**
+>
+> 传入[CustomBuilder](./cj-common-types.md#type-custombuilder)类型的参数时，需使用bind管理自定义构建函数的调用，bind使用方式请参见[框架接口](./cj-ui-framework.md)中的bind函数说明。
+
 ### func title(?ResourceStr, ?NavigationTitleOptions)
 
 ```cangjie
@@ -421,7 +425,7 @@ public init(name!: ?String, param!: ?String, onPop!: ?Callback<PopInfo, Unit> = 
 |:---|:---|:---|:---|:---|
 |name|?String|是|-|**命名参数。** NavDestination的名称。初始值：""。|
 |param|?String|是|-|**命名参数。** NavDestination的详细参数。初始值：""。|
-|onPop|?[Callback](./cj-common-types.md#type-callbackt-v)\<[PopInfo](#class-popinfo), Unit>|否|None|**命名参数。**  NavDestination页面触发pop时的回调函数。|
+|onPop|?[Callback](./cj-common-types.md#type-callbackt-v)\<[PopInfo](#class-popinfo), Unit>|否|None|**命名参数。** Callback回调，用于页面出栈时触发该回调处理返回结果。仅[pop](#func-popbool)中设置result参数后触发。由于[pop](#func-popbool)函数暂不支持result参数，因此该回调暂无法生效。|
 
 ### class NavPathStack
 
@@ -777,6 +781,7 @@ Navigation组件是路由导航的根视图容器。
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -805,11 +810,11 @@ class EntryView {
                     this.stack.pushPath(NavPathInfo(name: "pageOne", param: "pageOne test"))
                 })
             }
-            .width(100.percent)
-            .height(50.percent)
+                .width(100.percent)
+                .height(50.percent)
         }
-        .title("PageHome")
-        .navDestination(bind(pageMap, this))
+            .title("PageHome")
+            .navDestination(bind(pageMap, this))
     }
 }
 
@@ -828,10 +833,9 @@ class PageOne {
                     this.stack.pushPathByName("pageTwo", "pageOne test")
                 })
             }
-            .width(100.percent)
-            .height(50.percent)
-        }
-        .title("PageOne")
+                .width(100.percent)
+                .height(50.percent)
+        }.title("PageOne")
     }
 }
 
@@ -849,8 +853,8 @@ class PageTwo {
                     this.pathStack.pop()
                 })
             }
-            .width(100.percent)
-            .height(50.percent)
+                .width(100.percent)
+                .height(50.percent)
         }
         .title("PageTwo")
         .onReady({ context =>

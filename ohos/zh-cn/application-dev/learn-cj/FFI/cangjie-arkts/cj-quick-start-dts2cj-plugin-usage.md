@@ -101,6 +101,6 @@
     ```javascript
     import * as lz4js_util from "lz4js/util";
     import * as lz4js_xxh32 from "lz4js/xxh32";
-    globalThis.lz4cj_until = lz4js_util
+    globalThis.lz4cj_util = lz4js_util
     globalThis.lz4cj_xxh32 = lz4js_xxh32
     ```

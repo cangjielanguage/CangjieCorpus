@@ -20,7 +20,8 @@ import kit.ArkUI.*
 
 > **说明：**
 >
-> Tabs子组件的visibility属性设置为None，或者visibility属性设置为Hidden时，对应子组件不显示，但依然会在视窗内占位。
+> - Tabs子组件的visibility属性设置为None，或者visibility属性设置为Hidden时，对应子组件不显示，但依然会在视窗内占位。
+> - Tabs设置[height](./cj-universal-attribute-size.md#func-heightoptionlength)为[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)时，可根据子组件高度自适应高度大小。设置[width](./cj-universal-attribute-size.md#func-widthoptionlength)为[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)时，可根据子组件宽度自适应宽度大小。
 
 ## 创建组件
 
@@ -82,7 +83,7 @@ public func animationDuration(value: ?Float32): This
 public func barHeight(value: ?Length): This
 ```
 
-**功能：** 设置Tabs页签栏的高度。
+**功能：** 设置Tabs页签栏的高度。横向Tabs可以设置height为LengthMetrics.AUTO，让TabBar自适应子组件高度。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -164,7 +165,7 @@ public func vertical(value: ?Bool): This
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?Bool|是|-|页签栏是否垂直排列。初始值：false。|
+|value|?Bool|是|-|页签栏是否垂直排列。<br>初始值：false。<br>当横向Tabs设置height为LengthMetrics.AUTO时，Tabs组件高度自适应子组件高度，即为tabBar高度+divider线宽+TabContent高度+上下padding值+上下border宽度。<br>当纵向Tabs设置width为LengthMetrics.AUTO时，Tabs组件宽度自适应子组件宽度，即为tabBar宽度+divider线宽+TabContent宽度+左右padding值+左右border宽度。|
 
 ## 组件事件
 
@@ -250,10 +251,14 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var fontColor: UInt32 = 0x182431
-    @State var selectedFontColor: UInt32 = 0x007DFF
-    @State var currentIndex: Int32 = 0
-    @State var selectedIndex: Int32 = 0
+    @State
+    var fontColor: UInt32 = 0x182431
+    @State
+    var selectedFontColor: UInt32 = 0x007DFF
+    @State
+    var currentIndex: Int32 = 0
+    @State
+    var selectedIndex: Int32 = 0
     var controller: TabsController = TabsController()
 
     func getFontColor(index: Int32): UInt32 {
@@ -281,15 +286,15 @@ class EntryView {
     func tabBuilder(index: Int32, name: String) {
         Column() {
             Text(name)
-            .fontColor(this.getFontColor(index))
-            .fontSize(16)
-            .fontWeight(this.getFontWeight(index))
-            .lineHeight(22)
-            .margin(top: 17, bottom: 7)
+                .fontColor(this.getFontColor(index))
+                .fontSize(16)
+                .fontWeight(this.getFontWeight(index))
+                .lineHeight(22)
+                .margin(top: 17, bottom: 7)
             Divider()
-            .strokeWidth(2)
-            .color(0x007DFF)
-            .opacity(this.getOpacity(index))
+                .strokeWidth(2)
+                .color(0x007DFF)
+                .opacity(this.getOpacity(index))
         }.width(100.percent)
     }
 
@@ -297,37 +302,51 @@ class EntryView {
         Column() {
             Tabs(barPosition: BarPosition.Start, controller: this.controller, index: this.currentIndex) {
                 TabContent() {
-                    Column().width(100.percent).height(100.percent).backgroundColor(0x00CB87)
-                }.tabBar({=>bind(this.tabBuilder, this)(0, "green")})
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0x00CB87)
+                }.tabBar({=> bind(this.tabBuilder, this)(0, "green")})
 
                 TabContent() {
-                    Column().width(100.percent).height(100.percent).backgroundColor(0x007DFF)
-                }.tabBar({=>bind(this.tabBuilder, this)(1,"blue")})
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0x007DFF)
+                }.tabBar({=> bind(this.tabBuilder, this)(1, "blue")})
 
                 TabContent() {
-                    Column().width(100.percent).height(100.percent).backgroundColor(0xFFBF00)
-                }.tabBar({=>bind(this.tabBuilder, this)(2,"yellow")})
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0xFFBF00)
+                }.tabBar({=> bind(this.tabBuilder, this)(2, "yellow")})
 
                 TabContent() {
-                    Column().width(100.percent).height(100.percent).backgroundColor(0xE67C92)
-                }.tabBar({=>bind(this.tabBuilder, this)(3, "pink")})
-              }
-            .vertical(false)
-            .barMode(BarMode.Fixed)
-            .barWidth(360)
-            .barHeight(56)
-            .animationDuration(400.0)
-            .onChange({index: Int32 =>
-                // currentIndex控制TabContent显示页签
-                this.currentIndex = index
-                // selectedIndex控制自定义TabBar内Image和Text颜色切换
-                this.selectedIndex = index
-            })
-            .width(360)
-            .height(296)
-            .margin(top: 52)
-            .backgroundColor(0xF1F3F5)
-
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0xE67C92)
+                }.tabBar({=> bind(this.tabBuilder, this)(3, "pink")})
+            }
+                .vertical(false)
+                .barMode(BarMode.Fixed)
+                .barWidth(360)
+                .barHeight(56)
+                .animationDuration(400.0)
+                .onChange(
+                    {
+                        index: Int32 =>
+                            // currentIndex控制TabContent显示页签
+                            this.currentIndex = index
+                            // selectedIndex控制自定义TabBar内Image和Text颜色切换
+                            this.selectedIndex = index
+                    }
+                )
+                .width(360)
+                .height(296)
+                .margin(top: 52)
+                .backgroundColor(0xF1F3F5)
         }.width(100.percent)
     }
 }
@@ -370,9 +389,12 @@ class MyDataSource <: IDataSource<String> {
 @Entry
 @Component
 class EntryView {
-    @State var fontColor: Color = Color(0x182431)
-    @State var selectedFontColor: Color = Color(0x007DFF)
-    @State var currentIndex: Int32 = 0
+    @State
+    var fontColor: Color = Color(0x182431)
+    @State
+    var selectedFontColor: Color = Color(0x007DFF)
+    @State
+    var currentIndex: Int32 = 0
     var list: ArrayList<String> = ArrayList<String>()
     var tabsController: TabsController = TabsController()
     var swiperController: SwiperController = SwiperController()
@@ -409,25 +431,25 @@ class EntryView {
                     TabContent(){}.tabBar({=>bind(this.tabBuilder, this)(Int32(index), '页签 ${this.list[index]}')})
                 })
             }
-            .barMode(BarMode.Scrollable)
-            .backgroundColor(0xF1F3F5)
-            .height(56)
-            .width(100.percent)
+                .barMode(BarMode.Scrollable)
+                .backgroundColor(0xF1F3F5)
+                .height(56)
+                .width(100.percent)
 
             Swiper(controller: this.swiperController) {
-                LazyForEach(this.swiperData, itemGeneratorFunc: {item: String, idx: Int64 =>
-                    Text(item)
-                    .onAppear({=>
-                      Hilog.info(0, "AppLogCj", 'onAppear ' + item)
-                    })
-                    .onDisAppear({=>
-                      Hilog.info(0, "AppLogCj", 'onDisAppear ' + item)
-                    })
-                    .width(100.percent)
-                    .height(100.percent)
-                    .backgroundColor(0xAFEEEE)
-                    .textAlign(TextAlign.Center)
-                    .fontSize(30)
+                LazyForEach(this.swiperData, itemGeneratorFunc: {
+                    item: String, idx: Int64 => Text(item)
+                        .onAppear({
+                            => Hilog.info(0, "AppLogCj", 'onAppear ' + item)
+                        })
+                        .onDisAppear({
+                            => Hilog.info(0, "AppLogCj", 'onDisAppear ' + item)
+                        })
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0xAFEEEE)
+                        .textAlign(TextAlign.Center)
+                        .fontSize(30)
                 })
             }
             .loop(false)
@@ -457,59 +479,70 @@ import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
-class EntryView{
-    @State var text: String = "文本"
-    @State var barMode: BarMode = BarMode.Fixed
+class EntryView {
+    @State
+    var text: String = "文本"
+    @State
+    var barMode: BarMode = BarMode.Fixed
 
-    func build(){
-        Column(){
-            Row(){
+    func build() {
+        Column() {
+            Row() {
                 Button("文本增加 ")
-                .width(47.percent)
-                .height(50)
-                .onClick({event => this.text += "文本"})
-                .margin(right: 6.percent, bottom: 12)
+                    .width(47.percent)
+                    .height(50)
+                    .onClick({event => this.text += "文本"})
+                    .margin(right: 6.percent, bottom: 12)
 
                 Button("文本重置")
-                .width(47.percent)
-                .height(50)
-                .onClick({event => this.text = "文本"})
-                .margin(bottom: 12)
+                    .width(47.percent)
+                    .height(50)
+                    .onClick({event => this.text = "文本"})
+                    .margin(bottom: 12)
             }
 
-            Row(){
+            Row() {
                 Button("BarMode.Fixed")
-                .width(47.percent)
-                .height(50)
-                .onClick({event => this.barMode = BarMode.Fixed})
-                .margin(right: 6.percent, bottom: 12)
+                    .width(47.percent)
+                    .height(50)
+                    .onClick({event => this.barMode = BarMode.Fixed})
+                    .margin(right: 6.percent, bottom: 12)
 
                 Button("BarMode.Scrollable")
-                .width(47.percent)
-                .height(50)
-                .onClick({event => this.barMode = BarMode.Scrollable})
-                .margin(bottom: 12)
+                    .width(47.percent)
+                    .height(50)
+                    .onClick({event => this.barMode = BarMode.Scrollable})
+                    .margin(bottom: 12)
             }
-            Tabs(){
-                TabContent(){
-                    Column().width(100.percent).height(100.percent).backgroundColor(0xFEC0CD)
+            Tabs() {
+                TabContent() {
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(0xFEC0CD)
                 }.tabBar(this.text)
 
-                TabContent(){
-                    Column().width(100.percent).height(100.percent).backgroundColor(Color.Green)
+                TabContent() {
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(Color.Green)
                 }.tabBar(this.text)
 
-                TabContent(){
-                    Column().width(100.percent).height(100.percent).backgroundColor(Color.Blue)
+                TabContent() {
+                    Column()
+                        .width(100.percent)
+                        .height(100.percent)
+                        .backgroundColor(Color.Blue)
                 }.tabBar(this.text)
             }
-            .height(60.percent)
-            .backgroundColor(0xf1f3f5)
-            .barMode(this.barMode)
+                .height(60.percent)
+                .backgroundColor(0xf1f3f5)
+                .barMode(this.barMode)
         }
-        .width(100.percent)
-        .height(500)
-        .padding(24)
+            .width(100.percent)
+            .height(500)
+            .padding(24)
     }
 }
 ```

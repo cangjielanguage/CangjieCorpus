@@ -88,7 +88,7 @@ public func showActionMenu(option: ActionMenuOptions, callback!: ShowActionMenuC
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -115,7 +115,7 @@ public func showDialog(option: ShowDialogOptions, callback!: ShowDialogCallBack 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码|说明|
   |:----|:----|
@@ -141,11 +141,68 @@ public func showToast(option: ShowToastOptions): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   |错误码|说明|
   |:----|:----|
   |100001|Internal error: failed to allocate memory.|
+
+### func openCustomDialog(CustomDialogConfig, (Int32) -> Unit)
+
+```cangjie
+public func openCustomDialog(options: CustomDialogConfig, callback: (Int32) -> Unit): Unit
+```
+
+**功能：** 创建并弹出自定义弹窗。使用回调返回对话框的id，可供closeCustomDialog使用。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|options|[CustomDialogConfig](#class-customdialogconfig)|是|-|自定义弹窗的内容。<br>**说明：** 如果BaseDialogOptions中的isModal与showInSubWindow同时设置为true，则只生效showInSubWindow = true，此时为非模态弹出框且不会显示蒙层，并在子窗口中显示。|
+|callback|(Int32) -> Unit|是|-| **命名参数。** 回调函数，返回对话框id，可供closeCustomDialog使用。|
+
+### func showActionMenu(ActionMenuConfig, ShowActionMenuCallBack)
+
+```cangjie
+public func showActionMenu(option: ActionMenuConfig, callback!: ShowActionMenuCallBack = defaultCallback)
+```
+
+**功能：** 创建并显示操作菜单，通过回调获取菜单的响应结果。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|option|[ActionMenuConfig](#class-actionmenuconfig)|是|-|操作菜单选项。|
+|callback|[ShowActionMenuCallBack](#type-showactionmenucallback)|否|defaultCallback|**命名参数。** 用于返回菜单的响应结果。defaultCallback表示{_: Option<BusinessException>, _: Option<Int32> =>}|
+
+### func showDialog(ShowDialogConfig, ShowDialogCallBack)
+
+```cangjie
+public func showDialog(option: ShowDialogConfig, callback!: ShowDialogCallBack = defaultCallback)
+```
+
+**功能：** 创建并显示对话框，使用回调获取对话框的响应结果。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|option|[ShowDialogConfig](#class-showdialogconfig)|是|-|对话框选项。|
+|callback|[ShowDialogCallBack](#type-showdialogcallback)|否|defaultCallback|**命名参数。** 用于返回菜单的响应结果。defaultCallback表示{_: Option<BusinessException>, _: Option<Int32> =>}|
 
 ## class ActionMenuOptions
 
@@ -936,7 +993,7 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|builder|() -> Unit|是|-| **命名参数。** 自定义对话框内容。|
+|builder|() -> Unit|是|-| **命名参数。** 自定义对话框内容。<br>**说明：** 仅支持接收@Builder修饰的自定义构建函数。|
 |maskRect|[Rectangle](./cj-common-types.md#class-rectangle)|否|Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent)| **命名参数。** 对话框遮罩区域。|
 |alignment|[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|DialogAlignment.Default| **命名参数。** 对话框在屏幕上的对齐方式。|
 |offset|[Offset](./cj-common-types.md#class-offset)|否|Offset(0.vp, 0.vp)| **命名参数。** 对话框偏移量。|
@@ -959,7 +1016,7 @@ public init(
 |borderStyle|[EdgeStyles](./cj-common-types.md#class-edgestyles)|否|EdgeStyles()| **命名参数。** 自定义对话框的边框样式。|
 |width|[Length](./cj-common-types.md#interface-length)|否|400.vp| **命名参数。** 对话框的宽度。|
 |height|[Length](./cj-common-types.md#interface-length)|否|100.vp| **命名参数。** 对话框的高度。|
-|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 对话框的阴影。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 对话框的阴影。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|
 |backgroundBlurStyle|[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|BlurStyle.ComponentUltraThick| **命名参数。** 对话框的背景模糊样式。|
 
 ## class EdgeColors
@@ -1324,7 +1381,7 @@ public var title: ResourceStr
 
 **起始版本：** 22
 
-### init(ResourceStr, ResourceStr, Array\<ButtonInfo\>, DialogAlignment, Offset, Rectangle, Bool, Bool, Color, BlurStyle, ?ShadowOptions, Bool, HoverModeAreaType)
+### init(ResourceStr, ResourceStr, Array\<ButtonInfo>, DialogAlignment, Offset, Rectangle, Bool, Bool, Color, BlurStyle, ?ShadowOptions, Bool, HoverModeAreaType)
 
 ```cangjie
 public init(
@@ -1364,7 +1421,7 @@ public init(
 |isModal|Bool|否|true| **命名参数。** 是否为模态对话框。|
 |backgroundColor|[Color](./cj-common-types.md#class-color)|否|Color.Transparent| **命名参数。** 对话框的背景颜色。|
 |backgroundBlurStyle|[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|BlurStyle.ComponentUltraThick| **命名参数。** 对话框的背景模糊样式。|
-|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 对话框的阴影选项。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 对话框的阴影选项。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|
 |enableHoverMode|Bool|否|false| **命名参数。** 是否响应悬停模式。|
 |hoverModeArea|[HoverModeAreaType](#enum-hovermodeareatype)|否|HoverModeAreaType.BottomScreen| **命名参数。** 悬停模式下对话框的显示区域。|
 
@@ -1637,9 +1694,1170 @@ public init(
 |backgroundColor|[Color](./cj-common-types.md#class-color)|否|Color.Transparent| **命名参数。** Toast的背景颜色。|
 |textColor|[Color](./cj-common-types.md#class-color)|否|Color.Black| **命名参数。** Toast的文本颜色。|
 |backgroundBlurStyle|[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|BlurStyle.ComponentUltraThick| **命名参数。** Toast的背景模糊样式。|
-|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** Toast的阴影选项。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** Toast的阴影选项。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|
 |enableHoverMode|Bool|否|false| **命名参数。** 是否响应悬停模式。|
 |hoverModeArea|[HoverModeAreaType](#enum-hovermodeareatype)|否|HoverModeAreaType.BottomScreen| **命名参数。** 悬停模式下Toast的显示区域。|
+
+## class BaseDialogConfig
+
+```cangjie
+public open class BaseDialogConfig {
+    public init(
+        maskRect!: ?Rectangle = Option.None,
+        alignment!: ?DialogAlignment = Option.None,
+        offset!: ?Offset = Option.None,
+        isModal!: ?Bool = Option.None,
+        showInSubWindow!: ?Bool = Option.None,
+        autoCancel!: ?Bool = Option.None,
+        maskColor!: ?ResourceColor = Option.None,
+        transition!: ?TransitionEffect = Option.None,
+        onDidAppear!: ?() -> Unit = Option.None,
+        onDidDisappear!: ?() -> Unit = Option.None,
+        onWillAppear!: ?() -> Unit = Option.None,
+        onWillDisappear!: ?() -> Unit = Option.None,
+        keyboardAvoidMode!: ?KeyboardAvoidMode = Option.None,
+        enableHoverMode!: ?Bool = Option.None,
+        hoverModeArea!: ?HoverModeAreaType = Option.None,
+        levelMode!: ?LevelMode = Option.None
+    )
+}
+```
+
+**功能：** 弹窗的选项。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop maskRect
+
+```cangjie
+public mut prop maskRect: ?Rectangle
+```
+
+**功能：** 弹窗遮蔽层区域。初始值：Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent)。
+
+> **说明：**
+>
+> - showInSubWindow为true时，maskRect不生效。
+> - maskRect在设置Rectangle中的部分属性后，若未设置其余的属性，则其余属性的默认值为0。
+
+**类型：** ?[Rectangle](cj-common-types.md#class-rectangle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop alignment
+
+```cangjie
+public mut prop alignment: ?DialogAlignment
+```
+
+**功能：** 弹窗在竖直方向上的对齐方式。初始值：DialogAlignment.Default。
+
+**类型：** ?[DialogAlignment](cj-common-types.md#enum-dialogalignment)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop offset
+
+```cangjie
+public mut prop offset: ?Offset
+```
+
+**功能：** 弹窗相对alignment所在位置的偏移量。初始值：Offset(dx: 0.vp, dy: 0.vp)。
+
+**类型：** ?[Offset](./cj-common-types.md#class-offset)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop isModal
+
+```cangjie
+public mut prop isModal: ?Bool
+```
+
+**功能：** 弹窗是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与弹窗周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与弹窗周围其他控件进行交互。初始值：true。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop showInSubWindow
+
+```cangjie
+public mut prop showInSubWindow: ?Bool
+```
+
+**功能：** 某弹窗需要显示在主窗口之外时，是否在子窗口显示此弹窗。值为true表示在子窗口显示弹窗。初始值：false，弹窗显示在应用内，而非独立子窗口。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop autoCancel
+
+```cangjie
+public mut prop autoCancel: ?Bool
+```
+
+**功能：** 点击遮障层时，是否关闭弹窗，true表示关闭弹窗。false表示不关闭弹窗。初始值：true。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop maskColor
+
+```cangjie
+public mut prop maskColor: ?ResourceColor
+```
+
+**功能：** 自定义蒙层颜色。初始值: Color(0x33000000)。
+
+**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop transition
+
+```cangjie
+public mut prop transition: ?TransitionEffect
+```
+
+**功能：** 设置弹窗显示和退出的过渡效果。
+
+> **说明：**
+>
+> - 如果不设置，则使用默认的显示/退出动效。
+> - 显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。
+> - 退出动效中按back键，不会打断退出动效，退出动效继续执行，继续按back键退出应用。
+
+**类型：** ?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop onDidAppear
+
+```cangjie
+public mut prop onDidAppear: ?() -> Unit
+```
+
+**功能：** 弹窗弹出后的事件回调。
+
+> **说明：**
+>
+> - 正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。
+> - 在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。
+> - 快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。
+> - 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。
+
+**类型：** ?() -> Unit
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop onDidDisappear
+
+```cangjie
+public mut prop onDidDisappear: ?() -> Unit
+```
+
+**功能：** 弹窗消失后的事件回调。
+
+> **说明：**
+>
+> - 正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。
+> - 当弹窗退场动画未完成时（例如：同时触发弹窗关闭和页面切换），该回调不会触发。
+
+**类型：** ?() -> Unit
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop onWillAppear
+
+```cangjie
+public mut prop onWillAppear: ?() -> Unit
+```
+
+**功能：** 弹窗显示动效前的事件回调。
+
+> **说明：**
+>
+> - 正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。
+> - 在onWillAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。
+
+**类型：** ?() -> Unit
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop onWillDisappear
+
+```cangjie
+public mut prop onWillDisappear: ?() -> Unit
+```
+
+**功能：** 弹窗退出动效前的事件回调。
+
+> **说明：**
+>
+> - 正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。
+> - 快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。
+
+**类型：** ?() -> Unit
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop keyboardAvoidMode
+
+```cangjie
+public mut prop keyboardAvoidMode: ?KeyboardAvoidMode
+```
+
+**功能：** 用于设置弹窗是否在拉起软键盘时进行自动避让。初始值：KeyboardAvoidMode.Default。
+
+**类型：** ?[KeyboardAvoidMode](#enum-keyboardavoidmode)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop enableHoverMode
+
+```cangjie
+public mut prop enableHoverMode: ?Bool
+```
+
+**功能：** 是否响应悬停态，值为true时，响应悬停态。初始值：false，默认不响应。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop hoverModeArea
+
+```cangjie
+public mut prop hoverModeArea: ?HoverModeAreaType
+```
+
+**功能：** 悬停态下弹窗默认展示区域。初始值：HoverModeAreaType.BottomScreen。
+
+**类型：** ?[HoverModeAreaType](#enum-hovermodeareatype)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### prop levelMode
+
+```cangjie
+public mut prop levelMode: ?LevelMode
+```
+
+**功能：** 设置弹窗显示层级。
+
+> **说明：**
+>
+> - 初始值：LevelMode.Overlay
+> - 当且仅当showInSubWindow属性设置为false时生效。
+
+**类型：** ?[LevelMode](#enum-levelmode)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### init(?Rectangle, ?DialogAlignment, ?Offset, ?Bool, ?Bool, ?Bool, ?ResourceColor, ?TransitionEffect, ?() -> Unit, ?() -> Unit, ?() -> Unit, ?() -> Unit, ?KeyboardAvoidMode, ?Bool, ?HoverModeAreaType, ?LevelMode)
+
+```cangjie
+public init(
+    maskRect!: ?Rectangle = Option.None,
+    alignment!: ?DialogAlignment = Option.None,
+    offset!: ?Offset = Option.None,
+    isModal!: ?Bool = Option.None,
+    showInSubWindow!: ?Bool = Option.None,
+    autoCancel!: ?Bool = Option.None,
+    maskColor!: ?ResourceColor = Option.None,
+    transition!: ?TransitionEffect = Option.None,
+    onDidAppear!: ?() -> Unit = Option.None,
+    onDidDisappear!: ?() -> Unit = Option.None,
+    onWillAppear!: ?() -> Unit = Option.None,
+    onWillDisappear!: ?() -> Unit = Option.None,
+    keyboardAvoidMode!: ?KeyboardAvoidMode = Option.None,
+    enableHoverMode!: ?Bool = Option.None,
+    hoverModeArea!: ?HoverModeAreaType = Option.None,
+    levelMode!: ?LevelMode = Option.None
+)
+```
+
+**功能：** 弹窗的选项构造函数。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|maskRect|?[Rectangle](./cj-common-types.md#class-rectangle)|否|Option.None| **命名参数。** 弹窗遮蔽层区域。<br>初始值：Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent)<br> **说明：** showInSubWindow为true时，maskRect不生效。<br>maskRect在设置Rectangle中的部分属性后，若未设置其余的属性，则其余属性的默认值为0。|
+|alignment|?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|Option.None| **命名参数。** 弹窗在竖直方向上的对齐方式。初始值：DialogAlignment.Default|
+|offset|?[Offset](./cj-common-types.md#class-offset)|否|Option.None| **命名参数。** 弹窗相对alignment所在位置的偏移量。初始值：Offset(dx: 0.vp, dy: 0.vp)|
+|isModal|?Bool|否|Option.None| **命名参数。** 弹窗是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与弹窗周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与弹窗周围其他控件进行交互。初始值：true。|
+|showInSubWindow|?Bool|否|Option.None| **命名参数。** 某弹窗需要显示在主窗口之外时，是否在子窗口显示此弹窗。值为true表示在子窗口显示弹窗。初始值：false，弹窗显示在应用内，而非独立子窗口。|
+|autoCancel|?Bool|否|Option.None| **命名参数。** 点击遮障层时，是否关闭弹窗，true表示关闭弹窗。false表示不关闭弹窗。初始值：true|
+|maskColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|Option.None| **命名参数。** 自定义蒙层颜色。初始值: Color(0x33000000)|
+|transition|?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)|否|Option.None| **命名参数。** 设置弹窗显示和退出的过渡效果。<br> **说明：** <br> 1.如果不设置，则使用默认的显示/退出动效。<br> 2.显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。<br> 3.退出动效中按back键，不会打断退出动效，退出动效继续执行，继续按back键退出应用。|
+|onDidAppear|?() -> Unit|否|Option.None| **命名参数。** 弹窗弹出后的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onDidDisappear|?() -> Unit|否|Option.None| **命名参数。** 弹窗消失后的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onWillAppear|?() -> Unit|否|Option.None| **命名参数。** 弹窗显示动效前的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onWillDisappear|?() -> Unit|否|Option.None| **命名参数。** 弹窗退出动效前的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|keyboardAvoidMode|?[KeyboardAvoidMode](#enum-keyboardavoidmode)|否|Option.None| **命名参数。** 用于设置弹窗是否在拉起软键盘时进行自动避让。KeyboardAvoidMode.Default|
+|enableHoverMode|?Bool|否|Option.None| **命名参数。** 是否响应悬停态，值为true时，响应悬停态。<br> 初始值：false，默认不响应。|
+|hoverModeArea|?[HoverModeAreaType](#enum-hovermodeareatype)|否|Option.None| **命名参数。** 悬停态下弹窗默认展示区域。初始值：HoverModeAreaType.BottomScreen|
+|levelMode|?[LevelMode](#enum-levelmode)|否|Option.None| **命名参数。** 设置弹窗显示层级。<br> **说明：** <br> 初始值：LevelMode.Overlay <br> 当且仅当showInSubWindow属性设置为false时生效。|
+
+## class CustomDialogConfig
+
+```cangjie
+public class CustomDialogConfig <: BaseDialogConfig {
+    public var builder: () -> Unit
+    public var backgroundColor: ?ResourceColor
+    public var cornerRadius: ?BorderRadiuses
+    public var borderWidth: ?EdgeWidths
+    public var borderColor: ?EdgeColors
+    public var borderStyle: ?EdgeStyles
+    public var width: ?Length
+    public var height: ?Length
+    public var shadow: ?ShadowOptions
+    public var backgroundBlurStyle: ?BlurStyle
+    public init(
+        builder!: () -> Unit,
+        maskRect!: ?Rectangle = Option.None,
+        alignment!: ?DialogAlignment = Option.None,
+        offset!: ?Offset = Option.None,
+        isModal!: ?Bool = Option.None,
+        showInSubWindow!: ?Bool = Option.None,
+        autoCancel!: ?Bool = Option.None,
+        maskColor!: ?ResourceColor = Option.None,
+        transition!: ?TransitionEffect = Option.None,
+        onDidAppear!: ?() -> Unit = Option.None,
+        onDidDisappear!: ?() -> Unit = Option.None,
+        onWillAppear!: ?() -> Unit = Option.None,
+        onWillDisappear!: ?() -> Unit = Option.None,
+        keyboardAvoidMode!: ?KeyboardAvoidMode = Option.None,
+        enableHoverMode!: ?Bool = Option.None,
+        hoverModeArea!: ?HoverModeAreaType = Option.None,
+        levelMode!: ?LevelMode = Option.None,
+        backgroundColor!: ?ResourceColor = Option.None,
+        cornerRadius!: ?BorderRadiuses = Option.None,
+        borderWidth!: ?EdgeWidths = Option.None,
+        borderColor!: ?EdgeColors = Option.None,
+        borderStyle!: ?EdgeStyles = Option.None,
+        width!: ?Length = Option.None,
+        height!: ?Length = Option.None,
+        shadow!: ?ShadowOptions = Option.None,
+        backgroundBlurStyle!: ?BlurStyle = Option.None
+    )
+}
+```
+
+**功能：** 自定义弹窗的内容，继承自[BaseDialogConfig](#class-basedialogconfig)。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**父类型：**
+
+- [BaseDialogConfig](#class-basedialogconfig)
+
+### var builder
+
+```cangjie
+public var builder: () -> Unit
+```
+
+**功能：** 设置自定义弹窗的内容。
+
+>**说明：**
+>
+> - builder根节点宽高百分比相对弹窗容器大小。
+> - builder非根节点宽高百分比相对父节点大小。
+
+**类型：** () -> Unit
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var backgroundColor
+
+```cangjie
+public var backgroundColor: ?ResourceColor
+```
+
+**功能：** 设置弹窗背板颜色。初始值：Color.Transparent
+
+>**说明：**
+>
+> 当设置了backgroundColor为非透明色时，backgroundBlurStyle需要设置为BlurStyle.NONE，否则颜色显示将不符合预期效果。
+
+**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var cornerRadius
+
+```cangjie
+public var cornerRadius: ?BorderRadiuses
+```
+
+**功能：** 设置背板的圆角半径。可分别设置4个圆角的半径。<br> 初始值：BorderRadiuses(topLeft: 32.vp, topRight: 32.vp, bottomLeft: 32.vp, bottomRight: 32.vp)<br>圆角大小受组件尺寸限制，最大值为组件宽或高的一半，若值为负，则按照默认值处理。<br>百分比参数方式：以父元素弹窗宽和高的百分比来设置弹窗的圆角。
+
+**类型：** ?[BorderRadiuses](cj-common-types.md#class-borderradiuses)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var borderWidth
+
+```cangjie
+public var borderWidth: ?EdgeWidths
+```
+
+**功能：** 设置弹窗背板的边框宽度。<br>可分别设置4个边框宽度。初始值：EdgeWidths(top: 0.vp, right: 0.vp, bottom: 0.vp, left: 0.vp)<br>百分比参数方式：以父元素弹窗宽的百分比来设置弹窗的边框宽度。<br>当弹窗左边框和右边框大于弹窗宽度，弹窗上边框和下边框大于弹窗高度，显示可能不符合预期。
+
+**类型：** ?[EdgeWidths](./cj-common-types.md#class-edgewidths)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var borderColor
+
+```cangjie
+public var borderColor: ?EdgeColors
+```
+
+**功能：** 设置弹窗背板的边框颜色。<br>初始值：EdgeColors(top: Color.Black, right: Color.Black, bottom: Color.Black, left: Color.Black)。<br>如果使用borderColor属性，需要和borderWidth属性一起使用。
+
+**类型：** ?[EdgeColors](#class-edgecolors)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var borderStyle
+
+```cangjie
+public var borderStyle: ?EdgeStyles
+```
+
+**功能：** 设置弹窗背板的边框样式。<br>初始值：EdgeStyles()。<br>如果使用borderStyle属性，需要和borderWidth属性一起使用。
+
+**类型：** ?[EdgeStyles](./cj-common-types.md#class-edgestyles)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var width
+
+```cangjie
+public var width: ?Length
+```
+
+**功能：** 设置弹窗背板的宽度。
+
+> - **说明：**
+>
+> - 弹窗宽度默认最大值：400.vp
+> - 百分比参数方式：弹窗参考宽度基于所在窗口的宽度的基础上调整。
+
+**类型：** ?[Length](./cj-common-types.md#interface-length)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var height
+
+```cangjie
+public var height: ?Length
+```
+
+**功能：** 设置弹窗背板的高度。
+
+> - **说明：**
+>
+> - 弹窗高度默认最大值：0.9 *（窗口高度 - 安全区域）。
+> - 百分比参数方式：弹窗参考高度为（窗口高度 - 安全区域），在此基础上调小或调大。
+
+**类型：** ?[Length](./cj-common-types.md#interface-length)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var shadow
+
+```cangjie
+public var shadow: ?ShadowOptions
+```
+
+**功能：** 设置弹窗背板的阴影。
+
+**类型：** ?[ShadowOptions](./cj-common-types.md#class-shadowoptions)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var backgroundBlurStyle
+
+```cangjie
+public var backgroundBlurStyle: ?BlurStyle
+```
+
+**功能：** 弹窗背板模糊材质。初始值：BlurStyle.ComponentUltraThick
+
+> **说明：**
+>
+> - 设置为BlurStyle.None即可关闭背景虚化。当设置了backgroundBlurStyle为非NONE值时，则不要设置backgroundColor，否则颜色显示将不符合预期效果。
+
+**类型：** ?[BlurStyle](./cj-common-types.md#enum-blurstyle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### init(() -> Unit, ?Rectangle, ?DialogAlignment, ?Offset, ?Bool, ?Bool, ?Bool, ?ResourceColor, ?TransitionEffect, ?() -> Unit, ?() -> Unit, ?() -> Unit, ?() -> Unit, ?KeyboardAvoidMode, ?Bool, ?HoverModeAreaType, ?LevelMode, ?ResourceColor, ?BorderRadiuses, ?EdgeWidths, ?EdgeColors, ?EdgeStyles, ?Length, ?Length, ?ShadowOptions, ?BlurStyle)
+
+```cangjie
+public init(
+    builder!: () -> Unit,
+    maskRect!: ?Rectangle = Option.None,
+    alignment!: ?DialogAlignment = Option.None,
+    offset!: ?Offset = Option.None,
+    isModal!: ?Bool = Option.None,
+    showInSubWindow!: ?Bool = Option.None,
+    autoCancel!: ?Bool = Option.None,
+    maskColor!: ?ResourceColor = Option.None,
+    transition!: ?TransitionEffect = Option.None,
+    onDidAppear!: ?() -> Unit = Option.None,
+    onDidDisappear!: ?() -> Unit = Option.None,
+    onWillAppear!: ?() -> Unit = Option.None,
+    onWillDisappear!: ?() -> Unit = Option.None,
+    keyboardAvoidMode!: ?KeyboardAvoidMode = Option.None,
+    enableHoverMode!: ?Bool = Option.None,
+    hoverModeArea!: ?HoverModeAreaType = Option.None,
+    levelMode!: ?LevelMode = Option.None,
+    backgroundColor!: ?ResourceColor = Option.None,
+    cornerRadius!: ?BorderRadiuses = Option.None,
+    borderWidth!: ?EdgeWidths = Option.None,
+    borderColor!: ?EdgeColors = Option.None,
+    borderStyle!: ?EdgeStyles = Option.None,
+    width!: ?Length = Option.None,
+    height!: ?Length = Option.None,
+    shadow!: ?ShadowOptions = Option.None,
+    backgroundBlurStyle!: ?BlurStyle = Option.None
+)
+```
+
+**功能：** 自定义弹窗配置构造函数。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|builder|() -> Unit|是|-| **命名参数。** 自定义对话框内容。<br>**说明：** 仅支持接收@Builder修饰的自定义构建函数。|
+|maskRect|?[Rectangle](./cj-common-types.md#class-rectangle)|否|Option.None| **命名参数。** 弹窗遮蔽层区域。<br>初始值：Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent)<br> **说明：** showInSubWindow为true时，maskRect不生效。<br>maskRect在设置Rectangle中的部分属性后，若未设置其余的属性，则其余属性的默认值为0。|
+|alignment|?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|Option.None| **命名参数。** 弹窗在竖直方向上的对齐方式。初始值：DialogAlignment.Default|
+|offset|?[Offset](./cj-common-types.md#class-offset)|否|Option.None| **命名参数。** 弹窗相对alignment所在位置的偏移量。初始值：Offset(dx: 0.vp, dy: 0.vp)|
+|isModal|?Bool|否|Option.None| **命名参数。** 弹窗是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与弹窗周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与弹窗周围其他控件进行交互。初始值：true。|
+|showInSubWindow|?Bool|否|Option.None| **命名参数。** 某弹窗需要显示在主窗口之外时，是否在子窗口显示此弹窗。值为true表示在子窗口显示弹窗。初始值：false，弹窗显示在应用内，而非独立子窗口。|
+|autoCancel|?Bool|否|Option.None| **命名参数。** 点击遮障层时，是否关闭弹窗，true表示关闭弹窗。false表示不关闭弹窗。初始值：true|
+|maskColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|Option.None| **命名参数。** 自定义蒙层颜色。初始值: Color(0x33000000)|
+|transition|?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)|否|Option.None| **命名参数。** 设置弹窗显示和退出的过渡效果。<br> **说明：** <br> 1.如果不设置，则使用默认的显示/退出动效。<br> 2.显示动效中按back键，打断显示动效，执行退出动效，动画效果为显示动效与退出动效的曲线叠加后的效果。<br> 3.退出动效中按back键，不会打断退出动效，退出动效继续执行，继续按back键退出应用。|
+|onDidAppear|?() -> Unit|否|Option.None| **命名参数。** 弹窗弹出后的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onDidDisappear|?() -> Unit|否|Option.None| **命名参数。** 弹窗消失后的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onWillAppear|?() -> Unit|否|Option.None| **命名参数。** 弹窗显示动效前的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|onWillDisappear|?() -> Unit|否|Option.None| **命名参数。** 弹窗退出动效前的事件回调。**说明：** <br> 1.正常时序依次为：onWillAppear>>onDidAppear>>(onDateAccept/onCancel/onDateChange)>>onWillDisappear>>onDidDisappear。 <br> 2.在onDidAppear内设置改变弹窗显示效果的回调事件，二次弹出生效。<br> 3.快速点击弹出，消失弹窗时，存在onWillDisappear在onDidAppear前生效。<br> 4. 当弹窗入场动效未完成时关闭弹窗，该回调不会触发。|
+|keyboardAvoidMode|?[KeyboardAvoidMode](#enum-keyboardavoidmode)|否|Option.None| **命名参数。** 用于设置弹窗是否在拉起软键盘时进行自动避让。KeyboardAvoidMode.Default|
+|enableHoverMode|?Bool|否|Option.None| **命名参数。** 是否响应悬停态，值为true时，响应悬停态。<br> 初始值：false，默认不响应。|
+|hoverModeArea|?[HoverModeAreaType](#enum-hovermodeareatype)|否|Option.None| **命名参数。** 悬停态下弹窗默认展示区域。初始值：HoverModeAreaType.BottomScreen|
+|levelMode|?[LevelMode](#enum-levelmode)|否|Option.None| **命名参数。** 设置弹窗显示层级。<br> **说明：** <br> 初始值：LevelMode.Overlay <br> 当且仅当showInSubWindow属性设置为false时生效。|
+|backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|Option.None| **命名参数。** 设置弹窗背板颜色。初始值：Color.Transparent <br> **说明：** <br> 当设置了backgroundColor为非透明色时，backgroundBlurStyle需要设置为BlurStyle.NONE，否则颜色显示将不符合预期效果。|
+|cornerRadius|?[BorderRadiuses](./cj-common-types.md#class-borderradiuses)|否|Option.None| **命名参数。** 设置背板的圆角半径。可分别设置4个圆角的半径。<br> 初始值：BorderRadiuses(topLeft: 32.vp, topRight: 32.vp, bottomLeft: 32.vp, bottomRight: 32.vp)<br>圆角大小受组件尺寸限制，最大值为组件宽或高的一半，若值为负，则按照默认值处理。<br>百分比参数方式：以父元素弹窗宽和高的百分比来设置弹窗的圆角。|
+|borderWidth|?[EdgeWidths](./cj-common-types.md#class-edgewidths)|否|Option.None| **命名参数。** 设置弹窗背板的边框宽度。<br>可分别设置4个边框宽度。初始值：EdgeWidths(top: 0.vp, right: 0.vp, bottom: 0.vp, left: 0.vp)<br>百分比参数方式：以父元素弹窗宽的百分比来设置弹窗的边框宽度。<br>当弹窗左边框和右边框大于弹窗宽度，弹窗上边框和下边框大于弹窗高度，显示可能不符合预期。|
+|borderColor|?[EdgeColors](#class-edgecolors)|否|Option.None| **命名参数。** 设置弹窗背板的边框颜色。<br>初始值：EdgeColors(top: Color.Black, right: Color.Black, bottom: Color.Black, left: Color.Black)。<br>如果使用borderColor属性，需要和borderWidth属性一起使用。|
+|borderStyle|?[EdgeStyles](./cj-common-types.md#class-edgestyles)|否|Option.None| **命名参数。** 设置弹窗背板的边框样式。<br>初始值：EdgeStyles()。<br>如果使用borderStyle属性，需要和borderWidth属性一起使用。|
+|width|?[Length](./cj-common-types.md#interface-length)|否|Option.None| **命名参数。** 设置弹窗背板的宽度。<br> **说明：** <br> 弹窗宽度默认最大值：400.vp <br> 百分比参数方式：弹窗参考宽度基于所在窗口的宽度的基础上调整。|
+|height|?[Length](./cj-common-types.md#interface-length)|否|Option.None| **命名参数。** 设置弹窗背板的高度。<br> **说明：** <br> 弹窗高度默认最大值：0.9 *（窗口高度 - 安全区域）。<br> 百分比参数方式：弹窗参考高度为（窗口高度 - 安全区域），在此基础上调小或调大。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|Option.None| **命名参数。** 设置弹窗背板的阴影。|
+|backgroundBlurStyle|?[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|Option.None| **命名参数。** 弹窗背板模糊材质。初始值：BlurStyle.ComponentUltraThick|
+
+## class ShowDialogConfig
+
+```cangjie
+public class ShowDialogConfig {
+    public var title: ?ResourceStr
+    public var message: ?ResourceStr
+    public var buttons: ?Array<ButtonInfo>
+    public var alignment: ?DialogAlignment
+    public var offset: ?Offset
+    public var maskRect: ?Rectangle
+    public var showInSubWindow: ?Bool
+    public var isModal: ?Bool
+    public var backgroundColor: ?ResourceColor
+    public var backgroundBlurStyle: ?BlurStyle
+    public var shadow: ?ShadowOptions
+    public var enableHoverMode: ?Bool
+    public var hoverModeArea: ?HoverModeAreaType
+    public var levelMode: ?LevelMode
+    public init(
+        title!: ?ResourceStr = Option.None,
+        message!: ?ResourceStr = Option.None,
+        buttons!: ?Array<ButtonInfo> = Option.None,
+        alignment!: ?DialogAlignment = Option.None,
+        offset!: ?Offset = Option.None,
+        maskRect!: ?Rectangle = Option.None,
+        showInSubWindow!: ?Bool = Option.None,
+        isModal!: ?Bool = Option.None,
+        backgroundColor!: ?ResourceColor = Option.None,
+        backgroundBlurStyle!: ?BlurStyle = Option.None,
+        shadow!: ?ShadowOptions = Option.None,
+        enableHoverMode!: ?Bool = Option.None,
+        hoverModeArea!: ?HoverModeAreaType = Option.None,
+        levelMode!: ?LevelMode = Option.None
+    )
+}
+```
+
+**功能：** 对话框的选项。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var title
+
+```cangjie
+public var title: ?ResourceStr
+```
+
+**功能：** 标题文本。初始值：""，取值为""默认不显示标题。
+
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var message
+
+```cangjie
+public var message: ?ResourceStr
+```
+
+**功能：** 内容文本。初始值：""，取值为""默认不显示内容。
+
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var buttons
+
+```cangjie
+public var buttons: ?Array<ButtonInfo>
+```
+
+**功能：** 对话框中按钮的数组，支持大于1个按钮。
+
+**类型：** ?Array\<[ButtonInfo](#class-buttoninfo)>
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var alignment
+
+```cangjie
+public var alignment: ?DialogAlignment
+```
+
+**功能：** 对话框在竖直方向上的对齐方式。初始值：DialogAlignment.Default
+
+> **说明：**
+> 若在UIExtension中设置showInSubWindow为true, 弹窗将基于UIExtension的宿主窗口对齐。
+
+**类型：** ?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var offset
+
+```cangjie
+public var offset: ?Offset
+```
+
+**功能：** 对话框相对alignment所在位置的偏移量。初始值：Offset(dx: 0.vp, dy: 0.vp)
+
+**类型：** ?[Offset](./cj-common-types.md#class-offset)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var maskRect
+
+```cangjie
+public var maskRect: ?Rectangle
+```
+
+**功能：** 对话框遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。初始值：Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent)
+
+> **说明：**
+>
+> - showInSubWindow为true时，maskRect不生效。
+> - maskRect在设置Rectangle中的部分属性后，若未设置其余的属性，则其余属性的默认值为0。
+
+**类型：** ?[Rectangle](./cj-common-types.md#class-rectangle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var showInSubWindow
+
+```cangjie
+public var showInSubWindow: ?Bool
+```
+
+**功能：** 某对话框需要显示在主窗口之外时，是否在子窗口显示此对话框。值为true表示在子窗口显示对话框。初始值：false，对话框显示在应用内，而非独立子窗口。
+
+> **说明：**
+> showInSubWindow为true的对话框无法触发显示另一个showInSubWindow为true的对话框。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var isModal
+
+```cangjie
+public var isModal: ?Bool
+```
+
+**功能：** 对话框是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与对话框周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与对话框周围其他控件进行交互。初始值：true
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var backgroundColor
+
+```cangjie
+public var backgroundColor: ?ResourceColor
+```
+
+**功能：** 对话框背板颜色。初始值：Color.Transparent
+
+> **说明：**
+> backgroundColor会与模糊属性backgroundBlurStyle叠加产生效果，如果不符合预期，可将backgroundBlurStyle设置为BlurStyle.None，即可取消模糊。
+
+**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var backgroundBlurStyle
+
+```cangjie
+public var backgroundBlurStyle: ?BlurStyle
+```
+
+**功能：** 对话框背板模糊材质。初始值：BlurStyle.ComponentUltraThick
+
+> **说明：**
+> 
+> 设置为BlurStyle.NONE即可关闭背景虚化。当设置了backgroundBlurStyle为非None值时，则不要设置backgroundColor，否则颜色显示将不符合预期效果。
+
+**类型：** ?[BlurStyle](./cj-common-types.md#enum-blurstyle)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var shadow
+
+```cangjie
+public var shadow: ?ShadowOptions
+```
+
+**功能：** 设置对话框背板的阴影。
+
+**类型：** ?[ShadowOptions](./cj-common-types.md#class-shadowoptions)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var enableHoverMode
+
+```cangjie
+public var enableHoverMode: ?Bool
+```
+
+**功能：** 是否响应悬停态，值为true时，响应悬停态。初始值：false，默认不响应。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var hoverModeArea
+
+```cangjie
+public var hoverModeArea: ?HoverModeAreaType
+```
+
+**功能：** 设置悬停态下对话框的默认展示区域。初始值：HoverModeAreaType.BottomScreen
+
+**类型：** ?[HoverModeAreaType](#enum-hovermodeareatype)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var levelMode
+
+```cangjie
+public var levelMode: ?LevelMode
+```
+
+**功能：** 设置对话框显示层级。
+
+> **说明：**
+> - 初始值：LevelMode.Overlay。
+> - 当且仅当showInSubWindow属性设置为false时生效。
+
+**类型：** ?[LevelMode](#enum-levelmode)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### init(?ResourceStr, ?ResourceStr, ?Array\<ButtonInfo>, ?DialogAlignment, ?Offset, ?Rectangle, ?Bool, ?Bool, ?ResourceColor, ?BlurStyle, ?ShadowOptions, ?Bool, ?HoverModeAreaType, ?LevelMode)
+
+```cangjie
+public init(
+    title!: ?ResourceStr = Option.None,
+    message!: ?ResourceStr = Option.None,
+    buttons!: ?Array<ButtonInfo> = Option.None,
+    alignment!: ?DialogAlignment = Option.None,
+    offset!: ?Offset = Option.None,
+    maskRect!: ?Rectangle = Option.None,
+    showInSubWindow!: ?Bool = Option.None,
+    isModal!: ?Bool = Option.None,
+    backgroundColor!: ?ResourceColor = Option.None,
+    backgroundBlurStyle!: ?BlurStyle = Option.None,
+    shadow!: ?ShadowOptions = Option.None,
+    enableHoverMode!: ?Bool = Option.None,
+    hoverModeArea!: ?HoverModeAreaType = Option.None,
+    levelMode!: ?LevelMode = Option.None
+)
+```
+
+**功能：** 对话框显示选项构造函数。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|title|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|Option.None| **命名参数。** 标题文本。初始值：""，取值为""默认不显示标题。|
+|message|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|Option.None| **命名参数。** 内容文本。初始值：""，取值为""默认不显示内容。|
+|buttons|?Array\<[ButtonInfo](#class-buttoninfo)>|否|Option.None| **命名参数。** 对话框中按钮的数组，支持大于1个按钮。|
+|alignment|?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|Option.None| **命名参数。** 对话框在竖直方向上的对齐方式。初始值：DialogAlignment.Default> <br> **说明：** <br> 若在UIExtension中设置showInSubWindow为true, 弹窗将基于UIExtension的宿主窗口对齐。|
+|offset|?[Offset](./cj-common-types.md#class-offset)|否|Option.None| **命名参数。** 对话框相对alignment所在位置的偏移量。<br> 初始值：Offset(dx: 0.vp, dy: 0.vp)。 |
+|maskRect|?[Rectangle](./cj-common-types.md#class-rectangle)|否|Option.None| **命名参数。** 对话框遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。<br> 初始值：Rectangle(x: 0.vp, y: 0.vp, width: 100.percent, height: 100.percent) <br> **说明：** showInSubWindow为true时，maskRect不生效。<br> maskRect在设置Rectangle中的部分属性后，若未设置其余的属性，则其余属性的默认值为0。|
+|showInSubWindow|?Bool|否|Option.None| **命名参数。** 某对话框需要显示在主窗口之外时，是否在子窗口显示此对话框。值为true表示在子窗口显示对话框。<br>初始值：false，对话框显示在应用内，而非独立子窗口。<br>**说明：**<br>showInSubWindow为true的对话框无法触发显示另一个showInSubWindow为true的对话框。|
+|isModal|?Bool|否|Option.None| **命名参数。** 对话框是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与对话框周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与对话框周围其他控件进行交互。初始值：true。|
+|backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|Option.None| **命名参数。** 对话框背板颜色。初始值：Color.Transparent。|
+|backgroundBlurStyle|?[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|Option.None| **命名参数。** 对话框背板模糊材质。初始值：BlurStyle.ComponentUltraThick。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|Option.None| **命名参数。** 设置对话框背板的阴影。|
+|enableHoverMode|?Bool|否|Option.None| **命名参数。** 是否响应悬停态，值为true时，响应悬停态。初始值：false，默认不响应。|
+|hoverModeArea|?[HoverModeAreaType](#enum-hovermodeareatype)|否|Option.None| **命名参数。** 设置悬停态下对话框的默认展示区域。初始值：HoverModeAreaType.BottomScreen。|
+|levelMode|?[LevelMode](#enum-levelmode)|否|Option.None| **命名参数。** 设置弹窗显示层级。<br> **说明：** <br> 初始值：LevelMode.Overlay <br> 当且仅当showInSubWindow属性设置为false时生效。|
+
+## class ActionMenuConfig
+
+```cangjie
+public class ActionMenuConfig {
+    public var title: ?ResourceStr
+    public var buttons: ?Array<ButtonInfo>
+    public var showInSubWindow: ?Bool
+    public var isModal: ?Bool
+    public var levelMode: ?LevelMode
+    public init(
+        title!: ?ResourceStr = Option.None,
+        buttons!: ?Array<ButtonInfo> = Option.None,
+        showInSubWindow!: ?Bool = Option.None,
+        isModal!: ?Bool = Option.None,
+        levelMode!: ?LevelMode = Option.None
+    )
+}
+```
+
+**功能：** 操作菜单的选项。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var title
+
+```cangjie
+public var title: ?ResourceStr
+```
+
+**功能：** 标题文本。初始值：""，取值为""默认不显示标题。
+
+**类型：** ?[ResourceStr](./cj-common-types.md#interface-resourcestr)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var buttons
+
+```cangjie
+public var buttons: ?Array<ButtonInfo>
+```
+
+**功能：** 菜单中菜单项按钮的数组，支持1-6个按钮。按钮数量大于6个时，仅显示前6个按钮，之后的按钮不显示。
+
+**类型：** ?Array\<[ButtonInfo](#class-buttoninfo)>
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var showInSubWindow
+
+```cangjie
+public var showInSubWindow: ?Bool
+```
+
+**功能：** 某操作菜单需要显示在主窗口之外时，是否在子窗口显示此菜单。值为true表示在子窗口显示菜单。初始值：false，在子窗口不显示菜单。
+
+> **说明：**
+>
+> - showInSubWindow为true的菜单无法触发显示另一个showInSubWindow为true的菜单。
+> - 若在UIExtension中设置showInSubWindow为true, 菜单将基于UIExtension的宿主窗口对齐。
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var isModal
+
+```cangjie
+public var isModal: ?Bool
+```
+
+**功能：** 菜单是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与菜单周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与菜单周围其他控件进行交互。初始值：true
+
+**类型：** ?Bool
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### var levelMode
+
+```cangjie
+public var levelMode: ?LevelMode
+```
+
+**功能：** 设置菜单显示层级。
+
+> **说明：**
+> 
+> - 初始值：LevelMode.Overlay。
+> - 当且仅当showInSubWindow属性设置为false时生效。
+
+**类型：** ?[LevelMode](#enum-levelmode)
+
+**读写能力：** 可读写
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### init(?ResourceStr, ?Array\<ButtonInfo>, ?Bool, ?Bool, ?LevelMode)
+
+```cangjie
+public init(
+    title!: ?ResourceStr = Option.None,
+    buttons!: ?Array<ButtonInfo> = Option.None,
+    showInSubWindow!: ?Bool = Option.None,
+    isModal!: ?Bool = Option.None,
+    levelMode!: ?LevelMode = Option.None
+)
+```
+
+**功能：** 菜单操作选项构造函数。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|title|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|Option.None| **命名参数。** 要显示的文本标题。|
+|buttons|?Array\<[ButtonInfo](#class-buttoninfo)>|否|Option.None| **命名参数。** 按钮数组。|
+|showInSubWindow|?Bool|否|Option.None| **命名参数。** 某操作菜单需要显示在主窗口之外时，是否在子窗口显示此菜单。值为true表示在子窗口显示菜单。<br> 初始值：false，在子窗口不显示菜单。<br> **说明：** showInSubWindow为true的菜单无法触发显示另一个showInSubWindow为true的菜单。<br> 若在UIExtension中设置showInSubWindow为true, 菜单将基于UIExtension的宿主窗口对齐。|
+|isModal|?Bool|否|Option.None| **命名参数。** 菜单是否为模态窗口。值为true表示为模态窗口且有蒙层，不可与菜单周围其他控件进行交互，即蒙层区域无法事件透传。值为false表示为非模态窗口且无蒙层，可以与菜单周围其他控件进行交互。初始值：true。|
+|levelMode|?[LevelMode](#enum-levelmode)|否|Option.None| **命名参数。** 设置弹窗显示层级。<br> **说明：** <br> 初始值：LevelMode.Overlay <br> 当且仅当showInSubWindow属性设置为false时生效。|
 
 ## enum HoverModeAreaType
 
@@ -1910,6 +3128,104 @@ public operator func ==(other: ToastShowMode): Bool
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |other|[ToastShowMode](#enum-toastshowmode)|是|-|要比较的另一个ToastShowMode实例。|
+
+**返回值：**
+
+|类型|说明|
+|:----|:----|
+|Bool|比较结果，相等时返回true。|
+
+## enum LevelMode
+
+```cangjie
+public enum LevelMode <: Equatable<LevelMode> {
+    | Overlay
+    | Embedded
+    | ...
+}
+```
+
+**功能：** 弹窗显示层级模式。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**父类型：**
+
+- Equatable\<[LevelMode](#enum-levelmode)>
+
+### Overlay
+
+```cangjie
+Overlay
+```
+
+**功能：** 弹窗层级为应用窗口根节点，应用内路由导航切换弹窗不隐藏。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### Embedded
+
+```cangjie
+Embedded
+```
+
+**功能：** 弹窗节点为页面内路由/导航下的节点，随路由导航切换，弹窗随页面隐藏。
+
+> **说明：**
+>
+> - 目前只支持挂载在Page或者NavDestination节点上，优先挂载在Page节点下，只支持在这两种页面内顶层显示。
+> - 该模式下新起的页面可以覆盖在弹窗上，页面返回后该弹窗依旧存在，弹窗内容不会丢失。
+>  -该模式下需确保目标页面节点如Page节点已挂载上树，再拉起弹窗，否则弹窗将无法挂载到对应的页面节点内。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+### operator func !=(LevelMode)
+
+```cangjie
+public operator func !=(other: LevelMode): Bool
+```
+
+**功能：** 不等比较运算符。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|other|[LevelMode](#enum-levelmode)|是|-|要比较的另一个LevelMode实例。|
+
+**返回值：**
+
+|类型|说明|
+|:----|:----|
+|Bool|比较结果，不相等时返回true。|
+
+### operator func ==(LevelMode)
+
+```cangjie
+public operator func ==(other: LevelMode): Bool
+```
+
+**功能：** 相等比较运算符。
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
+
+**参数：**
+
+|参数名|类型|必填|默认值|说明|
+|:---|:---|:---|:---|:---|
+|other|[LevelMode](#enum-levelmode)|是|-|要比较的另一个LevelMode实例。|
 
 **返回值：**
 

@@ -28,8 +28,9 @@ Navigation路由相关的操作都是基于页面栈[NavPathStack](../reference/
 class EntryView {
     // 创建一个页面栈对象并传入Navigation
     var pageStack: NavPathStack = NavPathStack()
-    func build(){
+    func build() {
         Navigation(this.pageStack) {
+
         }
     }
 }

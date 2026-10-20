@@ -26,6 +26,7 @@ ArkUI为组件提供了通用的属性动画和转场动画能力的同时，还
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -39,9 +40,9 @@ class EntryView {
                 .shape(CheckBoxShape.Circle)
                 .size(width: 50, height: 50)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

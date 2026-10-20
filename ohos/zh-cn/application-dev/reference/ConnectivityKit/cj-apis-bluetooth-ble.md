@@ -57,7 +57,7 @@ public func createGattClientDevice(deviceId: String): GattClientDevice
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -142,7 +142,7 @@ public func off(eventType: BluetoothBleCallbackType, callback!: ?CallbackObject 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -203,7 +203,7 @@ public func on(eventType: BluetoothBleCallbackType, callback: Callback1Argument<
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -261,7 +261,7 @@ public func on(eventType: BluetoothBleCallbackType, callback: Callback1Argument<
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -282,7 +282,7 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class BLEDeviceFindCallback1 <: Callback1Argument<Array<ScanResult>> {
+class BLEDeviceFindCallback <: Callback1Argument<Array<ScanResult>> {
     public func invoke(err: ?BusinessException, devices: Array<ScanResult>): Unit {
         for (device in devices) {
             Hilog.info(0, "Bluetooth", "device has find, deviceID is ${device.deviceId}, name is ${device.deviceName}")
@@ -290,7 +290,7 @@ class BLEDeviceFindCallback1 <: Callback1Argument<Array<ScanResult>> {
     }
 }
 
-let bleDeviceFindCallback = BLEDeviceFindCallback1()
+let bleDeviceFindCallback = BLEDeviceFindCallback()
 try {
     on(BluetoothBleCallbackType.BleDeviceFind, bleDeviceFindCallback)
 } catch (e: BusinessException) {
@@ -324,7 +324,7 @@ public func startAdvertising(setting: AdvertiseSetting, advData: AdvertiseData, 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -410,7 +410,7 @@ public func startAdvertising(advertisingParams: AdvertisingParams): UInt32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -493,7 +493,7 @@ public func startBleScanning(filters: Array<ScanFilter>, options!: ?ScanOptions 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -517,7 +517,7 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class BLEDeviceFindCallback2 <: Callback1Argument<Array<ScanResult>> {
+class BLEDeviceFindCallback <: Callback1Argument<Array<ScanResult>> {
     public func invoke(err: ?BusinessException, devices: Array<ScanResult>): Unit {
         for (device in devices) {
             Hilog.info(0, "Bluetooth", "device has find, deviceID is ${device.deviceId}, name is ${device.deviceName}")
@@ -525,7 +525,7 @@ class BLEDeviceFindCallback2 <: Callback1Argument<Array<ScanResult>> {
     }
 }
 
-let bleDeviceFindCallback = BLEDeviceFindCallback2()
+let bleDeviceFindCallback = BLEDeviceFindCallback()
 try {
     on(BluetoothBleCallbackType.BleDeviceFind, bleDeviceFindCallback)
     var scanFilter = ScanFilter()
@@ -557,7 +557,7 @@ public func stopAdvertising(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -613,7 +613,7 @@ public func stopAdvertising(advertisingId: UInt32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -692,7 +692,7 @@ public func stopBleScanning(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1966,7 +1966,7 @@ public func close(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2015,7 +2015,7 @@ public func connect(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2063,7 +2063,7 @@ public func disconnect(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2115,7 +2115,7 @@ public func getDeviceName(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2169,7 +2169,7 @@ public func getRssiValue(callback: AsyncCallback<Int32>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2227,7 +2227,7 @@ public func getServices(callback: AsyncCallback<Array<GattService>>): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2285,7 +2285,7 @@ public func off(eventType: BluetoothBleGattClientDeviceCallbackType, callback!: 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2347,7 +2347,7 @@ public func on(eventType: BluetoothBleGattClientDeviceCallbackType, callback: Ca
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2409,7 +2409,7 @@ public func on(
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2430,7 +2430,7 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class BLEConnectionStateChangeCallback1 <: Callback1Argument<BleConnectionChangeState> {
+class BLEConnectionStateChangeCallback <: Callback1Argument<BleConnectionChangeState> {
     public func invoke(err: ?BusinessException, stateInfo: BleConnectionChangeState): Unit {
         Hilog.info(0, "Bluetooth", "onGattServerStateChange: device=" + stateInfo.deviceId + ", state=" + stateInfo.state.toString())
     }
@@ -2438,7 +2438,7 @@ class BLEConnectionStateChangeCallback1 <: Callback1Argument<BleConnectionChange
 
 try {
     let gattClient = createGattClientDevice("XX:XX:XX:XX:XX:XX")  // 请替换为您的设备地址
-    let bleConnectionStateChangeCallback = BLEConnectionStateChangeCallback1()
+    let bleConnectionStateChangeCallback = BLEConnectionStateChangeCallback()
     gattClient.on(BluetoothBleGattClientDeviceCallbackType.BleConnectionStateChange, bleConnectionStateChangeCallback)
 } catch (e: BusinessException) {
     Hilog.info(0, "Bluetooth", "errCode: ${e.code}, errMessage: ${e.message}", "")
@@ -2468,7 +2468,7 @@ public func on(eventType: BluetoothBleGattClientDeviceCallbackType, callback: Ca
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2536,7 +2536,7 @@ public func readCharacteristicValue(
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2635,7 +2635,7 @@ public func readDescriptorValue(descriptor: BleDescriptor, callback: AsyncCallba
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2720,7 +2720,7 @@ public func setBleMtuSize(mtu: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2787,7 +2787,7 @@ public func setCharacteristicChangeIndication(characteristic: BleCharacteristic,
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2881,7 +2881,7 @@ public func setCharacteristicChangeNotification(characteristic: BleCharacteristi
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -2967,7 +2967,7 @@ public func writeCharacteristicValue(characteristic: BleCharacteristic, writeTyp
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3060,7 +3060,7 @@ public func writeDescriptorValue(descriptor: BleDescriptor, callback: AsyncCallb
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3558,7 +3558,7 @@ public func addService(service: GattService): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3640,7 +3640,7 @@ public func close(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3698,7 +3698,7 @@ public func notifyCharacteristicChanged(deviceId: String, notifyCharacteristic: 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3758,7 +3758,7 @@ public func off(eventType: BluetoothBleGattServerCallbackType, callback!: ?Callb
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3817,7 +3817,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3895,7 +3895,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3980,7 +3980,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4058,7 +4058,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4140,7 +4140,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4160,7 +4160,7 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class StateChangeCallback1 <: Callback1Argument<BleConnectionChangeState> {
+class StateChangeCallback <: Callback1Argument<BleConnectionChangeState> {
     public func invoke(err: ?BusinessException, state: BleConnectionChangeState): Unit {
         Hilog.info(0, "Bluetooth", "onGattServerStateChange: device=" + state.deviceId + ", state=" + state.state.toString())
     }
@@ -4168,7 +4168,7 @@ class StateChangeCallback1 <: Callback1Argument<BleConnectionChangeState> {
 
 try {
     let gattServer = createGattServer()
-    let stateChangeCallback = StateChangeCallback1()
+    let stateChangeCallback = StateChangeCallback()
     gattServer.on(BluetoothBleGattServerCallbackType.ConnectionStateChange, stateChangeCallback)
 } catch (e: BusinessException) {
     Hilog.info(0, "Bluetooth", "errCode: ${e.code}, errMessage: ${e.message}", "")
@@ -4198,7 +4198,7 @@ public func on(eventType: BluetoothBleGattServerCallbackType, callback: Callback
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4218,7 +4218,7 @@ import kit.ConnectivityKit.*
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class BLEMtuChangeCallback1 <: Callback1Argument<Int32> {
+class BLEMtuChangeCallback <: Callback1Argument<Int32> {
     public func invoke(err: ?BusinessException, mtu: Int32): Unit {
         Hilog.info(0, "Bluetooth", "mtu change to ${mtu}")
     }
@@ -4226,7 +4226,7 @@ class BLEMtuChangeCallback1 <: Callback1Argument<Int32> {
 
 try {
     let gattServer = createGattServer()
-    let bleMtuChangeCallback = BLEMtuChangeCallback1()
+    let bleMtuChangeCallback = BLEMtuChangeCallback()
     gattServer.on(BluetoothBleGattServerCallbackType.ServerBleMtuChange, bleMtuChangeCallback)
 } catch (e: BusinessException) {
     Hilog.info(0, "Bluetooth", "errCode: ${e.code}, errMessage: ${e.message}", "")
@@ -4257,7 +4257,7 @@ public func removeService(serviceUUID: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4312,11 +4312,11 @@ client请求是指通过下述接口订阅回调收到的请求消息：
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|serverResponse|ServerResponse|是|-|server端回复client的响应数据。|
+|serverResponse|[ServerResponse](#class-serverresponse)|是|-|server端回复client的响应数据。ServerResponse|是|-|server端回复client的响应数据。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[蓝牙服务子系统错误码](./cj-errorcode-bluetooth_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -5354,7 +5354,7 @@ public enum AdvertisingState <: Equatable<AdvertisingState> & ToString {
 
 **父类型：**
 
-- Equatable\<AdvertisingState>
+- Equatable\<[AdvertisingState](#enum-advertisingstate)>
 - ToString
 
 ### Disabled
@@ -5489,7 +5489,7 @@ public enum BluetoothBleCallbackType <: Equatable<BluetoothBleCallbackType> & Ha
 
 **父类型：**
 
-- Equatable\<BluetoothBleCallbackType>
+- Equatable\<[BluetoothBleCallbackType](#enum-bluetoothblecallbacktype)>
 - Hashable
 - ToString
 
@@ -5604,7 +5604,8 @@ public func toString(): String
 ## enum BluetoothBleGattClientDeviceCallbackType
 
 ```cangjie
-public enum BluetoothBleGattClientDeviceCallbackType <: Equatable<BluetoothBleGattClientDeviceCallbackType> & Hashable & ToString {
+public enum BluetoothBleGattClientDeviceCallbackType <: Equatable<BluetoothBleGattClientDeviceCallbackType> & Hashable &
+    ToString {
     | BleCharacteristicChange
     | BleConnectionStateChange
     | ClientBleMtuChange
@@ -5620,7 +5621,7 @@ public enum BluetoothBleGattClientDeviceCallbackType <: Equatable<BluetoothBleGa
 
 **父类型：**
 
-- Equatable\<BluetoothBleGattClientDeviceCallbackType>
+- Equatable\<[BluetoothBleGattClientDeviceCallbackType](#enum-bluetoothblegattclientdevicecallbacktype)>
 - Hashable
 - ToString
 
@@ -5766,7 +5767,7 @@ public enum BluetoothBleGattServerCallbackType <: Equatable<BluetoothBleGattServ
 
 **父类型：**
 
-- Equatable\<BluetoothBleGattServerCallbackType>
+- Equatable\<[BluetoothBleGattServerCallbackType](#enum-bluetoothblegattservercallbacktype)>
 - Hashable
 - ToString
 
@@ -5944,7 +5945,7 @@ public enum GattWriteType <: Equatable<GattWriteType> & ToString {
 
 **父类型：**
 
-- Equatable\<GattWriteType>
+- Equatable\<[GattWriteType](#enum-gattwritetype)>
 - ToString
 
 ### Write
@@ -6055,7 +6056,7 @@ public enum MatchMode <: Equatable<MatchMode> & ToString {
 
 **父类型：**
 
-- Equatable\<MatchMode>
+- Equatable\<[MatchMode](#enum-matchmode)>
 - ToString
 
 ### MatchModeAggressive
@@ -6166,7 +6167,7 @@ public enum PhyType <: Equatable<PhyType> & ToString {
 
 **父类型：**
 
-- Equatable\<PhyType>
+- Equatable\<[PhyType](#enum-phytype)>
 - ToString
 
 ### PhyLe1M
@@ -6278,7 +6279,7 @@ public enum ScanDuty <: Equatable<ScanDuty> & ToString {
 
 **父类型：**
 
-- Equatable\<ScanDuty>
+- Equatable\<[ScanDuty](#enum-scanduty)>
 - ToString
 
 ### ScanModeBalanced
@@ -6403,7 +6404,7 @@ public enum ScanReportMode <: Equatable<ScanReportMode> & ToString {
 
 **父类型：**
 
-- Equatable\<ScanReportMode>
+- Equatable\<[ScanReportMode](#enum-scanreportmode)>
 - ToString
 
 ### Batch

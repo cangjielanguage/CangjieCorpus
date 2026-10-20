@@ -10,7 +10,7 @@ Common Event Manager（公共事件管理工具，简称cem）是实现公共事
 
 ## 环境要求
 
-在使用本工具前，开发者需要先获取[hdc工具](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-toolchain-hdc-guide.md)，执行hdc shell。
+在使用本工具前，开发者需要先获取<!--RP1-->[hdc工具](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md)<!--RP1End-->，执行hdc shell。
 
 ## cem工具命令列表
 

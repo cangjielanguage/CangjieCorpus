@@ -630,6 +630,7 @@ public init(strokeWidth!: ?Length, color!: ?ResourceColor = None, startMargin!: 
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_management.*
 import ohos.arkui.state_macro_manage.*
@@ -640,8 +641,10 @@ import ohos.resource.__GenerateResource__
 @Entry
 @Component
 class EntryView {
-    @State var arr: Array<Int64> = [1, 2, 3]
-    @State var current: Int64 = 1
+    @State
+    var arr: Array<Int64> = [1, 2, 3]
+    @State
+    var current: Int64 = 1
     var normalIcon: AppResource = @r(app.media.startIcon)
     let ctrlButton: ButtonStyle = ButtonStyle(left: 17.0, top: 49.0, width: 20.0, height: 31.0,
         icons: ButtonIconOptions(shown: "", hidden: "", switching: ""))
@@ -669,10 +672,8 @@ class EntryView {
                 .justifyContent(FlexAlign.SpaceEvenly)
                 .backgroundColor(0x19000000)
             Column() {
-                Text('SideBarContainer content text1')
-                    .fontSize(20)
-                Text('SideBarContainer content text2')
-                    .fontSize(20)
+                Text('SideBarContainer content text1').fontSize(20)
+                Text('SideBarContainer content text2').fontSize(20)
             }
         }
             .id("SideBarDefault")

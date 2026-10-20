@@ -150,7 +150,7 @@ public var parameters: HashMap<String, CommonEventValueType>
 
 **功能：** 表示发布方传递的公共事件的附加信息。
 
-**类型：** HashMap\<String, CommonEventValueType>
+**类型：** HashMap\<String,[CommonEventValueType](cj-apis-value_type.md#enum-commoneventvaluetype)>
 
 **读写能力：** 可读写
 
@@ -204,4 +204,4 @@ public init(
 |subscriberPermissions|Array\<String>|否|Array\<String>()| **命名参数。** 表示订阅者的权限。|
 |isOrdered|Bool|否|false| **命名参数。** 表示是否是有序事件。默认为false。|
 |isSticky|Bool|否|false| **命名参数。** 表示是否是粘性事件。默认为false。|
-|parameters|HashMap\<String, CommonEventValueType>|否|HashMap<String, CommonEventValueType>()| **命名参数。** 表示发布方传递的公共事件的附加信息。|
+|parameters|HashMap\<String, [CommonEventValueType](cj-apis-value_type.md#enum-commoneventvaluetype)>|否|HashMap<String, CommonEventValueType>()| **命名参数。** 表示发布方传递的公共事件的附加信息。HashMap\<String, CommonEventValueType>|否|HashMap<String, CommonEventValueType>()| **命名参数。** 表示发布方传递的公共事件的附加信息。|

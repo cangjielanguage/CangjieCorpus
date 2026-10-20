@@ -101,6 +101,7 @@ TextArea( text: '这是一段文本，用来展示选中菜单')
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -111,16 +112,72 @@ class EntryView {
     func build() {
         Scroll() {
             Column {
-                ForEach(this.placeHolderArr, itemGeneratorFunc: {placeholder: String, _: Int64 =>
-                TextInput( placeholder: 'TextInput ' + placeholder )
-                .margin(30)}
+                ForEach(
+                    this.placeHolderArr,
+                    itemGeneratorFunc: {
+                        placeholder: String, _: Int64 => TextInput(placeholder: 'TextInput ' + placeholder).margin(30)
+                    }
                 )
             }
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```
 
 ![textinputkeyboardavoid](figures/TextInputKeyboardAvoid.gif)
+
+## 常见问题
+
+### 如何设置TextArea的文本最少展示行数并自适应高度
+
+**问题现象**
+
+设置TextArea的初始高度来控制最少文本展示行数，当输入文本超过初始高度时，TextArea的高度自适应。
+
+**解决措施**
+
+设置height为LengthMetrics.AUTO，并使用constraintSize自行计算高度。
+
+``` cangjie
+package ohos_app_cangjie_entry
+
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
+
+@Entry
+@Component
+class EntryView {
+    let textAreaPadding = 12.0
+    let setMaxLines = 3.0
+    let changeText = "Add TextArea \n"
+    @State var fullText: String = this.changeText
+    @State var originText: String = this.changeText
+
+    func build() {
+        Column() {
+            TextArea(text: 'constraintSize: ' + this.fullText)
+            .fontSize(18)
+            .padding(this.textAreaPadding)
+            .width(300)
+            .height(LengthMetrics.AUTO)
+            .constraintSize(
+                // 结合padding计算，设置至少显示this.setMaxLines行文本
+                // 若涉及适老化字号缩放，需要监听并调整高度
+                minHeight: (this.textAreaPadding * 2.0 + this.setMaxLines * 21.0)
+            )
+
+            Blank(min: 50)
+            Button("Input something")
+            .onClick({ evt =>
+                this.fullText += this.changeText
+            })
+        }
+        .justifyContent(FlexAlign.Center)
+        .width(100.percent)
+        .padding(top: 30)
+    }
+}
+```
+![textAreaAuto](figures/TextArea-auto.gif)

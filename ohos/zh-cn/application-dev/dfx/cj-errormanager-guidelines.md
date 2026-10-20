@@ -28,8 +28,8 @@
 
 | 接口名称 | 说明 |
 | --------------- | ----------------- |
-| onUnhandledException: (String) -> Unit | 该回调函数调用场景：在程序运行中抛出异常且该异常未被任务‘try-catch’语句成功捕获。errMsg的内容固定为Uncaught exception was found.。 |
-| onException: Option \<(ErrorObject) -> Unit> | 该回调函数调用场景：在程序运行中抛出异常且该异常未被任务‘try-catch’语句成功捕获。errObject中包含了该未被捕获的异常的异常名称、异常信息与栈追踪。|
+| onUnhandledException: (String) -> Unit | 该回调函数调用场景：在程序运行中抛出异常且该异常未被任何‘try-catch’语句成功捕获。errMsg的内容固定为Uncaught exception was found.。 |
+| onException: Option \<(ErrorObject) -> Unit> | 该回调函数调用场景：在程序运行中抛出异常且该异常未被任何‘try-catch’语句成功捕获。errObject中包含了该未被捕获的异常的异常名称、异常信息与栈追踪。|
 
 ## 开发示例
 

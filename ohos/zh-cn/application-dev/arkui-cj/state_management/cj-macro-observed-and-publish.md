@@ -46,16 +46,16 @@
 <!-- code_check_manual -->
 
 ```cangjie
-class Child{
+class Child {
     var num: Int64 = 0
 
-    init(num: Int64){
+    init(num: Int64) {
         this.num = num
     }
 }
 
 @Observed
-class Parent{
+class Parent {
     @Publish
     var child: Child
     @Publish
@@ -94,25 +94,23 @@ import ohos.arkui.state_macro_manage.*
 import std.time.DateTime
 
 @Observed
-class TimeClass{
+class TimeClass {
     @Publish
     var time: DateTime
 }
 
 @Entry
 @Component
-class EntryView{
-
+class EntryView {
     @State
     var Time: TimeClass = TimeClass(time: DateTime.now())
 
-    func build(){
-        Flex(justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center){
-            Column(){
+    func build() {
+        Flex(justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center) {
+            Column() {
                 Text("Time: ${Time.time.format("HH:mm:ss")}").margin(10)
                 Button("time update").onClick({
-                    evt =>
-                        Time.time = DateTime.now()
+                    evt => Time.time = DateTime.now()
                 })
                 Button("time addHours by 2").onClick({
                     evt =>
@@ -152,7 +150,7 @@ class EntryView{
 
 2. @Observed装饰的类不能定义构造函数。被@Observed修饰的类会自动生成带命名参数的构造函数。
 
-3. @Publish装饰的变量类型需要为自定义类型拥有的成员变量，且如果未不是@Observed装饰的class成员变量，其内容更新不会触发UI更新。
+3. @Publish装饰的变量类型需要为自定义类型拥有的成员变量，且如果不是@Observed装饰的class成员变量，其内容更新不会触发UI更新。
 
 4. @Publish只能修饰仓颉自定义类型由var声明的成员变量，不能修饰let变量和静态变量。
 
@@ -171,25 +169,25 @@ import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
-class Book{
+class Book {
     @Publish
     var name: String
 }
 
 @Observed
-class Bag{
+class Bag {
     @Publish
     var book: Book
 }
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     @State
     var bag: Bag = Bag(book: Book(name: "Cangjie"))
 
-    func build(){
-        Column{
+    func build() {
+        Column {
             Text("Index: ${this.bag.book.name}")
             Button("change book.name").onClick({
                 evt =>
@@ -213,14 +211,13 @@ class EntryView{
 <!-- code_no_check -->
 
 ```cangjie
-
 @Observed
-class Info1{
-  @Publish
-  var count: Int64 = 0
-  init(count: Int64){
-      this.count = count
-  }
+class Info1 {
+    @Publish
+    var count: Int64 = 0
+    init(count: Int64) {
+        this.count = count
+    }
 }
 ```
 
@@ -229,20 +226,19 @@ class Info1{
 <!-- code_check_manual -->
 
 ```cangjie
-
 @Observed
-class Info2{
+class Info2 {
     @Publish
     var count: Int64 = 0
 }
 
 @Component
-class Test{
+class Test {
     // 创建该类设置成员变量的值时，需要指定命名参数。
     var info: Info2 = Info2(count: 5)
 
-    func build(){
-        Column{
+    func build() {
+        Column {
             Text("info.count: ${info.count}")
         }
     }
@@ -257,27 +253,29 @@ class Test{
 
 ```cangjie
 @Observed
-class Info{
+class Info {
     var count: Int64 = 0
 }
 
-class Test{
+class Test {
     @Publish
     var msg: Int64 = 0
 
-    init(msg: Int64){
+    init(msg: Int64) {
         this.msg = msg
     }
 }
 
 @Component
-class Page{
+class Page {
     // info.count未被@Publish修饰，内容更新不会触发UI更新
-    @State var info: Info = Info(count: 5)
+    @State
+    var info: Info = Info(count: 5)
     // Test.msg 未被@Observed修饰，内容更新不会触发UI更新
-    @State var test: Test = Test(5)
+    @State
+    var test: Test = Test(5)
 
-    func build(){}
+    func build() {}
 }
 ```
 
@@ -296,28 +294,27 @@ import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
-class Parent{
+class Parent {
     @Publish
     var parentId: Int64
     @Publish
     var child: Child
 }
 
-class Child{
-    var childId: Int64=1
+class Child {
+    var childId: Int64 = 1
 }
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     @State
-    var parent1: Parent = Parent(parentId: 0,child: Child())
-    func build(){
-        Column(space: 10){
+    var parent1: Parent = Parent(parentId: 0, child: Child())
+    func build() {
+        Column(space: 10) {
             Text("parentId: ${parent1.parentId}")
             Button("change parentId by 1").onClick({
-                evt =>
-                    parent1.parentId += 1
+                evt => parent1.parentId += 1
             })
 
             Text("childId: ${parent1.child.childId}")
@@ -347,7 +344,7 @@ import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
-class Parent{
+class Parent {
     @Publish
     var parentId: Int64
     @Publish
@@ -355,22 +352,21 @@ class Parent{
 }
 
 @Observed
-class Child{
+class Child {
     @Publish
     var childId: Int64
 }
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     @State
-    var parent1: Parent = Parent(parentId: 0,child: Child(childId: 1))
-    func build(){
-        Column(space: 10){
+    var parent1: Parent = Parent(parentId: 0, child: Child(childId: 1))
+    func build() {
+        Column(space: 10) {
             Text("parentId: ${parent1.parentId}")
             Button("change parentId by 1").onClick({
-                evt =>
-                    parent1.parentId += 1
+                evt => parent1.parentId += 1
             })
 
             Text("childId: ${parent1.child.childId}")

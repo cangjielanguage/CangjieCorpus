@@ -176,10 +176,10 @@ Button组件通常用于触发某些操作，可以绑定[onClick](../reference/
 <!-- code_check_manual -->
 
 ```cangjie
-  Button('Ok', ButtonOptions(shape: ButtonType.Normal, stateEffect: true))
-      .onClick({ evt =>
-      Hilog.info(0, '', 'Button onClick')
-  })
+Button('Ok', ButtonOptions(shape: ButtonType.Normal, stateEffect: true))
+    .onClick({ evt =>
+    Hilog.info(0, '', 'Button onClick')
+})
 ```
 
 ## 场景示例
@@ -192,6 +192,7 @@ Button组件通常用于触发某些操作，可以绑定[onClick](../reference/
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
 
@@ -200,18 +201,16 @@ Button组件通常用于触发某些操作，可以绑定[onClick](../reference/
   class EntryView {
       func build() {
           Column() {
-              TextInput(placeholder: 'input your username')
-                .margin(top: 20)
-              TextInput(placeholder: 'input your password')
-                .margin(top: 20)
+              TextInput(placeholder: 'input your username').margin(top: 20)
+              TextInput(placeholder: 'input your password').margin(top: 20)
               Button('Register')
-                .width(300)
-                .margin(top: 20)
-                .onClick({ evt =>
-                    // 需要执行的操作
-                    })
-          }
-          .padding(20)
+                  .width(300)
+                  .margin(top: 20)
+                  .onClick({
+                      evt =>
+                        // 需要执行的操作
+                  })
+          }.padding(20)
       }
   }
   ```
@@ -226,6 +225,7 @@ Button组件通常用于触发某些操作，可以绑定[onClick](../reference/
 
   ```cangjie
   package ohos_app_cangjie_entry
+
   import kit.ArkUI.*
   import ohos.arkui.state_macro_manage.*
   import kit.LocalizationKit.AppResource
@@ -259,20 +259,20 @@ Button组件通常用于触发某些操作，可以绑定[onClick](../reference/
                       .width(50)
                       .height(50)
               }
-              .shape(ButtonType.Circle)
-              .width(60)
-              .height(60)
-              .position(x: 80.percent, y: 600)
-              .shadow(radius: 10.0)
-              .onClick ({
-                  evt =>
-                  // 需要执行的操作
-              })
+                  .shape(ButtonType.Circle)
+                  .width(60)
+                  .height(60)
+                  .position(x: 80.percent, y: 600)
+                  .shadow(radius: 10.0)
+                  .onClick({
+                      evt =>
+                        // 需要执行的操作
+                  })
           }
-          .width(100.percent)
-          .height(100.percent)
-          .backgroundColor(0xDCDCDC)
-          .padding(top: 5)
+              .width(100.percent)
+              .height(100.percent)
+              .backgroundColor(0xDCDCDC)
+              .padding(top: 5)
       }
   }
   ```

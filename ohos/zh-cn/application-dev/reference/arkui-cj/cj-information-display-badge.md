@@ -352,6 +352,7 @@ public operator func ==(other: BadgePosition): Bool
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -370,8 +371,13 @@ class EntryView {
                     position: BadgePosition.RightTop,
                     maxCount: 99
                 ) {
-                    Button("message").width(100).height(50).backgroundColor(0x317aff)
-                }.width(100).height(50)
+                    Button("message")
+                        .width(100)
+                        .height(50)
+                        .backgroundColor(0x317aff)
+                }
+                    .width(100)
+                    .height(50)
                 Badge(
                     count: 1,
                     style: BadgeStyle(color: Color(0xFFFFFF), fontSize: 16, badgeSize: 20, badgeColor: Color.Red,
@@ -379,8 +385,13 @@ class EntryView {
                     position: BadgePosition.Left,
                     maxCount: 99
                 ) {
-                    Button("message").width(100).height(50).backgroundColor(0x317aff)
-                }.width(100).height(50)
+                    Button("message")
+                        .width(100)
+                        .height(50)
+                        .backgroundColor(0x317aff)
+                }
+                    .width(100)
+                    .height(50)
                 // 数字上标
                 Badge(
                     count: 1,
@@ -389,8 +400,13 @@ class EntryView {
                     position: BadgePosition.Right,
                     maxCount: 99
                 ) {
-                    Button("message").width(100).height(50).backgroundColor(0x317aff)
-                }.width(100).height(50)
+                    Button("message")
+                        .width(100)
+                        .height(50)
+                        .backgroundColor(0x317aff)
+                }
+                    .width(100)
+                    .height(50)
             }.margin(10)
             Text("stringBadge").width(80.percent)
             Row(space: 30) {
@@ -406,7 +422,9 @@ class EntryView {
                         .borderRadius(10)
                         .textAlign(TextAlign.Center)
                         .backgroundColor(0xF3F4ED)
-                }.width(80).height(50)
+                }
+                    .width(80)
+                    .height(50)
                 // value为空，设置圆点标记
                 Badge(
                     value: "",
@@ -421,7 +439,9 @@ class EntryView {
                         .borderRadius(10)
                         .textAlign(TextAlign.Center)
                         .backgroundColor(0xF3F4ED)
-                }.width(90).height(50)
+                }
+                    .width(90)
+                    .height(50)
             }.margin(10)
         }
     }
@@ -438,20 +458,23 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var badgeCount: Int32 = 1
+    @State
+    var badgeCount: Int32 = 1
     func build() {
         Column() {
             Badge(
                 count: this.badgeCount,
-                style: BadgeStyle(color: Color(0xFFFFFF), fontSize: 16, badgeSize: 20, badgeColor: Color.Red,fontWeight: FontWeight.Bolder, borderColor: Color.Black, borderWidth: 2.vp),
+                style: BadgeStyle(color: Color(0xFFFFFF), fontSize: 16, badgeSize: 20, badgeColor: Color.Red,
+                    fontWeight: FontWeight.Bolder, borderColor: Color.Black, borderWidth: 2.vp),
                 position: BadgePosition.RightTop,
-            ){
+            ) {
                 Text("message")
                     .width(200)
                     .height(50)
@@ -461,12 +484,12 @@ class EntryView {
                 .width(100)
                 .height(50)
             Button("count 0")
-                .onClick({ evt =>  this.badgeCount =0;})
-                .margin(top:20)
+                .onClick({evt => this.badgeCount = 0})
+                .margin(top: 20)
                 .width(200)
             Button("count 1")
-                .onClick({ evt =>  this.badgeCount =1;})
-                .margin(top:20)
+                .onClick({evt => this.badgeCount = 1})
+                .margin(top: 20)
                 .width(200)
         }.margin(10)
     }

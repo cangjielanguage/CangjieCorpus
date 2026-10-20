@@ -61,11 +61,11 @@ public static func createSubscriber(subscribeInfo: CommonEventSubscribeInfo): Co
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 1500008 | Common Event Service does not complete initialization. |
+  | 1500008 | Failed to initialize the common event service. |
 
 **示例：**
 
@@ -111,7 +111,7 @@ public static func publish(event: String, options!: CommonEventPublishData =  Co
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -165,7 +165,7 @@ public static func subscribe(subscriber: CommonEventSubscriber, callback: AsyncC
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -221,7 +221,7 @@ public static func unsubscribe(subscriber: CommonEventSubscriber): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[事件错误码](./cj-errorcode-common_event_service.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1356,7 +1356,7 @@ public static const COMMON_EVENT_DISTRIBUTED_ACCOUNT_LOGOFF: String = "common.ev
 
 **功能：** 表示分布式账号注销的动作。
 
-分布式账号注销成功会时触发事件通知服务发布该系统公共事件，事件携带系统账号ID。
+分布式账号注销成功时会触发事件通知服务发布该系统公共事件，事件携带系统账号ID。
 
 **类型：** String
 

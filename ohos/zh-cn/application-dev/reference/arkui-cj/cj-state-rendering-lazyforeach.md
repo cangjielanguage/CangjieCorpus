@@ -247,6 +247,7 @@ public init(dataSource: IDataSource<T>, itemGenerator!: ItemGeneratorFunc<T>, ke
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -282,8 +283,7 @@ class StudentDataSource <: IDataSource<Student> {
     }
 }
 
-func getDS(): StudentDataSource
-{
+func getDS(): StudentDataSource {
     let data: ArrayList<Student> = ArrayList<Student>()
     for (i in 0..10) {
         data.add(Student("name ${i}", i * i))

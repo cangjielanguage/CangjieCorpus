@@ -20,61 +20,85 @@ Init error. The WebviewController must be associated with a Web component.
 
 WebviewController还没有和具体的Web组件关联，无法进行相应的操作。
 
+**可能原因**
+
+WebviewController还没有和具体的Web组件关联。
+
 **处理步骤**
 
 请检查WebviewController对象是否已与Web组件关联。
 
-## 17100002 Url格式错误
+## 17100002 URL格式错误
 
 **错误信息**
 
-Invalid url.
+URL error. Possible causes: 1. No valid cookie found for the specified URL. 2. The webpage corresponding to the URL is invalid, or the URL length exceeds 2\*1024\*1024.
 
 **错误描述**
 
-Url格式错误。
+URL错误，可能原因：
+
+1. 未找到指定URL的有效Cookie。
+
+2. 该URL对应的网页无效，或URL长度超过2\*1024\*1024。
+
+**可能原因**
+
+1. 未找到指定URL的有效Cookie。
+
+2. 该URL对应的网页无效，或URL长度超过2\*1024\*1024。
 
 **处理步骤**
 
-请检查输入的url是否正确。
+请检查输入的URL是否正确且URL长度不超过2\*1024\*1024。
 
 ## 17100003 resource路径错误
 
 **错误信息**
 
-Invalid resource path or file type.
+Possible causes:
+
+1. Invalid resource path or file type.
+2. Calling a Cangjie method that returns an empty ArrayBuffer via runJavaScript.
 
 **错误描述**
 
-resource路径错误。
+1. resource路径错误。
+2. 通过runJavaScript调用H5侧的方法，这个方法返回了空的ArrayBuffer。
 
 **可能原因**
 
-资源路径下文件不存在或无法访问。
+1. 资源路径下文件不存在或无法访问。
+2. 通过runJavaScript调用H5侧的方法，这个方法返回了空的ArrayBuffer。
 
 **处理步骤**
 
-请检查输入的resource路径是否正确。
+1. 请检查输入的resource路径是否正确。
+2. 使用runJavaScriptExt接口替代runJavaScript接口。
 
 ## 17100004 功能开关未打开
 
 **错误信息**
 
-Function not enable.
+Function not enabled.
 
 **错误描述**
 
 功能开关未打开。
 
+**可能原因**
+
+相关功能未设置、开关未打开或错误调用。
+
 **处理步骤**
 
-请检查相关功能开关是否已配置打开，如该功能对应的XXXAccess是否配置为true。
+请检查相关功能开关是否已配置打开，如该功能对应的XXXAccess是否配置为true，或检测当前接口是否支持并发。
 
 ## 17100005 cookie value格式错误
 
 **错误信息**
 
-Invalid cookie value.
+The provided cookie value is invalid. It must follow the format specified in RFC 6265.
 
 **错误描述**
 
@@ -92,7 +116,7 @@ cookie value格式错误。
 
 **错误信息**
 
-Can not register message event using this port.
+Failed to register a message event for the port.
 
 **错误描述**
 
@@ -128,23 +152,23 @@ Invalid back or forward operation.
 
 2. 实际操作中是否有浏览对应跳转的网页数。
 
-## 17100008 删除不存在的javaScriptProxy
+## 17100008 删除不存在的JavaScriptProxy
 
 **错误信息**
 
-Cannot delete JavaScriptProxy.
+Failed to delete JavaScriptProxy because it does not exist.
 
 **错误描述**
 
-删除不存在的javaScriptProxy。
+删除不存在的JavaScriptProxy。
 
 **可能原因**
 
-传入的javaScriptProxy之前没有注册。
+传入的JavaScriptProxy之前没有注册。
 
 **处理步骤**
 
-检查传入的javaScriptProxy是否注册成功。
+检查传入的JavaScriptProxy是否注册成功。
 
 ## 17100009 上一次的zoomin/out操作缩放失败
 
@@ -168,7 +192,7 @@ Cannot zoom in or zoom out.
 
 **错误信息**
 
-Cannot post message using this port.
+Failed to post messages through the port.
 
 **错误描述**
 
@@ -188,11 +212,11 @@ Cannot post message using this port.
 
 **错误信息**
 
-Invalid origin.
+Invalid origin.The origin format must follow defined in RFC 6454.
 
 **错误描述**
 
-输入参数origin错误。
+输入参数origin错误。origin格式必须遵循RFC 6454中定义的格式。
 
 **可能原因**
 
@@ -216,11 +240,11 @@ Invalid web storage origin.
 
 **可能原因**
 
-没有使用相关的JS数据库API。
+没有使用相关的Cangjie数据库API。
 
 **处理步骤**
 
-1. 检查是否有使用JS数据库API。
+1. 检查是否有使用Cangjie数据库API。
 
 2. 如果已经使用，检查调用失败原因，如databaseAccess开关是否打开。
 
@@ -228,7 +252,7 @@ Invalid web storage origin.
 
 **错误信息**
 
-The number of preconnect sockets is invalid.
+The number of sockets to be preconnected is invalid.
 
 **错误描述**
 
@@ -246,7 +270,7 @@ The number of preconnect sockets is invalid.
 
 **错误信息**
 
-The type does not match with the value of the message.
+The type and value of the message do not match.
 
 **错误描述**
 
@@ -282,7 +306,7 @@ New failed, out of memory.
 
 **错误信息**
 
-The download is not paused.
+The download task is not paused.
 
 **错误描述**
 
@@ -336,7 +360,7 @@ No WebDownloadDelegate has been set yet.
 
 **错误信息**
 
-The download has not been started yet.
+The download task is not started yet.
 
 **错误描述**
 
@@ -407,3 +431,39 @@ WebHttpBodyStream数据初始化失败。
 **处理步骤**
 
 检查发起的POST等类型的请求中，携带的数据是否合法。
+
+## 17100023 使用了不被允许的端口号
+
+**错误信息**
+
+The port number is not within the allowed range.
+
+**错误描述**
+
+使用的端口号不在允许的取值范围内。
+
+**可能原因**
+
+由于部分端口号（例如小于1024的端口号）作为熟知或系统端口，在操作系统上需要特权才能开启，因此禁止应用使用这些端口号。
+
+**处理步骤**
+
+检查使用的端口号是否在允许的取值范围内。
+
+## 17100101 使用了错误的网络错误码
+
+**错误信息**
+
+The errorCode is either ARKWEB_NET_OK or outside the range of error codes in WebNetErrorList.
+
+**错误描述**
+
+网络错误码为ARKWEB_NET_OK或者超出了WebNetErrorList中的错误码范围。
+
+**可能原因**
+
+使用的错误码不在WebNetErrorList范围内，或者调用didFail接口时使用了NET_OK错误码。
+
+**处理步骤**
+
+检查使用的错误码是否在WebNetErrorList范围内，或者调用didFail时是否使用了NET_OK错误码。

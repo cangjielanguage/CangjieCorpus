@@ -90,29 +90,39 @@ public func onChange(callback: ?(Bool) -> Unit): This
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var radioName: String = "Null"
+    @State
+    var radioName: String = "Null"
 
     func build() {
         Flex(direction: FlexDirection.Row, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center) {
             Column() {
                 Text("Radio1")
-                Radio(group: "radioGroup", value: "Radio1").checked(true).height(50).width(50)
+                Radio(group: "radioGroup", value: "Radio1")
+                    .checked(true)
+                    .height(50)
+                    .width(50)
             }
             Column() {
                 Text("Radio2")
-                Radio(group: "radioGroup", value: "Radio2").checked(true).height(50).width(50)
+                Radio(group: "radioGroup", value: "Radio2")
+                    .checked(true)
+                    .height(50)
+                    .width(50)
             }
             Column() {
                 Text("Radio3")
-                Radio(group: "radioGroup", value: "Radio3").checked(true).height(50).width(50)
+                Radio(group: "radioGroup", value: "Radio3")
+                    .checked(true)
+                    .height(50)
+                    .width(50)
             }
         }
     }

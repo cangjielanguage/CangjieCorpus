@@ -297,7 +297,7 @@ public var position: ?GuideLinePosition
 
 **功能：** 指定guideline的位置。当未声明或声明异常值（如undefined）时，guideline的位置默认为start: 0。start和 end两种声明方式选择一种即可。若同时声明，仅start生效。若容器在某个方向的size被声明为"auto"，则该方向上guideline的位置只能使用start方式声明（不允许使用百分比）。
 
-**类型：** ?[GuideLinePosition](./cj-row-column-stack-relativecontainer.md#class-guidelineposition)
+**类型：** ?[GuideLinePosition](#class-guidelineposition)
 
 **读写能力：** 可读写
 
@@ -335,6 +335,7 @@ public init(id: ?String, direction: ?Axis, position: ?GuideLinePosition)
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -345,55 +346,66 @@ class EntryView {
     func build() {
         Row() {
             RelativeContainer() {
-                Row().width(100).height(100)
-                .backgroundColor(0xff3333)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
-                    )
-                ).id("row1")
-                Row().width(100).height(100)
-                .backgroundColor(0xFFCC00)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        right: HorizontalAlignParam("__container__", HorizontalAlign.End)
-                    )
-                ).id("row2")
-                Row().height(100)
-                .backgroundColor(0xFF6633)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.End),
-                        right: HorizontalAlignParam("row2", HorizontalAlign.Start)
-                    )
-                ).id("row3")
                 Row()
-                .backgroundColor(0xFF9966)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("row1",  HorizontalAlign.End)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xff3333)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                ).id("row4")
+                    .id("row1")
                 Row()
-                .backgroundColor(0xff3333)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row3", VerticalAlign.Bottom),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row2", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("__container__",  HorizontalAlign.End)
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xFFCC00)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End)
+                        )
                     )
-                ).id("row5")
+                    .id("row2")
+                Row()
+                    .height(100)
+                    .backgroundColor(0xFF6633)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.End),
+                            right: HorizontalAlignParam("row2", HorizontalAlign.Start)
+                        )
+                    )
+                    .id("row3")
+                Row()
+                    .backgroundColor(0xFF9966)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("row1", HorizontalAlign.End)
+                        )
+                    )
+                    .id("row4")
+                Row()
+                    .backgroundColor(0xff3333)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row3", VerticalAlign.Bottom),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row2", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End)
+                        )
+                    )
+                    .id("row5")
             }
-            .width(300).height(300)
-            .margin(left: 50.vp)
-            .border(width: 2.vp, color: Color(0x6699ff))
+                .width(300)
+                .height(300)
+                .margin(left: 50.vp)
+                .border(width: 2.vp, color: Color(0x6699ff))
         }.height(100.percent)
     }
 }
@@ -409,6 +421,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -419,44 +432,57 @@ class EntryView {
     func build() {
         Row() {
             RelativeContainer() {
-                Row().width(100).height(100)
-                .backgroundColor(0xff3333)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xff3333)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start)
+                        )
                     )
-                ).id("row1")
-                .margin(10)
-                Row().width(100).height(100)
-                .backgroundColor(0xFFCC00)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Top),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.End)
+                    .id("row1")
+                    .margin(10)
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xFFCC00)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Top),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.End)
+                        )
                     )
-                ).id("row2")
-                Row().height(100).width(100)
-                .backgroundColor(0xFF6633)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.Start)
+                    .id("row2")
+                Row()
+                    .height(100)
+                    .width(100)
+                    .backgroundColor(0xFF6633)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.Start)
+                        )
                     )
-                ).id("row3")
-                Row().width(100).height(100)
-                .backgroundColor(0xFF9966)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row2", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row3", HorizontalAlign.End),
+                    .id("row3")
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xFF9966)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row2", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row3", HorizontalAlign.End),
+                        )
                     )
-                ).id("row4")
-                .margin(10)
+                    .id("row4")
+                    .margin(10)
             }
-            .width(300).height(300)
-            .margin(left: 50.vp)
-            .border(width: 2.vp, color: Color(0x6699ff))
+                .width(300)
+                .height(300)
+                .margin(left: 50.vp)
+                .border(width: 2.vp, color: Color(0x6699ff))
         }.height(100.percent)
     }
 }
@@ -472,6 +498,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -482,19 +509,25 @@ class EntryView {
     func build() {
         Row() {
             RelativeContainer() {
-                Row().width(100).height(100).backgroundColor(0xff3333).alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("__container__", VerticalAlign.Top),
-                        bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
-                        right: HorizontalAlignParam("__container__", HorizontalAlign.End),
-                        bias: Bias(vertical: 0.3)
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xff3333)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("__container__", VerticalAlign.Top),
+                            bottom: VerticalAlignParam("__container__", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("__container__", HorizontalAlign.Start),
+                            right: HorizontalAlignParam("__container__", HorizontalAlign.End),
+                            bias: Bias(vertical: 0.3)
+                        )
                     )
-                ).id("row1")
+                    .id("row1")
             }
-            .width(300).height(300)
-            .margin(left: 50.vp)
-            .border(width: 2.vp, color: Color(0x6699ff))
+                .width(300)
+                .height(300)
+                .margin(left: 50.vp)
+                .border(width: 2.vp, color: Color(0x6699ff))
         }.height(100.percent)
     }
 }
@@ -510,6 +543,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -520,16 +554,25 @@ class EntryView {
     func build() {
         Row() {
             RelativeContainer() {
-                Row().width(100).height(100).backgroundColor(0xff3333).alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("guideline2", VerticalAlign.Top),
-                        left: HorizontalAlignParam("guideline1", HorizontalAlign.End),
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xff3333)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("guideline2", VerticalAlign.Top),
+                            left: HorizontalAlignParam("guideline1", HorizontalAlign.End),
+                        )
                     )
-                ).id("row1")
-            }.width(300).height(300).margin(left: 50.vp).border(width: 2.vp, color: Color(0x6699ff))
-            .guideLine(
-                [GuideLineStyle("guideline1", Axis.Vertical, GuideLinePosition(start: 50.vp)),
-                GuideLineStyle("guideline2", Axis.Horizontal, GuideLinePosition(start: 50.vp))])
+                    .id("row1")
+            }
+                .width(300)
+                .height(300)
+                .margin(left: 50.vp)
+                .border(width: 2.vp, color: Color(0x6699ff))
+                .guideLine(
+                    [GuideLineStyle("guideline1", Axis.Vertical, GuideLinePosition(start: 50.vp)),
+                        GuideLineStyle("guideline2", Axis.Horizontal, GuideLinePosition(start: 50.vp))])
         }.height(100.percent)
     }
 }
@@ -545,6 +588,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -555,42 +599,55 @@ class EntryView {
     func build() {
         Row() {
             RelativeContainer() {
-                Row().width(100).height(100)
-                .backgroundColor(0xff3333)
-                .id("row1")
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xff3333)
+                    .id("row1")
 
-                Row().width(100).height(100)
-                .backgroundColor(0xFFCC00)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Bottom),
-                        middle: HorizontalAlignParam("row1", HorizontalAlign.End)
+                Row()
+                    .width(100)
+                    .height(100)
+                    .backgroundColor(0xFFCC00)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Bottom),
+                            middle: HorizontalAlignParam("row1", HorizontalAlign.End)
+                        )
                     )
-                ).id("row2")
+                    .id("row2")
 
-                Row().height(100).width(100)
-                .backgroundColor(0xFF6633)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("row1", VerticalAlign.Top),
-                        left: HorizontalAlignParam("barrier1", HorizontalAlign.End)
+                Row()
+                    .height(100)
+                    .width(100)
+                    .backgroundColor(0xFF6633)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("row1", VerticalAlign.Top),
+                            left: HorizontalAlignParam("barrier1", HorizontalAlign.End)
+                        )
                     )
-                ).id("row3")
+                    .id("row3")
 
-                Row().width(50).height(50)
-                .backgroundColor(0xFF9966)
-                .alignRules(
-                    AlignRuleOption(
-                        top: VerticalAlignParam("barrier2", VerticalAlign.Bottom),
-                        left: HorizontalAlignParam("row1", HorizontalAlign.Start),
+                Row()
+                    .width(50)
+                    .height(50)
+                    .backgroundColor(0xFF9966)
+                    .alignRules(
+                        AlignRuleOption(
+                            top: VerticalAlignParam("barrier2", VerticalAlign.Bottom),
+                            left: HorizontalAlignParam("row1", HorizontalAlign.Start),
+                        )
                     )
-                ).id("row4")
-            }.width(300).height(300)
-            .margin(left: 50.vp)
-            .border(width: 2.vp, color: Color(0x6699ff))
-            .barrier(
-                [BarrierStyle("barrier1", BarrierDirection.Right, ["row1", "row2"]),
-                BarrierStyle("barrier2", BarrierDirection.Bottom, ["row1", "row2"])])
+                    .id("row4")
+            }
+                .width(300)
+                .height(300)
+                .margin(left: 50.vp)
+                .border(width: 2.vp, color: Color(0x6699ff))
+                .barrier(
+                    [BarrierStyle("barrier1", BarrierDirection.Right, ["row1", "row2"]),
+                        BarrierStyle("barrier2", BarrierDirection.Bottom, ["row1", "row2"])])
         }.height(100.percent)
     }
 }

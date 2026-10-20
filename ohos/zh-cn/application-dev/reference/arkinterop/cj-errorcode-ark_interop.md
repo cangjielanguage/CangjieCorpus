@@ -14,7 +14,7 @@
 
 **错误信息**
 
-使用的索引超过允许的范围.
+The accessing index is out of range.
 
 **错误描述**
 
@@ -33,7 +33,7 @@
 
 **错误信息**
 
-执行到的ArkTS代码发生异常。
+Outside error occurred.
 
 **错误描述**
 
@@ -53,7 +53,7 @@ ArkTS运行时异常或调用的ArkTS函数发生异常。
 
 **错误信息**
 
-访问的对象超出生命周期。
+Accessing reference is beyond reach.
 
 **错误描述**
 
@@ -75,7 +75,7 @@ ArkTS运行时异常或调用的ArkTS函数发生异常。
 
 **错误信息**
 
-在非ArkTS运行线程上进行互操作。
+Thread mismatch.
 
 **错误描述**
 
@@ -93,7 +93,7 @@ ArkTS运行时异常或调用的ArkTS函数发生异常。
 
 **错误信息**
 
-ArkTS数据类型不匹配。
+The ArkTS data types do not match.
 
 **错误描述**
 
@@ -111,7 +111,7 @@ ArkTS数据类型不匹配。
 
 **错误信息**
 
-导入的ArkTS模块不存在。
+Target module not exist.
 
 **错误描述**
 
@@ -130,7 +130,7 @@ ArkTS数据类型不匹配。
 
 **错误信息**
 
-在仓颉导出ArkTS接口期间不能导入ArkTS模块。
+Can not requireArkModule during initializing cangjie module.
 
 **错误描述**
 
@@ -148,7 +148,7 @@ ArkTS数据类型不匹配。
 
 **错误信息**
 
-当前应用不支持导入指定ArkTS模块。
+Current application have not support requireArkModule of the url.
 
 **错误描述**
 

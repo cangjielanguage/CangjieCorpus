@@ -683,6 +683,7 @@ public let onChange: (T) -> Unit
 ```cangjie
 public class LengthMetrics <: Length {
     public init(value: Float64, unit!: LengthUnit = LengthUnit.Vp)
+    public static let AUTO: Length
 }
 ```
 
@@ -746,6 +747,22 @@ public prop unitType: LengthUnit
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
+
+### static let AUTO
+
+```cangjie
+public static let AUTO: Length
+```
+
+**功能：** 表示自适应长度。
+
+**类型：** [Length](#interface-length)
+
+**读写能力：** 只读
+
+**系统能力：** SystemCapability.ArkUI.ArkUI.Full
+
+**起始版本：** 26.0.0
 
 ## class Color
 
@@ -1044,7 +1061,7 @@ public var keyType: KeyType
 
 **功能：** 按键的类型。
 
-**类型：** [KeyType](./cj-common-types.md#enum-keytype)
+**类型：** [KeyType](#enum-keytype)
 
 **读写能力：** 可读写
 
@@ -1076,7 +1093,7 @@ public var keySource: KeySource
 
 **功能：** 触发当前按键的输入设备类型。
 
-**类型：** [KeySource](./cj-common-types.md#enum-keysource)
+**类型：** [KeySource](#enum-keysource)
 
 **读写能力：** 可读写
 
@@ -1150,9 +1167,9 @@ public init(keyText: String, keyType: KeyType, keyCode: Int32, keySource: KeySou
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |keyText|String|是|-|按键的键值。|
-|keyType|[KeyType](./cj-common-types.md#enum-keytype)|是|-|按键的类型。|
+|keyType|[KeyType](#enum-keytype)|是|-|按键的类型。|
 |keyCode|Int32|是|-|按键的键值。|
-|keySource|[KeySource](./cj-common-types.md#enum-keysource)|是|-|触发当前按键的输入设备类型。|
+|keySource|[KeySource](#enum-keysource)|是|-|触发当前按键的输入设备类型。|
 |metaKey|Int32|是|-|按键发生时元键的状态，1表示按压态，0表示未按压态。|
 |deviceId|Int64|是|-|触发当前按键的输入设备ID。|
 |timestamp|Int64|是|-|按键发生时的时间戳。|
@@ -1245,7 +1262,7 @@ public var touchType: TouchType
 
 **功能：** 触摸事件的类型。
 
-**类型：** [TouchType](cj-common-types.md#enum-touchtype)
+**类型：** [TouchType](#enum-touchtype)
 
 **读写能力：** 可读写
 
@@ -1301,7 +1318,7 @@ public init(touchType: TouchType, id: Int32, screenX: Float64, screenY: Float64,
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|touchType|[TouchType](cj-common-types.md#enum-touchtype)|是|-|触摸事件的类型。|
+|touchType|[TouchType](#enum-touchtype)|是|-|触摸事件的类型。|
 |id|Int32|是|-|手指唯一标识符。|
 |screenX|Float64|是|-|触摸点相对于设备屏幕左边沿的X坐标。|
 |screenY|Float64|是|-|触摸点相对于设备屏幕上边沿的Y坐标。|
@@ -1311,7 +1328,7 @@ public init(touchType: TouchType, id: Int32, screenX: Float64, screenY: Float64,
 ## class BaseEvent
 
 ```cangjie
-abstract sealed class BaseEvent {
+sealed abstract class BaseEvent {
     public var target: ?EventTarget
     public var timestamp: Int64
     public var source: ?SourceType
@@ -1533,7 +1550,7 @@ public var builder: ?CustomBuilder
 
 **功能：** 使用自定义的生成器进行绘图，如果设置了pixelMap，则该值无效。
 
-**类型：** ?[CustomBuilder](./cj-common-types.md#type-custombuilder)
+**类型：** ?[CustomBuilder](#type-custombuilder)
 
 **读写能力：** 可读写
 
@@ -1590,7 +1607,7 @@ public init(pixelMap: ?PixelMap, builder: ?CustomBuilder, extraInfo: ?String)
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |pixelMap|?[PixelMap](../ImageKit/cj-apis-image.md#class-pixelmap)|是|-|设置拖拽过程中显示的图片。|
-|builder|?[CustomBuilder](./cj-common-types.md#type-custombuilder)|是|-|使用自定义生成器进行绘图，如果设置了pixelMap，则忽略此值。|
+|builder|?[CustomBuilder](#type-custombuilder)|是|-|使用自定义生成器进行绘图，如果设置了pixelMap，则忽略此值。|
 |extraInfo|?String|是|-|拖拽项的描述。|
 
 ## class MouseEvent
@@ -1625,7 +1642,7 @@ public var button: MouseButton
 
 **功能：** 鼠标按键。
 
-**类型：** [MouseButton](./cj-common-types.md#enum-mousebutton)
+**类型：** [MouseButton](#enum-mousebutton)
 
 **读写能力：** 可读写
 
@@ -1705,7 +1722,7 @@ public var action: MouseAction
 
 **功能：** 事件动作。
 
-**类型：** [MouseAction](./cj-common-types.md#enum-mouseaction)
+**类型：** [MouseAction](#enum-mouseaction)
 
 **读写能力：** 可读写
 
@@ -1734,8 +1751,8 @@ public init(timestamp: Int64, screenX: Float64, screenY: Float64, x: Float64, y:
 |screenY|Float64|是|-|点击触点相对于屏幕左上角的y轴坐标。|
 |x|Float64|是|-|点击触点相对于当前组件左上角的x轴坐标。|
 |y|Float64|是|-|点击触点相对于当前组件左上角的y轴坐标。|
-|button|[MouseButton](./cj-common-types.md#enum-mousebutton)|是|-|鼠标按键。|
-|action|[MouseAction](./cj-common-types.md#enum-mouseaction)|是|-|事件动作。|
+|button|[MouseButton](#enum-mousebutton)|是|-|鼠标按键。|
+|action|[MouseAction](#enum-mouseaction)|是|-|事件动作。|
 
 ## class TouchEvent
 
@@ -1765,7 +1782,7 @@ public var eventType: TouchType
 
 **功能：** 触摸事件的类型。
 
-**类型：** [TouchType](cj-common-types.md#enum-touchtype)
+**类型：** [TouchType](#enum-touchtype)
 
 **读写能力：** 可读写
 
@@ -1892,7 +1909,7 @@ public var width: Length
 
 **功能：** 定义目标元素的宽度。
 
-**类型：** [Length](./cj-common-types.md#interface-length)
+**类型：** [Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -1908,7 +1925,7 @@ public var height: Length
 
 **功能：** 定义目标元素的高度。
 
-**类型：** [Length](./cj-common-types.md#interface-length)
+**类型：** [Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -1964,8 +1981,8 @@ public init(width: Length, height: Length, position: Position, globalPosition: P
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|width|[Length](./cj-common-types.md#interface-length)|是|-|目标元素的宽度，单位为vp。|
-|height|[Length](./cj-common-types.md#interface-length)|是|-|目标元素的高度，单位为vp。|
+|width|[Length](#interface-length)|是|-|目标元素的宽度，单位为vp。|
+|height|[Length](#interface-length)|是|-|目标元素的高度，单位为vp。|
 |position|[Position](#class-position)|是|-|目标元素左上角相对父元素左上角的位置。|
 |globalPosition|[Position](#class-position)|是|-|目标元素左上角相对页面左上角的位置。|
 
@@ -1993,7 +2010,7 @@ public var x: ?Length
 
 **功能：** 定义x轴坐标。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2009,7 +2026,7 @@ public var y: ?Length
 
 **功能：** 定义y轴坐标。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2033,8 +2050,8 @@ public init(x!: ?Length = None, y!: ?Length = None)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** x轴坐标，单位为vp。|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** y轴坐标，单位为vp。|
+|x|?[Length](#interface-length)|否|None|**命名参数。** x轴坐标，单位为vp。|
+|y|?[Length](#interface-length)|否|None|**命名参数。** y轴坐标，单位为vp。|
 
 ## class MotionPathOptions
 
@@ -2272,11 +2289,11 @@ public init(duration!: ?Int32 = None, curve!: ?Curve = None, delay!: ?Int32 = No
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
 |duration|?Int32|否|None|**命名参数。** 描述共享元素转场动效播放时长。<br>初始值：1000。<br>单位：毫秒。<br>取值范围：[0, +∞)。|
-|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。<br>初始值：Curve.Linear。|
+|curve|?[Curve](#enum-curve)|否|None|**命名参数。** 动画曲线。<br>初始值：Curve.Linear。|
 |delay|?Int32|否|None|**命名参数。** 延迟播放时间。<br>初始值：0。<br>单位：毫秒。|
 |motionPath|?[MotionPathOptions](#class-motionpathoptions)|否|None|**命名参数。** 设置共享转场的运动路径。<br>初始值：MotionPathOptions(path: "")。|
 |zIndex|?Int32|否|None|**命名参数。** 设置Z轴。<br>取值范围：(-∞, +∞)。<br>初始值：0。|
-|effectType|?[SharedTransitionEffectType](./cj-common-types.md#enum-sharedtransitioneffecttype)|否|None|**命名参数。** 动画类型。<br>初始值为SharedTransitionEffectType.Exchange。|
+|effectType|?[SharedTransitionEffectType](#enum-sharedtransitioneffecttype)|否|None|**命名参数。** 动画类型。<br>初始值为SharedTransitionEffectType.Exchange。|
 
 ## class AnimateParam
 
@@ -2463,12 +2480,12 @@ public init(duration!: ?Int32 = None, tempo!: ?Float32 = None, curve!: ?Curve = 
 |:---|:---|:---|:---|:---|
 |duration|?Int32|否|None|**命名参数。** 动画持续时间，单位为毫秒。设置小于0的值时按0处理。<br>初始值：1000。<br>**说明：**<br>1. 可以通过在持续时间为0的动画闭包函数中改变属性，以实现停止该属性动画的效果。<br>2. 设置小于0的值时按0处理。|
 |tempo|?Float32|否|None|**命名参数。** 动画播放速度，值越大动画播放越快，值越小播放越慢，为0时无动画效果。<br>初始值：1.0。<br>取值范围：[0, +∞)。|
-|curve|?[Curve](./cj-common-types.md#enum-curve)|否|None|**命名参数。** 动画曲线。初始值为Curve.EaseInOut。|
+|curve|?[Curve](#enum-curve)|否|None|**命名参数。** 动画曲线。初始值为Curve.EaseInOut。|
 |delay|?Int32|否|None|**命名参数。** 动画延迟播放时间，单位为ms(毫秒)。<br>初始值：0。<br>取值范围：(-∞, +∞)。<br>**说明：**<br>delay>=0为延迟播放，delay<0表示提前播放。对于delay<0的情况：当delay的绝对值小于实际动画时长，动画将在开始后第一帧直接运动到delay绝对值的时刻的状态；当delay的绝对值大于等于实际动画时长，动画将在开始后第一帧直接运动到终点状态。其中实际动画时长等于单次动画时长乘以动画播放次数。|
 |iterations|?Int32|否|None|**命名参数。** 动画播放次数。设置为-1时表示无限次播放。设置为0时表示无动画效果。<br>初始值：1。<br>取值范围：[-1, +∞)。|
-|playMode|?[PlayMode](./cj-common-types.md#enum-playmode)|否|None|**命名参数。** 动画播放模式，默认播放完成后重头开始播放。<br>初始值：PlayMode.Normal。|
+|playMode|?[PlayMode](#enum-playmode)|否|None|**命名参数。** 动画播放模式，默认播放完成后重头开始播放。<br>初始值：PlayMode.Normal。|
 |onFinish|Option\<() -> Unit>|否|Option.None|**命名参数。** 动画播放完成回调。|
-|finishCallbackType|?[FinishCallbackType](./cj-common-types.md#enum-finishcallbacktype)|否|None|**命名参数。** 在动画中定义onFinish回调的类型。<br>初始值：FinishCallbackType.Removed。|
+|finishCallbackType|?[FinishCallbackType](#enum-finishcallbacktype)|否|None|**命名参数。** 在动画中定义onFinish回调的类型。<br>初始值：FinishCallbackType.Removed。|
 |expectedFrameRateRange|Option<[ExpectedFrameRateRange](#class-expectedframeraterange)>|否|Option.None|**命名参数。** 设置动画的期望帧率。|
 
 ## class HorizontalAlignParam
@@ -2698,7 +2715,7 @@ public var size: ?Length
 
 **功能：** 设置文本尺寸，使用fp单位。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2770,10 +2787,10 @@ public init(size!: ?Length = None, weight!: ?FontWeight = None, family!: ?Resour
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|size|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置文本尺寸，Length为Int64、Float64类型时，使用fp单位。不支持百分比设置。初始值为16.fp。|
-|weight|?[FontWeight](./cj-common-types.md#enum-fontweight)|否|None|**命名参数。** 设置文本的字体粗细。初始值为FontWeight.Normal。|
-|family|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None|**命名参数。** 设置文本的字体列表。使用多个字体，使用','进行分割，优先级按顺序生效。例如：'Arial, HarmonyOS Sans'。当前支持'HarmonyOS Sans'字体。初始值为"HarmonyOS Sans"。|
-|style|?[FontStyle](./cj-common-types.md#enum-fontstyle)|否|None|**命名参数。** 设置文本的字体样式。初始值为FontStyle.Normal。|
+|size|?[Length](#interface-length)|否|None|**命名参数。** 设置文本尺寸，Length为Int64、Float64类型时，使用fp单位。不支持百分比设置。初始值为16.fp。|
+|weight|?[FontWeight](#enum-fontweight)|否|None|**命名参数。** 设置文本的字体粗细。初始值为FontWeight.Normal。|
+|family|?[ResourceStr](#interface-resourcestr)|否|None|**命名参数。** 设置文本的字体列表。使用多个字体，使用','进行分割，优先级按顺序生效。例如：'Arial, HarmonyOS Sans'。当前支持'HarmonyOS Sans'字体。初始值为"HarmonyOS Sans"。|
+|style|?[FontStyle](#enum-fontstyle)|否|None|**命名参数。** 设置文本的字体样式。初始值为FontStyle.Normal。|
 
 ## class BorderRadiuses
 
@@ -2801,7 +2818,7 @@ public var topLeft: ?Length
 
 **功能：** 组件左上角圆角半径。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2817,7 +2834,7 @@ public var topRight: ?Length
 
 **功能：** 组件右上角圆角半径。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2833,7 +2850,7 @@ public var bottomLeft: ?Length
 
 **功能：** 组件左下角圆角半径。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2849,7 +2866,7 @@ public var bottomRight: ?Length
 
 **功能：** 组件右下角圆角半径。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -2873,10 +2890,10 @@ public init(topLeft!: ?Length = None, topRight!: ?Length = None, bottomLeft!: ?L
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|topLeft|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 组件左上角圆角半径。初始值为0.vp。|
-|topRight|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 组件右上角圆角半径。，初始值为0.vp。|
-|bottomLeft|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 组件左下角圆角半径。初始值为0.v2。|
-|bottomRight|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 组件右下角圆角半径。初始值为0.vp。|
+|topLeft|?[Length](#interface-length)|否|None|**命名参数。** 组件左上角圆角半径。初始值为0.vp。|
+|topRight|?[Length](#interface-length)|否|None|**命名参数。** 组件右上角圆角半径。，初始值为0.vp。|
+|bottomLeft|?[Length](#interface-length)|否|None|**命名参数。** 组件左下角圆角半径。初始值为0.vp。|
+|bottomRight|?[Length](#interface-length)|否|None|**命名参数。** 组件右下角圆角半径。初始值为0.vp。|
 
 ## class Margin
 
@@ -2908,10 +2925,10 @@ public init(top!: ?Length = None, right!: ?Length = None, bottom!: ?Length = Non
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|top|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 上外边距，组件顶部距组件外元素的尺寸。初始值为0.vp。|
-|right|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 右外边距，组件右边界距组件外元素的尺寸。初始值为0.vp。|
-|bottom|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 下外边距，组件底部距组件外元素的尺寸。初始值为0.vp。|
-|left|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 左外边距，组件左边界距组件外元素的尺寸。初始值为0.vp。|
+|top|?[Length](#interface-length)|否|None|**命名参数。** 上外边距，组件顶部距组件外元素的尺寸。初始值为0.vp。|
+|right|?[Length](#interface-length)|否|None|**命名参数。** 右外边距，组件右边界距组件外元素的尺寸。初始值为0.vp。|
+|bottom|?[Length](#interface-length)|否|None|**命名参数。** 下外边距，组件底部距组件外元素的尺寸。初始值为0.vp。|
+|left|?[Length](#interface-length)|否|None|**命名参数。** 左外边距，组件左边界距组件外元素的尺寸。初始值为0.vp。|
 
 ## class ShadowOptions
 
@@ -2973,7 +2990,7 @@ public var color: ?ResourceColor
 
 **功能：** 设置阴影颜色。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -3045,9 +3062,9 @@ public init(radius!: ?Float64, shadowType!: ?ShadowType = None, color!: ?Resourc
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|radius|?Float64|是|-|**命名参数。** 设置阴影的模糊半径。|
-|shadowType|?[ShadowType](./cj-common-types.md#enum-shadowtype)|否|None|**命名参数。** 设置阴影类型。初始值为ShadowType.Color。|
-|color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 设置阴影颜色。初始值为Color.Black。|
+|radius|?Float64|是|-|**命名参数。** 设置阴影的模糊半径。<br>初始值：<br>API version 26之前，初始值为0.0，设置大于0.0时，阴影生效；<br>从API version 26开始，初始值为-1.0，大于等于0.0时，阴影生效。|
+|shadowType|?[ShadowType](#enum-shadowtype)|否|None|**命名参数。** 设置阴影类型。初始值为ShadowType.Color。|
+|color|?[ResourceColor](#interface-resourcecolor)|否|None|**命名参数。** 设置阴影颜色。初始值为Color.Black。|
 |offsetX|?Float64|否|None|**命名参数。** 设置阴影的水平偏移量。初始值为0.0。|
 |offsetY|?Float64|否|None|**命名参数。** 设置阴影的垂直偏移量。初始值为0.0。|
 |fill|?Bool|否|None|**命名参数。** 设置阴影是否填充。初始值为false。|
@@ -3076,7 +3093,7 @@ public var dx: ?Length
 
 **功能：** 水平方向偏移量。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -3092,7 +3109,7 @@ public var dy: ?Length
 
 **功能：** 竖直方向偏移量。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -3116,8 +3133,8 @@ public init(dx: ?Length, dy: ?Length)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|dx|?[Length](./cj-common-types.md#interface-length)|是|-|x点坐标。|
-|dy|?[Length](./cj-common-types.md#interface-length)|是|-|y点坐标。|
+|dx|?[Length](#interface-length)|是|-|x点坐标。|
+|dy|?[Length](#interface-length)|是|-|y点坐标。|
 
 ## class ExpectedFrameRateRange
 
@@ -3459,10 +3476,10 @@ public init(top!: ?BorderStyle = None, right!: ?BorderStyle = None, bottom!: ?Bo
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|top|?[BorderStyle](./cj-common-types.md#enum-borderstyle)|否|None|**命名参数。** 组件上边框样式。初始值为BorderStyle.Solid。|
-|right|?[BorderStyle](./cj-common-types.md#enum-borderstyle)|否|None|**命名参数。** 组件右边框样式。初始值为BorderStyle.Solid。|
-|bottom|?[BorderStyle](./cj-common-types.md#enum-borderstyle)|否|None|**命名参数。** 组件下边框样式。初始值为BorderStyle.Solid。|
-|left|?[BorderStyle](./cj-common-types.md#enum-borderstyle)|否|None|**命名参数。** 组件左边框样式。初始值为BorderStyle.Solid。|
+|top|?[BorderStyle](#enum-borderstyle)|否|None|**命名参数。** 组件上边框样式。初始值为BorderStyle.Solid。|
+|right|?[BorderStyle](#enum-borderstyle)|否|None|**命名参数。** 组件右边框样式。初始值为BorderStyle.Solid。|
+|bottom|?[BorderStyle](#enum-borderstyle)|否|None|**命名参数。** 组件下边框样式。初始值为BorderStyle.Solid。|
+|left|?[BorderStyle](#enum-borderstyle)|否|None|**命名参数。** 组件左边框样式。初始值为BorderStyle.Solid。|
 
 ## class MultiShadowOptions
 
@@ -3471,7 +3488,6 @@ public open class MultiShadowOptions {
     public var radius: ?Length
     public var offsetX: ?Length
     public var offsetY: ?Length
-    protected init(radius: ?Length, offsetX: ?Length, offsetY: ?Length)
 }
 ```
 
@@ -3493,7 +3509,7 @@ public var radius: ?Length
 <br>小于或等于0的值将作为默认值处理。
 </p>
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -3510,7 +3526,7 @@ public var offsetX: ?Length
 **功能：** 设置阴影的水平偏移量。
 单位：vp。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -3527,33 +3543,13 @@ public var offsetY: ?Length
 **功能：** 设置阴影的垂直偏移量。
 单位：vp。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
 **起始版本：** 22
-
-### init(?Length, ?Length, ?Length)
-
-```cangjie
-protected init(radius: ?Length, offsetX: ?Length, offsetY: ?Length)
-```
-
-**功能：** 构造一个MultiShadowOptions对象。
-
-**系统能力：** SystemCapability.ArkUI.ArkUI.Full
-
-**起始版本：** 22
-
-**参数：**
-
-|参数名|类型|必填|默认值|说明|
-|:---|:---|:---|:---|:---|
-| radius | ?[Length](./cj-common-types.md#interface-length) | 是 | - | 半径 |
-| offsetX | ?[Length](./cj-common-types.md#interface-length) | 是 | - | X轴偏移 |
-| offsetY | ?[Length](./cj-common-types.md#interface-length) | 是 | - | Y轴偏移 |
 
 ## class PickerTextStyle
 
@@ -3579,7 +3575,7 @@ public var color: ?ResourceColor
 
 **功能：** 设置选择器文本颜色。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -3619,7 +3615,7 @@ public init(color!: ?ResourceColor = None, font!: ?Font = None)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 设置选择器文本颜色。|
+|color|?[ResourceColor](#interface-resourcecolor)|否|None|**命名参数。** 设置选择器文本颜色。|
 |font|?[Font](#class-font)|否|None|**命名参数。** 设置选择器文本字体。|
 
 ## class Font
@@ -3648,7 +3644,7 @@ public var size: ?Length
 
 **功能：** 设置文本尺寸，使用fp单位。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -3720,10 +3716,10 @@ public init(size!: ?Length = None, weight!: ?FontWeight = None, family!: ?Resour
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|size|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置文本尺寸，Length为Int64、Float64类型时，使用fp单位。不支持百分比设置。初始值为16.fp。|
-|weight|?[FontWeight](./cj-common-types.md#enum-fontweight)|否|None|**命名参数。** 设置文本的字体粗细。初始值为FontWeight.Normal。|
-|family|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|否|None|**命名参数。**设置文本的字体列表。使用多个字体，使用','进行分割，优先级按顺序生效。例如：'Arial, HarmonyOS Sans'。初始值为"HarmonyOS Sans"。|
-|style|?[FontStyle](./cj-common-types.md#enum-fontstyle)|否|None|**命名参数。** 设置文本的字体样式。初始值为FontStyle.Normal。|
+|size|?[Length](#interface-length)|否|None|**命名参数。** 设置文本尺寸，Length为Int64、Float64类型时，使用fp单位。不支持百分比设置。初始值为16.fp。|
+|weight|?[FontWeight](#enum-fontweight)|否|None|**命名参数。** 设置文本的字体粗细。初始值为FontWeight.Normal。|
+|family|?[ResourceStr](#interface-resourcestr)|否|None|**命名参数。**设置文本的字体列表。使用多个字体，使用','进行分割，优先级按顺序生效。例如：'Arial, HarmonyOS Sans'。初始值为"HarmonyOS Sans"。|
+|style|?[FontStyle](#enum-fontstyle)|否|None|**命名参数。** 设置文本的字体样式。初始值为FontStyle.Normal。|
 
 ## class BlurOptions
 
@@ -3872,8 +3868,8 @@ public init(colorMode!: ?ThemeColorMode = None, adaptiveColor!: ?AdaptiveColor =
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|colorMode|?[ThemeColorMode](./cj-common-types.md#enum-themecolormode)|否|None|**命名参数。** 内容模糊效果使用的深浅色模式。初始值为ThemeColorMode.System。|
-|adaptiveColor|?[AdaptiveColor](./cj-common-types.md#enum-adaptivecolor)|否|None|**命名参数。** 内容模糊效果使用的取色模式。初始值为AdaptiveColor.Default。|
+|colorMode|?[ThemeColorMode](#enum-themecolormode)|否|None|**命名参数。** 内容模糊效果使用的深浅色模式。初始值为ThemeColorMode.System。|
+|adaptiveColor|?[AdaptiveColor](#enum-adaptivecolor)|否|None|**命名参数。** 内容模糊效果使用的取色模式。初始值为AdaptiveColor.Default。|
 |blurOptions|?[BlurOptions](#class-bluroptions)|否|None|**命名参数。** 灰阶模糊参数。初始值为BlurOptions([0.0, 0.0])。|
 |scale|?Float32|否|None|**命名参数。** 内容模糊效果程度。<br>取值范围：[0.0, 1.0]。初始值为1.0。|
 
@@ -4144,7 +4140,7 @@ public var arrowOffset: ?Length
 
 **功能：** 设置popup箭头在弹窗处的偏移。箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。如果显示在屏幕边缘，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4176,7 +4172,7 @@ public var mask: ?ResourceColor
 
 **功能：** 设置遮罩层的颜色。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -4208,7 +4204,7 @@ public var targetSpace: ?Length
 
 **功能：** 设置popup与目标的间隙。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4222,7 +4218,7 @@ public var targetSpace: ?Length
 public var offset: ?Position
 ```
 
-**功能：** 设设置popup组件相对于placement设置的显示位置的偏移。不支持设置百分比。
+**功能：** 设置popup组件相对于placement设置的显示位置的偏移。不支持设置百分比。
 
 **类型：** ?[Position](#class-position)
 
@@ -4256,7 +4252,7 @@ public var popupColor: ?ResourceColor
 
 **功能：** 设置提示气泡的颜色。如需去除模糊背景填充效果，需将backgroundBlurStyle设置为BlurStyle.NONE。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -4288,7 +4284,7 @@ public var width: ?Length
 
 **功能：** 设置弹出窗口的宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4320,7 +4316,7 @@ public var arrowWidth: ?Length
 
 **功能：** 箭头的宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4336,7 +4332,7 @@ public var arrowHeight: ?Length
 
 **功能：** 箭头的高度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4352,7 +4348,7 @@ public var radius: ?Length
 
 **功能：** 弹出窗口的圆角。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4496,21 +4492,21 @@ public init(
 |primaryButton|?[PopupButton](#class-popupbutton)|否|None|**命名参数。** 设置第一个按钮。初始值为PopupButton(value: "", action: {=>})。|
 |secondaryButton|?[PopupButton](#class-popupbutton)|否|None|**命名参数。** 设置第二个按钮。初始值为PopupButton(value: "", action: {=>})。|
 |onStateChange|Option<([PopupStateChangeParam](#class-popupstatechangeparam)) -> Unit>|否|Option.None|**命名参数。** 设置弹窗状态变化事件回调。|
-|arrowOffset|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置popup箭头在弹窗处的偏移。初始值为0.vp。|
+|arrowOffset|?[Length](#interface-length)|否|None|**命名参数。** 设置popup箭头在弹窗处的偏移。初始值为0.vp。|
 |showInSubWindow|?Bool|否|None|**命名参数。** 设置是否在子窗口显示气泡。初始值为false。|
-|mask|?[Color](./cj-common-types.md#class-color)|否|None|**命名参数。** 设置遮罩层的颜色。初始值为Color(0x1000000)。|
+|mask|?[Color](#class-color)|否|None|**命名参数。** 设置遮罩层的颜色。初始值为Color(0x1000000)。|
 |messageOptions|?[PopupMessageOptions](#class-popupmessageoptions)|否|None|**命名参数。** 设置弹窗信息文本参数。初始值为PopupMessageOptions()。|
-|targetSpace|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置popup与目标的间隙。初始值为0.vp。|
+|targetSpace|?[Length](#interface-length)|否|None|**命名参数。** 设置popup与目标的间隙。初始值为0.vp。|
 |enableArrow|?Bool|否|None|**命名参数。** 是否启用箭头，初始值为true。|
 |offset|?[Position](#class-position)|否|None|**命名参数。** 设置popup组件相对于placement设置的显示位置的偏移。初始值为Position(x:0.0, y: 0.0)。|
-|popupColor|?[Color](./cj-common-types.md#class-color)|否|None|**命名参数。** 设置提示气泡的颜色。初始值为Color(0x1000000)。|
+|popupColor|?[Color](#class-color)|否|None|**命名参数。** 设置提示气泡的颜色。初始值为Color(0x1000000)。|
 |autoCancel|?Bool|否|None|**命名参数。** 页面有操作时，设置是否自动关闭气泡。初始值为true。|
-|width|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置弹窗宽度。初始值为0.vp。|
-|arrowPointPosition|?[ArrowPointPosition](./cj-common-types.md#enum-arrowpointposition)|否|None|**命名参数。** 设置气泡尖角相对于父组件显示位置。|
-|arrowWidth|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 箭头宽度。初始值为16.vp。|
-|arrowHeight|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 箭头高度。初始值为8.vp。|
-|radius|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置气泡圆角半径。初始值为20.vp。|
-|shadow|?[ShadowStyle](./cj-common-types.md#enum-shadowstyle)|否|None|**命名参数。** 设置气泡阴影。初始值为ShadowStyle.OuterDefaultMD。|
+|width|?[Length](#interface-length)|否|None|**命名参数。** 设置弹窗宽度。初始值为0.vp。|
+|arrowPointPosition|?[ArrowPointPosition](#enum-arrowpointposition)|否|None|**命名参数。** 设置气泡尖角相对于父组件显示位置。|
+|arrowWidth|?[Length](#interface-length)|否|None|**命名参数。** 箭头宽度。初始值为16.vp。|
+|arrowHeight|?[Length](#interface-length)|否|None|**命名参数。** 箭头高度。初始值为8.vp。|
+|radius|?[Length](#interface-length)|否|None|**命名参数。** 设置气泡圆角半径。初始值为20.vp。|
+|shadow|?[ShadowStyle](#enum-shadowstyle)|否|None|**命名参数。** 设置气泡阴影。初始值为ShadowStyle.OuterDefaultMD。|
 |backgroundBlurStyle|?[BlurStyle](#enum-blurstyle)|否|Option.None|**命名参数。** 设置气泡模糊背景参数。初始值为BlurStyle.ComponentUltraThick。|
 |transition|?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)|否|Option.None|**命名参数。** 自定义设置popup弹窗显示和退出的动画效果。|
 |onWillDismiss|Option\<([DismissPopupAction](#class-dismisspopupaction)) -> Unit>|否|None|**命名参数。**设置拦截退出事件且执行回调函数。|
@@ -4546,7 +4542,7 @@ public init(value!: ?ResourceStr, action!: () -> Unit)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|value|?[ResourceStr](./cj-common-types.md#interface-resourcestr)|是|-|**命名参数。** 菜单项文本。|
+|value|?[ResourceStr](#interface-resourcestr)|是|-|**命名参数。** 菜单项文本。|
 |action|() -> Unit|是|-|**命名参数。** 点击菜单项的事件回调。|
 
 ## class CustomPopupOptions
@@ -4654,7 +4650,7 @@ public var backgroundColor: ?Color
 
 **功能：** 设置提示气泡背景颜色。
 
-**类型：** ?[Color](./cj-common-types.md#class-color)
+**类型：** ?[Color](#class-color)
 
 **读写能力：** 可读写
 
@@ -4718,7 +4714,7 @@ public var popupColor: ?Color
 
 **功能：** 设置提示气泡的颜色。如需去除模糊背景填充效果，需将backgroundBlurStyle设置为BlurStyle.NONE。
 
-**类型：** ?[Color](./cj-common-types.md#class-color)
+**类型：** ?[Color](#class-color)
 
 **读写能力：** 可读写
 
@@ -4734,7 +4730,7 @@ public var arrowOffset: ?Length
 
 **功能：** 设置popup箭头在弹窗处的偏移。箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。如果显示在屏幕边缘，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4766,7 +4762,7 @@ public var mask: ?Color
 
 **功能：** 设置遮罩层的颜色。
 
-**类型：** ?[Color](./cj-common-types.md#class-color)
+**类型：** ?[Color](#class-color)
 
 **读写能力：** 可读写
 
@@ -4782,7 +4778,7 @@ public var targetSpace: ?Length
 
 **功能：** 设置popup与目标的间隙。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4814,7 +4810,7 @@ public var width: ?Length
 
 **功能：** 设置弹窗宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4846,7 +4842,7 @@ public var arrowWidth: ?Length
 
 **功能：** 设置箭头宽度。若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4862,7 +4858,7 @@ public var arrowHeight: ?Length
 
 **功能：** 箭头的高度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -4878,7 +4874,7 @@ public var radius: ?Length
 
 **功能：** 弹出窗口的圆角。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5026,22 +5022,22 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|builder|() -> Unit|是|-|**命名参数。** 提示气泡内容的构造器。|
+|builder|() -> Unit|是|-|**命名参数。** 提示气泡内容的构造器。<br> **说明：** 仅支持接收@Builder修饰的自定义构建函数。|
 |placement|?[Placement](#enum-placement)|否|Option.None|**命名参数。** 气泡组件优先显示的位置。<br>**说明：** 当前位置显示不下时，会自动调整位置。初始值为Placement.Bottom。|
-|popupColor|?[Color](./cj-common-types.md#class-color)|否|None|**命名参数。** 提示气泡的背景颜色。初始值为Color(0x1000000)。|
+|popupColor|?[Color](#class-color)|否|None|**命名参数。** 提示气泡的背景颜色。初始值为Color(0x1000000)。|
 |enableArrow|?Bool|否|None|**命名参数。** 是否显示箭头。<br>**说明：** 如果箭头所在方位侧的气泡长度不足以显示下箭头，则会默认不显示箭头。比如：placement设置为Left，但气泡高度小于箭头的宽度（32vp），则实际不会显示箭头。初始值为true。|
 |autoCancel|?Bool|否|None|**命名参数。** 页面有操作时，是否自动关闭气泡。初始值为true。|
 |onStateChange|Option<([PopupStateChangeParam](#class-popupstatechangeparam)) -> Unit>|否|Option.None|**命名参数。** 弹窗状态变化事件回调，参数为弹窗当前的显示状态。|
 |showInSubWindow|?Bool|否|None|**命名参数。** 是否在子窗口显示气泡。初始值为false。|
-|backgroundColor|?[Color](./cj-common-types.md#class-color)|否|None|**命名参数。** 提示气泡的背景颜色。初始值为Color(0x1000000)。|
-|arrowOffset|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** popup箭头在弹窗处的偏移。<br>**说明：** 箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。如果显示在屏幕边缘，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。初始值为0.vp。|
-|mask|?[Color](./cj-common-types.md#class-color)|否|None|**命名参数。** 提示气泡遮障层的颜色。|
-|targetSpace|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 设置popup与目标的间隙。初始值为0.vp。|
+|backgroundColor|?[Color](#class-color)|否|None|**命名参数。** 提示气泡的背景颜色。初始值为Color(0x1000000)。|
+|arrowOffset|?[Length](#interface-length)|否|None|**命名参数。** popup箭头在弹窗处的偏移。<br>**说明：** 箭头在气泡上下方时，数值为0表示箭头居最左侧，偏移量为箭头至最左侧的距离，默认居中。箭头在气泡左右侧时，偏移量为箭头至最上侧的距离，默认居中。如果显示在屏幕边缘，气泡会自动左右偏移，数值为0时箭头始终指向绑定组件。初始值为0.vp。|
+|mask|?[Color](#class-color)|否|None|**命名参数。** 提示气泡遮障层的颜色。|
+|targetSpace|?[Length](#interface-length)|否|None|**命名参数。** 设置popup与目标的间隙。初始值为0.vp。|
 |offset|?[Position](#class-position)|否|None|**命名参数。** popup组件相对于placement设置的显示位置的偏移。<br>**说明：** 不支持设置百分比。 |
-|width|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 弹窗宽度。<br>**说明：**  showInSubWindow=true时最大高度为设备屏幕高度，showInSubWindow=false时最大高度为应用窗口高度。高度限定逻辑=最大高度-状态栏高度（没有时高度为0）-dock栏高度（没有时高度为0）-40VP-40VP。初始值为0.vp。|
-|arrowPointPosition|?[ArrowPointPosition](./cj-common-types.md#enum-arrowpointposition)|否|None|**命名参数。** 气泡尖角相对于父组件显示位置，气泡尖角在垂直和水平方向上有 ”Start“、”Center“、”End“三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。|
-|arrowWidth|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 箭头宽度。<br>**说明：** 若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。初始值为16.vp。|
-|arrowHeight|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 箭头高度。<br>**说明：** 不支持设置百分比。初始值为16.vp。|
+|width|?[Length](#interface-length)|否|None|**命名参数。** 弹窗宽度。<br>**说明：**  showInSubWindow=true时最大高度为设备屏幕高度，showInSubWindow=false时最大高度为应用窗口高度。高度限定逻辑=最大高度-状态栏高度（没有时高度为0）-dock栏高度（没有时高度为0）-40VP-40VP。初始值为0.vp。|
+|arrowPointPosition|?[ArrowPointPosition](#enum-arrowpointposition)|否|None|**命名参数。** 气泡尖角相对于父组件显示位置，气泡尖角在垂直和水平方向上有 ”Start“、”Center“、”End“三个位置点可选。以上所有位置点均位于父组件区域的范围内，不会超出父组件的边界范围。|
+|arrowWidth|?[Length](#interface-length)|否|None|**命名参数。** 箭头宽度。<br>**说明：** 若所设置的箭头宽度超过所在边的长度减去两倍的气泡圆角大小，则不绘制气泡箭头。初始值为16.vp。|
+|arrowHeight|?[Length](#interface-length)|否|None|**命名参数。** 箭头高度。<br>**说明：** 不支持设置百分比。初始值为16.vp。|
 
 ## class SheetOptions
 
@@ -5077,7 +5073,7 @@ public init(backgroundColor!: Option<ResourceColor> = Option.None, onAppear!: Op
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|backgroundColor|Option<[ResourceColor](./cj-common-types.md#interface-resourcecolor)>|否|Option.None|**命名参数。** 半模态页面的背板颜色。默认值为Color.White。|
+|backgroundColor|Option<[ResourceColor](#interface-resourcecolor)>|否|Option.None|**命名参数。** 半模态页面的背板颜色。默认值为Color.White。|
 |onAppear|Option\<() -> Unit>|否|Option.None|**命名参数。** 半模态页面显示（动画结束后）回调函数。|
 |onDisappear|Option\<() -> Unit>|否|Option.None|**命名参数。** 半模态页面回退（动画结束后）回调函数。|
 |onWillAppear|Option\<() -> Unit>|否|Option.None|**命名参数。** 半模态页面显示（动画开始前）回调函数。|
@@ -5088,8 +5084,8 @@ public init(backgroundColor!: Option<ResourceColor> = Option.None, onAppear!: Op
 |showClose|Option\<Bool>|否|Option.None|**命名参数。** 是否显示关闭图标，默认显示关闭图标。使用关闭图标关闭半模态页面时，需要在onDisappear回调函数中将isShow参数置为false。|
 |dragBar|Option\<Bool>|否|Option.None|**命名参数。** 是否显示控制条。<br>**说明：**<br>半模态面板的dentents属性设置多个不同高度并且设置生效时，默认显示控制条。否则不显示控制条。|
 |blurStyle|Option\<[BlurStyle](#enum-blurstyle)>|否|Option.None|**命名参数。** 半模态面板的模糊背景。|
-|maskColor|Option<[Color](./cj-common-types.md#class-color)>|否|Option.None|**命名参数。** 半模态页面的背景蒙层颜色。|
-|title|Option\<() -> Unit>|否|Option.None|**命名参数。** 半模态面板的标题。在使用时结合@Builder使用。|
+|maskColor|Option<[Color](#class-color)>|否|Option.None|**命名参数。** 半模态页面的背景蒙层颜色。|
+|title|Option\<() -> Unit>|否|Option.None|**命名参数。** 半模态面板的标题。<br>**说明：** 仅支持接收@Builder修饰的自定义构建函数。|
 |enableOutsideInteractive|Option\<Bool>|否|Option.None|**命名参数。** **命名参数。**  半模态所在页面是否允许交互。<br>**说明：**<br>设置为true时允许交互，不显示蒙层；设置为false时不允许交互，显示蒙层；若不进行设置，默认底部弹窗与居中弹窗不允许交互，跟手弹窗允许交互。当设置为true时，maskColor设置无效。|
 |shouldDismiss|Option<([SheetDismiss](#class-sheetdismiss)) -> Unit>|否|Option.None|**命名参数。** 半模态页面交互式关闭回调函数。<br>**说明：**<br>当用户执行下拉关闭/back事件/点击蒙层关闭/关闭按钮关闭交互操作时，如果注册该回调函数，则不会立刻关闭。|
 |onWillDismiss|Option<([DismissSheetAction](#class-dismisssheetaction)) -> Unit>|否|Option.None|**命名参数。** 半模态页面的交互式关闭回调函数允许开发者注册，以获取关闭操作的类型，并决定是否关闭半模态状态。<br>**说明：**<br>当用户触发关闭操作时，若已注册回调函数，则不会立即关闭页面，而是由开发者通过回调函数中的reason参数判断关闭操作的类型，进而根据具体原因自主选择是否关闭半模态页面。如果不注册该回调函数，则用户执行关闭操作时，正常关闭半模态，无其他行为。在onWillDismiss回调中，不能再做onWillDismiss拦截。建议在二次确认场景使用。|
@@ -5098,11 +5094,11 @@ public init(backgroundColor!: Option<ResourceColor> = Option.None, onAppear!: Op
 |onDetentsDidChange|Option\<(Float32) -> Unit>|否|Option.None|**命名参数。**  半模态页面档位变化回调函数。<br>**说明：**<br>底部弹窗时，档位变化返回最后的高度。返回值为px。|
 |onWidthDidChange|Option\<(Float32) -> Unit>|否|Option.None|**命名参数。**  半模态页面宽度变化回调函数。<br>**说明：**<br>宽度变化时返回最后的宽度。返回值为px。|
 |onTypeDidChange|Option\<(Float32) -> Unit>|否|Option.None|**命名参数。**  半模态页面形态变化回调函数。<br>**说明：**<br>形态变化时返回最后的形态。|
-|borderWidth|Option<[Length](./cj-common-types.md#interface-length)>|否|None|**命名参数。**  设置半模态页面的边框宽度。可分别设置4个边框宽度。<br>百分比参数方式：以父元素半模态页面宽的百分比来设置半模态页面的边框宽度。<br>当半模态页面左边框和右边框大于半模态页面宽度，半模态页面上边框和下边框大于半模态页面高度，显示可能不符合预期。<br>**说明：**<br>底部弹窗时，底部边框宽度设置无效。|
-|borderColor|Option<[Color](./cj-common-types.md#class-color)>|否|None|**命名参数。**  设置半模态页面的边框颜色。如果使用borderColor属性，需要和borderWidth属性一起使用。<br>**说明：**<br>底部弹窗时，底部边框颜色设置无效。|
+|borderWidth|Option<[Length](#interface-length)>|否|None|**命名参数。**  设置半模态页面的边框宽度。可分别设置4个边框宽度。<br>百分比参数方式：以父元素半模态页面宽的百分比来设置半模态页面的边框宽度。<br>当半模态页面左边框和右边框大于半模态页面宽度，半模态页面上边框和下边框大于半模态页面高度，显示可能不符合预期。<br>**说明：**<br>底部弹窗时，底部边框宽度设置无效。|
+|borderColor|Option<[Color](#class-color)>|否|None|**命名参数。**  设置半模态页面的边框颜色。如果使用borderColor属性，需要和borderWidth属性一起使用。<br>**说明：**<br>底部弹窗时，底部边框颜色设置无效。|
 |borderStyle|Option<[EdgeStyles](#class-edgestyles)>|否|None|**命名参数。**  设置半模态页面的边框样式。如果使用borderStyle属性，需要和borderWidth属性一起使用。<br>**说明：**<br>底部弹窗时，底部边框样式设置无效。|
-|width|Option<[Length](./cj-common-types.md#interface-length)>|否|None|**命名参数。**  设置半模态页面的宽度。百分比参数方式：以父元素宽的百分比来设置半模态页面的宽度。|
-|shadow|Option<[ShadowOptions](#class-shadowoptions)>|否|None|**命名参数。** 阴影。|
+|width|Option<[Length](#interface-length)>|否|None|**命名参数。**  设置半模态页面的宽度。百分比参数方式：以父元素宽的百分比来设置半模态页面的宽度。|
+|shadow|Option<[ShadowOptions](#class-shadowoptions)>|否|None|**命名参数。** 阴影。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|
 |mode|Option<[SheetMode](#enum-sheetmode)>|否|None|**命名参数。**  设置半模态页面的阴影。|
 |scrollSizeMode|Option<[ScrollSizeMode](#enum-scrollsizemode)>|否|None|**命名参数。**  设置半模态面板滑动时，内容区域刷新时机。|
 
@@ -5130,7 +5126,7 @@ public var textColor: ?ResourceColor
 
 **功能：** 设置弹窗信息文本颜色。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -5170,7 +5166,7 @@ public init(textColor!: ?ResourceColor = None, font!: ?Font = None)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|textColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 弹窗信息文本颜色。初始值为Color(0x000000)。|
+|textColor|?[ResourceColor](#interface-resourcecolor)|否|None|**命名参数。** 弹窗信息文本颜色。初始值为Color(0x000000)。|
 |font|?[Font](#class-font)|否|None|**命名参数。** 弹窗信息字体属性。初始值为Font()。|
 
 ## class OverlayOffset
@@ -5266,7 +5262,7 @@ public var top: ?Length
 
 **功能：** 上侧边框宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5282,7 +5278,7 @@ public var right: ?Length
 
 **功能：** 右侧边框宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5298,7 +5294,7 @@ public var bottom: ?Length
 
 **功能：** 下侧边框宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5314,7 +5310,7 @@ public var left: ?Length
 
 **功能：** 左侧边框宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5338,10 +5334,10 @@ public init(top!: ?Length = None, right!: ?Length = None, bottom!: ?Length = Non
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|top|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 上侧边框宽度。初始值为0.vp。|
-|right|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 右侧边框宽度。初始值为0.vp。|
-|bottom|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 下侧边框宽度。初始值为0.vp。|
-|left|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 左侧边框宽度。初始值为0.vp。|
+|top|?[Length](#interface-length)|否|None|**命名参数。** 上侧边框宽度。初始值为0.vp。|
+|right|?[Length](#interface-length)|否|None|**命名参数。** 右侧边框宽度。初始值为0.vp。|
+|bottom|?[Length](#interface-length)|否|None|**命名参数。** 下侧边框宽度。初始值为0.vp。|
+|left|?[Length](#interface-length)|否|None|**命名参数。** 左侧边框宽度。初始值为0.vp。|
 
 ## class BindOptions
 
@@ -5373,7 +5369,7 @@ public init(backgroundColor!: ?ResourceColor = None, onAppear!: ?() -> Unit = No
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 半模态页面的背板颜色。默认值：**Color.White**。|
+|backgroundColor|?[ResourceColor](#interface-resourcecolor)|否|None|**命名参数。** 半模态页面的背板颜色。默认值：**Color.White**。|
 |onAppear|?() -> Unit|否|None|**命名参数。** 半模态页面显示（动画结束后）回调函数。|
 |onDisappear|?() -> Unit|否|None|**命名参数。** 半模态页面回退（动画结束后）回调函数。|
 |onWillAppear|?() -> Unit|否|None|**命名参数。** 半模态页面显示（动画开始前）回调函数。|
@@ -5431,10 +5427,10 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|modalTransition|?[ModalTransition](./cj-common-types.md#enum-modaltransition)|否|Option.None|**命名参数。** 全屏模态页面的转场方式。|
+|modalTransition|?[ModalTransition](#enum-modaltransition)|否|Option.None|**命名参数。** 全屏模态页面的转场方式。|
 |onWillDismiss|?([DismissContentCoverAction](#class-dismisscontentcoveraction))-> Unit|否|Option.None|**命名参数。** 内容覆盖交互式关闭时的回调函数。|
 |transition|?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)|否|Option.None|**命名参数。** 全屏模态页面交互式关闭回调函数。|
-|backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|Option.None|**命名参数。** sheet的背景色。默认值：**Color.White**。|
+|backgroundColor|?[ResourceColor](#interface-resourcecolor)|否|Option.None|**命名参数。** sheet的背景色。默认值：**Color.White**。|
 |onAppear|?() -> Unit|否|Option.None|**命名参数。** 全模态页面显示（动画结束后）回调函数。|
 |onDisappear|?() -> Unit|否|Option.None|**命名参数。** 全模态页面回退（动画结束后）回调函数。|
 |onWillAppear|?() -> Unit|否|Option.None|**命名参数。** 全模态页面显示（动画开始前）回调函数。|
@@ -5514,7 +5510,7 @@ public var x: ?Length
 
 **功能：** 触摸点相对于组件左上角的x轴坐标。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5530,7 +5526,7 @@ public var y: ?Length
 
 **功能：** 触摸点相对于组件左上角的y轴坐标。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5546,7 +5542,7 @@ public var width: ?Length
 
 **功能：** 触摸热区的宽度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5562,7 +5558,7 @@ public var height: ?Length
 
 **功能：** 触摸热区的高度。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5586,10 +5582,10 @@ public init(x!: ?Length = None, y!: ?Length = None, width!: ?Length = None, heig
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|x|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 触摸点相对于组件左上角的x轴坐标。初始值为0.vp。|
-|y|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 触摸点相对于组件左上角的y轴坐标。初始值为0.vp。|
-|width|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 触摸热区的宽度。初始值为100.percent。|
-|height|?[Length](./cj-common-types.md#interface-length)|否|None|**命名参数。** 触摸热区的高度。初始值为100.percent。|
+|x|?[Length](#interface-length)|否|None|**命名参数。** 触摸点相对于组件左上角的x轴坐标。初始值为0.vp。|
+|y|?[Length](#interface-length)|否|None|**命名参数。** 触摸点相对于组件左上角的y轴坐标。初始值为0.vp。|
+|width|?[Length](#interface-length)|否|None|**命名参数。** 触摸热区的宽度。初始值为100.percent。|
+|height|?[Length](#interface-length)|否|None|**命名参数。** 触摸热区的高度。初始值为100.percent。|
 
 ## class DismissPopupAction
 
@@ -5732,7 +5728,7 @@ public var arrowOffset: ?Length
 
 **功能：** 箭头在菜单处的偏移。偏移量必须合法且转换为具体数值时大于0才会生效，另外该值生效时不会导致箭头超出菜单四周的安全距离。
 
-**类型：** ?[Length](./cj-common-types.md#interface-length)
+**类型：** ?[Length](#interface-length)
 
 **读写能力：** 可读写
 
@@ -5844,7 +5840,7 @@ public var backgroundColor: ?ResourceColor
 
 **功能：** 弹窗背板颜色。
 
-**类型：** ?[ResourceColor](./cj-common-types.md#interface-resourcecolor)
+**类型：** ?[ResourceColor](#interface-resourcecolor)
 
 **读写能力：** 可读写
 
@@ -5919,14 +5915,14 @@ public init(
 |offset|?[Position](#class-position)|否|None|**命名参数。** 菜单弹出位置的偏移量，不会导致菜单显示超出屏幕范围。<br> **说明：**<br> 菜单类型为相对⽗组件区域弹出时，⾃动根据菜单位置属性 (placement)将区域的宽或⾼计⼊偏移量中。<br> 当菜单相对父组件出现在上侧时（placement设置为Placement.TopLeft，Placement.Top，Placement.TopRight），x为正值，菜单相对组件向右进行偏移，y为正值，菜单相对组件向上进行偏移。<br> 当菜单相对父组件出现在下侧时（placement设置为Placement.BottomLeft，Placement.Bottom，Placement.BottomRight），x为正值，菜单相对组件向右进行偏移，y为正值，菜单相对组件向下进行偏移。<br> 当菜单相对父组件出现在左侧时（placement设置为Placement.LeftTop，Placement.Left，Placement.LeftBottom），x为正值，菜单相对组件向左进行偏移，y为正值，菜单相对组件向下进行偏移。<br> 当菜单相对父组件出现在右侧时（placement设置为Placement.RightTop，Placement.Right，Placement.RightBottom），x为正值，菜单相对组件向右进行偏移，y为正值，菜单相对组件向下进行偏移。<br> 如果菜单调整了显示位置（与placement初始值主方向不⼀致），则偏移值 (offset) 失效。|
 |placement|Option\<[Placement](#enum-placement)>|否|Option.None|**命名参数。** 菜单组件优先显示的位置，当前位置显示不下时，会自动调整位置。<br> **说明：**<br> placement值设置为undefined、null或没有设置此选项时，按未设置placement处理，当使用bindMenu，按初始值：Placement.BottomLeft设置。|
 |enableArrow|?Bool|否|None| **命名参数。** 是否显示箭头。如果菜单的大小和位置不足以放置箭头时，不会显示箭头。<br> **说明：** <br> enableArrow为true时，placement未设置或者值为非法值，默认在目标物上方显示，否则按照placement的位置优先显示。当前位置显示不下时，会自动调整位置，enableArrow为undefined时，不显示箭头。|
-|arrowOffset|?[Length](./cj-common-types.md#interface-length)|否|None| **命名参数。** 箭头在菜单处的偏移。偏移量必须合法且转换为具体数值时大于0才会生效，另外该值生效时不会导致箭头超出菜单四周的安全距离。<br> 单位：vp<br> **说明：**<br> 箭头距菜单四周的安全距离为菜单圆角大小与箭头宽度的一半之和。<br> 根据配置的placement来计算是在水平还是垂直方向上偏移。<br> 箭头在菜单水平方向时，偏移量为箭头至最左侧箭头安全距离处的距离。箭头在菜单垂直方向时，偏移量为箭头至最上侧箭头安全距离处的距离。<br> 根据配置的placement的不同，箭头展示的默认位置不同：<br> 在菜单不发生避让的情况下，placement设置为Placement.Top、Placement.Bottom时，箭头显示在水平方向且默认居中；<br> placement设置为Placement.Left、Placement.Right时，箭头显示在垂直方向且默认居中；<br> placement设置为Placement.TopLeft、Placement.BottomLeft时，箭头默认显示在水平方向，且距离菜单左侧边缘距离为箭头安全距离；<br> placement设置为Placement.TopRight、Placement.BottomRight时，箭头默认显示在水平方向，且距离菜单右侧距离为箭头安全距离；<br> placement设置为Placement.LeftTop、Placement.RightTop时，箭头默认显示在垂直方向，且距离菜单上侧距离为箭头安全距离；<br> placement设置为Placement.LeftBottom、Placement.RightBottom时，箭头默认显示在垂直方向，且距离菜单下侧距离为箭头安全距离。|
-|preview|Option\<() -> Unit>|否|Option.None| **命名参数。** 长按悬浮菜单或使用bindContextMenu显示菜单的预览内容样式，为用户自定义的内容。<br> **说明：** <br> - 不支持responseType为ResponseType.RightClick时触发，如果responseType为ResponseType.RightClick，则不会显示预览内容。<br> - 当未设置preview参数时，enableArrow参数生效。<br> - 当preview参数设置为CustomBuilder时，enableArrow为true时也不显示箭头。|
+|arrowOffset|?[Length](#interface-length)|否|None| **命名参数。** 箭头在菜单处的偏移。偏移量必须合法且转换为具体数值时大于0才会生效，另外该值生效时不会导致箭头超出菜单四周的安全距离。<br> 单位：vp<br> **说明：**<br> 箭头距菜单四周的安全距离为菜单圆角大小与箭头宽度的一半之和。<br> 根据配置的placement来计算是在水平还是垂直方向上偏移。<br> 箭头在菜单水平方向时，偏移量为箭头至最左侧箭头安全距离处的距离。箭头在菜单垂直方向时，偏移量为箭头至最上侧箭头安全距离处的距离。<br> 根据配置的placement的不同，箭头展示的默认位置不同：<br> 在菜单不发生避让的情况下，placement设置为Placement.Top、Placement.Bottom时，箭头显示在水平方向且默认居中；<br> placement设置为Placement.Left、Placement.Right时，箭头显示在垂直方向且默认居中；<br> placement设置为Placement.TopLeft、Placement.BottomLeft时，箭头默认显示在水平方向，且距离菜单左侧边缘距离为箭头安全距离；<br> placement设置为Placement.TopRight、Placement.BottomRight时，箭头默认显示在水平方向，且距离菜单右侧距离为箭头安全距离；<br> placement设置为Placement.LeftTop、Placement.RightTop时，箭头默认显示在垂直方向，且距离菜单上侧距离为箭头安全距离；<br> placement设置为Placement.LeftBottom、Placement.RightBottom时，箭头默认显示在垂直方向，且距离菜单下侧距离为箭头安全距离。|
+|preview|Option\<() -> Unit>|否|Option.None| **命名参数。** 长按悬浮菜单或使用bindContextMenu显示菜单的预览内容样式，为用户自定义的内容。<br> **说明：** <br> - 仅支持接收@Builder修饰的自定义构建函数。<br> - 不支持responseType为ResponseType.RightClick时触发，如果responseType为ResponseType.RightClick，则不会显示预览内容。<br> - 当未设置preview参数时，enableArrow参数生效。<br> - 当preview参数设置为CustomBuilder时，enableArrow为true时也不显示箭头。|
 |previewAnimationOptions|?[ContextMenuAnimationOptions](#class-contextmenuanimationoptions)|否|None|**命名参数。** 控制长按预览显示动画开始倍率和结束倍率（相对预览原图比例）。|
 |onAppear|?() -> Unit|否|None| **命名参数。** 菜单弹出时的事件回调。|
 |onDisappear|?() -> Unit|否|None| **命名参数。** 菜单消失时的事件回调。|
 |aboutToAppear|?() -> Unit|否|None| **命名参数。** 菜单显示动效前的事件回调。|
 |aboutToDisappear|?() -> Unit|否|None| **命名参数。** 菜单退出动效前的事件回调。|
-|backgroundColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。** 弹窗背板颜色。初始值为Color.Transparent。|
+|backgroundColor|?[ResourceColor](#interface-resourcecolor)|否|None|**命名参数。** 弹窗背板颜色。初始值为Color.Transparent。|
 |backgroundBlurStyle|?[BlurStyle](#enum-blurstyle)|否|Option.None| **命名参数。** 弹窗背板模糊材质。|
 |transition|?[TransitionEffect](./cj-animation-transition.md#class-transitioneffect)|否|None| **命名参数。** 菜单显示和退出的过渡效果。<br> **说明：**<br> 菜单退出动效过程中，进行横竖屏切换，菜单会避让。二级菜单不继承自定义动效。弹出过程可以点击二级菜单，退出动效执行过程不允许点击二级菜单。<br> 详细描述见TransitionEffect对象说明。|
 |borderRadius|?[BorderRadiuses](#class-borderradiuses)|否|None| **命名参数。** 设置菜单显示区域的圆角。|
@@ -6739,7 +6735,7 @@ public operator func ==(other: ScrollSizeMode): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[ScrollSizeMode](./cj-common-types.md#enum-scrollsizemode)|是|-|要比较的另一个ScrollSizeMode枚举。|
+|other|[ScrollSizeMode](#enum-scrollsizemode)|是|-|要比较的另一个ScrollSizeMode枚举。|
 
 **返回值：**
 
@@ -6763,7 +6759,7 @@ public operator func !=(other: ScrollSizeMode): Bool
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|other|[ScrollSizeMode](./cj-common-types.md#enum-scrollsizemode)|是|-|要比较的另一个ScrollSizeMode枚举。|
+|other|[ScrollSizeMode](#enum-scrollsizemode)|是|-|要比较的另一个ScrollSizeMode枚举。|
 
 **返回值：**
 
@@ -6882,7 +6878,7 @@ public enum KeyType <: Equatable<KeyType> {
 
 **父类型：**
 
-- Equatable\<KeyType>
+- Equatable\<[KeyType](#enum-keytype)>
 
 ### Unknown
 
@@ -15610,7 +15606,7 @@ public enum StickyStyle <: Equatable<StickyStyle> {
 None
 ```
 
-**功能：** 设置ListItemGroup的headerh不吸顶，footer不吸底。
+**功能：** 设置ListItemGroup的header不吸顶，footer不吸底。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -15622,7 +15618,7 @@ None
 Header
 ```
 
-**功能：** 设置ListItemGroup的headerh吸顶。
+**功能：** 设置ListItemGroup的header吸顶。
 
 **系统能力：** SystemCapability.ArkUI.ArkUI.Full
 
@@ -20795,7 +20791,7 @@ public operator func !=(other: TextAreaType): Bool
 public type VoidCallback = () -> Unit
 ```
 
-**功能：** [VoidCallback](#type-voidcallback)是[() -> Unit](#type-voidcallback)类型的别名。
+**功能：** [VoidCallback](#type-voidcallback)是() -> Unit类型的别名。
 
 **类型：** () -> Unit
 

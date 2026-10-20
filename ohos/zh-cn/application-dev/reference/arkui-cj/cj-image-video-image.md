@@ -688,6 +688,7 @@ public type ImageErrorCallback = (ImageError) -> Unit
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -698,33 +699,35 @@ import ohos.resource.*
 class EntryView {
     func build() {
         Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Start) {
-                Row() {
-                    // 加载png格式图片
-                    Image(@r(app.media.startIcon))
+            Row() {
+                // 加载png格式图片
+                Image(@r(app.media.startIcon))
                     .width(110)
                     .height(110)
                     .margin(15)
                     .overlay(value: "png", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                    // 加载gif格式图片
-                    Image(@r(app.media.list))
-                    .width(110).height(110).margin(15)
+                // 加载gif格式图片
+                Image(@r(app.media.list))
+                    .width(110)
+                    .height(110)
+                    .margin(15)
                     .overlay(value: "gif", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                }
-                Row() {
-                    // 加载svg格式图片
-                    Image(@r(app.media.svg))
+            }
+            Row() {
+                // 加载svg格式图片
+                Image(@r(app.media.svg))
                     .width(110)
                     .height(110)
                     .margin(15)
                     .overlay(value: "svg", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                    // 加载jpg格式图片
-                    Image(@r(app.media.startIcon_jpg))
+                // 加载jpg格式图片
+                Image(@r(app.media.startIcon_jpg))
                     .width(110)
                     .height(110)
                     .margin(15)
                     .overlay(value: "jpg", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                }
             }
+        }
             .height(320)
             .width(360)
             .padding(right: 10, top: 10)
@@ -742,6 +745,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -750,31 +754,31 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    let imageOne: AppResource= @r(app.media.startIcon)
+    let imageOne: AppResource = @r(app.media.startIcon)
     let imageTwo = @r(app.media.background)
     let imageThree = @r(app.media.svg_move)
-    @State var src: AppResource = this.imageOne
-    @State var src2: AppResource = this.imageThree
+    @State
+    var src: AppResource = this.imageOne
+    @State
+    var src2: AppResource = this.imageThree
 
     func build() {
-        Column(){
+        Column() {
             // 为图片添加点击事件，点击完成后加载特定图片
             Image(this.src)
-            .width(100)
-            .height(100)
-            .onClick({
-                    evt =>
-                    this.src =this.imageTwo
-            })
+                .width(100)
+                .height(100)
+                .onClick({
+                    evt => this.src = this.imageTwo
+                })
             // 当加载图片为SVG格式时
             Image(this.src2)
-            .width(100)
-            .height(100)
-            .onFinish({
+                .width(100)
+                .height(100)
+                .onFinish({
                     // SVG动效播放完成时加载另一张图片
-                    =>
-                    this.src2 =this.imageOne
-            })
+                    => this.src2 = this.imageOne
+                })
         }
     }
 }
@@ -790,6 +794,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -803,61 +808,61 @@ class EntryView {
             Row() {
                 // 加载png格式图片
                 Image(@r(app.media.flower))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "Contain", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.Contain)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "Contain", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.Contain)
                 // 加载gif格式图片
                 Image(@r(app.media.bybridhar_gif1))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "Cover", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.Cover)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "Cover", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.Cover)
             }
             Row() {
                 // 加载svg格式图片
                 Image(@r(app.media.svg))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "Fill", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.Fill)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "Fill", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.Fill)
                 // 加载jpg格式图片
                 Image(@r(app.media.startIcon))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "ScaleDown", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.ScaleDown)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "ScaleDown", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.ScaleDown)
             }
             Row() {
                 // 加载png格式图片
                 Image(@r(app.media.media1))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "Auto", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.Auto)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "Auto", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.Auto)
                 // 加载gif格式图片
                 Image(@r(app.media.bybridhar_gif1))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .overlay(value: "None", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
-                .border(width: 2, color: 0xFEC0CD)
-                .objectFit(ImageFit.None)
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .overlay(value: "None", align: Alignment.Bottom, offset: OverlayOffset(x: 0.0, y: 20.0))
+                    .border(width: 2, color: 0xFEC0CD)
+                    .objectFit(ImageFit.None)
             }
         }
-        .height(480)
-        .width(360)
-        .padding(right: 10, top: 10)
+            .height(480)
+            .width(360)
+            .padding(right: 10, top: 10)
     }
 }
 ```
@@ -872,6 +877,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -880,13 +886,15 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    let imageOne: AppResource= @r(app.media.startIcon)
+    let imageOne: AppResource = @r(app.media.startIcon)
     let imageTwo = @r(app.media.svg_move)
-    @State var imageSrcIndex : Int64 = 0
-    @State var imageSrcList : Array<AppResource> = [this.imageOne,this.imageTwo]
+    @State
+    var imageSrcIndex: Int64 = 0
+    @State
+    var imageSrcList: Array<AppResource> = [this.imageOne, this.imageTwo]
 
     func build() {
-        Column(){
+        Column() {
             Image(this.imageSrcList[this.imageSrcIndex])
                 .width(100)
                 .height(100)
@@ -895,9 +903,8 @@ class EntryView {
                 .margin(left: 100, top: 20)
                 .padding(20)
                 .onClick({
-                    evt =>
-                    this.imageSrcIndex = (this.imageSrcIndex + 1) % 2
-            })
+                    evt => this.imageSrcIndex = (this.imageSrcIndex + 1) % 2
+                })
         }
     }
 }
@@ -913,6 +920,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -922,22 +930,23 @@ import ohos.arkui.component.ImageFit
 @Entry
 @Component
 class EntryView {
-    @State var borderRadiusValue : Int64 = 10
+    @State
+    var borderRadiusValue: Int64 = 10
 
     func build() {
-        Column(){
+        Column() {
             Image(@r(app.media.image))
-                .sourceSize(500,500)
+                .sourceSize(500, 500)
                 .width(300)
                 .height(300)
             Image(@r(app.media.image))
-                .sourceSize(10,10)
+                .sourceSize(10, 10)
                 .width(300)
                 .height(300)
                 .borderWidth(1)
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```
@@ -952,6 +961,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -961,17 +971,18 @@ import ohos.arkui.component.ImageFit
 @Entry
 @Component
 class EntryView {
-    @State var borderRadiusValue : Int64 = 10
+    @State
+    var borderRadiusValue: Int64 = 10
 
     func build() {
-        Column(){
+        Column() {
             Image(@r(app.media.image))
                 .renderMode(ImageRenderMode.Template)
                 .width(300)
                 .height(300)
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```
@@ -986,6 +997,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -995,9 +1007,10 @@ import ohos.arkui.component.ImageFit
 @Entry
 @Component
 class EntryView {
-    @State var borderRadiusValue : Int64 = 10
+    @State
+    var borderRadiusValue: Int64 = 10
     func build() {
-        Column(){
+        Column() {
             Image(@r(app.media.image))
                 .objectRepeat(ImageRepeat.Y)
                 .width(120)
@@ -1005,8 +1018,8 @@ class EntryView {
                 .objectFit(ImageFit.Contain)
                 .borderWidth(1)
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```
@@ -1021,6 +1034,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -1029,9 +1043,10 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var borderRadiusValue : Int64 = 10
+    @State
+    var borderRadiusValue: Int64 = 10
     func build() {
-        Column(){
+        Column() {
             Text("不设置fillColor")
             Image(@r(app.media.svg))
                 .width(100)
@@ -1060,8 +1075,8 @@ class EntryView {
                 .borderWidth(1)
                 .fillColor(Color.Red)
         }
-        .height(100.percent)
-        .width(100.percent)
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```

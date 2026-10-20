@@ -180,7 +180,7 @@ public static func getCurrentLocation(): Location
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -236,7 +236,7 @@ public static func getCurrentLocation(request: CurrentLocationRequest): Location
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -292,7 +292,7 @@ public static func getCurrentLocation(request: SingleLocationRequest): Location
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -340,7 +340,7 @@ public static func isLocationEnabled(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[位置服务子系统错误码](./cj-errorcode-geo_location_manager.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |

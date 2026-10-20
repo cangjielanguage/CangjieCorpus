@@ -116,6 +116,7 @@ func translate(x!: ?Length, y!: ?Length, z!: ?Length): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -155,10 +156,10 @@ class EntryView {
                 .scale(x: 1.2, y: 1.2)
                 .translate(x: 30.vp, y: 10.vp)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
-        .alignItems(HorizontalAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
+            .alignItems(HorizontalAlign.Center)
     }
 }
 ```

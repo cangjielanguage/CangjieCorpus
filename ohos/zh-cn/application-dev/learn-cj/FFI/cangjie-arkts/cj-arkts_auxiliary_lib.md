@@ -1,8 +1,8 @@
 # 仓颉-ArkTS 互操作辅助库
 
-为了帮助开发者更加方便的编写仓颉- ArkTS 互操作代码，仓颉还提供了互操作辅助库。辅助库提供了更加丰富的 API 供开发者调用。例如，在仓颉应用里使用 ArkTS 存量库场景中，当开发者想要调用的 ArkTS 模块中的接口需要传入一个 context 入参时，可以使用辅助库提供的 getJSContext 函数来获取。
+为了帮助开发者更加方便的编写仓颉-ArkTS互操作代码，仓颉还提供了互操作辅助库。辅助库提供了更加丰富的API供开发者调用。例如，在仓颉应用里使用ArkTS存量库场景中，当开发者想要调用的 ArkTS模块中的接口需要传入一个context入参时，可以使用辅助库提供的getJSContext函数来获取。
 
-例如，如下给出 ArkTS [相机选择器](https://docs.openharmony.cn/pages/v6.0/zh-cn/application-dev/reference/apis-camera-kit/js-apis-cameraPicker.md) 模块中 pick 方法的声明，其第一个参数类型为 common.Context。
+例如，如下给出 ArkTS <!--RP1-->[相机选择器](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/reference/apis-camera-kit/js-apis-cameraPicker.md)<!--RP1End--> 模块中 pick 方法的声明，其第一个参数类型为 common.Context。
 
 ```typescript
 declare namespace cameraPicker {
@@ -60,8 +60,7 @@ public func getJSContext(runtime: JSRuntime, abilityContext: UIAbilityContext): 
     // 从全局变量中获取 UIAbilityContext
     func getContext(): UIAbilityContext {
         match (globalAbilityContext) {
-            case Some(context) =>
-                context
+            case Some(context) => context
             case _ =>
                 AppLog.error("####getContext err ")
                 throw Exception("get globalAbilityContext failed")

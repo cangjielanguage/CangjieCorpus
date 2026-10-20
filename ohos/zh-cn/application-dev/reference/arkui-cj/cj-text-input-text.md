@@ -405,6 +405,7 @@ public func closeSelectionMenu(): Unit
 <!--run-->
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.i18n.*
 import ohos.resource.*

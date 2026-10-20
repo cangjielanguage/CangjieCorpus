@@ -25,23 +25,24 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Entry
 @Component
-class EntryView{
-    @State var needsUpdate: Bool = true
+class EntryView {
+    @State
+    var needsUpdate: Bool = true
     var realStateArr: ArrayList<Int64> = ArrayList<Int64>([4, 1, 3, 2])
     var realState: Color = Color(0xFFFF00)
 
-    func updateUIArr(param: ArrayList<Int64>): ArrayList<Int64>{
+    func updateUIArr(param: ArrayList<Int64>): ArrayList<Int64> {
         let triggerAGet: Bool = this.needsUpdate
         return param
     }
 
-    func updateUI(param: Color): Color{
+    func updateUI(param: Color): Color {
         let triggerAGet: Bool = this.needsUpdate
         return param
     }
 
-    func build(){
-        Column(space: 20){
+    func build() {
+        Column(space: 20) {
             ForEach(this.updateUIArr(this.realStateArr), itemGeneratorFunc: {item: Int64, _: Int64 => Text("${item}")})
             Text("add item")
             .onClick({ event =>
@@ -65,8 +66,9 @@ class EntryView{
                 this.needsUpdate = !this.needsUpdate
             })
         }
-        .backgroundColor(this.updateUI(this.realState))
-        .width(200).height(500)
+            .backgroundColor(this.updateUI(this.realState))
+            .width(200)
+            .height(500)
     }
 }
 ```
@@ -85,18 +87,21 @@ class EntryView{
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import kit.PerformanceAnalysisKit.Hilog
 
 @Entry
 @Component
-class EntryView{
-    @State var realStateArr: ObservedArrayList<Int64> = ObservedArrayList<Int64>([4, 1, 3, 2])
-    @State var realState: Color = Color(0xFFFF00)
+class EntryView {
+    @State
+    var realStateArr: ObservedArrayList<Int64> = ObservedArrayList<Int64>([4, 1, 3, 2])
+    @State
+    var realState: Color = Color(0xFFFF00)
 
-    func build(){
-        Column(space: 20){
+    func build() {
+        Column(space: 20) {
             ForEach(this.realStateArr, itemGeneratorFunc: {item: Int64, _: Int64 => Text("${item}")})
 
             Text("add item")
@@ -142,25 +147,26 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Entry
 @Component
-class EntryView{
-    @State var message: String = "message"
+class EntryView {
+    @State
+    var message: String = "message"
 
-    func build(){
-        Column(){
+    func build() {
+        Column() {
             Button("点击打印日志")
-            .onClick({event=>
-                for(i in 0..10 : 1){
-                    Hilog.info(0, "AppLogCj", this.message)
-                }
-            })
-            .width(90.percent)
-            .backgroundColor(Color.Blue)
-            .fontColor(Color.White)
-            .margin(top: 10)
+                .onClick({
+                    event => for (i in 0..10 : 1) {
+                        Hilog.info(0, "AppLogCj", this.message)
+                    }
+                })
+                .width(90.percent)
+                .backgroundColor(Color.Blue)
+                .fontColor(Color.White)
+                .margin(top: 10)
         }
-        .justifyContent(FlexAlign.Start)
-        .alignItems(HorizontalAlign.Center)
-        .margin(top: 15)
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Center)
+            .margin(top: 15)
     }
 }
 ```
@@ -178,26 +184,30 @@ import kit.PerformanceAnalysisKit.Hilog
 
 @Entry
 @Component
-class EntryView{
-    @State var message: String = "message"
+class EntryView {
+    @State
+    var message: String = "message"
 
-    func build(){
-        Column(){
+    func build() {
+        Column() {
             Button("点击打印日志")
-            .onClick({event=>
-                let logMessage: String = this.message
-                for(i in 0..10 : 1){
-                    Hilog.info(0, "AppLogCj", logMessage)
-                }
-            })
-            .width(90.percent)
-            .backgroundColor(Color.Blue)
-            .fontColor(Color.White)
-            .margin(top: 10)
+                .onClick(
+                    {
+                        event =>
+                            let logMessage: String = this.message
+                            for (i in 0..10 : 1) {
+                                Hilog.info(0, "AppLogCj", logMessage)
+                            }
+                    }
+                )
+                .width(90.percent)
+                .backgroundColor(Color.Blue)
+                .fontColor(Color.White)
+                .margin(top: 10)
         }
-        .justifyContent(FlexAlign.Start)
-        .alignItems(HorizontalAlign.Center)
-        .margin(top: 15)
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Center)
+            .margin(top: 15)
     }
 }
 ```
@@ -221,10 +231,11 @@ import ohos.hi_trace_meter.HiTraceMeter
 
 @Entry
 @Component
-class EntryView{
-    @State var message: String = ""
+class EntryView {
+    @State
+    var message: String = ""
 
-    func appendMsg(newMsg: String){
+    func appendMsg(newMsg: String) {
         // 性能打点
         HiTraceMeter.startTrace('StateVariable', 1)
         this.message += newMsg
@@ -233,18 +244,18 @@ class EntryView{
         HiTraceMeter.finishTrace('StateVariable', 1)
     }
 
-    func build(){
-        Column(){
+    func build() {
+        Column() {
             Button("点击打印日志")
-            .onClick({event => this.appendMsg("操作状态变量")})
-            .width(90.percent)
-            .backgroundColor(Color.Blue)
-            .fontColor(Color.White)
-            .margin(top: 10)
+                .onClick({event => this.appendMsg("操作状态变量")})
+                .width(90.percent)
+                .backgroundColor(Color.Blue)
+                .fontColor(Color.White)
+                .margin(top: 10)
         }
-        .justifyContent(FlexAlign.Start)
-        .alignItems(HorizontalAlign.Center)
-        .margin(top: 15)
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Center)
+            .margin(top: 15)
     }
 }
 ```
@@ -266,10 +277,11 @@ import ohos.hi_trace_meter.HiTraceMeter
 
 @Entry
 @Component
-class EntryView{
-    @State var message: String = ""
+class EntryView {
+    @State
+    var message: String = ""
 
-    func appendMsg(newMsg: String){
+    func appendMsg(newMsg: String) {
         // 性能打点
         HiTraceMeter.startTrace('StateVariable', 1)
         var message: String = this.message
@@ -280,18 +292,18 @@ class EntryView{
         HiTraceMeter.finishTrace('StateVariable', 1)
     }
 
-    func build(){
-        Column(){
+    func build() {
+        Column() {
             Button("点击打印日志")
-            .onClick({event => this.appendMsg("操作状态变量")})
-            .width(90.percent)
-            .backgroundColor(Color.Blue)
-            .fontColor(Color.White)
-            .margin(top: 10)
+                .onClick({event => this.appendMsg("操作状态变量")})
+                .width(90.percent)
+                .backgroundColor(Color.Blue)
+                .fontColor(Color.White)
+                .margin(top: 10)
         }
-        .justifyContent(FlexAlign.Start)
-        .alignItems(HorizontalAlign.Center)
-        .margin(top: 15)
+            .justifyContent(FlexAlign.Start)
+            .alignItems(HorizontalAlign.Center)
+            .margin(top: 15)
     }
 }
 ```

@@ -25,12 +25,12 @@ import ohos.resource.*
 
 @Entry
 @Component
-class EntryView{
-    func build(){
-        Column(){
+class EntryView {
+    func build() {
+        Column() {
             Image(@r(app.media.foreground))
-                .position(x: 220,y: 220)
-                .size(width: 80,height: 80)
+                .position(x: 220, y: 220)
+                .size(width: 80, height: 80)
                 .id('image1')
                 .backgroundColor(Color.Blue)
         }

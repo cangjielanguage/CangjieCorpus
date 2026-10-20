@@ -43,10 +43,10 @@ import ohos.arkui.state_macro_manage.*
 import kit.PerformanceAnalysisKit.*
 import std.collection.*
 
-struct PersonList{
+struct PersonList {
     var name: String = ""
     var carnum: String = ""
-    public init(name: String,carnum: String){
+    public init(name: String, carnum: String) {
         this.name = name
         this.carnum = carnum
     }
@@ -55,14 +55,15 @@ struct PersonList{
 @Entry
 @Component
 class EntryView {
-
     private var personlist: ArrayList<PersonList> = ArrayList<PersonList>(
-        [PersonList("许**","123***456"),PersonList("王**","234***345"),PersonList("陈**","345**456")])
+        [PersonList("许**", "123***456"), PersonList("王**", "234***345"), PersonList("陈**", "345**456")])
 
     // 半模态转场控制变量
-    @State var isSheetShow: Bool = false
+    @State
+    var isSheetShow: Bool = false
     // 全模态转场控制变量
-    @State var isPresent: Bool = false
+    @State
+    var isPresent: Bool = false
     public func onAppear() {
         Hilog.info(0, "cangjie", "BindContentCover onAppear.")
     }
@@ -71,70 +72,72 @@ class EntryView {
     }
 
     @Builder
-    public func MycontentCoverBulider(){
-        Column(){
-            Column(){
+    public func MycontentCoverBulider() {
+        Column() {
+            Column() {
                 Blank().height(20.percent)
-                ForEach(this.personlist,itemGeneratorFunc:{item:PersonList,index: Int64 =>
-                        Row(){
-                            Column(){
-                                if(index %2 == 0){
-                                    Column()
+                ForEach(this.personlist, itemGeneratorFunc: {
+                    item: PersonList, index: Int64 => Row() {
+                        Column() {
+                            if (index % 2 == 0) {
+                                Column()
                                     .width(20)
                                     .height(20)
                                     .border(width: 10, color: 0x007dfe)
                                     .backgroundColor(0x007dfe)
-                                }else{
-                                    Column()
+                            } else {
+                                Column()
                                     .width(20)
                                     .height(20)
-                                }
-                            }.width(20.percent)
-                            Column(){
-                                Text(item.name)
+                            }
+                        }.width(20.percent)
+                        Column() {
+                            Text(item.name)
                                 .fontColor(0x333333)
                                 .fontSize(18)
-                                Text(item.carnum)
+                            Text(item.carnum)
                                 .fontColor(0x666666)
                                 .fontSize(14)
-                            }.width(60.percent).alignItems(HorizontalAlign.Center)
-                            Column(){
-                                Text("编辑")
+                        }
+                            .width(60.percent)
+                            .alignItems(HorizontalAlign.Center)
+                        Column() {
+                            Text("编辑")
                                 .fontColor(0x007dfe)
                                 .fontSize(16)
-                            }
-                            .width(20.percent)
-                        }
-                        .padding(top:10,bottom:10)
+                        }.width(20.percent)
+                    }
+                        .padding(top: 10, bottom: 10)
                         .width(92.percent)
                         .backgroundColor(Color.White)
-                        })
-            }.justifyContent(FlexAlign.Center).alignItems(HorizontalAlign.Center)
+                })
+            }
+                .justifyContent(FlexAlign.Center)
+                .alignItems(HorizontalAlign.Center)
             Button("确定")
-            .width(400)
-            .height(40)
-            .fontColor(Color.Blue)
-            .onClick({
-                evt =>
-                this.isPresent = !this.isPresent
-            })
+                .width(400)
+                .height(40)
+                .fontColor(Color.Blue)
+                .onClick({
+                    evt => this.isPresent = !this.isPresent
+                })
         }
-        .backgroundColor(0xf5f5f5)
-        .size(width: 100.percent,height: 80.percent)
+            .backgroundColor(0xf5f5f5)
+            .size(width: 100.percent, height: 80.percent)
     }
 
     @Builder
-    public func TripInfo(){
-        Row(){
-            Column(){
+    public func TripInfo() {
+        Row() {
+            Column() {
                 Text("00:25")
                 Text("始发站")
             }.width(100)
-            Column(){
+            Column() {
                 Text("G1234")
                 Text("8时1分")
             }.width(100)
-            Column(){
+            Column() {
                 Text("08:26")
                 Text("终点站")
             }.width(100)
@@ -143,52 +146,55 @@ class EntryView {
     // 第二步：定义半模态展示界面
     // 通过builder构建模态展示界面
     @Builder
-    public func MySheetBuilder(){
-        Column(){
-            Column(){
+    public func MySheetBuilder() {
+        Column() {
+            Column() {
                 this.TripInfo()
-            }.width(500)
-            .margin(15)
-            .backgroundColor(Color.White)
-            .borderRadius(10)
+            }
+                .width(500)
+                .margin(15)
+                .backgroundColor(Color.White)
+                .borderRadius(10)
 
-            Column(){
+            Column() {
                 Button("+ 选择乘车人")
-                .fontSize(18)
-                .onClick({
-                    evt =>
-                    // 第三步：通过全模态接口调起全模态展示界面，新拉起的模态面板默认显示在最上层
-                    this.isPresent = !this.isPresent
-                })
-                // 通过全模态接口，绑定模态展示界面MyContentCoverBuilder。
-                .bindContentCover(this.isPresent,MycontentCoverBulider,options: ContentCoverOptions(
-                          modalTransition: ModalTransition.Default,backgroundColor: Color.White,onAppear: onAppear,onDisappear:onDisappear)
+                    .fontSize(18)
+                    .onClick({
+                        evt =>
+                        // 第三步：通过全模态接口调起全模态展示界面，新拉起的模态面板默认显示在最上层
+                        this.isPresent = !this.isPresent
+                    })
+                    // 通过全模态接口，绑定模态展示界面MyContentCoverBuilder。
+                    .bindContentCover(
+                        this.isPresent,
+                        MycontentCoverBulider,
+                        options: ContentCoverOptions(modalTransition: ModalTransition.Default,
+                            backgroundColor: Color.White, onAppear: onAppear, onDisappear: onDisappear)
                     )
             }
-            .justifyContent(FlexAlign.Center)
-            .backgroundColor(Color.White)
-            .padding(60)
+                .justifyContent(FlexAlign.Center)
+                .backgroundColor(Color.White)
+                .padding(60)
         }
     }
 
     func build() {
-        Column(){
+        Column() {
             Blank().height(20.percent)
             Text("确认订单")
             this.TripInfo()
-            Column(){
+            Column() {
                 Button("选择乘车人")
-                .onClick({
-                    evt =>
-                    this.isSheetShow = !this.isSheetShow
-                })
-                // 第一步：定义半模态转场效果
-                .bindSheet(this.isSheetShow,MySheetBuilder)
+                    .onClick({
+                        evt => this.isSheetShow = !this.isSheetShow
+                    })
+                    // 第一步：定义半模态转场效果
+                    .bindSheet(this.isSheetShow, MySheetBuilder)
             }
         }
-        .width(100.percent)
-        .height(100.percent)
-        .backgroundColor(Color.White)
+            .width(100.percent)
+            .height(100.percent)
+            .backgroundColor(Color.White)
     }
 }
 ```

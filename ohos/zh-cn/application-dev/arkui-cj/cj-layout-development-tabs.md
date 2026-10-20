@@ -196,11 +196,12 @@ Tabs(barPosition: BarPosition.Start) {
 <!-- code_check_manual -->
 
 ```cangjie
-@State var currentIndex: Int32 = 0
+@State
+var currentIndex: Int32 = 0
 
 @Builder
 func tabBuilder(title: String, targetIndex: Int32, imgs: Array<AppResource>) {
-    Column(){
+    Column() {
         if (this.currentIndex != targetIndex) {
             Image(imgs[0]).size(width: 25, height: 25)
             Text(title).fontColor(0X1698CE)
@@ -209,9 +210,9 @@ func tabBuilder(title: String, targetIndex: Int32, imgs: Array<AppResource>) {
             Text(title).fontColor(0X6B6B6B)
         }
     }
-    .width(100.percent)
-    .height(50)
-    .justifyContent(FlexAlign.Center)
+        .width(100.percent)
+        .height(50)
+        .justifyContent(FlexAlign.Center)
 }
 ```
 
@@ -241,6 +242,7 @@ TabContent(){
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.ArrayList
@@ -248,50 +250,57 @@ import std.collection.ArrayList
 @Entry
 @Component
 public class EntryView {
-    @State var currentIndex: Int32 = 2
+    @State
+    var currentIndex: Int32 = 2
 
     @Builder
     func tabBuilder(title: String, targetIndex: Int32) {
-        Column(){
-            Text(title)
-                .fontColor(
-                    if (this.currentIndex == targetIndex) {
-                        0X1698CE
-                    } else {
-                        0X6B6B6B
-                    })
+        Column() {
+            Text(title).fontColor(if (this.currentIndex == targetIndex) {
+                0X1698CE
+            } else {
+                0X6B6B6B
+            })
         }
     }
 
     func build() {
         Column() {
-            Tabs(barPosition: BarPosition.End){
-                TabContent(){
-                    // ...
-                }.tabBar({ =>
-                    bind(this.tabBuilder, this)("首页", 0)
-                }).backgroundColor(Color.Green)
+            Tabs(barPosition: BarPosition.End) {
                 TabContent() {
                     // ...
-                }.tabBar({ =>
-                    bind(this.tabBuilder, this)("发现", 1)
-                }).backgroundColor(Color(0xFFFF00))
+                }
+                    .tabBar({
+                        => bind(this.tabBuilder, this)("首页", 0)
+                    })
+                    .backgroundColor(Color.Green)
                 TabContent() {
                     // ...
-                }.tabBar({ =>
-                    bind(this.tabBuilder, this)("推荐", 2)
-                }).backgroundColor(0xFEC0CD)
+                }
+                    .tabBar({
+                        => bind(this.tabBuilder, this)("发现", 1)
+                    })
+                    .backgroundColor(Color(0xFFFF00))
                 TabContent() {
                     // ...
-                }.tabBar({ =>
-                    bind(this.tabBuilder, this)("我的", 3)
-                }).backgroundColor(Color.Blue)
+                }
+                    .tabBar({
+                        => bind(this.tabBuilder, this)("推荐", 2)
+                    })
+                    .backgroundColor(0xFEC0CD)
+                TabContent() {
+                    // ...
+                }
+                    .tabBar({
+                        => bind(this.tabBuilder, this)("我的", 3)
+                    })
+                    .backgroundColor(Color.Blue)
             }
-            .animationDuration(0.0)
-            .backgroundColor(0xF1F3F5)
-            .onChange({index =>
-                this.currentIndex = index
-            })
+                .animationDuration(0.0)
+                .backgroundColor(0xF1F3F5)
+                .onChange({
+                    index => this.currentIndex = index
+                })
         }.width(100.percent)
     }
 }

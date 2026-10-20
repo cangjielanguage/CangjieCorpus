@@ -75,7 +75,7 @@ public func addPath(path2D: ?Path2D): Unit
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|path2D|?[Path2D](./cj-canvas-drawing-path2d.md#class-path2d)|是|-|需要添加到当前路径的路径对象，路径单位：px。|
+|path2D|?[Path2D](#class-path2d)|是|-|需要添加到当前路径的路径对象，路径单位：px。|
 
 ### func setTransform(?Float64, ?Float64, ?Float64, ?Float64, ?Float64, ?Float64)
 

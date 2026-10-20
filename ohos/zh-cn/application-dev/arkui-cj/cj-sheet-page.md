@@ -58,6 +58,7 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import kit.LocalizationKit.*
@@ -65,7 +66,8 @@ import kit.LocalizationKit.*
 @Entry
 @Component
 class EntryView {
-    @State var isShowSheet: Bool = false
+    @State
+    var isShowSheet: Bool = false
     private var items: Array<Int64> = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     @Builder
@@ -81,24 +83,24 @@ class EntryView {
                                 .fontSize(16)
                                 .fontWeight(FontWeight.Bold)
                         }
-                        .width(90.percent)
-                        .height(80.vp)
-                        .backgroundColor(Color.Blue)
-                        .borderRadius(10)
+                            .width(90.percent)
+                            .height(80.vp)
+                            .backgroundColor(Color.Blue)
+                            .borderRadius(10)
                     }
                 )
             }
-            .alignListItem(ListItemAlign.Center)
-            .margin(top: 10)
-            .width(100.percent)
-            .height(900.px)
-            // 第二步：设置滚动组件的嵌套滚动属性
-            .nestedScroll(
-                NestedScrollOptions(
-                    NestedScrollMode.ParentFirst,
-                    NestedScrollMode.SelfFirst,
+                .alignListItem(ListItemAlign.Center)
+                .margin(top: 10)
+                .width(100.percent)
+                .height(900.px)
+                // 第二步：设置滚动组件的嵌套滚动属性
+                .nestedScroll(
+                    NestedScrollOptions(
+                        NestedScrollMode.ParentFirst,
+                        NestedScrollMode.SelfFirst,
+                    )
                 )
-            )
 
             Text("非滚动区域")
                 .width(100.percent)
@@ -107,8 +109,8 @@ class EntryView {
                 .textAlign(TextAlign.Center)
                 .align(Alignment.Top)
         }
-        .width(100.percent)
-        .height(100.percent)
+            .width(100.percent)
+            .height(100.percent)
     }
 
     func build() {
@@ -129,9 +131,9 @@ class EntryView {
                     )
                 )
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

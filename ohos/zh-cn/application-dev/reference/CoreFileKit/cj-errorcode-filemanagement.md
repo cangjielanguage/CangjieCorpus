@@ -14,25 +14,37 @@
 
 ## 基础文件IO错误码
 
-### 13900001 操作不允许
+## 13900001 操作不允许
 
 **错误信息**
 
-Operation not permitted
+Operation not permitted.
+
+**错误描述**
+
+操作不允许。
 
 **可能原因**
 
-当前用户文件操作不被允许。
+当前用户文件操作不被允许，URI或path访问未授权。
 
 **处理步骤**
 
-确认文件权限。
+1.根据当前系统的[访问控制机制](../../security/AccessToken/cj-access-token-overview.md)，应用无法使用分享给其他应用的URI。
 
-### 13900002 没有这个文件或目录
+2.根据系统Picker的运行机制，通过Picker获取到的URI仅有临时权限，无法持久化保存使用。
+
+3.URI路径不推荐进行拼接，拼接后的URI默认未授权。
+
+## 13900002 没有这个文件或目录
 
 **错误信息**
 
-No such file or directory
+No such file or directory.
+
+**错误描述**
+
+没有此文件或目录。
 
 **可能原因**
 
@@ -42,11 +54,15 @@ No such file or directory
 
 确认文件路径是否存在。
 
-### 13900003 没有这样的进程
+## 13900003 没有这样的进程
 
 **错误信息**
 
-No such process
+No such process.
+
+**错误描述**
+
+没有此类进程。
 
 **可能原因**
 
@@ -58,11 +74,15 @@ No such process
 
 2.确认相关服务是否已启动。
 
-### 13900004 系统调用被中断
+## 13900004 系统调用被中断
 
 **错误信息**
 
-Interrupted system call
+Interrupted system call.
+
+**错误描述**
+
+系统调用被中断。
 
 **可能原因**
 
@@ -74,25 +94,43 @@ Interrupted system call
 
 2.重新进行系统调用。
 
-### 13900005 I/O错误
+## 13900005 I/O错误
 
 **错误信息**
 
-I/O error
+I/O error.
+
+**错误描述**
+
+I/O错误。
 
 **可能原因**
 
-I/O请求非法。
+底层I/O错误，通常与硬件或者驱动设备层故障相关。
+
+1. 硬件故障：设备物理损坏导致无法完成I/O指令。
+
+2. 通信链路中断：数据传输过程链接断开。
+
+3. 驱动程序错误：驱动程序异常或者版本不兼容。
 
 **处理步骤**
 
-重新进行I/O请求。
+1. 检查硬件状态是否正常。
 
-### 13900006 没有这个设备或地址
+2. 检查USB设备等链接是否正常。
+
+3. 检查并更新驱动程序。
+
+## 13900006 没有这个设备或地址
 
 **错误信息**
 
-No such device or address
+No such device or address.
+
+**错误描述**
+
+没有此设备或地址。
 
 **可能原因**
 
@@ -102,11 +140,15 @@ No such device or address
 
 确认设备或地址信息。
 
-### 13900007 参数列表太长
+## 13900007 参数列表太长
 
 **错误信息**
 
-Arg list too long
+Arg list too long.
+
+**错误描述**
+
+参数列表过长。
 
 **可能原因**
 
@@ -116,27 +158,37 @@ Arg list too long
 
 减少参数个数。
 
-### 13900008 坏的文件描述符
+## 13900008 异常的文件描述符
 
 **错误信息**
 
-Bad file descriptor
+Bad file descriptor.
+
+**错误描述**
+
+异常的文件描述符。
 
 **可能原因**
 
-1. 此文件描述符已关闭。
-2. 读写权限不匹配。
+1.此文件描述符已关闭。
+
+2.读写权限不匹配。
 
 **处理步骤**
 
-1. 确认此文件描述符是否已关闭。
-2. 确认此文件读写权限是否匹配。
+1.确认此文件描述符是否已关闭。
 
-### 13900009 没有子进程
+2.确认此文件读写权限是否匹配。
+
+## 13900009 没有子进程
 
 **错误信息**
 
-No child processes
+No child processes.
+
+**错误描述**
+
+没有子进程。
 
 **可能原因**
 
@@ -146,11 +198,15 @@ No child processes
 
 确认系统中最大进程数。
 
-### 13900010 资源暂时不可用
+## 13900010 资源暂时不可用
 
 **错误信息**
 
-Try again
+Try again.
+
+**错误描述**
+
+资源暂时不可用。
 
 **可能原因**
 
@@ -160,11 +216,15 @@ Try again
 
 重新请求资源。
 
-### 13900011 内存溢出
+## 13900011 内存溢出
 
 **错误信息**
 
-Out of memory
+Out of memory.
+
+**错误描述**
+
+内存溢出。
 
 **可能原因**
 
@@ -176,29 +236,39 @@ Out of memory
 
 2.管理系统内存开销。
 
-### 13900012 拒绝许可
+## 13900012 拒绝许可
 
 **错误信息**
 
-Permission denied
+Permission denied.
+
+**错误描述**
+
+拒绝许可。
 
 **可能原因**
 
-1.文件操作无权限。
+1.文件操作被DAC或selinux拦截。
 
 2.文件沙箱路径地址错误。
 
 **处理步骤**
 
-1.确认权限。
+1.访问被DAC自主式权限控制权限拦截，请排查文件的UGO权限。
 
-2.确认文件沙箱路径地址。
+2.排查内核日志中是否有[avc拦截日志](https://gitcode.com/openharmony/docs/blob/master/zh-cn/device-dev/subsystems/subsys-security-selinux-develop-intro.md)。
 
-### 13900013 错误的地址
+3.确认文件的路径是否为应用内的沙箱路径（[应用沙箱目录与应用沙箱路径](../../file-management/cj-app-sandbox-directory.md#应用沙箱目录与应用沙箱路径)），文件管理系统禁止操作应用沙箱以外的文档。
+
+## 13900013 错误的地址
 
 **错误信息**
 
-Bad address
+Bad address.
+
+**错误描述**
+
+错误的地址。
 
 **可能原因**
 
@@ -208,11 +278,15 @@ Bad address
 
 确认地址是否正确。
 
-### 13900014 设备或资源忙
+## 13900014 设备或资源忙
 
 **错误信息**
 
-Device or resource busy
+Device or resource busy.
+
+**错误描述**
+
+设备或资源忙。
 
 **可能原因**
 
@@ -222,11 +296,15 @@ Device or resource busy
 
 重新请求资源。
 
-### 13900015 文件存在
+## 13900015 文件存在
 
 **错误信息**
 
-File exists
+File exists.
+
+**错误描述**
+
+文件已存在。
 
 **可能原因**
 
@@ -236,11 +314,15 @@ File exists
 
 确认文件路径是否正确。
 
-### 13900016 无效的交叉链接
+## 13900016 无效的交叉链接
 
 **错误信息**
 
-Cross-device link
+Cross-device link.
+
+**错误描述**
+
+无效的交叉链接。
 
 **可能原因**
 
@@ -250,11 +332,15 @@ Cross-device link
 
 确认跨设备是否正常。
 
-### 13900017 设备不存在
+## 13900017 设备不存在
 
 **错误信息**
 
-No such device
+No such device.
+
+**错误描述**
+
+设备不存在。
 
 **可能原因**
 
@@ -264,11 +350,15 @@ No such device
 
 确认设备间连接是否正常。
 
-### 13900018 不是一个目录
+## 13900018 不是一个目录
 
 **错误信息**
 
-Not a directory
+Not a directory.
+
+**错误描述**
+
+不是一个目录。
 
 **可能原因**
 
@@ -278,11 +368,15 @@ Not a directory
 
 确认路径是否正确。
 
-### 13900019 是一个目录
+## 13900019 是一个目录
 
 **错误信息**
 
-Is a directory
+Is a directory.
+
+**错误描述**
+
+是一个目录。
 
 **可能原因**
 
@@ -292,11 +386,15 @@ Is a directory
 
 确认路径是否正确。
 
-### 13900020 无效的参数
+## 13900020 无效的参数
 
 **错误信息**
 
-Invalid argument
+Invalid argument.
+
+**错误描述**
+
+无效参数。
 
 **可能原因**
 
@@ -306,11 +404,15 @@ Invalid argument
 
 确认参数合法性。
 
-### 13900021 打开太多的文件描述符
+## 13900021 打开太多的文件描述符
 
 **错误信息**
 
-File table overflow
+File table overflow.
+
+**错误描述**
+
+打开太多的文件描述符。
 
 **可能原因**
 
@@ -320,11 +422,15 @@ File table overflow
 
 关闭不相关的文件描述符。
 
-### 13900022 打开的文件过多
+## 13900022 打开的文件过多
 
 **错误信息**
 
-Too many open files
+Too many open files.
+
+**错误描述**
+
+打开的文件过多。
 
 **可能原因**
 
@@ -334,11 +440,15 @@ Too many open files
 
 关闭不需要的文件。
 
-### 13900023 文本文件忙
+## 13900023 文本文件忙
 
 **错误信息**
 
-Text file busy
+Text file busy.
+
+**错误描述**
+
+文本文件忙。
 
 **可能原因**
 
@@ -348,11 +458,15 @@ Text file busy
 
 关闭正在调试的程序。
 
-### 13900024 文件太大
+## 13900024 文件太大
 
 **错误信息**
 
-File too large
+File too large.
+
+**错误描述**
+
+文件过大。
 
 **可能原因**
 
@@ -362,11 +476,15 @@ File too large
 
 确认文件大小是否满足最大文件大小。
 
-### 13900025 设备上没有空间
+## 13900025 设备上没有空间
 
 **错误信息**
 
-No space left on device
+No space left on device.
+
+**错误描述**
+
+设备上剩余空间不足。
 
 **可能原因**
 
@@ -376,11 +494,15 @@ No space left on device
 
 清理设备存储空间。
 
-### 13900026 非法移位
+## 13900026 非法移位
 
 **错误信息**
 
-Illegal seek
+Illegal seek.
+
+**错误描述**
+
+非法移位。
 
 **可能原因**
 
@@ -390,11 +512,15 @@ Illegal seek
 
 确认seek使用。
 
-### 13900027 只读文件系统
+## 13900027 只读文件系统
 
 **错误信息**
 
-Read-only file system
+Read-only file system.
+
+**错误描述**
+
+只读文件系统。
 
 **可能原因**
 
@@ -404,11 +530,15 @@ Read-only file system
 
 确认文件是否只读。
 
-### 13900028 太多的链接
+## 13900028 太多的链接
 
 **错误信息**
 
-Too many links
+Too many links.
+
+**错误描述**
+
+链接过多。
 
 **可能原因**
 
@@ -418,11 +548,15 @@ Too many links
 
 清理无用链接。
 
-### 13900029 资源死锁错误
+## 13900029 资源死锁错误
 
 **错误信息**
 
-Resource deadlock would occur
+Resource deadlock would occur.
+
+**错误描述**
+
+资源死锁错误。
 
 **可能原因**
 
@@ -432,25 +566,33 @@ Resource deadlock would occur
 
 终止死锁进程。
 
-### 13900030 文件名太长
+## 13900030 文件名太长
 
 **错误信息**
 
-Filename too Long
+File name too long.
+
+**错误描述**
+
+文件名过长。
 
 **可能原因**
 
-路径或文件名超过最大长度。
+文件名超过最大长度255字节。
 
 **处理步骤**
 
-确认路径或文件名长度。
+确认文件名长度。
 
-### 13900031 功能没有实现
+## 13900031 功能没有实现
 
 **错误信息**
 
-Function not implemented
+Function not implemented.
+
+**错误描述**
+
+功能没有实现。
 
 **可能原因**
 
@@ -460,11 +602,15 @@ Function not implemented
 
 确认系统版本。
 
-### 13900032 目录非空
+## 13900032 目录非空
 
 **错误信息**
 
-Directory not empty
+Directory not empty.
+
+**错误描述**
+
+目录非空。
 
 **可能原因**
 
@@ -476,11 +622,15 @@ Directory not empty
 
 2.确认路径为空。
 
-### 13900033 符号链接层次太多
+## 13900033 符号链接层次太多
 
 **错误信息**
 
-Too many symbolic links encountered
+Too many symbolic links encountered.
+
+**错误描述**
+
+符号链接层次过多。
 
 **可能原因**
 
@@ -490,11 +640,15 @@ Too many symbolic links encountered
 
 清理无关符号链接。
 
-### 13900034 操作被阻塞
+## 13900034 操作被阻塞
 
 **错误信息**
 
-Operation would block
+Operation would block.
+
+**错误描述**
+
+操作被阻塞。
 
 **可能原因**
 
@@ -504,11 +658,15 @@ Operation would block
 
 重新进行操作。
 
-### 13900035 请求描述符无效
+## 13900035 请求描述符无效
 
 **错误信息**
 
-Invalid request descriptor
+Invalid request descriptor.
+
+**错误描述**
+
+请求描述符无效。
 
 **可能原因**
 
@@ -518,11 +676,15 @@ Invalid request descriptor
 
 确认文件描述符是否合法。
 
-### 13900036 设备不是字符流
+## 13900036 设备不是字符流
 
 **错误信息**
 
-Device not a stream
+Device not a stream.
+
+**错误描述**
+
+设备不是字符流。
 
 **可能原因**
 
@@ -532,11 +694,15 @@ Device not a stream
 
 确认文件描述符是否指向流设备。
 
-### 13900037 无可用数据
+## 13900037 无可用数据
 
 **错误信息**
 
-No data available
+No data available.
+
+**错误描述**
+
+无可用数据。
 
 **可能原因**
 
@@ -546,11 +712,15 @@ No data available
 
 重新请求数据。
 
-### 13900038 对于定义的数据类型值太大
+## 13900038 对于定义的数据类型,值太大
 
 **错误信息**
 
-Value too large for defined data type
+Value too large for defined data type.
+
+**错误描述**
+
+变量值超出数据类型规定的最大值。
 
 **可能原因**
 
@@ -560,11 +730,15 @@ Value too large for defined data type
 
 修改数据类型。
 
-### 13900039 文件描述符在坏状态
+## 13900039 文件描述符在异常状态
 
 **错误信息**
 
-File descriptor in bad state
+File descriptor in bad state.
+
+**错误描述**
+
+文件描述符在异常状态。
 
 **可能原因**
 
@@ -574,11 +748,15 @@ File descriptor in bad state
 
 确认文件描述符合法性。
 
-### 13900040 应该重新启动被中断的系统调用
+## 13900040 应该重新启动被中断的系统调用
 
 **错误信息**
 
-Interrupted system call should be restarted
+Interrupted system call should be restarted.
+
+**错误描述**
+
+应该重新启动被中断的系统调用。
 
 **可能原因**
 
@@ -588,11 +766,15 @@ Interrupted system call should be restarted
 
 重新进行系统调用。
 
-### 13900041 超出磁盘配额
+## 13900041 超出磁盘配额
 
 **错误信息**
 
-Quota exceeded
+Quota exceeded.
+
+**错误描述**
+
+超出磁盘配额。
 
 **可能原因**
 
@@ -602,11 +784,15 @@ Quota exceeded
 
 清理磁盘存储空间。
 
-### 13900042 未知错误
+## 13900042 未知错误
 
 **错误信息**
 
-Unknown error
+Unknown error.
+
+**错误描述**
+
+未知错误。
 
 **可能原因**
 
@@ -618,11 +804,15 @@ Unknown error
 
 2.重启服务。
 
-### 13900043 没有可用的锁
+## 13900043 没有可用的锁
 
 **错误信息**
 
-No record is locks available
+No record locks available.
+
+**错误描述**
+
+没有可用的锁。
 
 **可能原因**
 
@@ -632,11 +822,15 @@ No record is locks available
 
 释放锁资源后重试。
 
-### 13900044 网络无法访问
+## 13900044 网络无法访问
 
 **错误信息**
 
-Network is unreachable
+Network is unreachable.
+
+**错误描述**
+
+网络无法访问。
 
 **可能原因**
 
@@ -646,45 +840,53 @@ Network is unreachable
 
 检查网络状态，确认状态正常。
 
-### 13900045 连接失败
+## 13900045 连接失败
 
 **错误信息**
 
-Connection failed
+Connection failed.
+
+**错误描述**
+
+连接失败。
 
 **可能原因**
 
-设备、Wifi或蓝牙状态异常，导致建立连接失败。
+设备、Wi-Fi或蓝牙状态异常，导致建立链接失败。
 
 **处理步骤**
 
 1.检查设备，确认设备状态正常。
 
-2.检查WiFi和蓝牙，确认状态正常。
+2.检查Wi-Fi和蓝牙，确认状态正常。
 
-### 13900046 连接失败
+## 13900046 软件造成连接中断
 
 **错误信息**
 
-Software caused connection abort
+Software caused connection abort.
+
+**错误描述**
+
+软件造成连接中断。
 
 **可能原因**
 
-设备下线或WiFi、蓝牙断连。
+设备下线或Wi-Fi、蓝牙断连。
 
 **处理步骤**
 
 1.检查设备，确认设备状态正常。
 
-2.检查WiFi和蓝牙，确认状态正常。
+2.检查Wi-Fi和蓝牙，确认状态正常。
 
 ## 用户数据管理错误码
 
-### 14000001 文件名非法
+## 14000001 文件名非法
 
 **错误信息**
 
-Invalid display name
+Invalid file name.
 
 **可能原因**
 
@@ -694,11 +896,11 @@ Invalid display name
 
 删除非法字符。
 
-### 14000002 非法URI
+## 14000002 非法URI
 
 **错误信息**
 
-Invalid uri
+Invalid URI.
 
 **可能原因**
 
@@ -706,13 +908,13 @@ URI不合法。
 
 **处理步骤**
 
-直接使用查询获取的uri。
+直接使用查询获取的URI。
 
-### 14000003 文件后缀非法
+## 14000003 文件后缀非法
 
 **错误信息**
 
-Invalid file name extension
+Invalid file name extension.
 
 **可能原因**
 
@@ -722,11 +924,11 @@ Invalid file name extension
 
 检查文件名后缀。
 
-### 14000004 文件已进入回收站
+## 14000004 文件已进入回收站
 
 **错误信息**
 
-File has been put into trash bin
+File already in the recycle bin.
 
 **可能原因**
 
@@ -736,11 +938,11 @@ File has been put into trash bin
 
 检查文件是否已经进入回收站。
 
-### 14000011 系统内部错误
+## 14000011 系统内部错误
 
 **错误信息**
 
-System inner fail
+System inner fail.
 
 **可能原因**
 
@@ -750,11 +952,11 @@ System inner fail
 
 清理后台，或重启设备。
 
-### 14000014 成员名非法
+## 14000014 成员名非法
 
 **错误信息**
 
-Member is not a valid PhotoKey
+Member is not a valid PhotoKey.
 
 **可能原因**
 
@@ -766,11 +968,15 @@ Member is not a valid PhotoKey
 
 ## 空间统计错误码
 
-### 13600001 IPC通信失败
+## 13600001 IPC通信失败
 
 **错误信息**
 
-IPC error
+IPC error.
+
+**错误描述**
+
+IPC通信失败。
 
 **可能原因**
 
@@ -780,11 +986,15 @@ IPC error
 
 检查服务是否启动。
 
-### 13600002 文件系统类型不支持
+## 13600002 文件系统类型不支持
 
 **错误信息**
 
-Not supported filesystem
+File system not supported.
+
+**错误描述**
+
+文件系统类型不支持。
 
 **可能原因**
 
@@ -794,11 +1004,15 @@ Not supported filesystem
 
 修改为正确的文件系统类型。
 
-### 13600003 挂载失败
+## 13600003 挂载失败
 
 **错误信息**
 
-Failed to mount
+Mount failed.
+
+**错误描述**
+
+挂载失败。
 
 **可能原因**
 
@@ -808,11 +1022,15 @@ Failed to mount
 
 拔卡尝试重新挂载。
 
-### 13600004 卸载失败
+## 13600004 卸载失败
 
 **错误信息**
 
-Failed to unmount
+Unmount failed.
+
+**错误描述**
+
+卸载失败。
 
 **可能原因**
 
@@ -822,11 +1040,15 @@ Failed to unmount
 
 检查外卡文件是否被线程占用, 杀掉占用线程。
 
-### 13600005 卷状态错误
+## 13600005 卷状态错误
 
 **错误信息**
 
-Incorrect volume state
+Incorrect volume state.
+
+**错误描述**
+
+卷状态错误。
 
 **可能原因**
 
@@ -836,11 +1058,15 @@ Incorrect volume state
 
 检查当前卷状态是否正确。
 
-### 13600006 创建目录或者节点失败
+## 13600006 创建目录或者节点失败
 
 **错误信息**
 
-Prepare directory or node error
+Failed to create the directory or node.
+
+**错误描述**
+
+创建目录或者节点失败。
 
 **可能原因**
 
@@ -850,11 +1076,15 @@ Prepare directory or node error
 
 检查待创建目录或节点是否存在。
 
-### 13600007 删除目录或者节点失败
+## 13600007 删除目录或者节点失败
 
 **错误信息**
 
-Delete directory or node error
+Failed to delete the directory or node.
+
+**错误描述**
+
+删除目录或者节点失败。
 
 **可能原因**
 
@@ -864,11 +1094,15 @@ Delete directory or node error
 
 检查待删除目录或节点是否存在。
 
-### 13600008 操作对象不存在
+## 13600008 操作对象不存在
 
 **错误信息**
 
-No such object
+No such object.
+
+**错误描述**
+
+操作对象不存在。
 
 **可能原因**
 
@@ -882,11 +1116,15 @@ No such object
 
 2.检查输入的应用包名是否存在。
 
-### 13600009 用户id超出范围
+## 13600009 用户id超出范围
 
 **错误信息**
 
-User id out of range
+User ID out of range.
+
+**错误描述**
+
+用户id超出范围。
 
 **可能原因**
 
@@ -896,13 +1134,161 @@ User id out of range
 
 检查输入的用户id是否处于正常范围。
 
-## 公共文件访问错误码
-
-### 14300001 IPC通信失败
+## 13600010 输入参数非法
 
 **错误信息**
 
-IPC error
+The input parameter is invalid.
+
+**错误描述**
+
+用户输入参数非法。
+
+**可能原因**
+
+输入错误的参数。
+
+**处理步骤**
+
+检查输入的参数是否处于正常范围。
+
+## 13600011 上报指定业务空间占用失败
+
+**错误信息**
+
+Failed to report the specified business space usage.
+
+**错误描述**
+
+上报指定业务空间占用失败。
+
+**可能原因**
+
+与数据库交互异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600012 查询指定业务空间占用失败
+
+**错误信息**
+
+Failed to query the specified business space usage.
+
+**错误描述**
+
+查询指定业务空间占用失败。
+
+**可能原因**
+
+与数据库交互异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600013 查询所有业务空间占用情况失败
+
+**错误信息**
+
+Failed to query all business space usage.
+
+**错误描述**
+
+查询所有业务空间占用情况失败。
+
+**可能原因**
+
+与数据库交互异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600015 获取磁盘空间占用信息失败
+
+**错误信息**
+
+Failed to traverse the query data partition directory.
+
+**错误描述**
+
+获取磁盘空间占用信息失败。
+
+**可能原因**
+
+底层文件系统异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600016 获取文件系统inode数失败
+
+**错误信息**
+
+Failed to query the inode information of the data partition.
+
+**错误描述**
+
+获取数据分区的inode信息失败。
+
+**可能原因**
+
+底层文件系统异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600017 获取当前应用的inode占用量失败
+
+**错误信息**
+
+Failed to query the inode information of the application.
+
+**错误描述**
+
+获取当前应用的inode占用量失败。
+
+**可能原因**
+
+底层文件系统异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 13600018 查询系统数据大小失败
+
+**错误信息**
+
+Failed to query the system data size.
+
+**错误描述**
+
+查询系统数据大小失败。
+
+**可能原因**
+
+底层文件系统异常。
+
+**处理步骤**
+
+重启设备后重试。
+
+## 公共文件访问错误码
+
+## 14300001 IPC通信失败
+
+**错误信息**
+
+IPC error.
+
+**错误描述**
+
+IPC通信失败。
 
 **可能原因**
 
@@ -914,25 +1300,33 @@ IPC error
 
 检查server端服务是否存在。
 
-### 14300002 URI格式错误
+## 14300002 URI格式错误
 
 **错误信息**
 
-Invalid uri
+Invalid URI.
+
+**错误描述**
+
+URI格式错误。
 
 **可能原因**
 
-使用非法uri。
+使用非法URI。
 
 **处理步骤**
 
 检查URI格式。
 
-### 14300003 查询server端ability信息失败
+## 14300003 查询server端ability信息失败
 
 **错误信息**
 
-Fail to get fileextension info
+Failed to obtain the server ability information.
+
+**错误描述**
+
+查询server端ability信息失败。
 
 **可能原因**
 
@@ -940,27 +1334,17 @@ BMS接口异常。
 
 **处理步骤**
 
-系统基础能力问题
+系统基础能力问题。
 
-### 14300004 js-server实际返回的结果异常
-
-**错误信息**
-
-Get wrong result
-
-**可能原因**
-
-server端返回实际数据不当。
-
-**处理步骤**
-
-检查server端返回值。
-
-### 14300005 notify注册失败
+## 14300005 notify注册失败
 
 **错误信息**
 
-Fail to register notification
+Failed to register notify.
+
+**错误描述**
+
+notify注册失败。
 
 **可能原因**
 
@@ -972,11 +1356,15 @@ Fail to register notification
 
 检查server端服务是否存在。
 
-### 14300006 notify移除失败
+## 14300006 notify移除失败
 
 **错误信息**
 
-Fail to remove notification
+Failed to unregister notify.
+
+**错误描述**
+
+notify移除失败。
 
 **可能原因**
 
@@ -988,11 +1376,15 @@ Fail to remove notification
 
 检查server端服务是否存在。
 
-### 14300007 notify代理初始化失败
+## 14300007 notify代理初始化失败
 
 **错误信息**
 
-Fail to init notification agent
+Failed to initialize the notify agent.
+
+**错误描述**
+
+notify代理初始化失败。
 
 **可能原因**
 
@@ -1002,29 +1394,14 @@ Fail to init notification agent
 
 检查是否注册过。
 
-### 14300008 js-server端通知代理失败
-
-**错误信息**
-
-Fail to notify agent
-
-**可能原因**
-
-1.服务不在。
-
-2.extension机制异常。
-
-**处理步骤**
-
-检查client是否异常。
 
 ## 端云同步错误码
 
-### 22400001 云端状态未ready
+## 22400001 云端状态未ready
 
 **错误信息**
 
-Cloud status not ready
+Cloud status not ready.
 
 **可能原因**
 
@@ -1038,11 +1415,11 @@ Cloud status not ready
 
 2.检查云同步开关是否打开。
 
-### 22400002  网络不可用
+## 22400002  网络不可用
 
 **错误信息**
 
-Network unavailable
+Network unavailable.
 
 **可能原因**
 
@@ -1052,11 +1429,11 @@ Network unavailable
 
 检查网络状态。
 
-### 22400003  告警电量
+## 22400003  告警电量
 
 **错误信息**
 
-Battery level warning
+Low battery level.
 
 **可能原因**
 
@@ -1064,4 +1441,66 @@ Battery level warning
 
 **处理步骤**
 
-开启充电状态或电量恢复后再执行。
+充电状态或电量恢复后再执行。
+
+## 22400004  入参请求超过最大限制
+
+**错误信息**
+
+Exceeded the maximum limit.
+
+**可能原因**
+
+请求数量超过接口规格定义的上限。
+
+**处理步骤**
+
+检查入参，保证请求数量符合规格要求。
+
+## 22400005  内部错误
+
+**错误信息**
+
+Inner error.
+
+**可能原因**
+
+1.系统内部数据库请求失败或者SQL执行失败。
+
+2.系统出现空指针等异常。
+
+3.系统内存不足或内存异常。
+
+4.JS框架异常。
+
+**处理步骤**
+
+系统基础能力问题。
+
+## 22400006  已经有同类型任务正在运行
+
+**错误信息**
+
+The same task is already in progress.
+
+**可能原因**
+
+有同类型任务正在运行。
+
+**处理步骤**
+
+等待现有同类型任务完成，或通过调用对应业务的stop接口终止现有任务后，再触发新任务。
+
+## 22400007  指定用于替换原始文件的历史版本文件不存在
+
+**错误信息**
+
+The version file specified to replace the original file does not exist.
+
+**可能原因**
+
+历史版本文件未下载或已删除。
+
+**处理步骤**
+
+重新下载指定的历史版本文件，保证文件存在。

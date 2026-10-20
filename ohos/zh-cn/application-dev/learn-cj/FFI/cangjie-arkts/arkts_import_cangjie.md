@@ -2,8 +2,8 @@
 
 此章节介绍如何在 ArkTS 中使用互操作代码，有两种方式：
 
-- 使用 import 语法加载仓颉模块使用。
-- 使用 loadNativeModule 接口加载仓颉模块使用。
+- 使用 import 语法加载仓颉模块。
+- 使用 loadNativeModule 接口加载仓颉模块。
 
 ## 方式一：使用 import 语法加载仓颉模块
 
@@ -11,7 +11,7 @@
 
 > **说明：**
 >
-> 使用 import 语法加载仓颉模块的方式和使用 import 语法加载 native 模块方式一致，详细介绍请参见：[静态方式加载 native 模块](https://docs.openharmony.cn/pages/v6.0/zh-cn/application-dev/arkts-utils/arkts-import-native-module.md)。
+> 使用 import 语法加载仓颉模块的方式和使用 import 语法加载 native 模块方式一致，详细介绍请参见：<!--RP1-->[静态方式加载 native 模块](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/arkts-utils/arkts-import-native-module.md)<!--RP1End-->。
 
 下面为使用 import 语法加载仓颉 ohos_app_cangjie_entry 模块并调用 addNumber 接口的示例：
 
@@ -52,8 +52,7 @@
         }
         // 必须注册该函数到JSModule中
         let EXPORT_MODULE = JSModule.registerModule {
-            runtime, exports =>
-                exports["addNumber"] = runtime.function(addNumber).toJSValue()
+            runtime, exports => exports["addNumber"] = runtime.function(addNumber).toJSValue()
         }
         ```
 
@@ -338,7 +337,7 @@
         import ohos.ark_interop.JSValue
         // 导入三方库 B
         import package_b.returnB
-        
+
         // 定义三方库 A 中的 returnA 接口
         public func returnA(context: JSContext, callInfo: JSCallInfo): JSValue {
             let result = "A " + returnB()
@@ -358,7 +357,7 @@
         ```cangjie
         // package_b/b.cj
         package package_b
-        
+
         public func returnB(): String {
             return "B"
         }
@@ -447,7 +446,7 @@
         import ohos.ark_interop.JSValue
         // 导入子包 B
         import package_a.package_b.returnB
-        
+
         // 定义三方库 A 中的 returnA 接口
         public func returnA(context: JSContext, callInfo: JSCallInfo): JSValue {
             let result = "A " + returnB()
@@ -467,7 +466,7 @@
         ```cangjie
         // package_a/package_b/b.cj
         package package_a.package_b
-        
+
         public func returnB(): String {
             return "B"
         }
@@ -576,7 +575,7 @@
         import ohos.ark_interop.JSValue
         // 导入三方库 B
         import ohos_app_cangjie_package_b.returnB
-        
+
         // 定义三方库 A 中的 returnA 接口
         public func returnA(context: JSContext, callInfo: JSCallInfo): JSValue {
             let result = "A " + returnB()
@@ -657,7 +656,7 @@
 
 > **说明：**
 >
-> loadNativeModule 接口详细介绍请参考：[同步方式动态加载 native 模块](https://docs.openharmony.cn/pages/v6.0/zh-cn/application-dev/arkts-utils/js-apis-load-native-module.md)
+> loadNativeModule 接口详细介绍请参考：<!--RP2-->[同步方式动态加载 native 模块](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/arkts-utils/js-apis-load-native-module.md)<!--RP2End-->
 
 下面为使用 loadNativeModule 接口加载仓颉 ohos_app_cangjie_entry 模块并调用 addNumber 函数的示例：
 
@@ -698,8 +697,7 @@
         }
         // 必须注册该函数到JSModule中
         let EXPORT_MODULE = JSModule.registerModule {
-            runtime, exports =>
-                exports["addNumber"] = runtime.function(addNumber).toJSValue()
+            runtime, exports => exports["addNumber"] = runtime.function(addNumber).toJSValue()
         }
         ```
 

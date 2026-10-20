@@ -75,11 +75,11 @@ import ohos.base.*
 import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 
-func f1(){
+func func1(){
     HiTraceMeter.finishTrace("myTestFunc", 1)
 }
 
-func f2(){
+func func2(){
     // 跟踪并行执行的同名任务
     HiTraceMeter.startTrace("myTestFunc", 1)
     // 业务流程代码
@@ -90,7 +90,7 @@ func f2(){
     HiTraceMeter.finishTrace("myTestFunc", 2)
 }
 
-func f3(){
+func func3(){
     // 跟踪串行执行的同名任务
     HiTraceMeter.startTrace("myTestFunc", 1)
     // 业务流程代码
@@ -102,9 +102,9 @@ func f3(){
 }
 
 try {
-    f1()
-    f2()
-    f3()
+    func1()
+    func2()
+    func3()
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }

@@ -29,18 +29,21 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var handlePopup: Bool = false
+    @State
+    var handlePopup: Bool = false
     func build() {
         Column {
             Button('PopupOptions')
-                .onClick ({
+                .onClick({
                     e => this.handlePopup = !this.handlePopup
                 })
                 .bindPopup(
                     this.handlePopup,
                     PopupOptions(message: 'This is a popup with PopupOptions', placement: Placement.Bottom)
                 )
-        }.width(100.percent).padding(top: 5)
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -62,11 +65,12 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var handlePopup: Bool = false
+    @State
+    var handlePopup: Bool = false
     func build() {
         Column {
             Button('PopupOptions')
-                .onClick ({
+                .onClick({
                     e => this.handlePopup = !this.handlePopup
                 })
                 .bindPopup(
@@ -75,14 +79,15 @@ class EntryView {
                         message: 'This is a popup with PopupOptions',
                         placement: Placement.Bottom,
                         onStateChange: {
-                            e =>
-                            if (!e.isVisible) {
+                            e => if (!e.isVisible) {
                                 this.handlePopup = false
                             }
                         }
                     )
                 )
-        }.width(100.percent).padding(top: 5)
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -105,12 +110,13 @@ import ohos.hilog.*
 @Entry
 @Component
 class EntryView {
-    @State var handlePopup: Bool = false
+    @State
+    var handlePopup: Bool = false
     func build() {
         Column() {
             Button('PopupOptions')
                 .margin(top: 200)
-                .onClick ({
+                .onClick({
                     e => this.handlePopup = !this.handlePopup
                 })
                 .bindPopup(
@@ -120,15 +126,17 @@ class EntryView {
                         placement: Placement.Bottom,
                         primaryButton: PopupButton(
                             value: "Confirm",
-                            action: { => Hilog.info(0, 'cangjie', 'Confirm')}
+                            action: {=> Hilog.info(0, 'cangjie', 'Confirm')}
                         ),
                         secondaryButton: PopupButton(
                             value: "Cancel",
-                            action: { => Hilog.info(0, 'cangjie', 'Cancel')}
+                            action: {=> Hilog.info(0, 'cangjie', 'Cancel')}
                         )
                     )
                 )
-        }.width(100.percent).padding(top: 5)
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -150,18 +158,22 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var handlePopup: Bool = false
-    @State var customPopup: Bool = false
-    @State var popup: Bool = false
-    @State var custom: String = "Custom Wait"
+    @State
+    var handlePopup: Bool = false
+    @State
+    var customPopup: Bool = false
+    @State
+    var popup: Bool = false
+    @State
+    var custom: String = "Custom Wait"
     // Popup builder defines popup content
     @Builder
     func popupBuilder() {
         Row() {
             Text('Custom Popup with transitionEffect').fontSize(10)
         }
-        .height(50)
-        .padding(5)
+            .height(50)
+            .padding(5)
     }
 
     func build() {
@@ -169,7 +181,7 @@ class EntryView {
             // 类型设置弹框内容
             Button('PopupOptions')
                 .position(x: 100, y: 150)
-                .onClick ({
+                .onClick({
                     e => this.popup = !this.popup
                 })
                 .bindPopup(
@@ -180,19 +192,17 @@ class EntryView {
                         showInSubWindow: false,
                         onStateChange: {
                             e =>
-                            custom = "stateChange: ${e.isVisible}"
-                            if (!e.isVisible) {
-                                this.popup = true
-                            }
+                                custom = "stateChange: ${e.isVisible}"
+                                if (!e.isVisible) {
+                                    this.popup = true
+                                }
                         },
                         // 设置弹窗显示动效与退出动效为平移动效
                         transition: TransitionEffect.asymmetric(
                             TransitionEffect
-                            .OPACITY
-                            .animation(AnimateParam(duration: 1000, curve: Curve.Ease))
-                            .combine(
-                                TransitionEffect.translate(TranslateOptions(x: 50, y: 50))
-                            ),
+                                .OPACITY
+                                .animation(AnimateParam(duration: 1000, curve: Curve.Ease))
+                                .combine(TransitionEffect.translate(TranslateOptions(x: 50, y: 50))),
                             TransitionEffect.IDENTITY
                         )
                     )
@@ -201,21 +211,21 @@ class EntryView {
             // CustomPopupOptions 类型设置弹框内容
             Button('CustomPopupOptions')
                 .position(x: 80, y: 300)
-                .onClick ({
+                .onClick({
                     e => this.customPopup = !this.customPopup
                 })
                 .bindPopup(
                     this.customPopup,
                     CustomPopupOptions(
-                        builder: bind(popupBuilder, this),
+                        builder: popupBuilder,
                         placement: Placement.Top,
                         showInSubWindow: false,
                         onStateChange: {
                             e =>
-                            custom = "stateChange: ${e.isVisible}"
-                            if (!e.isVisible) {
-                                this.customPopup = true
-                            }
+                                custom = "stateChange: ${e.isVisible}"
+                                if (!e.isVisible) {
+                                    this.customPopup = true
+                                }
                         },
                         // 设置弹窗显示动效与退出动效为缩放动效
                         transition: TransitionEffect
@@ -223,7 +233,9 @@ class EntryView {
                             .animation(AnimateParam(duration: 500, curve: Curve.Ease))
                     )
                 )
-        }.width(100.percent).padding(top: 5)
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -247,8 +259,10 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var customPopup: Bool = false
-    @State var custom: String = "Custom Wait"
+    @State
+    var customPopup: Bool = false
+    @State
+    var custom: String = "Custom Wait"
     // popup构造器定义弹框内容
     @Builder
     func popupBuilder() {
@@ -259,30 +273,30 @@ class EntryView {
                 .margin(left: 5)
             Text('This is Custom Popup').fontSize(15)
         }
-        .width(200)
-        .height(50)
-        .padding(5)
+            .width(200)
+            .height(50)
+            .padding(5)
     }
     func build() {
         Column() {
             Button('CustomPopupOptions')
                 .position(x: 100, y: 200)
-                .onClick ({
+                .onClick({
                     e => this.customPopup = !this.customPopup
                 })
                 .bindPopup(
                     this.customPopup,
                     CustomPopupOptions(
-                        builder: bind(popupBuilder, this), // 气泡的内容
+                        builder: popupBuilder, // 气泡的内容
                         placement: Placement.Bottom, // 气泡的弹出位置
                         popupColor: Color.Red, // 气泡的背景色
                         showInSubWindow: false,
                         onStateChange: {
                             evt =>
-                            custom = "stateChange: ${evt.isVisible}"
-                            if (!evt.isVisible) {
-                                customPopup = true
-                            }
+                                custom = "stateChange: ${evt.isVisible}"
+                                if (!evt.isVisible) {
+                                    customPopup = true
+                                }
                         }
                     )
                 )
@@ -320,7 +334,8 @@ import ohos.arkui.state_macro_manage.*
 @Entry
 @Component
 class EntryView {
-    @State var handlePopup: Bool = false
+    @State
+    var handlePopup: Bool = false
 
     func build() {
         Column(space: 100) {

@@ -73,7 +73,7 @@ public func clearText(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -92,8 +92,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let txt: Component = driver.findComponent(On().text("cangjie")).getOrThrow()
-    txt.clearText()
+    if (let Some(txt) <- driver.findComponent(On().text("cangjie"))) {
+        txt.clearText()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -113,7 +114,7 @@ public func click(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -132,8 +133,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    button.click()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.click()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -153,7 +155,7 @@ public func doubleClick(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -172,8 +174,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    button.doubleClick()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.doubleClick()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -199,7 +202,7 @@ public func dragTo(target: Component): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -218,9 +221,11 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let drag: Component = driver.findComponent(On().text("ohos")).getOrThrow()
-    button.dragTo(drag)
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        if (let Some(drag) <- driver.findComponent(On().text("ohos"))) {
+            button.dragTo(drag)
+        }
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -246,7 +251,7 @@ public func getBounds(): Rect
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -265,8 +270,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let rect: Rect = button.getBounds()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getBounds()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -292,7 +298,7 @@ public func getBoundsCenter(): Point
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -311,8 +317,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let point = button.getBoundsCenter()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getBoundsCenter()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -338,7 +345,7 @@ public func getDescription(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -357,8 +364,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let des: String = button.getDescription()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getDescription()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -384,7 +392,7 @@ public func getId(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -403,8 +411,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let id: String = button.getId()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getId()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -430,7 +439,7 @@ public func getText(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -449,8 +458,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let text: String = button.getText()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getText()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -476,7 +486,7 @@ public func getType(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -495,8 +505,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let btype: String = button.getType()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.getType()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -522,7 +533,7 @@ public func inputText(text: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -541,8 +552,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let txt: Component = driver.findComponent(On().text("cangjie")).getOrThrow()
-    txt.inputText("111")
+    if (let Some(txt) <- driver.findComponent(On().text("cangjie"))) {
+        txt.inputText("111")
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -568,7 +580,7 @@ public func isCheckable(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -587,8 +599,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let c: Bool = button.isCheckable()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isCheckable()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -614,7 +627,7 @@ public func isChecked(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -633,8 +646,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let c2: Bool = button.isChecked()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isChecked()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -660,7 +674,7 @@ public func isClickable(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -679,8 +693,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let c: Bool = button.isClickable()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isClickable()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -706,7 +721,7 @@ public func isEnabled(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -725,8 +740,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let e: Bool = button.isEnabled()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isEnabled()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -752,7 +768,7 @@ public func isFocused(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -771,8 +787,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let f: Bool = button.isFocused()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isFocused()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -798,7 +815,7 @@ public func isLongClickable(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -817,8 +834,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let c1: Bool = button.isLongClickable()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isLongClickable()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -844,7 +862,7 @@ public func isScrollable(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -863,8 +881,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let s: Bool = button.isScrollable()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isScrollable()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -890,7 +909,7 @@ public func isSelected(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -909,8 +928,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    let s1: Bool = button.isSelected()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.isSelected()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -930,7 +950,7 @@ public func longClick(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -949,8 +969,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let button: Component = driver.findComponent(On().id("button")).getOrThrow()
-    button.longClick()
+    if (let Some(button) <- driver.findComponent(On().id("button"))) {
+        button.longClick()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -976,7 +997,7 @@ public func pinchIn(scale: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -995,8 +1016,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let image: Component = driver.findComponent(On().id("icon")).getOrThrow()
-    image.pinchIn(0.5)
+    if (let Some(image) <- driver.findComponent(On().id("icon"))) {
+        image.pinchIn(0.5)
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1022,7 +1044,7 @@ public func pinchOut(scale: Float32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1041,8 +1063,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let image: Component = driver.findComponent(On().id("icon")).getOrThrow()
-    image.pinchOut(2.5)
+    if (let Some(image) <- driver.findComponent(On().id("icon"))) {
+        image.pinchOut(2.5)
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1074,7 +1097,7 @@ public func scrollSearch(on: On): ?Component
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1093,8 +1116,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let scrollBar: Component = driver.findComponent(On().onType("Scroll")).getOrThrow()
-    let button: Option<Component> = scrollBar.scrollSearch(On().text("1"))
+    if (let Some(scrollBar) <- driver.findComponent(On().onType("Scroll"))) {
+        let button: Option<Component> = scrollBar.scrollSearch(On().text("1"))
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1120,7 +1144,7 @@ public func scrollToBottom(speed!: Int64 = 600): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1139,8 +1163,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let scrollBar: Component = driver.findComponent(On().onType("Scroll")).getOrThrow()
-    scrollBar.scrollToBottom()
+    if (let Some(scrollBar) <- driver.findComponent(On().onType("Scroll"))) {
+        scrollBar.scrollToBottom()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1166,7 +1191,7 @@ public func scrollToTop(speed!: Int64 = 600): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1185,8 +1210,9 @@ import kit.PerformanceAnalysisKit.Hilog
 
 try {
     let driver: Driver = Driver.create()
-    let scrollBar: Component = driver.findComponent(On().onType("Scroll")).getOrThrow()
-    scrollBar.scrollToTop()
+    if (let Some(scrollBar) <- driver.findComponent(On().onType("Scroll"))) {
+        scrollBar.scrollToTop()
+    }
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
 }
@@ -1224,7 +1250,7 @@ public static func create(): Driver
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1268,7 +1294,7 @@ public func assertComponentExist(on: On): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1891,11 +1917,12 @@ import kit.TestKit.*
 import kit.PerformanceAnalysisKit.*
 import ohos.business_exception.BusinessException
 
-let driver: Driver = Driver.create()
 try {
-    let text: Component = driver.findComponent(On().onType("TextInput")).getOrThrow()
-    let point = text.getBoundsCenter()
-    driver.inputText(point, "123")
+    let driver: Driver = Driver.create()
+    if (let Some(text) <- driver.findComponent(On().onType("TextInput"))) {
+        let point = text.getBoundsCenter()
+        driver.inputText(point, "123")
+    }
 } catch (e: BusinessException) {
     Hilog.error(0, "UITest", "The component `TextInput` does not exist")
 }
@@ -3851,11 +3878,13 @@ public func close(): Unit
 
 **系统能力：** SystemCapability.Test.UiTest
 
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3891,17 +3920,13 @@ public func focus(): Unit
 
 **功能：** 让窗口获焦。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
 
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3947,7 +3972,7 @@ public func getBounds(): Rect
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3993,7 +4018,7 @@ public func getBundleName(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4039,7 +4064,7 @@ public func getTitle(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4085,7 +4110,7 @@ public func getWindowMode(): WindowMode
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4131,7 +4156,7 @@ public func isActive(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4177,7 +4202,7 @@ public func isFocused(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4211,17 +4236,15 @@ public func maximize(): Unit
 
 **功能：** 将窗口最大化。适用于支持窗口最大化操作的窗口。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
+
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
 
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4257,17 +4280,15 @@ public func minimize(): Unit
 
 **功能：** 将窗口最小化。适用于支持窗口最小化操作的窗口。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
+
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
 
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4303,11 +4324,9 @@ public func moveTo(x: Int32, y: Int32): Unit
 
 **功能：** 将窗口移动到目标点。适用于支持移动的窗口。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
+
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
 
 **起始版本：** 22
 
@@ -4320,7 +4339,7 @@ public func moveTo(x: Int32, y: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4357,6 +4376,8 @@ public func resize(wide: Int32, height: Int32, direction: ResizeDirection): Unit
 
 **系统能力：** SystemCapability.Test.UiTest
 
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
+
 **起始版本：** 22
 
 **参数：**
@@ -4369,7 +4390,7 @@ public func resize(wide: Int32, height: Int32, direction: ResizeDirection): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4405,17 +4426,15 @@ public func resume(): Unit
 
 **功能：** 将窗口恢复到之前的窗口模式。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
+
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
 
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4451,17 +4470,15 @@ public func split(): Unit
 
 **功能：** 将窗口模式切换成分屏模式。适用于支持切换分屏模式的窗口。
 
-> **说明：**
->
-> 该接口在Tablet设备中可正常调用，在手机设备中返回17000005错误码。
-
 **系统能力：** SystemCapability.Test.UiTest
+
+**设备行为差异：** 对于API version 22版本，该接口在PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。从API version 23开始，该接口在Phone、PC、Tablet设备中可正常调用，在其他设备中返回17000005错误码。
 
 **起始版本：** 22
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[uitest错误码](./cj-errorcode-uitest.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -4813,7 +4830,7 @@ public enum OnceType <: Equatable<OnceType> & ToString {
 
 **父类型：**
 
-- Equatable\<OnceType>
+- Equatable\<[OnceType](#enum-oncetype)>
 - ToString
 
 ### DialogShow

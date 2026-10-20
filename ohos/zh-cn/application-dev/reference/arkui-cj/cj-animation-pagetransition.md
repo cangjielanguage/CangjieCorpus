@@ -21,7 +21,7 @@ import kit.ArkUI.*
 ## class CommonTransition
 
 ```cangjie
-abstract sealed class CommonTransition {}
+sealed abstract class CommonTransition {}
 ```
 
 **功能：** 页面转场通用动效。
@@ -492,11 +492,12 @@ public type PageTransitionCallback = (RouteType, Float64) -> Unit
 
 通过不同的退入场类型配置不同的退场，入场动画。
 
-<!-- run -->
+<!-- run -example1 -->
 
 ```cangjie
 //index.cj
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource.*
@@ -504,8 +505,10 @@ import ohos.resource.*
 @Entry
 @Component
 class EntryView {
-    @State var scale2: Float32 = 1.0
-    @State var opacity2: Float64 = 1.0
+    @State
+    var scale: Float32 = 1.0
+    @State
+    var opacity: Float64 = 1.0
 
     func build() {
         Column() {
@@ -515,10 +518,10 @@ class EntryView {
         }
         .width(100.percent)
         .height(100.percent)
-        .scale(x: scale2, y: 1.0)
-        .opacity(this.opacity2)
+        .scale(x: scale, y: 1.0)
+        .opacity(this.opacity)
         .onClick({
-                e => getUIContext().getRouter().pushUrl(url: "Page1")
+                e => getUIContext().getRouter().pushUrl(url: "Page")
             })
     }
 
@@ -526,35 +529,38 @@ class EntryView {
         PageTransitionEnter(duration: 1200, curve: Curve.Linear,).onEnter({
             ty: RouteType, progress: Float64 => 
                 if (ty == RouteType.Push || ty ==  RouteType.Pop) {
-                    scale2 = Float32(progress)
-                    opacity2 = progress
+                    scale = Float32(progress)
+                    opacity = progress
                 }
         })
         PageTransitionExit(duration: 1200, curve: Curve.Ease, ).onExit({
             ty: RouteType, progress: Float64 =>
                 if (ty == RouteType.Push) {
-                    this.scale2 = Float32(1.0 - progress)
-                    this.opacity2 = 1.0 - progress
+                    this.scale = Float32(1.0 - progress)
+                    this.opacity = 1.0 - progress
                 }
         })
     }
 }
 ```
 
-<!-- run -->
+<!-- run -example1 -->
 
 ```cangjie
-//page1.cj
+//page.cj
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource.*
 
 @Entry
 @Component
-class Page1 {
-    @State var scale1: Float32 = 1.0
-    @State var opacity1: Float64 = 1.0
+class Page {
+    @State
+    var scale: Float32 = 1.0
+    @State
+    var opacity: Float64 = 1.0
 
     func build() {
         Column() {
@@ -564,8 +570,8 @@ class Page1 {
         }
         .width(100.percent)
         .height(100.percent)
-        .scale(x: scale1, y: 1.0)
-        .opacity(opacity1)
+        .scale(x: scale, y: 1.0)
+        .opacity(opacity)
         .onClick({
                 e => getUIContext().getRouter().pushUrl(url: "EntryView")
             })
@@ -575,15 +581,15 @@ class Page1 {
         PageTransitionEnter(duration: 1200, curve: Curve.Linear).onEnter({
             ty: RouteType, progress: Float64 => 
                 if (ty == RouteType.Push || ty ==  RouteType.Pop) {
-                    scale1 = Float32(progress)
-                    opacity1 = progress
+                    scale = Float32(progress)
+                    opacity = progress
                 }
         })
         PageTransitionExit(duration: 1200, curve: Curve.Ease).onExit({
             ty: RouteType, progress: Float64 => 
                 if (ty == RouteType.Push) {
-                    this.scale1 = Float32(1.0 - progress)
-                    this.opacity1 = 1.0 - progress
+                    this.scale = Float32(1.0 - progress)
+                    this.opacity = 1.0 - progress
                 }
         })
     }
@@ -596,24 +602,27 @@ class Page1 {
 
 配置提供的不同退入场平移效果，将系统语言排版模式改为RTL。
 
-<!-- run -->
+<!-- run -example2 -->
 
 ```cangjie
 //index.cj
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var scale2: Float32 = 1.0
-    @State var opacity2: Float64 = 1.0
+    @State
+    var scale: Float32 = 1.0
+    @State
+    var opacity: Float64 = 1.0
 
     func build() {
         Column() {
-            Button("Page1").onClick({
-                e => getUIContext().getRouter().pushUrl(url: "Page1")
+            Button("Page").onClick({
+                e => getUIContext().getRouter().pushUrl(url: "Page")
             })
                 .width(200)
                 .height(60)
@@ -622,11 +631,11 @@ class EntryView {
                 .fontSize(36)
                 .textAlign(TextAlign.Center)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .scale(x: scale2, y: 1.0)
-        .opacity(this.opacity2)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .scale(x: scale, y: 1.0)
+            .opacity(this.opacity)
+            .justifyContent(FlexAlign.Center)
     }
 
     protected func pageTransition(): Unit {
@@ -636,20 +645,23 @@ class EntryView {
 }
 ```
 
-<!-- run -->
+<!-- run -example2 -->
 
 ```cangjie
 
-//page1.cj
+//page.cj
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
-class Page1 {
-    @State var scale1: Float32 = 1.0
-    @State var opacity1: Float64 = 1.0
+class Page {
+    @State
+    var scale1: Float32 = 1.0
+    @State
+    var opacity1: Float64 = 1.0
 
     func build() {
         Column() {
@@ -663,11 +675,11 @@ class Page1 {
                 .fontSize(36)
                 .textAlign(TextAlign.Center)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .scale(x: scale1, y: 1.0)
-        .opacity(this.opacity1)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .scale(x: scale1, y: 1.0)
+            .opacity(this.opacity1)
+            .justifyContent(FlexAlign.Center)
     }
 
     protected func pageTransition(): Unit {

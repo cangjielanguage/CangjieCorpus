@@ -534,7 +534,7 @@ public init(
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|builder|CustomView|是|-| **命名参数。** 自定义弹窗内容构造器。|
+|builder|[CustomView](cj-ui-framework.md#class-customview)|是|-| **命名参数。** 自定义弹窗内容构造器。CustomView|是|-| **命名参数。** 自定义弹窗内容构造器。|
 |cancel|?[VoidCallback](./cj-common-types.md#type-voidcallback)|否|None| **命名参数。** 返回、ESC键和点击遮障层弹窗退出时的回调。初始值: { => }|
 |autoCancel|?Bool|否|None| **命名参数。** 是否允许点击遮障层退出，true表示关闭弹窗。false表示不关闭弹窗。初始值: true|
 |alignment|?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|None| **命名参数。** 弹窗在竖直方向上的对齐方式。初始值: DialogAlignment.Default|
@@ -555,7 +555,7 @@ public init(
 |borderWidth|?[Length](./cj-common-types.md#interface-length)|否|None| **命名参数。** 设置弹窗背板的边框宽度。初始值: 0.vp<br/>可分别设置4个边框宽度。<br/> 百分比参数方式：以父元素弹窗宽的百分比来设置弹窗的边框宽度。<br/>当弹窗左边框和右边框大于弹窗宽度，弹窗上边框和下边框大于弹窗高度，显示可能不符合预期。|
 |borderColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None| **命名参数。** 设置弹窗背板的边框颜色。初始值: Color.Black<br/>如果使用borderColor属性，需要和borderWidth属性一起使用。|
 |borderStyle|?[EdgeStyles](./cj-common-types.md#class-edgestyles)|否|None| **命名参数。** 设置弹窗背板的边框样式。初始值: EdgeStyles()<br/>如果使用borderStyle属性，需要和borderWidth属性一起使用。|
-|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 设置弹窗背板的阴影。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None| **命名参数。** 设置弹窗背板的阴影。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|
 |backgroundBlurStyle|?[BlurStyle](./cj-common-types.md#enum-blurstyle)|否|None| **命名参数。** 弹窗背板模糊材质。 初始值: BlurStyle.ComponentUltraThick<br/>**说明：** <br/>设置为BlurStyle.None即可关闭背景虚化。当设置了backgroundBlurStyle为非None值时，则不要设置backgroundColor，否则颜色显示将不符合预期效果。|
 
 ## 示例代码
@@ -563,7 +563,6 @@ public init(
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -574,12 +573,12 @@ class MyDialog {
     var controller: Option<CustomDialogController> = Option.None
     func build() {
         Row(space: 60) {
-            Button("cancel").onClick({ evt =>
-                controller?.releaseSelf()
+            Button("cancel").onClick({
+                evt => controller?.releaseSelf()
             })
 
-            Button("confirm").onClick({ evt =>
-                controller?.releaseSelf()
+            Button("confirm").onClick({
+                evt => controller?.releaseSelf()
             })
         }.height(500.px)
     }
@@ -588,17 +587,19 @@ class MyDialog {
 @Entry
 @Component
 class EntryView {
-    var dialogController: CustomDialogController = CustomDialogController(CustomDialogControllerOptions(builder: MyDialog()))
+    var dialogController: CustomDialogController = CustomDialogController(
+        CustomDialogControllerOptions(builder: MyDialog()))
     func build() {
         Column {
-            Button("open dialog").onClick({evt =>
-                dialogController.openDialog()
-            }).margin(top: 40.percent, left: 35.percent)
-              .width(30.percent)
+            Button("open dialog")
+                .onClick({
+                    evt => dialogController.openDialog()
+                })
+                .margin(top: 40.percent, left: 35.percent)
+                .width(30.percent)
         }
     }
 }
-
 ```
 
 ![custom_dialog](./figures/custom_dialog.gif)

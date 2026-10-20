@@ -14,11 +14,12 @@
 
 **错误信息**
 
-Function is disabled.
+Function disabled. Possible caused by the param disable in ConfigOption is true.
 
 **错误描述**
 
-在调用write接口进行应用事件打点时，由于打点功能未开启，系统将忽略相关事件。
+- 在调用write接口进行应用事件打点时，由于打点功能未开启，系统将忽略相关事件。
+- 在调用setEventParam接口设置事件自定义参数时，由于打点功能未开启，系统将忽略此次调用。
 
 **可能原因**
 
@@ -33,7 +34,7 @@ Function is disabled.
    ```cangjie
    import kit.PerformanceAnalysisKit.*
 
-   var config : ConfigOption = ConfigOption(maxStorage: "100M", disable: false)
+   var config : ConfigOption = ConfigOption(disable: false)
    HiAppEvent.configure(config)
    ```
 
@@ -41,19 +42,20 @@ Function is disabled.
 
 **错误信息**
 
-Invalid event domain.
+Invalid event domain. Possible causes: 1. Contain invalid characters; 2. Length is invalid.
 
 **错误描述**
 
-在调用write接口进行应用事件打点时，由于传入了非法的事件领域名称，系统将忽略相关事件。
+- 在调用write接口进行应用事件打点时，由于传入了非法的事件领域名称，系统将忽略相关事件。
+- 在调用setEventParam接口设置事件自定义参数时，由于传入了非法的事件领域名称，系统将忽略此次调用。
 
 **可能原因**
 
 传入的事件领域名称不符合以下规则：
 
-- 事件领域名称只包含数字、小写字母、下划线字符。
-- 事件领域名称以小写字母开头，不以下划线结尾。
-- 事件领域名称非空且长度不超过16个字符。
+- 事件领域名称只包含数字、字母、下划线字符。
+- 事件领域名称以字母开头，不以下划线结尾。
+- 事件领域名称非空且长度不超过32个字符。
 
 **处理步骤**
 
@@ -63,11 +65,12 @@ Invalid event domain.
 
 **错误信息**
 
-Invalid event name.
+Invalid event name. Possible causes: 1. Contain invalid characters; 2. Length is invalid.
 
 **错误描述**
 
-在调用write接口进行应用事件打点时，由于传入了非法的事件名称，系统将忽略相关事件。
+- 在调用write接口进行应用事件打点时，由于传入了非法的事件名称，系统将忽略相关事件。
+- 在调用setEventParam接口设置事件自定义参数时，由于传入了非法的事件名称，系统将忽略此次调用。
 
 **可能原因**
 
@@ -85,7 +88,7 @@ Invalid event name.
 
 **错误信息**
 
-Invalid number of event parameters.
+Invalid number of event parameters. Possible caused by the number of parameters is over 32.
 
 **错误描述**
 
@@ -107,11 +110,13 @@ Invalid string length of the event parameter.
 
 **错误描述**
 
-在调用write接口进行应用事件打点时，由于事件参数值传入了超长的字符串，系统将忽略相关事件参数。
+- 在调用write接口进行应用事件打点时，由于事件参数值传入了超长的字符串，系统将忽略相关事件参数。
+- 在调用setEventParam接口设置事件自定义参数时，由于传入了非法的事件参数值，系统将忽略此次调用。
 
 **可能原因**
 
-传入的事件参数值中的字符串长度超过8*1024个字符。
+- 调用write接口传入的事件参数值中的字符串长度超过8*1024。
+- 调用setEventParam接口传入的事件自定义参数值的长度超过1024个字符。
 
 **处理步骤**
 
@@ -121,11 +126,12 @@ Invalid string length of the event parameter.
 
 **错误信息**
 
-Invalid event parameter name.
+Invalid event parameter name. Possible causes: 1. Contain invalid characters; 2. Length is invalid.
 
 **错误描述**
 
-在调用write接口进行应用事件打点时，由于传入了非法的事件参数名称，系统将忽略相关事件参数。
+- 在调用write接口进行应用事件打点时，由于传入了非法的事件参数名称，系统将忽略相关事件参数。
+- 在调用setEventParam接口设置事件自定义参数时，由于传入了非法的事件参数名称，系统将忽略此次调用。
 
 **可能原因**
 
@@ -133,7 +139,7 @@ Invalid event parameter name.
 
 - 事件参数名称只包含$字符、数字字符、字母字符、下划线字符。
 - 事件参数名称首字符必须为字母字符或$字符，中间字符必须为数字字符、字母字符或下划线字符，结尾字符必须为数字字符或字母字符。
-- 事件参数名称非空且长度不超过16个字符。
+- 事件参数名称非空且长度不超过32个字符。
 
 **处理步骤**
 
@@ -179,7 +185,7 @@ The number of parameter keys exceeds the limit.
 
 **错误信息**
 
-Invalid watcher name.
+Invalid watcher name. Possible causes: 1. Contain invalid characters; 2. Length is invalid.
 
 **错误描述**
 
@@ -189,8 +195,8 @@ Invalid watcher name.
 
 传入的观察者名称不符合以下规则：
 
-- 观察者名称只包含数字、小写字母、下划线字符。
-- 观察者名称以小写字母开头，不以下划线结尾。
+- 观察者名称只包含数字、字母、下划线字符。
+- 观察者名称以字母开头，不以下划线结尾。
 - 观察者名称非空且长度不超过32个字符。
 
 **处理步骤**
@@ -201,7 +207,7 @@ Invalid watcher name.
 
 **错误信息**
 
-Invalid filtering event domain.
+Invalid filtering event domain. Possible causes: 1. Contain invalid characters; 2. Length is invalid.
 
 **错误描述**
 
@@ -211,8 +217,8 @@ Invalid filtering event domain.
 
 传入的过滤事件领域名称不符合以下规则：
 
-- 事件领域名称只包含数字、小写字母、下划线字符。
-- 事件领域名称以小写字母开头，不以下划线结尾。
+- 事件领域名称只包含数字、字母、下划线字符。
+- 事件领域名称以字母开头，不以下划线结尾。
 - 事件领域名称非空且长度不超过32个字符。
 
 **处理步骤**
@@ -223,7 +229,7 @@ Invalid filtering event domain.
 
 **错误信息**
 
-Invalid row value.
+Invalid row value. Possible caused by the row value is less than zero.
 
 **错误描述**
 
@@ -241,7 +247,7 @@ Invalid row value.
 
 **错误信息**
 
-Invalid size value.
+Invalid size value. Possible caused by the size value is less than zero.
 
 **错误描述**
 
@@ -259,7 +265,7 @@ Invalid size value.
 
 **错误信息**
 
-Invalid timeout value.
+Invalid timeout value. Possible caused by the timeout value is less than zero.
 
 **错误描述**
 
@@ -277,7 +283,7 @@ Invalid timeout value.
 
 **错误信息**
 
-Invalid max storage quota value.
+Invalid max storage quota value. Possible caused by incorrectly formatted.
 
 **错误描述**
 
@@ -298,7 +304,7 @@ Invalid max storage quota value.
 
 **错误信息**
 
-Invalid size value.
+Invalid size value. Possible caused by the size value is less than or equal to zero.
 
 **错误描述**
 
@@ -311,3 +317,22 @@ Invalid size value.
 **处理步骤**
 
 传入自然数值的事件包大小。
+
+## 11105001 非法的参数值
+
+**错误信息**
+
+Invalid parameter value. Possible causes: 1. Incorrect parameter length; 2. Incorrect parameter format.
+
+**错误描述**
+
+在调用hiAppEvent接口进行传参时，由于传入了非法的参数值，系统将忽略此次设置。
+
+**可能原因**
+
+- 传入的参数长度不符合规格。
+- 传入的参数格式不符合规格。
+
+**处理步骤**
+
+传入符合规格的参数值。

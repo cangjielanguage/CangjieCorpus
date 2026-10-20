@@ -66,12 +66,13 @@ func foregroundColor(value: ?ResourceColor): T
 
 ### 示例1（使用前景色设置）
 
-该示例主要演示通过foregroundColor设置前置景色。
+该示例主要演示通过foregroundColor设置前景色。
 
 <!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -93,9 +94,8 @@ class EntryView {
                 .fontSize(20)
                 .foregroundColor(0x64BB5C)
                 .backgroundColor(0xD1D1D6)
-            }
-            .width(100.percent)
-        }
+        }.width(100.percent)
+    }
 }
 ```
 
@@ -103,12 +103,13 @@ class EntryView {
 
 ### 示例2（设置前景色为组件背景色反色）
 
-该示例通过INVERT将前置景色设置为背景色反色。
+该示例通过INVERT将前景色设置为背景色反色。
 
 <!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -126,22 +127,22 @@ class EntryView {
                 .height(80)
                 .backgroundColor(Color.Black)
                 .foregroundColor(ColoringStrategy.Invert)
-            }
-            .width(100.percent)
-        }
+        }.width(100.percent)
+    }
 }
 ```
 
 ![foregroundColor2](figures/foregroundColor2.png)
 
-### 示例3（前置景色未继承父组件）
+### 示例3（前景色未继承父组件）
 
-该示例主要演示组件同时设置前置景色和背景色与只设置背景色的效果对比。
+该示例主要演示组件同时设置前景色和背景色与只设置背景色的效果对比。
 
 <!-- run -->
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -159,11 +160,11 @@ class EntryView {
 
             Button("未设置前景色继承自父组件")
                 .width(100.percent)
-                .height(80).fontSize(20)
+                .height(80)
+                .fontSize(20)
                 .backgroundColor(Color.Gray)
-            }
-            .width(100.percent)
-        }
+        }.width(100.percent)
+    }
 }
 ```
 

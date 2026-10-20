@@ -229,7 +229,6 @@ public func scale(sx!: ?Float64 = None, sy!: ?Float64 = None): This
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -262,7 +261,9 @@ class EntryView {
                         this.context1.fillRect(100.0, 20.0, 50.0, 50.0)
                     }
                 )
-        }.height(100.percent).width(100.percent)
+        }
+            .height(100.percent)
+            .width(100.percent)
     }
 }
 ```

@@ -139,7 +139,7 @@ public class Params {
 }
 ```
 
-**功能：** [Want.parameters](./cj-apis-app-ability-want.md#class-want)字段常用的系统预置关键字。开发者可以通过这些预置关键字设置或获取应用跳转等场景中额外携带的参数信息。例如在[UIAbility](./cj-apis-app-ability-ui_ability.md)的启动阶段，如果从onCreate回调的入参want字段中获取到ABILITY_RECOVERY_RESTART的值为true，则表示当前UIAbility发生了故障重启。
+**功能：** [Want.parameters](./cj-apis-app-ability-want.md#class-want)字段常用的系统预置关键字。开发者可以通过这些预置关键字设置或获取应用跳转等场景中额外携带的参数信息。例如在[UIAbility](./cj-apis-app-ability-ui_ability.md#class-uiability)的启动阶段，如果从onCreate回调的入参want字段中获取到ABILITY_RECOVERY_RESTART的值为true，则表示当前UIAbility发生了故障重启。
 
 **系统能力：** SystemCapability.Ability.AbilityBase
 

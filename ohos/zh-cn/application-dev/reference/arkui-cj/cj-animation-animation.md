@@ -52,38 +52,47 @@ import ohos.hilog.Hilog
 @Entry
 @Component
 class EntryView {
-    @State var widthSize: Length = 250.vp
-    @State var heightSize: Length = 100.vp
-    @State var rotateAngle: Float32 = 0.0
-    @State var flag: Bool = true
-    @State var space: Length = 10.vp
+    @State
+    var widthSize: Length = 250.vp
+    @State
+    var heightSize: Length = 100.vp
+    @State
+    var rotateAngle: Float32 = 0.0
+    @State
+    var flag: Bool = true
+    @State
+    var space: Length = 10.vp
     func build() {
         Column(space: this.space) // 改变Column构造器中的space动画不生效
-            .onClick({
-                evt =>
-                     if (this.flag) {
-                       this.widthSize = 150.vp
-                       this.heightSize = 60.vp
-                       this.space = 20.vp // 改变this.space动画不生效
-                     } else {
-                       this.widthSize = 250.vp
-                       this.heightSize = 100.vp
-                       this.space = 10.vp // 改变this.space动画不生效
-                     }
-                     this.flag = !this.flag
-            })
+            .onClick(
+                {
+                    evt =>
+                        if (this.flag) {
+                            this.widthSize = 150.vp
+                            this.heightSize = 60.vp
+                            this.space = 20.vp // 改变this.space动画不生效
+                        } else {
+                            this.widthSize = 250.vp
+                            this.heightSize = 100.vp
+                            this.space = 10.vp // 改变this.space动画不生效
+                        }
+                        this.flag = !this.flag
+                }
+            )
             .backgroundColor(Color.Black)
             .margin(30)
             .width(this.widthSize) // 只有写在animation前面才生效
             .height(this.heightSize) // 只有写在animation前面才生效
-            .animation(AnimateParam(
-                duration: 2000,
-                curve: Curve.EaseOut,
-                iterations: 3,
-                playMode: PlayMode.Normal
-            ))
-//            .width(this.widthSize) // 动画不生效
-//            .height(this.heightSize) // 动画不生效
+            .animation(
+                AnimateParam(
+                    duration: 2000,
+                    curve: Curve.EaseOut,
+                    iterations: 3,
+                    playMode: PlayMode.Normal
+                )
+            )
+            // .width(this.widthSize) // 动画不生效
+            // .height(this.heightSize) // 动画不生效
     }
 }
 ```
@@ -96,6 +105,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -134,38 +144,44 @@ let animateOpt2 = AnimateParam(
 @Entry
 @Component
 class EntryView {
-    @State var widthSize: Length = 250.vp
-    @State var heightSize: Length = 100.vp
-    @State var rotateAngle: Float32 = 0.0
-    @State var flag: Bool = true
+    @State
+    var widthSize: Length = 250.vp
+    @State
+    var heightSize: Length = 100.vp
+    @State
+    var rotateAngle: Float32 = 0.0
+    @State
+    var flag: Bool = true
     func build() {
         Column() {
             Button("change size")
-                .onClick({
-                   evt =>
-                    if (this.flag) {
-                        this.widthSize = 150.vp
-                        this.heightSize = 60.vp
-                    } else {
-                        this.widthSize = 250.vp
-                        this.heightSize = 100.vp
+                .onClick(
+                    {
+                        evt =>
+                            if (this.flag) {
+                                this.widthSize = 150.vp
+                                this.heightSize = 60.vp
+                            } else {
+                                this.widthSize = 250.vp
+                                this.heightSize = 100.vp
+                            }
+                            this.flag = !this.flag
                     }
-                    this.flag = !this.flag
-                })
+                )
                 .margin(30)
                 .width(this.widthSize)
                 .height(this.heightSize)
                 .animation(animateOpt1)
             Button('change rotate angle')
                 .onClick({
-                   evt => this.rotateAngle = 90.0
+                    evt => this.rotateAngle = 90.0
                 })
                 .margin(50)
                 .rotate(angle: this.rotateAngle)
                 .animation(animateOpt2)
         }
-        .width(100.percent)
-        .margin(top: 20)
+            .width(100.percent)
+            .margin(top: 20)
     }
 }
 ```

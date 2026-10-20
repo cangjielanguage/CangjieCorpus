@@ -1,8 +1,10 @@
 ## ArrayList
 
+> Version review: checked against the locally synchronized documentation for the 1.2.0 upgrade. These supplementary notes are not official API documentation; concrete examples were checked with Cangjie 1.2.0; see the [validation scope and results](../EXTRA_VALIDATION.md). See the [reference documentation](../libs/std/collection/collection_package_api/collection_package_class.md#class-arraylistt).
+
 To use the ArrayList type, the collection package needs to be imported:
 
-```
+```cangjie
 import std.collection.*
 ```
 
@@ -10,7 +12,7 @@ import std.collection.*
 
 Ways to initialize an `ArrayList` include:
 
-```
+```cangjie
 let a = ArrayList<Int64>([1, 2, 3])  // Initialize using a concrete list
 let c = ArrayList<Int64>(3, {i => i + 1})   // Initialize using lambda function, result is [1, 2, 3]
 let d = ArrayList<String>()  // Created an empty ArrayList whose element type is String
@@ -24,7 +26,7 @@ let h = ArrayList<String>(2, {x: Int64 => x.toString()})  // Created an ArrayLis
 
 When we need access to all the elements of the ArrayList, we can use a `for-in` loop to iterate through all the elements of the ArrayList.
 
-```
+```cangjie
 import std.collection.*
 
 main() {
@@ -37,7 +39,7 @@ main() {
 
 When we want to access an element in a single specified location, we can use the subscript syntax to access it (the type of subscript must be Int64). The first element of a non-empty ArrayList always starts at position 0. We can access any element of the ArrayList from 0 up to the last position (`size - 1` of the ArrayList). Using a negative number or an index greater than or equal to size triggers a runtime exception.
 
-```
+```cangjie
 let a = list[0]  // a == 0
 let b = list[1]  // b == 1
 let c = list[-1]  // Runtime Exceptions
@@ -51,21 +53,21 @@ To obtain the length of an `ArrayList`, use syntax of the form `arr.size`.
 
 To add an element `i` to the end of an `ArrayList` `arr`, use `arr.add(i)`. The signature of the `add` function is
 
-```
+```cangjie
 public func add(element: T): Unit
 ```
 
 To add a collection of elements with the same type to the end of an `ArrayList`, we can also use the `add` function with
 the following signature
 
-```
+```cangjie
 public func add(all!: Collection<T>): Unit
 ```
 
 For example,
 
-```
-let arr = ArrayList<Int>([1, 2, 3])
+```cangjie
+let arr = ArrayList<Int64>([1, 2, 3])
 let arr2 = [3, 4, 5]
 arr.add(all: arr2)
 ```
@@ -74,11 +76,11 @@ arr.add(all: arr2)
 
 The slice function on `ArrayList` has the following signature:
 
-```
+```cangjie
 public func slice(range: Range<Int64>): ArrayList<T>
 ```
 
-Note a range argument is taken (e.g. `l..r` for the closed-open interval `[1, r)`, and `[l, r]` or `l..=r`
+Note a range argument is taken (e.g. `l..r` for the closed-open interval `[l, r)`, and `l..=r`
 for the closed interval `[l, r]`). This is different from the case for Array, which takes
 the starting index and length as arguments.
 
@@ -86,19 +88,19 @@ the starting index and length as arguments.
 
 We can use the `add` functions to insert a specified single element or a Collection value of the same element type into the location of the index we specify. The signatures are
 
-```
+```cangjie
 public func add(element: T, at!: Int64): Unit
 ```
 
 and
 
-```
+```cangjie
 public func add(all!: Collection<T>, at!: Int64): Unit
 ```
 
 respectively. The elements at the index and the elements behind them are moved back to make space.
 
-```
+```cangjie
 let list = ArrayList<Int64>([0, 1, 2])  // list contains elements 0, 1, 2
 list.add(4, at: 1)  // list contains elements 0, 4, 1, 2
 list.add(all: [1, 2, 3], at: 4)  // list contains elements 0, 4, 1, 2, 1, 2, 3
@@ -108,14 +110,14 @@ list.add(all: [1, 2, 3], at: 4)  // list contains elements 0, 4, 1, 2, 1, 2, 3
 
 To remove an element from an ArrayList, you can use the `remove` function, which requires you to specify the index to be removed, The elements that follow the index are moved forward to fill the space.
 
-```
+```cangjie
 let list = ArrayList<String>(["a", "b", "c", "d"])  // list contains the elements "a", "b", "c", "d"
 list.remove(at: 1) // Delete the element at subscript 1, now the list contains elements "a", "c", "d"
 ```
 
 To remove a range of elements from an ArrayList, you can also use the `remove` function, which requires you to specify the range to be removed, The elements that follow the index are moved forward to fill the space.
 
-```
+```cangjie
 let list = ArrayList<String>(["a", "b", "c", "d"])  // list contains the elements "a", "b", "c", "d"
 list.remove(1..2) // Delete the element within the range [1, 2), now the list contains elements "a", "c", "d"
 list.remove(1..=2) // Delete the element within the range [1, 2], now the list contains elements "a"
@@ -125,7 +127,7 @@ list.remove(1..=2) // Delete the element within the range [1, 2], now the list c
 
 To iterate over elements of an ArrayList `arr`, use:
 
-```
+```cangjie
 for (element in arr) {
     ...
 }
@@ -134,7 +136,7 @@ for (element in arr) {
 If the elements of an ArrayList are tuples, the loop variable can be written as a tuple
 pattern to destructure each element, e.g.:
 
-```
+```cangjie
 var a = ArrayList<(Int64, Int64)>([(2, 3), (3, 4)])
 for ((x, y) in a) {
     println("(${x}, ${y})")

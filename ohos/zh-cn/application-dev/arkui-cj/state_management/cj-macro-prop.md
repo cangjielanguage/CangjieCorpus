@@ -30,7 +30,8 @@
 |:---|:---|
 |非属性宏|无。|
 |同步类型|单向同步：对父组件状态变量值的修改，将同步给子组件\@Prop装饰的变量，子组件\@Prop变量的修改不会同步到父组件的状态变量上。嵌套类型的场景请参见[观察变化](#观察变化)。|
-|允许装饰的变量类型|支持基础数据类型，对于String，Int64，Float64和Bool类型的变量，可以缺省类型。其他类型的变量不可缺省类型，必须被指定。<br/>支持enum、struct和Option类型，struct类型内部无法修改。<br/>支持class类型，如果要感知内部的变化，在定义的时候需要被[\@Observed](./cj-macro-observed-and-publish.md)修饰，对类内属性和嵌套属性使用[\@Publish](./cj-macro-observed-and-publish.md)装饰后，才能观察到其变化。嵌套类的情况同理。由于class是引用类型，使用\@Observed修饰时在子组件中对class内部变量的修改会影响父组件。<br/>支持数组类型，如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylistt)。数组项为自定义类型时，使用[\@Observed](./cj-macro-observed-and-publish.md)和[\@Publish](./cj-macro-observed-and-publish.md)装饰时能观察到数组项中属性赋值。其他数组类型和Collection类型，如Array、Varray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。<br/>支持[Color](../../reference/arkui-cj/cj-common-types.md#class-color)类型。<br/>\@Prop和[数据源](./cj-state-management-overview.md#基本概念)类型需要相同，有以下三种情况：<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏同步时双方的类型必须相同，示例请参见[父组件@State到子组件@Prop简单数据类型同步](#父组件state到子组件prop简单数据类型同步)。<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏装饰的数组的项同步时 ，\@Prop的类型需要和\@State装饰的数组的数组项相同，比如\@Prop&nbsp;:&nbsp;T和\@State&nbsp;:&nbsp;Array&lt;T&gt;，示例请参见[父组件@State数组中的项到子组件@Prop简单数据类型同步](#父组件state数组项到子组件prop简单数据类型同步)。<br/>-&nbsp;当父组件状态变量为struct或者class时，\@Prop装饰的变量和父组件状态变量的属性类型相同，示例请参见[从父组件中的@State类对象属性到@Prop简单类型的同步](#从父组件中的state类对象属性到prop简单类型的同步)。<br/>支持类型的场景请参见[观察变化](#观察变化)。|
+|允许装饰的变量类型|支持基础数据类型，对于String，Int64，Float64和Bool类型的变量，可以缺省类型。其他类型的变量不可缺省类型，必须被指定。<br/>支持enum、struct和Option类型，struct类型内部无法修改。<br/>支持class类型，如果要感知内部的变化，在定义的时候需要被[\@Observed](./cj-macro-observed-and-publish.md)修饰，对类内属性和嵌套属性使用[\@Publish](./cj-macro-observed-and-publish.md)装饰后，才能观察到其变化。嵌套类的情况同理。由于class是引用类型，使用\@Observed修饰时在子组件中对class内部变量的修改会影响父组件。<br/>支持数组类型，如果要感知内部的变化，需要使用[ObservedArrayList\<T>](../../reference/arkui-cj/cj-state-rendering-componentstatemanagement.md#class-observedarraylistt)。数组项为自定义类型时，使用[\@Observed](./cj-macro-observed-and-publish.md)和[\@Publish](./cj-macro-observed-and-publish.md)装饰时能观察到数组项中属性赋值。其他数组类型和Collection类型，如Array、VArray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。<br/>支持[Color](../../reference/arkui-cj/cj-common-types.md#class-color)类型。<br/>\@Prop和[数据源](./cj-state-management-overview.md#基本概念)类型需要相同，有以下三种情况：<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏同步时双方的类型必须相同，示例请参见[父组件@State到子组件@Prop简单数据类型同步](#父组件state到子组件prop简单数据类型同步)。<br/>-&nbsp;\@Prop装饰的变量和\@State以及其他宏装饰的数组的项同步时 ，\@Prop的类型需要和\@State装饰的数组的数组项相同，比如\@Prop&nbsp;:&nbsp;T和\@State&nbsp;:&nbsp;Array&lt;T&gt;，示例请参见[父组件@State数组中的项到子组件@Prop简单数据类型同步](#父组件state数组项到子组件prop简单数据类型同步)。<br/>-&nbsp;当父组件状态变量为struct或者class时，\@Prop装饰的变量和父组件状态变量的属性类型相同，示例请参见[从父组件中的@State类对象属性到@Prop简单类型的同步](#从父组件中的state类对象属性到prop简单类型的同步)。<br/>支持类型的场景请参见[观察变化](#观察变化)。|
+|不推荐装饰的变量类型 |不推荐装饰函数类型。 |
 |嵌套传递层数|在组件复用场景，建议\@Prop深度嵌套数据不要超过5层，嵌套太多会导致深拷贝占用的空间过大以及GarbageCollection(垃圾回收)，引起性能问题。|
 |被装饰变量的初始值|\@Prop装饰的变量必须使用其父组件提供的变量进行初始化，不允许在子组件中初始化。|
 
@@ -100,13 +101,16 @@
     ```cangjie
     @Observed
     class Person {
-        @Publish var value: String
+        @Publish
+        var value: String
     }
 
     @Observed
     class Model {
-        @Publish var value: String = ""
-        @Publish var name: Person = Person(value: " ")
+        @Publish
+        var value: String = ""
+        @Publish
+        var name: Person = Person(value: " ")
     }
     ```
 
@@ -157,11 +161,12 @@
     ```cangjie
     @Observed
     class Model {
-        @Publish public var value: Int
+        @Publish
+        public var value: Int
     }
     ```
 
-    \@Prop装饰的对象为ObservedArray\<Model>类型数组时。
+    \@Prop装饰的对象为ObservedArrayList\<Model>类型数组时。
 
     ```cangjie
     // ObservedArray数组类型
@@ -212,7 +217,7 @@
 - 除了\@State，数据源也可以用\@Link或\@Prop装饰，对\@Prop的同步机制是相同的。
 - 数据源和\@Prop变量的类型需要相同，\@Prop允许简单类型和class类型。
 
-- 当装饰的变量是其他数组类型和Collection类型，如Array、Varray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。
+- 当装饰的变量是其他数组类型和Collection类型，如Array、VArray、ArrayList、HashMap和HashSet，支持赋值新的数组，但是无法监听内部元素的变化。
     以HashSet为例。
 
     ```cangjie
@@ -260,12 +265,14 @@ EntryView的状态变量countDownStartValue的变化将重置CountDownComponent�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class CountDownComponent {
-    @Prop var count: Int64
+    @Prop
+    var count: Int64
     var costOfOneAttempt: Int64 = 1
     func build() {
         Column() {
@@ -287,7 +294,8 @@ class CountDownComponent {
 @Entry
 @Component
 class EntryView {
-    @State var countDownStartValue: Int64 = 10
+    @State
+    var countDownStartValue: Int64 = 10
     func build() {
         Column {
             Text("Grant ${this.countDownStartValue} nuggets to play.")
@@ -331,12 +339,14 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Component
 class Child {
-    @Prop var value: Int64
+    @Prop
+    var value: Int64
     func build() {
         Text("${this.value}")
             .fontSize(50.vp)
@@ -349,7 +359,8 @@ class Child {
 @Entry
 @Component
 class EntryView {
-    @State var arr: Array<Int64> = [1, 2, 3]
+    @State
+    var arr: Array<Int64> = [1, 2, 3]
     func build() {
         Row {
             Column {
@@ -423,19 +434,22 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Observed
 class Book {
-     public var title: String
-     public var pages: Int64
-     @Publish public var readIt: Bool = false
+    public var title: String
+    public var pages: Int64
+    @Publish
+    public var readIt: Bool = false
 }
 
 @Component
 class ReaderComp {
-    @Prop var book: Book
+    @Prop
+    var book: Book
     func build() {
         Row() {
             Text(this.book.title)
@@ -453,7 +467,8 @@ class ReaderComp {
 @Entry
 @Component
 class EntryView {
-    @State var book: Book = Book(title:'100 secrets of C++',pages: 765)
+    @State
+    var book: Book = Book(title: '100 secrets of C++', pages: 765)
     func build() {
         Column {
             ReaderComp(book: this.book)
@@ -482,12 +497,14 @@ import ohos.arkui.state_macro_manage.*
 class Book {
     public var title: String
     public var pages: Int64
-    @Publish public var readIt: Bool = false
+    @Publish
+    public var readIt: Bool = false
 }
 
 @Component
 class ReaderComp {
-    @Prop var book: Book
+    @Prop
+    var book: Book
     func build() {
         Row() {
             Text(this.book.title)
@@ -496,19 +513,20 @@ class ReaderComp {
                 evt => this.book.readIt = true
             })
         }
-        .backgroundColor(0x00ff00)
-        .width(312)
-        .height(40)
-        .padding(left: 20, top: 10)
-        .borderRadius(20)
-        .margin(10)
+            .backgroundColor(0x00ff00)
+            .width(312)
+            .height(40)
+            .padding(left: 20, top: 10)
+            .borderRadius(20)
+            .margin(10)
     }
 }
 
 @Entry
 @Component
 class EntryView {
-    @State var allBooks: ObservedArrayList<Book> = ObservedArrayList<Book>(
+    @State
+    var allBooks: ObservedArrayList<Book> = ObservedArrayList<Book>(
         [Book(title: "JS", pages: 765), Book(title: "Cangjie", pages: 652), Book(title: "ArkUI", pages: 765)])
 
     func build() {
@@ -573,30 +591,33 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 // 以下是嵌套类对象的数据结构。
 @Observed
 class Son {
-    @Publish var title: String
+    @Publish
+    var title: String
 }
 
 @Observed
 class Father {
-    @Publish var name: String
-    @Publish var son: Son
+    @Publish
+    var name: String
+    @Publish
+    var son: Son
 }
 // 以下组件层次结构呈现的是@Prop嵌套场景的数据结构。
 @Entry
 @Component
 class EntryView {
-    @State var person: Father = Father(name: 'Hello', son: Son(title: 'world'));
+    @State
+    var person: Father = Father(name: 'Hello', son: Son(title: 'world'));
     func build() {
         Column {
-            Flex(
-                direction: FlexDirection.Column, alignItems: ItemAlign.Center,
-                    justifyContent: FlexAlign.SpaceBetween) {
+            Flex(direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween) {
                 Button('change Father name')
                     .width(312)
                     .height(40)
@@ -639,7 +660,8 @@ class EntryView {
 
 @Component
 class Child {
-    @Prop var child: Son
+    @Prop
+    var child: Son
     func build() {
         Column() {
             Text(this.child.title)

@@ -849,7 +849,7 @@ public init(
 |confirm|?[ActionSheetButtonOptions](#class-actionsheetbuttonoptions)|否|None|**命名参数。** 确认Button的使能状态、默认焦点、按钮风格、文本内容和点击回调。在弹窗获焦且未进行tab键走焦时，该按钮默认响应Enter键，且多重弹窗可自动获焦连续响应。默认响应Enter键能力在defaultFocus为true时不生效。<br/>enabled：点击Button是否响应，true表示Button可以响应，false表示Button不可以响应。<br/>初始值：true。<br/>defaultFocus：设置Button是否是默认焦点，true表示Button是默认焦点，false表示Button不是默认焦点。<br/>初始值：false。<br/>style：设置Button的风格样式。<br/>初始值：DialogButtonStyle.DEFAULT。<br/>value：Button文本内容。当文本内容过长无法显示时，用省略号代替未显示的部分。<br/>action: Button选中时的回调。|
 |cancel|?[VoidCallback](./cj-common-types.md#type-voidcallback)|否|None|**命名参数。** 点击遮障层关闭dialog时的回调。|
 |sheets|?Array\<[SheetInfo](#class-sheetinfo)>|是|-|**命名参数。** 设置选项内容，每个选择项支持设置图片、文本和选中的回调。|
-|autoCancel|?Bool|否|None|**命名参数。** 点击遮障层时，是否关闭弹窗。<br/>值为true时，点击遮罩层关闭弹窗，值为false时，点击遮罩层不关闭弹窗。|
+|autoCancel|?Bool|否|None|**命名参数。** 点击遮障层时，是否关闭弹窗。<br/>值为true时，点击遮障层关闭弹窗，值为false时，点击遮障层不关闭弹窗。|
 |alignment|?[DialogAlignment](./cj-common-types.md#enum-dialogalignment)|否|None|**命名参数。** 弹窗在竖直方向上的对齐方式。|
 |offset|?[ActionSheetOffset](#class-actionsheetoffset)|否|None|**命名参数。** 弹窗相对alignment所在位置的偏移量。|
 |maskRect|?[Rectangle](./cj-common-types.md#class-rectangle)|否|None|**命名参数。** 弹窗遮蔽层区域，在遮蔽层区域内的事件不透传，在遮蔽层区域外的事件透传。 <br>**说明:**<br> showInSubWindow为true时，maskRect不生效。|
@@ -865,4 +865,4 @@ public init(
 |borderWidth|?[Length](./cj-common-types.md#interface-length)|否|None| **命名参数。**  设置弹窗背板的边框宽度。<br>百分比参数方式：以父元素弹窗宽和高的百分比来设置弹窗的圆角。<br>当弹窗左边框和右边框大于弹窗宽度，弹窗上边框和下边框大于弹窗高度，显示可能不符合预期。|
 |borderColor|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|否|None|**命名参数。**  设置弹窗背板的边框颜色。如果使用borderColor属性，需要和borderWidth属性一起使用。 |
 |borderStyle|?[EdgeStyles](./cj-common-types.md#class-edgestyles)|否|None|**命名参数。**  设置弹窗背板的边框样式 。 如果使用borderStyle属性，需要和borderWidth属性一起使用。 |
-|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None|**命名参数。** 设置弹窗背板的阴影。|
+|shadow|?[ShadowOptions](./cj-common-types.md#class-shadowoptions)|否|None|**命名参数。** 设置弹窗背板的阴影。<br>初始值：<br>API version 26之前，初始值为ShadowOptions(radius: 0.0)；<br>从API version 26开始，初始值为ShadowOptions(radius: -1.0)。|

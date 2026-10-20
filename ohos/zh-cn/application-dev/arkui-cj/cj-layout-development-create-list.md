@@ -38,7 +38,7 @@ List除了提供垂直和水平布局能力、超出屏幕时可以滚动的自�
 
 ![List1](figures/List1.png)
 
-利用水平布局能力可以是构建单行或多行水平滚动列表，如下图3所示。
+利用水平布局能力可以构建单行或多行水平滚动列表，如下图3所示。
 
 **图3** 水平滚动列表（左：单行；右：多行）
 
@@ -161,8 +161,8 @@ public class EntryView {
                 Text('上海').fontSize(24)
             }
         }
-        .backgroundColor(0xfff1f3f5)
-        .alignListItem(ListItemAlign.Center)
+            .backgroundColor(0xfff1f3f5)
+            .alignListItem(ListItemAlign.Center)
     }
 }
 ```
@@ -228,11 +228,14 @@ public class Contact {
 @Entry
 @Component
 public class EntryView {
-    private var contacts: Array<Contact> = [Contact('小明', @r(app.media.startIcon)), Contact('小红', @r(app.media.startIcon))]
+    private var contacts: Array<Contact> = [Contact('小明', @r(app.media.startIcon)),
+        Contact('小红', @r(app.media.startIcon))]
     func build() {
         List() {
-            ForEach(this.contacts, itemGeneratorFunc: { item: Contact, _: Int64 =>
-                    ListItem() {
+            ForEach(
+                this.contacts,
+                itemGeneratorFunc: {
+                    item: Contact, _: Int64 => ListItem() {
                         Row() {
                             Image(item.icon)
                                 .width(40)
@@ -347,17 +350,15 @@ public class EntryView {
 
     func build() {
         List() {
-            ListItemGroup(
-                header: {=> bind(this.itemHead, this)("a")}){
-                    =>
-                    // 循环渲染分组A的ListItem
-                }
+            ListItemGroup(header: this.itemHead("a")) {
+                =>
+                // 循环渲染分组A的ListItem
+            }
 
-            ListItemGroup(
-                header: {=> bind(this.itemHead, this)("b")}) {
-                    =>
-                    // 循环渲染分组A的ListItem
-                }
+            ListItemGroup(header: this.itemHead("b")) {
+                =>
+                // 循环渲染分组A的ListItem
+            }
         }
     }
 }
@@ -412,27 +413,34 @@ public class ContactGroup {
 @Component
 public class EntryView {
     // 定义分组联系人数据集合contactsGroups数组
-    private var contactsGroups : Array<ContactGroup> = [
-            ContactGroup('A', [Contact('艾佳', @r(app.media.startIcon)),Contact('安安', @r(app.media.startIcon)),Contact('Angela', @r(app.media.startIcon))]),
-            ContactGroup('B', [Contact('白叶', @r(app.media.startIcon)),Contact('伯明', @r(app.media.startIcon))])
-        ]
+    private var contactsGroups: Array<ContactGroup> = [
+        ContactGroup('A',
+            [Contact('艾佳', @r(app.media.startIcon)), Contact('安安', @r(app.media.startIcon)),
+                Contact('Angela', @r(app.media.startIcon))]),
+        ContactGroup('B', [Contact('白叶', @r(app.media.startIcon)), Contact('伯明', @r(app.media.startIcon))])
+    ]
 
     @Builder
     func itemHead(text: String) {
         // 列表分组的头部组件，对应联系人分组A、B等位置的组件
         Text(text)
-          .fontSize(20)
-          .backgroundColor(0xfff1f3f5)
-          .width(100.percent)
-          .padding(5)
+            .fontSize(20)
+            .backgroundColor(0xfff1f3f5)
+            .width(100.percent)
+            .padding(5)
     }
 
     @Builder
     func footertest(itemGroup: ContactGroup) {
-        ForEach(itemGroup.contacts, itemGeneratorFunc: { item: Contact, _:Int64 =>
-                ListItem() {
+        ForEach(
+            itemGroup.contacts,
+            itemGeneratorFunc: {
+                item: Contact, _: Int64 => ListItem() {
                     Row() {
-                        Image(item.icon).width(36).height(36).margin(8)
+                        Image(item.icon)
+                            .width(36)
+                            .height(36)
+                            .margin(8)
                         itemHead(item.name)
                     }
                 }.backgroundColor(Color(0XFFFFFFFF))
@@ -443,18 +451,20 @@ public class EntryView {
     func build() {
         List() {
             // 循环渲染ListItemGroup，contactsGroups为多个分组联系人contacts和标题title的数据集合
-            ForEach(this.contactsGroups, itemGeneratorFunc: { itemGroup: ContactGroup, _: Int64 =>
-                    ListItemGroup(header: { => bind(this.itemHead, this)(itemGroup.title)}) {
+            ForEach(
+                this.contactsGroups,
+                itemGeneratorFunc: {
+                    itemGroup: ContactGroup, _: Int64 => ListItemGroup(header: this.itemHead(itemGroup.title)) {
                         this.footertest(itemGroup)
-                    }
-                    .divider(ListDividerOptions(strokeWidth: 1, color: Color(0X08000000), startMargin: 48, endMargin: 48))
+                    }.divider(ListDividerOptions(strokeWidth: 1, color: Color(0X08000000), startMargin: 48,
+                        endMargin: 48))
                 },
                 keyGeneratorFunc: {item: ContactGroup, idx: Int64 => idx.toString()}
             )
         }
-        .backgroundColor(Color(0X08000000))
-        .divider(ListDividerOptions(strokeWidth: 1, color: Color(0X08000000), startMargin: 48, endMargin: 48))
-        .sticky(StickyStyle.Header) // 设置吸顶，实现粘性标题效果
+            .backgroundColor(Color(0X08000000))
+            .divider(ListDividerOptions(strokeWidth: 1, color: Color(0X08000000), startMargin: 48, endMargin: 48))
+            .sticky(StickyStyle.Header) // 设置吸顶，实现粘性标题效果
     }
 }
 ```
@@ -518,20 +528,21 @@ import ohos.resource.*
 @Entry
 @Component
 public class EntryView {
-    let alphabets = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-    @State var selectedIndex: Int32 = 0;
-    private var listScroller:Scroller = Scroller()
+    let alphabets = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+        'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    @State
+    var selectedIndex: Int32 = 0;
+    private var listScroller: Scroller = Scroller()
 
     func build() {
         Stack(alignContent: Alignment.End) {
-            List(scroller: this.listScroller) {}
-                .onScrollIndex({ firstIndex, scrollState, _ =>
-                    // 根据列表滚动到的索引值，重新计算对应联系人索引栏的位置this.selectedIndex
-                })
+            List(scroller: this.listScroller) {}.onScrollIndex({
+                firstIndex, scrollState, _ =>
+            // 根据列表滚动到的索引值，重新计算对应联系人索引栏的位置this.selectedIndex
+            })
 
             // 字母表索引组件
-            AlphabetIndexer(arrayValue: this.alphabets, selected: 0)
-                .selected(this.selectedIndex)
+            AlphabetIndexer(arrayValue: this.alphabets, selected: 0).selected(this.selectedIndex)
         }
     }
 }
@@ -551,7 +562,7 @@ public class EntryView {
 
 ListItem的[swipeAction属性](../reference/arkui-cj/cj-scroll-swipe-listitem.md#func-swipeactioncustombuilder-custombuilder-swipeedgeeffect-float64---unit)可用于实现列表项的左右滑动功能。swipeAction属性方法初始化时有必填参数SwipeActionOptions，其中，start参数表示设置列表项右滑时起始端滑出的组件，end参数表示设置列表项左滑时尾端滑出的组件。
 
-在消息列表中，end参数表示设置ListItem左滑时尾端划出自定义组件，即删除按钮。在初始化end方法时，将滑动列表项的索引传入删除按钮组件，当用户点击删除按钮时，可以根据索引值来删除列表项对应的数据，从而实现侧滑删除功能。
+在消息列表中，end参数表示设置ListItem左滑时尾端滑出自定义组件，即删除按钮。在初始化end方法时，将滑动列表项的索引传入删除按钮组件，当用户点击删除按钮时，可以根据索引值来删除列表项对应的数据，从而实现侧滑删除功能。
 
 - 实现尾端滑出组件的构建。
 
@@ -582,7 +593,7 @@ ListItem的[swipeAction属性](../reference/arkui-cj/cj-scroll-swipe-listitem.md
     ListItem(){
         Text('1111').height(20)
     }
-    .swipeAction(end: { => bind(this.itemEnd, this)(index)}) // index为该ListItem在List中的索引值
+    .swipeAction(end: this.itemEnd(index)) // index为该ListItem在List中的索引值
     ```
 
 ## 给列表项添加标记
@@ -703,7 +714,8 @@ List() {
     <!-- code_check_manual -->
 
     ```cangjie
-    @State var routes: Array<ItemGroupInfo> = [
+    @State
+    var routes: Array<ItemGroupInfo> = [
         ItemGroupInfo(
             0,
             'basicInfo',
@@ -722,7 +734,9 @@ List() {
         ItemGroupInfo(4, 'tradeInfo', '交易与资产信息', []),
         ItemGroupInfo(5, 'otherInfo', '其他资料', [])
     ]
-    @State var expandedItems: ObservedArrayList<Float32> = ObservedArrayList<Float32>([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+
+    @State
+    var expandedItems: ObservedArrayList<Float32> = ObservedArrayList<Float32>([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 
     func build() {
         Column() {
@@ -730,40 +744,39 @@ List() {
             List(space: 10) {
                 ForEach(
                     this.routes,
-                    itemGeneratorFunc: { itemGroup: ItemGroupInfo, _: Int64 =>
-                        ListItemGroup(header: {=> bind(this.ListItemGroupHeader, this)(itemGroup)},
+                    itemGeneratorFunc: {
+                        itemGroup: ItemGroupInfo, _: Int64 => ListItemGroup(header: this.ListItemGroupHeader(itemGroup),
                             footer: {=>}, space: 0, style: ListItemGroupStyle.Card) {
-                                if (this.expandedItems[itemGroup.index] == 180.0) {
-                                    ForEach(itemGroup.children, itemGeneratorFunc: { item: ItemInfo, _: Int64 =>
-                                        ListItem() {
-                                                Row() {
-                                                    Text(item.name)
-                                                    Blank()
-                                                    if (item.`type` == 'Image') {
-                                                        Image(item.label)
-                                                            .height(20)
-                                                            .width(20)
-                                                    } else {
-                                                        Text(item.label)
-                                                    }
-                                                    Image(@r(sys.media.ohos_ic_public_arrow_right))
-                                                        .fillColor(@r(sys.color.ohos_id_color_fourth))
-                                                        .height(30)
-                                                        .width(30)
-                                                }
-                                                .width(100.percent)
+                            if (this.expandedItems[itemGroup.index] == 180.0) {
+                                ForEach(itemGroup.children, itemGeneratorFunc: {
+                                    item: ItemInfo, _: Int64 => ListItem() {
+                                        Row() {
+                                            Text(item.name)
+                                            Blank()
+                                            if (item.`type` == 'Image') {
+                                                Image(item.label)
+                                                    .height(20)
+                                                    .width(20)
+                                            } else {
+                                                Text(item.label)
+                                            }
+                                            Image(@r(sys.media.ohos_ic_public_arrow_right))
+                                                .fillColor(@r(sys.color.ohos_id_color_fourth))
+                                                .height(30)
+                                                .width(30)
                                         }.width(100.percent)
-                                    })
-                                }
+                                    }.width(100.percent)
+                                })
                             }
+                        }
                     }
                 )
             }.width(100.percent)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Start)
-        .backgroundColor(@r(sys.color.ohos_id_color_sub_background))
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Start)
+            .backgroundColor(@r(sys.color.ohos_id_color_sub_background))
     }
     ```
 
@@ -784,10 +797,10 @@ List() {
                 .rotate(x: this.expandedItems[itemGroup.index])
                 .animation(AnimateParam(curve: Curve.EaseInOut, duration: 500))
         }
-        .width(100.percent)
-        .padding(10)
-        .onClick({
-            event => this.expandedItems[itemGroup.index] = 180.0 - this.expandedItems[itemGroup.index]
-        })
+            .width(100.percent)
+            .padding(10)
+            .onClick({
+                event => this.expandedItems[itemGroup.index] = 180.0 - this.expandedItems[itemGroup.index]
+            })
     }
     ```

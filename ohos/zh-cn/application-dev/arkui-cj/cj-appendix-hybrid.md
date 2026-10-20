@@ -43,7 +43,6 @@
 <!--compile-->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -59,7 +58,7 @@ class Test {
         Column {
             Text(msg)
             Button("click to change Text").onClick({
-              evt => msg = "world"
+                evt => msg = "world"
             })
         }
     }

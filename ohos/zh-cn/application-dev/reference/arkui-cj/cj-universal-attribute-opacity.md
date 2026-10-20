@@ -46,6 +46,7 @@ func opacity(value: ?Float64): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -100,8 +101,8 @@ class EntryView {
                 .opacity(0.0)
                 .backgroundColor(0xAFEEEE)
         }
-        .width(100.percent)
-        .padding(top: 5)
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```

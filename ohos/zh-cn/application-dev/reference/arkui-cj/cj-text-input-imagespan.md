@@ -188,34 +188,38 @@ class EntryView {
                         .verticalAlign(ImageSpanAlignment.Center)
                     //对图片进行文本修饰
                     Span("This is the Span and ImageSpan component")
-                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red).fontSize(25)
+                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
+                        .fontSize(25)
                     ImageSpan(@r(app.media.startIcon))
-                       .width(150.px)
-                       .height(50.px)
+                        .width(150.px)
+                        .height(50.px)
                         .objectFit(ImageFit.Contain)
-                       .verticalAlign(ImageSpanAlignment.Top)
+                        .verticalAlign(ImageSpanAlignment.Top)
                     Span("I am Underline-span2")
-                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red).fontSize(25)
+                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
+                        .fontSize(25)
                     ImageSpan(@r(app.media.startIcon))
                         .width(150.px)
                         .height(250.px)
                         .objectFit(ImageFit.Fill)
                         .verticalAlign(ImageSpanAlignment.Baseline)
                     Span("I am Underline-span3")
-                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red).fontSize(25)
+                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
+                        .fontSize(25)
                     ImageSpan(@r(app.media.startIcon))
                         .width(150.px)
                         .height(50.px)
                         .objectFit(ImageFit.Auto)
                         .verticalAlign(ImageSpanAlignment.Bottom)
                     Span("I am Underline-span4")
-                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red).fontSize(25)
+                        .decoration(decorationType: TextDecorationType.LineThrough, color: Color.Red)
+                        .fontSize(25)
                 }.textAlign(TextAlign.Center)
             }
         }
-        .height(720)
-        .width(360)
-        .padding(left:0, right: 0, top: 0)
+            .height(720)
+            .width(360)
+            .padding(left: 0, right: 0, top: 0)
     }
 }
 ```
@@ -230,6 +234,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.i18n.*
@@ -248,31 +253,31 @@ class EntryView {
                                    1.0, 0.0, 1.0, 0.0, 0.0,
                                    0.0, 1.0, 0.0, 1.0, 0.0])
 
-    @State var DrawingColorFilterFirst: ColorFilter = blueColor
-    @State var DrawingColorFilterSecond: ColorFilter = colorFilter
+    @State
+    var DrawingColorFilterFirst: ColorFilter = blueColor
+    @State
+    var DrawingColorFilterSecond: ColorFilter = colorFilter
 
     func build() {
-        Column(space: 5){
+        Column(space: 5) {
             Text {
                 ImageSpan(@r(app.media.startIcon))
-                .width(100)
-                .height(100)
-                .colorFilter(this.DrawingColorFilterFirst)
-                .onClick({
-                        evt =>
-                        this.DrawingColorFilterFirst = colorFilter
-                })
+                    .width(100)
+                    .height(100)
+                    .colorFilter(this.DrawingColorFilterFirst)
+                    .onClick({
+                        evt => this.DrawingColorFilterFirst = colorFilter
+                    })
             }
             Text {
                 ImageSpan(@r(app.media.startIcon))
-                .width(110)
-                .height(110)
-                .margin(15)
-                .colorFilter(this.DrawingColorFilterSecond)
-                .onClick({
-                        evt =>
-                        this.DrawingColorFilterSecond = blueColor
-                })
+                    .width(110)
+                    .height(110)
+                    .margin(15)
+                    .colorFilter(this.DrawingColorFilterSecond)
+                    .onClick({
+                        evt => this.DrawingColorFilterSecond = blueColor
+                    })
             }
         }
     }

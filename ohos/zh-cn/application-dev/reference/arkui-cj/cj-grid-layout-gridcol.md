@@ -367,13 +367,15 @@ public init(value: ?Int32)
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    var bgColors: Array<Color> = [Color(0xD4344C), Color(0x64BB5C), Color(0xED6F21), Color(0x0A59F7), Color(0xD1D1D6), Color(0xFBD7DD), Color(0x4D0A59F7)]
+    var bgColors: Array<Color> = [Color(0xD4344C), Color(0x64BB5C), Color(0xED6F21), Color(0x0A59F7), Color(0xD1D1D6),
+        Color(0xFBD7DD), Color(0x4D0A59F7)]
     var currentBp: String = ""
     func build() {
         Column {
@@ -398,9 +400,9 @@ class EntryView {
                         .width(100.percent)
                         .height(40.vp)
                 }
-                .borderColor(0xD4344C)
-                .borderWidth(2.vp)
-                .span(2)
+                    .borderColor(0xD4344C)
+                    .borderWidth(2.vp)
+                    .span(2)
                 //构造第2个GridCol子组件，栅格占2列，离上一个栅格的偏移列数为1列，因此该栅格占第4.5列
                 GridCol() {
                     Row() {
@@ -408,13 +410,13 @@ class EntryView {
                             .fontColor(Color.Gray)
                             .fontSize(12)
                     }
-                    .width(100.percent)
-                    .height(40.vp)
+                        .width(100.percent)
+                        .height(40.vp)
                 }
-                .borderColor(0x64BB5C)
-                .borderWidth(2.vp)
-                .span(2)
-                .gridColOffset(1)
+                    .borderColor(0x64BB5C)
+                    .borderWidth(2.vp)
+                    .span(2)
+                    .gridColOffset(1)
                 //构造第3个GridCol子组件，栅格占1列，距离上一个栅格偏移列数为2列，由于换行，因此该栅格占下一行的第3列
                 GridCol() {
                     Row() {
@@ -422,13 +424,13 @@ class EntryView {
                             .fontColor(Color.Gray)
                             .fontSize(11)
                     }
-                    .width(100.percent)
-                    .height(40.vp)
+                        .width(100.percent)
+                        .height(40.vp)
                 }
-                .borderColor(0xED6F21)
-                .borderWidth(2.vp)
-                .span(1)
-                .gridColOffset(2)
+                    .borderColor(0xED6F21)
+                    .borderWidth(2.vp)
+                    .span(1)
+                    .gridColOffset(2)
 
                 //循环渲染栅格子组件
                 ForEach(
@@ -437,29 +439,29 @@ class EntryView {
                         color: Color, index: Int64 => GridCol() {
                             Row().height(20.vp)
                         }
-                        .borderWidth(2.vp)
-                        .borderColor(color)
-                        .span(GridColOptions(xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12))
-                        .id("my_GridCol")
+                            .borderWidth(2.vp)
+                            .borderColor(color)
+                            .span(GridColOptions(xs: 12, sm: 12, md: 12, lg: 12, xl: 12, xxl: 12))
+                            .id("my_GridCol")
                     }
                 )
             }
-            .width(100.percent)
-            .height(100.percent)
-            .onBreakpointChange({
-                bp => currentBp = bp
-            })
-            .alignItems(ItemAlign.Center)
+                .width(100.percent)
+                .height(100.percent)
+                .onBreakpointChange({
+                    bp => currentBp = bp
+                })
+                .alignItems(ItemAlign.Center)
         }
-        .margin(left: 10, right:10, top: 5, bottom: 5)
-        .height(300)
+            .margin(left: 10, right: 10, top: 5, bottom: 5)
+            .height(300)
     }
 }
 ```
 
 ![grid_col](./figures/grid_col.png)
 
-### 与Gridrow组合使用示例
+### 与GridRow组合使用示例
 
 请参考栅格容器示例代码（[GridRow](./cj-grid-layout-gridrow.md#示例代码)）
 

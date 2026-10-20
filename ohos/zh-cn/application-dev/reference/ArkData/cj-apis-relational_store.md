@@ -60,7 +60,7 @@ public func deleteRdbStore(context: UIAbilityContext, name: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -114,7 +114,7 @@ public func deleteRdbStore(context: UIAbilityContext, config: StoreConfig): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[通用错误码](../cj-errorcode-universal.md)和[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -181,13 +181,13 @@ getRdbStore目前不支持多线程并发操作。
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
   | 14800010 | Failed to open or delete the database by an invalid database path. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14801001 | The operation is supported in the stage model only. |
   | 14801002 | Invalid data group ID. |
   | 14800017 | StoreConfig is changed. |
@@ -1832,13 +1832,13 @@ public func backup(destName: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -1903,13 +1903,13 @@ public func batchInsert(table: String, values: Array<ValuesBucket>): Int64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -1978,13 +1978,13 @@ public func beginTransaction(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2042,13 +2042,13 @@ public func commit(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2117,13 +2117,13 @@ public func delete(predicates: RdbPredicates): Int64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2183,13 +2183,13 @@ public func emit(event: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 801 | Capability not supported. |
   | 14800000 | Inner error. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800050 | Failed to obtain the subscription service. |
 
 **示例：**
@@ -2248,14 +2248,14 @@ public func executeSql(sql: String, bindArgs!: Array<RelationalStoreValueType> =
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 801 | Capability not supported the sql(attach,begin,commit,rollback etc.). |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2321,13 +2321,13 @@ public func insert(table: String, values: ValuesBucket,
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2397,13 +2397,13 @@ public func off(event: String, interProcess: Bool, observer!: ?Callback0Argument
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 801 | Capability not supported. |
   | 14800000 | Inner error. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800050 | Failed to obtain the subscription service. |
 
 **示例：**
@@ -2420,7 +2420,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class TestCallback1 <: Callback0Argument {
+class TestCallback <: Callback0Argument {
     public init() {}
     public func invoke(err: ?BusinessException): Unit {
         Hilog.info(0, "test", "Call invoke.", "")
@@ -2429,7 +2429,7 @@ class TestCallback1 <: Callback0Argument {
 
 try {
     var rdbStore: RdbStore = getRdbStore(Global.abilityContext, StoreConfig(RelationalStoreSecurityLevel.S1, name: "RdbTest.db")) // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    let testCallback = TestCallback1()
+    let testCallback = TestCallback()
     rdbStore.on("PRINT", false, testCallback)
     rdbStore.off("PRINT", false, observer: testCallback)
 } catch (e: BusinessException) {
@@ -2459,13 +2459,13 @@ public func on(event: String, interProcess: Bool, observer: Callback0Argument): 
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 801 | Capability not supported. |
   | 14800000 | Inner error. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800050 | Failed to obtain the subscription service. |
 
 **示例：**
@@ -2482,7 +2482,7 @@ import ohos.business_exception.BusinessException
 import kit.PerformanceAnalysisKit.Hilog
 
 // 此处代码可添加在依赖项定义中
-class TestCallback2 <: Callback0Argument {
+class TestCallback <: Callback0Argument {
     public init() {}
     public func invoke(err: ?BusinessException): Unit {
         Hilog.info(0, "test", "Call invoke.", "")
@@ -2492,7 +2492,7 @@ class TestCallback2 <: Callback0Argument {
 try {
     var rdbStore: RdbStore = getRdbStore(Global.abilityContext,
         StoreConfig(RelationalStoreSecurityLevel.S1, name: "RdbTest.db")) // 此处需手动配置模板，获取Context上下文。上下文获取方式请参见使用说明。
-    let testCallback = TestCallback2()
+    let testCallback = TestCallback()
     rdbStore.on("PRINT", false, testCallback)
 } catch (e: BusinessException) {
     Hilog.info(0, "test", "${e.message}")
@@ -2526,12 +2526,12 @@ public func query(predicates: RdbPredicates, columns!: Array<String> = []): Resu
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
 
 **示例：**
@@ -2591,12 +2591,12 @@ public func querySql(sql: String, bindArgs!: Array<RelationalStoreValueType> = [
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
 
 **示例：**
@@ -2644,13 +2644,13 @@ public func restore(srcName: String): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2702,13 +2702,13 @@ public func rollBack(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -2788,13 +2788,13 @@ public func update(values: ValuesBucket, predicates: RdbPredicates,
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800014 | The target instance is already closed. |
   | 14800015 | The database does not respond. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3013,7 +3013,7 @@ public func close(): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -3067,15 +3067,15 @@ public func getAsset(columnIndex: Int32): Asset
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3134,19 +3134,19 @@ public func getAssets(columnIndex: Int32): Assets
 
 |类型|说明|
 |:----|:----|
-|Assets|以Array\<[Asset](#class-asset)>形式返回指定列的值。|
+|[Assets](#type-assets)|以Array\<[Asset](#class-asset)>形式返回指定列的值。|
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3209,15 +3209,15 @@ public func getBlob(columnIndex: Int32): Array<UInt8>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3280,14 +3280,14 @@ public func getColumnIndex(columnName: String): Int32
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3354,14 +3354,14 @@ public func getColumnName(columnIndex: Int32): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800011 | The current operation failed because the database is corrupted. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3427,15 +3427,15 @@ public func getDouble(columnIndex: Int32): Float64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3498,15 +3498,15 @@ public func getLong(columnIndex: Int32): Int64
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3563,15 +3563,15 @@ public func getRow(): ValuesBucket
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3634,15 +3634,15 @@ public func getString(columnIndex: Int32): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -3709,14 +3709,14 @@ public func goTo(offset: Int32): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3778,14 +3778,14 @@ public func goToFirstRow(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3847,14 +3847,14 @@ public func goToLastRow(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3916,14 +3916,14 @@ public func goToNextRow(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -3985,14 +3985,14 @@ public func goToPreviousRow(): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -4060,14 +4060,14 @@ public func goToRow(position: Int32): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800014 | The target instance is already closed. |
   | 14800019 | The SQL must be a query statement. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
@@ -4131,15 +4131,15 @@ public func isColumnNull(columnIndex: Int32): Bool
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[关系型数据库错误码](./cj-errorcode-data-rdb.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
   | 14800000 | Inner error. |
-  | 14800011 | Failed to open the database because it is corrupted. |
+  | 14800011 | The current operation failed because the database is corrupted. |
   | 14800012 | ResultSet is empty or pointer index is out of bounds. |
-  | 14800013 | Resultset is empty or column index is out of bounds. |
-  | 14800014 | The RdbStore or ResultSet is already closed. |
+  | 14800013 | Column index is out of bounds. |
+  | 14800014 | The target instance is already closed. |
   | 14800021 | SQLite: Generic error. Possible causes: Insert failed or the updated data does not exist. |
   | 14800022 | SQLite: Callback routine requested an abort. |
   | 14800023 | SQLite: Access permission denied. |
@@ -5517,7 +5517,7 @@ Uint8Array(Array<UInt8>)
 public type Assets = Array<Asset>
 ```
 
-**功能：** [Assets](#type-assets)是[Array\<Asset>](#class-asset)类型的别名。
+**功能：** [Assets](#type-assets)是Array\<[Asset](#class-asset)类型的别名。
 
 ## type ValuesBucket
 

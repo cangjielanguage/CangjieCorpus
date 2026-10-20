@@ -37,27 +37,33 @@ import kit.PerformanceAnalysisKit.*
 @Entry
 @Component
 class EntryView {
-    @State var index1: Int32 = 0
+    @State
+    var index1: Int32 = 0
     func build() {
-         Column {
+        Column {
             Button("showActionMenu").onClick(
                 {
                     evt =>
-                    let buttons: Array<ButtonInfo> = [ButtonInfo(text: "item1", color: Color.Gray), ButtonInfo(text: "item2", color: Color.Black)]
-                    getUIContext().getPromptAction().showActionMenu(ActionMenuOptions(title: "showActionMenu Title Info", buttons: buttons),
-                        callback: {
-                            err: Option<BusinessException>, i: Option<Int32> => try {
-                                match (err) {
-                                    case Some(e) => Hilog.info(0, "cangjie", "error: errcode is ${e.code}")
-                                    case _ => index1 = i.getOrThrow()
-                                }
-                            } catch (e: Exception) {
-                                Hilog.info(0, "cangjie", e.toString())
-                            }
-                        })
+                        let buttons: Array<ButtonInfo> = [ButtonInfo(text: "item1", color: Color.Gray),
+                            ButtonInfo(text: "item2", color: Color.Black)]
+                        getUIContext()
+                            .getPromptAction()
+                            .showActionMenu(ActionMenuOptions(title: "showActionMenu Title Info", buttons: buttons),
+                                callback: {
+                                    err: Option<BusinessException>, i: Option<Int32> => try {
+                                        match (err) {
+                                            case Some(e) => Hilog.info(0, "cangjie", "error: errcode is ${e.code}")
+                                            case _ => index1 = i.getOrThrow()
+                                        }
+                                    } catch (e: Exception) {
+                                        Hilog.info(0, "cangjie", e.toString())
+                                    }
+                                })
                 }
             )
-        }.width(100.percent).padding(top: 5)
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -85,13 +91,14 @@ import kit.PerformanceAnalysisKit.*
 @Entry
 @Component
 class EntryView {
-    @State var index1: Int32 = 0
+    @State
+    var index1: Int32 = 0
     func build() {
-         Column {
-            Button("showDialog").onClick(
-                {
-                    evt =>
-                    getUIContext().getPromptAction().showDialog(
+        Column {
+            Button("showDialog").onClick({
+                evt => getUIContext()
+                    .getPromptAction()
+                    .showDialog(
                         ShowDialogOptions(
                             title: "showDialog Title Info",
                             buttons: [
@@ -110,9 +117,10 @@ class EntryView {
                             }
                         }
                     )
-                }
-            )
-        }.width(100.percent).padding(top: 5)
+            })
+        }
+            .width(100.percent)
+            .padding(top: 5)
     }
 }
 ```
@@ -144,49 +152,55 @@ import kit.PerformanceAnalysisKit.*
 class EntryView {
     func build() {
         Column() {
-            Button('showActionSheet').onClick({ e =>
-                let confirm: ActionSheetButtonOptions = ActionSheetButtonOptions(value: "Confirm button", action: {=> Hilog.info(0, "cangjie", "Get Alert Dialog handled")},
-                    defaultFocus: true, style: DialogButtonStyle.Default)
-                let sheets: Array<SheetInfo> = [
-                    SheetInfo(title: "apple", action: {=> Hilog.info(0, "cangjie", "apple")}),
-                    SheetInfo(title: "banana", action: {=> Hilog.info(0, "cangjie", "banana")}),
-                    SheetInfo(title: "pears", action: {=> Hilog.info(0, "cangjie", "pears")})]
-                getUIContext().showActionSheet(
-                    ActionSheetOptions(
-                        title: 'ActionSheet title',
-                        message: 'message',
-                        sheets: sheets,
-                        autoCancel: false,
-                        confirm: confirm,
-                        width: 300,
-                        height: 300,
-                        cornerRadius: BorderRadiuses(topLeft: 20.vp, topRight: 20.vp, bottomLeft: 20.vp,
-                            bottomRight: 20.vp),
-                        borderWidth: 1.vp,
-                        borderStyle: EdgeStyles(),
-                        borderColor: Color.Blue,
-                        backgroundColor: Color.White,
-                        transition: TransitionEffect.asymmetric(
-                            TransitionEffect
-                                .OPACITY
-                                .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))
-                                .combine(
+            Button('showActionSheet').onClick(
+                {
+                    e =>
+                        let confirm: ActionSheetButtonOptions = ActionSheetButtonOptions(value: "Confirm button",
+                            action: {=> Hilog.info(0, "cangjie", "Get Alert Dialog handled")}, defaultFocus: true,
+                            style: DialogButtonStyle.Default)
+                        let sheets: Array<SheetInfo> = [SheetInfo(title: "apple",
+                            action: {=> Hilog.info(0, "cangjie", "apple")}),
+                            SheetInfo(title: "banana", action: {=> Hilog.info(0, "cangjie", "banana")}),
+                            SheetInfo(title: "pears", action: {=> Hilog.info(0, "cangjie", "pears")})]
+                        getUIContext().showActionSheet(
+                            ActionSheetOptions(
+                                title: 'ActionSheet title',
+                                message: 'message',
+                                sheets: sheets,
+                                autoCancel: false,
+                                confirm: confirm,
+                                width: 300,
+                                height: 300,
+                                cornerRadius: BorderRadiuses(topLeft: 20.vp, topRight: 20.vp, bottomLeft: 20.vp,
+                                    bottomRight: 20.vp),
+                                borderWidth: 1.vp,
+                                borderStyle: EdgeStyles(),
+                                borderColor: Color.Blue,
+                                backgroundColor: Color.White,
+                                transition: TransitionEffect.asymmetric(
                                     TransitionEffect
-                                        .scale(ScaleOptions(x: 1.5, y: 1.5))
-                                        .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))),
-                            TransitionEffect
-                                .OPACITY
-                                .animation(AnimateParam(duration: 100, curve: Curve.Smooth))
-                                .combine(
+                                        .OPACITY
+                                        .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))
+                                        .combine(
+                                            TransitionEffect
+                                                .scale(ScaleOptions(x: 1.5, y: 1.5))
+                                                .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))),
                                     TransitionEffect
-                                        .scale(ScaleOptions(x: 0.5, y: 0.5))
-                                        .animation(AnimateParam(duration: 100, curve: Curve.Smooth)))
-                        ),
-                        alignment: DialogAlignment.Center,
-                    )
-                )
-            })
-        }.width(100.percent).margin(top: 5)
+                                        .OPACITY
+                                        .animation(AnimateParam(duration: 100, curve: Curve.Smooth))
+                                        .combine(
+                                            TransitionEffect
+                                                .scale(ScaleOptions(x: 0.5, y: 0.5))
+                                                .animation(AnimateParam(duration: 100, curve: Curve.Smooth)))
+                                ),
+                                alignment: DialogAlignment.Center,
+                            )
+                        )
+                }
+            )
+        }
+            .width(100.percent)
+            .margin(top: 5)
     }
 }
 ```
@@ -220,50 +234,54 @@ class EntryView {
     func build() {
         Column() {
             Button('showAlertDialog')
-                .onClick({
-                    evt =>
-                    let primaryButton = AlertDialogButtonOptions(
-                        value: 'cancel',
-                        action: {
-                            => Hilog.info(0, "cangjie", 'Callback when the first button is clicked')
-                        }
-                    )
-                    let secondaryButton = AlertDialogButtonOptions(
-                        enabled: true,
-                        defaultFocus: true,
-                        style: DialogButtonStyle.Highlight,
-                        value: 'ok',
-                        action: {
-                            => Hilog.info(0, "cangjie", 'Callback when the second button is clicked')
-                        }
-                    )
-                    getUIContext().showAlertDialog(
-                        AlertDialogParamWithButtons(
-                            message: 'text',
-                            title: 'title',
-                            autoCancel: true,
-                            alignment: DialogAlignment.Center,
-                            offset: Offset(0.0, -20.0),
-                            gridCount: 3,
-                            transition: TransitionEffect.asymmetric(
-                                TransitionEffect
-                                    .OPACITY
-                                    .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))
-                                    .combine(TransitionEffect.scale(ScaleOptions(x: 1.5, y: 1.5)))
-                                    .animation(AnimateParam(duration: 3000, curve: Curve.Sharp)),
-                                TransitionEffect
-                                    .OPACITY
-                                    .animation(AnimateParam(duration: 100, curve: Curve.Smooth))
-                                    .combine(
+                .onClick(
+                    {
+                        evt =>
+                            let primaryButton = AlertDialogButtonOptions(
+                                value: 'cancel',
+                                action: {
+                                    => Hilog.info(0, "cangjie", 'Callback when the first button is clicked')
+                                }
+                            )
+                            let secondaryButton = AlertDialogButtonOptions(
+                                enabled: true,
+                                defaultFocus: true,
+                                style: DialogButtonStyle.Highlight,
+                                value: 'ok',
+                                action: {
+                                    => Hilog.info(0, "cangjie", 'Callback when the second button is clicked')
+                                }
+                            )
+                            getUIContext().showAlertDialog(
+                                AlertDialogParamWithButtons(
+                                    message: 'text',
+                                    title: 'title',
+                                    autoCancel: true,
+                                    alignment: DialogAlignment.Center,
+                                    offset: Offset(0.0, -20.0),
+                                    gridCount: 3,
+                                    transition: TransitionEffect.asymmetric(
                                         TransitionEffect
-                                            .scale(ScaleOptions(x: 0.5, y: 0.5))
-                                            .animation(AnimateParam(duration: 100, curve: Curve.Smooth)))
-                            ),
-                            primaryButton: primaryButton,
-                            secondaryButton: secondaryButton
-                        )
-                    )
-                }).width(100.percent).margin(top: 5)
+                                            .OPACITY
+                                            .animation(AnimateParam(duration: 3000, curve: Curve.Sharp))
+                                            .combine(TransitionEffect.scale(ScaleOptions(x: 1.5, y: 1.5)))
+                                            .animation(AnimateParam(duration: 3000, curve: Curve.Sharp)),
+                                        TransitionEffect
+                                            .OPACITY
+                                            .animation(AnimateParam(duration: 100, curve: Curve.Smooth))
+                                            .combine(
+                                                TransitionEffect
+                                                    .scale(ScaleOptions(x: 0.5, y: 0.5))
+                                                    .animation(AnimateParam(duration: 100, curve: Curve.Smooth)))
+                                    ),
+                                    primaryButton: primaryButton,
+                                    secondaryButton: secondaryButton
+                                )
+                            )
+                    }
+                )
+                .width(100.percent)
+                .margin(top: 5)
         }
     }
 }

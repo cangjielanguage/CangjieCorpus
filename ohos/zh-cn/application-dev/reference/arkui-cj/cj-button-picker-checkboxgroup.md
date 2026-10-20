@@ -198,8 +198,8 @@ public type OnCheckboxGroupChangeCallback = (CheckboxGroupResult) -> Unit
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.hilog.*
 import ohos.arkui.state_macro_manage.*
@@ -211,7 +211,7 @@ func loggerInfo(str: String) {
 
 func formatNames(names: Array<String>): String {
     var result = ""
-    for(name in names) {
+    for (name in names) {
         result += name + ";"
     }
     result
@@ -221,28 +221,26 @@ func formatNames(names: Array<String>): String {
 @Component
 class EntryView {
     func build() {
-        Column(){
+        Column() {
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                CheckboxGroup(group:"checkboxGroup")
-                .size(width: 50.vp, height: 50.vp)
-                .selectedColor(0xed6f21)
-                .selectAll(false)
-                .onChange({ val =>
-                    loggerInfo("checkboxGroup onChange names:" + formatNames(val.name))
-                })
+                CheckboxGroup(group: "checkboxGroup")
+                    .size(width: 50.vp, height: 50.vp)
+                    .selectedColor(0xed6f21)
+                    .selectAll(false)
+                    .onChange({
+                        val => loggerInfo("checkboxGroup onChange names:" + formatNames(val.name))
+                    })
 
                 Text("Select All").fontSize(50)
             }
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                Checkbox(name: "checkbox1", group:"checkboxGroup")
-                .size(width: 50.vp, height: 50.vp)
+                Checkbox(name: "checkbox1", group: "checkboxGroup").size(width: 50.vp, height: 50.vp)
 
                 Text("checkbox1").fontSize(50)
             }
 
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                Checkbox(name: "checkbox2", group:"checkboxGroup")
-                .size(width: 50.vp, height: 50.vp)
+                Checkbox(name: "checkbox2", group: "checkboxGroup").size(width: 50.vp, height: 50.vp)
 
                 Text("checkbox2").fontSize(50)
             }
@@ -258,8 +256,8 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.hilog.*
 import ohos.arkui.state_macro_manage.*
@@ -271,7 +269,7 @@ func loggerInfo(str: String) {
 
 func formatNames(names: Array<String>): String {
     var result = ""
-    for(name in names) {
+    for (name in names) {
         result += name + ";"
     }
     result
@@ -281,35 +279,32 @@ func formatNames(names: Array<String>): String {
 @Component
 class EntryView {
     func build() {
-        Column(){
+        Column() {
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                CheckboxGroup(group:"checkboxGroup1")
-                .size(width: 50.vp, height: 50.vp)
-                .selectedColor(0xed6f21)
-                .selectAll(true)
-                .onChange({ val =>
-                    loggerInfo("checkboxGroup1 onChange names:" + formatNames(val.name))
-                })
+                CheckboxGroup(group: "checkboxGroup1")
+                    .size(width: 50.vp, height: 50.vp)
+                    .selectedColor(0xed6f21)
+                    .selectAll(true)
+                    .onChange({
+                        val => loggerInfo("checkboxGroup1 onChange names:" + formatNames(val.name))
+                    })
 
                 Text("Select All").fontSize(50)
             }
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                Checkbox(name: "checkbox1", group:"checkboxGroup1")
-                .size(width: 50.vp, height: 50.vp)
+                Checkbox(name: "checkbox1", group: "checkboxGroup1").size(width: 50.vp, height: 50.vp)
 
                 Text("checkbox1").fontSize(50)
             }
 
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                Checkbox(name: "checkbox2", group:"checkboxGroup1")
-                .size(width: 50.vp, height: 50.vp)
+                Checkbox(name: "checkbox2", group: "checkboxGroup1").size(width: 50.vp, height: 50.vp)
 
                 Text("checkbox2").fontSize(50)
             }
 
             Flex(justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center) {
-                Checkbox(name: "checkbox3", group:"checkboxGroup1")
-                .size(width: 50.vp, height: 50.vp)
+                Checkbox(name: "checkbox3", group: "checkboxGroup1").size(width: 50.vp, height: 50.vp)
 
                 Text("checkbox3").fontSize(50)
             }

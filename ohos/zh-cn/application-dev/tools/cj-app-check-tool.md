@@ -205,7 +205,7 @@ java -jar app_check_tool.jar --input ./test.app --out-path ./test --stat-suffix 
 | --------- | ------ | -------------- |
 | suffix    | String | 同类型文件后缀名。   |
 | totalSize | int    | 扫描的同类型文件的总大小，单位为Byte。 |
-| files     | Stuct  | 参考下表。   |
+| files     | Struct  | 参考下表。   |
 
 **同类型文件的对应路径和大小字段信息：**
 

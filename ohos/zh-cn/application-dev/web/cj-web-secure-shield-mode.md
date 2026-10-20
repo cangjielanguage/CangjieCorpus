@@ -39,7 +39,7 @@
 - 排查前端代码是否存在WebGL相关接口调用，WebGL提供了3D图形绘制能力，坚盾守护模式下，相关接口无法调用。
 - 排查是否有在线显示PDF的功能场景，坚盾守护模式开启下无法在线显示PDF，例如通过loadUrl接口加载pdf链接等场景。
 - 排查HTML页面是否存在\<math>标签嵌入的MathML语法，坚盾守护模式下，MathML语法不能正常解析，导致显示异常。
-- 排查前端代码是否存在SpeechRecognition（语言识别）、SpeechSynthesis（语音合成）等接口调用，坚盾守护模式下，相关接口无法调用。
+- 排查前端代码是否存在SpeechRecognition（语音识别）、SpeechSynthesis（语音合成）等接口调用，坚盾守护模式下，相关接口无法调用。
 - 排查前端代码是否存在RTCDataChannel/createDataChannel等接口调用，该类接口是WebRTC API的特性，可以建立一条双向数据通道的连接，实现WebRTC 中对等端之间的实时数据交换，坚盾守护模式下，相关接口无法调用。
 - 排查前端代码是否存在MediaDevices.getUserMedia接口调用，该接口用于向用户请求访问流媒体设备（例如：摄像头、麦克风），坚盾守护模式下，相关接口调用会抛出异常信息“can't use getUserMedia on advancedSecurityMode!”。
 - 排查前端代码是否存在ServiceWorker相关接口调用，该机制用于实现离线缓存、网络请求拦截和推送通知等功能，坚盾守护模式下无法创建成功。

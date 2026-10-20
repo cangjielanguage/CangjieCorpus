@@ -142,34 +142,39 @@
     @Entry[storage]
     @Component
     class EntryView {
-        @Provide var consume_value: String = "Hello"
+        @Provide
+        var consume_value: String = "Hello"
 
         func build() {
             Column {
                 ComponentChild()
-            }
-            .width(100.percent)
+            }.width(100.percent)
         }
     }
 
     @Component
     class ComponentChild {
         // 此处使用public修饰符时会出现报错
-        @LocalStorageProp["sessionLocalProp"] public let local_prop_value: String = "Hello"
+        @LocalStorageProp["sessionLocalProp"]
+        public let local_prop_value: String = "Hello"
         // 此处使用public修饰符时会出现报错
-        @LocalStorageLink["sessionLocalLink"] public var local_link_value: String = "Hello"
+        @LocalStorageLink["sessionLocalLink"]
+        public var local_link_value: String = "Hello"
         // 此处使用public修饰符时会出现报错
-        @StorageProp["sessionProp"] public let storage_prop_value: String = "Hello"
+        @StorageProp["sessionProp"]
+        public let storage_prop_value: String = "Hello"
         // 此处使用public修饰符时会出现报错
-        @StorageLink["sessionLink"] public var storage_link_value: String = "Hello"
+        @StorageLink["sessionLink"]
+        public var storage_link_value: String = "Hello"
         // 此处使用public修饰符时会出现报错
-        @Consume public var consume_value: String = "Hello"
+        @Consume
+        public var consume_value: String = "Hello"
 
         func build() {
             Column {
                 Text("Hello")
-                .fontSize(50)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(50)
+                    .fontWeight(FontWeight.Bold)
             }
         }
     }
@@ -190,29 +195,34 @@
     @Entry[storage]
     @Component
     class EntryView {
-        @Provide var consume_value: String = "Hello"
+        @Provide
+        var consume_value: String = "Hello"
 
         func build() {
             Column {
                 ComponentChild()
-            }
-            .width(100.percent)
+            }.width(100.percent)
         }
     }
 
     @Component
     class ComponentChild {
-        @LocalStorageProp["sessionLocalProp"] let local_prop_value: String = "Hello"
-        @LocalStorageLink["sessionLocalLink"] var local_link_value: String = "Hello"
-        @StorageProp["sessionProp"] let storage_prop_value: String = "Hello"
-        @StorageLink["sessionLink"] var storage_link_value: String = "Hello"
-        @Consume var consume_value: String = "Hello"
+        @LocalStorageProp["sessionLocalProp"]
+        let local_prop_value: String = "Hello"
+        @LocalStorageLink["sessionLocalLink"]
+        var local_link_value: String = "Hello"
+        @StorageProp["sessionProp"]
+        let storage_prop_value: String = "Hello"
+        @StorageLink["sessionLink"]
+        var storage_link_value: String = "Hello"
+        @Consume
+        var consume_value: String = "Hello"
 
         func build() {
             Column {
                 Text("Hello")
-                .fontSize(50)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(50)
+                    .fontWeight(FontWeight.Bold)
             }
         }
     }
@@ -233,26 +243,27 @@
     @Entry
     @Component
     class EntryView {
-        @State var link_value: String = "Hello"
+        @State
+        var link_value: String = "Hello"
 
         func build() {
             Column {
                 ComponentChild(link_value: this.link_value)
-            }
-            .width(100.percent)
+            }.width(100.percent)
         }
     }
 
     @Component
     class ComponentChild {
         // 此处使用private修饰符时会出现报错
-        @Link private var link_value: String
+        @Link
+        private var link_value: String
 
         func build() {
             Column {
                 Text("Hello")
-                .fontSize(50)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(50)
+                    .fontWeight(FontWeight.Bold)
             }
         }
     }
@@ -271,25 +282,26 @@
     @Entry
     @Component
     class EntryView {
-        @State var link_value: String = "Hello"
+        @State
+        var link_value: String = "Hello"
 
         func build() {
             Column {
                 ComponentChild(link_value: this.link_value)
-            }
-            .width(100.percent)
+            }.width(100.percent)
         }
     }
 
     @Component
     class ComponentChild {
-        @Link var link_value: String
+        @Link
+        var link_value: String
 
         func build() {
             Column {
                 Text("Hello")
-                .fontSize(50)
-                .fontWeight(FontWeight.Bold)
+                    .fontSize(50)
+                    .fontWeight(FontWeight.Bold)
             }
         }
     }

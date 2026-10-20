@@ -106,6 +106,7 @@ public func onComplete(callback: ?() -> Unit): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -113,7 +114,8 @@ import ohos.hilog.*
 @Entry
 @Component
 class EntryView {
-    @State var data: String = """
+    @State
+    var data: String = """
         <h1 style="text-align: center;">h1标题</h1>
         <h1 style="text-align: center;"><i>h1斜体</i></h1>
         <h1 style="text-align: center;"><u>h1下划线</u></h1>
@@ -129,30 +131,30 @@ class EntryView {
         Column() {
             //未设置layoutWeight属性，组件按照自身尺寸渲染
             RichText(data)
-            //加载网页时触发，打印"RichText onStart"
-            .onStart({ => Hilog.info(0, "AppLogCj", "RichText onStart")})
-            //网页加载结束时触发，打印"RichText onComplete"
-            .onComplete({ => Hilog.info(0, "AppLogCj", "RichText onComplete")})
-            //设定宽度500，高度400
-            .width(500)
-            .height(400)
-            //设定组件背景颜色
-            .backgroundColor(Color(0XBDDB69))
+                //加载网页时触发，打印"RichText onStart"
+                .onStart({=> Hilog.info(0, "AppLogCj", "RichText onStart")})
+                //网页加载结束时触发，打印"RichText onComplete"
+                .onComplete({=> Hilog.info(0, "AppLogCj", "RichText onComplete")})
+                //设定宽度500，高度400
+                .width(500)
+                .height(400)
+                //设定组件背景颜色
+                .backgroundColor(Color(0XBDDB69))
 
             // 父容器尺寸确定时，设置了layoutWeight的子元素在主轴布局尺寸按照权重进行分配，忽略本身尺寸设置。
             RichText("layoutWeight(1)")
-            .onStart({ => Hilog.info(0, "AppLogCj", "RichText onStart")})
-            .onComplete({ => Hilog.info(0, "AppLogCj", "RichText onComplete")})
-            .backgroundColor(Color(0X92D6CC))
-            //权重1，占主轴剩余空间1/3
-            .layoutWeight(1)
+                .onStart({=> Hilog.info(0, "AppLogCj", "RichText onStart")})
+                .onComplete({=> Hilog.info(0, "AppLogCj", "RichText onComplete")})
+                .backgroundColor(Color(0X92D6CC))
+                //权重1，占主轴剩余空间1/3
+                .layoutWeight(1)
 
             RichText("layoutWeight(2)")
-            .onStart({ => Hilog.info(0, "AppLogCj", "RichText onStart")})
-            .onComplete({ => Hilog.info(0, "AppLogCj", "RichText onComplete")})
-            .backgroundColor(Color(0X92C48D))
-            //权重2，占主轴剩余空间2/3
-            .layoutWeight(2)
+                .onStart({=> Hilog.info(0, "AppLogCj", "RichText onStart")})
+                .onComplete({=> Hilog.info(0, "AppLogCj", "RichText onComplete")})
+                .backgroundColor(Color(0X92C48D))
+                //权重2，占主轴剩余空间2/3
+                .layoutWeight(2)
         }
     }
 }

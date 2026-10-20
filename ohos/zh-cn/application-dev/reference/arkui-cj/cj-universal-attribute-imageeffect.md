@@ -102,7 +102,7 @@ func shadow(radius!: ?Float64, color!: ?ResourceColor, offsetX!: ?Float64, offse
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|radius|?Float64|是|-|**命名参数。** 阴影模糊半径。初始值：0.0|
+|radius|?Float64|是|-|**命名参数。** 阴影模糊半径。<br>初始值：<br>API version 26之前，初始值为0.0，设置大于0.0时，阴影生效；<br>从API version 26开始，初始值为-1.0，大于等于0.0时，阴影生效。|
 |color|?[ResourceColor](./cj-common-types.md#interface-resourcecolor)|是|-|**命名参数。** 阴影颜色。初始值：Color(0x666666)|
 |offsetX|?Float64|是|-|**命名参数。** 阴影X轴偏移量。初始值：0.0|
 |offsetY|?Float64|是|-|**命名参数。** 阴影Y轴偏移量。初始值：0.0|
@@ -318,6 +318,7 @@ func hueRotate(value: ?Float32): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import kit.LocalizationKit.*
@@ -336,8 +337,7 @@ class EntryView {
                     .fontColor(0xCCCCCC)
                     .width(90.percent)
                 Flex(alignItems: ItemAlign.Center) {
-                    Text("original text")
-                        .margin(10)
+                    Text("original text").margin(10)
                     Text("blur text")
                         .blur(5.0)
                         .margin(10)
@@ -476,6 +476,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -501,7 +502,8 @@ class EntryView {
                                     high: 1.0,
                                     threshold: 0.5,
                                     thresholdRange: 0.2
-                                ).opacity(0.7)
+                                )
+                                .opacity(0.7)
                             Column()
                                 .width(100.percent)
                                 .height(30.vp)
@@ -510,11 +512,12 @@ class EntryView {
                                     high: 0.5,
                                     threshold: 0.3,
                                     thresholdRange: 0.2
-                                ).opacity(0.7)
+                                )
+                                .opacity(0.7)
                         }
                     }
-                    .width(100.vp)
-                    .height(100.vp)
+                        .width(100.vp)
+                        .height(100.vp)
                 }
 
                 Text("pixelStretchEffect").margin(5)
@@ -526,8 +529,8 @@ class EntryView {
                         .width(50.percent)
                         .id("test_pixelStretchEffect")
                 }
-                .width(200.vp)
-                .height(110.vp)
+                    .width(200.vp)
+                    .height(110.vp)
                 Column() {
                     Text('This is the text content with letterSpacing 0.')
                         .fontSize(12)
@@ -535,8 +538,8 @@ class EntryView {
                         .padding(10.vp)
                         .width(50.percent)
                 }
-                .width(200.vp)
-                .height(110.vp)
+                    .width(200.vp)
+                    .height(110.vp)
 
                 Text("blendMode")
                 Column() {
@@ -557,7 +560,8 @@ class EntryView {
                 }
                     .height(90)
                     .width(200)
-                    .backgroundImage(@r(app.media.background), ImageRepeat.X).opacity(0.7)
+                    .backgroundImage(@r(app.media.background), ImageRepeat.X)
+                    .opacity(0.7)
 
                 Text("lightUpEffect")
                 Text('This is the text content with letterSpacing 0.')
@@ -571,7 +575,8 @@ class EntryView {
                     .width(200)
                     .height(35)
                     .caretColor(Color.Red)
-                    .placeholderColor(Color.Black).opacity(0.4)
+                    .placeholderColor(Color.Black)
+                    .opacity(0.4)
                     .placeholderFont(size: 20.vp)
                     .id("test_sphericalEffect")
 
@@ -585,18 +590,18 @@ class EntryView {
                                 .height(100.vp)
                                 .opacity(1.0)
                         }
-                        .backgroundColor(Color.White)
-                        .width(150.vp)
-                        .height(150.vp)
-                        .justifyContent(FlexAlign.Center)
-                        .opacity(0.6)
+                            .backgroundColor(Color.White)
+                            .width(150.vp)
+                            .height(150.vp)
+                            .justifyContent(FlexAlign.Center)
+                            .opacity(0.6)
                     }
-                    .backgroundColor(Color.Black)
-                    .width(200)
-                    .height(200)
-                    .justifyContent(FlexAlign.Center)
-                    .opacity(1.0)
-                    .margin(20.vp)
+                        .backgroundColor(Color.Black)
+                        .width(200)
+                        .height(200)
+                        .justifyContent(FlexAlign.Center)
+                        .opacity(1.0)
+                        .margin(20.vp)
 
                     Row() {
                         Row() {
@@ -606,22 +611,22 @@ class EntryView {
                                 .height(100.vp)
                                 .opacity(1.0)
                         }
-                        .backgroundColor(Color.White)
-                        .width(150.vp)
-                        .height(150.vp)
-                        .justifyContent(FlexAlign.Center)
-                        .opacity(0.6)
-                        .id("test_renderGroup")
+                            .backgroundColor(Color.White)
+                            .width(150.vp)
+                            .height(150.vp)
+                            .justifyContent(FlexAlign.Center)
+                            .opacity(0.6)
+                            .id("test_renderGroup")
                     }
-                    .backgroundColor(Color.Black)
-                    .width(200)
-                    .height(200)
-                    .justifyContent(FlexAlign.Center)
-                    .opacity(1.0)
-                    .margin(20.vp)
+                        .backgroundColor(Color.Black)
+                        .width(200)
+                        .height(200)
+                        .justifyContent(FlexAlign.Center)
+                        .opacity(1.0)
+                        .margin(20.vp)
                 }
-                .width(380.vp)
-                .height(500.vp)
+                    .width(380.vp)
+                    .height(500.vp)
 
                 Text("systemBarEffect")
                 Stack() {
@@ -640,26 +645,28 @@ class EntryView {
                 Text("useShadowBatching")
                 Column() {
                     Column() {
+
                     }
-                    .width(200)
-                    .height(30)
-                    .margin(top: 5)
-                    .backgroundColor(0xFFE4C4)
-                    .shadow(radius: 120.0, color: Color.Green, offsetX: 0.0, offsetY: 0.0)
+                        .width(200)
+                        .height(30)
+                        .margin(top: 5)
+                        .backgroundColor(0xFFE4C4)
+                        .shadow(radius: 120.0, color: Color.Green, offsetX: 0.0, offsetY: 0.0)
 
                     Column() {
+
                     }
-                    .width(200)
-                    .height(30)
-                    .margin(top: 5)
-                    .backgroundColor(0xFFE4C4)
-                    .shadow(radius: 120.0, color: Color.Red, offsetX: 0.0, offsetY: 0.0)
-                    .backgroundColor(Color.White)
+                        .width(200)
+                        .height(30)
+                        .margin(top: 5)
+                        .backgroundColor(0xFFE4C4)
+                        .shadow(radius: 120.0, color: Color.Red, offsetX: 0.0, offsetY: 0.0)
+                        .backgroundColor(Color.White)
                 }
-                .borderWidth(1)
-                .width(300)
-                .height(100)
-                .id("test_useShadowBatching")
+                    .borderWidth(1)
+                    .width(300)
+                    .height(100)
+                    .id("test_useShadowBatching")
 
                 Text("freeze")
                 Column() {
@@ -668,15 +675,14 @@ class EntryView {
                         .height(40)
                         .backgroundColor(Color.Blue)
                 }
-                .opacity(0.5)
-                .id("test_freeze")
+                    .opacity(0.5)
+                    .id("test_freeze")
                 Column() {
                     Text("freeze: false")
                         .width(100)
                         .height(40)
                         .backgroundColor(Color.Blue)
-                }
-                .opacity(0.5)
+                }.opacity(0.5)
 
                 Text("linearGradientBlur")
                 Image(@r(app.media.startIcon))
@@ -684,9 +690,9 @@ class EntryView {
                     .height(200)
                     .id("test_linearGradientBlur")
             }
-            .width(380)
-            .borderWidth(1)
-            .backgroundColor(Color(0xf1f3f5))
+                .width(380)
+                .borderWidth(1)
+                .backgroundColor(Color(0xf1f3f5))
         }
     }
 }

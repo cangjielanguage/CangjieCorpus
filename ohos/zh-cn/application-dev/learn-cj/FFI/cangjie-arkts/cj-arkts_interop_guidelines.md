@@ -6,7 +6,7 @@
 
 多引擎实例场景下，每个 JS 对象（如 JSValue 及其子类的实例）都绑定于创建它的引擎实例（JSContext）。不同引擎实例之间相互独立，不能共享 JS 对象。如果在非所属引擎中访问 JS 对象，可能会导致程序崩溃。
 
-在仓颉- ArkTS 互操作库中，早期的访问 JS 对象的相关接口需要开发者手动传入 JSContext，调用时需要确保传入正确实例。这类接口已标记为“废弃（deprecated）”，建议统一使用不含 JSContext 参数的新接口，由接口实现本身来自动选择正确的引擎实例。
+在仓颉-ArkTS 互操作库中，早期的访问 JS 对象的相关接口需要开发者手动传入 JSContext，调用时需要确保传入正确实例。这类接口已标记为“废弃（deprecated）”，建议统一使用不含 JSContext 参数的新接口，由接口实现本身来自动选择正确的引擎实例。
 
 **错误示例：**
 
@@ -132,7 +132,9 @@ import ohos.ark_interop.*
 func callArktsWithExp(context: JSContext, callInfo: JSCallInfo): JSValue {
     // 在调用跨语言接口时，使用 try...catch 来捕获跨语言异常
     try {
-        callInfo[0].asFunction().call()
+        callInfo[0]
+            .asFunction()
+            .call()
     } catch (err: JSCodeError) {
         // ...
     }
@@ -374,7 +376,7 @@ import ohos.ark_interop.*
 
 class CJData <: SharedObject {
     let name: String
-    var callback: ?()->Unit = None
+    var callback: ?() -> Unit = None
     init(name: String) {
         this.name = name
     }
@@ -384,16 +386,20 @@ func createCJData(context: JSContext, callInfo: JSCallInfo): JSValue {
     let object = context.object()
     let data = CJData(callInfo[0].toString())
     object.attachCJObject(context.external(data))
-    object.defineOwnAccessor("name", getter: { context, callInfo =>
-        context.string(data.name).toJSValue()
+    object.defineOwnAccessor("name", getter: {
+        context, callInfo => context.string(data.name).toJSValue()
     })
-    object.defineOwnAccessor("callback", setter: {context, callInfo =>
-        let callback = callInfo[0].asFunction()
-        data.callback = { =>
-            callback.call()
+    object.defineOwnAccessor(
+        "callback",
+        setter: {
+            context, callInfo =>
+                let callback = callInfo[0].asFunction()
+                data.callback = {
+                    => callback.call()
+                }
+                context.undefined().toJSValue()
         }
-        context.undefined().toJSValue()
-    })
+    )
 
     object.toJSValue()
 }
@@ -432,7 +438,7 @@ data.callback = () => {
 3. **callback** 捕获 ArkTS 侧的 callback 函数
 4. ArkTS 侧的 callback 函数捕获了 ArkTS 侧创建的 CJData 对象 **data**
 
-假设上述场景为业务场景需要，那么开发者需要在 data.callback 执行完成之后及时将 data.callback 置空，既可解除环形引用。示例如下：
+假设上述场景为业务场景需要，那么开发者需要在 data.callback 执行完成之后及时将 data.callback 置空，即可解除环形引用。示例如下：
 
 <!--code_no_check-->
 ```cangjie
@@ -464,7 +470,7 @@ import ohos.base.UIThread
 @Interop[ArkTS]
 public func testCJ(): Unit {
     // ...
-    let future = spawn(UIThread) {
+    let future = spawn (UIThread) {
         // ...
     }
     future.get() // 错误：spawn(UIThread) 是创建一个仓颉任务到主线程，future.get() 又在主线程等待，会造成死锁
@@ -494,8 +500,8 @@ struct Index {
 
 - 使用 JSContext.isInBindThread() 判断当前线程是否可以执行互操作接口；
 - 如需切换线程执行，可使用：
-    - JSContext.postJSTask { ... } 创建在 ArkTS 线程执行的任务；
-    - 如果 ArkTS 被部署在主线程上，开发者可以使用 spawn(UIThread) 语法使互操作逻辑所在线程被调度到主线程执行、
+    - JSContext.postJSTask { ... } 创建在 ArkTS 线程执行的任务。
+    - 如果 ArkTS 被部署在主线程上，开发者可以使用 spawn(UIThread) 语法使互操作逻辑所在线程被调度到主线程执行。
 
 **错误示例：**
 
@@ -522,6 +528,7 @@ func addNumberAsync(context: JSContext, callInfo: JSCallInfo): JSValue {
         let value = a + b
         // 创建result
         let result = context.number(value).toJSValue() // 错误：没有运行在ArkTS运行时绑定的系统线程上
+
         // 调用js回调
         callback.call(result)
     }
@@ -535,7 +542,7 @@ let EXPORT_MODULE = JSModule.registerModule {
 }
 ```
 
-**正确示例（isInBindThread & postJSTask 使用示例）：**
+**正确示例（isInBindThread&postJSTask使用示例）：**
 
 仓颉代码：
 
@@ -563,7 +570,7 @@ func addNumberAsync(context: JSContext, callInfo: JSCallInfo): JSValue {
             let result = context.number(value).toJSValue()
             // 调用js回调
             callback.call(result)
-        } else {                        // 正确：否则使用 postJSTask 发起异步回调至 ArkTS 线程上执行
+        } else { // 正确：否则使用 postJSTask 发起异步回调至 ArkTS 线程上执行
             context.postJSTask {
                 // 创建result
                 let result = context.number(value).toJSValue()
@@ -606,7 +613,7 @@ func addNumberAsync(context: JSContext, callInfo: JSCallInfo): JSValue {
     spawn {
         // 实际仓颉函数行为
         let value = a + b
-        spawn(UIThread) { // 正确：调度到 ArkTS 主线程上执行
+        spawn (UIThread) { // 正确：调度到 ArkTS 主线程上执行
             // 创建result
             let result = context.number(value).toJSValue()
             // 调用js回调

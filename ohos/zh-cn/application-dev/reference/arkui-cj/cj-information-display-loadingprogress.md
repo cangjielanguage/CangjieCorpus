@@ -72,6 +72,7 @@ public func color(value: ?ResourceColor): This
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -84,9 +85,10 @@ class EntryView {
                 .fontSize(9)
                 .fontColor(0xCCCCCC)
                 .width(90.percent)
-            LoadingProgress()
-            .color(Color.Blue)
-        }.width(100.percent).margin(top: 5)
+            LoadingProgress().color(Color.Blue)
+        }
+            .width(100.percent)
+            .margin(top: 5)
     }
 }
 ```

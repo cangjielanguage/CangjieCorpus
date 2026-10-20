@@ -35,7 +35,7 @@
 
 **起始版本：** 12
 
-**变更信息：** API 12-14时，其权限级别为system_core，仅面向MDM应用开放；从API 14开始，权限级别变更为system_basic，开发范围变更为企业普通应用。
+**变更信息：** API 12-14时，其权限级别为system_core，仅面向MDM应用开放；从API 14开始，权限级别变更为system_basic，开放范围变更为企业普通应用。
 
 ## ohos.permission.FILE_GUARD_MANAGER
 
@@ -52,7 +52,7 @@
 
 **起始版本：** 12
 
-**变更信息：** API 12-14时，其权限级别为system_core，仅面向MDM应用开放；从API 14开始，权限级别变更为system_basic，开发范围变更为企业普通应用。
+**变更信息：** API 12-14时，其权限级别为system_core，仅面向MDM应用开放；从API 14开始，权限级别变更为system_basic，开放范围变更为企业普通应用。
 
 ## ohos.permission.INTERACT_ACROSS_LOCAL_ACCOUNTS
 
@@ -163,7 +163,7 @@
 
 **起始版本：** 12
 
-**变更信息：** API 12-13该权限仅面向MDM应用开放；从API 14开始，开放范围从MDM应用变为更为企业普通应用。
+**变更信息：** API 12-13该权限仅面向MDM应用开放；从API 14开始，开放范围从MDM应用变更为企业普通应用。
 
 ## ohos.permission.KILL_APP_PROCESSES
 

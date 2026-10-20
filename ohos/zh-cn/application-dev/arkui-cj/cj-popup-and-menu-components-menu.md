@@ -69,7 +69,8 @@ class Tmp {
 @Entry
 @Component
 class EntryView {
-    @State var select: Bool = true
+    @State
+    var select: Bool = true
     private var iconStr: AppResource = @r(app.media.startIcon)
     private var iconStr2: AppResource = @r(app.media.startIcon)
 
@@ -94,27 +95,27 @@ class EntryView {
                 endIcon: @r(app.media.startIcon),
                 labelInfo: @r(app.string.module_desc),
                 // 当builder参数进行配置时，表示与menuItem项绑定了子菜单。鼠标hover在该菜单项时，会显示子菜单。
-                builder: {=> bind(this.SubMenu, this)()}
+                builder: this.SubMenu
             )
             MenuItemGroup(header: "小标题", footer: "") {
                 =>
-                MenuItem(startIcon: "", content: "菜单选项", endIcon: "", labelInfo: "")
-                    .selectIcon(true)
-                    .selected(this.select)
-                    .onChange(
-                        {
-                            selected =>
-                            let Str: Tmp = Tmp()
-                            Str.set(@r(app.media.startIcon))
-                        }
+                    MenuItem(startIcon: "", content: "菜单选项", endIcon: "", labelInfo: "")
+                        .selectIcon(true)
+                        .selected(this.select)
+                        .onChange(
+                            {
+                                selected =>
+                                    let Str: Tmp = Tmp()
+                                    Str.set(@r(app.media.startIcon))
+                            }
+                        )
+                    MenuItem(
+                        startIcon: @r(app.media.startIcon),
+                        content: @r(app.string.module_desc),
+                        endIcon: @r(app.media.startIcon),
+                        labelInfo: @r(app.string.module_desc),
+                        builder: this.SubMenu
                     )
-                MenuItem(
-                    startIcon: @r(app.media.startIcon),
-                    content: @r(app.string.module_desc),
-                    endIcon: @r(app.media.startIcon),
-                    labelInfo: @r(app.string.module_desc),
-                    builder: {=> bind(this.SubMenu, this)()}
-                )
             }
 
             MenuItem(

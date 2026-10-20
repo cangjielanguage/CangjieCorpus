@@ -16,7 +16,7 @@
 
 \@Provide / \@Consume装饰的状态变量有以下特性：
 
-- \@Provide 装饰的状态变量自动对其所有后代组件可用，即该变量被“provide”给他的后代组件。由此可见，\@Provide 的方便之处在于，开发者不需要多次在组件之间传递变量。
+- \@Provide 装饰的状态变量自动对其所有后代组件可用，即该变量被“provide”给它的后代组件。由此可见，\@Provide 的方便之处在于，开发者不需要多次在组件之间传递变量。
 
 - 后代通过使用 \@Consume 去获取 \@Provide 提供的变量，建立在 \@Provide 和 \@Consume 之间的双向数据同步，与 \@State / \@Link 不同的是，前者可以在多层级的父子组件之间传递。
 
@@ -49,6 +49,7 @@ var age: Float64;
 |宏参数|别名：常量字符串，可选。如果指定了别名，则通过别名来绑定变量；如果未指定别名，则通过变量名绑定变量。|
 |同步类型|双向同步。从 \@Provide 变量到所有 \@Consume 变量以及相反的方向的数据同步。双向同步的操作与 \@State 和 \@Link 的组合相同。|
 |允许装饰的变量类型|仓颉内置类型包括基础数据类型（Nothing除外）和自定义类型，以及这些类型的数组。支持函数类型，支持DateTime类型。\@Provide 变量的 \@Consume 变量的类型必须相同。支持类型的场景请参考观察变化。|
+|不推荐装饰的变量类型 |不推荐装饰函数类型。 |
 |被装饰变量的初始值|必须指明类型，初始值必须指定。|
 |\@Provide支持重名|允许重名，\@Consume 会向上查找匹配最近的 \@Provide。|
 
@@ -57,6 +58,7 @@ var age: Float64;
 |宏参数|别名：常量字符串，可选。如果提供了别名，则必须有 \@Provide 的变量和其有相同的别名才可以匹配成功；如果不提供别名，则需要变量名与变量类型都相同才能匹配成功。|
 |同步类型|双向：从 \@Provide 变量（具体请参见 \@Provide ）到所有 \@Consume 变量，以及相反的方向。双向同步操作与 \@State 和 \@Link 的组合相同。|
 |允许装饰的变量类型|仓颉内置类型包括基础数据类型（Nothing除外）和自定义类型，以及这些类型的数组。支持函数类型，支持DateTime类型。\@Provide 变量的 \@Consume 变量的类型必须相同。支持类型的场景请参考观察变化。|
+|不推荐装饰的变量类型 |不推荐装饰函数类型。 |
 |被装饰变量的初始值|必须指明类型，不能有初始值。|
 
 ## 变量的传递/访问规则说明
@@ -98,13 +100,12 @@ import std.time.*
 // 父组件
 @Entry
 @Component
-class EntryView{
-
+class EntryView {
     @Provide
-    var selectedDate: DateTime = DateTime.of(year:2021,month:8,dayOfMonth:8)
+    var selectedDate: DateTime = DateTime.of(year: 2021, month: 8, dayOfMonth: 8)
 
-    public func build(){
-        Column(){
+    public func build() {
+        Column() {
             Button("parent increase the day by 1")
                 .margin(10)
                 .onClick({ event
@@ -112,24 +113,23 @@ class EntryView{
                 })
             Button("parent update the new date")
                 .margin(10)
-                .onClick({ event
-                    => this.selectedDate = DateTime.of(year:2023,month:7,dayOfMonth:7)
+                .onClick({
+                    event => this.selectedDate = DateTime.of(year: 2023, month: 7, dayOfMonth: 7)
                 })
             DatePicker(
-                start: DateTime.of(year:1970,month:1,dayOfMonth:1),
-                end: DateTime.of(year:2100,month:1,dayOfMonth:1),
+                start: DateTime.of(year: 1970, month: 1, dayOfMonth: 1),
+                end: DateTime.of(year: 2100, month: 1, dayOfMonth: 1),
                 selected: this.selectedDate
             )
-           Child()
+            Child()
         }
     }
 }
 
 @Component
-class Child{
-
+class Child {
     @Consume
-    var selectedDate: DateTime;
+    var selectedDate: DateTime
 
     public func build(){
         Column(){
@@ -139,12 +139,12 @@ class Child{
                 })
             Button("child update the new date")
                 .margin(10)
-                .onClick({ event
-                    => this.selectedDate = DateTime.of(year:2023,month:9,dayOfMonth:9)
+                .onClick({
+                    event => this.selectedDate = DateTime.of(year: 2023, month: 9, dayOfMonth: 9)
                 })
             DatePicker(
-                start: DateTime.of(year:1970,month:1,dayOfMonth:1),
-                end: DateTime.of(year:2100,month:1,dayOfMonth:1),
+                start: DateTime.of(year: 1970, month: 1, dayOfMonth: 1),
+                end: DateTime.of(year: 2100, month: 1, dayOfMonth: 1),
                 selected: this.selectedDate
             )
         }
@@ -168,44 +168,46 @@ package ohos_app_cangjie_entry
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
-public func returnAdd(a: Int64, b:Int64): Int64{
-    return a+b
+public func returnAdd(a: Int64, b: Int64): Int64 {
+    return a + b
 }
 
-public func returnMinus(a: Int64, b:Int64): Int64{
-    return a-b
+public func returnMinus(a: Int64, b: Int64): Int64 {
+    return a - b
 }
 
 @Entry
 @Component
-class EntryView{
-
+class EntryView {
     @Provide["calc"]
     var Func1: (Int64, Int64) -> Int64 = returnAdd
 
     @Provide
-    var isAdd : Bool = true
+    var isAdd: Bool = true
 
-    func build(){
-        Column{
+    func build() {
+        Column {
             Text("Parent")
-            Text(
-                if(isAdd == true){
-                    "1+1 = ${Func1(1,1)}"
-                }else{
-                    "1-1 = ${Func1(1,1)}"}
-            )
-            Button(
-                if(isAdd == true){
-                    "Switch to minus"
-                }else{
-                    "Switch to add"
-                }
-            ).onClick({ evt =>
-                if(isAdd == true){ Func1 = returnMinus }
-                else{ Func1 = returnAdd }
-                isAdd = !isAdd
+            Text(if (isAdd == true) {
+                "1+1 = ${Func1(1, 1)}"
+            } else {
+                "1-1 = ${Func1(1, 1)}"
             })
+            Button(if (isAdd == true) {
+                "Switch to minus"
+            } else {
+                "Switch to add"
+            }).onClick(
+                {
+                    evt =>
+                        if (isAdd == true) {
+                            Func1 = returnMinus
+                        } else {
+                            Func1 = returnAdd
+                        }
+                        isAdd = !isAdd
+                }
+            )
             Divider()
             Child()
         }
@@ -213,33 +215,36 @@ class EntryView{
 }
 
 @Component
-class Child{
+class Child {
     @Consume["calc"]
     var Func2: (Int64, Int64) -> Int64
 
     @Consume
     var isAdd: Bool
 
-    func build(){
-        Column{
+    func build() {
+        Column {
             Text("Child")
-            Text(
-                if(isAdd == true){
-                    "1+1 = ${Func2(1,1)}"
-                }else{
-                    "1-1 = ${Func2(1,1)}"}
-            )
-            Button(
-                if(isAdd == true){
-                    "Switch to minus"
-                }else{
-                    "Switch to add"
-                }
-            ).onClick({ evt =>
-                if(isAdd == true){ Func2 = returnMinus }
-                else{ Func2 = returnAdd }
-                isAdd = !isAdd
+            Text(if (isAdd == true) {
+                "1+1 = ${Func2(1, 1)}"
+            } else {
+                "1-1 = ${Func2(1, 1)}"
             })
+            Button(if (isAdd == true) {
+                "Switch to minus"
+            } else {
+                "Switch to add"
+            }).onClick(
+                {
+                    evt =>
+                        if (isAdd == true) {
+                            Func2 = returnMinus
+                        } else {
+                            Func2 = returnAdd
+                        }
+                        isAdd = !isAdd
+                }
+            )
         }
     }
 }
@@ -268,21 +273,20 @@ class Child{
     【反例】
 
     ```cangjie
-
     let change: Int64 = 10;
+
     @Provide[change]
     var message: String = "Hello"
 
     let change: String = "10"
+
     @Provide[change]
     var message: String = "Hello"
-
     ```
 
     【正例】
 
     ```cangjie
-
     @Provide["10"]
     var message: String = "Hello"
     ```
@@ -311,7 +315,7 @@ class Child{
     @Component
     class Child {
 
-    //  错误写法，不能本地初始化
+        //  错误写法，不能本地初始化
         @Consume
         var msg: String = "Hello";
 
@@ -328,9 +332,8 @@ class Child{
     ```cangjie
     @Component
     class Child {
-
         @Consume
-        var num: Int64;
+        var num: Int64
 
         func build() {
             Column() {
@@ -343,7 +346,6 @@ class Child{
     @Entry
     @Component
     class EntryView {
-
         @Provide
         var num: Int64 = 10;
 
@@ -363,6 +365,7 @@ class Child{
     // 需类型一致，若类型不一致，框架会弹出运行时错误。
     @Provide
     var count: Int32 = 10
+
     @Provide
     var count: Int64 = 10
 
@@ -370,6 +373,7 @@ class Child{
     // 同上，需类型一致。
     @Provide["a"]
     var count: Int32 = 10
+
     @Provide["a"]
     var num: Int64 = 10
     ```
@@ -382,12 +386,12 @@ class Child{
 
     ```cangjie
     @Component
-    class Child{
+    class Child {
         @Consume
         var num: Int64
 
-        func build(){
-            Column(){
+        func build() {
+            Column() {
                 Text("num的值：${this.num}")
             }
         }
@@ -396,12 +400,12 @@ class Child{
     // 父组件
     @Entry
     @Component
-    class EntryView{
+    class EntryView {
         // 错误写法，缺少@Provide
         var num: Int64 = 10;
 
-        func build(){
-            Column(){
+        func build() {
+            Column() {
                 Text("num的值：${this.num}")
                 Child()
             }
@@ -415,12 +419,12 @@ class Child{
 
     ```cangjie
     @Component
-    class Child{
+    class Child {
         @Consume
         var num: Int64
 
-        func build(){
-            Column(){
+        func build() {
+            Column() {
                 Text("num的值：${this.num}")
             }
         }
@@ -429,13 +433,13 @@ class Child{
     // 父组件
     @Entry
     @Component
-    class EntryView{
+    class EntryView {
         // 正确写法
         @Provide
         var num: Int64 = 10;
 
-        func build(){
-            Column(){
+        func build() {
+            Column() {
                 Text("num的值：${this.num}")
                 Child()
             }
@@ -460,23 +464,22 @@ class ToDoItem {
 
     // @Consume装饰的变量通过相同的属性名绑定其祖先组件EntryView内的@Provide装饰的变量
     @Consume
-    var count: Int64;
+    var count: Int64
 
-    func build(){
-        Column{
+    func build() {
+        Column {
             Text("count(${this.count})")
-            Button("count(${this.count}), count + 1")
-                .onClick({
-                   evt => this.count += 1
+            Button("count(${this.count}), count + 1").onClick({
+                evt => this.count += 1
             })
         }.width(100.percent)
     }
 }
 
 @Component
-class ToDoList{
-    func build(){
-        Row(space: 5){
+class ToDoList {
+    func build() {
+        Row(space: 5) {
             ToDoItem()
             ToDoItem()
         }
@@ -484,9 +487,9 @@ class ToDoList{
 }
 
 @Component
-class ToDoDemo{
-    func build(){
-        Column{
+class ToDoDemo {
+    func build() {
+        Column {
             ToDoList()
         }
     }
@@ -494,17 +497,16 @@ class ToDoDemo{
 
 @Entry
 @Component
-class EntryView{
+class EntryView {
     // @Provide装饰的变量index由入口组件EntryView提供其后代组件
     @Provide
     var count: Int64 = 0;
 
-    func build(){
-        Column{
-            Button("count(${this.count}), count + 1")
-                .onClick({
-                   evt => this.count += 1
-                })
+    func build() {
+        Column {
+            Button("count(${this.count}), count + 1").onClick({
+                evt => this.count += 1
+            })
             ToDoDemo()
         }
     }
@@ -534,12 +536,14 @@ class Child {
     @Consume
     var arr: Array<(Int64, String)>
 
-    func build(){
-        Column(){
-            ForEach(arr,
-                itemGeneratorFunc: { item: (Int64, String), idx: Int64 =>
-                    Text("key: ${item[0]} value: ${item[1]}").fontSize(30)
-                    Divider()
+    func build() {
+        Column() {
+            ForEach(
+                arr,
+                itemGeneratorFunc: {
+                    item: (Int64, String), idx: Int64 =>
+                        Text("key: ${item[0]} value: ${item[1]}").fontSize(30)
+                        Divider()
                 },
                 keyGeneratorFunc: {item: (Int64, String), idx: Int64
                     => "${idx}_${item[0]}" + item[1]
@@ -577,23 +581,25 @@ class Child {
 @Component
 class EntryView {
     @Provide
-    var message: HashMap<Int64, String> = HashMap<Int64, String>([(0,"a"),(1,"b"),(3,"c")])
+    var message: HashMap<Int64, String> = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c")])
 
     @Provide
     var arr: Array<(Int64, String)> = []
 
-    public override func onPageShow(){
+    public override func onPageShow() {
         arr = message.toArray()
     }
 
-    func build(){
-        Row(){
-            Column(){
-                Button("Provide init map").onClick({
-                    evt =>
-                        this.message = HashMap<Int64,String>([(0,"a"),(1,"b"),(3,"c"),(4,"d")])
-                        arr = message.toArray()
-                })
+    func build() {
+        Row() {
+            Column() {
+                Button("Provide init map").onClick(
+                    {
+                        evt =>
+                            this.message = HashMap<Int64, String>([(0, "a"), (1, "b"), (3, "c"), (4, "d")])
+                            arr = message.toArray()
+                    }
+                )
                 Child()
             }.width(100.percent)
         }.height(100.percent)
@@ -617,7 +623,7 @@ import ohos.arkui.state_macro_manage.*
 import std.collection.*
 
 @Component
-class Child{
+class Child {
     @Consume
     var message: HashSet<Int64>
 
@@ -656,13 +662,13 @@ class Child{
 
 @Entry
 @Component
-class EntryView{
-    public override func onPageShow(){
+class EntryView {
+    public override func onPageShow() {
         arr = message.toArray()
     }
 
     @Provide
-    var message: HashSet<Int64> = HashSet([0,1,2,3,4])
+    var message: HashSet<Int64> = HashSet([0, 1, 2, 3, 4])
 
     @Provide
     var arr: Array<Int64> = []

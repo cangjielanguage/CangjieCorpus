@@ -264,8 +264,10 @@ import std.collection.*
 @Entry
 @Component
 class EntryView {
-    @State var passwords: ObservedArrayList<Int32> = ObservedArrayList<Int32>([])
-    @State var message: String = 'please input password!'
+    @State
+    var passwords: ObservedArrayList<Int32> = ObservedArrayList<Int32>([])
+    @State
+    var message: String = 'please input password!'
     let patternLockController = PatternLockController()
 
     func build() {
@@ -319,7 +321,9 @@ class EntryView {
                         this.message = 'Please input password'
                     }
                 )
-        }.width(100.percent).height(100.percent)
+        }
+            .width(100.percent)
+            .height(100.percent)
     }
 }
 ```

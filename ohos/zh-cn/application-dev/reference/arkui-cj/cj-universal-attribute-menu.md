@@ -105,8 +105,8 @@ func bindMenu(builder!: ?CustomBuilder): T
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -122,8 +122,7 @@ class EntryView {
                 .onClick({
                     evt => Hilog.info(1, "info", "Builder 中的按钮被点击")
                 })
-        }
-        .width(300.px)
+        }.width(300.px)
     }
 
     func build() {
@@ -145,10 +144,8 @@ class EntryView {
                 ]
             )
 
-            Button("BindMenu-Custom")
-                .bindMenu(builder: builder)
-            Button("BindContextMenu-长按")
-                .bindContextMenu(builder: builder, responseType: ResponseType.RightClick)
+            Button("BindMenu-Custom").bindMenu(builder: builder)
+            Button("BindContextMenu-长按").bindContextMenu(builder: builder, responseType: ResponseType.RightClick)
         }
     }
 }
@@ -163,7 +160,6 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
 
 import kit.ArkUI.*
@@ -176,39 +172,43 @@ class EntryView {
     func build() {
         Scroll() {
             Column(space: 10) {
-                Button("BindMenu").bindMenu(
-                    [
-                        MenuElement(
-                            value: "菜单1",
-                            action: {
-                                => Hilog.info(1, "info", "MenuElement test: 菜单1被点击")
-                            }
-                        ),
-                        MenuElement(
-                            value: "菜单2",
-                            action: {
-                                => Hilog.info(1, "info", "MenuElement test: 菜单2被点击")
-                            }
-                        )
-                    ]
-                ).margin(left: 20, top: 20)
+                Button("BindMenu")
+                    .bindMenu(
+                        [
+                            MenuElement(
+                                value: "菜单1",
+                                action: {
+                                    => Hilog.info(1, "info", "MenuElement test: 菜单1被点击")
+                                }
+                            ),
+                            MenuElement(
+                                value: "菜单2",
+                                action: {
+                                    => Hilog.info(1, "info", "MenuElement test: 菜单2被点击")
+                                }
+                            )
+                        ]
+                    )
+                    .margin(left: 20, top: 20)
 
-                Button("BindMenu").bindMenu(
-                    [
-                        MenuElement(
-                            value: "菜单1",
-                            action: {
-                                => Hilog.info(1, "info", "MenuElement test: 菜单1被点击")
-                            }
-                        ),
-                        MenuElement(
-                            value: "菜单2",
-                            action: {
-                                => Hilog.info(1, "info", "MenuElement test: 菜单2被点击")
-                            }
-                        )
-                    ]
-                ).margin(left: 20)
+                Button("BindMenu")
+                    .bindMenu(
+                        [
+                            MenuElement(
+                                value: "菜单1",
+                                action: {
+                                    => Hilog.info(1, "info", "MenuElement test: 菜单1被点击")
+                                }
+                            ),
+                            MenuElement(
+                                value: "菜单2",
+                                action: {
+                                    => Hilog.info(1, "info", "MenuElement test: 菜单2被点击")
+                                }
+                            )
+                        ]
+                    )
+                    .margin(left: 20)
             }
         }
     }
@@ -224,8 +224,8 @@ class EntryView {
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.resource_manager.*
@@ -244,8 +244,7 @@ class EntryView {
                 .onClick({
                     evt => Hilog.info(1, "info", "Builder test: builder clicked!!!")
                 })
-        }
-        .width(150)
+        }.width(150)
     }
 
     @Builder
@@ -272,10 +271,8 @@ class EntryView {
                 )
 
                 Text(
-                    "offset, backgroundColor, backgroundBlurStyle, aboutToAppear -> onAppear -> aboutToDisappear -> onDisappear"
-                )
-                Button("BindContextMenu-2")
-                .bindContextMenu(
+                    "offset, backgroundColor, backgroundBlurStyle, aboutToAppear -> onAppear -> aboutToDisappear -> onDisappear")
+                Button("BindContextMenu-2").bindContextMenu(
                     builder: myBuilder,
                     responseType: ResponseType.LongPress,
                     options: ContextMenuOptions(
@@ -300,7 +297,7 @@ class EntryView {
                         builder: myBuilder,
                         responseType: ResponseType.LongPress,
                         options: ContextMenuOptions(
-                            preview: bind(this.MyPreview, this),
+                            preview: this.MyPreview,
                             transition: TransitionEffect.SLIDE_SWITCH
                         )
                     )
@@ -316,12 +313,11 @@ class EntryView {
                         builder: myBuilder,
                         responseType: ResponseType.LongPress,
                         options: ContextMenuOptions(
-                            preview: bind(this.MyPreview, this),
+                            preview: this.MyPreview,
                             previewAnimationOptions: ContextMenuAnimationOptions(
                                 transition: TransitionEffect
                                     .OPACITY
-                                    .animation(AnimateParam(duration: 4000, curve: Curve.Ease))
-                            )
+                                    .animation(AnimateParam(duration: 4000, curve: Curve.Ease)))
                         )
                     )
 
@@ -336,7 +332,7 @@ class EntryView {
                         builder: myBuilder,
                         responseType: ResponseType.LongPress,
                         options: ContextMenuOptions(
-                            preview: bind(this.MyPreview, this),
+                            preview: this.MyPreview,
                             previewAnimationOptions: ContextMenuAnimationOptions()
                         )
                     )

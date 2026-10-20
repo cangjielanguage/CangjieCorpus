@@ -72,7 +72,7 @@ public init(scroller: ?Scroller, child: () -> Unit)
 
 |参数名|类型|必填|默认值|说明|
 |:---|:---|:---|:---|:---|
-|scroller|?[Scroller](./cj-scroll-swipe-scroll.md#class-scroller)|是|-|滚动条控制器。初始值：Scroller()。|
+|scroller|?[Scroller](#class-scroller)|是|-|滚动条控制器。初始值：Scroller()。|
 |child|() -> Unit|是|-|声明容器内的子组件。|
 
 ## 通用属性/通用事件
@@ -119,7 +119,7 @@ public func onWillScroll(handler: ?(Float64, Float64, ScrollState, ScrollSource)
 
 触发该事件的条件 ：
 
-1. 滚动组件触发滚动时触发，支持键鼠操作和其他触发滚动的输入设置。
+1. 滚动组件触发滚动时触发，支持键鼠操作和其他触发滚动的输入设备。
 
 2. 通过滚动控制器API接口调用。
 
@@ -850,7 +850,7 @@ public func scrollTo(xOffset!: Length, yOffset!: Length, animation!: ?ScrollAnim
 |:---|:---|:---|:---|:---|
 |xOffset|[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 水平滚动偏移。|
 |yOffset|[Length](./cj-common-types.md#interface-length)|是|-|**命名参数。** 垂直滚动偏移。|
-|animation|?ScrollAnimationOptions|是|-|**命名参数。** 滚动动画选项。初始值：ScrollAnimationOptions()。|
+|animation|?[ScrollAnimationOptions](#class-scrollanimationoptions)|是|-|**命名参数。** 滚动动画选项。初始值：ScrollAnimationOptions()。?ScrollAnimationOptions|是|-|**命名参数。** 滚动动画选项。初始值：ScrollAnimationOptions()。|
 
 #### func scrollTo(Length, Length, ?Bool)
 
@@ -1399,14 +1399,13 @@ class EntryView {
                 .scrollBarColor(Color.Gray) // 滚动条颜色
                 .scrollBarWidth(10.px) // 滚动条宽度
                 .friction(0.6)
-                .onScrollEdge(
-                    {
-                        edge => match (edge) {
-                            case Edge.Top => loggerInfo("Top")
-                            case Edge.Bottom => loggerInfo("Bottom")
-                            case _ => loggerInfo("None")
-                        }
-                    })
+                .onScrollEdge({
+                    edge => match (edge) {
+                        case Edge.Top => loggerInfo("Top")
+                        case Edge.Bottom => loggerInfo("Bottom")
+                        case _ => loggerInfo("None")
+                    }
+                })
                 .onScrollStop({
                     => loggerInfo("Scroll Stop")
                 })
@@ -1553,14 +1552,14 @@ class EntryView {
                         .onScrollFrameBegin(
                             {
                                 x: Float64, y: ScrollState =>
-                                if ((this.listPosition == 0 && x <= 0.0) || (this.listPosition == 2 && x >= 0.0)) {
-                                    this
-                                        .scroller
-                                        .scrollBy(xOffset: 0.0, yOffset: x)
-                                    return OnScrollFrameBeginHandlerResult(offsetRemain: 0.0)
-                                }
-                                this.listPosition = 1
-                                return OnScrollFrameBeginHandlerResult(offsetRemain: x)
+                                    if ((this.listPosition == 0 && x <= 0.0) || (this.listPosition == 2 && x >= 0.0)) {
+                                        this
+                                            .scroller
+                                            .scrollBy(xOffset: 0.0, yOffset: x)
+                                        return OnScrollFrameBeginHandlerResult(offsetRemain: 0.0)
+                                    }
+                                    this.listPosition = 1
+                                    return OnScrollFrameBeginHandlerResult(offsetRemain: x)
                             }
                         )
 
@@ -1633,11 +1632,11 @@ class EntryView {
                         }
                             .width(100.percent)
                             .edgeEffect(EdgeEffect.Spring)
-                            .nestedScroll(
-                                NestedScrollOptions(NestedScrollMode.ParentFirst, NestedScrollMode.SelfFirst))
+                            .nestedScroll(NestedScrollOptions(NestedScrollMode.ParentFirst, NestedScrollMode.SelfFirst))
                     }.tabBar("Tab1")
 
                     TabContent {
+
                     }.tabBar("Tab2")
                 }
                     .vertical(false)
@@ -1684,7 +1683,9 @@ class EntryView {
 
     protected override func aboutToAppear() {
         for (i in 0..10) {
-            this.arr.add(i)
+            this
+                .arr
+                .add(i)
         }
     }
 
@@ -1737,48 +1738,50 @@ class EntryView {
             .onScrollFrameBegin(
                 {
                     offset: Float64, state: ScrollState =>
-                    var retOffset = offset
-                    var currentOffset = this
-                        .scrollerForParent
-                        .currentOffset().getOrThrow()
-                        .yOffset
-                    var newOffset = currentOffset + offset
-                    if (offset > 0.0) {
-                        if (this
-                            .scrollerForChild
-                            .isAtEnd()) {
-                            return offset
-                        }
-                        if (newOffset > this.headerHeight) {
-                            this
+                        var retOffset = offset
+                        var currentOffset = this
+                            .scrollerForParent
+                            .currentOffset()
+                            .getOrThrow()
+                            .yOffset
+                        var newOffset = currentOffset + offset
+                        if (offset > 0.0) {
+                            if (this
                                 .scrollerForChild
-                                .scrollBy(xOffset: 0.0, yOffset: retOffset)
-                            if (currentOffset < this.headerHeight) {
-                                return this.headerHeight - currentOffset
-                            } else {
+                                .isAtEnd()) {
+                                return offset
+                            }
+                            if (newOffset > this.headerHeight) {
+                                this
+                                    .scrollerForChild
+                                    .scrollBy(xOffset: 0.0, yOffset: retOffset)
+                                if (currentOffset < this.headerHeight) {
+                                    return this.headerHeight - currentOffset
+                                } else {
+                                    return 0.0
+                                }
+                            }
+                        } else {
+                            if (this
+                                .scrollerForChild
+                                .currentOffset()
+                                .getOrThrow()
+                                .yOffset <= 0.0) {
+                                return offset
+                            }
+                            if (newOffset < this.headerHeight) {
+                                this
+                                    .scrollerForChild
+                                    .scrollBy(xOffset: 0.0, yOffset: retOffset)
                                 return 0.0
+                                if (currentOffset > this.headerHeight) {
+                                    return this.headerHeight - currentOffset
+                                } else {
+                                    return 0.0
+                                }
                             }
                         }
-                    } else {
-                        if (this
-                            .scrollerForChild
-                            .currentOffset().getOrThrow()
-                            .yOffset <= 0.0) {
-                            return offset
-                        }
-                        if (newOffset < this.headerHeight) {
-                            this
-                                .scrollerForChild
-                                .scrollBy(xOffset: 0.0, yOffset: retOffset)
-                            return 0.0
-                            if (currentOffset > this.headerHeight) {
-                                return this.headerHeight - currentOffset
-                            } else {
-                                return 0.0
-                            }
-                        }
-                    }
-                    return offset
+                        return offset
                 }
             )
             .width(100.percent)
@@ -1807,24 +1810,26 @@ import std.collection.ArrayList
 @Component
 class EntryView {
     var scroller: Scroller = Scroller()
-    private var arr: ArrayList<Int64> = ArrayList<Int64>(16, {i => i+1})
+    private var arr: ArrayList<Int64> = ArrayList<Int64>(16, {i => i + 1})
     func build() {
         Scroll(this.scroller) {
             Column {
-                ForEach(this.arr, itemGeneratorFunc: {item: Int64, idx: Int64 =>
-                            Text(item.toString())
-                            .width(90.percent)
-                            .height(200)
-                            .backgroundColor(0xFFFFFF)
-                            .borderWidth(1)
-                            .borderRadius(15)
-                            .fontSize(16)
-                            .textAlign(TextAlign.Center)
+                ForEach(this.arr, itemGeneratorFunc: {
+                    item: Int64, idx: Int64 => Text(item.toString())
+                        .width(90.percent)
+                        .height(200)
+                        .backgroundColor(0xFFFFFF)
+                        .borderWidth(1)
+                        .borderRadius(15)
+                        .fontSize(16)
+                        .textAlign(TextAlign.Center)
                 })
-            }.width(100.percent).backgroundColor(0xDCDCDC)
+            }
+                .width(100.percent)
+                .backgroundColor(0xDCDCDC)
         }
-        .backgroundColor(Color.White)
-        .height(100.percent)
+            .backgroundColor(Color.White)
+            .height(100.percent)
     }
 }
 ```

@@ -383,11 +383,11 @@ public init(watcherName: String)
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 11105001 | Parameter error. |
+  | 11105001 | Invalid parameter value. Possible causes: 1. Incorrect parameter length; 2. Incorrect parameter format. |
 
 ### func setSize(Int32)
 
@@ -409,11 +409,11 @@ public func setSize(size: Int32): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 11104001 | Invalid size value. |
+  | 11104001 | Invalid size value. Possible caused by the size value is less than or equal to zero. |
 
 **示例：**
 
@@ -851,7 +851,7 @@ public static func addWatcher(watcher: Watcher): Option<AppEventPackageHolder>
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -886,9 +886,7 @@ func f1() {
                         Hilog.info(0, "AppLogCj", "HiAppEvent packageId=${eventPkg.packageId}", "")
                         Hilog.info(0, "AppLogCj", "HiAppEvent row=${eventPkg.row}", "")
                         Hilog.info(0, "AppLogCj", "HiAppEvent size=${eventPkg.size}", "")
-                        for (i in 0..eventPkg
-                                .data
-                                .size) {
+                        for (i in 0..eventPkg.data.size) {
                             Hilog.info(0, "AppLogCj", "HiAppEvent info=${eventPkg.data[i]}", "")
                         }
                     }
@@ -908,9 +906,7 @@ func f2() {
             Hilog.info(0, "test_hiAppEvent_addWatcher", "HiAppEvent packageId=${eventPkg.packageId}", "")
             Hilog.info(0, "test_hiAppEvent_addWatcher", "HiAppEvent row=${eventPkg.row}", "")
             Hilog.info(0, "test_hiAppEvent_addWatcher", "HiAppEvent size=${eventPkg.size}", "")
-            for (i in 0..eventPkg
-                    .data
-                    .size) {
+            for (i in 0..eventPkg.data.size) {
                 Hilog.info(0, "test_hiAppEvent_addWatcher", "HiAppEvent info=${eventPkg.data[i]}", "")
             }
         }
@@ -932,19 +928,12 @@ func f3() {
                 let groupSize = AppEventGroups.size
                 for (i in 0..groupSize) {
                     Hilog.info(0, "AppLogCj", "name =${AppEventGroups[i].name}", "")
-                    let appInfosize = AppEventGroups[i]
-                        .appEventInfos
-                        .size
+                    let appInfosize = AppEventGroups[i].appEventInfos.size
                     for (j in 0..appInfosize) {
                         Hilog.info(0, "AppLogCj", "appEventInfo name=${AppEventGroups[i].appEventInfos[j].name}", "")
                         Hilog.info(0, "AppLogCj", "appEventInfo domain=${AppEventGroups[i].appEventInfos[j].domain}", "")
-                        let paSize = AppEventGroups[i]
-                            .appEventInfos[j]
-                            .params
-                            .size
-                        for ((k, v) in AppEventGroups[i]
-                                .appEventInfos[j]
-                                .params) {
+                        let paSize = AppEventGroups[i].appEventInfos[j].params.size
+                        for ((k, v) in AppEventGroups[i].appEventInfos[j].params) {
                             Hilog.info(0x0000, "HiAppEnvent", "key=${k}", "")
                             Hilog.info(0x0000, "HiAppEnvent", "value=${v.toString()}", "")
                         }
@@ -1018,7 +1007,7 @@ public static func configure(config: ConfigOption): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1187,7 +1176,7 @@ public static func removeWatcher(watcher: Watcher): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
@@ -1307,17 +1296,17 @@ public static func write(info: AppEventInfo): Unit
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 11100001 | Function is disabled. Possible caused by the param disable in ConfigOption is true. |
-  | 11101001 | Invalid event domain.Possible causes: 1. Contain invalid characters; 2. Length is invalid. |
+  | 11100001 | Function disabled. Possible caused by the param disable in ConfigOption is true. |
+  | 11101001 | Invalid event domain. Possible causes: 1. Contain invalid characters; 2. Length is invalid. |
   | 11101002 | Invalid event name. Possible causes: 1. Contain invalid characters; 2. Length is invalid. |
   | 11101003 | Invalid number of event parameters. Possible caused by the number of parameters is over 32. |
   | 11101004 | Invalid string length of the event parameter. |
   | 11101005 | Invalid event parameter name. Possible causes: 1. Contain invalid characters; 2. Length is invalid. |
-  | 11101006 | Invalid array length of a event parameter. |
+  | 11101006 | Invalid array length of the event parameter. |
 
 **示例：**
 
@@ -2097,8 +2086,8 @@ public func toString(): String
 
 **异常：**
 
-- BusinessException：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
+- [BusinessException](../arkinterop/cj-api-business_exception.md#class-businessexception)：对应错误码如下表，详见[应用事件打点错误码](./cj-errorcode-hiappevent.md)。
 
   | 错误码ID | 错误信息 |
   | :---- | :--- |
-  | 11105001 | Parameter error. |
+  | 11105001 | Invalid parameter value. Possible causes: 1. Incorrect parameter length; 2. Incorrect parameter format. |

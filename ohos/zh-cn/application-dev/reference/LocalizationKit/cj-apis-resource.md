@@ -50,9 +50,9 @@ public class AppResource <: Length & ResourceColor & ResourceStr {
 
 **父类型：**
 
-- Length
-- ResourceColor
-- ResourceStr
+- [Length](../arkui-cj/cj-common-types.md#interface-length)
+- [ResourceColor](../arkui-cj/cj-common-types.md#interface-resourcecolor)
+- [ResourceStr](../arkui-cj/cj-common-types.md#interface-resourcestr)
 
 ### var bundleName
 

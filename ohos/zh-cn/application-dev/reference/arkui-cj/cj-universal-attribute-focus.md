@@ -10,7 +10,7 @@
 
 > **说明：**
 >
-> - 自定义组件无获焦能力，当设置[focusable](./cj-universal-attribute-focus.md#func-focusablebool)、[enabled](./cj-universal-attribute-enable.md#func-enabledbool)等属性为false，或者设置[visibility](./cj-universal-attribute-visibility.md#func-visibilityvisibility)属性为Hidden、None时，也不影响其子组件的获焦。
+> - 自定义组件无获焦能力，当设置[focusable](#func-focusablebool)、[enabled](./cj-universal-attribute-enable.md#func-enabledbool)等属性为false，或者设置[visibility](./cj-universal-attribute-visibility.md#func-visibilityvisibility)属性为Hidden、None时，也不影响其子组件的获焦。
 > - 组件主动获取焦点不受窗口焦点的控制。
 > - 焦点开发参考[焦点开发指南](./cj-universal-event-focus.md)。
 

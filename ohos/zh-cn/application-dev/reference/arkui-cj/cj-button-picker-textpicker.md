@@ -129,8 +129,8 @@ public type OnTextPickerChangeCallback = (String, UInt32) -> Unit
 <!-- run -->
 
 ```cangjie
-
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import ohos.hilog.*
@@ -143,18 +143,18 @@ func loggerInfo(str: String) {
 @Component
 class EntryView {
     var select: UInt32 = 1
-    @State var fruits: Array<String> = ["apple", "banana", "orange", "peach"]
+    @State
+    var fruits: Array<String> = ["apple", "banana", "orange", "peach"]
     func build() {
         Column {
-            TextPicker(range: this.fruits, selected: this.select)
-            .onChange({value: String, index: UInt32  =>
-                    loggerInfo("Picker item changed, value: ${index}")
+            TextPicker(range: this.fruits, selected: this.select).onChange({
+                value: String, index: UInt32 => loggerInfo("Picker item changed, value: ${index}")
             })
         }
-        .width(100.percent)
-        .height(100.percent)
-        .alignItems(HorizontalAlign.Center)
-        .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .height(100.percent)
+            .alignItems(HorizontalAlign.Center)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

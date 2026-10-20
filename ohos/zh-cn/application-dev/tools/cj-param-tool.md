@@ -10,7 +10,7 @@ param是为开发人员提供的系统参数操作工具，该工具只支持标
 
 ## 环境要求
 
-- 获取<!--Del-->[<!--DelEnd-->hdc工具<!--Del-->](https://docs.openharmony.cn/pages/v5.1/zh-cn/device-dev/subsystems/subsys-toolchain-hdc-guide.md)<!--DelEnd-->，执行hdc shell。
+- 获取<!--Del-->[<!--DelEnd-->hdc工具<!--Del-->](https://gitcode.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md)<!--DelEnd-->，执行hdc shell。
 - 正常连接设备。
 
 ## param工具命令列表

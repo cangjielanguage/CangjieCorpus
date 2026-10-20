@@ -14,7 +14,7 @@ Flex是以弹性方式布局子组件的容器组件，提供更加有效的方�
 >
 > - Flex组件在渲染时存在二次布局过程，因此在对性能有严格要求的场景下建议使用[Column](cj-row-column-stack-column.md)、[Row](cj-row-column-stack-row.md)代替。
 > - Flex组件主轴默认不设置时撑满父容器，[Column](cj-row-column-stack-column.md)、[Row](cj-row-column-stack-row.md)组件主轴不设置时默认是跟随子节点大小。
-> - 主轴长度可设置为auto使Flex自适应子组件布局，自适应时，Flex长度受constraintSize属性以及父容器传递的最大最小长度限制且constraintSize属性优先级更高。
+> - 主轴长度可设置为[LengthMetrics.AUTO](./cj-common-types.md#static-let-auto)使Flex自适应子组件布局，自适应时，Flex长度受[constraintSize](./cj-universal-attribute-layoutconstraints.md#func-constraintsizelength-length-length-length)属性以及父容器传递的最大最小长度限制且constraintSize属性优先级更高。
 
 ## 导入模块
 
@@ -69,6 +69,7 @@ public init(direction!: ?FlexDirection = None, wrap!: ?FlexWrap = None,
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
@@ -80,121 +81,120 @@ class EntryView {
         Column {
             Column(space: 5) {
                 Text("direction:Row")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
 
                 // 子组件在容器主轴上行布局
                 Flex(direction: FlexDirection.Row) {
                     Text("1")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("4")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .height(70)
-                .width(90.percent)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .height(70)
+                    .width(90.percent)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
 
                 Text("direction:RowReverse")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上反向行布局
                 Flex(direction: FlexDirection.RowReverse) {
                     Text("1")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("4")
-                    .width(20.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(20.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .height(70)
-                .width(90.percent)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .height(70)
+                    .width(90.percent)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
 
                 Text("direction:Column")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上列布局
                 Flex(direction: FlexDirection.Column) {
                     Text("1")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("4")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .width(90.percent)
-                .height(160)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .height(160)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
                 Text("direction:ColumnReverse")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上反向列布局
                 Flex(direction: FlexDirection.ColumnReverse) {
                     Text("1")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("4")
-                    .width(100.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(100.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .width(90.percent)
-                .height(160)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .height(160)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
             }
-            .width(100.percent)
-            .margin(top: 5)
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .margin(top: 5)
+        }.width(100.percent)
     }
 }
 ```
@@ -209,6 +209,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -219,76 +220,75 @@ class EntryView {
         Column {
             Column(space: 5) {
                 Text("Wrap")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 Flex(wrap: FlexWrap.Wrap) {
                     Text("1")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .width(90.percent)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
 
                 Text("NoWrap")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 Flex(wrap: FlexWrap.NoWrap) {
                     Text("1")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                 }
-                .width(90.percent)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
 
                 Text("WrapReverse")
-                .fontSize(9)
-                .fontColor(0xCCCCCC)
-                .width(90.percent)
-                Flex(wrap: FlexWrap.WrapReverse, direction:FlexDirection.Row) {
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
+                Flex(wrap: FlexWrap.WrapReverse, direction: FlexDirection.Row) {
                     Text("1")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xF5DEB3)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xF5DEB3)
                     Text("2")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                     Text("3")
-                    .width(50.percent)
-                    .height(50)
-                    .backgroundColor(0xD2B48C)
+                        .width(50.percent)
+                        .height(50)
+                        .backgroundColor(0xD2B48C)
                 }
-                .width(90.percent)
-                .height(120)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .height(120)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
             }
-            .width(100.percent)
-            .margin(top: 5)
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .margin(top: 5)
+        }.width(100.percent)
     }
 }
 ```
@@ -303,24 +303,34 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
 
 @Component
-class JustifyContentFlex{
+class JustifyContentFlex {
     // 初始化对齐方式：子组件在容器主轴上首端对齐
-    var justifyContent :  FlexAlign  = FlexAlign.Start
+    var justifyContent: FlexAlign = FlexAlign.Start
 
-    func build(){
-        Flex(justifyContent:this.justifyContent){
-            Text('1').width(20.percent).height(50).backgroundColor(0xF5DEB3)
-            Text('2').width(20.percent).height(50).backgroundColor(0xD2B48C)
-            Text('3').width(20.percent).height(50).backgroundColor(0xF5DEB3)
+    func build() {
+        Flex(justifyContent: this.justifyContent) {
+            Text('1')
+                .width(20.percent)
+                .height(50)
+                .backgroundColor(0xF5DEB3)
+            Text('2')
+                .width(20.percent)
+                .height(50)
+                .backgroundColor(0xD2B48C)
+            Text('3')
+                .width(20.percent)
+                .height(50)
+                .backgroundColor(0xF5DEB3)
         }
-        .width(90.percent)
-        .padding(10)
-        .backgroundColor(0xAFEEEE)
+            .width(90.percent)
+            .padding(10)
+            .backgroundColor(0xAFEEEE)
     }
 }
 
@@ -330,26 +340,43 @@ class EntryView {
     func build() {
         Column {
             Column(space: 5) {
-                Text('justifyContent:Start').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
-                JustifyContentFlex()// 子组件在容器主轴上首端对齐
-                Text('justifyContent:Center').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
-                JustifyContentFlex(justifyContent:FlexAlign.Center)// 子组件在容器主轴上居中对齐
-                Text('justifyContent:End').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
-                JustifyContentFlex(justifyContent:FlexAlign.End)// 子组件在容器主轴上尾端对齐
-                Text('justifyContent:SpaceBetween').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                Text('justifyContent:Start')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
+                JustifyContentFlex() // 子组件在容器主轴上首端对齐
+                Text('justifyContent:Center')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
+                JustifyContentFlex(justifyContent: FlexAlign.Center) // 子组件在容器主轴上居中对齐
+                Text('justifyContent:End')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
+                JustifyContentFlex(justifyContent: FlexAlign.End) // 子组件在容器主轴上尾端对齐
+                Text('justifyContent:SpaceBetween')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上均分容器布局，第一个子组件与行首对齐，最后一个子组件与行尾对齐。
-                JustifyContentFlex(justifyContent:FlexAlign.SpaceBetween)
-                Text('justifyContent:SpaceAround').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                JustifyContentFlex(justifyContent: FlexAlign.SpaceBetween)
+                Text('justifyContent:SpaceAround')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上均分容器布局，第一个子组件与行首对齐，最后一个子组件与行尾对齐。
-                JustifyContentFlex(justifyContent:FlexAlign.SpaceAround)
-                Text('justifyContent:SpaceEvenly').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                JustifyContentFlex(justifyContent: FlexAlign.SpaceAround)
+                Text('justifyContent:SpaceEvenly')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器主轴上均分容器布局，子组件之间的距离与第一子组件到行首、最后一个子组件到行尾的距离相等
-                JustifyContentFlex(justifyContent:FlexAlign.SpaceEvenly)
+                JustifyContentFlex(justifyContent: FlexAlign.SpaceEvenly)
             }
-            .width(100.percent)
-            .margin(top: 5)
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .margin(top: 5)
+        }.width(100.percent)
     }
 }
 ```
@@ -364,25 +391,35 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
 
 @Component
-class AlignItemsFlex{
+class AlignItemsFlex {
     // 初始化对齐方式：子组件在容器交叉轴上首部对齐
-    var alignItems :  ItemAlign  = ItemAlign.Auto
+    var alignItems: ItemAlign = ItemAlign.Auto
 
-    func build(){
-        Flex(alignItems:this.alignItems){
-            Text('1').width(33.percent).height(30).backgroundColor(0xF5DEB3)
-            Text('2').width(33.percent).height(40).backgroundColor(0xD2B48C)
-            Text('3').width(33.percent).height(50).backgroundColor(0xF5DEB3)
+    func build() {
+        Flex(alignItems: this.alignItems) {
+            Text('1')
+                .width(33.percent)
+                .height(30)
+                .backgroundColor(0xF5DEB3)
+            Text('2')
+                .width(33.percent)
+                .height(40)
+                .backgroundColor(0xD2B48C)
+            Text('3')
+                .width(33.percent)
+                .height(50)
+                .backgroundColor(0xF5DEB3)
         }
-        .width(90.percent)
-        .height(80)
-        .padding(10)
-        .backgroundColor(0xAFEEEE)
+            .width(90.percent)
+            .height(80)
+            .padding(10)
+            .backgroundColor(0xAFEEEE)
     }
 }
 
@@ -392,29 +429,46 @@ class EntryView {
     func build() {
         Column {
             Column(space: 5) {
-                Text('alignItems:Auto').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                Text('alignItems:Auto')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上首部对齐
                 AlignItemsFlex()
-                Text('alignItems:Start').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                Text('alignItems:Start')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上首部对齐
-                AlignItemsFlex(alignItems:ItemAlign.Start)
-                Text('alignItems:Center').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignItemsFlex(alignItems: ItemAlign.Start)
+                Text('alignItems:Center')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上居中对齐
-                AlignItemsFlex(alignItems:ItemAlign.Center)
-                Text('alignItems:End').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignItemsFlex(alignItems: ItemAlign.Center)
+                Text('alignItems:End')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上尾部对齐
-                AlignItemsFlex(alignItems:ItemAlign.End)
-                Text('alignItems:Stretch').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignItemsFlex(alignItems: ItemAlign.End)
+                Text('alignItems:Stretch')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上拉伸填充
-                AlignItemsFlex(alignItems:ItemAlign.Stretch)
-                Text('alignItems:Baseline').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignItemsFlex(alignItems: ItemAlign.Stretch)
+                Text('alignItems:Baseline')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 子组件在容器交叉轴上与文本基线对齐
-                AlignItemsFlex(alignItems:ItemAlign.Baseline)
+                AlignItemsFlex(alignItems: ItemAlign.Baseline)
             }
-            .width(100.percent)
-            .margin(top: 5)
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .margin(top: 5)
+        }.width(100.percent)
     }
 }
 ```
@@ -429,25 +483,35 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 import std.collection.*
 
 @Component
-class AlignContentFlex{
+class AlignContentFlex {
     // 初始化对齐方式：多行布局下子组件首部对齐
-    var alignContent :  FlexAlign  = FlexAlign.Start
+    var alignContent: FlexAlign = FlexAlign.Start
 
-    func build(){
-        Flex(wrap: FlexWrap.Wrap, alignContent:this.alignContent){
-            Text('1').width(50.percent).height(20).backgroundColor(0xF5DEB3)
-            Text('2').width(50.percent).height(20).backgroundColor(0xD2B48C)
-            Text('3').width(50.percent).height(20).backgroundColor(0xD2B48C)
+    func build() {
+        Flex(wrap: FlexWrap.Wrap, alignContent: this.alignContent) {
+            Text('1')
+                .width(50.percent)
+                .height(20)
+                .backgroundColor(0xF5DEB3)
+            Text('2')
+                .width(50.percent)
+                .height(20)
+                .backgroundColor(0xD2B48C)
+            Text('3')
+                .width(50.percent)
+                .height(20)
+                .backgroundColor(0xD2B48C)
         }
-        .width(90.percent)
-        .height(90)
-        .padding(10)
-        .backgroundColor(0xAFEEEE)
+            .width(90.percent)
+            .height(90)
+            .padding(10)
+            .backgroundColor(0xAFEEEE)
     }
 }
 
@@ -457,41 +521,133 @@ class EntryView {
     func build() {
         Column {
             Column(space: 5) {
-                Text('alignContent:Start').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                Text('alignContent:Start')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下子组件首部对齐
                 AlignContentFlex()
-                Text('alignContent:Center').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                Text('alignContent:Center')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下子组件居中对齐
-                AlignContentFlex(alignContent:FlexAlign.Center)
-                Text('alignContent:End').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignContentFlex(alignContent: FlexAlign.Center)
+                Text('alignContent:End')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下子组件尾部对齐
-                AlignContentFlex(alignContent:FlexAlign.End)
-                Text('alignContent:SpaceBetween').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignContentFlex(alignContent: FlexAlign.End)
+                Text('alignContent:SpaceBetween')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下第一行子组件与列首对齐，最后一行子组件与列尾对齐
-                AlignContentFlex(alignContent:FlexAlign.SpaceBetween)
-                Text('alignContent:SpaceAround').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignContentFlex(alignContent: FlexAlign.SpaceBetween)
+                Text('alignContent:SpaceAround')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下第一行子组件到列首的距离和最后一行子组件到列尾的距离是相邻行之间距离的一半
-                AlignContentFlex(alignContent:FlexAlign.SpaceAround)
-                Text('alignContent:SpaceEvenly').fontSize(9).fontColor(0xCCCCCC).width(90.percent)
+                AlignContentFlex(alignContent: FlexAlign.SpaceAround)
+                Text('alignContent:SpaceEvenly')
+                    .fontSize(9)
+                    .fontColor(0xCCCCCC)
+                    .width(90.percent)
                 // 多行布局下相邻行之间的距离与第一行子组件到列首的距离、最后一行子组件到列尾的距离完全一样
-                Flex(wrap: FlexWrap.Wrap, alignContent:FlexAlign.SpaceEvenly){
-                    Text('1').width(50.percent).height(20).backgroundColor(0xF5DEB3)
-                    Text('2').width(50.percent).height(20).backgroundColor(0xD2B48C)
-                    Text('3').width(50.percent).height(20).backgroundColor(0xF5DEB3)
-                    Text('4').width(50.percent).height(20).backgroundColor(0xD2B48C)
-                    Text('5').width(50.percent).height(20).backgroundColor(0xF5DEB3)
+                Flex(wrap: FlexWrap.Wrap, alignContent: FlexAlign.SpaceEvenly) {
+                    Text('1')
+                        .width(50.percent)
+                        .height(20)
+                        .backgroundColor(0xF5DEB3)
+                    Text('2')
+                        .width(50.percent)
+                        .height(20)
+                        .backgroundColor(0xD2B48C)
+                    Text('3')
+                        .width(50.percent)
+                        .height(20)
+                        .backgroundColor(0xF5DEB3)
+                    Text('4')
+                        .width(50.percent)
+                        .height(20)
+                        .backgroundColor(0xD2B48C)
+                    Text('5')
+                        .width(50.percent)
+                        .height(20)
+                        .backgroundColor(0xF5DEB3)
                 }
-                .width(90.percent)
-                .height(90)
-                .padding(10)
-                .backgroundColor(0xAFEEEE)
+                    .width(90.percent)
+                    .height(90)
+                    .padding(10)
+                    .backgroundColor(0xAFEEEE)
             }
-            .width(100.percent)
-            .margin(top: 5)
-        }
-        .width(100.percent)
+                .width(100.percent)
+                .margin(top: 5)
+        }.width(100.percent)
     }
 }
 ```
 
 ![flex](figures/flex_5.png)
+
+### 示例6（宽度自适应的Flex容器）
+
+该示例实现了Flex在宽度设置LengthMetrics.AUTO后可以自适应子组件布局的能力。
+
+``` cangjie
+package ohos_app_cangjie_entry
+import kit.ArkUI.*
+import ohos.arkui.state_macro_manage.*
+
+@Component
+class Demo {
+    @Prop var text: String
+
+    func build() {
+        Button() {
+            Flex() {
+                Image(@r(app.media.startIcon))
+                .width(16)
+                .height(16)
+
+                Row() {
+                    Text(this.text)
+                    .margin(
+                        left: 6,
+                        right: 6
+                    )
+                    .fontSize(14)
+                    .maxLines(1)
+                    .textOverflow(overflow: TextOverflow.Ellipsis)
+                }
+
+                Image(@r(app.media.startIcon))
+                .width(16)
+                .height(16)
+            }.width(LengthMetrics.AUTO)
+        }
+        .backgroundColor(0xAFEEEE)
+        .height(36)
+        .padding(left: 16, right: 16)
+        .constraintSize(maxWidth: 156)
+        .width(LengthMetrics.AUTO)
+    }
+}
+
+@Entry
+@Component
+class EntryView {
+    build() {
+        Column(space: 12 ) {
+            Text('Width does not reach max length').fontSize(11).fontColor(0XCCCCCC).width(50.percent)
+            Demo(text: '123' )
+            Text('Width reaches max length').fontSize(11).fontColor(0XCCCCCC).width(50.percent)
+            Demo(text: '1234567890-1234567890-1234567890-1234567890')
+        }
+    }
+}
+```
+
+![flex-auto](figures/flex-auto.png)

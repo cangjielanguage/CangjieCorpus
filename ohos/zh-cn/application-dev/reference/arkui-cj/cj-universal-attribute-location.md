@@ -127,6 +127,7 @@ func alignRules(value: ?AlignRuleOption): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -150,19 +151,19 @@ class EntryView {
                         .backgroundColor(0xF5DEB3)
                         .opacity(0.9)
                 }
-                .width(90.percent)
-                .height(50)
-                .margin(top: 5)
-                .backgroundColor(0xFFE4C4)
-                .align(Alignment.BottomEnd)
+                    .width(90.percent)
+                    .height(50)
+                    .margin(top: 5)
+                    .backgroundColor(0xFFE4C4)
+                    .align(Alignment.BottomEnd)
                 Stack() {
                     Text("top start")
                 }
-                .width(90.percent)
-                .height(50)
-                .margin(top: 5)
-                .backgroundColor(0xFFE4C4)
-                .align(Alignment.TopStart)
+                    .width(90.percent)
+                    .height(50)
+                    .margin(top: 5)
+                    .backgroundColor(0xFFE4C4)
+                    .align(Alignment.TopStart)
 
                 // 父容器设置direction为Direction.Ltr，子元素从左到右排列
                 Text("direction")
@@ -191,8 +192,8 @@ class EntryView {
                         .fontSize(16)
                         .backgroundColor(0xD2B48C)
                 }
-                .width(90.percent)
-                .direction(Direction.Ltr)
+                    .width(90.percent)
+                    .direction(Direction.Ltr)
                 // 父容器设置direction为Direction.Rtl，子元素从右到左排列
                 Row() {
                     Text("1")
@@ -220,8 +221,8 @@ class EntryView {
                         .backgroundColor(0xD2B48C)
                         .textAlign(TextAlign.End)
                 }
-                .width(90.percent)
-                .direction(Direction.Rtl)
+                    .width(90.percent)
+                    .direction(Direction.Rtl)
             }
         }
     }
@@ -238,6 +239,7 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -277,9 +279,9 @@ class EntryView {
                         .fontSize(16)
                         .position(x: 50.percent, y: 70.percent)
                 }
-                .width(90.percent)
-                .height(100)
-                .border(width: 1.vp, style: BorderStyle.Dashed)
+                    .width(90.percent)
+                    .height(100)
+                    .border(width: 1.vp, style: BorderStyle.Dashed)
 
                 // 相对于起点偏移，其中x为最终定位点距离起点水平方向间距，x>0往左，反之向右。
                 // y为最终定位点距离起点垂直方向间距，y>0向上，反之向下
@@ -304,8 +306,8 @@ class EntryView {
                         .backgroundColor(Color.Green)
                         .markAnchor(x: 25, y: -25)
                 }
-                .margin(top: 25)
-                .border(width: 1.vp, style: BorderStyle.Dashed)
+                    .margin(top: 25)
+                    .border(width: 1.vp, style: BorderStyle.Dashed)
 
                 // 相对定位，x>0向右偏移，反之向左，y>0向下偏移，反之向上
                 Text("offset")
@@ -337,12 +339,12 @@ class EntryView {
                         .fontSize(16)
                         .offset(x: (-5).percent, y: 20.percent)
                 }
-                .width(90.percent)
-                .height(100)
-                .border(width: 1.vp, style: BorderStyle.Dashed)
+                    .width(90.percent)
+                    .height(100)
+                    .border(width: 1.vp, style: BorderStyle.Dashed)
             }
-            .width(100.percent)
-            .margin(top: 25)
+                .width(100.percent)
+                .margin(top: 25)
         }
     }
 }

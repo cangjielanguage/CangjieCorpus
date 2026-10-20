@@ -42,33 +42,32 @@
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-  @State var count: Int64 = 0;
-  func build() {
-    Column() {
-      Text("count=${this.count}")
+    @State
+    var count: Int64 = 0;
+    func build() {
+        Column() {
+            Text("count=${this.count}")
 
-      if (this.count > 0) {
-        Text("count is positive")
-          .fontColor(Color.Green)
-      }
+            if (this.count > 0) {
+                Text("count is positive").fontColor(Color.Green)
+            }
 
-      Button('increase count')
-        .onClick({ e =>
-          this.count++;
-        })
+            Button('increase count').onClick({
+                e => this.count++;
+            })
 
-      Button('decrease count')
-        .onClick({ e =>
-          this.count--;
-        })
+            Button('decrease count').onClick({
+                e => this.count--;
+            })
+        }
     }
-  }
 }
 ```
 
@@ -90,6 +89,7 @@ if语句的每个分支都包含一个构建函数。此类构建函数必须创
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 internal import ohos.base.*
@@ -97,40 +97,40 @@ internal import ohos.arkui.component.*
 
 @Component
 public class CounterView {
-      @State var counter: Int64 = 0;
-      var label: String = 'unknown';
-      func build() {
+    @State
+    var counter: Int64 = 0;
+    var label: String = 'unknown';
+    func build() {
         Column(space: 20) {
-          Text("${this.label}")
-          Button("counter ${this.counter} +1")
-            .onClick({ e =>
-              this.counter += 1;
+            Text("${this.label}")
+            Button("counter ${this.counter} +1").onClick({
+                e => this.counter += 1
             })
         }
-        .margin(10)
-        .padding(10)
-        .border( width: 1 )
-      }
+            .margin(10)
+            .padding(10)
+            .border(width: 1)
+    }
 }
 
 @Entry
 @Component
 public class EntryView {
-    @State var toggle: Bool = true;
+    @State
+    var toggle: Bool = true;
     func build() {
-      Column() {
-        if (this.toggle) {
-          CounterView( label: "CounterView #positive" )
-        } else {
-          CounterView( label: "CounterView #negative" )
+        Column() {
+            if (this.toggle) {
+                CounterView(label: "CounterView #positive")
+            } else {
+                CounterView(label: "CounterView #negative")
+            }
+            Button("toggle ${this.toggle}").onClick({
+                e => this.toggle = !this.toggle
+            })
         }
-        Button("toggle ${this.toggle}")
-          .onClick({ e =>
-            this.toggle = !this.toggle;
-          })
-      }
-      .width(100.percent)
-      .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```
@@ -147,6 +147,7 @@ CounterView（label为 'CounterView #positive'）子组件在初次渲染时创�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 internal import ohos.base.*
@@ -154,43 +155,43 @@ internal import ohos.arkui.component.*
 
 @Component
 class CounterView {
-    @Link var counter: Int64;
+    @Link
+    var counter: Int64
     var label: String = 'unknown';
 
     func build() {
-      Column(space: 20) {
-        Text("${this.label}")
-          .fontSize(20)
-        Button("counter ${this.counter} +1")
-          .onClick({ e =>
-            this.counter += 1;
-          })
-      }
-      .margin(10)
-      .padding(10)
-      .border(width:1)
+        Column(space: 20) {
+            Text("${this.label}").fontSize(20)
+            Button("counter ${this.counter} +1").onClick({
+                e => this.counter += 1
+            })
+        }
+            .margin(10)
+            .padding(10)
+            .border(width: 1)
     }
 }
 
 @Entry
 @Component
 public class EntryView {
-    @State var toggle: Bool = true;
-    @State var counter: Int64 = 0;
+    @State
+    var toggle: Bool = true;
+    @State
+    var counter: Int64 = 0;
     func build() {
-      Column() {
-        if (this.toggle) {
-          CounterView( counter: counter, label: 'CounterView #positive' )
-        } else {
-          CounterView( counter: counter, label: 'CounterView #negative' )
+        Column() {
+            if (this.toggle) {
+                CounterView(counter: counter, label: 'CounterView #positive')
+            } else {
+                CounterView(counter: counter, label: 'CounterView #negative')
+            }
+            Button("toggle ${this.toggle}").onClick({
+                e => this.toggle = !this.toggle
+            })
         }
-        Button("toggle ${this.toggle}")
-          .onClick({ e =>
-            this.toggle = !this.toggle;
-          })
-      }
-      .width(100.percent)
-      .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```
@@ -205,54 +206,60 @@ public class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 internal import ohos.base.*
 internal import ohos.arkui.component.*
+
 @Entry
 @Component
 public class EntryView {
-    @State var toggle: Bool = false;
-    @State var toggleColor: Bool = false;
+    @State
+    var toggle: Bool = false;
+    @State
+    var toggleColor: Bool = false;
     func build() {
-      Column(space: 20) {
-        Text('Before')
-          .fontSize(15)
-        if (this.toggle) {
-          Text('Top True, positive 1 top')
-            .backgroundColor(Color.Green).fontSize(20)
-          // 内部if语句
-          if (this.toggleColor) {
-            Text('Top True, Nested True, positive COLOR  Nested ')
-              .backgroundColor(Color.Green).fontSize(15)
-          } else {
-            Text('Top True, Nested False, Negative COLOR  Nested ')
-              .backgroundColor(Color.Blue).fontSize(15)
-          }
-        } else {
-          Text('Top false, negative top level').fontSize(20)
-            .backgroundColor(Color.Red)
-          if (this.toggleColor) {
-            Text('positive COLOR  Nested ')
-              .backgroundColor(Color.Green).fontSize(15)
-          } else {
-            Text('Negative COLOR  Nested ')
-              .backgroundColor(Color.Blue).fontSize(15)
-          }
+        Column(space: 20) {
+            Text('Before').fontSize(15)
+            if (this.toggle) {
+                Text('Top True, positive 1 top')
+                    .backgroundColor(Color.Green)
+                    .fontSize(20)
+                // 内部if语句
+                if (this.toggleColor) {
+                    Text('Top True, Nested True, positive COLOR  Nested ')
+                        .backgroundColor(Color.Green)
+                        .fontSize(15)
+                } else {
+                    Text('Top True, Nested False, Negative COLOR  Nested ')
+                        .backgroundColor(Color.Blue)
+                        .fontSize(15)
+                }
+            } else {
+                Text('Top false, negative top level')
+                    .fontSize(20)
+                    .backgroundColor(Color.Red)
+                if (this.toggleColor) {
+                    Text('positive COLOR  Nested ')
+                        .backgroundColor(Color.Green)
+                        .fontSize(15)
+                } else {
+                    Text('Negative COLOR  Nested ')
+                        .backgroundColor(Color.Blue)
+                        .fontSize(15)
+                }
+            }
+            Text('After').fontSize(15)
+            Button('Toggle Outer').onClick({
+                e => this.toggle = !this.toggle
+            })
+            Button('Toggle Inner').onClick({
+                e => this.toggleColor = !this.toggleColor
+            })
         }
-        Text('After')
-          .fontSize(15)
-        Button('Toggle Outer')
-          .onClick({ e =>
-            this.toggle = !this.toggle;
-          })
-        Button('Toggle Inner')
-          .onClick({ e =>
-            this.toggleColor = !this.toggleColor;
-          })
-      }
-      .width(100.percent)
-      .justifyContent(FlexAlign.Center)
+            .width(100.percent)
+            .justifyContent(FlexAlign.Center)
     }
 }
 ```

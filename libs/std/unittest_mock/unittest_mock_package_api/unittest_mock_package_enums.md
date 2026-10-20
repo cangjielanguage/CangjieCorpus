@@ -44,7 +44,9 @@ import std.unittest.mock.*
 import std.unittest.mock.mockmacro.*
 
 class Printer {
-    func print(message: String): Bool { return true }
+    func print(message: String): Bool {
+        return true
+    }
 }
 
 @Test
@@ -106,7 +108,7 @@ Stateless
 ```
 
 功能：只允许无状态的[桩](../unittest_mock_samples/mock_framework_basics.md#配置-api)。
-不允许本质上有状态的操作，例如 returnsConsequively 和基数说明符（ cardinality specifier， 指定预期执行次数的表达式）。
+不允许本质上有状态的操作，例如 returnsConsecutively 和基数说明符（ cardinality specifier， 指定预期执行次数的表达式）。
 
 ### Verifiable
 
@@ -138,7 +140,9 @@ import std.collection.*
 class EntityGenerator {
     var array: ArrayList<Int>
     mut prop str: String {
-        get() { "generator" }
+        get() {
+            "generator"
+        }
         set(x) {}
     }
 
@@ -146,9 +150,15 @@ class EntityGenerator {
         this.array = ArrayList<Int>()
     }
 
-    func getNumber(): Int { 42 }
-    func getOption(): Option<Int> { Some(42) }
-    func getHashMap(): HashMap<String, String> { HashMap() }
+    func getNumber(): Int {
+        42
+    }
+    func getOption(): Option<Int> {
+        Some(42)
+    }
+    func getHashMap(): HashMap<String, String> {
+        HashMap()
+    }
 }
 
 @Test

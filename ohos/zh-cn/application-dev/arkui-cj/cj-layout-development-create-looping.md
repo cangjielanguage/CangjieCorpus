@@ -157,16 +157,20 @@ Swiper支持手指滑动和点击导航点两种方式切换页面，以下示�
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    private var swiperBackgroundColors: Array<Color> = [Color.Blue, Color.Black, Color.Gray, Color.Green, Color.White, Color.Red]
+    private var swiperBackgroundColors: Array<Color> = [Color.Blue, Color.Black, Color.Gray, Color.Green, Color.White,
+        Color.Red]
     private var swiperController: SwiperController = SwiperController();
-    @State var animationModeStr: Bool = false
-    @State var targetIndex: Int64 = 0
+    @State
+    var animationModeStr: Bool = false
+    @State
+    var targetIndex: Int64 = 0
     func build() {
         Column(space: 5) {
             Swiper(controller: this.swiperController) {
@@ -181,10 +185,9 @@ class EntryView {
                             .fontSize(30)
                     }
                 )
-            }
-            .indicator(true)
+            }.indicator(true)
 
-            Row(space:12) {
+            Row(space: 12) {
                 Button('showNext').onClick({
                     evt => this
                         .swiperController
@@ -195,9 +198,8 @@ class EntryView {
                         .swiperController
                         .showPrevious(); // 通过controller切换到前一页
                 })
-            }
-            .margin(5)
-            Row(space:12) {
+            }.margin(5)
+            Row(space: 12) {
                 Text('Index:')
                 Button(this.targetIndex.toString()).onClick(
                     {
@@ -218,8 +220,8 @@ class EntryView {
             }
             .margin(5)
         }
-        .width(100.percent)
-        .margin(top: 5)
+            .width(100.percent)
+            .margin(top: 5)
     }
 }
 ```
@@ -264,6 +266,7 @@ Swiper支持在一个页面内同时显示多个子组件，通过[displayCount]
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
@@ -272,36 +275,35 @@ import ohos.arkui.state_macro_manage.*
 class EntryView {
     func build() {
         Column(space: 5) {
-              Swiper() {
-                  Text('0')
+            Swiper() {
+                Text('0')
                     .width(250)
                     .height(250)
                     .backgroundColor(Color.Gray)
                     .textAlign(TextAlign.Center)
                     .fontSize(30)
-                  Text('1')
+                Text('1')
                     .width(250)
                     .height(250)
                     .backgroundColor(Color.Green)
                     .textAlign(TextAlign.Center)
                     .fontSize(30)
-                  Text('2')
+                Text('2')
                     .width(250)
                     .height(250)
                     .backgroundColor(0xFEC0CD)
                     .textAlign(TextAlign.Center)
                     .fontSize(30)
-                  Text('3')
+                Text('3')
                     .width(250)
                     .height(250)
                     .backgroundColor(Color.Blue)
                     .textAlign(TextAlign.Center)
                     .fontSize(30)
-                }
+            }
                 .indicator(true)
                 .displayCount(2)
-        }
-        .width(100.percent)
+        }.width(100.percent)
     }
 }
 ```

@@ -69,24 +69,22 @@ class EntryView {
                 .width(200)
                 .height(100)
                 .backgroundColor(this.color)
-                .onHover(
-                    {
-                        isHover => // 使用onHover接口监听鼠标是否悬浮在Button组件上
-                        if (isHover) {
-                            this.hoverText = 'Hovered!'
-                            this.color = Color.Green
-                        } else {
-                            this.hoverText = ' Hover'
-                            this.color = Color.Gray
-                        }
-                    })
+                .onHover({
+                    isHover => // 使用onHover接口监听鼠标是否悬浮在Button组件上
+                    if (isHover) {
+                        this.hoverText = 'Hovered!'
+                        this.color = Color.Green
+                    } else {
+                        this.hoverText = ' Hover'
+                        this.color = Color.Gray
+                    }
+                })
         }
             .width(100.percent)
             .height(100.percent)
             .justifyContent(FlexAlign.Center)
     }
 }
-
 ```
 
 该示例创建了一个Button组件，初始背景色为灰色，内容为“Not Hover”，示例中的Button组件绑定了onHover回调。
@@ -115,16 +113,21 @@ public func onMouse(event: ?(MouseEvent) -> Unit): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var buttonText: String = ''
-    @State var columnText: String = ''
-    @State var hoverText: String = 'Not Hover'
-    @State var color: Color = Color.Gray
+    @State
+    var buttonText: String = ''
+    @State
+    var columnText: String = ''
+    @State
+    var hoverText: String = 'Not Hover'
+    @State
+    var color: Color = Color.Gray
 
     func build() {
         Column(space: 20) {
@@ -132,8 +135,8 @@ class EntryView {
                 .width(200)
                 .height(100)
                 .backgroundColor(this.color)
-                .onHover({isHover =>
-                    if (isHover) {
+                .onHover({
+                    isHover => if (isHover) {
                         this.hoverText = 'Hovered!'
                         this.color = Color.Green
                     } else {
@@ -141,26 +144,24 @@ class EntryView {
                         this.color = Color.Gray
                     }
                 })
-                .onMouse({event =>
-                this.buttonText = "Button onMouse:\n" +
-                    "x,y = (${event.x},${event.y})\n" +
-                    "windowXY=(${event.screenX},${event.screenY})"
+                .onMouse({
+                    event => this.buttonText = "Button onMouse:\n" + "x,y = (${event.x},${event.y})\n" +
+                        "windowXY=(${event.screenX},${event.screenY})"
                 })
             Divider()
             Text(this.buttonText).fontColor(Color.Green)
             Divider()
             Text(this.columnText).fontColor(Color.Red)
         }
-        .width(100.percent)
-        .height(100.percent)
-        .justifyContent(FlexAlign.Center)
-        .borderWidth(2.px)
-        .borderColor(Color.Red)
-        .onMouse({event =>
-                this.columnText = "Column onMouse:\n" +
-                    "x,y = (${event.x},${event.y})\n" +
+            .width(100.percent)
+            .height(100.percent)
+            .justifyContent(FlexAlign.Center)
+            .borderWidth(2.px)
+            .borderColor(Color.Red)
+            .onMouse({
+                event => this.columnText = "Column onMouse:\n" + "x,y = (${event.x},${event.y})\n" +
                     "windowXY=(${event.screenX},${event.screenY})"
-        })
+            })
     }
 }
 ```
@@ -181,16 +182,21 @@ public func onKeyEvent(event: ?(KeyEvent) -> Unit): T
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var buttonText: String = ''
-    @State var buttonType: String = ''
-    @State var columnText: String = ''
-    @State var columnType: String = ''
+    @State
+    var buttonText: String = ''
+    @State
+    var buttonType: String = ''
+    @State
+    var columnText: String = ''
+    @State
+    var columnType: String = ''
 
     func build() {
         Column() {
@@ -257,16 +263,21 @@ class EntryView {
 
 ```cangjie
 package ohos_app_cangjie_entry
+
 import kit.ArkUI.*
 import ohos.arkui.state_macro_manage.*
 
 @Entry
 @Component
 class EntryView {
-    @State var buttonText: String = ''
-    @State var buttonType: String = ''
-    @State var columnText: String = ''
-    @State var columnType: String = ''
+    @State
+    var buttonText: String = ''
+    @State
+    var buttonType: String = ''
+    @State
+    var columnText: String = ''
+    @State
+    var columnType: String = ''
 
     func build() {
         Column() {
